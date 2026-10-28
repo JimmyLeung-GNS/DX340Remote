@@ -2,7 +2,7 @@
 
 Development beta: Kotlin DX340 companion and a shared Flutter Android/iPhone interface over native Kotlin/Swift Bluetooth components, sharing BLE protocol v1. Native reference clients are retained during physical parity verification. Music continues through the installed Mango Player or Apple Music on DX340. Everyday control has no Wi-Fi/cloud path.
 
-The shared Flutter phone app **builds and opens on Android and in an iPhone simulator**: Android release build/lint,9 Dart tests and DX340 launch pass; [iPhone CI40713390473](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/40713390473) passes analysis/9 tests/unsigned build/launch and6 disconnected screen captures on iPhone Air/iOS26.5, Xcode26.6. Native reference Android build/lint/29 JVM tests and Swift3 protocol tests also pass. These results do not verify separate-phone Bluetooth stability or physical iPhone installation. Full browsing acceptance, volume and Watch remain incomplete. See [current status](docs/status.md) and [platform verification](docs/cross-platform-verification.md).
+The shared Flutter phone app **builds and opens on Android and in an iPhone simulator**: Android release build/lint,10 Dart tests and DX340 launch pass; [iPhone CI40723554411](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/40723554411) passes analysis/10 tests/unsigned build/launch and6 disconnected captures on iPhone Air/iOS26.5, Xcode26.6. Native Android build/lint/37 JVM tests and Swift3 protocol tests also pass. These results do not verify separate-phone Bluetooth stability or physical iPhone installation. Full browsing acceptance, volume and Watch remain incomplete. See [current status](docs/status.md) and [platform verification](docs/cross-platform-verification.md).
 
 ## Build and launch checks
 
@@ -27,7 +27,7 @@ The second build command installs/launches the app in the selected simulator and
 
 ## Source support so far
 
-- Mango exposes a native library; one selected-track audio test was confirmed by the user on AMP15 phone output. Desired-state pause/pause/play/play was observed working through the adapter. Full FLAC/WAV, folders/playlists and reliability acceptance remain open.
+- Mango exposes a native library with a user-confirmed selected-track test. Its separately accepted optional screen-on/unlocked folder service has now selected a WAV and a FLAC file, each user-confirmed audible through Mango on AMP15 phone out. Native albums/songs remain available. Full20-track/SD/rescan/playlist/phone and reliability acceptance remain open; [folder test evidence](docs/test-results/2026-10-29-mango-folders.md) separates actual service, simulated component and phone results.
 - Apple Music denied the tested direct browse interfaces. The user accepted optional screen-on/unlocked UI-assisted browsing. The actual companion service has returned downloaded albums/songs and selected a song with matching observed playing state. This does not pass phone/BLE or the full offline selection matrix. The mode is pinned to tested Apple Music 6.5.3/code1599.
 - Output volume stays disabled until verified against the actual amplifier output.
 
