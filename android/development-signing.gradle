@@ -1,0 +1,10 @@
+// A project-scoped path override; never replace ~/.android/debug.keystore.
+// Standard Android debug alias/password remain supplied by the Android plugin.
+def requestedKey = providers.environmentVariable('DX340_DEBUG_KEYSTORE').orNull
+if (requestedKey != null && !requestedKey.isBlank()) {
+    def signingKey = new File(requestedKey)
+    if (!signingKey.isAbsolute() || !signingKey.isFile()) {
+        throw new GradleException('DX340_DEBUG_KEYSTORE must identify an existing absolute debug-keystore path.')
+    }
+    extensions.getByName('android').signingConfigs.getByName('debug').storeFile = signingKey.canonicalFile
+}

@@ -7,7 +7,7 @@ This file was absent when the user requested continuation. It is reconstructed f
 ## Read first
 
 1. `AGENTS.md`, `docs/implementation-plan.md`, `docs/status.md`.
-2. `docs/test-results/2026-10-29-browse-access-recovery.md` for the latest results and `2026-10-29-elapsed-position.md` for the preceding continuation.
+2. `docs/test-results/2026-10-29-signing-override.md` for the latest build setup, `2026-10-29-browse-access-recovery.md` for recovery work and `2026-10-29-elapsed-position.md` for elapsed timing.
 3. `docs/phone-reliability-runbook.md`, `docs/compatibility-matrix.md`, and the separate Mango/Apple experiment reports before physical acceptance work.
 
 ## Saved implementation
@@ -18,9 +18,11 @@ Checkpoint400ec34 contains source-session callback ownership/capability guards a
 
 This continuation adds host position normalization and shared-phone elapsed estimates with native sample identity/age, lifecycle freeze/fresh-resume guards and no periodic BLE polling. See the test report and current working tree. New Swift changes require a fresh Mac build; earlier iOS CI results do not verify this source revision. No publication is performed by this continuation.
 
-Latest local verification: native build/lint57 JVM tests, Flutter analysis22 tests/release APK/release lint passed. Companion and phone packages are generated in artifacts but **not installed**. Both installed apps' certificate24f48aa3... differs from this checkout's ed3ffa7b... development key. The verified upgrade preflight stops before installation. Restore the original key securely outside Git before rebuilding/upgrading; preserve installed data. Current raw package hashes are in the browse-access report; full public certificate fingerprints are in the preceding elapsed report. Source is saved on local branch `codex/source-recovery-checkpoint`; use `git log -1` for the current checkpoint. It has not been pushed or published.
+Latest local verification: native build/lint57 JVM tests, Flutter analysis22 tests/release APK/release lint passed. Companion and phone packages are generated in artifacts but **not installed**. Both installed apps' certificate24f48aa3... differs from this checkout's ed3ffa7b... development key. The verified upgrade preflight stops before installation. Restore the original key securely outside Git before rebuilding/upgrading; preserve installed data. Current raw package hashes are in the signing-override report; full public certificate fingerprints are in the preceding elapsed report. Source is saved on local branch `codex/source-recovery-checkpoint`; use `git log -1` for the current checkpoint. It has not been pushed or published.
 
-The latest continuation also guards native browse-request lifetime before cache mutation, carries authorization through play-item revalidation, invalidates requests/callback ownership/source epochs on detected notification-access loss, retries session observer registration after grant, and adds explicit refresh/recovery UI. Pure helper tests cover ordering/failure cases; actual device permission delivery and recovery are not tested. The original signing-key availability question is pending.
+The preceding continuation guards native browse-request lifetime before cache mutation, carries authorization through play-item revalidation, invalidates requests/callback ownership/source epochs on detected notification-access loss, retries session observer registration after grant, and adds explicit refresh/recovery UI. Pure helper tests cover ordering/failure cases; actual device permission delivery and recovery are not tested.
+
+The user now confirms the original signing key/computer is available. A local readable path has been requested and remains pending. The shared android/development-signing.gradle supports process-local DX340_DEBUG_KEYSTORE for all Android builds, preserving this PC's default key. Real alternate-key packaging, phone release selection, missing-path rejection and default-key restoration builds are verified. Use installation.md's try/finally environment override once the original file is accessible; validate actual certificates before updating.
 
 ## Local environment and reproducible commands
 
@@ -45,7 +47,7 @@ On Mac, install the same Flutter revision and run `sh scripts/build-phone-ios.sh
 
 ## Resume next
 
-1. Restore the original development signing identity securely, rebuild and run the signing preflight before any update. Validate the new Swift bridge/native sample timing on Mac, then both physical phones over BLE. Verify pause/seek/track/source changes, stale artwork/status events, lock/background/resume, range loss and disconnection with Wi-Fi/cellular off. A synthetic widget test or DX340-only app launch does not pass this gate.
+1. Obtain the user-provided readable path for the available original development key. Use DX340_DEBUG_KEYSTORE for project-only signing, rebuild and run both signing preflights before any update. Validate the new Swift bridge/native sample timing on Mac, then both physical phones over BLE. Verify pause/seek/track/source changes, stale artwork/status events, lock/background/resume, range loss and disconnection with Wi-Fi/cellular off. A synthetic widget test or DX340-only app launch does not pass this gate.
 2. Complete the Mango and Apple selection/format/library-change matrices. Separate source-reported state, actual user listening and phone BLE evidence. Observe and validate playlist screens before adding an assisted playlist adapter. Stable native Mango duplicate-file identity after rescan/SD changes remains unverified.
 3. Physically verify the new browse/access-recovery guards using the report's exact cases; continue in-flight UI permission/revocation/cancellation and measured recovery. Reinstalling/instrumenting the companion previously left optional Accessibility services enabled but unbound; do not assume this session-access work repairs that. Use existing in-process debug checks where appropriate and document manual recovery.
 4. Volume: prior wheel/API downward steps only. Upward/output/Apple/phone/reconnect acceptance remains open. Do not enable phone volume from a reported AudioManager value alone.

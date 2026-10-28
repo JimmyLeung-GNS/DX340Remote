@@ -42,3 +42,5 @@ dependencies { implementation(project(":controller-core")) }
 flutter {
     source = "../.."
 }
+
+apply(from = rootProject.file("../../android/development-signing.gradle"))

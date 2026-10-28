@@ -36,6 +36,24 @@ APKs use the development computer's standard Android debug signing key outside G
 
 Before upgrading from another development computer, run `./scripts/verify-android-signing.ps1 -Serial <serial> -Apk artifacts/dx340-phone-0.2.0-development.apk`. The shared-phone launch script runs this check automatically before installation. It verifies the candidate's package/signature and compares signing-certificate digests with the installed base APK, keeping a local report in artifacts/android-upgrade-signing.json. A mismatch stops the update. Restore the original development key securely outside Git; do not uninstall/reset the installed app to bypass the check. This conservative development-key comparison does not implement signing-key rotation.
 
+To use an original standard Android debug keystore on another computer, keep its file outside the repository and set `DX340_DEBUG_KEYSTORE` for these builds. The shared Gradle script applies this path to the companion, reference controller, research/instrumentation packages and shared Flutter Android release/debug builds. It keeps Android's standard debug alias/password settings. A missing or relative path fails; it does not silently use another key. This does not alter the computer's default `~/.android/debug.keystore` or global environment.
+
+```powershell
+$previousDx340Key = $env:DX340_DEBUG_KEYSTORE
+try {
+    $env:DX340_DEBUG_KEYSTORE = 'C:\Users\user\.android\dx340-original-debug.keystore'
+    ./scripts/build-android.ps1
+    ./scripts/build-phone.ps1
+} finally {
+    $env:DX340_DEBUG_KEYSTORE = $previousDx340Key
+}
+# Check the actual APKs against the installed identity before any update.
+./scripts/verify-android-signing.ps1 -Serial d -Apk artifacts/dx340-companion-0.1.0-debug.apk -Package org.dx340.remote.host
+./scripts/verify-android-signing.ps1 -Serial d -Apk artifacts/dx340-phone-0.2.0-development.apk
+```
+
+These signing commands still need the JDK/SDK/pinned Flutter environment described above. Custom production signing is outside this standard debug-key override.
+
 ## DX340 companion
 
 ```powershell
