@@ -76,4 +76,15 @@ class OutputVolumeTest {
         val s = Rig(); s.verified(); s.sample = s.sample.copy(ready = false); assertNull(s.volume.proof(s.sample))
         s.volume.close(); assertNull(s.volume.proof(s.sample)); assertTrue(r.writes.isEmpty())
     }
+    @Test fun revokedAuthorizationAfterWriteNeverTriggersRestorationOrRetry() {
+        val r = Rig(); val p = r.verified(); r.writes.clear(); var authorized = true
+        r.volume.adjust(-1, 35, p.id, { authorized }) { assertEquals("AUTHORIZATION_DENIED", it) }
+        authorized = false; r.settle()
+        assertEquals(34, r.sample.current); assertEquals(listOf(34), r.writes); assertNull(r.volume.proof(r.sample))
+    }
+    @Test fun outputChangeDuringReadbackInvalidatesTheListeningCheck() {
+        val r = Rig(); r.volume.begin("AMP15 phone out", 35) { assertEquals("VOLUME_PROFILE_CHANGED", it) }
+        r.sample = r.sample.copy(key = "different-output"); r.settle()
+        assertNull(r.volume.check); assertNull(r.volume.proof(r.sample)); assertEquals(listOf(34), r.writes)
+    }
 }

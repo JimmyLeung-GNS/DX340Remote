@@ -21,6 +21,7 @@ Future<void> main() async {
     DX340App(remote: Remote(VolumeCaptureBridge(low: mode == 'volume-low'))),
   );
   // Scroll only this fixture to the controls so captures show the new states.
+  await WidgetsBinding.instance.endOfFrame;
   await Future<void>.delayed(const Duration(seconds: 2));
   bool moved = false;
   void scroll(Element element) {
@@ -40,7 +41,16 @@ Future<void> main() async {
   void visit(Element element) {
     if (element.widget is Text &&
         (element.widget as Text).data == 'Volume up') {
-      Scrollable.ensureVisible(element, alignment: 1);
+      Element target = element;
+      element.visitAncestorElements((ancestor) {
+        if (ancestor.widget is ConstrainedBox &&
+            (ancestor.widget as ConstrainedBox).constraints.minHeight >= 48) {
+          target = ancestor;
+          return false;
+        }
+        return true;
+      });
+      Scrollable.ensureVisible(target, alignment: 1);
     } else {
       element.visitChildren(visit);
     }
