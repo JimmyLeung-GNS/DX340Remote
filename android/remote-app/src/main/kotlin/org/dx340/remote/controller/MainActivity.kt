@@ -96,11 +96,16 @@ class MainActivity : Activity() {
             }
             "Queue" -> {
                 label("Queue", 24f)
-                button("Refresh queue", cap("canReadQueue")) { model.send("GET_QUEUE") }
+                val revision = model.queueRevision
+                button("Refresh queue", cap("canReadQueue") && !model.queueLoading) { model.readQueue() }
+                if (model.queueLoading) label("Loading queue…")
+                if (model.queuePage.has("total") && model.queue.length() > 0) label("Queue items ${model.queuePage.optInt("offset") + 1}–${model.queuePage.optInt("offset") + model.queue.length()} of ${model.queuePage.optInt("total")}")
                 for (i in 0 until model.queue.length()) {
                     val item = model.queue.getJSONObject(i)
-                    button(item.optString("title"), cap("canPlayQueueItem")) { model.send("PLAY_QUEUE_ITEM", JSONObject().put("item", item.getString("id")).put("revision", model.queueRevision)) }
+                    button(item.optString("title"), cap("canPlayQueueItem") && !model.queueLoading) { model.send("PLAY_QUEUE_ITEM", JSONObject().put("item", item.getString("id")).put("revision", revision)) }
                 }
+                if (model.queuePage.optInt("offset") > 0) button("Start of queue", cap("canReadQueue") && !model.queueLoading) { model.readQueue() }
+                if (!model.queuePage.isNull("nextOffset")) button("Next queue page", cap("canReadQueue") && !model.queueLoading) { model.readQueue(model.queuePage.getInt("nextOffset")) }
                 if (!cap("canReadQueue")) label("The source has not exposed a readable queue.")
             }
         }

@@ -2,12 +2,12 @@
 
 29 October 2026. VERIFIED means only the stated observation. No complete T01–T18 acceptance run has passed.
 
-Latest local software checkpoint: Android builds/lint and67 aggregate JVM tests; Flutter analysis/22 tests/release APK/release lint pass. Original matching key restored; companion and shared phone upgraded in place on DX340, preserving companion preferences. Current Swift changes have not compiled here; the connected Apple tool fails with xcrun ENOENT. Earlier launch/CI/source results below retain their historical scope. Full-scope audit: completion-audit.md; current upgrade/source evidence: test-results/2026-10-29-original-key-upgrade.md.
+Latest local software checkpoint: Android builds/lint and72 aggregate JVM tests; Flutter analysis/28 tests/release APK/release lint pass. Original matching key restored; companion and shared phone upgraded in place on DX340, preserving companion preferences. Current Swift changes have not compiled here; the connected Apple tool fails with xcrun ENOENT. Earlier launch/CI/source results below retain their historical scope. Full-scope audit: completion-audit.md; current queue/upgrade evidence: test-results/2026-10-29-queue-pagination.md; preceding audio/key evidence: test-results/2026-10-29-original-key-upgrade.md.
 
 | Platform / combination | Build | Open | Physical BLE controller |
 |---|---|---|---|
 | DX340 host, Android13/API33, eng.iBasso.20260812.181952 | VERIFIED latest Windows Gradle build/lint | VERIFIED current package installed/opened; advertising active | Historical advertising callbacks only; central NOT TESTED |
-| Shared Flutter Android remote0.2.0+2 | VERIFIED latest analysis/22 Dart tests/release APK/release lint | VERIFIED current DX340 disconnected cold-launch/capture only | NOT TESTED; same-device launch is not phone BLE |
+| Shared Flutter Android remote0.2.0+2 | VERIFIED latest analysis/28 Dart tests/release APK/release lint | VERIFIED current DX340 disconnected cold-launch/capture only | NOT TESTED; same-device launch is not phone BLE |
 | Shared Flutter iPhone remote, iOS17+ proposed | Historical Flutter3.41.4/Xcode26.6 unsigned simulator build/10 Dart tests, CI40723554411 at7921d75. Current Swift/iOS build BLOCKED here | Earlier six disconnected captures inspected; new elapsed/recovery changes NOT LAUNCHED on iOS | NOT TESTED; physical signing/installation open |
 | Android remote0.1.0 on same DX340 | VERIFIED Windows Gradle | VERIFIED screenshot/process | NOT TESTED; same-device UI is not phone radio proof |
 | Separate Android phone, API31+ proposed | APK available | NOT TESTED, device unavailable | NOT TESTED |
@@ -23,8 +23,8 @@ Latest local software checkpoint: Android builds/lint and67 aggregate JVM tests;
 | T04 Latency | NOT MEASURED; distinguish ACK from observed state |
 | T05 Screen off /30min pause | NOT TESTED for BLE; optional Apple/Mango browsing requires on/unlocked. Mango assisted rejection/native browse separation sampled locally |
 | T06 Ten range recoveries | NOT TESTED |
-| T07 Apple20 tracks/5 albums/2 playlists | PARTIAL: actual own-service downloaded playlist selection outside complete20-item queue observed playing offline; user-confirmed audible with delayed-snapshot caveat. Current updated source also selected A・RA・SHI outside complete101-item queue with user-confirmed audio offline. Full20/5/2 and phone matrix NOT TESTED |
-| T08 Mango20 FLAC/WAV/folders/playlists | PARTIAL native audible selection plus accepted optional own-service nested-folder WAV selection user-confirmed audible. Native root lacks folder/playlist categories; Current updated source also selected03. 風のたより.wav and03. ゴースト.flac with user-confirmed audio; full20/format/playlist/phone matrix open |
+| T07 Apple20 tracks/5 albums/2 playlists | PARTIAL: actual own-service downloaded playlist selection outside complete20-item queue observed playing offline; user-confirmed audible with delayed-snapshot caveat. Preceding parser build also selected A・RA・SHI outside complete101-item queue with user-confirmed audio offline. Full20/5/2 and phone matrix NOT TESTED |
+| T08 Mango20 FLAC/WAV/folders/playlists | PARTIAL native audible selection plus accepted optional own-service nested-folder WAV selection user-confirmed audible. Native root lacks folder/playlist categories; Preceding parser build also selected03. 風のたより.wav and03. ゴースト.flac with user-confirmed audio; full20/format/playlist/phone matrix open |
 | T09 Source switching | PARTIAL:12 local desired-state requests across awake/asleep tests and native/UI selected-item handoff observed correct target playing/other paused. No phone BLE or acoustic-overlap acceptance |
 | T10 Actual output volume | PARTIAL: wheel36→35 and app API35→34 matched API/Mango display and user-reported quieter AMP15 output. Upward/boundaries/Apple/other-output/phone/reconnect NOT TESTED; remote volume remains disabled |
 | T11 Rescan/SD/stale IDs | Old Mango UI file tokens rejected locally; SD root and explicit empty Music folder read. Physical removal/rescan/duplicate cases NOT TESTED |

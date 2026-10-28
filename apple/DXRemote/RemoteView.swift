@@ -111,7 +111,11 @@ private struct QueueView: View {
     var body: some View {
         List {
             ConnectionStatusSection(connection: connection)
-            Button("Refresh queue") { connection.send("GET_QUEUE") }.disabled(!connection.can("canReadQueue"))
+            Button("Refresh queue") { connection.readQueue() }.disabled(!connection.can("canReadQueue") || connection.queueLoading)
+            if connection.queueLoading { Text("Loading queue…") }
+            if let offset = connection.queuePage["offset"] as? Int, let total = connection.queuePage["total"] as? Int, !connection.queue.isEmpty {
+                Text("Queue items \(offset + 1)–\(offset + connection.queue.count) of \(total)")
+            }
             if !connection.authorized {
                 Text("Connect to DX340 in Setup to view its queue.")
                 Button("Open Setup", action: openSetup)
@@ -119,7 +123,14 @@ private struct QueueView: View {
             else if !connection.can("canReadQueue") { Text("This source has not exposed a readable queue.") }
             ForEach(connection.queue.indices, id: \.self) { i in
                 let item = connection.queue[i]
-                Button(item["title"] as? String ?? "Untitled") { connection.send("PLAY_QUEUE_ITEM", args: ["item": item["id"] ?? "", "revision": connection.queueRevision]) }.disabled(!connection.can("canPlayQueueItem"))
+                let revision = connection.queueRevision
+                Button(item["title"] as? String ?? "Untitled") { connection.send("PLAY_QUEUE_ITEM", args: ["item": item["id"] ?? "", "revision": revision]) }.disabled(!connection.can("canPlayQueueItem") || connection.queueLoading)
+            }
+            if (connection.queuePage["offset"] as? Int ?? 0) > 0 {
+                Button("Start of queue") { connection.readQueue() }.disabled(!connection.can("canReadQueue") || connection.queueLoading)
+            }
+            if let next = connection.queuePage["nextOffset"] as? Int {
+                Button("Next queue page") { connection.readQueue(offset: next) }.disabled(!connection.can("canReadQueue") || connection.queueLoading)
             }
         }
     }

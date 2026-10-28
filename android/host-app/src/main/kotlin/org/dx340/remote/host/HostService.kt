@@ -179,7 +179,7 @@ class HostService : Service() {
                                 val value = reply(device, request, if (error == null) "RESULT" else "ERROR", data ?: JSONObject().put("code", error)); ledger.finish(id, value)
                             }
                         }
-                        "GET_QUEUE" -> result(sources.queueState())
+                        "GET_QUEUE" -> result(sources.queueState(args))
                         "GET_ARTWORK" -> result(sources.getArtwork(args.getString("key")))
                         "PLAY_ITEM" -> {
                             reply(device, request, "ACCEPTED")

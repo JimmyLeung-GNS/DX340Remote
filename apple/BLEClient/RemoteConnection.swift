@@ -22,6 +22,8 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     var library: [String: Any] = [:]
     var queue: [[String: Any]] = []
     var queueRevision = ""
+    var queuePage: [String: Any] = [:]
+    var queueLoading: Bool { activeQueueId.map { pending[$0] != nil } ?? false }
     var artwork: Data?
     private var hostEpoch = ""
     private var manager: CBCentralManager!
@@ -42,7 +44,8 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     private struct BrowseLocation { let source: String; let epoch: String; let parent: String? }
     private var browseLocations: [String: BrowseLocation] = [:]
     private var activeBrowseId: String?
-    private var queueLocations: [String: BrowseLocation] = [:]
+    private struct QueueLocation { let source: String; let epoch: String; let offset: Int; let revision: String? }
+    private var queueLocations: [String: QueueLocation] = [:]
     private var activeQueueId: String?
     var assistedBrowsing: Bool { (state["capabilities"] as? [String: Any])?["browseMode"] as? String == "ui-assisted" }
     var sourceScope: String { (state["source"] as? String ?? "") + ":" + (state["sourceEpoch"] as? String ?? "") + ":" + String(assistedBrowsing) }
@@ -156,13 +159,13 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
             let frames = try Wire.frames(data, capacity: min(512, p.maximumWriteValueLength(for: .withResponse)), id: serial)
             guard writes.count + frames.count <= 12000 else { status = "Too many queued messages."; return }
             serial &+= 1; pending[id] = type
-            if type == "GET_QUEUE" { queueLocations[id] = BrowseLocation(source: state["source"] as? String ?? "", epoch: state["sourceEpoch"] as? String ?? "", parent: nil); activeQueueId = id }
+            if type == "GET_QUEUE" { queueLocations[id] = QueueLocation(source: state["source"] as? String ?? "", epoch: state["sourceEpoch"] as? String ?? "", offset: args["offset"] as? Int ?? 0, revision: args["revision"] as? String); activeQueueId = id }
             if type == "BROWSE" {
                 browseLocations[id] = BrowseLocation(source: state["source"] as? String ?? "", epoch: state["sourceEpoch"] as? String ?? "", parent: args["parent"] as? String)
                 activeBrowseId = id; library = ["loading": true]; status = "Loading library…"
             }
             writes.append(contentsOf: frames); pump()
-            Task { try? await Task.sleep(for: .seconds(12)); if pending.removeValue(forKey: id) != nil { browseLocations[id] = nil; if id == activeBrowseId { library = [:] }; status = "Reply timed out; outcome unknown. Refresh before retrying." } }
+            Task { try? await Task.sleep(for: .seconds(12)); if pending.removeValue(forKey: id) != nil { browseLocations[id] = nil; queueLocations[id] = nil; if id == activeBrowseId { library = [:] }; status = "Reply timed out; outcome unknown. Refresh before retrying." } }
         } catch { status = "Cannot encode Bluetooth message." }
     }
     private func pump() {
@@ -184,6 +187,9 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         catch { disconnect(); status = "Invalid Bluetooth reply. Reconnect." }
     }
     func authorize() { send("AUTHORIZE", bootstrap: true) }
+    func readQueue(offset: Int = 0) {
+        send("GET_QUEUE", args: ["offset": offset, "revision": offset == 0 ? NSNull() : queueRevision as Any])
+    }
     func browse(parent: String? = nil, page: Int = 0) {
         send("BROWSE", args: ["parent": parent.map { $0 as Any } ?? NSNull(), "page": page, "revision": parent == nil ? NSNull() : (library["revision"] ?? state["sourceEpoch"] ?? "")])
     }
@@ -196,7 +202,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         if type != "ACCEPTED" { queueLocations[id] = nil }
         if type != "ACCEPTED" { pending[id] = nil }
         if type == "HELLO" { hostEpoch = reply["hostEpoch"] as? String ?? ""; authorize(); return }
-        if type == "ERROR" { browseLocations[id] = nil; if id == activeBrowseId { library = [:] }; status = errorMessage(data["code"] as? String ?? "Source error"); return }
+        if type == "ERROR" { browseLocations[id] = nil; if id == activeBrowseId { library = [:] }; if id == activeQueueId { queue = []; queueRevision = ""; queuePage = [:] }; status = errorMessage(data["code"] as? String ?? "Source error"); return }
         if type == "ACCEPTED" { status = "Waiting for source…"; return }
         guard reply["hostEpoch"] as? String == hostEpoch else { disconnect(); return }
         if operation == "AUTHORIZE", data["authorized"] as? Bool == true { authorized = true; status = "Connected to DX340" }
@@ -209,7 +215,18 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
             library = data; library["requestedParent"] = location.parent ?? ""; library["scopeSource"] = location.source; library["scopeEpoch"] = location.epoch
             status = "Library loaded. Offline availability depends on the source."
         }
-        if operation == "GET_QUEUE", id == activeQueueId, let queueLocation, queueLocation.source == state["source"] as? String, queueLocation.epoch == state["sourceEpoch"] as? String { queue = data["items"] as? [[String: Any]] ?? []; queueRevision = data["revision"] as? String ?? "" }
+        if operation == "GET_QUEUE", id == activeQueueId, let location = queueLocation, location.source == state["source"] as? String, location.epoch == state["sourceEpoch"] as? String {
+            guard let items = data["items"] as? [[String: Any]], let revision = data["revision"] as? String else { throw WireError.malformed }
+            let offset = data["offset"] as? Int ?? 0, total = data["total"] as? Int ?? items.count
+            let next = data["nextOffset"] as? Int
+            guard !revision.isEmpty, location.revision == nil || location.revision == revision,
+                  offset == location.offset, (0...10000).contains(offset), items.count <= 50,
+                  total >= offset + items.count, total <= 10000,
+                  next == nil ? offset + items.count == total : (!items.isEmpty && next == offset + items.count && next! < total) else { throw WireError.malformed }
+            queue = items; queueRevision = revision
+            queuePage = ["offset": offset, "total": total, "nextOffset": next as Any? ?? NSNull()]
+            status = "Queue loaded."
+        }
         if operation == "GET_ARTWORK", let key = data["key"] as? String, let encoded = data["base64"] as? String, let bytes = Data(base64Encoded: encoded), bytes.count <= 49152 {
             let digest = SHA256.hash(data: bytes).map { String(format: "%02x", $0) }.joined()
             guard digest == key else { throw WireError.malformed }
@@ -230,7 +247,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     }
     private func applyState(_ new: [String: Any]) {
         if new["sourceEpoch"] as? String != state["sourceEpoch"] as? String || new["source"] as? String != state["source"] as? String || (new["capabilities"] as? [String: Any])?["browseMode"] as? String != (state["capabilities"] as? [String: Any])?["browseMode"] as? String {
-            library = [:]; queue = []; queueRevision = ""; artwork = nil; activeBrowseId = nil; activeQueueId = nil; browseLocations = [:]; queueLocations = [:]
+            library = [:]; queue = []; queueRevision = ""; queuePage = [:]; artwork = nil; activeBrowseId = nil; activeQueueId = nil; browseLocations = [:]; queueLocations = [:]
         }
         state = new
         stateReceivedAt = ContinuousClock.now

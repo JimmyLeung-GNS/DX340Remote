@@ -39,11 +39,13 @@ Duplicate IDs in the same authenticated controller/host epoch return cached resu
 | SEEK | args.position milliseconds, bounded by source duration |
 | BROWSE | args.parent nullable root, page >=0, revision; 25 items per page, max 50; source/revision-scoped IDs |
 | PLAY_ITEM | args.item previously browsed ID and args.revision; requires canPlayItem |
-| GET_QUEUE | up to 50 source queue items with revision |
+| GET_QUEUE | optional args.offset (default0), args.revision required after offset0; up to50 source queue items with revision/offset/total/nextOffset |
 | PLAY_QUEUE_ITEM | args.item must still exist in source queue and require canPlayQueueItem |
 | GET_ARTWORK | args.key from current state; bounded public-metadata JPEG/base64 with SHA256 key |
 
 Library nodes have id/title/subtitle/browsable/playable. Responses include parent, page, revision and nextPage (null at end). A legacy source returning an unpaged result is bounded to 10,000 items then paginated on DX340. No arbitrary remote file paths. Item knowledge is bounded at 10,000 IDs. Removable-storage and library-change revision detection still require physical implementation/verification; session epoch alone is not a complete library revision.
+
+Queue pagination is additive within v1. An empty GET_QUEUE args object still returns the first window. New clients request the returned nextOffset with the current revision; nextOffset is null at the end. offset is an integer0–10000; source queues above10000 return QUEUE_LIMIT. Each window has at most50 complete entries and at most48KiB of encoded UTF-8 data, leaving room for the reply envelope. Oversized metadata reduces the entry count; nextOffset advances by the actual count. A single entry that cannot fit returns MESSAGE_TOO_LARGE, never partial JSON or a silently truncated title. A changed source epoch/order/ID/media identity/title changes the queue revision; any supplied old revision or positive offset without the current revision returns STALE_LIBRARY. Refresh with offset0 and no revision to recover. PLAY_QUEUE_ITEM still validates the complete current queue and revision again after source handoff. No paging read starts playback. Clients replace the visible window rather than combining different revisions and show its range/total, Next queue page and Start of queue. Older hosts return no continuation; newer clients do not invent one.
 
 SEARCH, SET_SHUFFLE, SET_REPEAT and ADJUST_VOLUME return UNSUPPORTED_CAPABILITY in this beta. Public metadata artwork is scaled/compressed to at most44KiB, identified by SHA256, and cached with bounds on both clients. Bulk replies have lower priority than controls; actual BLE latency remains unmeasured. canAdjustVolume is false until DX340 output is verified. canResume and canColdLaunch are false. Complete source-switch/audio acceptance remains outstanding.
 

@@ -70,7 +70,10 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
             } else if (operation == "GET_STATE") {
                 finish(sources.state(), null)
             } else if (operation == "GET_QUEUE") {
-                finish(sources.queueState(), null)
+                val args = JSONObject()
+                if (intent.hasExtra("offset")) args.put("offset", intent.getIntExtra("offset", -1))
+                intent.getStringExtra("revision")?.let { args.put("revision", it) }
+                finish(sources.queueState(args), null)
             } else if (operation == "CHECK_APPLE_QUEUE_BASELINE") {
                 val candidate = intent.getStringExtra("candidate") ?: error("INVALID_ARGUMENT")
                 require(sources.selected == "com.apple.android.music") { "INVALID_SOURCE" }

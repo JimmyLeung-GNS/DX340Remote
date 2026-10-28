@@ -97,7 +97,8 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler {
             .put("state", remote?.state ?: JSONObject()).put("sources", remote?.sources ?: JSONArray())
             .put("stateSampleId", remote?.stateSampleId ?: "").put("stateAgeMs", remote?.stateAgeMs ?: JSONObject.NULL)
             .put("library", remote?.library ?: JSONObject()).put("queue", remote?.queue ?: JSONArray())
-            .put("queueRevision", remote?.queueRevision ?: "").put("devices", devices)
+            .put("queueRevision", remote?.queueRevision ?: "").put("queuePage", remote?.queuePage ?: JSONObject())
+            .put("queueLoading", remote?.queueLoading ?: false).put("devices", devices)
             .put("artworkBase64", remote?.artworkBytes?.let { Base64.encodeToString(it, Base64.NO_WRAP) } ?: JSONObject.NULL).toString()
     }
     private fun emit() { sink?.success(snapshot()) }

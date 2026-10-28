@@ -26,7 +26,7 @@ import CoreBluetooth
             "mutationPending": remote.mutationPending, "state": remote.state,
             "stateSampleId": remote.stateSampleId, "stateAgeMs": remote.stateAgeMs as Any? ?? NSNull(),
             "sources": remote.sources, "library": remote.library, "queue": remote.queue,
-            "queueRevision": remote.queueRevision,
+            "queueRevision": remote.queueRevision, "queuePage": remote.queuePage, "queueLoading": remote.queueLoading,
             "devices": remote.devices.map { ["id": $0.identifier.uuidString, "name": $0.name ?? "DX340"] },
             "artworkBase64": remote.artwork?.base64EncodedString() as Any? ?? NSNull()
         ]

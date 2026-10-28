@@ -12,6 +12,16 @@
     "sourceEpoch": {"type": "string", "maxLength": 64},
     "args": {"type": "object"}
   },
-  "allOf": [{"if": {"properties": {"type": {"not": {"enum": ["HELLO", "AUTHORIZE"]}}}}, "then": {"required": ["hostEpoch"]}}],
+  "allOf": [
+    {"if": {"properties": {"type": {"not": {"enum": ["HELLO", "AUTHORIZE"]}}}}, "then": {"required": ["hostEpoch"]}},
+    {"if": {"properties": {"type": {"const": "GET_QUEUE"}}}, "then": {
+      "properties": {"args": {
+        "type": "object",
+        "properties": {"offset": {"type": "integer", "minimum": 0, "maximum": 10000}, "revision": {"type": ["string", "null"], "maxLength": 64}},
+        "additionalProperties": false,
+        "allOf": [{"if": {"required": ["offset"], "properties": {"offset": {"minimum": 1}}}, "then": {"required": ["revision"], "properties": {"revision": {"type": "string", "minLength": 1}}}}]
+      }}
+    }}
+  ],
   "additionalProperties": false
 }

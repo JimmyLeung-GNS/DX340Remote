@@ -47,6 +47,111 @@ Json snapshot({
 
 void main() {
   test(
+    'a retained queue row cannot select using a newer revision or another page',
+    () async {
+      final bridge = FakeBridge();
+      final item = {'id': 'reused', 'title': 'Original title'};
+      final remote = Remote(bridge)
+        ..accept(
+          snapshot()..addAll({
+            'queue': [item],
+            'queueRevision': 'new',
+          }),
+        );
+      await remote.playQueue(item, revision: 'old');
+      await remote.playQueue({
+        'id': 'off-page',
+        'title': 'Other title',
+      }, revision: 'new');
+      await remote.playQueue({
+        'id': 'reused',
+        'title': 'Wrong title',
+      }, revision: 'new');
+      expect(bridge.calls, isEmpty);
+      await remote.playQueue(item, revision: 'new');
+      expect(bridge.calls.single.$2, {
+        'type': 'PLAY_QUEUE_ITEM',
+        'args': {'item': 'reused', 'revision': 'new'},
+      });
+      remote.dispose();
+    },
+  );
+  test(
+    'queue continuation carries revision and cannot use arbitrary offsets or stale scope',
+    () async {
+      final bridge = FakeBridge();
+      final data = snapshot()
+        ..addAll({
+          'queue': [
+            {'id': '0', 'title': 'Fixture'},
+          ],
+          'queueRevision': 'q1',
+          'queuePage': {'offset': 0, 'nextOffset': 50, 'total': 101},
+        });
+      final remote = Remote(bridge)..accept(data);
+      expect(remote.queueNextOffset, 50);
+      expect(remote.queueTotal, 101);
+      expect(await remote.readQueue(25), false);
+      expect(await remote.readQueue(50), true);
+      expect(bridge.calls.single.$2, {
+        'type': 'GET_QUEUE',
+        'args': {'offset': 50, 'revision': 'q1'},
+      });
+      remote.accept(snapshot(source: 'apple', epoch: 'new'));
+      expect(remote.queueNextOffset, isNull);
+      expect(await remote.readQueue(50), false);
+      expect(bridge.calls.length, 1);
+      remote.dispose();
+    },
+  );
+  test(
+    'queue loading prevents duplicate reads and old-row selection',
+    () async {
+      final bridge = FakeBridge()..pending = Completer();
+      final remote = Remote(bridge)
+        ..accept(snapshot()..addAll({'queueRevision': 'q'}));
+      final read = remote.readQueue();
+      expect(remote.queueLoading, true);
+      expect(await remote.readQueue(), false);
+      await remote.playQueue({'id': 'old'}, revision: 'q');
+      expect(bridge.calls.length, 1);
+      bridge.pending!.complete();
+      await read;
+      remote.accept(
+        snapshot()..addAll({'queueRevision': 'q', 'queueLoading': true}),
+      );
+      expect(await remote.readQueue(), false);
+      await remote.playQueue({'id': 'old'}, revision: 'q');
+      expect(bridge.calls.length, 1);
+      remote.accept(snapshot(authorized: false));
+      expect(await remote.readQueue(), false);
+      remote.dispose();
+    },
+  );
+  test(
+    'legacy queue replies have no invented continuation and refresh starts from zero',
+    () async {
+      final bridge = FakeBridge();
+      final remote = Remote(bridge)
+        ..accept(
+          snapshot()..addAll({
+            'queueRevision': 'legacy',
+            'queue': [
+              {'id': 'a'},
+            ],
+          }),
+        );
+      expect(remote.queueTotal, isNull);
+      expect(remote.queueNextOffset, isNull);
+      await remote.readQueue();
+      expect(bridge.calls.single.$2, {
+        'type': 'GET_QUEUE',
+        'args': {'offset': 0},
+      });
+      remote.dispose();
+    },
+  );
+  test(
     'hybrid Mango folders return to native root without retaining a stale native parent',
     () async {
       final bridge = FakeBridge();

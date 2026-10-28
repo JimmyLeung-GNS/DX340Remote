@@ -421,9 +421,10 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         val content = epoch(selected) + "\u0000" + queue.joinToString("\u0000") { "${it.queueId}:${it.description.mediaId}:${it.description.mediaUri}:${it.description.title}" }
         return java.security.MessageDigest.getInstance("SHA-256").digest(content.toByteArray()).joinToString("") { "%02x".format(it.toInt() and 255) }
     }
-    fun queueState(): JSONObject {
+    fun queueState(args: JSONObject = JSONObject()): JSONObject {
         val queue = controllers[selected]?.queue ?: error("UNSUPPORTED_CAPABILITY")
-        return JSONObject().put("revision", queueRevision(queue)).put("items", JSONArray().apply { queue.take(50).forEach { q -> put(JSONObject().put("id", q.queueId.toString()).put("title", q.description.title?.toString() ?: "Untitled")) } })
+        require(queue.size <= QueuePages.MAX_ITEMS) { "QUEUE_LIMIT" }
+        return QueuePages.render(queue.map { QueuePages.Entry(it.queueId.toString(), it.description.title?.toString() ?: "Untitled") }, queueRevision(queue), args)
     }
     fun browse(parent: String?, page: Int, expectedRevision: String? = null, done: (JSONObject?, String?) -> Unit) {
         browseAuthorized(parent, page, expectedRevision, { true }, done)

@@ -10,6 +10,55 @@ import 'remote_test.dart' show FakeBridge, snapshot;
 void main() {
   for (final platform in [TargetPlatform.android, TargetPlatform.iOS]) {
     testWidgets(
+      '$platform can reach the last queue window and return to start',
+      (tester) async {
+        debugDefaultTargetPlatformOverride = platform;
+        addTearDown(() => debugDefaultTargetPlatformOverride = null);
+        final bridge = FakeBridge();
+        final remote = Remote(bridge);
+        await tester.pumpWidget(DX340App(remote: remote));
+        await tester.pumpAndSettle();
+        remote.accept(
+          snapshot()..addAll({
+            'queue': [
+              {'id': '100', 'title': 'Last fixture track'},
+            ],
+            'queueRevision': 'q',
+            'queuePage': {'offset': 100, 'total': 101, 'nextOffset': null},
+          }),
+        );
+        await tester.tap(find.text('Queue').last);
+        await tester.pumpAndSettle();
+        expect(find.text('Queue items 101–101 of 101'), findsOneWidget);
+        expect(find.text('Last fixture track'), findsOneWidget);
+        expect(find.text('Next queue page'), findsNothing);
+        await tester.tap(find.text('Start of queue'));
+        await tester.pumpAndSettle();
+        expect(bridge.calls.last.$2, {
+          'type': 'GET_QUEUE',
+          'args': {'offset': 0},
+        });
+        remote.accept(
+          snapshot()..addAll({
+            'queue': [
+              {'id': '0', 'title': 'First fixture track'},
+            ],
+            'queueRevision': 'q2',
+            'queuePage': {'offset': 0, 'total': 101, 'nextOffset': 1},
+          }),
+        );
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('Next queue page'));
+        await tester.pumpAndSettle();
+        expect(bridge.calls.last.$2, {
+          'type': 'GET_QUEUE',
+          'args': {'offset': 1, 'revision': 'q2'},
+        });
+        await tester.pumpWidget(const SizedBox());
+        debugDefaultTargetPlatformOverride = null;
+      },
+    );
+    testWidgets(
       '$platform explains source permission recovery with disabled transport',
       (tester) async {
         debugDefaultTargetPlatformOverride = platform;

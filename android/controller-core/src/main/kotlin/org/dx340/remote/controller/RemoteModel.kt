@@ -28,6 +28,8 @@ class RemoteModel(context: Context) {
     var library = JSONObject(); private set
     var queue = JSONArray(); private set
     var queueRevision = ""; private set
+    var queuePage = JSONObject(); private set
+    val queueLoading get() = activeQueueId?.let { pending.containsKey(it) } == true
     val epoch get() = session.hostEpoch
     var artworkBytes: ByteArray? = null; private set
     private val main = Handler(Looper.getMainLooper())
@@ -37,7 +39,8 @@ class RemoteModel(context: Context) {
     private data class BrowseLocation(val source: String, val epoch: String, val parent: String?)
     private val browseLocations = mutableMapOf<String, BrowseLocation>()
     private var activeBrowseId: String? = null
-    private val queueLocations = mutableMapOf<String, BrowseLocation>()
+    private data class QueueLocation(val source: String, val epoch: String, val offset: Int, val revision: String?)
+    private val queueLocations = mutableMapOf<String, QueueLocation>()
     private var activeQueueId: String? = null
     private val devices = linkedMapOf<String, BluetoothDevice>()
     val found get() = devices.values.toList()
@@ -67,18 +70,23 @@ class RemoteModel(context: Context) {
         val request = JSONObject().put("v", 1).put("id", id).put("type", type).put("hostEpoch", epoch)
             .put("source", state.optString("source")).put("sourceEpoch", state.optString("sourceEpoch")).put("args", args)
         session.register(id, type)
-        if (type == "GET_QUEUE") { queueLocations[id] = BrowseLocation(state.optString("source"), state.optString("sourceEpoch"), null); activeQueueId = id }
+        if (type == "GET_QUEUE") {
+            queueLocations[id] = QueueLocation(state.optString("source"), state.optString("sourceEpoch"), args.optInt("offset", 0), if (args.isNull("revision")) null else args.optString("revision"))
+            activeQueueId = id
+        }
         if (type == "BROWSE") {
             browseLocations[id] = BrowseLocation(state.optString("source"), state.optString("sourceEpoch"), if (args.isNull("parent")) null else args.optString("parent"))
             activeBrowseId = id; library = JSONObject().put("loading", true); status = "Loading library…"; update()
         }
         update()
         try { ble.send(request.toString().toByteArray()) }
-        catch (e: Exception) { pending.remove(id); status = e.message ?: "Send failed"; update(); return }
+        catch (e: Exception) { pending.remove(id); browseLocations.remove(id); queueLocations.remove(id); status = e.message ?: "Send failed"; update(); return }
         main.postDelayed({ if (pending.remove(id) != null) { browseLocations.remove(id); queueLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); status = "Reply timed out; outcome unknown. Refresh state before retrying."; update() } }, 12000)
     }
     fun browse(parent: String? = null, page: Int = 0) = send("BROWSE", JSONObject().put("parent", parent ?: JSONObject.NULL).put("page", page)
         .put("revision", if (parent == null) JSONObject.NULL else library.optString("revision", state.optString("sourceEpoch"))))
+    fun readQueue(offset: Int = 0) = send("GET_QUEUE", JSONObject().put("offset", offset)
+        .put("revision", if (offset == 0) JSONObject.NULL else queueRevision))
     private fun receive(bytes: ByteArray) {
         try {
             val reply = JSONObject(String(bytes, Charsets.UTF_8)); require(reply.getInt("v") == 1)
@@ -90,7 +98,7 @@ class RemoteModel(context: Context) {
             if (type != "ACCEPTED") queueLocations.remove(id)
             if (type != "ACCEPTED" && id.isNotEmpty()) pending.remove(id)
             if (type == "HELLO") { session.hello(reply.getString("hostEpoch")); authorize(); return }
-            if (type == "ERROR") { browseLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); status = errorMessage(data.optString("code", "Unknown source error")); update(); return }
+            if (type == "ERROR") { browseLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); if (id == activeQueueId) { queue = JSONArray(); queueRevision = ""; queuePage = JSONObject() }; status = errorMessage(data.optString("code", "Unknown source error")); update(); return }
             if (type == "ACCEPTED") { status = "Waiting for source…"; update(); return }
             if (operation == "AUTHORIZE" && data.optBoolean("authorized")) { session.approve(reply.getString("hostEpoch")); status = "Connected to DX340" }
             if (reply.optString("hostEpoch") != epoch) { disconnect(); return }
@@ -103,7 +111,17 @@ class RemoteModel(context: Context) {
                 library = data.put("requestedParent", location.parent ?: JSONObject.NULL).put("scopeSource", location.source).put("scopeEpoch", location.epoch)
                 status = "Library loaded. Offline availability is source dependent."
             }
-            if (operation == "GET_QUEUE" && id == activeQueueId && queueLocation != null && queueLocation.source == state.optString("source") && queueLocation.epoch == state.optString("sourceEpoch")) { queue = data.optJSONArray("items") ?: JSONArray(); queueRevision = data.optString("revision") }
+            if (operation == "GET_QUEUE" && id == activeQueueId && queueLocation != null && queueLocation.source == state.optString("source") && queueLocation.epoch == state.optString("sourceEpoch")) {
+                val items = data.getJSONArray("items"); val revision = data.getString("revision")
+                val offset = data.optInt("offset", 0); val total = data.optInt("total", items.length())
+                val next = if (data.isNull("nextOffset")) null else data.getInt("nextOffset")
+                require(revision.isNotEmpty() && (queueLocation.revision == null || revision == queueLocation.revision))
+                require(offset == queueLocation.offset && offset in 0..10000 && items.length() <= 50 && total in (offset + items.length())..10000)
+                require(if (next == null) offset + items.length() == total else items.length() > 0 && next == offset + items.length() && next < total)
+                queue = items; queueRevision = revision
+                queuePage = JSONObject().put("offset", offset).put("total", total).put("nextOffset", next ?: JSONObject.NULL)
+                status = "Queue loaded."
+            }
             if (operation == "GET_ARTWORK") {
                 val key = data.getString("key")
                 val art = android.util.Base64.decode(data.getString("base64"), android.util.Base64.NO_WRAP)
@@ -124,11 +142,11 @@ class RemoteModel(context: Context) {
             val snapshot = JSONObject().put("state", state).put("sources", sources).put("library", library).toString()
             if (snapshot.toByteArray().size <= 262144) runCatching { snapshotFile.writeText(snapshot) }
             update()
-        } catch (_: Exception) { status = "Invalid host reply; reconnect."; update() }
+        } catch (_: Exception) { disconnect(); status = "Invalid host reply; reconnect."; update() }
     }
     private fun applyState(new: JSONObject) {
         if (state.optString("sourceEpoch") != new.optString("sourceEpoch") || state.optString("source") != new.optString("source") || state.optJSONObject("capabilities")?.optString("browseMode") != new.optJSONObject("capabilities")?.optString("browseMode")) {
-            library = JSONObject(); queue = JSONArray(); queueRevision = ""; artworkBytes = null; activeBrowseId = null; activeQueueId = null; browseLocations.clear(); queueLocations.clear()
+            library = JSONObject(); queue = JSONArray(); queueRevision = ""; queuePage = JSONObject(); artworkBytes = null; activeBrowseId = null; activeQueueId = null; browseLocations.clear(); queueLocations.clear()
         }
         state = new
         stateReceivedAt = android.os.SystemClock.elapsedRealtime()

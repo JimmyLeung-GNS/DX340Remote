@@ -318,9 +318,11 @@ class _PhoneShellState extends State<PhoneShell>
       ),
   ];
   Widget musicRow(Json item, {required bool queue}) {
+    final queueRevision = remote.queueRevision;
     final browsable = !queue && item['browsable'] == true;
     final enabled =
         !remote.busy &&
+        (!queue || !remote.queueLoading) &&
         (browsable
             ? remote.can('canBrowse') && !remote.libraryLoading
             : remote.can(queue ? 'canPlayQueueItem' : 'canPlayItem') &&
@@ -328,7 +330,7 @@ class _PhoneShellState extends State<PhoneShell>
     final callback = perform(
       enabled,
       () => queue
-          ? remote.playQueue(item)
+          ? remote.playQueue(item, revision: queueRevision)
           : browsable
           ? remote.open(item)
           : remote.playItem(item),
@@ -391,14 +393,42 @@ class _PhoneShellState extends State<PhoneShell>
     action(
       'Refresh queue',
       perform(
-        remote.can('canReadQueue'),
-        () => remote.command('GET_QUEUE', {}, 'canReadQueue'),
+        remote.can('canReadQueue') && !remote.queueLoading,
+        () => remote.readQueue(),
       ),
       icon: Icons.refresh,
     ),
-    if (remote.authorized && remote.can('canReadQueue') && remote.queue.isEmpty)
-      label('Refresh to read the queue from DX340.'),
+    if (remote.queueLoading) label('Loading queue…'),
+    if (remote.authorized &&
+        remote.can('canReadQueue') &&
+        remote.queue.isEmpty &&
+        !remote.queueLoading)
+      label(
+        remote.queueTotal == 0
+            ? 'The queue is empty.'
+            : 'Refresh to read the queue from DX340.',
+      ),
+    if (remote.queue.isNotEmpty && remote.queueTotal != null)
+      label(
+        'Queue items ${remote.queueOffset + 1}–${remote.queueOffset + remote.queue.length} of ${remote.queueTotal}',
+      ),
     for (final item in remote.queue) musicRow(item, queue: true),
+    if (remote.queueOffset > 0)
+      action(
+        'Start of queue',
+        perform(
+          remote.can('canReadQueue') && !remote.queueLoading,
+          () => remote.readQueue(),
+        ),
+      ),
+    if (remote.queueNextOffset != null)
+      action(
+        'Next queue page',
+        perform(
+          remote.can('canReadQueue') && !remote.queueLoading,
+          () => remote.readQueue(remote.queueNextOffset!),
+        ),
+      ),
   ];
   List<Widget> setupView() => [
     label(

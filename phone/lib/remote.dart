@@ -42,6 +42,14 @@ class Remote extends ChangeNotifier {
   Json state = {}, library = {};
   List<Json> sources = [], queue = [], devices = [];
   String queueRevision = '';
+  Json queuePage = {};
+  bool _nativeQueueLoading = false;
+  bool _dispatchingQueue = false;
+  bool get queueLoading => _nativeQueueLoading || _dispatchingQueue;
+  int get queueOffset => queuePage['offset'] is int ? queuePage['offset'] : 0;
+  int? get queueNextOffset =>
+      queuePage['nextOffset'] is int ? queuePage['nextOffset'] : null;
+  int? get queueTotal => queuePage['total'] is int ? queuePage['total'] : null;
   Uint8List? artwork;
   final List<String> _parents = [];
   String get scope =>
@@ -96,6 +104,8 @@ class Remote extends ChangeNotifier {
       library = object(data['library']);
       queue = objects(data['queue']);
       queueRevision = textValue(data['queueRevision']);
+      queuePage = object(data['queuePage']);
+      _nativeQueueLoading = data['queueLoading'] == true;
       if (previousScope != scope || (wasAuthorized && !authorized)) {
         _parents.clear();
       }
@@ -121,6 +131,7 @@ class Remote extends ChangeNotifier {
     authorized = false;
     progress.invalidate();
     mutationPending = false;
+    _nativeQueueLoading = false;
     _parents.clear();
     error = issue is PlatformException
         ? issue.message
@@ -239,11 +250,41 @@ class Remote extends ChangeNotifier {
     }, 'canPlayItem');
   }
 
-  Future<void> playQueue(Json item) async {
+  Future<void> playQueue(Json item, {required String revision}) async {
+    if (queueLoading ||
+        queueRevision.isEmpty ||
+        revision != queueRevision ||
+        !queue.any(
+          (current) =>
+              current['id'] == item['id'] && current['title'] == item['title'],
+        )) {
+      return;
+    }
     await command('PLAY_QUEUE_ITEM', {
       'item': item['id'],
-      'revision': queueRevision,
+      'revision': revision,
     }, 'canPlayQueueItem');
+  }
+
+  Future<bool> readQueue([int offset = 0]) async {
+    if (!can('canReadQueue') ||
+        busy ||
+        queueLoading ||
+        offset < 0 ||
+        (offset != 0 && (offset != queueNextOffset || queueRevision.isEmpty))) {
+      return false;
+    }
+    _dispatchingQueue = true;
+    notifyListeners();
+    try {
+      return await command('GET_QUEUE', {
+        'offset': offset,
+        if (offset != 0) 'revision': queueRevision,
+      }, 'canReadQueue');
+    } finally {
+      _dispatchingQueue = false;
+      if (!_disposed) notifyListeners();
+    }
   }
 
   @override
