@@ -14,18 +14,26 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
         val pending = goAsync()
         val main = Handler(Looper.getMainLooper())
         var finished = false
+        val reportTag = intent.getStringExtra("reportTag")
+        if (reportTag != null && !reportTag.matches(Regex("[A-Za-z0-9_-]{1,48}"))) { pending.finish(); return }
+        val reportFile = File(context.filesDir, if (reportTag == null) "apple-ui-live-test.json" else "debug-probe-$reportTag.json")
+        reportFile.writeText(JSONObject().put("time", System.currentTimeMillis()).put("phase", "STARTED")
+            .put("operation", intent.getStringExtra("operation") ?: "BROWSE").toString())
         val before = HostService.instance?.sources?.observedSources()
+        var interruption: JSONObject? = null
         fun finish(data: JSONObject?, error: String?) {
             if (finished) return
             finished = true
             try {
                 val report = JSONObject().put("kind", "physical-own-accessibility-adapter-debug-probe-no-ble")
                     .put("time", System.currentTimeMillis()).put("operation", intent.getStringExtra("operation") ?: "BROWSE")
+                    .put("phase", "FINISHED").put("requestedSource", intent.getStringExtra("source") ?: "com.apple.android.music")
+                    .put("interruption", interruption ?: JSONObject.NULL)
                     .put("data", data ?: JSONObject.NULL).put("error", error ?: JSONObject.NULL)
                     .put("state", HostService.instance?.sources?.state() ?: JSONObject.NULL)
                     .put("sourceStatesBefore", before ?: JSONObject.NULL)
                     .put("sourceStatesAfter", HostService.instance?.sources?.observedSources() ?: JSONObject.NULL)
-                File(context.filesDir, "apple-ui-live-test.json").writeText(report.toString(2))
+                reportFile.writeText(report.toString(2))
             } finally { pending.finish() }
         }
         main.postDelayed({ finish(null, "DEBUG_PROBE_TIMEOUT") }, 9500)
@@ -33,6 +41,19 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
             val sources = HostService.instance?.sources ?: return finish(null, "START_COMPANION_FIRST")
             sources.select(intent.getStringExtra("source") ?: "com.apple.android.music")
             val operation = intent.getStringExtra("operation") ?: "BROWSE"
+            if (intent.hasExtra("changeSourceAfterMs")) {
+                require(operation == "BROWSE") { "INVALID_ARGUMENT" }
+                val delay = intent.getIntExtra("changeSourceAfterMs", -1)
+                val next = intent.getStringExtra("changeSourceTo")
+                require(delay in 100..1000 && next in setOf("com.ibasso.music", "com.apple.android.music") && next != sources.selected) { "INVALID_ARGUMENT" }
+                main.postDelayed({
+                    if (!finished) {
+                        interruption = JSONObject().put("kind", "in-process-source-change-while-browse-pending")
+                            .put("time", System.currentTimeMillis()).put("from", sources.selected).put("to", next)
+                        sources.select(next!!)
+                    }
+                }, delay.toLong())
+            }
             if (operation == "PROBE_VOLUME_DOWN") {
                 val state = sources.state()
                 require(intent.getStringExtra("sourceEpoch") == state.optString("sourceEpoch")) { "STALE_SOURCE" }

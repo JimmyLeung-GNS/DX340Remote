@@ -133,7 +133,7 @@ class AppleMusicAccessibilityService : AccessibilityService() {
         if (busy) { done(null, "UI_BUSY"); return }
         busy = true
         var finished = false
-        fun finish(value: JSONObject?, error: String?) { if (!finished) { finished = true; busy = false; cancelBrowse = null; done(value, error) } }
+        fun finish(value: JSONObject?, error: String?) { if (!finished) { finished = true; busy = false; cancelBrowse = null; if (error != null) last = null; done(value, error) } }
         cancelBrowse = { finish(null, it) }
         val deadline = android.os.SystemClock.elapsedRealtime() + 6000
         fun publish(end: Boolean = false) { try { require(stillAuthorized()) { "AUTHORIZATION_DENIED" }; finish(result(frame(tree()), page, end), null) } catch (e: Exception) { finish(null, e.message ?: "UI_UNEXPECTED_SCREEN") } }
@@ -154,8 +154,14 @@ class AppleMusicAccessibilityService : AccessibilityService() {
                 } else { settlingFingerprint = null }
                 if (android.os.SystemClock.elapsedRealtime() >= deadline) { if (parent?.endsWith(":scroll") == true) publish(true) else finish(null, "UI_ACTION_TIMEOUT"); return }
                 main.postDelayed({ waitChanged(before) }, 150)
-            } catch (_: Exception) {
-                if (android.os.SystemClock.elapsedRealtime() >= deadline) finish(null, "UI_UNEXPECTED_SCREEN") else main.postDelayed({ waitChanged(before) }, 150)
+            } catch (e: Exception) {
+                // A transitioning window can be read again. Lost readiness is terminal and
+                // must retain its actionable error rather than waiting out the UI deadline.
+                val error = e.message ?: "UI_UNEXPECTED_SCREEN"
+                if (error in setOf("UI_FOREGROUND_REQUIRED", "UI_UNEXPECTED_SCREEN", "UI_DOWNLOADED_CONTEXT_REQUIRED", "STALE_LIBRARY") && android.os.SystemClock.elapsedRealtime() < deadline) {
+                    settlingFingerprint = null
+                    main.postDelayed({ waitChanged(before) }, 150)
+                } else finish(null, error)
             }
         }
         var rootSteps = 0

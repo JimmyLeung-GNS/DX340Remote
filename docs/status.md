@@ -2,7 +2,13 @@
 
 Updated 29 October 2026 (Hong Kong). **Original signing key restored and both apps upgraded in place. Goal active; full system incomplete and physical phone/Mac acceptance remains pending.**
 
-## Current continuation: Mango Playlist-screen recovery
+## Current continuation: pending assisted-browse interruptions
+
+Actual Apple Songs loading followed by screen-off reproduced a6.253second wait and generic UI_UNEXPECTED_SCREEN. Its wait loop now retries only transitional window/context errors, preserving terminal readiness errors immediately. Both adapters discard their action frame when browsing fails/cancels. Debug-only tagged STARTED/FINISHED reports and a bounded timed source-change trigger support repeatable own-adapter checks without instrumentation.
+
+VERIFIED: actual Apple/Mango screen-off and in-process source-change cases all stop, reject the canceled navigation token and recover a fresh page; both sources remained paused. Apple screen-off now returns UI_SCREEN_UNLOCK_REQUIRED in815ms including the ADB trigger/report round trip; Mango1272ms. These are source-local interruption checks, not phone BLE/revocation or latency acceptance. Native build/lint74 JVM tests and matching-key in-place companion update passed; installed bytes/preferences/services checked. Shared phone unchanged with preceding28 Flutter tests; current iOS compilation remains open. See test-results/2026-10-29-assisted-interruptions.md for hashes, failures, timing and exact scope. Goal active; full system incomplete.
+
+## Preceding continuation: Mango Playlist-screen recovery
 
 Read-only DX340 research verified that Mango's current Playlist screen has no saved rows; no playlist was created/edited. It exposed a real folder-navigation gap: four requests from that screen timed out while native/assisted root reads succeeded. A narrowly recognized exact Playlist/header/list/navbar layout now permits the existing menu action to return to local folders, without exposing playlist-editing or network controls.
 

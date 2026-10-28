@@ -150,7 +150,7 @@ class MangoAccessibilityService : AccessibilityService() {
     fun browse(parent: String?, page: Int, revision: String?, stillAuthorized: () -> Boolean, done: (JSONObject?, String?) -> Unit) {
         if (busy) { done(null, "UI_BUSY"); return }; busy = true
         var finished = false
-        fun finish(value: JSONObject?, error: String?) { if (!finished) { finished = true; busy = false; cancelBrowse = null; done(value, error) } }
+        fun finish(value: JSONObject?, error: String?) { if (!finished) { finished = true; busy = false; cancelBrowse = null; if (error != null) last = null; done(value, error) } }
         cancelBrowse = { finish(null, it) }
         val deadline = android.os.SystemClock.elapsedRealtime() + 8000
         fun guard() { require(stillAuthorized()) { "AUTHORIZATION_DENIED" }; readiness()?.let { error(it) }; check(android.os.SystemClock.elapsedRealtime() <= deadline) { "UI_ACTION_TIMEOUT" } }
