@@ -54,6 +54,8 @@ try {
 
 These signing commands still need the JDK/SDK/pinned Flutter environment described above. Custom production signing is outside this standard debug-key override.
 
+29 October2026: original key transfer is resolved on this PC. C:\Users\user\.android\dx340-original-debug.keystore was verified against installed certificate24f48aa3... and used for successful in-place companion/shared-phone upgrades. Keep selecting it with the process-local override; the PC's different default debug.keystore remains unchanged. The requested C:\Users\user.android directory was not writable. Current build environment uses Android Studio JBR21.0.7, SDK at C:\Users\user\AppData\Local\Android\Sdk and pinned Flutter in work/flutter; the earlier Windows toolchain paragraph is historical. See test-results/2026-10-29-original-key-upgrade.md for installed hashes and preserved-data checks.
+
 ## DX340 companion
 
 ```powershell

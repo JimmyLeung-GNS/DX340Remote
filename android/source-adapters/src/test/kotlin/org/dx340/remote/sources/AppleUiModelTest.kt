@@ -25,6 +25,40 @@ class AppleUiModelTest {
         assertThrows(IllegalArgumentException::class.java) { AppleUiModel.parse(listOf(tab.copy(selected = false)), true) }
         assertThrows(IllegalArgumentException::class.java) { AppleUiModel.parse(listOf(tab), false) }
     }
+    private fun songs(badgeId: String = "action_button", badgeDescription: String = "Downloaded Song") = listOf(tab,
+        UiNode("0.1", "0", "com.apple.android.music:id/toolbar_title", "Songs"),
+        UiNode("0.2", "0", "com.apple.android.music:id/library_details_list"),
+        UiNode("0.2.0", "0.2", "com.apple.android.music:id/small_list_d_item", clickable = true),
+        UiNode("0.2.0.0", "0.2.0", "com.apple.android.music:id/title", "Downloaded fixture"),
+        UiNode("0.2.0.1", "0.2.0", "com.apple.android.music:id/list_right_icon"),
+        UiNode("0.2.0.1.0", "0.2.0.1"),
+        UiNode("0.2.0.1.0.0", "0.2.0.1.0", "com.apple.android.music:id/$badgeId", description = badgeDescription),
+        UiNode("0.2.1", "0.2", "com.apple.android.music:id/small_list_d_item", clickable = true),
+        UiNode("0.2.1.0", "0.2.1", "com.apple.android.music:id/title", "Cloud fixture"),
+        UiNode("0.3", "0", "com.apple.android.music:id/action_button", description = "Downloaded Song"))
+    @Test fun recognizesObservedNestedSongsBadgeOnlyForItsOwnRow() {
+        val parsed = AppleUiModel.parse(songs(), true)
+        assertEquals(2, parsed.rows.size)
+        assertTrue(parsed.rows[0].playable)
+        assertFalse(parsed.rows[1].playable)
+        assertTrue(parsed.rows.none { it.browsable })
+        assertTrue(AppleUiModel.parse(songs(badgeId = "track_action_button"), true).rows[0].playable)
+    }
+    @Test fun doesNotPromoteDownloadControlsOrUnknownBadgesToDownloadedSongs() {
+        for (description in listOf("Download Song", "Downloaded Album", "Downloaded Song ", "")) {
+            assertTrue(AppleUiModel.parse(songs(badgeDescription = description), true).rows.none { it.playable })
+        }
+        assertTrue(AppleUiModel.parse(songs(badgeId = "unknown_badge"), true).rows.none { it.playable })
+    }
+    @Test fun fullTrackIdentityInvalidatesRevisionBeyondDisplayLimit() {
+        val longTitle = "x".repeat(128)
+        val first = songs().map { if (it.text == "Downloaded fixture") it.copy(text = longTitle + " first") else it }
+        val second = first.map { if (it.text == longTitle + " first") it.copy(text = longTitle + " second") else it }
+        val before = AppleUiModel.parse(first, true)
+        val after = AppleUiModel.parse(second, true)
+        assertEquals(before.rows[0].title, after.rows[0].title)
+        assertNotEquals(before.fingerprint, after.fingerprint)
+    }
     @Test fun recognizesObservedPlaylistRowsOnlyInsideVerifiedList() {
         val nodes = listOf(tab,
             UiNode("0.1", "0", "com.apple.android.music:id/toolbar_title", "Playlists"),

@@ -71,6 +71,20 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
                 finish(sources.state(), null)
             } else if (operation == "GET_QUEUE") {
                 finish(sources.queueState(), null)
+            } else if (operation == "CHECK_APPLE_QUEUE_BASELINE") {
+                val candidate = intent.getStringExtra("candidate") ?: error("INVALID_ARGUMENT")
+                require(sources.selected == "com.apple.android.music") { "INVALID_SOURCE" }
+                val manager = context.getSystemService(android.media.session.MediaSessionManager::class.java)
+                val controller = manager.getActiveSessions(android.content.ComponentName(context, SessionListener::class.java))
+                    .singleOrNull { it.packageName == sources.selected } ?: error("SOURCE_NOT_READY")
+                val queue = controller.queue ?: error("UNSUPPORTED_CAPABILITY")
+                require(queue.size <= 10000) { "QUEUE_LIMIT" }
+                finish(JSONObject().put("kind", "complete-public-Apple-queue-read-no-playback")
+                    .put("candidateTitle", candidate).put("count", queue.size)
+                    .put("candidateInQueue", queue.any { it.description.title?.toString() == candidate })
+                    .put("queue", org.json.JSONArray().apply { queue.forEach {
+                        put(JSONObject().put("id", it.queueId.toString()).put("title", it.description.title?.toString()))
+                    } }), null)
             } else if (operation == "SET_PLAYING") {
                 sources.setPlaying(intent.getBooleanExtra("playing", false), stillAuthorized = { true }) { error ->
                     finish(if (error == null) JSONObject().put("outcome", "observed") else null, error)

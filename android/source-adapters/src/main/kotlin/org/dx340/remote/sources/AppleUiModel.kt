@@ -52,7 +52,11 @@ object AppleUiModel {
             candidates.mapNotNull { title ->
                 val row = clickable(nodes, title, container.path) ?: return@mapNotNull null
                 val descendants = nodes.filter { it.path == row.path || it.path.startsWith(row.path + ".") }
-                val downloadedSong = descendants.any { it.id == PREFIX + "track_action_button" && it.description == "Downloaded Song" }
+                // The observed Songs layout uses action_button; album/playlist tracks use track_action_button.
+                // A download badge must belong to this row, never just the surrounding Downloaded screen.
+                val downloadedSong = descendants.any {
+                    it.id in setOf(PREFIX + "track_action_button", PREFIX + "action_button") && it.description == "Downloaded Song"
+                }
                 val song = downloadedSong || descendants.any { it.id == PREFIX + "collection_list_item" } || row.id == PREFIX + "collection_list_item" || header == "Songs"
                 if (!song && header !in setOf("Albums", "Artists", "Playlists")) return@mapNotNull null
                 val subtitle = descendants.firstOrNull { it.id == PREFIX + "subtitle" }?.text ?: ""
@@ -61,7 +65,12 @@ object AppleUiModel {
         }
         val scroll = (container ?: nodes.firstOrNull { it.forward && categories.any { c -> c.path.startsWith(it.path + ".") } })?.takeIf { it.forward }?.path
         val back = if (root) null else back(nodes)?.path
-        val signature = header + "\u0000" + rows.joinToString("\u0000") { "${it.path}:${it.title}:${it.subtitle}:${it.playable}:${it.browsable}" } + ":$back:$scroll"
+        val signature = header + "\u0000" + rows.joinToString("\u0000") { row ->
+            // Display truncation must not make two different tracks share an action revision.
+            val identity = nodes.filter { it.path == row.path || it.path.startsWith(row.path + ".") }
+                .joinToString("\u0000") { "${it.path}\u0000${it.id}\u0000${it.text}\u0000${it.description}" }
+            "${row.path}:${row.title}:${row.subtitle}:${row.playable}:${row.browsable}\u0000$identity"
+        } + ":$back:$scroll"
         val hash = MessageDigest.getInstance("SHA-256").digest(signature.toByteArray()).joinToString("") { "%02x".format(it.toInt() and 255) }
         return ParsedAppleUi(header, rows, back, scroll, root, hash)
     }
