@@ -26,6 +26,8 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     private var writing = false
     private var wantsConnection = false
     private var reconnectAttempts = 0
+    private var connectionTimeout: Task<Void, Never>?
+    private var connectionGeneration = 0
     private var writeTimeout: Task<Void, Never>?
     private var pending: [String: String] = [:]
     private let mutations: Set<String> = ["SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "SELECT_SOURCE", "PLAY_ITEM", "PLAY_QUEUE_ITEM"]
@@ -50,7 +52,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     var artist: String { state["artist"] as? String ?? "" }
     func can(_ name: String) -> Bool { authorized && (state["capabilities"] as? [String: Any])?[name] as? Bool == true }
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        if central.state == .poweredOn { status = "Bluetooth ready. Open pairing on DX340 for a new controller."; if wantsConnection, let peripheral, peripheral.state == .disconnected { central.connect(peripheral) } }
+        if central.state == .poweredOn { status = "Bluetooth ready. Open pairing on DX340 for a new controller."; if wantsConnection, let peripheral, peripheral.state == .disconnected { beginConnection(peripheral) } }
         else { clearConnection(); status = central.state == .unauthorized ? "Allow Bluetooth access in Settings." : "Bluetooth unavailable. Enable Bluetooth to reconnect." }
     }
     func scan() {
@@ -63,20 +65,34 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         manager.stopScan()
         if let previous = peripheral, previous.identifier != device.identifier { manager.cancelPeripheralConnection(previous) }
         clearConnection(); peripheral = device; device.delegate = self; wantsConnection = true; reconnectAttempts = 0; status = "Connecting…"
-        manager.connect(device)
+        beginConnection(device)
     }
     func disconnect() {
         wantsConnection = false
         if let p = peripheral { manager.cancelPeripheralConnection(p) }
         clearConnection(); status = "Disconnected. Cached lists may be stale."
     }
-    private func clearConnection() { writeTimeout?.cancel(); writeTimeout = nil; authorized = false; rx = nil; tx = nil; writing = false; writes = []; pending = [:]; browseLocations = [:]; queueLocations = [:]; activeBrowseId = nil; activeQueueId = nil; hostEpoch = ""; assembler.clear() }
+    private func clearConnection() { connectionGeneration += 1; connectionTimeout?.cancel(); connectionTimeout = nil; writeTimeout?.cancel(); writeTimeout = nil; authorized = false; rx = nil; tx = nil; writing = false; writes = []; pending = [:]; browseLocations = [:]; queueLocations = [:]; activeBrowseId = nil; activeQueueId = nil; hostEpoch = ""; assembler.clear() }
+    private func beginConnection(_ device: CBPeripheral) {
+        guard wantsConnection, manager.state == .poweredOn else { return }
+        status = "Connecting…"; armConnectionTimeout(device); manager.connect(device)
+    }
+    private func armConnectionTimeout(_ device: CBPeripheral) {
+        connectionTimeout?.cancel(); connectionGeneration += 1
+        let generation = connectionGeneration
+        connectionTimeout = Task {
+            try? await Task.sleep(for: .seconds(30))
+            guard !Task.isCancelled, connectionGeneration == generation, self.peripheral == device, tx?.isNotifying != true else { return }
+            clearConnection(); status = "Connection setup timed out. Open pairing on DX340 and retry in Setup."
+            manager.cancelPeripheralConnection(device)
+        }
+    }
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi RSSI: NSNumber) {
         if !devices.contains(where: { $0.identifier == peripheral.identifier }) { devices.append(peripheral) }
     }
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         guard peripheral == self.peripheral else { return }
-        reconnectAttempts = 0; status = "Discovering DX340 service…"; peripheral.delegate = self; peripheral.discoverServices([CBUUID(string: Wire.service)])
+        status = "Discovering DX340 service…"; peripheral.delegate = self; peripheral.discoverServices([CBUUID(string: Wire.service)])
         UserDefaults.standard.set(peripheral.identifier.uuidString, forKey: "lastPeripheral")
     }
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
@@ -85,27 +101,30 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     }
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         guard peripheral == self.peripheral else { return }
-        clearConnection(); status = "Disconnected; pending commands discarded. Reconnecting…"
+        clearConnection(); status = wantsConnection ? "Disconnected; pending commands discarded. Reconnecting…" : "Disconnected. Cached lists may be stale."
         if wantsConnection && central.state == .poweredOn && reconnectAttempts < 5 {
             let delay = min(15, 1 << reconnectAttempts); reconnectAttempts += 1
-            Task { try? await Task.sleep(for: .seconds(delay)); if wantsConnection && self.peripheral == peripheral && peripheral.state == .disconnected { central.connect(peripheral) } }
+            let generation = connectionGeneration
+            Task { try? await Task.sleep(for: .seconds(delay)); if connectionGeneration == generation && wantsConnection && self.peripheral == peripheral && peripheral.state == .disconnected { beginConnection(peripheral) } }
         }
     }
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String: Any]) {
         guard let restored = (dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral])?.first else { return }
         peripheral = restored; restored.delegate = self; wantsConnection = true
         clearConnection()
-        if restored.state == .connected { restored.discoverServices([CBUUID(string: Wire.service)]) }
+        if restored.state == .connected { armConnectionTimeout(restored); restored.discoverServices([CBUUID(string: Wire.service)]) }
     }
     func refreshOnForeground() {
         guard let p = peripheral, p.state == .connected, rx != nil else { return }
         if authorized { send("GET_STATE") } else { send("HELLO", bootstrap: true) }
     }
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        guard peripheral == self.peripheral, peripheral.state == .connected else { return }
         guard error == nil, let service = peripheral.services?.first(where: { $0.uuid == CBUUID(string: Wire.service) }) else { status = "DX340 service unavailable."; return }
         peripheral.discoverCharacteristics([CBUUID(string: Wire.rx), CBUUID(string: Wire.tx)], for: service)
     }
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        guard peripheral == self.peripheral, peripheral.state == .connected else { return }
         guard error == nil else { status = "Service discovery failed."; return }
         rx = service.characteristics?.first(where: { $0.uuid == CBUUID(string: Wire.rx) })
         tx = service.characteristics?.first(where: { $0.uuid == CBUUID(string: Wire.tx) })
@@ -114,7 +133,9 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         peripheral.setNotifyValue(true, for: tx)
     }
     func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+        guard peripheral == self.peripheral, characteristic == tx else { return }
         guard error == nil, characteristic.isNotifying else { status = "Pairing failed. Open pairing on DX340, accept the system prompt, then retry."; return }
+        connectionTimeout?.cancel(); connectionTimeout = nil; reconnectAttempts = 0
         send("HELLO", bootstrap: true)
     }
     func send(_ type: String, args: [String: Any] = [:], bootstrap: Bool = false) {
@@ -144,11 +165,13 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         writeTimeout = Task { try? await Task.sleep(for: .seconds(10)); guard !Task.isCancelled else { return }; if writing { manager.cancelPeripheralConnection(p); clearConnection(); status = "Bluetooth write timed out; outcome unknown. Pending controls cleared." } }
     }
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+        guard peripheral == self.peripheral, characteristic == rx else { return }
         writeTimeout?.cancel(); writeTimeout = nil; writing = false
         if error != nil { clearConnection(); status = "Write failed; outcome unknown. Reconnect before retrying." }
         else { pump() }
     }
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        guard peripheral == self.peripheral, characteristic == tx else { return }
         guard error == nil, let bytes = characteristic.value else { status = "Bluetooth read failed."; return }
         do { if let value = try assembler.accept(bytes) { try receive(value) } }
         catch { disconnect(); status = "Invalid Bluetooth reply. Reconnect." }

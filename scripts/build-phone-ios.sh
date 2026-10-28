@@ -7,6 +7,7 @@ repo=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 simulator=${1:?Pass an available iPhone simulator UDID}
 cd "$repo"
 mkdir -p artifacts work
+flutter --version > artifacts/flutter-bootstrap.txt 2>&1
 flutter --version --machine > artifacts/flutter-ios-toolchain.json
 python3 - <<'PY'
 import json

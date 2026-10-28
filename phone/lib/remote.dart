@@ -55,7 +55,7 @@ class Remote extends ChangeNotifier {
       : textValue(library['requestedParent']);
   bool get canGoBack =>
       assisted ? textValue(library['backId']).isNotEmpty : _parents.isNotEmpty;
-  int get page => (library['page'] as num?)?.toInt() ?? 0;
+  int get page => library['page'] is num ? (library['page'] as num).toInt() : 0;
   int? get nextPage =>
       library['nextPage'] is num ? (library['nextPage'] as num).toInt() : null;
 
