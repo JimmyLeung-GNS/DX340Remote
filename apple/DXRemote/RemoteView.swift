@@ -3,14 +3,29 @@ import UIKit
 
 struct RemoteView: View {
     let connection: RemoteConnection
-    var body: some View {
-        TabView {
-            NavigationStack { PlayerView(connection: connection).navigationTitle("DX340") }.tabItem { Label("Player", systemImage: "play.circle") }
-            NavigationStack { LibraryView(connection: connection, parent: nil).navigationTitle("Library") }.id(connection.sourceScope).tabItem { Label("Library", systemImage: "music.note.list") }
-            NavigationStack { QueueView(connection: connection).navigationTitle("Queue") }.tabItem { Label("Queue", systemImage: "list.bullet") }
-            NavigationStack { SetupView(connection: connection).navigationTitle("Setup") }.tabItem { Label("Setup", systemImage: "antenna.radiowaves.left.and.right") }
+    private enum Destination: String { case player, library, queue, setup }
+    @State private var destination = Destination.player
+    init(connection: RemoteConnection) {
+        self.connection = connection
+        #if DEBUG
+        // Actual native-screen captures only; does not simulate a connection or source.
+        if let value = ProcessInfo.processInfo.arguments.first(where: { $0.hasPrefix("--capture-tab=") }),
+           let requested = Destination(rawValue: String(value.dropFirst("--capture-tab=".count))) {
+            _destination = State(initialValue: requested)
         }
-        .safeAreaInset(edge: .bottom) { Text(connection.status).font(.footnote).padding(8).frame(maxWidth: .infinity).background(.bar).accessibilityAddTraits(.updatesFrequently) }
+        #endif
+    }
+    var body: some View {
+        TabView(selection: $destination) {
+            NavigationStack { PlayerView(connection: connection).navigationTitle("DX340") }.tabItem { Label("Player", systemImage: "play.circle") }.tag(Destination.player)
+            NavigationStack { LibraryView(connection: connection, parent: nil).navigationTitle("Library") }.id(connection.sourceScope).tabItem { Label("Library", systemImage: "music.note.list") }.tag(Destination.library)
+            NavigationStack { QueueView(connection: connection).navigationTitle("Queue") }.tabItem { Label("Queue", systemImage: "list.bullet") }.tag(Destination.queue)
+            NavigationStack { SetupView(connection: connection).navigationTitle("Setup") }.tabItem { Label("Setup", systemImage: "antenna.radiowaves.left.and.right") }.tag(Destination.setup)
+        }
+        .safeAreaInset(edge: .top, spacing: 0) {
+            Text(connection.status).font(.footnote).fixedSize(horizontal: false, vertical: true)
+                .padding(8).frame(maxWidth: .infinity).background(.bar).accessibilityAddTraits(.updatesFrequently)
+        }
     }
 }
 

@@ -4,7 +4,9 @@ import Observation
 import CryptoKit
 
 @MainActor @Observable
-final class RemoteConnection: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
+// CoreBluetooth delivers these delegates on the explicitly configured .main queue.
+// Check that legacy protocol assumption at runtime rather than ignoring actor isolation.
+final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate, @preconcurrency CBPeripheralDelegate {
     var status = "Find your DX340 to connect directly over Bluetooth."
     var devices: [CBPeripheral] = []
     var authorized = false
