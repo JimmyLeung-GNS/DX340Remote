@@ -6,7 +6,7 @@ Updated28 October2026 (Hong Kong). **Goal active; full system incomplete.**
 
 Kotlin DX340 companion and native Android remote build and open on the only connected device, DX340 Android13. Android launch has been repeated with scripts/verify-android-launch.ps1: Activity Status:ok, process present, screenshot inspected. Installing the remote on DX340 is not separate-phone Bluetooth verification. Native SwiftUI/CoreBluetooth source and deterministic Xcode project exist, but **iOS has not compiled, signed or opened**. Windows has no xcrun; Mac/iPhone/separate Android controller/Watch are unavailable here.
 
-The user's latest platform question is recorded in cross-platform-verification.md. Native Kotlin/Swift remains canonical per the original requirements while optional Flutter preference is unanswered. Flutter3.41.4/Dart3.11.1 is installed; Flutter would still require Mac/Xcode/signing and real iPhone BLE tests. No Flutter migration, global Flutter configuration change, cloud build or publication has occurred. Repeatable Android and Mac simulator launch scripts are now prepared; only Android has run.
+The user's latest platform question is recorded in cross-platform-verification.md. Native Kotlin/Swift remains canonical per the original requirements while optional Flutter preference is unanswered. Flutter3.41.4/Dart3.11.1 is installed; Flutter would still require Mac/Xcode/signing and real iPhone BLE tests. No Flutter migration, global Flutter configuration change or cloud build occurred. Public GitHub publication was subsequently authorized by the user, as recorded below. Repeatable Android and Mac simulator launch scripts are now prepared; only Android has run.
 
 Mango's native browser exposes All Music/Album/Artist/Genre. The user confirmed one companion-selected track audibly through Mango on AMP15 phone out. Raw repeated play proved toggle-like; the exact-version desired-state adapter then passed pause/pause/play/play with unchanged track. Seek/output volume remain disabled. Full20-file FLAC/WAV/folder/playlist acceptance is incomplete; sampled root has no folder/playlist category.
 
@@ -53,3 +53,7 @@ Windows PowerShell7.6.5/JDK21.0.9/SDK36; pinned Gradle8.14, AGP8.11.1, Kotlin2.1
 6. Execute compatibility-matrix.md/T01–T18 physical reliability/battery/walking/security, then Watch after phone stability. No numerical performance/audio-quality or production-security claim yet.
 
 Single-controller beta has no automatic handoff; request ledger is bounded2048 per controller/host epoch. Library/queue scopes invalidate stale results; real SD and repeated metadata cases are not passed. Artwork uses bounded public metadata caches; actual BLE latency unknown. Search/shuffle/repeat/verified volume/resume/cold launch are unsupported. Full scope remains visible rather than reducing browsing to queue skipping.
+
+## Public source repository
+
+On28 October2026 the user explicitly requested committing and pushing this implementation to a public GitHub repository. Created https://github.com/JimmyLeung-GNS/DX340Remote using the existing local GitHub sign-in; source commits are published on main. Build artifacts, raw device logs, scratch files and signing material remain excluded. Public availability does not change the beta verification limits above.
