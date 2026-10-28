@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'remote.dart';
 
 void main() {
@@ -34,6 +35,7 @@ class PhoneShell extends StatefulWidget {
 class _PhoneShellState extends State<PhoneShell>
     with WidgetsBindingObserver, RestorationMixin {
   final _tab = RestorableInt(0);
+  late final SemanticsHandle _semantics;
   Remote get remote => widget.remote;
   bool get apple => Theme.of(context).platform == TargetPlatform.iOS;
   static const _tabs = ['Player', 'Library', 'Queue', 'Setup'];
@@ -45,6 +47,9 @@ class _PhoneShellState extends State<PhoneShell>
   @override
   void initState() {
     super.initState();
+    // Keep the small controller's tree available to native accessibility clients,
+    // including automation clients that attach after Flutter has drawn a frame.
+    _semantics = SemanticsBinding.instance.ensureSemantics();
     WidgetsBinding.instance.addObserver(this);
     unawaited(remote.start());
     if (kDebugMode) {
@@ -66,6 +71,7 @@ class _PhoneShellState extends State<PhoneShell>
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    _semantics.dispose();
     _tab.dispose();
     remote.dispose();
     super.dispose();
