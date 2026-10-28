@@ -6,12 +6,14 @@ on:
       - 'apple/**'
       - 'protocol/fixtures/**'
       - 'scripts/build-apple.sh'
+      - 'scripts/check-apple-capture.swift'
       - '.github/workflows/apple-verification.yml'
   pull_request:
     paths:
       - 'apple/**'
       - 'protocol/fixtures/**'
       - 'scripts/build-apple.sh'
+      - 'scripts/check-apple-capture.swift'
       - '.github/workflows/apple-verification.yml'
   workflow_dispatch:
 
