@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated 28 October 2026 (Hong Kong). **Goal active; full system incomplete.**
+Updated 29 October 2026 (Hong Kong). **Goal active; full system incomplete.**
 
 ## Current checkpoint
 
@@ -20,11 +20,13 @@ Apple Music 6.5.3/code 1599 denied the tested direct browse interfaces. The user
 
 ## Current Mango folder work
 
+Branch `codex/mango-folders` adds a separate version-pinned Mango folder service/provider, seven synthetic parser tests, hybrid native-root routing and authorization checks during Apple/Mango UI navigation. Final native build/lint and36 JVM tests passed; shared phone analysis/10 Dart tests/release APK/lint passed before the latest native error-copy additions, whose final rebuild is running. The actual own service browsed Internal Storage/Music/Tayori/first live folder and selected02. 白日夢.wav. Mango reported 白日夢 playing and Apple paused, with Wi-Fi0/no default network. The user confirmed the correct song audible through AMP15; the reply was delayed, so no instantaneous metadata/acoustic match is claimed. These are local companion adapter results, **not phone Bluetooth proof**. See test-results/2026-10-29-mango-folders.md.
+
 Three sampled native Mango descriptions expose no media URI or extra identity fields. The installed package has no advertised ACTION_VIEW route in the tested FLAC/WAV cases and no folder/playlist category in the sampled native root. Stable file identity after duplicate-file reorder/rescan/SD changes is unverified; do not infer format or identity from numeric display suffixes.
 
-After these findings, the user explicitly answered **“Allow optional Mango UI mode.”** Investigation/implementation is authorized with screen-on/unlock and app-update limitations, preserving Mango and native controls. Initial actual UI research reached Mango's folder view and observed FLAC filenames, breadcrumbs and internal/SD storage menu entries. Production Mango AccessibilityService integration is **not yet implemented**; ADB research does not prove it. Details and safety constraints: mango-ui-experiment.md and test-results/2026-10-28-mango-identity.md. No replacement engine or vendor contact was authorized/performed.
+The user explicitly answered **“Allow optional Mango UI mode.”** It requires screen-on/unlock and app-update revalidation, preserving Mango and native controls. The separate companion service is now implemented experimentally and has actual local browse/selected-WAV state evidence. Initial research and own-service results remain distinct. Details and safety constraints: mango-ui-experiment.md and test-results/2026-10-28-mango-identity.md. No replacement engine or vendor contact was authorized/performed.
 
-The next implementation should add optional Mango folder browsing while retaining native album/song browsing. Exclude Local Network, destructive controls and settings. Isolate active folder content: Mango retains hidden ancestor page trees. Use semantic actions, current window/breadcrumb/file-label validation, snapshot-scoped IDs and the shared observed source handoff. Keep research taps separate from own-service and BLE results.
+Mango retains overlapping cached ancestor trees: fixed first/last-page assumptions failed. Actual sibling drawing order identified active Music/Tayori/file pages, including a top page stored first with order4 above cached1/2/3. Ambiguous order fails closed. Include-not-important-views is required for layout wrappers. Early storage-root recovery timed out/encountered moving child indices; settled, bounded navigation and local test foreground restoration are under final verification. Local Network, destructive controls and settings are excluded. Current-window/breadcrumb/file labels and snapshot-scoped IDs are rechecked before the shared source handoff.
 
 ## Environment and stages
 

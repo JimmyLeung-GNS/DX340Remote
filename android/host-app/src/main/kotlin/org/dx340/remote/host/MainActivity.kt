@@ -14,6 +14,7 @@ class MainActivity : Activity() {
     private lateinit var status: TextView
     private var showDiagnostics = false
     private lateinit var appleMode: Button
+    private lateinit var mangoMode: Button
     private val permissions get() = mutableListOf(Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.BLUETOOTH_ADVERTISE).apply { if (android.os.Build.VERSION.SDK_INT >= 33) add(Manifest.permission.POST_NOTIFICATIONS) }.toTypedArray()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +32,14 @@ class MainActivity : Activity() {
             if (enable) startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
         }
         button("Open Apple Music on this DX340") { packageManager.getLaunchIntentForPackage("com.apple.android.music")?.let { startActivity(it) } }
+        mangoMode = button("Enable optional Mango folders") {
+            val prefs = getSharedPreferences("mango-ui", MODE_PRIVATE)
+            val enable = !prefs.getBoolean("enabled", false)
+            prefs.edit().putBoolean("enabled", enable).apply()
+            HostService.instance?.sources?.externalStateChanged(); refresh()
+            if (enable) startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+        }
+        content.addView(TextView(this).apply { text = "Optional folder mode keeps playback in Mango. It needs DX340 awake/unlocked and Accessibility access; Mango updates require revalidation. Native albums and controls remain available."; textSize = 18f })
         button("Grant Bluetooth permissions") { requestPermissions(permissions, 340) }
         button("Enable playback session access") { startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)) }
         button("Open pairing for 60 seconds") { start("PAIR") }
@@ -55,6 +64,7 @@ class MainActivity : Activity() {
     private fun attach() { HostService.instance?.observer = { runOnUiThread { refresh() } } }
     private fun refresh() {
         if (::appleMode.isInitialized) appleMode.text = if (getSharedPreferences("apple-ui", MODE_PRIVATE).getBoolean("enabled", false)) "Disable optional Apple Music browsing" else "Enable optional Apple Music browsing"
+        if (::mangoMode.isInitialized) mangoMode.text = if (getSharedPreferences("mango-ui", MODE_PRIVATE).getBoolean("enabled", false)) "Disable optional Mango folders" else "Enable optional Mango folders"
         val service = HostService.instance
         status.text = if (service == null) "Remote stopped. Tap Start Bluetooth remote, then Test Mango library to try browsing on this DX340." else if (showDiagnostics) service.status + "\n\n" + service.sources.diagnostic().toString(2) else "${service.status}\n\nNo controller phone is required for the local Mango library test. A phone running DX340 Remote is required to test Bluetooth control.\n\nApple Music library access is still under investigation."
     }

@@ -229,10 +229,12 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     }
     private func errorMessage(_ code: String) -> String {
         switch code {
-        case "UI_PERMISSION_REQUIRED": return "On DX340, enable DX340 Apple Music browsing in Accessibility settings."
-        case "UI_SCREEN_UNLOCK_REQUIRED": return "Wake and unlock DX340 to browse Apple Music."
-        case "UI_FOREGROUND_REQUIRED", "UI_SETUP_REQUIRED", "UI_UNEXPECTED_SCREEN": return "Open Apple Music’s Downloaded library on DX340, then refresh."
-        case "UI_VERSION_UNVERIFIED": return "Apple Music changed. Assisted browsing needs revalidation."
+        case "UI_PERMISSION_REQUIRED": return "On DX340, enable the selected player's optional browsing service in Accessibility settings."
+        case "UI_SCREEN_UNLOCK_REQUIRED": return "Wake and unlock DX340 for assisted browsing."
+        case "UI_FOREGROUND_REQUIRED", "UI_SETUP_REQUIRED", "UI_UNEXPECTED_SCREEN", "UI_STORAGE_CONTEXT_REQUIRED": return "Open the selected player's local/downloaded library on DX340, then refresh."
+        case "UI_VERSION_UNVERIFIED": return "The selected player changed. Assisted browsing needs revalidation."
+        case "UI_ACTIVE_PAGE_UNVERIFIED", "UI_TREE_CHANGED", "UI_ACTION_TIMEOUT", "UI_ACTION_INTERRUPTED": return "The player's screen changed or did not settle. Refresh the library before retrying."
+        case "UI_MODE_DISABLED": return "On DX340, enable the selected player's optional browsing mode."
         case "STALE_LIBRARY", "EXPIRED_ITEM": return "The library changed. Refresh before selecting a track."
         case "UI_BUSY", "SOURCE_BUSY": return "Wait for the current action to finish."
         case "LOCAL_APPROVAL_REQUIRED": return "Approve this controller on DX340, then retry authorization."

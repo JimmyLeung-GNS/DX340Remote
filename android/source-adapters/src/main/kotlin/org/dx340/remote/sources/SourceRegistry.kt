@@ -17,8 +17,12 @@ import java.util.UUID
 import org.dx340.remote.library.RevisionGuard
 
 /** Uses only public Android 13 APIs and our real application identity. */
-class SourceRegistry(private val context: Context, private val listener: ComponentName, private val uiLibrary: UiLibraryAdapter? = null, private val changed: () -> Unit) {
-    companion object { val PACKAGES = listOf("com.ibasso.music", "com.apple.android.music") }
+class SourceRegistry(private val context: Context, private val listener: ComponentName, private val uiLibrary: UiLibraryAdapter? = null, private val mangoUiLibrary: UiLibraryAdapter? = null, private val changed: () -> Unit) {
+    companion object {
+        val PACKAGES = listOf("com.ibasso.music", "com.apple.android.music")
+        const val MANGO_UI_ROOT = "mango-ui:root"
+        const val MANGO_NATIVE_ROOT = "mango-native:root"
+    }
     private val main = Handler(Looper.getMainLooper())
     private val manager = context.getSystemService(MediaSessionManager::class.java)
     private val browsers = mutableMapOf<String, MediaBrowser>()
@@ -119,8 +123,10 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         put("canSeek", supports(pkg, PlaybackState.ACTION_SEEK_TO)); put("canReadQueue", controllers[pkg]?.queue != null)
         put("canPlayQueueItem", supports(pkg, PlaybackState.ACTION_SKIP_TO_QUEUE_ITEM))
         put("canBrowse", browsers[pkg]?.isConnected == true || (usingUi(pkg) && uiLibrary?.ready == true))
-        put("canPlayItem", supports(pkg, PlaybackState.ACTION_PLAY_FROM_MEDIA_ID) || verifiedPlayItem(pkg) || (usingUi(pkg) && uiLibrary?.ready == true))
+        put("canPlayItem", supports(pkg, PlaybackState.ACTION_PLAY_FROM_MEDIA_ID) || verifiedPlayItem(pkg) || (usingUi(pkg) && uiLibrary?.ready == true) || (pkg == PACKAGES[0] && mangoUiLibrary?.ready == true))
         put("browseMode", if (usingUi(pkg)) "ui-assisted" else "direct")
+        put("canBrowseFolders", pkg == PACKAGES[0] && mangoUiLibrary?.ready == true)
+        if (pkg == PACKAGES[0] && mangoUiLibrary?.enabled == true) put("uiBrowseReason", mangoUiLibrary.explanation)
         put("canSearch", false); put("canAdjustVolume", false); put("canResume", false); put("canColdLaunch", false)
         put("canShuffle", false); put("canRepeat", false)
         put("reason", if (usingUi(pkg)) uiLibrary?.explanation else "Actions reflect advertised/observed source APIs; physical acceptance remains separate. Volume is disabled until output is measured.")
@@ -170,8 +176,8 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     fun playItem(args: JSONObject, stillAuthorized: () -> Boolean, done: (String?) -> Unit) {
         val pkg = selected
         val deadline = android.os.SystemClock.elapsedRealtime() + 10000
-        if (usingUi(pkg)) {
-            val ui = uiLibrary ?: return done("UI_PERMISSION_REQUIRED")
+        if (usingUi(pkg) || (pkg == PACKAGES[0] && args.optString("item").startsWith("mango-ui:"))) {
+            val ui = (if (pkg == PACKAGES[0]) mangoUiLibrary else uiLibrary) ?: return done("UI_PERMISSION_REQUIRED")
             val id = args.optString("item"); val revision = args.optString("revision")
             val invalid = ui.validatePlayable(id, revision)
             if (invalid != null) { done(invalid); return }
@@ -180,7 +186,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
             preparePlayback(pkg, expected, stillAuthorized) { error ->
                 if (error != null) done(error)
                 else if (selected != pkg || epoch(pkg) != expected) done("STALE_SOURCE")
-                else ui.play(id, revision, stillAuthorized, done)
+                else ui.play(id, revision, { playbackGuard(pkg, expected, stillAuthorized) == null }, done)
             }
             return
         }
@@ -375,12 +381,22 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         return JSONObject().put("revision", queueRevision(queue)).put("items", JSONArray().apply { queue.take(50).forEach { q -> put(JSONObject().put("id", q.queueId.toString()).put("title", q.description.title?.toString() ?: "Untitled")) } })
     }
     fun browse(parent: String?, page: Int, expectedRevision: String? = null, done: (JSONObject?, String?) -> Unit) {
+        browseAuthorized(parent, page, expectedRevision, { true }, done)
+    }
+    fun browseAuthorized(parent: String?, page: Int, expectedRevision: String?, stillAuthorized: () -> Boolean, done: (JSONObject?, String?) -> Unit) {
         require(page in 0..10000) { "INVALID_ARGUMENT" }
         val pkg = selected; val revision = epoch(pkg)
-        if (usingUi(pkg)) { uiLibrary!!.browse(parent, page, expectedRevision, done); return }
-        require(expectedRevision == null || expectedRevision == revision) { "STALE_LIBRARY" }
+        val allowed = { !closed && selected == pkg && epoch(pkg) == revision && stillAuthorized() }
+        if (!allowed()) { done(null, "AUTHORIZATION_DENIED"); return }
+        if (usingUi(pkg)) { uiLibrary!!.browse(parent, page, expectedRevision, allowed, done); return }
+        if (pkg == PACKAGES[0] && parent?.startsWith("mango-ui:") == true) {
+            val ui = mangoUiLibrary ?: return done(null, "UI_PERMISSION_REQUIRED")
+            ui.browse(if (parent == MANGO_UI_ROOT) null else parent, page, expectedRevision, allowed, done); return
+        }
+        val nativeRoot = pkg == PACKAGES[0] && parent == MANGO_NATIVE_ROOT
+        require(nativeRoot || expectedRevision == null || expectedRevision == revision) { "STALE_LIBRARY" }
         val browser = browsers[pkg]?.takeIf { it.isConnected } ?: return done(null, "BROWSE_UNAVAILABLE")
-        val target = parent ?: browser.root
+        val target = if (nativeRoot) browser.root else parent ?: browser.root
         if (target != browser.root && items[pkg]?.get(target)?.isBrowsable != true) return done(null, "EXPIRED_ITEM")
         val options = Bundle().apply { putInt(MediaBrowser.EXTRA_PAGE, page); putInt(MediaBrowser.EXTRA_PAGE_SIZE, 25) }
         var completed = false
@@ -388,7 +404,8 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         fun finish(value: JSONObject?, error: String?) {
             if (completed) return
             completed = true; if (browser.isConnected) browser.unsubscribe(target, cb)
-            if (epoch(pkg) != revision) done(null, "STALE_LIBRARY") else done(value, error)
+            if (!stillAuthorized()) done(null, "AUTHORIZATION_DENIED")
+            else if (closed || selected != pkg || epoch(pkg) != revision) done(null, "STALE_LIBRARY") else done(value, error)
         }
         cb = object : MediaBrowser.SubscriptionCallback() {
             override fun onChildrenLoaded(parentId: String, children: MutableList<MediaBrowser.MediaItem>, opts: Bundle) = loaded(children)
@@ -404,6 +421,10 @@ class SourceRegistry(private val context: Context, private val listener: Compone
                 val known = items.getOrPut(pkg) { linkedMapOf() }
                 val knownProofs = proofs.getOrPut(pkg) { linkedMapOf() }
                 val result = JSONArray()
+                if (pkg == PACKAGES[0] && target == browser.root && page == 0 && mangoUiLibrary?.enabled == true) {
+                    result.put(JSONObject().put("id", MANGO_UI_ROOT).put("title", "Local folders · assisted")
+                        .put("subtitle", mangoUiLibrary.explanation).put("browsable", true).put("playable", false).put("uiAssisted", true))
+                }
                 visible.forEach { item ->
                     val id = item.mediaId ?: return@forEach
                     if (id.toByteArray().size > 512) { finish(null, "SOURCE_ID_TOO_LARGE"); return }

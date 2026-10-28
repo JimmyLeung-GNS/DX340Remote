@@ -59,7 +59,7 @@ class HostService : Service() {
     override fun onBind(intent: Intent?) = null
     override fun onCreate() {
         super.onCreate(); instance = this
-        sources = SourceRegistry(this, ComponentName(this, SessionListener::class.java), AppleUiAdapterProvider(this)) { onSourceChanged() }
+        sources = SourceRegistry(this, ComponentName(this, SessionListener::class.java), AppleUiAdapterProvider(this), MangoUiAdapterProvider(this)) { onSourceChanged() }
         ble = BlePeripheral(this, ::record, { approved.getBoolean(it.address, false) }, { device -> if (authenticated == device) authenticated = null; if (pending == device) pending = null }, ::receive)
         val events = IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED).apply { addAction(Intent.ACTION_SCREEN_OFF); addAction(Intent.ACTION_USER_PRESENT) }
         if (Build.VERSION.SDK_INT >= 33) registerReceiver(bonds, events, Context.RECEIVER_EXPORTED) else registerReceiver(bonds, events)
@@ -170,7 +170,7 @@ class HostService : Service() {
                     when (op) {
                         "BROWSE" -> {
                             reply(device, request, "ACCEPTED")
-                            sources.browse(if (args.isNull("parent")) null else args.optString("parent").takeIf { it.isNotEmpty() }, args.optInt("page", 0), if (args.isNull("revision")) null else args.optString("revision")) { data, error ->
+                            sources.browseAuthorized(if (args.isNull("parent")) null else args.optString("parent").takeIf { it.isNotEmpty() }, args.optInt("page", 0), if (args.isNull("revision")) null else args.optString("revision"), { authenticated == device && approved.getBoolean(device.address, false) && device.bondState == BluetoothDevice.BOND_BONDED }) { data, error ->
                                 val value = reply(device, request, if (error == null) "RESULT" else "ERROR", data ?: JSONObject().put("code", error)); ledger.finish(id, value)
                             }
                         }

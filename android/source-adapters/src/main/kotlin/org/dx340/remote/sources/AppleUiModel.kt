@@ -5,7 +5,7 @@ import java.security.MessageDigest
 data class UiNode(
     val path: String, val parent: String?, val id: String = "", val text: String = "", val description: String = "",
     val className: String = "", val clickable: Boolean = false, val selected: Boolean = false, val forward: Boolean = false,
-    val backward: Boolean = false, val enabled: Boolean = true
+    val backward: Boolean = false, val enabled: Boolean = true, val drawingOrder: Int = 0
 )
 data class UiRow(val path: String, val title: String, val subtitle: String = "", val playable: Boolean, val browsable: Boolean)
 data class ParsedAppleUi(val title: String, val rows: List<UiRow>, val back: String?, val scroll: String?, val downloadedRoot: Boolean, val fingerprint: String)

@@ -33,7 +33,11 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
             val sources = HostService.instance?.sources ?: return finish(null, "START_COMPANION_FIRST")
             sources.select(intent.getStringExtra("source") ?: "com.apple.android.music")
             val operation = intent.getStringExtra("operation") ?: "BROWSE"
-            if (operation == "DESCRIBE_ITEM") {
+            if (operation == "SET_MANGO_UI_MODE") {
+                val enabled = intent.getBooleanExtra("enabled", false)
+                context.getSharedPreferences("mango-ui", Context.MODE_PRIVATE).edit().putBoolean("enabled", enabled).commit()
+                sources.externalStateChanged(); finish(JSONObject().put("enabled", enabled), null)
+            } else if (operation == "DESCRIBE_ITEM") {
                 finish(sources.nativeItemEvidence(intent.getStringExtra("item") ?: ""), null)
             } else if (operation == "GET_STATE") {
                 finish(sources.state(), null)
@@ -49,7 +53,8 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
                     else main.postDelayed({ finish(JSONObject().put("outcome", "dispatched; inspect observed state separately"), null) }, 1200)
                 }
             } else if (operation == "SNAPSHOT") {
-                finish(AppleMusicAccessibilityService.instance?.debugSnapshot(), null)
+                val serviceSnapshot = if (sources.selected == "com.ibasso.music") MangoAccessibilityService.instance?.debugSnapshot() else AppleMusicAccessibilityService.instance?.debugSnapshot()
+                finish(serviceSnapshot, if (serviceSnapshot == null) "UI_PERMISSION_REQUIRED" else null)
             } else if (operation == "PLAY_ITEM") {
                 sources.playItem(JSONObject().put("item", intent.getStringExtra("item")).put("revision", intent.getStringExtra("revision")), { true }) { error ->
                     if (error != null) finish(null, error)

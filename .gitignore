@@ -25,6 +25,7 @@ DerivedData/
 
 # Generated packages, local logs and scratch files
 artifacts/
+.impeccable/review/
 work/
 *.log
 Thumbs.db

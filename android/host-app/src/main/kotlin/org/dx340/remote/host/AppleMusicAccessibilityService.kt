@@ -24,6 +24,7 @@ class AppleMusicAccessibilityService : AccessibilityService() {
     private val session = UUID.randomUUID().toString()
     private var offlineContext = false
     private var busy = false
+    private var cancelBrowse: ((String) -> Unit)? = null
     private var last: Frame? = null
     private var eventPending = false
     private var lastReadiness = "not-bound"
@@ -31,8 +32,8 @@ class AppleMusicAccessibilityService : AccessibilityService() {
     private data class Action(val path: String, val kind: String, val signature: String)
     private data class Frame(val revision: String, val window: Int, val parsed: ParsedAppleUi, val actions: Map<String, Action>)
     override fun onServiceConnected() { instance = this; notifyHost(true) }
-    override fun onUnbind(intent: android.content.Intent?): Boolean { instance = null; main.removeCallbacksAndMessages(null); last = null; notifyHost(true); return super.onUnbind(intent) }
-    override fun onInterrupt() { last = null; offlineContext = false; notifyHost(true) }
+    override fun onUnbind(intent: android.content.Intent?): Boolean { instance = null; cancelBrowse?.invoke("UI_PERMISSION_REQUIRED"); main.removeCallbacksAndMessages(null); last = null; notifyHost(true); return super.onUnbind(intent) }
+    override fun onInterrupt() { last = null; offlineContext = false; cancelBrowse?.invoke("UI_ACTION_INTERRUPTED"); notifyHost(true) }
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         if (!eventPending) { eventPending = true; main.postDelayed({ eventPending = false; notifyHost() }, 500) }
     }
@@ -128,17 +129,19 @@ class AppleMusicAccessibilityService : AccessibilityService() {
             perform(tree, action.path, "play", action.signature); done(null)
         } catch (e: Exception) { done(e.message ?: "UI_ACTION_FAILED") }
     }
-    fun browse(parent: String?, page: Int, revision: String?, done: (JSONObject?, String?) -> Unit) {
+    fun browse(parent: String?, page: Int, revision: String?, stillAuthorized: () -> Boolean, done: (JSONObject?, String?) -> Unit) {
         if (busy) { done(null, "UI_BUSY"); return }
         busy = true
         var finished = false
-        fun finish(value: JSONObject?, error: String?) { if (!finished) { finished = true; busy = false; done(value, error) } }
+        fun finish(value: JSONObject?, error: String?) { if (!finished) { finished = true; busy = false; cancelBrowse = null; done(value, error) } }
+        cancelBrowse = { finish(null, it) }
         val deadline = android.os.SystemClock.elapsedRealtime() + 6000
-        fun publish(end: Boolean = false) { try { finish(result(frame(tree()), page, end), null) } catch (e: Exception) { finish(null, e.message ?: "UI_UNEXPECTED_SCREEN") } }
+        fun publish(end: Boolean = false) { try { require(stillAuthorized()) { "AUTHORIZATION_DENIED" }; finish(result(frame(tree()), page, end), null) } catch (e: Exception) { finish(null, e.message ?: "UI_UNEXPECTED_SCREEN") } }
         var settlingFingerprint: String? = null
         var settlingSince = 0L
         fun waitChanged(before: String) {
             if (finished) return
+            if (!stillAuthorized()) { finish(null, "AUTHORIZATION_DENIED"); return }
             try {
                 val current = tree(); val parsed = AppleUiModel.parse(current.nodes, offlineContext)
                 if (parsed.fingerprint != before) {
@@ -158,6 +161,7 @@ class AppleMusicAccessibilityService : AccessibilityService() {
         var rootSteps = 0
         fun root() {
             if (finished) return
+            if (!stillAuthorized()) { finish(null, "AUTHORIZATION_DENIED"); return }
             if (android.os.SystemClock.elapsedRealtime() >= deadline || rootSteps++ > 20) { finish(null, "UI_SETUP_REQUIRED"); return }
             try {
                 val current = tree()
@@ -188,6 +192,7 @@ class AppleMusicAccessibilityService : AccessibilityService() {
                 val (current, action) = validate(parent, revision ?: "")
                 require(action.kind in setOf("browse", "back", "scroll")) { "UNSUPPORTED_CAPABILITY" }
                 val before = last!!.parsed.fingerprint
+                require(stillAuthorized()) { "AUTHORIZATION_DENIED" }
                 perform(current, action.path, action.kind, action.signature)
                 main.postDelayed({ waitChanged(before) }, 200)
             }

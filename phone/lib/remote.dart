@@ -49,6 +49,8 @@ class Remote extends ChangeNotifier {
   bool action(String capability) => can(capability) && !busy;
   bool get assisted =>
       library['uiAssisted'] == true || caps['browseMode'] == 'ui-assisted';
+  String get browseExplanation =>
+      textValue(caps['uiBrowseReason'] ?? caps['reason']);
   bool get libraryLoading => library['loading'] == true;
   String? get currentParent => textValue(library['requestedParent']).isEmpty
       ? null

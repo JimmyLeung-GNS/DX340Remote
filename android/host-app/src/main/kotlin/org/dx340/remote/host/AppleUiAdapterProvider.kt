@@ -14,8 +14,8 @@ class AppleUiAdapterProvider(private val context: Context) : UiLibraryAdapter {
         service?.readiness() != null -> "Apple Music assisted browsing requires DX340 screen on, unlocked, and the verified app version."
         else -> "Apple Music assisted browsing: DX340 must stay screen on and unlocked. App updates require revalidation."
     }
-    override fun browse(parent: String?, page: Int, revision: String?, done: (JSONObject?, String?) -> Unit) {
-        if (!enabled || service == null) done(null, "UI_PERMISSION_REQUIRED") else service!!.browse(parent, page, revision, done)
+    override fun browse(parent: String?, page: Int, revision: String?, stillAuthorized: () -> Boolean, done: (JSONObject?, String?) -> Unit) {
+        if (!enabled || service == null) done(null, "UI_PERMISSION_REQUIRED") else service!!.browse(parent, page, revision, stillAuthorized, done)
     }
     override fun validatePlayable(item: String, revision: String) = if (!enabled || service == null) "UI_PERMISSION_REQUIRED" else service!!.validatePlayable(item, revision)
     override fun play(item: String, revision: String, stillAuthorized: () -> Boolean, done: (String?) -> Unit) {

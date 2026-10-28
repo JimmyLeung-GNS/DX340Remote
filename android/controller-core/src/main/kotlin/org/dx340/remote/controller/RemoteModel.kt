@@ -130,10 +130,12 @@ class RemoteModel(context: Context) {
         state = new
     }
     private fun errorMessage(code: String) = when (code) {
-        "UI_PERMISSION_REQUIRED" -> "On DX340, enable DX340 Apple Music browsing in Accessibility settings."
-        "UI_SCREEN_UNLOCK_REQUIRED" -> "Wake and unlock DX340 to browse Apple Music."
-        "UI_FOREGROUND_REQUIRED", "UI_SETUP_REQUIRED", "UI_UNEXPECTED_SCREEN" -> "Open Apple Music’s Downloaded library on DX340, then refresh."
-        "UI_VERSION_UNVERIFIED" -> "Apple Music changed. Assisted browsing needs revalidation."
+        "UI_PERMISSION_REQUIRED" -> "On DX340, enable the selected player's optional browsing service in Accessibility settings."
+        "UI_SCREEN_UNLOCK_REQUIRED" -> "Wake and unlock DX340 for assisted browsing."
+        "UI_FOREGROUND_REQUIRED", "UI_SETUP_REQUIRED", "UI_UNEXPECTED_SCREEN", "UI_STORAGE_CONTEXT_REQUIRED" -> "Open the selected player's local/downloaded library on DX340, then refresh."
+        "UI_VERSION_UNVERIFIED" -> "The selected player changed. Assisted browsing needs revalidation."
+        "UI_ACTIVE_PAGE_UNVERIFIED", "UI_TREE_CHANGED", "UI_ACTION_TIMEOUT", "UI_ACTION_INTERRUPTED" -> "The player's screen changed or did not settle. Refresh the library before retrying."
+        "UI_MODE_DISABLED" -> "On DX340, enable the selected player's optional browsing mode."
         "STALE_LIBRARY", "EXPIRED_ITEM" -> "The library changed. Refresh before selecting a track."
         "UI_BUSY", "SOURCE_BUSY" -> "Wait for the current action to finish."
         "LOCAL_APPROVAL_REQUIRED" -> "Approve this controller on DX340, then retry authorization."

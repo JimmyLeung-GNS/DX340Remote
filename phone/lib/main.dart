@@ -252,9 +252,9 @@ class _PhoneShellState extends State<PhoneShell>
     if (!remote.authorized) recovery('browse music on DX340'),
     if (remote.authorized && remote.assisted)
       label(
-        textValue(remote.caps['reason']).isEmpty
+        remote.browseExplanation.isEmpty
             ? 'Assisted browsing needs DX340 awake and unlocked.'
-            : textValue(remote.caps['reason']),
+            : remote.browseExplanation,
       ),
     if (remote.authorized && !remote.can('canBrowse'))
       label(

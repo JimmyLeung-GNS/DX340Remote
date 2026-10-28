@@ -46,6 +46,54 @@ Json snapshot({
 };
 
 void main() {
+  test(
+    'hybrid Mango folders return to native root without retaining a stale native parent',
+    () async {
+      final bridge = FakeBridge();
+      final remote = Remote(bridge)
+        ..accept(
+          snapshot(
+            caps: {
+              'canBrowse': true,
+              'browseMode': 'direct',
+              'uiBrowseReason': 'Mango needs DX340 awake',
+            },
+          ),
+        );
+      await remote.open({
+        'id': 'mango-ui:root',
+        'browsable': true,
+        'uiAssisted': true,
+      });
+      expect(remote.canGoBack, false);
+      remote.accept(
+        snapshot(
+          caps: {
+            'canBrowse': true,
+            'browseMode': 'direct',
+            'uiBrowseReason': 'Mango needs DX340 awake',
+          },
+          library: {
+            'uiAssisted': true,
+            'backId': 'mango-native:root',
+            'revision': 'ui-r',
+          },
+        ),
+      );
+      expect(remote.assisted, true);
+      expect(remote.browseExplanation, 'Mango needs DX340 awake');
+      await remote.back();
+      expect(bridge.calls.last.$2, {'parent': 'mango-native:root'});
+      remote.accept(
+        snapshot(
+          library: {'items': [], 'requestedParent': 'mango-native:root'},
+        ),
+      );
+      expect(remote.assisted, false);
+      expect(remote.canGoBack, false);
+      remote.dispose();
+    },
+  );
   test('cached capabilities cannot authorize commands', () async {
     final bridge = FakeBridge();
     final remote = Remote(bridge);
