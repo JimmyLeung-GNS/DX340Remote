@@ -6,7 +6,7 @@
 |---|---|---|
 | GATT hosting / advertising | VERIFIED API callbacks | Service created, advertising succeeds. No physical central/security pass |
 | Android remote installation/open | VERIFIED on DX340 only | artifacts/android-remote-launch.json/png. Separate-controller radio NOT TESTED |
-| iPhone compile/open | BLOCKED here | Windows has no xcrun/Xcode; project source exists. Mac action required |
+| iOS compile/open | VERIFIED simulator only | Final CI40699505189: Xcode26.6, Swift3 tests passed, iPhone Air/iOS26.5 native screens captured. Reviewer scored3 disconnected UI fixes resolved. Physical iPhone signing/launch/BLE still NOT TESTED |
 | Mango native browsing | VERIFIED sampled tree | Own companion identity; five root categories,17 albums,11 artists,3 genres sampled. No folder/playlist category exposed in sampled root |
 | Mango selected-item playback | VERIFIED one user-confirmed audible selection | Selected “777 …” through Mango; later confirmation snapshot had advanced. See test-results/2026-10-28-mango-selection.md; full T08 incomplete |
 | Mango explicit transports | VERIFIED desired-state adapter sample | Raw repeated play was non-idempotent. Adapter checks observed state and dispatches once; pause/pause/play/play passed on “Curtain Call”. artifacts/mango-observed-state-probe.json. No acoustic/radio claim |
@@ -14,7 +14,8 @@
 | Apple native MediaBrowser | FAILED tested connection | Ordinary client onConnectionFailed |
 | Apple Media3 browse | DENIED tested root | Connected, getLibraryRoot returned -4, no root. No identity spoofing |
 | Apple offline outside-queue selection | VERIFIED foreground research + user-confirmed audio | “Paradise Paradise”, absent from prior101 queue; Wi-Fi0/default network none. ADB semantic navigation, not service/BLE acceptance |
-| Apple optional own UI adapter | VERIFIED sampled root/album/playlist/song reads and one observed selection | Actual bound companion AccessibilityService, debug DUMP-protected in-process probe, “Kuchibirukara Romantica” observed playing. Scroll/Back/stale-ID checks passed; Downloaded Playlists→AAA yielded downloaded rows. No BLE, fresh outside-queue or new human audio pass claimed |
+| Apple optional own UI adapter | VERIFIED sampled navigation and one own-service offline/outside-queue user-confirmed audible selection | One Night Animal selected from downloaded AAA playlist, absent from complete prior20-item queue, observed playing/Mango paused offline. User said correct song audible; delayed confirmation snapshot had advanced. Scroll/Back/stale-ID samples passed. Full20/5/2 and phone BLE remain open |
+| Mango optional UI mode | AUTHORIZED; initial research only | User explicitly allowed optional Mango UI mode. Folder/breadcrumb/FLAC filename and storage-menu semantics observed; own-service integration not implemented yet. Native Mango browsing/controls retained |
 | Apple UI screen off/unlock | VERIFIED sleep rejection; REQUIRED limit | Actual service returned UI_SCREEN_UNLOCK_REQUIRED/canBrowse=false while playing=true. Secure-lock test pending. User accepted this optional mode |
 | Source handoff | VERIFIED short local source-state samples; full acceptance pending | Shared desired-state/native-item/UI-item/queue preparation validates authorization/target before pause, then waits/revalidates.12 desired-state requests awake/asleep and native/UI item selections observed target playing/other paused. Queue path, phone BLE and acoustic-overlap acceptance outstanding |
 | Resume / cold launch / volume | NOT SUPPORTED beta | Capabilities false; no fabricated commands |

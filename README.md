@@ -2,7 +2,7 @@
 
 Development beta: Kotlin DX340 companion, Kotlin Android remote and SwiftUI iPhone remote sharing BLE protocol v1. Music continues through the installed Mango Player or Apple Music on DX340. Everyday control has no Wi-Fi/cloud path.
 
-Android APK builds, lint and JVM tests pass on Windows. Both Android apps have opened on the physical DX340. The iOS project exists but has **not been compiled or opened**: this session has no Mac/Xcode. Separate Android/iPhone Bluetooth acceptance and Watch remain incomplete. See [current status](docs/status.md) and [platform launch verification](docs/cross-platform-verification.md).
+Android APK builds, lint and JVM tests pass on Windows. Both Android apps have opened on the physical DX340. The native iOS app has now **compiled and opened in an iPhone Air/iOS26.5 simulator** on GitHub's standard Mac runner (Xcode26.6); three Swift protocol tests passed. This does not verify installation on the user's iPhone. Separate Android/iPhone Bluetooth acceptance and Watch remain incomplete. See [current status](docs/status.md) and [platform launch verification](docs/cross-platform-verification.md).
 
 ## Build and launch checks
 
@@ -21,7 +21,7 @@ xcrun simctl list devices available
 sh scripts/build-apple.sh <iPhone-simulator-UDID>
 ```
 
-The second build command installs/launches the app in the selected simulator and captures evidence. It is prepared for Mac execution and has not run here. Open `apple/DXRemote.xcodeproj` to sign and run on a physical iPhone. Simulator launch cannot establish BLE compatibility.
+The second build command installs/launches the app in the selected simulator and captures evidence. The [Apple CI workflow](docs/continuous-verification.md) also runs this unsigned verification on a standard public-repository Mac runner. Open `apple/DXRemote.xcodeproj` to sign and run on a physical iPhone. Simulator launch cannot establish BLE compatibility.
 
 ## Source support so far
 

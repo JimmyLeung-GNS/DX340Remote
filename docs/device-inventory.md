@@ -13,7 +13,8 @@
 | BLE feature | VERIFIED reported by PackageManager; advertiser and GATT start callback succeed | artifacts/host-advertising.txt; companion diagnostic |
 | iPhone | NOT TESTED: iOS 27.2 user reported; model/build unknown; unavailable to session | User confirmed only DX340 is connected |
 | Android controller | NOT TESTED: model/OS unknown; unavailable | User confirmation |
-| Mac/Xcode/signing | BLOCKED: user has access to a Mac; this session has no access or Apple toolchain | Windows environment inspection |
+| User's Mac/Xcode/signing | BLOCKED: no access; exact macOS/Xcode/signing account unknown | Windows environment inspection; physical iPhone deployment still requires this |
+| Development-only hosted Mac | VERIFIED macOS26.6.2/build25G83, Xcode26.6/build17F113; iPhone Air simulator/iOS26.5 | GitHub CI run40691819981, downloaded logs and native screenshot. No real iPhone/radio claim |
 | Watch | NOT TESTED: model/watchOS unknown; phone stability gate not met | Plan P9 |
 | Output | USER REPORTED AMP15 phone out; correct Mango and Apple selected-track audio confirmed | Gain/volume mapping/audio quality NOT MEASURED |
 | Collection | PARTIAL: Mango All Music returned466 items; total files/SD layout/format counts unknown | Native browser sample, not full storage inventory |

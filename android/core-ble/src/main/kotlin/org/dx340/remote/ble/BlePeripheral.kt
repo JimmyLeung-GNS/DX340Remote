@@ -116,6 +116,11 @@ class BlePeripheral(
         else { tx.value = bytes; if (server?.notifyCharacteristicChanged(device, tx, true) == true) 0 else -1 }
         if (code != 0) { busy = false; outgoing.clear(); artworkFrames.clear(); status("SEND_FAILED:$code"); server?.cancelConnection(device) }
     }
-    fun disconnect(device: BluetoothDevice) { server?.cancelConnection(device) }
+    fun disconnect(device: BluetoothDevice) {
+        if (device == peer) {
+            subscribed = false; outgoing.clear(); artworkFrames.clear(); assembler.clear(); busy = false
+        }
+        server?.cancelConnection(device)
+    }
     fun stop() { runCatching { advertiser?.stopAdvertising(advertiseCallback) }; runCatching { peer?.let { server?.cancelConnection(it) } }; runCatching { server?.close() }; server = null; peer = null; outgoing.clear(); artworkFrames.clear(); assembler.clear(); busy = false }
 }

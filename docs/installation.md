@@ -69,7 +69,7 @@ Use a separate physical phone, API 31 or newer. Do not install on DX340 and coun
 
 ## Mac and iPhone
 
-The committed `apple/DXRemote.xcodeproj` is generated deterministically by `python3 scripts/generate-xcode.py`. Python generation is verified on Windows; Xcode compilation is not. An equivalent XcodeGen project.yml is provided but is not required to open the committed project. `apple/Package.swift` tests the shared Swift framing implementation without a phone.
+The committed `apple/DXRemote.xcodeproj` is generated deterministically by `python3 scripts/generate-xcode.py`. Python generation is verified on Windows; hosted Mac CI has now compiled and opened the native app on an iPhone Air/iOS26.5 simulator using Xcode26.6. This is not physical iPhone deployment or Bluetooth acceptance. An equivalent XcodeGen project.yml is provided but is not required to open the committed project. `apple/Package.swift` tests the shared Swift framing implementation without a phone.
 
 On the user's Mac, first record macOS and Xcode versions. Choose an installed Xcode that actually supports the reported iOS 27.2 build; no such compatibility is assumed from Windows.
 
@@ -86,7 +86,7 @@ xcrun simctl list devices available
 sh scripts/build-apple.sh <iPhone-simulator-UDID>
 ```
 
-Inspect artifacts/apple-simulator-launch.png and apple-simulator-launch.txt. These Mac commands have NOT been executed in this Windows session. Compilation/launch success would not establish physical BLE support. On failure, preserve artifacts/apple-build.txt and swift-tests.txt for repair. The script exits without a build on non-macOS hosts.
+Inspect artifacts/apple-simulator-launch.png and apple-simulator-launch.txt. These commands have run on the standard GitHub Mac runner; they cannot run locally in this Windows session. Compilation/launch success would not establish physical BLE support. On failure, preserve artifacts/apple-build.txt and swift-tests.txt for repair. The script exits without a build on non-macOS hosts.
 
 Open `apple/DXRemote.xcodeproj` in Xcode. Select the DXRemote scheme, choose your signing team and connected iPhone, and run. Record the iPhone model and exact Settings → General → About OS/build. Complete development trust/Developer Mode only as required by that device/Xcode. No TestFlight/App Store upload is performed by these scripts.
 

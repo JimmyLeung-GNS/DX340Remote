@@ -17,6 +17,7 @@ import org.dx340.remote.protocol.CommandLedger
 import org.dx340.remote.protocol.RoutingPolicy
 import org.dx340.remote.protocol.JsonEnvelopeGuard
 import org.dx340.remote.protocol.MutationGate
+import org.dx340.remote.protocol.ReplyAccess
 import org.dx340.remote.sources.SourceRegistry
 import org.json.JSONArray
 import org.json.JSONObject
@@ -104,7 +105,13 @@ class HostService : Service() {
     private fun reply(device: BluetoothDevice, request: JSONObject, type: String, data: JSONObject = JSONObject()): String {
         val result = JSONObject().put("v", 1).put("id", request.optString("id")).put("hostEpoch", epoch).put("type", type).put("data", data).toString()
         val safeResult = if (result.toByteArray(Charsets.UTF_8).size <= 65536) result else JSONObject().put("v", 1).put("id", request.optString("id")).put("hostEpoch", epoch).put("type", "ERROR").put("data", JSONObject().put("code", "RESPONSE_TOO_LARGE")).toString()
-        ble.send(device, safeResult.toByteArray(Charsets.UTF_8), request.optString("type") in listOf("GET_ARTWORK", "BROWSE", "GET_QUEUE")); return safeResult
+        val bonded = checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED &&
+            runCatching { device.bondState == BluetoothDevice.BOND_BONDED }.getOrDefault(false)
+        if (ReplyAccess.maySend(type, bonded,
+                approved.getBoolean(device.address, false), authenticated == device)) {
+            ble.send(device, safeResult.toByteArray(Charsets.UTF_8), request.optString("type") in listOf("GET_ARTWORK", "BROWSE", "GET_QUEUE"))
+        }
+        return safeResult
     }
     private fun onSourceChanged() {
         if (!::sources.isInitialized) return
@@ -207,5 +214,5 @@ class HostService : Service() {
             record("REQUEST_ERROR:$code")
         }
     }
-    override fun onDestroy() { main.removeCallbacksAndMessages(null); unregisterReceiver(bonds); ble.stop(); sources.close(); observer = null; instance = null; super.onDestroy() }
+    override fun onDestroy() { authenticated = null; pending = null; main.removeCallbacksAndMessages(null); unregisterReceiver(bonds); ble.stop(); sources.close(); observer = null; instance = null; super.onDestroy() }
 }

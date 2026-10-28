@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-28T12:37:25Z",
+  "generatedAt": "2026-10-28T13:55:27Z",
   "title": "Design System: DX340 Remote",
   "extensions": {
     "colorMeta": {
@@ -16,15 +16,30 @@
       }
     },
     "typographyMeta": {
-      "android-app-title": { "displayName": "Android application title", "purpose": "Companion and remote title TextViews; accessibility headings." },
-      "android-track-title": { "displayName": "Android track and test title", "purpose": "Player track title and Mango test screen heading." },
-      "android-section-title": { "displayName": "Android section title", "purpose": "Library and queue headings." },
-      "android-body": { "displayName": "Android body", "purpose": "Metadata, capability explanations and host instructions; native Button labels retain platform typography." },
-      "android-status": { "displayName": "Android status", "purpose": "Host selectable status and remote polite live region." }
+      "android-app-title": {
+        "displayName": "Android application title",
+        "purpose": "Companion and remote title TextViews; accessibility headings."
+      },
+      "android-track-title": {
+        "displayName": "Android track and test title",
+        "purpose": "Player track title and Mango test screen heading."
+      },
+      "android-section-title": {
+        "displayName": "Android section title",
+        "purpose": "Library and queue headings."
+      },
+      "android-body": {
+        "displayName": "Android body",
+        "purpose": "Metadata, capability explanations and host instructions; native Button labels retain platform typography."
+      },
+      "android-status": {
+        "displayName": "Android status",
+        "purpose": "Host selectable status and remote polite live region."
+      }
     },
     "nativeAppearance": {
       "android": "Kotlin platform Views; Theme.DeviceDefault.DayNight; system Button styling and state feedback.",
-      "apple": "SwiftUI system font, title2 bold track title, footnote status, subheadline library now-playing; secondary metadata, bar material, List, Section, TabView and NavigationStack.",
+      "apple": "SwiftUI system font, title2 bold track title, wrapping footnote connection status inside each scrolling List, subheadline library now-playing inset with bar material; secondary nonempty metadata, Section, TabView and NavigationStack.",
       "shapesAndElevation": "Platform-owned corner shapes and depth; no app radius or shadow scale.",
       "motion": "No authored duration or easing tokens. Native motion should follow reduced-motion settings; physical behavior is unverified.",
       "ramps": "No authored color ramps. Launcher-only fixed artwork colors are not expanded into an invented screen palette.",
@@ -46,16 +61,47 @@
         "Android remote disconnected Player capture: artifacts/android-remote-launch.png.",
         "Android companion setup capture: artifacts/ui-host-final.png; predates optional Apple Music controls in current source.",
         "Captures show DX340 Android 13 dark native theme, not a separate controller phone.",
-        "Inventory records Mango 4.1.37 and Apple Music 6.5.3; full app-build/capture correspondence remains unresolved."
+        "Inventory records Mango 4.1.37 and Apple Music 6.5.3; Android app-build/capture correspondence remains unresolved."
       ],
       "sourceReviewed": "Scoped lifecycle and stale-result fixes; source review is not physical acceptance.",
+      "appleBuild": {
+        "status": "verified",
+        "environment": "Hosted Mac; Xcode 26.6 (17F113), macOS 26.6.2 (25G83), iPhone Air simulator / iOS 26.5.",
+        "result": "App build and simulator launch succeeded; all three Swift protocol tests passed.",
+        "appUiRevision": "77f828c",
+        "captureReadinessRevision": "412b87a",
+        "evidenceDirectory": "artifacts/apple-ci-40699505189"
+      },
+      "appleCaptures": {
+        "matrix": "valid6",
+        "files": [
+          "artifacts/apple-ci-40699505189/apple-simulator-launch.png",
+          "artifacts/apple-ci-40699505189/apple-library-light.png",
+          "artifacts/apple-ci-40699505189/apple-queue-light.png",
+          "artifacts/apple-ci-40699505189/apple-setup-light.png",
+          "artifacts/apple-ci-40699505189/apple-player-dark.png",
+          "artifacts/apple-ci-40699505189/apple-player-large-dark.png"
+        ],
+        "scope": "Actual disconnected native simulator screens; light Player/Library/Queue/Setup, dark Player and largest-text dark Player initial viewport.",
+        "readiness": "DEBUG capture routing selects destinations. OCR gates heading/tab visibility only; neither establishes tap or recovery-action interaction."
+      },
+      "appleReview": {
+        "disposition": "ship:3",
+        "resolvedScopeOnly": [
+          "ConnectionStatusSection scrolls inside each native List instead of a root safe-area inset, avoiding the prior largest-text overlap.",
+          "Disconnected Player omits blank artist/album metadata and the orphan Source section.",
+          "Disconnected Library and Queue show correct recovery copy and an Open Setup action."
+        ],
+        "limit": "No whole-product visual approval or interaction, VoiceOver, connected-data, physical iPhone or Bluetooth acceptance."
+      },
       "debt": [
         "Android ordinary four-button navigation lacks selected-state semantics and active destination treatment.",
         "Android root padding uses raw pixels, not a density-independent spacing scale.",
-        "Current-build recaptures, Activity recreation/navigation restoration, density, landscape and large-text checks remain unaccepted."
+        "Android current-build recaptures, Activity recreation/navigation restoration, density, landscape and large-text checks remain unaccepted."
       ],
       "notTested": [
-        "Apple compilation, signing, native rendering and physical iPhone accessibility review.",
+        "Apple tab/button taps, Open Setup interaction, scrolling reachability, VoiceOver and connected-data rendering.",
+        "Physical iPhone signing/install, accessibility and Bluetooth acceptance.",
         "Light and dark appearance and contrast across actual controller phones.",
         "Whole-product visual acceptance and radio/audio acceptance."
       ]
@@ -89,17 +135,22 @@
     {
       "name": "Apple navigation",
       "kind": "nav",
-      "description": "Native TabView with Player, Library, Queue and Setup labels and symbols; each destination has a NavigationStack. Apple compilation and rendering remain unverified."
+      "description": "Native TabView with Player, Library, Queue and Setup labels and symbols; each destination has a NavigationStack. A typed selection binding supports Open Setup recovery. DEBUG launch routing enables actual screen captures without proving taps."
     },
     {
       "name": "Library capability context",
       "kind": "custom",
-      "description": "Native text explains unavailable browsing or optional assisted browsing; Apple additionally uses a ProgressView for loading. This is explanatory UI, not a custom card or chip."
+      "description": "Native text explains unavailable browsing or optional assisted browsing; disconnected Apple Library and Queue give connection guidance plus Open Setup. Apple additionally uses a ProgressView for library loading. This is explanatory UI, not a custom card or chip."
+    },
+    {
+      "name": "Apple connection status",
+      "kind": "custom",
+      "description": "ConnectionStatusSection is a native Section inside each destination's scrolling List. Its footnote Text wraps vertically with fixedSize(horizontal: false, vertical: true) and retains the updates-frequently accessibility trait. No root fixed inset or custom spacing token."
     }
   ],
   "narrative": {
     "northStar": "Native system interface",
-    "overview": "The user selected native system appearance on 28 October 2026. Use platform typography, colors, navigation and control states. The current interface is a functional diagnostic beta with large playback actions and explicit capability explanations. It has no separate screen palette or custom display typeface.\n\nThis document records current Kotlin Views and SwiftUI source, plus the supplied Android captures. It is a handoff for continuing native work, not whole-product visual acceptance. No Figma, web, comp or Flutter migration was selected. Android navigation polish remains open; Apple compilation and visual verification remain unapproved.",
+    "overview": "The user selected native system appearance on 28 October 2026. Use platform typography, colors, navigation and control states. The current interface is a functional diagnostic beta with large playback actions and explicit capability explanations. It has no separate screen palette or custom display typeface.\n\nThis document records current Kotlin Views and SwiftUI source, Android captures and the corrected six-image Apple simulator matrix. It is a handoff for continuing native work, not whole-product visual acceptance. No Figma, web, comp or Flutter migration was selected. Android navigation polish remains open. Apple builds and opens on the hosted Mac; review resolved three scoped disconnected-state fixes, with broader visual and interaction acceptance still open.",
     "keyCharacteristics": [
       "Native typography and appearance that follow system settings.",
       "Large playback targets with capability-dependent disabled states.",
@@ -124,8 +175,7 @@
       "**Don't** promote launcher colors into a fixed screen palette.",
       "**Don't** treat the Android four-button navigation row or raw-pixel margins as approved final patterns.",
       "**Don't** replace native components with a different UI stack without a selected migration.",
-      "**Don't** claim Apple UI acceptance, Bluetooth interoperability or audible playback from source or screenshots."
+      "**Don't** expand the three scoped Apple review fixes into whole-product, interaction, accessibility, Bluetooth or audible-playback acceptance."
     ]
   }
 }
-

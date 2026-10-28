@@ -204,9 +204,8 @@ class SourceRegistry(private val context: Context, private val listener: Compone
                             try {
                                 require(finalError == null) { finalError ?: "SOURCE_TIMEOUT" }
                                 require(android.os.SystemClock.elapsedRealtime() <= deadline) { "SOURCE_TIMEOUT" }
-                                require(selected == pkg && epoch(pkg) == expectedEpoch) { "STALE_SOURCE" }
+                                playbackGuard(pkg, expectedEpoch, stillAuthorized)?.let { error(it) }
                                 revisionGuard.validateSelection(proof.fingerprint, items[pkg]?.get(id)?.let(::fingerprint))
-                                require(stillAuthorized()) { "AUTHORIZATION_DENIED" }
                                 command("PLAY_ITEM_VALIDATED", args); done(null)
                             } catch (e: Exception) { done(e.message ?: "SOURCE_NOT_READY") }
                         }
