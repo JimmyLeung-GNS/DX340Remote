@@ -1,9 +1,11 @@
 package org.dx340.remote.host
 
-import android.app.Activity
-import android.app.Instrumentation
 import android.content.ComponentName
+import android.content.Context
 import android.content.ContextWrapper
+import android.os.Handler
+import android.os.Looper
+import android.os.SystemClock
 import org.dx340.remote.sources.SourceRegistry
 import org.dx340.remote.sources.UiLibraryAdapter
 import org.json.JSONObject
@@ -13,9 +15,12 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
 /** Real native Mango session plus explicitly simulated UI readiness; never dispatches playback. */
-class MangoCapabilityProbe(private val instrumentation: Instrumentation) {
-    fun run() {
-        val context = instrumentation.targetContext
+class MangoCapabilityCheck(private val context: Context) {
+    /** Run off the main thread. The debug receiver can use this without restarting the companion. */
+    fun run(): JSONObject {
+        check(Looper.myLooper() != Looper.getMainLooper()) { "CHECK_REQUIRES_WORKER_THREAD" }
+        val main = Handler(Looper.getMainLooper())
+        val deadline = SystemClock.elapsedRealtime() + 8000
         val temporaryPreferences = "capability-probe-${UUID.randomUUID()}"
         val isolated = object : ContextWrapper(context) {
             override fun getSharedPreferences(name: String, mode: Int) = super.getSharedPreferences(
@@ -35,13 +40,15 @@ class MangoCapabilityProbe(private val instrumentation: Instrumentation) {
         var registry: SourceRegistry? = null
         fun onMain(action: () -> Unit) {
             var failure: Exception? = null
-            instrumentation.runOnMainSync { try { action() } catch (e: Exception) { failure = e } }
+            val latch = CountDownLatch(1)
+            main.post { try { if (SystemClock.elapsedRealtime() <= deadline) action() else error("CHECK_TIMEOUT") } catch (e: Exception) { failure = e } finally { latch.countDown() } }
+            check(latch.await(maxOf(1, deadline - SystemClock.elapsedRealtime()), TimeUnit.MILLISECONDS)) { "CHECK_TIMEOUT" }
             failure?.let { throw it }
         }
         fun browse(parent: String?): JSONObject {
             val latch = CountDownLatch(1); var result: JSONObject? = null; var failure: String? = null
             onMain { registry!!.browse(parent, 0) { data, error -> result = data; failure = error; latch.countDown() } }
-            check(latch.await(10, TimeUnit.SECONDS)) { "BROWSE_TIMEOUT" }; check(failure == null) { failure ?: "BROWSE_FAILED" }
+            check(latch.await(maxOf(1, deadline - SystemClock.elapsedRealtime()), TimeUnit.MILLISECONDS)) { "BROWSE_TIMEOUT" }; check(failure == null) { failure ?: "BROWSE_FAILED" }
             return result ?: error("NO_BROWSE_RESULT")
         }
         try {
@@ -53,7 +60,7 @@ class MangoCapabilityProbe(private val instrumentation: Instrumentation) {
                 }
                 registry!!.start(); registry!!.select("com.ibasso.music")
             }
-            check(ready.await(12, TimeUnit.SECONDS)) { "MANGO_BROWSER_NOT_READY" }
+            check(ready.await(maxOf(1, deadline - SystemClock.elapsedRealtime()), TimeUnit.MILLISECONDS)) { "MANGO_BROWSER_NOT_READY" }
             onMain {
                 val reg = registry!!; val state = reg.state(); val caps = state.getJSONObject("capabilities")
                 report.put("stateBefore", state).put("capabilities", caps)
@@ -76,12 +83,35 @@ class MangoCapabilityProbe(private val instrumentation: Instrumentation) {
             check(items.length() > 0) { "NO_NATIVE_ITEMS" }
             check((0 until items.length()).all { !items.getJSONObject(it).optBoolean("playable") }) { "UNVERIFIED_NATIVE_ROW_PLAYABLE" }
             check((0 until items.length()).any { items.getJSONObject(it).optBoolean("nativeTestable") }) { "NO_EXPLICIT_TEST_ITEMS" }
+            // These transitions are simulated ONLY in the isolated temporary preferences.
+            // They do not represent listening evidence or change production verification.
+            val initialEpoch = root.getString("revision")
+            var enabledEpoch = ""; var disabledEpoch = ""; var staleError: String? = null
+            onMain {
+                val reg = registry!!
+                reg.confirmMangoPlayItem(true); enabledEpoch = reg.epoch(reg.selected)
+                reg.playItem(JSONObject().put("item", "native-capability-probe-unknown-id").put("revision", initialEpoch), { true }) { staleError = it }
+            }
+            check(enabledEpoch != initialEpoch && staleError == "STALE_LIBRARY") { "VERIFICATION_DID_NOT_INVALIDATE_OLD_REVISION" }
+            val enabledItems = browse(allMusic.getString("id")).getJSONArray("items")
+            check((0 until enabledItems.length()).any { enabledItems.getJSONObject(it).optBoolean("playable") }) { "VERIFIED_NATIVE_ROWS_NOT_REFRESHABLE" }
+            onMain {
+                val reg = registry!!
+                reg.confirmMangoPlayItem(false); disabledEpoch = reg.epoch(reg.selected)
+            }
+            check(disabledEpoch != enabledEpoch) { "REVOCATION_DID_NOT_INVALIDATE_REVISION" }
+            val revokedItems = browse(allMusic.getString("id")).getJSONArray("items")
+            check((0 until revokedItems.length()).all { !revokedItems.getJSONObject(it).optBoolean("playable") }) { "REVOKED_ROWS_STILL_PLAYABLE" }
+            var repeatedEpoch = ""
+            onMain { registry!!.confirmMangoPlayItem(false); repeatedEpoch = registry!!.epoch("com.ibasso.music") }
+            check(repeatedEpoch == disabledEpoch) { "UNCHANGED_CAPABILITY_RESET_LIBRARY" }
+            report.put("simulatedVerificationTransitions", true).put("oldRevisionRejected", true).put("revocationRowsChecked", revokedItems.length())
             check(uiCalls == 0) { "NATIVE_REQUEST_REACHED_UI" }
             onMain { report.put("stateAfter", registry!!.state()) }
             report.put("nativeRowsChecked", items.length()).put("uiCalls", uiCalls).put("passed", true)
         } catch (e: Exception) { report.put("passed", false).put("error", e.message) }
-        finally { onMain { registry?.close() }; context.deleteSharedPreferences(temporaryPreferences) }
+        finally { main.post { registry?.close(); context.deleteSharedPreferences(temporaryPreferences) } }
         File(context.filesDir, "mango-capability-probe.json").writeText(report.toString(2))
-        instrumentation.finish(if (report.optBoolean("passed")) Activity.RESULT_OK else Activity.RESULT_CANCELED, android.os.Bundle().apply { putString("report", report.toString()) })
+        return report
     }
 }

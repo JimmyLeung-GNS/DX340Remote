@@ -32,6 +32,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     private val epochs = mutableMapOf<String, String>()
     private val tokens = mutableMapOf<String, android.media.session.MediaSession.Token>()
     private val callbacks = mutableMapOf<String, MediaController.Callback>()
+    private val callbackGuard = SourceCallbackGuard()
     private val artwork = ArtworkRepository()
     private val items = mutableMapOf<String, LinkedHashMap<String, MediaBrowser.MediaItem>>()
     private data class ItemProof(val parent: String, val page: Int, val fingerprint: String)
@@ -49,28 +50,34 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     }
     fun close() {
         closed = true
+        callbackGuard.close()
         main.removeCallbacksAndMessages(null)
         manager.removeOnActiveSessionsChangedListener(sessionsChanged)
         controllers.forEach { (p, c) -> callbacks[p]?.let { c.unregisterCallback(it) } }
         browsers.values.forEach { it.disconnect() }; browsers.clear()
     }
     private fun attach(pkg: String, controller: MediaController) {
+        if (closed) return
         if (tokens[pkg] == controller.sessionToken) return
+        val lease = callbackGuard.replace(pkg)
         callbacks[pkg]?.let { controllers[pkg]?.unregisterCallback(it) }
         epochs[pkg] = UUID.randomUUID().toString(); tokens[pkg] = controller.sessionToken
         items.remove(pkg); proofs.remove(pkg)
         controllers[pkg] = controller
         val cb = object : MediaController.Callback() {
-            override fun onPlaybackStateChanged(state: PlaybackState?) = changed()
-            override fun onMetadataChanged(metadata: android.media.MediaMetadata?) = changed()
-            override fun onQueueChanged(queue: MutableList<android.media.session.MediaSession.QueueItem>?) = changed()
+            override fun onPlaybackStateChanged(state: PlaybackState?) = callbackGuard.dispatch(lease, changed)
+            override fun onMetadataChanged(metadata: android.media.MediaMetadata?) = callbackGuard.dispatch(lease, changed)
+            override fun onQueueChanged(queue: MutableList<android.media.session.MediaSession.QueueItem>?) = callbackGuard.dispatch(lease, changed)
             override fun onSessionDestroyed() {
-                controllers.remove(pkg); tokens.remove(pkg); epochs[pkg] = UUID.randomUUID().toString(); items.remove(pkg); changed()
+                if (!callbackGuard.retire(lease)) return
+                controllers.remove(pkg); tokens.remove(pkg); callbacks.remove(pkg)
+                epochs[pkg] = UUID.randomUUID().toString(); items.remove(pkg); proofs.remove(pkg); changed()
             }
         }
         callbacks[pkg] = cb; controller.registerCallback(cb, main)
     }
     fun refresh() {
+        if (closed) return
         try {
             val live = manager.getActiveSessions(listener).filter { it.packageName in PACKAGES }
             live.forEach { attach(it.packageName, it) }; accessError = null
@@ -78,6 +85,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         changed()
     }
     fun probeBrowsers() {
+        if (closed) return
         for (pkg in PACKAGES) {
             if (browsers.containsKey(pkg)) continue
             val services = context.packageManager.queryIntentServices(Intent("android.media.browse.MediaBrowserService").setPackage(pkg), PackageManager.GET_META_DATA)
@@ -93,18 +101,19 @@ class SourceRegistry(private val context: Context, private val listener: Compone
                     browserStatus[pkg] = "CONNECTED"; changed()
                     val callback = object : MediaBrowser.SubscriptionCallback() {
                         override fun onChildrenLoaded(parentId: String, children: MutableList<MediaBrowser.MediaItem>) {
+                            if (closed) return
                             b.unsubscribe(parentId, this)
                             rootSamples[pkg] = JSONObject().put("root", parentId).put("count", children.size).put("items", JSONArray().apply {
                                 children.take(50).forEach { put(JSONObject().put("id", it.mediaId).put("title", it.description.title?.toString()).put("browsable", it.isBrowsable).put("playable", it.isPlayable)) }
                             }); changed()
                         }
-                        override fun onError(parentId: String) { b.unsubscribe(parentId, this); rootSamples[pkg] = JSONObject().put("error", "BROWSE_DENIED"); changed() }
+                        override fun onError(parentId: String) { if (closed) return; b.unsubscribe(parentId, this); rootSamples[pkg] = JSONObject().put("error", "BROWSE_DENIED"); changed() }
                     }
                     b.subscribe(b.root, callback)
                     main.postDelayed({ if (!rootSamples.containsKey(pkg)) { b.unsubscribe(b.root, callback); rootSamples[pkg] = JSONObject().put("error", "SOURCE_TIMEOUT"); changed() } }, 8000)
                 }
-                override fun onConnectionFailed() { browserStatus[pkg] = "CLIENT_DENIED_OR_FAILED"; changed() }
-                override fun onConnectionSuspended() { browserStatus[pkg] = "SUSPENDED"; changed() }
+                override fun onConnectionFailed() { if (closed) return; browserStatus[pkg] = "CLIENT_DENIED_OR_FAILED"; changed() }
+                override fun onConnectionSuspended() { if (closed) return; browserStatus[pkg] = "SUSPENDED"; changed() }
             }, null)
             browsers[pkg] = browser
             try { browser.connect() } catch (e: Exception) { browserStatus[pkg] = "FAILED:${e.javaClass.simpleName}" }
@@ -329,7 +338,12 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     }
     fun confirmMangoPlayItem(success: Boolean) {
         require(selected == PACKAGES[0]) { "WRONG_SOURCE" }
-        check(context.getSharedPreferences("source-verification", Context.MODE_PRIVATE).edit().apply { if (success) putString("mangoPlayItemVersion", version(selected)) else remove("mangoPlayItemVersion") }.commit()) { "VERIFICATION_STORE_FAILED" }; changed()
+        val previous = nativeSelectionSupported(selected)
+        check(context.getSharedPreferences("source-verification", Context.MODE_PRIVATE).edit().apply { if (success) putString("mangoPlayItemVersion", version(selected)) else remove("mangoPlayItemVersion") }.commit()) { "VERIFICATION_STORE_FAILED" }
+        // Native clients clear visible/cached rows when sourceEpoch changes. Keep the
+        // same-session parent proofs so the local test can refresh its current folder.
+        if (previous != nativeSelectionSupported(selected)) epochs[selected] = UUID.randomUUID().toString()
+        changed()
     }
     /** Local diagnostic experiment only. Does not imply playback or enable capability by itself. */
     fun experimentMangoPlayItem(itemId: String, revision: String) {

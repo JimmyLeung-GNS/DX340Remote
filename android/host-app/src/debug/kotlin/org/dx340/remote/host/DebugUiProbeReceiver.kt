@@ -33,7 +33,35 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
             val sources = HostService.instance?.sources ?: return finish(null, "START_COMPANION_FIRST")
             sources.select(intent.getStringExtra("source") ?: "com.apple.android.music")
             val operation = intent.getStringExtra("operation") ?: "BROWSE"
-            if (operation == "SET_MANGO_UI_MODE") {
+            if (operation == "PROBE_VOLUME_DOWN") {
+                val state = sources.state()
+                require(intent.getStringExtra("sourceEpoch") == state.optString("sourceEpoch")) { "STALE_SOURCE" }
+                val audio = context.getSystemService(android.media.AudioManager::class.java)
+                val stream = android.media.AudioManager.STREAM_MUSIC
+                val current = audio.getStreamVolume(stream)
+                require(intent.hasExtra("expectedVolume") && current == intent.getIntExtra("expectedVolume", -1)) { "STALE_VOLUME" }
+                require(!audio.isVolumeFixed && audio.isMusicActive && state.optBoolean("playing")) { "VOLUME_PROBE_NOT_READY" }
+                require(current > audio.getStreamMinVolume(stream)) { "VOLUME_AT_MINIMUM" }
+                val requested = current - 1
+                // Absolute, downward-only diagnostic: retrying the same expected value cannot
+                // lower the volume twice. No Bluetooth capability is enabled by this probe.
+                audio.setStreamVolume(stream, requested, 0)
+                main.postDelayed({
+                    try {
+                        val observed = audio.getStreamVolume(stream)
+                        finish(JSONObject().put("kind", "physical-public-volume-api-downward-probe-no-ble")
+                            .put("before", current).put("requested", requested).put("observed", observed)
+                            .put("note", "Reported API values; listening confirmation required"), if (observed == requested) null else "VOLUME_NOT_OBSERVED")
+                    } catch (e: Exception) { finish(null, e.message ?: "VOLUME_PROBE_FAILED") }
+                }, 500)
+            } else if (operation == "CHECK_MANGO_CAPABILITIES") {
+                Thread({
+                    try {
+                        val report = MangoCapabilityCheck(context.applicationContext).run()
+                        main.post { finish(report, if (report.optBoolean("passed")) null else report.optString("error", "CHECK_FAILED")) }
+                    } catch (e: Exception) { main.post { finish(null, e.message ?: "CHECK_FAILED") } }
+                }, "MangoCapabilityCheck").start()
+            } else if (operation == "SET_MANGO_UI_MODE") {
                 val enabled = intent.getBooleanExtra("enabled", false)
                 context.getSharedPreferences("mango-ui", Context.MODE_PRIVATE).edit().putBoolean("enabled", enabled).commit()
                 sources.externalStateChanged(); finish(JSONObject().put("enabled", enabled), null)

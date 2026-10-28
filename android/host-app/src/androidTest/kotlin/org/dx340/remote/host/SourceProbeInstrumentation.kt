@@ -33,7 +33,13 @@ class SourceProbeInstrumentation : Instrumentation() {
         if (mode == "mango-transports") { MangoTransportProbe(this).run(); return }
         if (mode == "mango-observed-state") { MangoStateProbe(this).run(); return }
         if (mode == "ui-recreation") { UiRecreationProbe(this).run(); return }
-        if (mode == "mango-capability-boundary") { MangoCapabilityProbe(this).run(); return }
+        if (mode == "mango-capability-boundary") {
+            val report = MangoCapabilityCheck(targetContext).run()
+            android.os.Handler(android.os.Looper.getMainLooper()).post {
+                finish(if (report.optBoolean("passed")) android.app.Activity.RESULT_OK else android.app.Activity.RESULT_CANCELED, Bundle().apply { putString("report", report.toString()) })
+            }
+            return
+        }
         val result = JSONObject().put("kind", "physical-read-only-source-probe")
         var registry: SourceRegistry? = null
         try {

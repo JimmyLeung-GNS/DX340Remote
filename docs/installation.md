@@ -118,6 +118,8 @@ Restart the companion afterward. The runner records native browser roots/pages a
 
 On this DX340, finishing instrumentation also left the enabled optional browsing services listed as crashed/unbound. If assisted browsing reports missing access afterward, open Android Settings → Accessibility, select each DX340 browsing service, turn it off/confirm Stop, then turn it on/review Allow. Return to the companion and refresh. This manual recovery was verified; restarting the companion alone did not restore those bindings. A normal phone UI or source-only compile does not establish automatic process-death recovery.
 
+For the native/assisted capability-boundary component test, prefer the debug receiver's `CHECK_MANGO_CAPABILITIES` operation documented in test-results/2026-10-29-source-recovery.md. It uses actual native Mango with simulated readiness/verification in temporary isolated preferences and sends no playback command. The actual run kept the same process and both service bindings. It requires privileged DUMP access, is absent from release and does not test phone Bluetooth. The older instrumentation mode still restarts the target process.
+
 ## Optional Apple Music browsing
 
 The user accepted this screen-on/unlocked mode. Apple Music must be6.5.3/code1599; an update disables the unverified adapter. Its direct browser is denied in the tested interfaces. This mode navigates the installed app's visible Downloaded library; it does not extract downloads.

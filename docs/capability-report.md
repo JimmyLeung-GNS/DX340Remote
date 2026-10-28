@@ -10,7 +10,7 @@
 | Mango native browsing | VERIFIED sampled tree | Own companion identity; five root categories,17 albums,11 artists,3 genres sampled. No folder/playlist category exposed in sampled root |
 | Mango selected-item playback | VERIFIED one user-confirmed audible selection | Selected “777 …” through Mango; later confirmation snapshot had advanced. See test-results/2026-10-28-mango-selection.md; full T08 incomplete |
 | Mango explicit transports | VERIFIED desired-state adapter sample | Raw repeated play was non-idempotent. Adapter checks observed state and dispatches once; pause/pause/play/play passed on “Curtain Call”. artifacts/mango-observed-state-probe.json. No acoustic/radio claim |
-| Mango seek/volume | NOT TESTED / disabled | Action mask560 omits seek; output-volume mapping unknown |
+| Mango seek/volume | Seek disabled; volume PARTIAL local downward observation, phone controls disabled | Action mask560 omits seek. Physical wheel36→35 and public API35→34 matched Mango display and were separately user-reported quieter on AMP15. No upward/full-boundary/other-output/Apple/phone volume acceptance; test-results/2026-10-29-volume-observation.md |
 | Apple native MediaBrowser | FAILED tested connection | Ordinary client onConnectionFailed |
 | Apple Media3 browse | DENIED tested root | Connected, getLibraryRoot returned -4, no root. No identity spoofing |
 | Apple offline outside-queue selection | VERIFIED foreground research + user-confirmed audio | “Paradise Paradise”, absent from prior101 queue; Wi-Fi0/default network none. ADB semantic navigation, not service/BLE acceptance |
