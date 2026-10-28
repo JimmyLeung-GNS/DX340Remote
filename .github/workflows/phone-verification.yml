@@ -1,0 +1,54 @@
+name: Shared phone interface verification
+on:
+  push:
+    paths: ['phone/**', 'apple/BLEClient/**', 'apple/ProtocolModels/**', 'scripts/build-phone-ios.sh', 'scripts/check-apple-capture.swift', '.github/workflows/phone-verification.yml']
+  pull_request:
+    paths: ['phone/**', 'apple/BLEClient/**', 'apple/ProtocolModels/**', 'scripts/build-phone-ios.sh', 'scripts/check-apple-capture.swift', '.github/workflows/phone-verification.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: shared-phone-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  ios-simulator:
+    if: github.event.repository.private == false
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install pinned official Flutter SDK
+        shell: bash
+        run: |
+          git clone --depth 1 --branch 3.41.4 https://github.com/flutter/flutter.git "$RUNNER_TEMP/flutter"
+          test "$(git -C "$RUNNER_TEMP/flutter" rev-parse HEAD)" = ff37bef603469fb030f2b72995ab929ccfc227f0
+          echo "$RUNNER_TEMP/flutter/bin" >> "$GITHUB_PATH"
+      - name: Select simulator
+        id: simulator
+        run: |
+          mkdir -p artifacts
+          xcrun simctl list devices available --json > artifacts/flutter-simulators.json
+          python3 - <<'PY'
+          import json, os, re
+          devices = json.load(open('artifacts/flutter-simulators.json'))['devices']
+          candidates = [(tuple(map(int, re.findall(r'\d+', runtime))), device)
+                        for runtime, values in devices.items() if '.iOS-' in runtime
+                        for device in values if device.get('isAvailable') and device['name'].startswith('iPhone')]
+          _, selected = max(candidates, key=lambda item: (item[0], item[1]['name']))
+          print(selected)
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f: f.write('udid=' + selected['udid'] + '\n')
+          PY
+      - name: Build and launch actual shared iPhone interface
+        run: sh scripts/build-phone-ios.sh '${{ steps.simulator.outputs.udid }}'
+      - name: Preserve evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: shared-phone-ios-evidence
+          path: |
+            artifacts/*.txt
+            artifacts/*.json
+            artifacts/*.png
+          retention-days: 3

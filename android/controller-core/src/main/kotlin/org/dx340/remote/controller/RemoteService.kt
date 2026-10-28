@@ -14,7 +14,8 @@ class RemoteService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val manager = getSystemService(NotificationManager::class.java)
         manager.createNotificationChannel(NotificationChannel("remote", "DX340 connection", NotificationManager.IMPORTANCE_LOW))
-        val open = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java), PendingIntent.FLAG_IMMUTABLE)
+        val launch = packageManager.getLaunchIntentForPackage(packageName) ?: Intent()
+        val open = PendingIntent.getActivity(this, 0, launch, PendingIntent.FLAG_IMMUTABLE)
         startForeground(341, Notification.Builder(this, "remote").setSmallIcon(android.R.drawable.stat_sys_data_bluetooth)
             .setContentTitle("DX340 Remote").setContentText("Bluetooth connection enabled").setContentIntent(open).setOngoing(true).build(), android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE)
         return START_NOT_STICKY

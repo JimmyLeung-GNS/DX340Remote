@@ -4,6 +4,8 @@ Updated 28 October 2026 (Hong Kong). **Goal active; full system incomplete.**
 
 ## Current checkpoint
 
+**Shared phone UI migration in progress:** The user explicitly selected shared Android/iPhone interface/UI with stable connection. Branch `codex/shared-phone` now implements Flutter/Dart screens above the existing native Kotlin service/BLE and Swift CoreBluetooth/restoration code. The companion stays Kotlin. Flutter 3.41.4/Dart 3.11.1 is pinned; legacy native phones remain reference builds. Initial Flutter analysis/tests/builds are being executed; no Flutter runtime or physical BLE acceptance is claimed yet. The native checkpoint was merged/pushed to public main at ce6d8b3.
+
 Both native platforms now have build/launch evidence. The Kotlin companion and Android remote build and open on the physical DX340. The SwiftUI iPhone app builds and opens in an iPhone Air/iOS 26.5 simulator on GitHub's standard Mac runner (macOS 26.6.2, Xcode 26.6). Android-on-DX340 launch is not a separate-phone BLE test; simulator launch is not physical iPhone installation, signing or Bluetooth proof. Only DX340 is connected locally.
 
 Android build/lint and 29 JVM tests passed (11 protocol, 2 reply authorization, 3 cache, 4 Apple UI model, 9 source handoff). The final APK-only/lint rebuild after the Bluetooth-permission guard passed and was installed; actual source state remained readable. Three shared Swift protocol tests, unsigned iOS build and native launch/captures passed in CI run 40699505189. An independent reviewer scored three iOS fixes resolved: large-text overlap, blank disconnected metadata/Source section and disconnected Library/Queue recovery. This is a scoped rendering verdict, not whole-product or interaction acceptance. DESIGN.md and its sidecar are updated.
@@ -24,9 +26,9 @@ The next implementation should add optional Mango folder browsing while retainin
 
 DX340 Android 13/API 33, build `DX340-userdebug 13 TKQ1.221013.002 eng.iBasso.20260812.181952 release-keys`. Firmware marketing version 1.09.851 and iPhone iOS 27.2 remain user-reported; actual iPhone model/build, personal Mac/Xcode and separate Android phone inventory remain unknown. AMP15 phone output/audio confirmations are user reports; gain, audio quality and output-volume mapping are unmeasured.
 
-Windows PowerShell 7.6.5/JDK 21.0.9/SDK 36; pinned Gradle 8.14, AGP 8.11.1, Kotlin 2.1.10. Debug signing key remains outside Git. The Java selector workaround is process-local. Flutter 3.41.4/Dart 3.11.1 is installed, but no Flutter migration or global configuration change occurred. Native Kotlin/Swift remains canonical. Development-only public GitHub Mac CI uses no signing credentials or paid runner and is absent from the everyday BLE path.
+Windows PowerShell 7.6.5/JDK 21.0.9/SDK 36; pinned Gradle 8.14, AGP 8.11.1, Kotlin 2.1.10. Debug signing key remains outside Git. The Java selector workaround is process-local. Flutter 3.41.4/Dart 3.11.1 migration is now user-selected and underway without global configuration changes. Development-only public GitHub Mac CI uses no signing credentials or paid runner and is absent from the everyday BLE path.
 
-The user asked for a Kotlin/Flutter comparison; docs/framework-comparison.md records current primary documentation and the recommendation. Flutter fits a single shared phone UI; Kotlin Multiplatform is a separate code-sharing option; current native Kotlin/Swift fits the selected system appearance and native BLE work. No migration decision has been made. DX340 host/source work is independent of the phone UI framework.
+The user chose shared Flutter phone UI after the Kotlin/Flutter comparison; docs/framework-comparison.md records the decision and primary references. Native Bluetooth/lifecycle components remain underneath it; physical stability still requires the phone test matrix. DX340 host/source work is independent of the phone UI framework.
 
 | Stage | State |
 |---|---|

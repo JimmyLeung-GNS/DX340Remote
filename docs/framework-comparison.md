@@ -1,6 +1,6 @@
 # Phone framework choice
 
-28 October 2026. The user asked whether Kotlin or Flutter is more suitable for Android and iPhone. This is a comparison, not authorization to migrate. Existing native Kotlin/Swift projects remain canonical until a different choice is made.
+28 October 2026. Following the comparison, the user explicitly selected a shared phone interface/UI with stable use and connection. Flutter is now the chosen phone presentation stack. The DX340 host stays Kotlin; Android Bluetooth/service and Swift CoreBluetooth/restoration stay native. The existing native phone apps remain reference builds during migration.
 
 | Option | Shared code | Fit and tradeoff for DX340 Remote |
 |---|---|---|
@@ -9,7 +9,7 @@
 | Kotlin + Compose Multiplatform | Shared Kotlin logic and UI where appropriate | Android/iOS shared UI is a supported option; platform-specific Bluetooth/lifecycle integration and platform appearance work remain |
 | Flutter phone clients | Shared Dart UI and application logic | A direct fit if one shared phone interface is the priority. Bluetooth may use a suitable plugin or native Kotlin/Swift platform channels; capabilities/background/restoration must be verified, not assumed |
 
-Recommendation for this project: retain the Kotlin DX340 host in every option. Continue current native phone clients for now, given the selected native system appearance, direct Bluetooth/lifecycle work, future Watch plan and verified builds. Kotlin Multiplatform is an incremental future option for shared logic. Choose Flutter if a single shared phone UI becomes the overriding maintenance preference; migrate phone clients only and retain the existing host/source adapters and native BLE code as reusable components/reference.
+Selected implementation: `phone/` contains shared Dart screens and presentation state. Android reuses `android/controller-core` (extracted from the native remote); iOS compiles the same `apple/BLEClient/RemoteConnection.swift` and protocol framing as the native reference app. Own versioned platform channels connect presentation to those native components. Material Android and Cupertino iPhone chrome follow the user's system-appearance preference. No third-party Bluetooth plugin or network fallback is introduced.
 
 This is an engineering recommendation, not a measured claim that one framework has better physical Bluetooth reliability. Neither choice removes iOS signing, real phone Bluetooth tests or Mango/Apple Music integration work on DX340. The current iOS simulator build passes, so a framework rewrite is not required simply to open the app on iOS. A future Watch target remains separate work under the plan.
 

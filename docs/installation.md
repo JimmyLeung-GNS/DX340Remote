@@ -1,6 +1,18 @@
 # Build, installation and first use
 
-This is a diagnostic beta, not an accepted full remote system. Mango stays the local playback engine. No application has INTERNET or Wi-Fi permissions. Build/download/signing setup may use the development computer's internet; everyday app transport is BLE only.
+This is a diagnostic beta, not an accepted full remote system. Mango stays the local playback engine. Product Android manifests request no INTERNET or Wi-Fi permissions. Flutter debug/profile tooling adds INTERNET for development; use the release-mode development package for everyday offline trials. Build/download/signing setup may use the development computer's internet; everyday app transport is BLE only.
+
+## Shared Android/iPhone interface
+
+The user selected Flutter shared phone UI with native Kotlin/Swift Bluetooth/lifecycle code. Keep the companion installed on DX340. Install the new controller on a separate phone for actual radio acceptance; installing it on DX340 proves launch only.
+
+Windows: install pinned Flutter3.41.4, JDK21 and SDK36; run `./scripts/build-phone.ps1`. It runs analysis/tests and builds `artifacts/dx340-phone-0.2.0-development.apk` in release mode, signed with the existing development key outside Git. Use `adb -s <phone-serial> install -r artifacts/dx340-phone-0.2.0-development.apk`. Application ID is retained as org.dx340.remote.controller; build2 upgrades reference build1 without uninstalling. Keys, raw logs and packages remain ignored.
+
+Mac: install the pinned Flutter3.41.4 SDK and Xcode, run `flutter pub get --enforce-lockfile` in phone/, then open phone/ios/Runner.xcworkspace. Choose your signing team and connected iPhone; build/run Runner. Bundle ID remains org.dx340.remote.ios. Record exact Mac/Xcode/iPhone model/OS/build. The reported iOS27.2 requires a compatible Xcode; hosted simulator evidence does not establish that compatibility or device signing. To verify a simulator, run `sh scripts/build-phone-ios.sh <UDID>` from the root.
+
+Use Setup → allow Bluetooth/Nearby Devices → Find DX340. Open pairing on the companion; connect and accept both system prompts; approve the pending controller on DX340; retry authorization. Test Player/Library/Queue with Wi-Fi and controller cellular data off. Switching source does not start playback. Optional assisted source browsing needs DX340 awake/unlocked. Continue the separate-phone sleep/range/revocation matrix in compatibility-matrix.md; no framework promises physical stability.
+
+The older native client instructions below remain as reference build/recovery documentation. Do not overwrite build2 with build1 as a routine update; Android version downgrade and signing mismatch require deliberate handling.
 
 ## Windows build
 

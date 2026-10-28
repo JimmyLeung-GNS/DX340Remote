@@ -29,6 +29,8 @@ class RemoteModel(context: Context) {
     var artworkBytes: ByteArray? = null; private set
     private val main = Handler(Looper.getMainLooper())
     private val pending get() = session.pending
+    private val mutations = setOf("SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "SELECT_SOURCE", "PLAY_ITEM", "PLAY_QUEUE_ITEM")
+    val mutationPending get() = pending.values.any { it in mutations }
     private data class BrowseLocation(val source: String, val epoch: String, val parent: String?)
     private val browseLocations = mutableMapOf<String, BrowseLocation>()
     private var activeBrowseId: String? = null
@@ -50,11 +52,13 @@ class RemoteModel(context: Context) {
     }
     fun scan() { devices.clear(); runCatching { ble.scan() }.onFailure { status = it.message ?: "Bluetooth unavailable" }; update() }
     fun connect(device: BluetoothDevice) = ble.connect(device)
-    fun disconnect() = ble.disconnect()
+    fun disconnect() { session.lost(); browseLocations.clear(); queueLocations.clear(); activeBrowseId = null; activeQueueId = null; ble.disconnect(); status = "Disconnected. Cached lists may be stale; reconnect to control."; update() }
+    fun refreshOnForeground() { if (authorized) send("GET_STATE") else update() }
     fun close() { ble.stopScan(); ble.disconnect(); main.removeCallbacksAndMessages(null) }
     fun authorize() = send("AUTHORIZE", bootstrap = true)
     fun send(type: String, args: JSONObject = JSONObject(), bootstrap: Boolean = false) {
         if (!bootstrap && !authorized) { status = "Reconnect and authorize before controlling playback."; update(); return }
+        if (type in mutations && mutationPending) { status = "Wait for the current playback action to finish."; update(); return }
         if (pending.size >= 8) { status = "Wait for pending commands."; update(); return }
         val id = UUID.randomUUID().toString()
         val request = JSONObject().put("v", 1).put("id", id).put("type", type).put("hostEpoch", epoch)
@@ -65,6 +69,7 @@ class RemoteModel(context: Context) {
             browseLocations[id] = BrowseLocation(state.optString("source"), state.optString("sourceEpoch"), if (args.isNull("parent")) null else args.optString("parent"))
             activeBrowseId = id; library = JSONObject().put("loading", true); status = "Loading library…"; update()
         }
+        update()
         try { ble.send(request.toString().toByteArray()) }
         catch (e: Exception) { pending.remove(id); status = e.message ?: "Send failed"; update(); return }
         main.postDelayed({ if (pending.remove(id) != null) { browseLocations.remove(id); queueLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); status = "Reply timed out; outcome unknown. Refresh state before retrying."; update() } }, 12000)

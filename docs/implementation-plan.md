@@ -34,7 +34,7 @@ The custom apps must demonstrate their own connection early. They will not depen
 
 ## 3 Recommended architecture
 
-Use a native Android host on DX340, a native Android controller and a native iPhone controller. Share a versioned protocol, examples, test fixtures and capability definitions. Share Android implementation modules where practical. Keep music-app adapters on the DX340 so both controllers receive the same features.
+User-selected revision, 28 October 2026: use a native Kotlin host on DX340 and a shared Flutter/Dart phone interface for Android and iPhone. Retain native Kotlin BLE/foreground-service and Swift CoreBluetooth/restoration underneath the shared UI. Keep existing native phone projects as parity references until migration is verified. Share a versioned protocol, examples, test fixtures and capability definitions. Keep music-app adapters on the DX340 so both controllers receive the same features.
 
 ```mermaid
 flowchart LR
@@ -53,15 +53,15 @@ The DX340 normally acts as a BLE peripheral and GATT server. The phones act as B
 | Component | Technology and responsibility |
 | --- | --- |
 | DX340 companion | Kotlin, coroutines, Android Bluetooth APIs, media-session adapters and a foreground service |
-| Android remote | Kotlin, Jetpack Compose, native BLE client, local metadata cache |
-| iPhone remote | Swift, SwiftUI, Core Bluetooth, local metadata cache |
+| Android remote | Shared Flutter UI; Kotlin native BLE/service and local metadata cache |
+| iPhone remote | Shared Flutter UI; Swift CoreBluetooth/restoration and local metadata cache |
 | Watch extension | SwiftUI and Core Bluetooth, after phone milestones |
 | Protocol | Shared specification, JSON schemas and Kotlin/Swift conformance fixtures |
 | Persistent state | Android Room or simple structured storage; iOS local persistence; platform secure storage for credentials |
 
 Produce separate Android host and controller build variants with shared modules. The DX340 variant requests host permissions; the phone variant does not need notification access to other apps. Product names and application identifiers can be chosen before signing the first beta.
 
-Native development gives direct access to Bluetooth and lifecycle APIs and aligns with a future Watch app. A cross-platform UI framework can be reconsidered later; it is not needed to prove the system.
+The shared UI uses versioned platform channels to the existing native Bluetooth/lifecycle components. This reduces duplicated phone presentation work; it does not establish radio stability or remove physical acceptance gates. The future Watch app remains native.
 
 ## 4 Feasibility gates before committing to the full feature set
 

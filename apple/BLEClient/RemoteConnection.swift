@@ -28,6 +28,8 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     private var reconnectAttempts = 0
     private var writeTimeout: Task<Void, Never>?
     private var pending: [String: String] = [:]
+    private let mutations: Set<String> = ["SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "SELECT_SOURCE", "PLAY_ITEM", "PLAY_QUEUE_ITEM"]
+    var mutationPending: Bool { pending.values.contains { mutations.contains($0) } }
     private struct BrowseLocation { let source: String; let epoch: String; let parent: String? }
     private var browseLocations: [String: BrowseLocation] = [:]
     private var activeBrowseId: String?
@@ -118,6 +120,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     func send(_ type: String, args: [String: Any] = [:], bootstrap: Bool = false) {
         guard let p = peripheral, let _ = rx, p.state == .connected, bootstrap || authorized else { status = "Connect and authorize before controlling playback."; return }
         guard pending.count < 8 else { status = "Wait for pending replies."; return }
+        guard !mutations.contains(type) || !mutationPending else { status = "Wait for the current playback action to finish."; return }
         let id = UUID().uuidString
         let request: [String: Any] = ["v": 1, "id": id, "type": type, "hostEpoch": hostEpoch, "source": state["source"] ?? "", "sourceEpoch": state["sourceEpoch"] ?? "", "args": args]
         do {

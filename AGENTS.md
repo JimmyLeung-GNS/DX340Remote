@@ -8,7 +8,7 @@ Keep Wi-Fi, hotspots and cloud services out of the everyday control path. Music 
 
 ## Engineering
 
-Use Kotlin for Android, Swift/SwiftUI for Apple clients and a shared versioned BLE protocol. Follow applicable skills and current primary documentation. Prefer native lifecycle and Bluetooth APIs. Maintain the source adapters separately from transport and UI. Implement only supported actions; report capability differences explicitly.
+The user selected a shared phone interface on 28 October 2026. Use Flutter/Dart for the shared Android/iPhone UI, retaining Kotlin Android Bluetooth/foreground-service code and Swift CoreBluetooth/restoration code underneath it. Keep the DX340 companion and source adapters in Kotlin; the later Watch client remains native SwiftUI. Retain the native phone reference apps until Flutter parity is verified. Share a versioned BLE protocol. Follow applicable skills and current primary documentation. Prefer native lifecycle and Bluetooth APIs. Maintain the source adapters separately from transport and UI. Implement only supported actions; report capability differences explicitly.
 
 Use meaningful tests for framing, duplicate commands, routing, stale IDs, reconnection and capability handling. Run actual build commands where supported. A successful mock, BLE write or compile does not prove source playback, audio quality or physical Bluetooth support.
 
