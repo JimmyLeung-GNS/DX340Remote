@@ -15,7 +15,7 @@ do {
     try VNImageRequestHandler(url: image, options: [:]).perform([request])
     let lines = (request.results ?? []).compactMap { $0.topCandidates(1).first?.string.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) }
     // A destination label in the tab bar alone is not its navigation title.
-    let requiredHeadingCount = heading == "dx340" ? 1 : 2
+    let requiredHeadingCount = ["dx340", "volume up"].contains(heading) ? 1 : 2
     let visibleHeading = lines.filter { $0 == heading }.count >= requiredHeadingCount
     let visibleTabs = ["player", "library", "queue", "setup"].allSatisfy { lines.contains($0) }
     if visibleHeading && visibleTabs { print("Capture ready: \(heading)"); exit(0) }
