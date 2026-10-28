@@ -2,7 +2,13 @@
 
 Updated 29 October 2026 (Hong Kong). **Original signing key restored and both apps upgraded in place. Goal active; full system incomplete and physical phone/Mac acceptance remains pending.**
 
-## Current continuation: full queue pagination
+## Current continuation: Mango Playlist-screen recovery
+
+Read-only DX340 research verified that Mango's current Playlist screen has no saved rows; no playlist was created/edited. It exposed a real folder-navigation gap: four requests from that screen timed out while native/assisted root reads succeeded. A narrowly recognized exact Playlist/header/list/navbar layout now permits the existing menu action to return to local folders, without exposing playlist-editing or network controls.
+
+VERIFIED: native build/lint74 JVM tests and matching-key in-place companion upgrade; installed bytes checked and four preferences preserved. Three actual Playlist-to-Internal-Storage recoveries returned9 rows; three additional folder-start rounds and all four sampled Apple roots succeeded. Playlist recovery4.57–5.12seconds exceeds the proposed3second uncached target; performance acceptance remains open. Both sources paused, volume unchanged, Wi-Fi0/default network:none. Shared phone unchanged from preceding queue build/28 Flutter tests. No phone BLE, new playback or current iOS build proof. Exact hashes/failures/timing/scope: test-results/2026-10-29-mango-playlist-recovery.md. Goal active; full system incomplete.
+
+## Preceding continuation: full queue pagination
 
 The preceding complete Apple queue baseline exposed101 entries while the product returned only50. GET_QUEUE now supplies revision-checked offset/total/nextOffset windows, up to50 complete entries and48KiB encoded data. Shared Flutter UI and retained native reference clients can reach the final window and return to the start. Loading guards prevent duplicate reads/old-row selection; callbacks retain the displayed revision so an old row cannot use a new queue revision. Protocol/schema/bridge docs and a repeatable read-only own-adapter script are updated.
 

@@ -170,8 +170,9 @@ class MangoAccessibilityService : AccessibilityService() {
                 val menu = MangoUiModel.menuVisible(current.nodes)
                 // Playback time text must not prevent a folder from settling.
                 val signature = parsed?.fingerprint ?: current.nodes.filter {
-                    it.id.endsWith("/internalStorgeLayout") || it.id.endsWith("/sdcardLayout") || it.id.endsWith("/main_list_iv") || it.id.endsWith("/nav_bar_back_iv")
-                }.joinToString(";") { "${it.path}:${it.id}" }
+                    it.id.endsWith("/internalStorgeLayout") || it.id.endsWith("/sdcardLayout") || it.id.endsWith("/main_list_iv") || it.id.endsWith("/nav_bar_back_iv") ||
+                        it.id.endsWith("/entry_title_tv") || it.id.endsWith("/playlist_view")
+                }.joinToString(";") { "${it.path}:${it.id}:${it.text}" }
                 val now = android.os.SystemClock.elapsedRealtime()
                 navigationTrace = JSONObject().put("storage", storage).put("menu", menu).put("storageClicked", storageClicked)
                     .put("title", parsed?.title).put("root", parsed?.root).put("resetFingerprint", resetFingerprint)
@@ -200,6 +201,9 @@ class MangoAccessibilityService : AccessibilityService() {
                             val click = MangoUiModel.clickable(current.nodes, node) ?: error("UI_ACTION_FAILED")
                             perform(current, Action(click.path, "menu"), stillAuthorized); menuClicked = true
                         }
+                    } else if (!storageClicked && !menuClicked && MangoUiModel.playlistMenuAction(current.nodes) != null) {
+                        val node = MangoUiModel.playlistMenuAction(current.nodes)!!
+                        perform(current, Action(node.path, "menu"), stillAuthorized); menuClicked = true
                     } else if (!storageClicked && MangoUiModel.node(current.nodes, "folder_detail_content") != null) {
                         if (!menuClicked) { val node = MangoUiModel.node(current.nodes, "nav_bar_back_iv") ?: error("UI_UNEXPECTED_SCREEN"); val click = MangoUiModel.clickable(current.nodes, node) ?: error("UI_ACTION_FAILED"); perform(current, Action(click.path, "menu"), stillAuthorized); menuClicked = true }
                     } else if (!storageClicked && !libraryClicked) {

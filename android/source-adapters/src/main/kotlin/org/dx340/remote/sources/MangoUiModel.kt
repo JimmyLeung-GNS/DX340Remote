@@ -11,6 +11,20 @@ object MangoUiModel {
     fun node(nodes: List<UiNode>, id: String) = nodes.firstOrNull { it.id == PREFIX + id }
     fun clickable(nodes: List<UiNode>, value: UiNode, within: String? = null) = AppleUiModel.clickable(nodes, value, within)
     fun menuVisible(nodes: List<UiNode>) = node(nodes, "internalStorgeLayout") != null && node(nodes, "sdcardLayout") != null
+    /** Recognize the observed Playlist page only to leave it for local-folder navigation. */
+    fun playlistMenuAction(nodes: List<UiNode>): UiNode? {
+        if (menuVisible(nodes)) return null
+        val headers = nodes.filter { it.id == PREFIX + "entry_title_tv" }
+        if (headers.none { it.text == "Playlist" }) return null
+        require(headers.size == 1 && headers.single().enabled) { "UI_UNEXPECTED_SCREEN" }
+        val header = headers.single()
+        val list = nodes.singleOrNull { it.id == PREFIX + "playlist_view" } ?: error("UI_UNEXPECTED_SCREEN")
+        val bar = nodes.singleOrNull { it.id == PREFIX + "nav_bar" && it.path == header.parent } ?: error("UI_UNEXPECTED_SCREEN")
+        require(list.parent == bar.parent) { "UI_UNEXPECTED_SCREEN" }
+        val arrow = nodes.singleOrNull { it.id == PREFIX + "nav_bar_back_iv" && it.parent == bar.path } ?: error("UI_UNEXPECTED_SCREEN")
+        require(arrow.clickable && arrow.enabled) { "UI_ACTION_FAILED" }
+        return arrow
+    }
     fun storageAction(nodes: List<UiNode>, storage: String): UiNode {
         require(storage in storages && menuVisible(nodes)) { "UI_STORAGE_CONTEXT_REQUIRED" }
         val option = node(nodes, if (storage == "internal") "internalStorgeLayout" else "sdcardLayout")!!

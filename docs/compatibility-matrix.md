@@ -2,7 +2,7 @@
 
 29 October 2026. VERIFIED means only the stated observation. No complete T01–T18 acceptance run has passed.
 
-Latest local software checkpoint: Android builds/lint and72 aggregate JVM tests; Flutter analysis/28 tests/release APK/release lint pass. Original matching key restored; companion and shared phone upgraded in place on DX340, preserving companion preferences. Current Swift changes have not compiled here; the connected Apple tool fails with xcrun ENOENT. Earlier launch/CI/source results below retain their historical scope. Full-scope audit: completion-audit.md; current queue/upgrade evidence: test-results/2026-10-29-queue-pagination.md; preceding audio/key evidence: test-results/2026-10-29-original-key-upgrade.md.
+Latest local software checkpoint: Android builds/lint and74 aggregate JVM tests; Flutter analysis/28 tests/release APK/release lint pass. Original matching key restored; companion and shared phone upgraded in place on DX340, preserving companion preferences. Current Swift changes have not compiled here; the connected Apple tool fails with xcrun ENOENT. Earlier launch/CI/source results below retain their historical scope. Full-scope audit: completion-audit.md; current Mango recovery/upgrade evidence: test-results/2026-10-29-mango-playlist-recovery.md; queue evidence: test-results/2026-10-29-queue-pagination.md; preceding audio/key evidence: test-results/2026-10-29-original-key-upgrade.md.
 
 | Platform / combination | Build | Open | Physical BLE controller |
 |---|---|---|---|
@@ -27,7 +27,7 @@ Latest local software checkpoint: Android builds/lint and72 aggregate JVM tests;
 | T08 Mango20 FLAC/WAV/folders/playlists | PARTIAL native audible selection plus accepted optional own-service nested-folder WAV selection user-confirmed audible. Native root lacks folder/playlist categories; Preceding parser build also selected03. 風のたより.wav and03. ゴースト.flac with user-confirmed audio; full20/format/playlist/phone matrix open |
 | T09 Source switching | PARTIAL:12 local desired-state requests across awake/asleep tests and native/UI selected-item handoff observed correct target playing/other paused. No phone BLE or acoustic-overlap acceptance |
 | T10 Actual output volume | PARTIAL: wheel36→35 and app API35→34 matched API/Mango display and user-reported quieter AMP15 output. Upward/boundaries/Apple/other-output/phone/reconnect NOT TESTED; remote volume remains disabled |
-| T11 Rescan/SD/stale IDs | Old Mango UI file tokens rejected locally; SD root and explicit empty Music folder read. Physical removal/rescan/duplicate cases NOT TESTED |
+| T11 Rescan/SD/stale IDs | Old Mango UI file tokens rejected locally; SD root and explicit empty Music folder read. Current empty Playlist screen observed; folder recovery from it passed3 times after a4/4 timeout baseline. Physical removal/rescan/duplicate cases NOT TESTED |
 | T12 Interruptions | Request/callback/session-access recovery and indication-deadline helpers pass software tests, alongside earlier activity/capability checks. Actual DX340 notification revoke/restore/epoch invalidation/fresh-root recovery passed without restarting host. In-flight UI/session replacement/phone/radio/background matrix NOT TESTED |
 | T13 Matched battery runs | NOT TESTED |
 | T14 Walking | NOT TESTED |

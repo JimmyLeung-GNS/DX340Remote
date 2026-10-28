@@ -5,6 +5,26 @@ import org.junit.Test
 
 class MangoUiModelTest {
     private val p = "com.ibasso.music:id/"
+    private fun playlists() = listOf(
+        UiNode("0.0", "0", p + "nav_bar"),
+        UiNode("0.0.0", "0.0", p + "nav_bar_back_iv", clickable = true),
+        UiNode("0.0.1", "0.0", p + "entry_title_tv", "Playlist"),
+        UiNode("0.1", "0", p + "add_new_playlist_view", "New Playlist", clickable = true),
+        UiNode("0.2", "0", p + "playlist_view"))
+    @Test fun playlistRecoveryOffersOnlyTheObservedMenuArrow() {
+        val nodes = playlists()
+        assertEquals("0.0.0", MangoUiModel.playlistMenuAction(nodes)!!.path)
+        assertNull(MangoUiModel.playlistMenuAction(nodes.map { if (it.text == "Playlist") it.copy(text = "Settings") else it }))
+        assertNull(MangoUiModel.playlistMenuAction(folder()))
+        assertThrows(IllegalArgumentException::class.java) { MangoUiModel.parse(nodes, "internal") }
+        assertThrows(IllegalArgumentException::class.java) { MangoUiModel.playlistMenuAction(nodes.map { if (it.id == p + "nav_bar_back_iv") it.copy(enabled = false) else it }) }
+    }
+    @Test fun playlistRecoveryRejectsCachedOrUnrelatedPageControls() {
+        val nodes = playlists()
+        assertThrows(IllegalArgumentException::class.java) { MangoUiModel.playlistMenuAction(nodes + UiNode("0.3", "0", p + "entry_title_tv", "Internal Storage")) }
+        assertThrows(IllegalStateException::class.java) { MangoUiModel.playlistMenuAction(nodes + UiNode("0.3", "0", p + "playlist_view")) }
+        assertThrows(IllegalArgumentException::class.java) { MangoUiModel.playlistMenuAction(nodes.map { if (it.id == p + "playlist_view") it.copy(parent = "other-page") else it }) }
+    }
     private fun row(page: Int, index: Int, title: String, file: Boolean = true) = listOf(
         UiNode("0.2.$page.0.$index", "0.2.$page.0", clickable = true),
         UiNode("0.2.$page.0.$index.0", "0.2.$page.0.$index", p + if (file) "file_info_index_tv" else "file_info_icon_iv", if (file) "1" else ""),
