@@ -11,6 +11,13 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     var devices: [CBPeripheral] = []
     var authorized = false
     var state: [String: Any] = [:]
+    var stateSampleId = ""
+    private var stateReceivedAt: ContinuousClock.Instant?
+    var stateAgeMs: Int64? {
+        guard let received = stateReceivedAt else { return nil }
+        let age = received.duration(to: ContinuousClock.now).components
+        return max(0, age.seconds * 1_000 + age.attoseconds / 1_000_000_000_000_000)
+    }
     var sources: [[String: Any]] = []
     var library: [String: Any] = [:]
     var queue: [[String: Any]] = []
@@ -226,6 +233,8 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
             library = [:]; queue = []; queueRevision = ""; artwork = nil; activeBrowseId = nil; activeQueueId = nil; browseLocations = [:]; queueLocations = [:]
         }
         state = new
+        stateReceivedAt = ContinuousClock.now
+        stateSampleId = UUID().uuidString
     }
     private func errorMessage(_ code: String) -> String {
         switch code {

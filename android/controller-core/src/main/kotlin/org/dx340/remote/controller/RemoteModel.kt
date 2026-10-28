@@ -21,6 +21,9 @@ class RemoteModel(context: Context) {
     private val session = ControllerSession()
     val authorized get() = session.authorized
     var state = JSONObject(); private set
+    var stateSampleId = ""; private set
+    private var stateReceivedAt: Long? = null
+    val stateAgeMs get() = stateReceivedAt?.let { (android.os.SystemClock.elapsedRealtime() - it).coerceAtLeast(0) }
     var sources = JSONArray(); private set
     var library = JSONObject(); private set
     var queue = JSONArray(); private set
@@ -128,6 +131,8 @@ class RemoteModel(context: Context) {
             library = JSONObject(); queue = JSONArray(); queueRevision = ""; artworkBytes = null; activeBrowseId = null; activeQueueId = null; browseLocations.clear(); queueLocations.clear()
         }
         state = new
+        stateReceivedAt = android.os.SystemClock.elapsedRealtime()
+        stateSampleId = UUID.randomUUID().toString()
     }
     private fun errorMessage(code: String) = when (code) {
         "UI_PERMISSION_REQUIRED" -> "On DX340, enable the selected player's optional browsing service in Accessibility settings."

@@ -13,6 +13,7 @@ $apk = "$repo/artifacts/dx340-phone-0.2.0-development.apk"
 if (!(Test-Path -LiteralPath $apk)) { throw 'Run scripts/build-phone.ps1 first.' }
 New-Item -ItemType Directory -Force "$repo/artifacts" | Out-Null
 $package = 'org.dx340.remote.controller'
+& "$PSScriptRoot/verify-android-signing.ps1" -Serial $Serial -Apk $apk -Package $package -Adb $Adb
 Invoke-Adb @('install', '-r', $apk)
 $launch = Invoke-Adb @('shell', 'am', 'start', '-W', '-n', "$package/org.dx340.remote.dx340_phone.MainActivity")
 $launch | Set-Content "$repo/artifacts/flutter-android-launch.txt"

@@ -37,27 +37,30 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     private val items = mutableMapOf<String, LinkedHashMap<String, MediaBrowser.MediaItem>>()
     private data class ItemProof(val parent: String, val page: Int, val fingerprint: String)
     private val proofs = mutableMapOf<String, LinkedHashMap<String, ItemProof>>()
+    private val browseRequests = mutableSetOf<SourceRequest<JSONObject>>()
     private val revisionGuard = RevisionGuard()
     var selected = PACKAGES.first(); private set
-    var accessError: String? = null; private set
+    val accessError get() = sessionAccess.error
     private var closed = false
     private val sessionsChanged = MediaSessionManager.OnActiveSessionsChangedListener { refresh() }
+    private val sessionAccess = SourceSessionAccess(
+        { manager.addOnActiveSessionsChangedListener(sessionsChanged, listener, main) },
+        { manager.removeOnActiveSessionsChangedListener(sessionsChanged) }, ::loseSessionAccess)
 
     fun start() {
-        try { manager.addOnActiveSessionsChangedListener(sessionsChanged, listener, main) }
-        catch (_: SecurityException) { accessError = "Enable notification access on DX340 for source sessions." }
         refresh(); probeBrowsers()
     }
     fun close() {
         closed = true
         callbackGuard.close()
+        browseRequests.toList().forEach { it.cancel("SOURCE_NOT_READY") }
         main.removeCallbacksAndMessages(null)
-        manager.removeOnActiveSessionsChangedListener(sessionsChanged)
+        sessionAccess.close()
         controllers.forEach { (p, c) -> callbacks[p]?.let { c.unregisterCallback(it) } }
         browsers.values.forEach { it.disconnect() }; browsers.clear()
     }
     private fun attach(pkg: String, controller: MediaController) {
-        if (closed) return
+        if (closed || accessError != null) return
         if (tokens[pkg] == controller.sessionToken) return
         val lease = callbackGuard.replace(pkg)
         callbacks[pkg]?.let { controllers[pkg]?.unregisterCallback(it) }
@@ -79,10 +82,23 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     fun refresh() {
         if (closed) return
         try {
-            val live = manager.getActiveSessions(listener).filter { it.packageName in PACKAGES }
-            live.forEach { attach(it.packageName, it) }; accessError = null
-        } catch (_: SecurityException) { accessError = "NOTIFICATION_ACCESS_REQUIRED" }
+            // Startup can precede the user's grant. Retry registration on recovery.
+            sessionAccess.refresh { manager.getActiveSessions(listener).filter { it.packageName in PACKAGES } }?.let { live ->
+                live.forEach { attach(it.packageName, it) }
+                browsers.forEach { (pkg, browser) ->
+                    if (pkg !in controllers && browser.isConnected) attach(pkg, MediaController(context, browser.sessionToken))
+                }
+            }
+        } catch (_: SecurityException) { sessionAccess.permissionDenied() }
         changed()
+    }
+    private fun loseSessionAccess() {
+        // Stop pending native callbacks even if permission is restored before they arrive.
+        browseRequests.toList().forEach { it.cancel("PERMISSION_REVOKED") }
+        callbackGuard.invalidateAll()
+        controllers.forEach { (pkg, controller) -> callbacks[pkg]?.let { runCatching { controller.unregisterCallback(it) } } }
+        controllers.clear(); tokens.clear(); callbacks.clear(); items.clear(); proofs.clear(); rootSamples.clear()
+        PACKAGES.forEach { epochs[it] = UUID.randomUUID().toString() }
     }
     fun probeBrowsers() {
         if (closed) return
@@ -125,6 +141,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     private fun usingUi(pkg: String) = pkg == PACKAGES[1] && uiLibrary?.enabled == true && browsers[pkg]?.isConnected != true
     private fun supports(pkg: String, flag: Long) = ((controllers[pkg]?.playbackState?.actions ?: 0L) and flag) != 0L
     fun capabilities(pkg: String): JSONObject = JSONObject().apply {
+        val sessionReady = !closed && accessError == null
         val verification = context.getSharedPreferences("source-verification", Context.MODE_PRIVATE)
         put("canPlay", supports(pkg, PlaybackState.ACTION_PLAY) || (pkg == PACKAGES[0] && verification.getString("mangoObservedPlayVersion", null) == version(pkg)))
         put("canPause", supports(pkg, PlaybackState.ACTION_PAUSE) || (pkg == PACKAGES[0] && verification.getString("mangoPauseVersion", null) == version(pkg)))
@@ -140,6 +157,12 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         put("canSearch", false); put("canAdjustVolume", false); put("canResume", false); put("canColdLaunch", false)
         put("canShuffle", false); put("canRepeat", false)
         put("reason", if (usingUi(pkg)) uiLibrary?.explanation else "Actions reflect advertised/observed source APIs; physical acceptance remains separate. Volume is disabled until output is measured.")
+        if (!sessionReady) {
+            // A connected browser or saved Mango verification must not keep controls enabled.
+            keys().asSequence().filter { it.startsWith("can") }.toList().forEach { put(it, false) }
+            remove("uiBrowseReason")
+            put("reason", "On DX340, enable playback session access in Notification access settings, then refresh.")
+        }
     }
     fun sources(): JSONArray = JSONArray().apply { PACKAGES.forEach { pkg ->
         val version = runCatching { context.packageManager.getPackageInfo(pkg, 0).versionName }.getOrNull()
@@ -149,13 +172,17 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     } }
     fun state(): JSONObject {
         val c = controllers[selected]; val m = c?.metadata; val p = c?.playbackState
+        val duration = (m?.getLong("android.media.metadata.DURATION") ?: 0).coerceAtLeast(0)
+        val progress = PlaybackPosition.snapshot(p?.position ?: -1, duration,
+            p?.playbackSpeed?.toDouble() ?: 0.0, p?.state == PlaybackState.STATE_PLAYING,
+            p?.lastPositionUpdateTime ?: 0, android.os.SystemClock.elapsedRealtime())
         val artKey = artwork.remember(selected, m?.getBitmap("android.media.metadata.ART") ?: m?.getBitmap("android.media.metadata.ALBUM_ART") ?: m?.description?.iconBitmap)
         return JSONObject().put("source", selected).put("sourceEpoch", epoch(selected)).put("artworkKey", artKey ?: JSONObject.NULL)
             .put("title", m?.getString("android.media.metadata.TITLE") ?: "No active track")
             .put("artist", m?.getString("android.media.metadata.ARTIST") ?: "")
             .put("album", m?.getString("android.media.metadata.ALBUM") ?: "")
-            .put("duration", m?.getLong("android.media.metadata.DURATION") ?: 0)
-            .put("position", p?.position ?: 0).put("playing", p?.state == PlaybackState.STATE_PLAYING)
+            .put("duration", duration).put("position", progress.position).put("playbackSpeed", progress.speed)
+            .put("playing", p?.state == PlaybackState.STATE_PLAYING)
             .put("playbackState", p?.state ?: 0).put("capabilities", capabilities(selected))
             .put("accessError", accessError ?: JSONObject.NULL)
     }
@@ -206,7 +233,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
             val id = args.getString("item")
             val proof = proofs[pkg]?.get(id) ?: error("EXPIRED_ITEM")
             val expectedEpoch = epoch(pkg)
-            browse(proof.parent, proof.page) { data, browseError ->
+            browseAuthorized(proof.parent, proof.page, null, stillAuthorized) { data, browseError ->
                 try {
                     require(browseError == null) { browseError ?: "SOURCE_TIMEOUT" }
                     require(selected == pkg && epoch(pkg) == expectedEpoch) { "STALE_SOURCE" }
@@ -217,7 +244,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
                     require(nativeSelectionSupported(pkg)) { "UNSUPPORTED_CAPABILITY" }
                     preparePlayback(pkg, expectedEpoch, stillAuthorized, deadline) { handoffError ->
                         if (handoffError != null) done(handoffError)
-                        else browse(proof.parent, proof.page) { _, finalError ->
+                        else browseAuthorized(proof.parent, proof.page, null, stillAuthorized) { _, finalError ->
                             try {
                                 require(finalError == null) { finalError ?: "SOURCE_TIMEOUT" }
                                 require(android.os.SystemClock.elapsedRealtime() <= deadline) { "SOURCE_TIMEOUT" }
@@ -404,8 +431,15 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     fun browseAuthorized(parent: String?, page: Int, expectedRevision: String?, stillAuthorized: () -> Boolean, done: (JSONObject?, String?) -> Unit) {
         require(page in 0..10000) { "INVALID_ARGUMENT" }
         val pkg = selected; val revision = epoch(pkg)
-        val allowed = { !closed && selected == pkg && epoch(pkg) == revision && stillAuthorized() }
-        if (!allowed()) { done(null, "AUTHORIZATION_DENIED"); return }
+        fun invalid(): String? = when {
+            !stillAuthorized() -> "AUTHORIZATION_DENIED"
+            closed -> "SOURCE_NOT_READY"
+            accessError != null -> "PERMISSION_REVOKED"
+            selected != pkg || epoch(pkg) != revision -> "STALE_LIBRARY"
+            else -> null
+        }
+        val allowed = { invalid() == null }
+        invalid()?.let { done(null, it); return }
         if (usingUi(pkg)) { uiLibrary!!.browse(parent, page, expectedRevision, allowed, done); return }
         if (pkg == PACKAGES[0] && parent?.startsWith("mango-ui:") == true) {
             val ui = mangoUiLibrary ?: return done(null, "UI_PERMISSION_REQUIRED")
@@ -417,18 +451,21 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         val target = if (nativeRoot) browser.root else parent ?: browser.root
         if (target != browser.root && items[pkg]?.get(target)?.isBrowsable != true) return done(null, "EXPIRED_ITEM")
         val options = Bundle().apply { putInt(MediaBrowser.EXTRA_PAGE, page); putInt(MediaBrowser.EXTRA_PAGE_SIZE, 25) }
-        var completed = false
         lateinit var cb: MediaBrowser.SubscriptionCallback
+        lateinit var request: SourceRequest<JSONObject>
+        request = SourceRequest({ invalid() ?: if (browsers[pkg] !== browser || !browser.isConnected) "BROWSE_UNAVAILABLE" else null }, {
+            browseRequests.remove(request)
+            // A disconnect may race unsubscribe; completion must still reach the caller.
+            runCatching { if (browser.isConnected) browser.unsubscribe(target, cb) }
+        }, done)
         fun finish(value: JSONObject?, error: String?) {
-            if (completed) return
-            completed = true; if (browser.isConnected) browser.unsubscribe(target, cb)
-            if (!stillAuthorized()) done(null, "AUTHORIZATION_DENIED")
-            else if (closed || selected != pkg || epoch(pkg) != revision) done(null, "STALE_LIBRARY") else done(value, error)
+            request.finish(value, error)
         }
         cb = object : MediaBrowser.SubscriptionCallback() {
             override fun onChildrenLoaded(parentId: String, children: MutableList<MediaBrowser.MediaItem>, opts: Bundle) = loaded(children)
             override fun onChildrenLoaded(parentId: String, children: MutableList<MediaBrowser.MediaItem>) = loaded(children)
             private fun loaded(children: List<MediaBrowser.MediaItem>) {
+                if (!request.check()) return
                 if (children.size > 10000) { finish(null, "SOURCE_LIBRARY_LIMIT"); return }
                 // Legacy services may ignore paging options. Paginate their bounded result on DX340.
                 val visible = if (children.size > 25) children.drop(page * 25).take(25) else children
@@ -461,7 +498,9 @@ class SourceRegistry(private val context: Context, private val listener: Compone
             override fun onError(parentId: String) = finish(null, "BROWSE_DENIED")
             override fun onError(parentId: String, options: Bundle) = finish(null, "BROWSE_DENIED")
         }
-        browser.subscribe(target, options, cb)
+        browseRequests.add(request)
+        try { browser.subscribe(target, options, cb) }
+        catch (_: Exception) { finish(null, "BROWSE_UNAVAILABLE"); return }
         main.postDelayed({ finish(null, "SOURCE_TIMEOUT") }, 8000)
     }
     fun diagnostic(): JSONObject = JSONObject().put("device", android.os.Build.MODEL).put("os", android.os.Build.VERSION.RELEASE)

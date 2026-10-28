@@ -4,10 +4,132 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dx340_phone/main.dart';
 import 'package:dx340_phone/remote.dart';
-import 'remote_test.dart' show FakeBridge;
+import 'package:dx340_phone/playback_progress.dart';
+import 'remote_test.dart' show FakeBridge, snapshot;
 
 void main() {
   for (final platform in [TargetPlatform.android, TargetPlatform.iOS]) {
+    testWidgets(
+      '$platform explains source permission recovery with disabled transport',
+      (tester) async {
+        debugDefaultTargetPlatformOverride = platform;
+        addTearDown(() => debugDefaultTargetPlatformOverride = null);
+        const reason =
+            'On DX340, enable playback session access in Notification access settings, then refresh the player.';
+        final remote = Remote(FakeBridge());
+        await tester.pumpWidget(DX340App(remote: remote));
+        await tester.pumpAndSettle();
+        final data = snapshot(
+          caps: {'canPlay': false, 'canBrowse': false, 'reason': reason},
+        );
+        data['state'] = {
+          ...object(data['state']),
+          'accessError': 'NOTIFICATION_ACCESS_REQUIRED',
+        };
+        remote.accept(data);
+        await tester.pumpAndSettle();
+        expect(find.text(reason), findsOneWidget);
+        await tester.scrollUntilVisible(
+          find.text('Play'),
+          150,
+          scrollable: find.byType(Scrollable).first,
+        );
+        if (platform == TargetPlatform.android) {
+          expect(
+            tester
+                .widget<OutlinedButton>(
+                  find.widgetWithText(OutlinedButton, 'Play'),
+                )
+                .onPressed,
+            isNull,
+          );
+        } else {
+          expect(
+            tester
+                .widget<CupertinoButton>(
+                  find.widgetWithText(CupertinoButton, 'Play'),
+                )
+                .onPressed,
+            isNull,
+          );
+        }
+        await tester.tap(find.text('Library').last);
+        await tester.pumpAndSettle();
+        expect(find.text(reason), findsOneWidget);
+        // Fresh capabilities after restoration reenable browsing; no command is replayed.
+        remote.accept(snapshot(epoch: 'restored'));
+        await tester.pumpAndSettle();
+        expect(find.text(reason), findsNothing);
+        expect(remote.can('canBrowse'), true);
+        await tester.pumpWidget(const SizedBox());
+        debugDefaultTargetPlatformOverride = null;
+      },
+    );
+    testWidgets(
+      '$platform elapsed clock freezes on suspend and adds no BLE polling',
+      (tester) async {
+        debugDefaultTargetPlatformOverride = platform;
+        addTearDown(() => debugDefaultTargetPlatformOverride = null);
+        var now = 0;
+        final bridge = FakeBridge();
+        final remote = Remote(
+          bridge,
+          progress: PlaybackProgress(nowMs: () => now),
+        );
+        await tester.pumpWidget(DX340App(remote: remote));
+        await tester.pumpAndSettle();
+        Json timing(String id, int position) {
+          final data = snapshot();
+          data['stateSampleId'] = id;
+          data['stateAgeMs'] = 0;
+          data['state'] = {
+            ...object(data['state']),
+            'position': position,
+            'duration': 60000,
+            'playing': true,
+            'playbackSpeed': 1,
+          };
+          return data;
+        }
+
+        remote.accept(timing('first', 10000));
+        await tester.pump();
+        await tester.scrollUntilVisible(
+          find.byType(ElapsedTime),
+          150,
+          scrollable: find.byType(Scrollable).first,
+        );
+        now += 2000;
+        await tester.pump(const Duration(seconds: 2));
+        expect(find.text('0:12 / 1:00 · estimated'), findsOneWidget);
+        tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
+        await tester.pump();
+        now += 30000;
+        await tester.pump(const Duration(seconds: 30));
+        expect(remote.progress.positionMs, 12000);
+        expect(remote.progress.estimated, false);
+        tester.binding.handleAppLifecycleStateChanged(
+          AppLifecycleState.resumed,
+        );
+        await tester.pump();
+        expect(
+          find.text('0:12 / 1:00 · refresh for current time'),
+          findsOneWidget,
+        );
+        expect(bridge.calls.where((call) => call.$1 == 'resume').length, 1);
+        expect(remote.progress.estimated, false);
+        remote.accept(timing('fresh', 45000));
+        await tester.pump();
+        now += 1000;
+        await tester.pump(const Duration(seconds: 1));
+        expect(find.text('0:46 / 1:00 · estimated'), findsOneWidget);
+        expect(bridge.calls.where((call) => call.$1 == 'send'), isEmpty);
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump(const Duration(seconds: 5));
+        expect(tester.takeException(), isNull);
+        debugDefaultTargetPlatformOverride = null;
+      },
+    );
     testWidgets(
       '$platform disconnected library has working Setup recovery at large text',
       (tester) async {

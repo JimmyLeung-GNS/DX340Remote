@@ -21,3 +21,5 @@
 | Flutter toolchain | VERIFIED3.41.4 stable/Dart3.11.1, revision ff37bef603469fb030f2b72995ab929ccfc227f0 | User selected shared phone UI; release Android build/lint/9 Dart tests and iPhone simulator build/launch passed. License first-run warning was an earlier inventory result, not a failed final build |
 
 Bluetooth MAC and unrelated notifications are omitted from tracked reports. Raw ADB dumps stay under ignored artifacts/. No root, firmware changes, Wi-Fi setup or source replacement performed.
+
+29 October continuation: current DX340 build and installed Mango4.1.37/code240/Apple6.5.3/code1599 were rechecked read-only. User confirms DX340 only for now. The local checkout uses Android Studio JBR21.0.7 selected per process and an isolated pinned Flutter3.41.4 under work/flutter; global Flutter remains3.41.7. Installed package hashes/development certificate differ from the old checkpoint's environment. New packages built successfully but are not installed because the signing preflight rejects the mismatch; see test-results/2026-10-29-elapsed-position.md. No new physical phone, audio or timing acceptance is inferred.

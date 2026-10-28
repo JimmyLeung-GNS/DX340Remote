@@ -163,7 +163,12 @@ class HostService : Service() {
             fun result(data: JSONObject) { val value = reply(device, request, "RESULT", data); ledger.finish(id, value); if (gateEntered) { mutationGate.leave(id); gateEntered = false } }
             when (op) {
                 "LIST_SOURCES", "GET_CAPABILITIES" -> result(JSONObject().put("sources", sources.sources()))
-                "GET_STATE", "SUBSCRIBE_STATE" -> result(JSONObject().put("state", sources.state()))
+                "GET_STATE", "SUBSCRIBE_STATE" -> {
+                    // Explicit refresh can recover permission/observer state without restarting
+                    // the companion or replaying any playback operation.
+                    sources.refresh()
+                    result(JSONObject().put("state", sources.state()))
+                }
                 "SELECT_SOURCE" -> { sources.select(args.getString("source")); result(JSONObject().put("state", sources.state())) }
                 else -> {
                     RoutingPolicy.validate(epoch, request.getString("hostEpoch"), sources.selected, request.getString("source"), sources.epoch(sources.selected), request.getString("sourceEpoch"), true)

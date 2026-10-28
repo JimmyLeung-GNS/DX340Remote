@@ -34,6 +34,8 @@ The script builds both apps, the read-only source instrumentation APK and option
 
 APKs use the development computer's standard Android debug signing key outside Git (`~/.android/debug.keystore`). Retain that identity for development updates. These are development-signed packages, not production signing or store releases. No signing keys are committed. A different signing identity needs a deliberate migration; uninstalling loses local approval/evidence/cache state.
 
+Before upgrading from another development computer, run `./scripts/verify-android-signing.ps1 -Serial <serial> -Apk artifacts/dx340-phone-0.2.0-development.apk`. The shared-phone launch script runs this check automatically before installation. It verifies the candidate's package/signature and compares signing-certificate digests with the installed base APK, keeping a local report in artifacts/android-upgrade-signing.json. A mismatch stops the update. Restore the original development key securely outside Git; do not uninstall/reset the installed app to bypass the check. This conservative development-key comparison does not implement signing-key rotation.
+
 ## DX340 companion
 
 ```powershell

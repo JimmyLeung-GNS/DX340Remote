@@ -95,6 +95,7 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler {
         return JSONObject().put("bridgeVersion", 1).put("status", remote?.status ?: "Preparing Bluetooth remote…")
             .put("authorized", remote?.authorized ?: false).put("mutationPending", remote?.mutationPending ?: false)
             .put("state", remote?.state ?: JSONObject()).put("sources", remote?.sources ?: JSONArray())
+            .put("stateSampleId", remote?.stateSampleId ?: "").put("stateAgeMs", remote?.stateAgeMs ?: JSONObject.NULL)
             .put("library", remote?.library ?: JSONObject()).put("queue", remote?.queue ?: JSONArray())
             .put("queueRevision", remote?.queueRevision ?: "").put("devices", devices)
             .put("artworkBase64", remote?.artworkBytes?.let { Base64.encodeToString(it, Base64.NO_WRAP) } ?: JSONObject.NULL).toString()

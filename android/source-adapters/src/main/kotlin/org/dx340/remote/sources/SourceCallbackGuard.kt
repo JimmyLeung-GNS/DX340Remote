@@ -18,5 +18,6 @@ class SourceCallbackGuard {
         owners.remove(lease.source)
         return true
     }
-    fun close() { closed = true; owners.clear() }
+    fun invalidateAll() { owners.clear() }
+    fun close() { closed = true; invalidateAll() }
 }

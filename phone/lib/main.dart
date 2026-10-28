@@ -60,6 +60,7 @@ class _PhoneShellState extends State<PhoneShell>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    remote.setForeground(state == AppLifecycleState.resumed);
     if (state == AppLifecycleState.resumed) unawaited(remote.invoke('resume'));
   }
 
@@ -149,6 +150,11 @@ class _PhoneShellState extends State<PhoneShell>
       if (artist.isNotEmpty) label(artist),
       if (album.isNotEmpty) label(album),
       if (!remote.authorized) recovery('control playback'),
+      if (remote.authorized &&
+          remote.state['accessError'] == 'NOTIFICATION_ACCESS_REQUIRED')
+        label(
+          'On DX340, enable playback session access in Notification access settings, then refresh the player.',
+        ),
       const SizedBox(height: 16),
       LayoutBuilder(
         builder: (context, bounds) {
@@ -212,19 +218,17 @@ class _PhoneShellState extends State<PhoneShell>
           );
         },
       ),
-      if (remote.state['duration'] is num)
-        label(
-          '${time(remote.state['position'])} / ${time(remote.state['duration'])} · source snapshot',
-        ),
+      if (remote.progress.durationMs != null) ElapsedTime(remote: remote),
       if (remote.can('canSeek'))
         action(
           'Back 10 seconds',
           perform(
-            remote.action('canSeek'),
+            remote.action('canSeek') && remote.progress.positionMs != null,
             () => remote.command('SEEK', {
-              'position':
-                  ((remote.state['position'] as num? ?? 0).toInt() - 10000)
-                      .clamp(0, 1 << 53),
+              'position': ((remote.progress.positionMs ?? 0) - 10000).clamp(
+                0,
+                1 << 53,
+              ),
             }, 'canSeek'),
           ),
         ),
@@ -258,7 +262,9 @@ class _PhoneShellState extends State<PhoneShell>
       ),
     if (remote.authorized && !remote.can('canBrowse'))
       label(
-        'Browsing is unavailable. Open the selected music app on DX340, then refresh the player.',
+        remote.browseExplanation.isNotEmpty
+            ? remote.browseExplanation
+            : 'Browsing is unavailable. Open the selected music app on DX340, then refresh the player.',
       ),
     action(
       'Browse source library',
@@ -530,7 +536,83 @@ class _PhoneShellState extends State<PhoneShell>
   );
 }
 
+/// Only this text rebuilds each second; hidden tabs and background apps do no work.
+class ElapsedTime extends StatefulWidget {
+  const ElapsedTime({super.key, required this.remote});
+  final Remote remote;
+  @override
+  State<ElapsedTime> createState() => _ElapsedTimeState();
+}
+
+class _ElapsedTimeState extends State<ElapsedTime> {
+  Timer? _timer;
+  @override
+  void initState() {
+    super.initState();
+    widget.remote.addListener(_remoteChanged);
+    _syncTimer();
+  }
+
+  @override
+  void didUpdateWidget(ElapsedTime oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.remote != widget.remote) {
+      oldWidget.remote.removeListener(_remoteChanged);
+      widget.remote.addListener(_remoteChanged);
+    }
+    _syncTimer();
+  }
+
+  void _remoteChanged() {
+    // Lifecycle changes can disable frames before a parent rebuild occurs.
+    // Cancel the timer immediately when the model freezes its estimate.
+    _syncTimer();
+    if (mounted) setState(() {});
+  }
+
+  void _syncTimer() {
+    if (!widget.remote.progress.ticking) {
+      _timer?.cancel();
+      _timer = null;
+    } else {
+      _timer ??= Timer.periodic(const Duration(seconds: 1), (_) {
+        _syncTimer();
+        if (mounted) setState(() {});
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    widget.remote.removeListener(_remoteChanged);
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final progress = widget.remote.progress;
+    final kind = !widget.remote.authorized
+        ? 'cached'
+        : progress.needsRefresh
+        ? 'refresh for current time'
+        : progress.estimated
+        ? 'estimated'
+        : 'source snapshot';
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Text(
+        '${time(progress.positionMs)} / ${time(progress.durationMs)} · $kind',
+        // A running clock should not interrupt screen-reader speech each second.
+        semanticsLabel:
+            'Elapsed ${time(progress.positionMs)} of ${time(progress.durationMs)}, $kind',
+      ),
+    );
+  }
+}
+
 String time(dynamic value) {
-  final seconds = (value is num ? value.toInt() : 0) ~/ 1000;
+  if (value is! num || !value.isFinite || value < 0) return '--:--';
+  final seconds = value.toInt() ~/ 1000;
   return '${seconds ~/ 60}:${(seconds % 60).toString().padLeft(2, '0')}';
 }

@@ -1,0 +1,54 @@
+# Development handoff
+
+Updated 29 October 2026, Asia/Shanghai. Work in `C:\GitHub\DX340Remote`.
+
+This file was absent when the user requested continuation. It is reconstructed from the checked-in `AGENTS.md`, implementation plan, status and commit400ec34, plus the work recorded below. It does not claim to recover an older missing file's contents.
+
+## Read first
+
+1. `AGENTS.md`, `docs/implementation-plan.md`, `docs/status.md`.
+2. `docs/test-results/2026-10-29-browse-access-recovery.md` for the latest results and `2026-10-29-elapsed-position.md` for the preceding continuation.
+3. `docs/phone-reliability-runbook.md`, `docs/compatibility-matrix.md`, and the separate Mango/Apple experiment reports before physical acceptance work.
+
+## Saved implementation
+
+The canonical phone interface is Flutter/Dart over native Kotlin BLE/service and Swift CoreBluetooth/restoration. Host and source adapters stay Kotlin. Native phone reference apps are retained. BLE carries controls/metadata only; existing DX340 Mango and Apple Music apps play the music. Optional screen-on/unlocked Apple and Mango assisted browsing were accepted in prior work. Replacing Mango, root, firmware changes and download extraction remain excluded.
+
+Checkpoint400ec34 contains source-session callback ownership/capability guards and guarded downward-only debug volume probes. Phone volume remains disabled. Prior local Mango WAV/FLAC and Apple downloaded outside-queue selections have user-reported audible confirmations; those are not phone Bluetooth acceptance. Full format/library/SD/playlist, reliability and audio matrices remain incomplete.
+
+This continuation adds host position normalization and shared-phone elapsed estimates with native sample identity/age, lifecycle freeze/fresh-resume guards and no periodic BLE polling. See the test report and current working tree. New Swift changes require a fresh Mac build; earlier iOS CI results do not verify this source revision. No publication is performed by this continuation.
+
+Latest local verification: native build/lint57 JVM tests, Flutter analysis22 tests/release APK/release lint passed. Companion and phone packages are generated in artifacts but **not installed**. Both installed apps' certificate24f48aa3... differs from this checkout's ed3ffa7b... development key. The verified upgrade preflight stops before installation. Restore the original key securely outside Git before rebuilding/upgrading; preserve installed data. Current raw package hashes are in the browse-access report; full public certificate fingerprints are in the preceding elapsed report. Source is saved on local branch `codex/source-recovery-checkpoint`; use `git log -1` for the current checkpoint. It has not been pushed or published.
+
+The latest continuation also guards native browse-request lifetime before cache mutation, carries authorization through play-item revalidation, invalidates requests/callback ownership/source epochs on detected notification-access loss, retries session observer registration after grant, and adds explicit refresh/recovery UI. Pure helper tests cover ordering/failure cases; actual device permission delivery and recovery are not tested. The original signing-key availability question is pending.
+
+## Local environment and reproducible commands
+
+The connected ADB target `d` is the DX340, Android13/API33, build `DX340-userdebug 13 TKQ1.221013.002 eng.iBasso.20260812.181952 release-keys`. It is not a separate Android phone. No physical iPhone, personal Mac or signing team is accessible here.
+
+The user explicitly confirmed DX340 only for now during this continuation. Read-only dumps show Mango and Apple both paused; no playback/volume test was performed. Installed apps and companion services were preserved.
+
+This checkout started without the old ignored work/artifacts/local.properties. Historical raw evidence paths in status belong to the earlier environment and are not presumed present here. Global Flutter resolves to3.41.7; Java was absent from PATH. Official Flutter3.41.4/revisionff37bef603469fb030f2b72995ab929ccfc227f0 is cloned into ignored `work/flutter`. Use the installed Android Studio JBR21.0.7 locally; do not change global Flutter/Java settings.
+
+```powershell
+Set-Location C:\GitHub\DX340Remote
+$env:JAVA_HOME = 'C:\Program Files\Android\Android Studio\jbr'
+$env:ANDROID_HOME = 'C:\Users\user\AppData\Local\Android\Sdk'
+$env:PATH = "$PWD\work\flutter\bin;$env:PATH"
+./scripts/build-android.ps1
+./scripts/build-phone.ps1
+```
+
+If `work/flutter` is missing, clone the official3.41.4 tag and verify the full revision before building. The Android-only project needs ignored `android/local.properties` containing `sdk.dir=C:/Users/user/AppData/Local/Android/Sdk`. Flutter generates its own ignored phone local properties. Signing keys stay outside Git. Keep prior installed APKs/signers for upgrade comparison; never uninstall or reset app data merely to bypass a signing mismatch.
+
+On Mac, install the same Flutter revision and run `sh scripts/build-phone-ios.sh <available-iPhone-simulator-UDID>` from the repository root. Physical iPhone deployment uses `phone/ios/Runner.xcworkspace`, a compatible Xcode and the user's signing team. Preserve native `apple/` as reference.
+
+## Resume next
+
+1. Restore the original development signing identity securely, rebuild and run the signing preflight before any update. Validate the new Swift bridge/native sample timing on Mac, then both physical phones over BLE. Verify pause/seek/track/source changes, stale artwork/status events, lock/background/resume, range loss and disconnection with Wi-Fi/cellular off. A synthetic widget test or DX340-only app launch does not pass this gate.
+2. Complete the Mango and Apple selection/format/library-change matrices. Separate source-reported state, actual user listening and phone BLE evidence. Observe and validate playlist screens before adding an assisted playlist adapter. Stable native Mango duplicate-file identity after rescan/SD changes remains unverified.
+3. Physically verify the new browse/access-recovery guards using the report's exact cases; continue in-flight UI permission/revocation/cancellation and measured recovery. Reinstalling/instrumenting the companion previously left optional Accessibility services enabled but unbound; do not assume this session-access work repairs that. Use existing in-process debug checks where appropriate and document manual recovery.
+4. Volume: prior wheel/API downward steps only. Upward/output/Apple/phone/reconnect acceptance remains open. Do not enable phone volume from a reported AudioManager value alone.
+5. Finish the phone reliability/security/battery/walking/audio/install matrix before Watch. Watch inventory and stable-phone gate remain open.
+
+Keep the project goal active while the full system is incomplete. Do not mark completion from compile/simulator/proxy evidence; follow the actual goal lifecycle rules if external blockers persist.

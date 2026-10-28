@@ -24,6 +24,7 @@ import CoreBluetooth
         let value: [String: Any] = [
             "bridgeVersion": 1, "status": remote.status, "authorized": remote.authorized,
             "mutationPending": remote.mutationPending, "state": remote.state,
+            "stateSampleId": remote.stateSampleId, "stateAgeMs": remote.stateAgeMs as Any? ?? NSNull(),
             "sources": remote.sources, "library": remote.library, "queue": remote.queue,
             "queueRevision": remote.queueRevision,
             "devices": remote.devices.map { ["id": $0.identifier.uuidString, "name": $0.name ?? "DX340"] },

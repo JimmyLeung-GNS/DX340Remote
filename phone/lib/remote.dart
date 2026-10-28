@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'playback_progress.dart';
 
 typedef Json = Map<String, dynamic>;
 Json object(dynamic value) =>
@@ -27,8 +28,10 @@ class NativeBridge implements RemoteBridge {
 
 /// Presentation state only. Native code owns BLE, request IDs, epochs and recovery.
 class Remote extends ChangeNotifier {
-  Remote(this.bridge);
+  Remote(this.bridge, {PlaybackProgress? progress})
+    : progress = progress ?? PlaybackProgress();
   final RemoteBridge bridge;
+  final PlaybackProgress progress;
   StreamSubscription<dynamic>? _subscription;
   String status = 'Preparing Bluetooth remote…';
   String? error;
@@ -101,6 +104,12 @@ class Remote extends ChangeNotifier {
           ? null
           : base64Decode(encoded);
       error = null;
+      progress.accept(
+        state: state,
+        sampleId: textValue(data['stateSampleId']),
+        ageMs: data['stateAgeMs'],
+        authorized: authorized,
+      );
       notifyListeners();
     } catch (issue) {
       _bridgeFailed(issue);
@@ -110,6 +119,7 @@ class Remote extends ChangeNotifier {
   void _bridgeFailed(Object issue) {
     if (_disposed) return;
     authorized = false;
+    progress.invalidate();
     mutationPending = false;
     _parents.clear();
     error = issue is PlatformException
@@ -135,6 +145,11 @@ class Remote extends ChangeNotifier {
       }
       return false;
     }
+  }
+
+  void setForeground(bool value) {
+    progress.setForeground(value);
+    if (!_disposed) notifyListeners();
   }
 
   Future<void> requestPermissions({required bool apple}) async {
