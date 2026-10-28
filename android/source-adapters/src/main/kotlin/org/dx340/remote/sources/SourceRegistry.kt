@@ -1,0 +1,365 @@
+package org.dx340.remote.sources
+
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.media.browse.MediaBrowser
+import android.media.session.MediaController
+import android.media.session.MediaSessionManager
+import android.media.session.PlaybackState
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import org.json.JSONArray
+import org.json.JSONObject
+import java.util.UUID
+import org.dx340.remote.library.RevisionGuard
+
+/** Uses only public Android 13 APIs and our real application identity. */
+class SourceRegistry(private val context: Context, private val listener: ComponentName, private val uiLibrary: UiLibraryAdapter? = null, private val changed: () -> Unit) {
+    companion object { val PACKAGES = listOf("com.ibasso.music", "com.apple.android.music") }
+    private val main = Handler(Looper.getMainLooper())
+    private val manager = context.getSystemService(MediaSessionManager::class.java)
+    private val browsers = mutableMapOf<String, MediaBrowser>()
+    private val browserStatus = mutableMapOf<String, String>()
+    private val rootSamples = mutableMapOf<String, JSONObject>()
+    private val controllers = mutableMapOf<String, MediaController>()
+    private val epochs = mutableMapOf<String, String>()
+    private val tokens = mutableMapOf<String, android.media.session.MediaSession.Token>()
+    private val callbacks = mutableMapOf<String, MediaController.Callback>()
+    private val artwork = ArtworkRepository()
+    private val items = mutableMapOf<String, LinkedHashMap<String, MediaBrowser.MediaItem>>()
+    private data class ItemProof(val parent: String, val page: Int, val fingerprint: String)
+    private val proofs = mutableMapOf<String, LinkedHashMap<String, ItemProof>>()
+    private val revisionGuard = RevisionGuard()
+    var selected = PACKAGES.first(); private set
+    var accessError: String? = null; private set
+    private var closed = false
+    private val sessionsChanged = MediaSessionManager.OnActiveSessionsChangedListener { refresh() }
+
+    fun start() {
+        try { manager.addOnActiveSessionsChangedListener(sessionsChanged, listener, main) }
+        catch (_: SecurityException) { accessError = "Enable notification access on DX340 for source sessions." }
+        refresh(); probeBrowsers()
+    }
+    fun close() {
+        closed = true
+        main.removeCallbacksAndMessages(null)
+        manager.removeOnActiveSessionsChangedListener(sessionsChanged)
+        controllers.forEach { (p, c) -> callbacks[p]?.let { c.unregisterCallback(it) } }
+        browsers.values.forEach { it.disconnect() }; browsers.clear()
+    }
+    private fun attach(pkg: String, controller: MediaController) {
+        if (tokens[pkg] == controller.sessionToken) return
+        callbacks[pkg]?.let { controllers[pkg]?.unregisterCallback(it) }
+        epochs[pkg] = UUID.randomUUID().toString(); tokens[pkg] = controller.sessionToken
+        items.remove(pkg); proofs.remove(pkg)
+        controllers[pkg] = controller
+        val cb = object : MediaController.Callback() {
+            override fun onPlaybackStateChanged(state: PlaybackState?) = changed()
+            override fun onMetadataChanged(metadata: android.media.MediaMetadata?) = changed()
+            override fun onQueueChanged(queue: MutableList<android.media.session.MediaSession.QueueItem>?) = changed()
+            override fun onSessionDestroyed() {
+                controllers.remove(pkg); tokens.remove(pkg); epochs[pkg] = UUID.randomUUID().toString(); items.remove(pkg); changed()
+            }
+        }
+        callbacks[pkg] = cb; controller.registerCallback(cb, main)
+    }
+    fun refresh() {
+        try {
+            val live = manager.getActiveSessions(listener).filter { it.packageName in PACKAGES }
+            live.forEach { attach(it.packageName, it) }; accessError = null
+        } catch (_: SecurityException) { accessError = "NOTIFICATION_ACCESS_REQUIRED" }
+        changed()
+    }
+    fun probeBrowsers() {
+        for (pkg in PACKAGES) {
+            if (browsers.containsKey(pkg)) continue
+            val services = context.packageManager.queryIntentServices(Intent("android.media.browse.MediaBrowserService").setPackage(pkg), PackageManager.GET_META_DATA)
+            val service = services.firstOrNull { it.serviceInfo.exported }
+            if (service == null) { browserStatus[pkg] = "NO_EXPORTED_BROWSER"; continue }
+            val component = ComponentName(pkg, service.serviceInfo.name)
+            browserStatus[pkg] = "CONNECTING"
+            val browser = MediaBrowser(context, component, object : MediaBrowser.ConnectionCallback() {
+                override fun onConnected() {
+                    if (closed) return
+                    val b = browsers.getValue(pkg)
+                    attach(pkg, MediaController(context, b.sessionToken))
+                    browserStatus[pkg] = "CONNECTED"; changed()
+                    val callback = object : MediaBrowser.SubscriptionCallback() {
+                        override fun onChildrenLoaded(parentId: String, children: MutableList<MediaBrowser.MediaItem>) {
+                            b.unsubscribe(parentId, this)
+                            rootSamples[pkg] = JSONObject().put("root", parentId).put("count", children.size).put("items", JSONArray().apply {
+                                children.take(50).forEach { put(JSONObject().put("id", it.mediaId).put("title", it.description.title?.toString()).put("browsable", it.isBrowsable).put("playable", it.isPlayable)) }
+                            }); changed()
+                        }
+                        override fun onError(parentId: String) { b.unsubscribe(parentId, this); rootSamples[pkg] = JSONObject().put("error", "BROWSE_DENIED"); changed() }
+                    }
+                    b.subscribe(b.root, callback)
+                    main.postDelayed({ if (!rootSamples.containsKey(pkg)) { b.unsubscribe(b.root, callback); rootSamples[pkg] = JSONObject().put("error", "SOURCE_TIMEOUT"); changed() } }, 8000)
+                }
+                override fun onConnectionFailed() { browserStatus[pkg] = "CLIENT_DENIED_OR_FAILED"; changed() }
+                override fun onConnectionSuspended() { browserStatus[pkg] = "SUSPENDED"; changed() }
+            }, null)
+            browsers[pkg] = browser
+            try { browser.connect() } catch (e: Exception) { browserStatus[pkg] = "FAILED:${e.javaClass.simpleName}" }
+        }
+        changed()
+    }
+    fun epoch(pkg: String) = epochs.getOrPut(pkg) { UUID.randomUUID().toString() }
+    fun externalStateChanged() = changed()
+    private fun usingUi(pkg: String) = pkg == PACKAGES[1] && uiLibrary?.enabled == true && browsers[pkg]?.isConnected != true
+    private fun supports(pkg: String, flag: Long) = ((controllers[pkg]?.playbackState?.actions ?: 0L) and flag) != 0L
+    fun capabilities(pkg: String): JSONObject = JSONObject().apply {
+        val verification = context.getSharedPreferences("source-verification", Context.MODE_PRIVATE)
+        put("canPlay", supports(pkg, PlaybackState.ACTION_PLAY) || (pkg == PACKAGES[0] && verification.getString("mangoObservedPlayVersion", null) == version(pkg)))
+        put("canPause", supports(pkg, PlaybackState.ACTION_PAUSE) || (pkg == PACKAGES[0] && verification.getString("mangoPauseVersion", null) == version(pkg)))
+        put("canNext", supports(pkg, PlaybackState.ACTION_SKIP_TO_NEXT)); put("canPrevious", supports(pkg, PlaybackState.ACTION_SKIP_TO_PREVIOUS))
+        put("canSeek", supports(pkg, PlaybackState.ACTION_SEEK_TO)); put("canReadQueue", controllers[pkg]?.queue != null)
+        put("canPlayQueueItem", supports(pkg, PlaybackState.ACTION_SKIP_TO_QUEUE_ITEM))
+        put("canBrowse", browsers[pkg]?.isConnected == true || (usingUi(pkg) && uiLibrary?.ready == true))
+        put("canPlayItem", supports(pkg, PlaybackState.ACTION_PLAY_FROM_MEDIA_ID) || verifiedPlayItem(pkg) || (usingUi(pkg) && uiLibrary?.ready == true))
+        put("browseMode", if (usingUi(pkg)) "ui-assisted" else "direct")
+        put("canSearch", false); put("canAdjustVolume", false); put("canResume", false); put("canColdLaunch", false)
+        put("canShuffle", false); put("canRepeat", false)
+        put("reason", if (usingUi(pkg)) uiLibrary?.explanation else "Actions reflect advertised/observed source APIs; physical acceptance remains separate. Volume is disabled until output is measured.")
+    }
+    fun sources(): JSONArray = JSONArray().apply { PACKAGES.forEach { pkg ->
+        val version = runCatching { context.packageManager.getPackageInfo(pkg, 0).versionName }.getOrNull()
+        put(JSONObject().put("id", pkg).put("name", if (pkg == PACKAGES[0]) "Mango Player" else "Apple Music")
+            .put("installed", version != null).put("version", version ?: "not installed").put("sourceEpoch", epoch(pkg))
+            .put("browser", browserStatus[pkg] ?: "NOT_PROBED").put("rootProbe", rootSamples[pkg] ?: JSONObject.NULL).put("capabilities", capabilities(pkg)))
+    } }
+    fun state(): JSONObject {
+        val c = controllers[selected]; val m = c?.metadata; val p = c?.playbackState
+        val artKey = artwork.remember(selected, m?.getBitmap("android.media.metadata.ART") ?: m?.getBitmap("android.media.metadata.ALBUM_ART") ?: m?.description?.iconBitmap)
+        return JSONObject().put("source", selected).put("sourceEpoch", epoch(selected)).put("artworkKey", artKey ?: JSONObject.NULL)
+            .put("title", m?.getString("android.media.metadata.TITLE") ?: "No active track")
+            .put("artist", m?.getString("android.media.metadata.ARTIST") ?: "")
+            .put("album", m?.getString("android.media.metadata.ALBUM") ?: "")
+            .put("duration", m?.getLong("android.media.metadata.DURATION") ?: 0)
+            .put("position", p?.position ?: 0).put("playing", p?.state == PlaybackState.STATE_PLAYING)
+            .put("playbackState", p?.state ?: 0).put("capabilities", capabilities(selected))
+            .put("accessError", accessError ?: JSONObject.NULL)
+    }
+    fun select(pkg: String) { require(pkg in PACKAGES) { "MISSING_SOURCE" }; selected = pkg; changed() }
+    fun getArtwork(key: String): JSONObject {
+        require(key == state().optString("artworkKey")) { "EXPIRED_ITEM" }
+        val bytes = artwork.get(key) ?: error("EXPIRED_ITEM")
+        return JSONObject().put("key", key).put("mime", "image/jpeg").put("base64", android.util.Base64.encodeToString(bytes, android.util.Base64.NO_WRAP))
+    }
+    private fun fingerprint(item: MediaBrowser.MediaItem) = listOf(item.mediaId, item.flags.toString(), item.description.title?.toString(), item.description.subtitle?.toString(), item.description.mediaUri?.toString()).joinToString("\u0000")
+    fun playItem(args: JSONObject, stillAuthorized: () -> Boolean, done: (String?) -> Unit) {
+        val pkg = selected
+        if (usingUi(pkg)) {
+            val ui = uiLibrary ?: return done("UI_PERMISSION_REQUIRED")
+            val id = args.optString("item"); val revision = args.optString("revision")
+            val invalid = ui.validatePlayable(id, revision)
+            if (invalid != null) { done(invalid); return }
+            if (controllers[pkg] == null) { done("SOURCE_NOT_READY"); return }
+            val expected = epoch(pkg)
+            pauseOtherSourceForUi(pkg) { error ->
+                if (error != null) done(error)
+                else if (selected != pkg || epoch(pkg) != expected) done("STALE_SOURCE")
+                else ui.play(id, revision, stillAuthorized, done)
+            }
+            return
+        }
+        try {
+            require(capabilities(pkg).optBoolean("canPlayItem")) { "UNSUPPORTED_CAPABILITY" }
+            require(args.getString("revision") == epoch(pkg)) { "STALE_LIBRARY" }
+            val id = args.getString("item")
+            val proof = proofs[pkg]?.get(id) ?: error("EXPIRED_ITEM")
+            val expectedEpoch = epoch(pkg)
+            browse(proof.parent, proof.page) { data, browseError ->
+                try {
+                    require(browseError == null) { browseError ?: "SOURCE_TIMEOUT" }
+                    require(selected == pkg && epoch(pkg) == expectedEpoch) { "STALE_SOURCE" }
+                    val list = data?.getJSONArray("items") ?: error("EXPIRED_ITEM")
+                    require((0 until list.length()).any { list.getJSONObject(it).getString("id") == id }) { "EXPIRED_ITEM" }
+                    revisionGuard.validateSelection(proof.fingerprint, items[pkg]?.get(id)?.let(::fingerprint))
+                    require(stillAuthorized()) { "AUTHORIZATION_DENIED" }
+                    command("PLAY_ITEM_VALIDATED", args)
+                    done(null)
+                } catch (e: Exception) { done(e.message ?: "SOURCE_NOT_READY") }
+            }
+        } catch (e: Exception) { done(e.message ?: "SOURCE_NOT_READY") }
+    }
+    private fun pauseOtherSourceForUi(target: String, done: (String?) -> Unit) {
+        val others = controllers.filter { (pkg, c) -> pkg != target && c.playbackState?.state == PlaybackState.STATE_PLAYING }
+        if (others.isEmpty()) { done(null); return }
+        if (others.size != 1) { done("OTHER_SOURCE_PLAYING"); return }
+        val (pkg, c) = others.entries.first()
+        if (!capabilities(pkg).optBoolean("canPause")) { done("OTHER_SOURCE_PLAYING"); return }
+        c.transportControls.pause()
+        val deadline = android.os.SystemClock.elapsedRealtime() + 3500
+        fun observe() {
+            when {
+                c.playbackState?.state == PlaybackState.STATE_PAUSED -> done(null)
+                android.os.SystemClock.elapsedRealtime() >= deadline || closed -> done("SOURCE_HANDOFF_FAILED")
+                else -> main.postDelayed({ observe() }, 100)
+            }
+        }
+        main.postDelayed({ observe() }, 100)
+    }
+    fun setPlaying(playing: Boolean, experimental: Boolean = false, stillAuthorized: () -> Boolean, done: (String?) -> Unit) {
+        val pkg = selected; val expectedEpoch = epoch(pkg)
+        try {
+            require(accessError == null) { "PERMISSION_REVOKED" }
+            require(experimental || capabilities(pkg).optBoolean(if (playing) "canPlay" else "canPause")) { "UNSUPPORTED_CAPABILITY" }
+            val controller = controllers[pkg] ?: error("SOURCE_NOT_READY")
+            val desired = if (playing) PlaybackState.STATE_PLAYING else PlaybackState.STATE_PAUSED
+            val current = controller.playbackState?.state
+            require(current == PlaybackState.STATE_PLAYING || current == PlaybackState.STATE_PAUSED) { "SOURCE_NOT_READY" }
+            require(stillAuthorized()) { "AUTHORIZATION_DENIED" }
+            if (current == desired) { done(null); return }
+            if (playing) require(controllers.none { (otherPkg, other) -> otherPkg != pkg && other.playbackState?.state == PlaybackState.STATE_PLAYING }) { "OTHER_SOURCE_PLAYING" }
+            // Mango's onPlay can toggle. Dispatch once only from an observed opposite state.
+            if (playing) controller.transportControls.play() else controller.transportControls.pause()
+            val deadline = android.os.SystemClock.elapsedRealtime() + 3500
+            fun observe() {
+                when {
+                    closed -> done("SOURCE_NOT_READY")
+                    pkg != selected || expectedEpoch != epoch(pkg) -> done("STALE_SOURCE")
+                    !stillAuthorized() -> done("AUTHORIZATION_DENIED")
+                    controller.playbackState?.state == desired -> done(null)
+                    android.os.SystemClock.elapsedRealtime() >= deadline -> done("SOURCE_TIMEOUT")
+                    else -> main.postDelayed({ observe() }, 100)
+                }
+            }
+            main.postDelayed({ observe() }, 100)
+        } catch (e: Exception) { done(e.message ?: "SOURCE_NOT_READY") }
+    }
+    private fun version(pkg: String) = runCatching { context.packageManager.getPackageInfo(pkg, 0).let { "${it.versionName}|${it.longVersionCode}|${android.os.Build.FINGERPRINT}" } }.getOrNull() ?: "missing"
+    private fun verifiedPlayItem(pkg: String): Boolean {
+        if (pkg != PACKAGES[0]) return false
+        val prefs = context.getSharedPreferences("source-verification", Context.MODE_PRIVATE)
+        val saved = prefs.getString("mangoPlayItemVersion", null) ?: return false
+        val current = version(pkg)
+        if (saved == current) return true
+        // Migrate the first installed beta's user-confirmed record; never infer success from dispatch.
+        val installedName = runCatching { context.packageManager.getPackageInfo(pkg, 0).versionName }.getOrNull()
+        if (saved != installedName) return false
+        return runCatching {
+            val file = java.io.File(context.filesDir, "mango-playback-tests.jsonl")
+            if (!file.isFile || file.length() > 1024 * 1024) return@runCatching false
+            val proof = JSONObject(file.useLines { lines -> lines.lastOrNull() } ?: return@runCatching false)
+            if (proof.optString("result") != "USER_CONFIRMED_AUDIBLE" || proof.optString("source") != pkg || proof.optString("version") != installedName || proof.optString("build") != android.os.Build.DISPLAY || proof.optString("device") != android.os.Build.MODEL) return@runCatching false
+            prefs.edit().putString("mangoPlayItemVersion", current).commit()
+        }.getOrDefault(false)
+    }
+    fun confirmMangoPlayItem(success: Boolean) {
+        require(selected == PACKAGES[0]) { "WRONG_SOURCE" }
+        check(context.getSharedPreferences("source-verification", Context.MODE_PRIVATE).edit().apply { if (success) putString("mangoPlayItemVersion", version(selected)) else remove("mangoPlayItemVersion") }.commit()) { "VERIFICATION_STORE_FAILED" }; changed()
+    }
+    /** Local diagnostic experiment only. Does not imply playback or enable capability by itself. */
+    fun experimentMangoPlayItem(itemId: String, revision: String) {
+        require(selected == PACKAGES[0]) { "WRONG_SOURCE" }
+        require(revision == epoch(selected)) { "STALE_LIBRARY" }
+        val item = items[selected]?.get(itemId) ?: error("EXPIRED_ITEM")
+        require(item.isPlayable) { "UNSUPPORTED_CAPABILITY" }
+        val controller = controllers[selected] ?: error("SOURCE_NOT_READY")
+        val other = try { manager.getActiveSessions(listener).firstOrNull { it.packageName != selected && it.playbackState?.state == PlaybackState.STATE_PLAYING } } catch (_: SecurityException) { error("PERMISSION_REVOKED") }
+        check(other == null) { "Pause ${other?.packageName} on DX340 before the test." }
+        controller.transportControls.playFromMediaId(itemId, null)
+    }
+    fun command(op: String, args: JSONObject) {
+        require(accessError == null) { "PERMISSION_REVOKED" }
+        val c = controllers[selected] ?: error("SOURCE_NOT_READY")
+        val controls = c.transportControls
+        val cap = capabilities(selected)
+        val key = when (op) {
+            "NEXT" -> "canNext"; "PREVIOUS" -> "canPrevious"; "SEEK" -> "canSeek"
+            "PLAY_ITEM_VALIDATED" -> "canPlayItem"; "PLAY_QUEUE_ITEM" -> "canPlayQueueItem"
+            else -> error("UNSUPPORTED_CAPABILITY")
+        }
+        require(cap.optBoolean(key)) { "UNSUPPORTED_CAPABILITY" }
+        // Safe handoff needs observed pause before starting another app; reject until that path is verified.
+        if (op == "PLAY_ITEM_VALIDATED" || op == "PLAY_QUEUE_ITEM") {
+            require(controllers.none { (pkg, other) -> pkg != selected && other.playbackState?.state == PlaybackState.STATE_PLAYING }) { "OTHER_SOURCE_PLAYING" }
+        }
+        when (op) {
+            "NEXT" -> controls.skipToNext(); "PREVIOUS" -> controls.skipToPrevious()
+            "SEEK" -> { val ms = args.getLong("position"); require(ms >= 0 && ms <= (c.metadata?.getLong("android.media.metadata.DURATION") ?: 0)) { "INVALID_ARGUMENT" }; controls.seekTo(ms) }
+            "PLAY_ITEM_VALIDATED" -> {
+                require(args.getString("revision") == epoch(selected)) { "STALE_LIBRARY" }
+                val item = items[selected]?.get(args.getString("item")) ?: error("EXPIRED_ITEM")
+                require(item.isPlayable) { "UNSUPPORTED_CAPABILITY" }; controls.playFromMediaId(item.mediaId, null)
+            }
+            "PLAY_QUEUE_ITEM" -> {
+                require(args.getString("revision") == queueRevision(c.queue ?: emptyList())) { "STALE_LIBRARY" }
+                val id = args.getLong("item"); require(c.queue?.any { it.queueId == id } == true) { "EXPIRED_ITEM" }
+                controls.skipToQueueItem(id)
+            }
+        }
+    }
+    fun queue(): JSONArray = JSONArray().apply { controllers[selected]?.queue?.take(50)?.forEach { q ->
+        put(JSONObject().put("id", q.queueId.toString()).put("title", q.description.title?.toString() ?: "Untitled"))
+    } }
+    private fun queueRevision(queue: List<android.media.session.MediaSession.QueueItem>): String {
+        val content = epoch(selected) + "\u0000" + queue.joinToString("\u0000") { "${it.queueId}:${it.description.mediaId}:${it.description.mediaUri}:${it.description.title}" }
+        return java.security.MessageDigest.getInstance("SHA-256").digest(content.toByteArray()).joinToString("") { "%02x".format(it.toInt() and 255) }
+    }
+    fun queueState(): JSONObject {
+        val queue = controllers[selected]?.queue ?: error("UNSUPPORTED_CAPABILITY")
+        return JSONObject().put("revision", queueRevision(queue)).put("items", JSONArray().apply { queue.take(50).forEach { q -> put(JSONObject().put("id", q.queueId.toString()).put("title", q.description.title?.toString() ?: "Untitled")) } })
+    }
+    fun browse(parent: String?, page: Int, expectedRevision: String? = null, done: (JSONObject?, String?) -> Unit) {
+        require(page in 0..10000) { "INVALID_ARGUMENT" }
+        val pkg = selected; val revision = epoch(pkg)
+        if (usingUi(pkg)) { uiLibrary!!.browse(parent, page, expectedRevision, done); return }
+        require(expectedRevision == null || expectedRevision == revision) { "STALE_LIBRARY" }
+        val browser = browsers[pkg]?.takeIf { it.isConnected } ?: return done(null, "BROWSE_UNAVAILABLE")
+        val target = parent ?: browser.root
+        if (target != browser.root && items[pkg]?.get(target)?.isBrowsable != true) return done(null, "EXPIRED_ITEM")
+        val options = Bundle().apply { putInt(MediaBrowser.EXTRA_PAGE, page); putInt(MediaBrowser.EXTRA_PAGE_SIZE, 25) }
+        var completed = false
+        lateinit var cb: MediaBrowser.SubscriptionCallback
+        fun finish(value: JSONObject?, error: String?) {
+            if (completed) return
+            completed = true; if (browser.isConnected) browser.unsubscribe(target, cb)
+            if (epoch(pkg) != revision) done(null, "STALE_LIBRARY") else done(value, error)
+        }
+        cb = object : MediaBrowser.SubscriptionCallback() {
+            override fun onChildrenLoaded(parentId: String, children: MutableList<MediaBrowser.MediaItem>, opts: Bundle) = loaded(children)
+            override fun onChildrenLoaded(parentId: String, children: MutableList<MediaBrowser.MediaItem>) = loaded(children)
+            private fun loaded(children: List<MediaBrowser.MediaItem>) {
+                if (children.size > 10000) { finish(null, "SOURCE_LIBRARY_LIMIT"); return }
+                // Legacy services may ignore paging options. Paginate their bounded result on DX340.
+                val visible = if (children.size > 25) children.drop(page * 25).take(25) else children
+                if (revisionGuard.update("$pkg\u0000$target\u0000$page", visible.associate { (it.mediaId ?: "") to fingerprint(it) })) {
+                    epochs[pkg] = UUID.randomUUID().toString(); items.remove(pkg); proofs.remove(pkg); changed()
+                    finish(null, "STALE_LIBRARY"); return
+                }
+                val known = items.getOrPut(pkg) { linkedMapOf() }
+                val knownProofs = proofs.getOrPut(pkg) { linkedMapOf() }
+                val result = JSONArray()
+                visible.forEach { item ->
+                    val id = item.mediaId ?: return@forEach
+                    if (id.toByteArray().size > 512) { finish(null, "SOURCE_ID_TOO_LARGE"); return }
+                    if (known.size >= 10000 && !known.containsKey(id)) { val oldest = known.keys.first(); known.remove(oldest); knownProofs.remove(oldest) }
+                    known[id] = item
+                    knownProofs[id] = ItemProof(target, page, fingerprint(item))
+                    result.put(JSONObject().put("id", id).put("title", item.description.title?.toString()?.take(128) ?: "Untitled")
+                        .put("subtitle", item.description.subtitle?.toString()?.take(64) ?: "")
+                        .put("browsable", item.isBrowsable).put("playable", item.isPlayable))
+                }
+                finish(JSONObject().put("parent", target).put("revision", revision).put("page", page)
+                    .put("nextPage", if ((children.size > 25 && (page + 1) * 25 < children.size) || children.size == 25) page + 1 else JSONObject.NULL).put("items", result), null)
+            }
+            override fun onError(parentId: String) = finish(null, "BROWSE_DENIED")
+            override fun onError(parentId: String, options: Bundle) = finish(null, "BROWSE_DENIED")
+        }
+        browser.subscribe(target, options, cb)
+        main.postDelayed({ finish(null, "SOURCE_TIMEOUT") }, 8000)
+    }
+    fun diagnostic(): JSONObject = JSONObject().put("device", android.os.Build.MODEL).put("os", android.os.Build.VERSION.RELEASE)
+        .put("build", android.os.Build.DISPLAY).put("sources", sources()).put("state", state()).put("reportedAudioManager", runCatching {
+            val audio = context.getSystemService(android.media.AudioManager::class.java)
+            JSONObject().put("musicMin", audio.getStreamMinVolume(android.media.AudioManager.STREAM_MUSIC))
+                .put("musicMax", audio.getStreamMaxVolume(android.media.AudioManager.STREAM_MUSIC)).put("musicCurrent", audio.getStreamVolume(android.media.AudioManager.STREAM_MUSIC))
+                .put("fixedVolume", audio.isVolumeFixed).put("musicActive", audio.isMusicActive)
+                .put("note", "Reported API values only; actual AMP15 output mapping is not verified")
+        }.getOrElse { JSONObject().put("error", it.javaClass.simpleName) })
+}

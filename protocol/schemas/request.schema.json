@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DX340 request v1",
+  "type": "object",
+  "required": ["v", "id", "type"],
+  "properties": {
+    "v": {"const": 1},
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9-]{1,64}$"},
+    "type": {"type": "string", "enum": ["HELLO", "AUTHORIZE", "GET_CAPABILITIES", "GET_STATE", "SUBSCRIBE_STATE", "LIST_SOURCES", "SELECT_SOURCE", "SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "ADJUST_VOLUME", "SET_SHUFFLE", "SET_REPEAT", "BROWSE", "SEARCH", "PLAY_ITEM", "GET_QUEUE", "PLAY_QUEUE_ITEM", "GET_ARTWORK"]},
+    "hostEpoch": {"type": "string", "maxLength": 64},
+    "source": {"type": "string", "maxLength": 256},
+    "sourceEpoch": {"type": "string", "maxLength": 64},
+    "args": {"type": "object"}
+  },
+  "allOf": [{"if": {"properties": {"type": {"not": {"enum": ["HELLO", "AUTHORIZE"]}}}}, "then": {"required": ["hostEpoch"]}}],
+  "additionalProperties": false
+}

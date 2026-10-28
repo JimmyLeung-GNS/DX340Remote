@@ -1,0 +1,34 @@
+name: DXRemote
+options:
+  minimumXcodeGenVersion: 2.44.1
+  deploymentTarget:
+    iOS: '17.0'
+settings:
+  base:
+    SWIFT_VERSION: '5.0'
+    MARKETING_VERSION: 0.1.0
+    CURRENT_PROJECT_VERSION: 1
+    CODE_SIGN_STYLE: Automatic
+targets:
+  DXRemote:
+    type: application
+    platform: iOS
+    sources: [DXRemote, BLEClient, ProtocolModels]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: org.dx340.remote.ios
+        TARGETED_DEVICE_FAMILY: '1'
+        GENERATE_INFOPLIST_FILE: NO
+    info:
+      path: DXRemote/Info.plist
+      properties:
+        CFBundleDisplayName: DX340 Remote
+        NSBluetoothAlwaysUsageDescription: Connect directly to your DX340 to browse and control its music over Bluetooth.
+        UIBackgroundModes: [bluetooth-central]
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+schemes:
+  DXRemote:
+    build:
+      targets:
+        DXRemote: all

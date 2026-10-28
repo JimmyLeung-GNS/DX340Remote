@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-28T12:37:25Z",
+  "title": "Design System: DX340 Remote",
+  "extensions": {
+    "colorMeta": {
+      "launcher-shell": {
+        "role": "neutral",
+        "displayName": "Launcher dark shell",
+        "scope": "Android launcher artwork only; not an application surface color."
+      },
+      "launcher-mark": {
+        "role": "neutral",
+        "displayName": "Launcher white mark",
+        "scope": "Android launcher artwork only; not an application text color."
+      }
+    },
+    "typographyMeta": {
+      "android-app-title": { "displayName": "Android application title", "purpose": "Companion and remote title TextViews; accessibility headings." },
+      "android-track-title": { "displayName": "Android track and test title", "purpose": "Player track title and Mango test screen heading." },
+      "android-section-title": { "displayName": "Android section title", "purpose": "Library and queue headings." },
+      "android-body": { "displayName": "Android body", "purpose": "Metadata, capability explanations and host instructions; native Button labels retain platform typography." },
+      "android-status": { "displayName": "Android status", "purpose": "Host selectable status and remote polite live region." }
+    },
+    "nativeAppearance": {
+      "android": "Kotlin platform Views; Theme.DeviceDefault.DayNight; system Button styling and state feedback.",
+      "apple": "SwiftUI system font, title2 bold track title, footnote status, subheadline library now-playing; secondary metadata, bar material, List, Section, TabView and NavigationStack.",
+      "shapesAndElevation": "Platform-owned corner shapes and depth; no app radius or shadow scale.",
+      "motion": "No authored duration or easing tokens. Native motion should follow reduced-motion settings; physical behavior is unverified.",
+      "ramps": "No authored color ramps. Launcher-only fixed artwork colors are not expanded into an invented screen palette.",
+      "previews": "Omitted: browser HTML/CSS cannot establish native rendering fidelity and no browser approximation was requested."
+    },
+    "sources": [
+      "android/host-app/src/main/res/values/styles.xml",
+      "android/remote-app/src/main/res/values/styles.xml",
+      "android/host-app/src/main/res/drawable/ic_dx340.xml",
+      "android/remote-app/src/main/res/drawable/ic_dx340.xml",
+      "android/host-app/src/main/kotlin/org/dx340/remote/host/MainActivity.kt",
+      "android/host-app/src/main/kotlin/org/dx340/remote/host/BrowseTestActivity.kt",
+      "android/remote-app/src/main/kotlin/org/dx340/remote/controller/MainActivity.kt",
+      "apple/DXRemote/RemoteView.swift"
+    ],
+    "verification": {
+      "scope": "Functional diagnostic beta; no whole-product visual approval.",
+      "observed": [
+        "Android remote disconnected Player capture: artifacts/android-remote-launch.png.",
+        "Android companion setup capture: artifacts/ui-host-final.png; predates optional Apple Music controls in current source.",
+        "Captures show DX340 Android 13 dark native theme, not a separate controller phone.",
+        "Inventory records Mango 4.1.37 and Apple Music 6.5.3; full app-build/capture correspondence remains unresolved."
+      ],
+      "sourceReviewed": "Scoped lifecycle and stale-result fixes; source review is not physical acceptance.",
+      "debt": [
+        "Android ordinary four-button navigation lacks selected-state semantics and active destination treatment.",
+        "Android root padding uses raw pixels, not a density-independent spacing scale.",
+        "Current-build recaptures, Activity recreation/navigation restoration, density, landscape and large-text checks remain unaccepted."
+      ],
+      "notTested": [
+        "Apple compilation, signing, native rendering and physical iPhone accessibility review.",
+        "Light and dark appearance and contrast across actual controller phones.",
+        "Whole-product visual acceptance and radio/audio acceptance."
+      ]
+    }
+  },
+  "components": [
+    {
+      "name": "Android action",
+      "kind": "button",
+      "refersTo": "android-action",
+      "description": "Platform Button used for text playback, setup and browse actions; native theme feedback and capability-dependent enabled state. Frontmatter records the minimum target intent."
+    },
+    {
+      "name": "Android disabled action",
+      "kind": "button",
+      "refersTo": "android-action",
+      "description": "The same platform Button with isEnabled false when authorization or source capability is unavailable; nearby explanatory text supplies context."
+    },
+    {
+      "name": "Android destinations",
+      "kind": "nav",
+      "refersTo": "android-destination",
+      "description": "Equal-width Player, Library, Queue and Setup buttons above the scrolling body; selected-state semantics and active treatment remain polish debt."
+    },
+    {
+      "name": "Apple playback action",
+      "kind": "button",
+      "refersTo": "apple-playback",
+      "description": "SwiftUI borderless SF Symbol action in the Playback section, with a spoken accessibility label and capability-based disabled state."
+    },
+    {
+      "name": "Apple navigation",
+      "kind": "nav",
+      "description": "Native TabView with Player, Library, Queue and Setup labels and symbols; each destination has a NavigationStack. Apple compilation and rendering remain unverified."
+    },
+    {
+      "name": "Library capability context",
+      "kind": "custom",
+      "description": "Native text explains unavailable browsing or optional assisted browsing; Apple additionally uses a ProgressView for loading. This is explanatory UI, not a custom card or chip."
+    }
+  ],
+  "narrative": {
+    "northStar": "Native system interface",
+    "overview": "The user selected native system appearance on 28 October 2026. Use platform typography, colors, navigation and control states. The current interface is a functional diagnostic beta with large playback actions and explicit capability explanations. It has no separate screen palette or custom display typeface.\n\nThis document records current Kotlin Views and SwiftUI source, plus the supplied Android captures. It is a handoff for continuing native work, not whole-product visual acceptance. No Figma, web, comp or Flutter migration was selected. Android navigation polish remains open; Apple compilation and visual verification remain unapproved.",
+    "keyCharacteristics": [
+      "Native typography and appearance that follow system settings.",
+      "Large playback targets with capability-dependent disabled states.",
+      "Player, Library, Queue and Setup destinations.",
+      "Setup and diagnostic detail separated from everyday playback."
+    ],
+    "rules": [
+      {
+        "name": "The System Color Rule",
+        "body": "Let native theme roles supply screen colors and enabled, disabled, pressed and focus states; keep the launcher palette scoped to the launcher.",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "**Do** use native system typography, colors and control feedback.",
+      "**Do** preserve large playback targets, scalable text and screen-reader labels.",
+      "**Do** explain unsupported capabilities and show actual connection state.",
+      "**Do** keep Player, Library, Queue and Setup distinct and diagnostics in setup flows.",
+      "**Do** verify current builds on target devices in light, dark and large-text settings before acceptance."
+    ],
+    "donts": [
+      "**Don't** promote launcher colors into a fixed screen palette.",
+      "**Don't** treat the Android four-button navigation row or raw-pixel margins as approved final patterns.",
+      "**Don't** replace native components with a different UI stack without a selected migration.",
+      "**Don't** claim Apple UI acceptance, Bluetooth interoperability or audible playback from source or screenshots."
+    ]
+  }
+}
+

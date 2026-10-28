@@ -1,0 +1,226 @@
+import Foundation
+import CoreBluetooth
+import Observation
+import CryptoKit
+
+@MainActor @Observable
+final class RemoteConnection: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
+    var status = "Find your DX340 to connect directly over Bluetooth."
+    var devices: [CBPeripheral] = []
+    var authorized = false
+    var state: [String: Any] = [:]
+    var sources: [[String: Any]] = []
+    var library: [String: Any] = [:]
+    var queue: [[String: Any]] = []
+    var queueRevision = ""
+    var artwork: Data?
+    private var hostEpoch = ""
+    private var manager: CBCentralManager!
+    private var peripheral: CBPeripheral?
+    private var rx: CBCharacteristic?
+    private var tx: CBCharacteristic?
+    private var serial: UInt16 = 0
+    private var writes: [Data] = []
+    private var writing = false
+    private var wantsConnection = false
+    private var reconnectAttempts = 0
+    private var writeTimeout: Task<Void, Never>?
+    private var pending: [String: String] = [:]
+    private struct BrowseLocation { let source: String; let epoch: String; let parent: String? }
+    private var browseLocations: [String: BrowseLocation] = [:]
+    private var activeBrowseId: String?
+    private var queueLocations: [String: BrowseLocation] = [:]
+    private var activeQueueId: String?
+    var assistedBrowsing: Bool { (state["capabilities"] as? [String: Any])?["browseMode"] as? String == "ui-assisted" }
+    var sourceScope: String { (state["source"] as? String ?? "") + ":" + (state["sourceEpoch"] as? String ?? "") + ":" + String(assistedBrowsing) }
+    private var assembler = Reassembler()
+    override init() {
+        super.init()
+        if let bytes = try? Data(contentsOf: snapshotURL()), bytes.count <= 262144, let saved = try? JSONSerialization.jsonObject(with: bytes) as? [String: Any] {
+            state = saved["state"] as? [String: Any] ?? [:]; sources = saved["sources"] as? [[String: Any]] ?? []; library = saved["library"] as? [String: Any] ?? [:]
+            status = "Cached metadata is stale. Connect to DX340 before controlling playback."
+        }
+        manager = CBCentralManager(delegate: self, queue: .main, options: [CBCentralManagerOptionRestoreIdentifierKey: "org.dx340.remote.central"])
+    }
+    var title: String { state["title"] as? String ?? "No track connected" }
+    var artist: String { state["artist"] as? String ?? "" }
+    func can(_ name: String) -> Bool { authorized && (state["capabilities"] as? [String: Any])?[name] as? Bool == true }
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        if central.state == .poweredOn { status = "Bluetooth ready. Open pairing on DX340 for a new controller."; if wantsConnection, let peripheral, peripheral.state == .disconnected { central.connect(peripheral) } }
+        else { clearConnection(); status = central.state == .unauthorized ? "Allow Bluetooth access in Settings." : "Bluetooth unavailable. Enable Bluetooth to reconnect." }
+    }
+    func scan() {
+        guard manager.state == .poweredOn else { status = "Enable Bluetooth and allow access in Settings."; return }
+        devices = []; status = "Searching for DX340…"
+        manager.scanForPeripherals(withServices: [CBUUID(string: Wire.service)], options: nil)
+        Task { try? await Task.sleep(for: .seconds(10)); manager.stopScan() }
+    }
+    func connect(_ device: CBPeripheral) {
+        manager.stopScan()
+        if let previous = peripheral, previous.identifier != device.identifier { manager.cancelPeripheralConnection(previous) }
+        clearConnection(); peripheral = device; device.delegate = self; wantsConnection = true; reconnectAttempts = 0; status = "Connecting…"
+        manager.connect(device)
+    }
+    func disconnect() {
+        wantsConnection = false
+        if let p = peripheral { manager.cancelPeripheralConnection(p) }
+        clearConnection(); status = "Disconnected. Cached lists may be stale."
+    }
+    private func clearConnection() { writeTimeout?.cancel(); writeTimeout = nil; authorized = false; rx = nil; tx = nil; writing = false; writes = []; pending = [:]; browseLocations = [:]; queueLocations = [:]; activeBrowseId = nil; activeQueueId = nil; hostEpoch = ""; assembler.clear() }
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi RSSI: NSNumber) {
+        if !devices.contains(where: { $0.identifier == peripheral.identifier }) { devices.append(peripheral) }
+    }
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        guard peripheral == self.peripheral else { return }
+        reconnectAttempts = 0; status = "Discovering DX340 service…"; peripheral.delegate = self; peripheral.discoverServices([CBUUID(string: Wire.service)])
+        UserDefaults.standard.set(peripheral.identifier.uuidString, forKey: "lastPeripheral")
+    }
+    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        guard peripheral == self.peripheral else { return }
+        clearConnection(); status = "Connection failed. Return to Setup and retry."
+    }
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        guard peripheral == self.peripheral else { return }
+        clearConnection(); status = "Disconnected; pending commands discarded. Reconnecting…"
+        if wantsConnection && central.state == .poweredOn && reconnectAttempts < 5 {
+            let delay = min(15, 1 << reconnectAttempts); reconnectAttempts += 1
+            Task { try? await Task.sleep(for: .seconds(delay)); if wantsConnection && self.peripheral == peripheral && peripheral.state == .disconnected { central.connect(peripheral) } }
+        }
+    }
+    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String: Any]) {
+        guard let restored = (dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral])?.first else { return }
+        peripheral = restored; restored.delegate = self; wantsConnection = true
+        clearConnection()
+        if restored.state == .connected { restored.discoverServices([CBUUID(string: Wire.service)]) }
+    }
+    func refreshOnForeground() {
+        guard let p = peripheral, p.state == .connected, rx != nil else { return }
+        if authorized { send("GET_STATE") } else { send("HELLO", bootstrap: true) }
+    }
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        guard error == nil, let service = peripheral.services?.first(where: { $0.uuid == CBUUID(string: Wire.service) }) else { status = "DX340 service unavailable."; return }
+        peripheral.discoverCharacteristics([CBUUID(string: Wire.rx), CBUUID(string: Wire.tx)], for: service)
+    }
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        guard error == nil else { status = "Service discovery failed."; return }
+        rx = service.characteristics?.first(where: { $0.uuid == CBUUID(string: Wire.rx) })
+        tx = service.characteristics?.first(where: { $0.uuid == CBUUID(string: Wire.tx) })
+        guard rx != nil, let tx else { status = "Missing DX340 message characteristics."; return }
+        // The encrypted CCC write invokes system BLE pairing, including MITM authentication on the host.
+        peripheral.setNotifyValue(true, for: tx)
+    }
+    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+        guard error == nil, characteristic.isNotifying else { status = "Pairing failed. Open pairing on DX340, accept the system prompt, then retry."; return }
+        send("HELLO", bootstrap: true)
+    }
+    func send(_ type: String, args: [String: Any] = [:], bootstrap: Bool = false) {
+        guard let p = peripheral, let _ = rx, p.state == .connected, bootstrap || authorized else { status = "Connect and authorize before controlling playback."; return }
+        guard pending.count < 8 else { status = "Wait for pending replies."; return }
+        let id = UUID().uuidString
+        let request: [String: Any] = ["v": 1, "id": id, "type": type, "hostEpoch": hostEpoch, "source": state["source"] ?? "", "sourceEpoch": state["sourceEpoch"] ?? "", "args": args]
+        do {
+            let data = try JSONSerialization.data(withJSONObject: request, options: [.sortedKeys])
+            let frames = try Wire.frames(data, capacity: min(512, p.maximumWriteValueLength(for: .withResponse)), id: serial)
+            guard writes.count + frames.count <= 12000 else { status = "Too many queued messages."; return }
+            serial &+= 1; pending[id] = type
+            if type == "GET_QUEUE" { queueLocations[id] = BrowseLocation(source: state["source"] as? String ?? "", epoch: state["sourceEpoch"] as? String ?? "", parent: nil); activeQueueId = id }
+            if type == "BROWSE" {
+                browseLocations[id] = BrowseLocation(source: state["source"] as? String ?? "", epoch: state["sourceEpoch"] as? String ?? "", parent: args["parent"] as? String)
+                activeBrowseId = id; library = ["loading": true]; status = "Loading library…"
+            }
+            writes.append(contentsOf: frames); pump()
+            Task { try? await Task.sleep(for: .seconds(12)); if pending.removeValue(forKey: id) != nil { browseLocations[id] = nil; if id == activeBrowseId { library = [:] }; status = "Reply timed out; outcome unknown. Refresh before retrying." } }
+        } catch { status = "Cannot encode Bluetooth message." }
+    }
+    private func pump() {
+        guard !writing, !writes.isEmpty, let p = peripheral, let rx else { return }
+        writing = true; p.writeValue(writes.removeFirst(), for: rx, type: .withResponse)
+        writeTimeout?.cancel()
+        writeTimeout = Task { try? await Task.sleep(for: .seconds(10)); guard !Task.isCancelled else { return }; if writing { manager.cancelPeripheralConnection(p); clearConnection(); status = "Bluetooth write timed out; outcome unknown. Pending controls cleared." } }
+    }
+    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+        writeTimeout?.cancel(); writeTimeout = nil; writing = false
+        if error != nil { clearConnection(); status = "Write failed; outcome unknown. Reconnect before retrying." }
+        else { pump() }
+    }
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        guard error == nil, let bytes = characteristic.value else { status = "Bluetooth read failed."; return }
+        do { if let value = try assembler.accept(bytes) { try receive(value) } }
+        catch { disconnect(); status = "Invalid Bluetooth reply. Reconnect." }
+    }
+    func authorize() { send("AUTHORIZE", bootstrap: true) }
+    func browse(parent: String? = nil, page: Int = 0) {
+        send("BROWSE", args: ["parent": parent.map { $0 as Any } ?? NSNull(), "page": page, "revision": parent == nil ? NSNull() : (library["revision"] ?? state["sourceEpoch"] ?? "")])
+    }
+    private func receive(_ value: Data) throws {
+        guard let reply = try JSONSerialization.jsonObject(with: value) as? [String: Any], reply["v"] as? Int == 1,
+              let type = reply["type"] as? String, let data = reply["data"] as? [String: Any] else { throw WireError.malformed }
+        let id = reply["id"] as? String ?? "", operation = pending[id], location = browseLocations[id]
+        if type != "STATE_CHANGED" && operation == nil { return }
+        let queueLocation = queueLocations[id]
+        if type != "ACCEPTED" { queueLocations[id] = nil }
+        if type != "ACCEPTED" { pending[id] = nil }
+        if type == "HELLO" { hostEpoch = reply["hostEpoch"] as? String ?? ""; authorize(); return }
+        if type == "ERROR" { browseLocations[id] = nil; if id == activeBrowseId { library = [:] }; status = errorMessage(data["code"] as? String ?? "Source error"); return }
+        if type == "ACCEPTED" { status = "Waiting for source…"; return }
+        guard reply["hostEpoch"] as? String == hostEpoch else { disconnect(); return }
+        if operation == "AUTHORIZE", data["authorized"] as? Bool == true { authorized = true; status = "Connected to DX340" }
+        if let new = data["state"] as? [String: Any] { applyState(new) }
+        if type == "STATE_CHANGED" { applyState(data) }
+        if let list = data["sources"] as? [[String: Any]] { sources = list }
+        if operation == "BROWSE" {
+            browseLocations[id] = nil
+            guard id == activeBrowseId, let location, location.source == state["source"] as? String, location.epoch == state["sourceEpoch"] as? String else { return }
+            library = data; library["requestedParent"] = location.parent ?? ""; library["scopeSource"] = location.source; library["scopeEpoch"] = location.epoch
+            status = "Library loaded. Offline availability depends on the source."
+        }
+        if operation == "GET_QUEUE", id == activeQueueId, let queueLocation, queueLocation.source == state["source"] as? String, queueLocation.epoch == state["sourceEpoch"] as? String { queue = data["items"] as? [[String: Any]] ?? []; queueRevision = data["revision"] as? String ?? "" }
+        if operation == "GET_ARTWORK", let key = data["key"] as? String, let encoded = data["base64"] as? String, let bytes = Data(base64Encoded: encoded), bytes.count <= 49152 {
+            let digest = SHA256.hash(data: bytes).map { String(format: "%02x", $0) }.joined()
+            guard digest == key else { throw WireError.malformed }
+            try? bytes.write(to: artworkURL(key), options: .atomic)
+            if state["artworkKey"] as? String == key { artwork = bytes }
+            trimArtworkCache()
+        }
+        if operation != "GET_ARTWORK", let key = state["artworkKey"] as? String, key.range(of: "^[a-f0-9]{64}$", options: .regularExpression) != nil {
+            if let cached = try? Data(contentsOf: artworkURL(key)) { artwork = cached }
+            else {
+                artwork = nil
+                Task { try? await Task.sleep(for: .milliseconds(300)); if authorized && pending.isEmpty && state["artworkKey"] as? String == key { send("GET_ARTWORK", args: ["key": key]) } }
+            }
+        } else if state["artworkKey"] is NSNull { artwork = nil }
+        if data["outcome"] as? String == "dispatched" { status = "Sent to player; waiting for observed playback."; send("GET_STATE") }
+        if data["outcome"] as? String == "observed" { status = "Playback state confirmed by source." }
+        if let snapshot = try? JSONSerialization.data(withJSONObject: ["state": state, "sources": sources, "library": library]), snapshot.count <= 262144 { try? snapshot.write(to: snapshotURL(), options: .atomic) }
+    }
+    private func applyState(_ new: [String: Any]) {
+        if new["sourceEpoch"] as? String != state["sourceEpoch"] as? String || new["source"] as? String != state["source"] as? String || (new["capabilities"] as? [String: Any])?["browseMode"] as? String != (state["capabilities"] as? [String: Any])?["browseMode"] as? String {
+            library = [:]; queue = []; queueRevision = ""; artwork = nil; activeBrowseId = nil; activeQueueId = nil; browseLocations = [:]; queueLocations = [:]
+        }
+        state = new
+    }
+    private func errorMessage(_ code: String) -> String {
+        switch code {
+        case "UI_PERMISSION_REQUIRED": return "On DX340, enable DX340 Apple Music browsing in Accessibility settings."
+        case "UI_SCREEN_UNLOCK_REQUIRED": return "Wake and unlock DX340 to browse Apple Music."
+        case "UI_FOREGROUND_REQUIRED", "UI_SETUP_REQUIRED", "UI_UNEXPECTED_SCREEN": return "Open Apple Music’s Downloaded library on DX340, then refresh."
+        case "UI_VERSION_UNVERIFIED": return "Apple Music changed. Assisted browsing needs revalidation."
+        case "STALE_LIBRARY", "EXPIRED_ITEM": return "The library changed. Refresh before selecting a track."
+        case "UI_BUSY", "SOURCE_BUSY": return "Wait for the current action to finish."
+        case "LOCAL_APPROVAL_REQUIRED": return "Approve this controller on DX340, then retry authorization."
+        default: return "Action failed (\(code)). Refresh the player to check its state."
+        }
+    }
+    private func snapshotURL() -> URL { FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appendingPathComponent("dx340-metadata.json") }
+    private func artworkURL(_ key: String) -> URL {
+        let directory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0].appendingPathComponent("DX340Artwork")
+        try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        return directory.appendingPathComponent(key).appendingPathExtension("jpg")
+    }
+    private func trimArtworkCache() {
+        let directory = artworkURL("unused").deletingLastPathComponent()
+        let files = (try? FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: [.contentModificationDateKey])) ?? []
+        let sorted = files.sorted { ((try? $0.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate) ?? .distantPast) > ((try? $1.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate) ?? .distantPast) }
+        for file in sorted.dropFirst(100) { try? FileManager.default.removeItem(at: file) }
+    }
+}

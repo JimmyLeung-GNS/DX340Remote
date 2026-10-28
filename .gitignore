@@ -1,0 +1,30 @@
+# Android and Gradle outputs
+.gradle/
+**/build/
+local.properties
+.kotlin/
+.idea/
+*.iml
+
+# Apple build and user state
+DerivedData/
+**/xcuserdata/
+**/.build/
+**/.swiftpm/
+*.xcuserstate
+.DS_Store
+
+# Credentials and signing material
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.p12
+*.mobileprovision
+
+# Generated packages, local logs and scratch files
+artifacts/
+work/
+*.log
+Thumbs.db

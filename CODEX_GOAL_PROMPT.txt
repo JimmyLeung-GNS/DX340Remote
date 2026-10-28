@@ -1,0 +1,38 @@
+/goal Implement the complete DX340 Bluetooth Remote system described in AGENTS.md and docs/implementation-plan.md: a companion on the iBasso DX340, native iPhone and Android remotes, and the later Apple Watch controls. Prove the required behavior with actual builds and the plan's acceptance evidence. Start with the device inventory and Bluetooth/source feasibility work, then continue into the working product rather than stopping at scaffolding.
+
+Read AGENTS.md, docs/implementation-plan.md and docs/status.md first. Use this existing folder as the repository root. Inspect the current files, toolchains and connected devices before making assumptions. Preserve existing work and maintain an actionable checkpoint in docs/status.md.
+
+The intended product
+- The DX340 stays in my bag and plays music stored on the device: Apple Music downloads and local FLAC/WAV files.
+- Both iPhone and Android controllers must connect directly over Bluetooth Low Energy with Wi-Fi switched off. Everyday control must not require internet, a hotspot or a cloud server.
+- Provide play/pause, previous/next, track information, verified volume control, supported seeking, source selection, and full album/playlist/track browsing with arbitrary song selection.
+- Keep Mango Player's Android app as the local playback engine if possible. Do not switch to another player or your own playback engine without presenting the evidence and obtaining my decision.
+- Add the Watch extension after the phone system is stable. Use the same protocol, verify actual Watch behavior and make any iPhone dependency explicit.
+
+Known inputs
+- I have access to a Mac, but do not assume this Windows chat can execute on that Mac.
+- My iPhone reports iOS 27.2; confirm its hardware model and exact build when needed.
+- Android 13 build 1.09.851 was reported, provisionally for the DX340. Confirm it. The separate Android controller's model and OS are not yet recorded.
+- HiByLink on my installed iPhone/DX340 setup only worked over Wi-Fi. Do not depend on HiByLink or repeat that setup as a Bluetooth solution.
+
+First implementation milestones
+1. Inventory the environment and source-app versions. Set up reproducible Android and Apple projects and build instructions. Initialize Git if this folder is not already a repository; do not create a remote repository or publish anything.
+2. Build an installable DX340 diagnostic APK that checks BLE advertising/GATT hosting, exposes the planned service, reports runtime permissions, and records source-session capabilities. Build minimal real iPhone and Android BLE clients early, so iPhone compatibility is tested before substantial UI work.
+3. Probe Apple Music and Mango independently for transport actions, metadata, actual output-volume behavior, queue access, resumption/cold-start behavior and legitimate browsing/play-by-ID interfaces. Use APIs compatible with the DX340's Android 13.
+4. Record findings in docs/device-inventory.md and docs/capability-report.md, with versions and evidence. Treat physical tests as not tested until executed on the actual devices.
+5. Implement the host, versioned protocol and both controller apps through the remaining plan stages. Add bounded message framing, capability reporting, authorization, command deduplication, reconnect/state recovery, paginated libraries, artwork caching and honest unsupported/error states. Preserve source playback when the controller disconnects.
+
+Critical scope and verification rules
+- Do not assume an available platform API proves that the DX340 or a particular music app supports it.
+- Reading files is not enough: verify that selecting a local track starts that track through Mango.
+- Skipping a queue is not full Apple Music browsing: verify selecting a downloaded track outside the current queue while offline.
+- If direct Apple Music browsing is denied, investigate the plan's UI-assisted branch as an experiment. State screen-on/unlock and app-update limitations before adopting it. Do not claim the full requirement is met if neither approach works.
+- Do not root, flash firmware, extract Apple Music's private protected downloads, spoof Android Auto, replace the audio engine silently or introduce Wi-Fi as a hidden fallback.
+- Use shared protocol fixtures and meaningful unit/integration tests. Build each platform on a supported host. Test BLE, background operation, audio routing and source integration on physical devices. Keep mock results separate from actual-device evidence.
+
+Progress and completion
+Proceed autonomously with routine implementation, builds, fixes and tests. Ask only for missing information or device/Mac/signing actions that are genuinely required. When one path is blocked, continue useful independent work and prepare precise installation or test instructions for me. Do not repeat unchanged tool failures or ask me to reconfirm known preferences.
+
+Maintain docs/status.md, the protocol specification, installation instructions and a compatibility/test matrix. Record actual commands and results. Keep remaining source or device limitations visible across turns.
+
+Completion requires working installable applications, documented builds, verified Bluetooth-only control from both phones, full requested local and downloaded Apple Music browsing through accepted integrations, the planned Watch milestone, and evidence for the applicable acceptance tests. A transport-only beta is useful progress, not completion. If an external dependency prevents further progress, report the attempted paths, evidence, exact blocker and the specific action needed to resume, following the environment's goal lifecycle rules.
