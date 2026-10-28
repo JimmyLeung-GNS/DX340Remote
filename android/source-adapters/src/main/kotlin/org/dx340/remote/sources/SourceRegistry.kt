@@ -144,6 +144,12 @@ class SourceRegistry(private val context: Context, private val listener: Compone
             .put("accessError", accessError ?: JSONObject.NULL)
     }
     fun select(pkg: String) { require(pkg in PACKAGES) { "MISSING_SOURCE" }; selected = pkg; changed() }
+    fun observedSources(): JSONArray = JSONArray().apply { controllers.forEach { (pkg, c) ->
+        put(JSONObject().put("source", pkg).put("sourceEpoch", epoch(pkg))
+            .put("title", c.metadata?.getString("android.media.metadata.TITLE") ?: "")
+            .put("playbackState", c.playbackState?.state ?: PlaybackState.STATE_NONE)
+            .put("playing", c.playbackState?.state == PlaybackState.STATE_PLAYING))
+    } }
     fun getArtwork(key: String): JSONObject {
         require(key == state().optString("artworkKey")) { "EXPIRED_ITEM" }
         val bytes = artwork.get(key) ?: error("EXPIRED_ITEM")
@@ -152,6 +158,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     private fun fingerprint(item: MediaBrowser.MediaItem) = listOf(item.mediaId, item.flags.toString(), item.description.title?.toString(), item.description.subtitle?.toString(), item.description.mediaUri?.toString()).joinToString("\u0000")
     fun playItem(args: JSONObject, stillAuthorized: () -> Boolean, done: (String?) -> Unit) {
         val pkg = selected
+        val deadline = android.os.SystemClock.elapsedRealtime() + 10000
         if (usingUi(pkg)) {
             val ui = uiLibrary ?: return done("UI_PERMISSION_REQUIRED")
             val id = args.optString("item"); val revision = args.optString("revision")
@@ -159,7 +166,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
             if (invalid != null) { done(invalid); return }
             if (controllers[pkg] == null) { done("SOURCE_NOT_READY"); return }
             val expected = epoch(pkg)
-            pauseOtherSourceForUi(pkg) { error ->
+            preparePlayback(pkg, expected, stillAuthorized) { error ->
                 if (error != null) done(error)
                 else if (selected != pkg || epoch(pkg) != expected) done("STALE_SOURCE")
                 else ui.play(id, revision, stillAuthorized, done)
@@ -180,55 +187,107 @@ class SourceRegistry(private val context: Context, private val listener: Compone
                     require((0 until list.length()).any { list.getJSONObject(it).getString("id") == id }) { "EXPIRED_ITEM" }
                     revisionGuard.validateSelection(proof.fingerprint, items[pkg]?.get(id)?.let(::fingerprint))
                     require(stillAuthorized()) { "AUTHORIZATION_DENIED" }
-                    command("PLAY_ITEM_VALIDATED", args)
-                    done(null)
+                    preparePlayback(pkg, expectedEpoch, stillAuthorized, deadline) { handoffError ->
+                        if (handoffError != null) done(handoffError)
+                        else browse(proof.parent, proof.page) { _, finalError ->
+                            try {
+                                require(finalError == null) { finalError ?: "SOURCE_TIMEOUT" }
+                                require(android.os.SystemClock.elapsedRealtime() <= deadline) { "SOURCE_TIMEOUT" }
+                                require(selected == pkg && epoch(pkg) == expectedEpoch) { "STALE_SOURCE" }
+                                revisionGuard.validateSelection(proof.fingerprint, items[pkg]?.get(id)?.let(::fingerprint))
+                                require(stillAuthorized()) { "AUTHORIZATION_DENIED" }
+                                command("PLAY_ITEM_VALIDATED", args); done(null)
+                            } catch (e: Exception) { done(e.message ?: "SOURCE_NOT_READY") }
+                        }
+                    }
                 } catch (e: Exception) { done(e.message ?: "SOURCE_NOT_READY") }
             }
         } catch (e: Exception) { done(e.message ?: "SOURCE_NOT_READY") }
     }
-    private fun pauseOtherSourceForUi(target: String, done: (String?) -> Unit) {
-        val others = controllers.filter { (pkg, c) -> pkg != target && c.playbackState?.state == PlaybackState.STATE_PLAYING }
-        if (others.isEmpty()) { done(null); return }
-        if (others.size != 1) { done("OTHER_SOURCE_PLAYING"); return }
-        val (pkg, c) = others.entries.first()
-        if (!capabilities(pkg).optBoolean("canPause")) { done("OTHER_SOURCE_PLAYING"); return }
-        c.transportControls.pause()
-        val deadline = android.os.SystemClock.elapsedRealtime() + 3500
-        fun observe() {
-            when {
-                c.playbackState?.state == PlaybackState.STATE_PAUSED -> done(null)
-                android.os.SystemClock.elapsedRealtime() >= deadline || closed -> done("SOURCE_HANDOFF_FAILED")
-                else -> main.postDelayed({ observe() }, 100)
+    private fun playbackGuard(pkg: String, expected: String, stillAuthorized: () -> Boolean): String? = when {
+        closed || controllers[pkg] == null -> "SOURCE_NOT_READY"
+        accessError != null -> "PERMISSION_REVOKED"
+        !stillAuthorized() -> "AUTHORIZATION_DENIED"
+        selected != pkg || epoch(pkg) != expected -> "STALE_SOURCE"
+        else -> null
+    }
+    private fun preparePlayback(target: String, expected: String, stillAuthorized: () -> Boolean, deadline: Long = Long.MAX_VALUE, done: (String?) -> Unit) {
+        PlaybackHandoff({ android.os.SystemClock.elapsedRealtime() }, { delay, task -> main.postDelayed(task, delay) }, {
+            controllers.map { (pkg, c) ->
+                val observation = when (c.playbackState?.state) {
+                    PlaybackState.STATE_PAUSED -> HandoffPlayback.PAUSED
+                    PlaybackState.STATE_NONE, PlaybackState.STATE_STOPPED -> HandoffPlayback.STOPPED
+                    PlaybackState.STATE_PLAYING, PlaybackState.STATE_BUFFERING, PlaybackState.STATE_CONNECTING,
+                    PlaybackState.STATE_FAST_FORWARDING, PlaybackState.STATE_REWINDING,
+                    PlaybackState.STATE_SKIPPING_TO_NEXT, PlaybackState.STATE_SKIPPING_TO_PREVIOUS,
+                    PlaybackState.STATE_SKIPPING_TO_QUEUE_ITEM -> HandoffPlayback.ACTIVE
+                    else -> HandoffPlayback.UNKNOWN
+                }
+                HandoffSource(pkg, epoch(pkg), observation, capabilities(pkg).optBoolean("canPause"))
             }
+        }, { previous ->
+            require(epoch(previous.id) == previous.epoch) { "SOURCE_HANDOFF_FAILED" }
+            val controller = controllers[previous.id] ?: error("SOURCE_HANDOFF_FAILED")
+            controller.transportControls.pause()
+        }).prepare(target, {
+            if (android.os.SystemClock.elapsedRealtime() > deadline) "SOURCE_TIMEOUT"
+            else playbackGuard(target, expected, stillAuthorized)
+        }, done)
+    }
+    fun playQueueItem(args: JSONObject, stillAuthorized: () -> Boolean, done: (String?) -> Unit) {
+        val pkg = selected; val expected = epoch(pkg)
+        fun validate() {
+            playbackGuard(pkg, expected, stillAuthorized)?.let { error(it) }
+            require(capabilities(pkg).optBoolean("canPlayQueueItem")) { "UNSUPPORTED_CAPABILITY" }
+            val queue = controllers[pkg]?.queue ?: error("SOURCE_NOT_READY")
+            require(args.getString("revision") == queueRevision(queue)) { "STALE_LIBRARY" }
+            require(queue.any { it.queueId == args.getLong("item") }) { "EXPIRED_ITEM" }
         }
-        main.postDelayed({ observe() }, 100)
+        try {
+            validate()
+            preparePlayback(pkg, expected, stillAuthorized) { handoffError ->
+                if (handoffError != null) done(handoffError)
+                else try { validate(); command("PLAY_QUEUE_ITEM", args); done(null) }
+                catch (e: Exception) { done(e.message ?: "SOURCE_NOT_READY") }
+            }
+        } catch (e: Exception) { done(e.message ?: "SOURCE_NOT_READY") }
     }
     fun setPlaying(playing: Boolean, experimental: Boolean = false, stillAuthorized: () -> Boolean, done: (String?) -> Unit) {
         val pkg = selected; val expectedEpoch = epoch(pkg)
         try {
             require(accessError == null) { "PERMISSION_REVOKED" }
-            require(experimental || capabilities(pkg).optBoolean(if (playing) "canPlay" else "canPause")) { "UNSUPPORTED_CAPABILITY" }
             val controller = controllers[pkg] ?: error("SOURCE_NOT_READY")
             val desired = if (playing) PlaybackState.STATE_PLAYING else PlaybackState.STATE_PAUSED
             val current = controller.playbackState?.state
             require(current == PlaybackState.STATE_PLAYING || current == PlaybackState.STATE_PAUSED) { "SOURCE_NOT_READY" }
-            require(stillAuthorized()) { "AUTHORIZATION_DENIED" }
-            if (current == desired) { done(null); return }
-            if (playing) require(controllers.none { (otherPkg, other) -> otherPkg != pkg && other.playbackState?.state == PlaybackState.STATE_PLAYING }) { "OTHER_SOURCE_PLAYING" }
-            // Mango's onPlay can toggle. Dispatch once only from an observed opposite state.
-            if (playing) controller.transportControls.play() else controller.transportControls.pause()
-            val deadline = android.os.SystemClock.elapsedRealtime() + 3500
-            fun observe() {
-                when {
-                    closed -> done("SOURCE_NOT_READY")
-                    pkg != selected || expectedEpoch != epoch(pkg) -> done("STALE_SOURCE")
-                    !stillAuthorized() -> done("AUTHORIZATION_DENIED")
-                    controller.playbackState?.state == desired -> done(null)
-                    android.os.SystemClock.elapsedRealtime() >= deadline -> done("SOURCE_TIMEOUT")
-                    else -> main.postDelayed({ observe() }, 100)
-                }
+            require(current == desired || experimental || capabilities(pkg).optBoolean(if (playing) "canPlay" else "canPause")) { "UNSUPPORTED_CAPABILITY" }
+            fun dispatch() {
+                try {
+                    playbackGuard(pkg, expectedEpoch, stillAuthorized)?.let { error(it) }
+                    val latest = controller.playbackState?.state
+                    require(latest == PlaybackState.STATE_PLAYING || latest == PlaybackState.STATE_PAUSED) { "SOURCE_NOT_READY" }
+                    if (latest == desired) { done(null); return }
+                    require(experimental || capabilities(pkg).optBoolean(if (playing) "canPlay" else "canPause")) { "UNSUPPORTED_CAPABILITY" }
+                    // Mango's onPlay can toggle. Dispatch once from observed opposite state only.
+                    if (playing) controller.transportControls.play() else controller.transportControls.pause()
+                    val deadline = android.os.SystemClock.elapsedRealtime() + 3500
+                    fun observe() {
+                        val invalid = playbackGuard(pkg, expectedEpoch, stillAuthorized)
+                        when {
+                            invalid != null -> done(invalid)
+                            controller.playbackState?.state == desired -> done(null)
+                            android.os.SystemClock.elapsedRealtime() >= deadline -> done("SOURCE_TIMEOUT")
+                            else -> main.postDelayed({ observe() }, 100)
+                        }
+                    }
+                    main.postDelayed({ observe() }, 100)
+                } catch (e: Exception) { done(e.message ?: "SOURCE_NOT_READY") }
             }
-            main.postDelayed({ observe() }, 100)
+            if (playing) {
+                preparePlayback(pkg, expectedEpoch, stillAuthorized) { error ->
+                    if (error != null) done(error) else dispatch()
+                }
+            } else dispatch()
         } catch (e: Exception) { done(e.message ?: "SOURCE_NOT_READY") }
     }
     private fun version(pkg: String) = runCatching { context.packageManager.getPackageInfo(pkg, 0).let { "${it.versionName}|${it.longVersionCode}|${android.os.Build.FINGERPRINT}" } }.getOrNull() ?: "missing"
@@ -275,7 +334,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
             else -> error("UNSUPPORTED_CAPABILITY")
         }
         require(cap.optBoolean(key)) { "UNSUPPORTED_CAPABILITY" }
-        // Safe handoff needs observed pause before starting another app; reject until that path is verified.
+        // Final defense after asynchronous preparation and item/queue revalidation.
         if (op == "PLAY_ITEM_VALIDATED" || op == "PLAY_QUEUE_ITEM") {
             require(controllers.none { (pkg, other) -> pkg != selected && other.playbackState?.state == PlaybackState.STATE_PLAYING }) { "OTHER_SOURCE_PLAYING" }
         }

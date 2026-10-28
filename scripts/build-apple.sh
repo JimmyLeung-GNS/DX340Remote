@@ -24,6 +24,8 @@ if [ -n "$simulator" ]; then
     xcrun simctl bootstatus "$simulator" -b > artifacts/apple-simulator-boot.txt 2>&1
     xcrun simctl install "$simulator" artifacts/apple-simulator/Build/Products/Debug-iphonesimulator/DXRemote.app
     xcrun simctl launch "$simulator" org.dx340.remote.ios > artifacts/apple-simulator-launch.txt 2>&1
+    sleep 2
+    xcrun simctl spawn "$simulator" launchctl list > artifacts/apple-simulator-processes.txt
     xcrun simctl io "$simulator" screenshot artifacts/apple-simulator-launch.png
     printf '%s\n' 'Simulator launch command succeeded; inspect the screenshot and app. Physical iPhone and Bluetooth acceptance remain untested.'
 else

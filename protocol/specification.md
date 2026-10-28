@@ -39,7 +39,15 @@ Duplicate IDs in the same authenticated controller/host epoch return cached resu
 
 Library nodes have id/title/subtitle/browsable/playable. Responses include parent, page, revision and nextPage (null at end). A legacy source returning an unpaged result is bounded to 10,000 items then paginated on DX340. No arbitrary remote file paths. Item knowledge is bounded at 10,000 IDs. Removable-storage and library-change revision detection still require physical implementation/verification; session epoch alone is not a complete library revision.
 
-SEARCH, SET_SHUFFLE, SET_REPEAT and ADJUST_VOLUME return UNSUPPORTED_CAPABILITY in this beta. Public metadata artwork is scaled/compressed to at most44KiB, identified by SHA256, and cached with bounds on both clients. Bulk replies have lower priority than controls; actual BLE latency remains unmeasured. canAdjustVolume is false until DX340 output is verified. canResume and canColdLaunch are false. Ordinary source transitions reject OTHER_SOURCE_PLAYING. Optional Apple UI selection validates its target, pauses a known competing source if supported, observes pause, then revalidates/clicks. Complete source-switch/audio acceptance remains outstanding.
+SEARCH, SET_SHUFFLE, SET_REPEAT and ADJUST_VOLUME return UNSUPPORTED_CAPABILITY in this beta. Public metadata artwork is scaled/compressed to at most44KiB, identified by SHA256, and cached with bounds on both clients. Bulk replies have lower priority than controls; actual BLE latency remains unmeasured. canAdjustVolume is false until DX340 output is verified. canResume and canColdLaunch are false. Complete source-switch/audio acceptance remains outstanding.
+
+## Playback source handoff
+
+SELECT_SOURCE changes the command target without starting playback. SET_PLAYING(true), PLAY_ITEM and PLAY_QUEUE_ITEM prepare playback by checking authorization, notification access, source identity/epoch and target validity before pausing a competing supported source. Preparation sends one pause and waits at most3.5s for the same session to report paused. Session replacement, lost authorization, changed target, unknown competing state or timeout prevents target start. Unsupported pause returns OTHER_SOURCE_PLAYING; failed observation returns SOURCE_HANDOFF_FAILED. The host holds mutation ownership throughout. Client request timeout still means unknown outcome; never automatically replay the command.
+
+Item and queue identity/revision are checked again after handoff. Native item selection re-reads the parent and refuses to dispatch after its10s validation deadline. UI selection revalidates the visible downloaded row. A pause may already have succeeded when later validation fails: the previous source stays paused, and the user must issue a new deliberate command. No automatic rollback/resume or volume change occurs. A completed pause observation/dispatch does not establish acoustic silence, gapless switching or phone Bluetooth acceptance.
+
+An already observed desired play/pause state is a no-op, including sources whose current action mask omits the redundant action. A real state-changing dispatch still requires the current capability. The host observes desired-state completion separately from library/queue item dispatch.
 
 ## Optional Apple Music UI-assisted browsing
 
@@ -51,6 +59,6 @@ Mango's verified desired-state wrapper calls play only from observed paused stat
 
 ## Error codes
 
-AUTHORIZATION_DENIED, LOCAL_APPROVAL_REQUIRED, CONTROLLER_BUSY, INCOMPATIBLE_PROTOCOL, STALE_HOST, STALE_SOURCE, WRONG_SOURCE, MISSING_SOURCE, SOURCE_NOT_READY, PERMISSION_REVOKED, UNSUPPORTED_CAPABILITY, BROWSE_UNAVAILABLE, BROWSE_DENIED, SOURCE_TIMEOUT, SOURCE_LIBRARY_LIMIT, STALE_LIBRARY, EXPIRED_ITEM, OTHER_SOURCE_PLAYING, INVALID_ARGUMENT, MALFORMED_MESSAGE, REQUEST_ID_REUSED, RATE_LIMIT, SESSION_LIMIT, RESPONSE_TOO_LARGE. SD_CARD_REMOVED is reserved until an adapter can distinguish removal. Transport errors do not assert source state.
+AUTHORIZATION_DENIED, LOCAL_APPROVAL_REQUIRED, CONTROLLER_BUSY, INCOMPATIBLE_PROTOCOL, STALE_HOST, STALE_SOURCE, WRONG_SOURCE, MISSING_SOURCE, SOURCE_NOT_READY, PERMISSION_REVOKED, UNSUPPORTED_CAPABILITY, BROWSE_UNAVAILABLE, BROWSE_DENIED, SOURCE_TIMEOUT, SOURCE_LIBRARY_LIMIT, STALE_LIBRARY, EXPIRED_ITEM, OTHER_SOURCE_PLAYING, SOURCE_HANDOFF_FAILED, SOURCE_BUSY, INVALID_ARGUMENT, MALFORMED_MESSAGE, REQUEST_ID_REUSED, RATE_LIMIT, SESSION_LIMIT, RESPONSE_TOO_LARGE. SD_CARD_REMOVED is reserved until an adapter can distinguish removal. Transport errors do not assert source state.
 
 UI mode adds UI_MODE_DISABLED, UI_SCREEN_UNLOCK_REQUIRED, UI_VERSION_UNVERIFIED, UI_FOREGROUND_REQUIRED, UI_SETUP_REQUIRED, UI_UNEXPECTED_SCREEN, UI_DOWNLOADED_CONTEXT_REQUIRED, UI_TREE_LIMIT, UI_BUSY, UI_ACTION_FAILED and UI_ACTION_TIMEOUT. These require a visible setup/recovery explanation; clients must not substitute queue skipping for library browsing.

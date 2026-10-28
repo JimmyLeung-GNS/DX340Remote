@@ -184,7 +184,14 @@ class HostService : Service() {
                                 ledger.finish(id, value); mutationGate.leave(id); gateEntered = false
                             }
                         }
-                        "NEXT", "PREVIOUS", "SEEK", "PLAY_QUEUE_ITEM" -> {
+                        "PLAY_QUEUE_ITEM" -> {
+                            reply(device, request, "ACCEPTED")
+                            sources.playQueueItem(args, { authenticated == device && approved.getBoolean(device.address, false) && device.bondState == BluetoothDevice.BOND_BONDED }) { error ->
+                                val value = reply(device, request, if (error == null) "RESULT" else "ERROR", if (error == null) JSONObject().put("outcome", "dispatched") else JSONObject().put("code", error))
+                                ledger.finish(id, value); mutationGate.leave(id); gateEntered = false
+                            }
+                        }
+                        "NEXT", "PREVIOUS", "SEEK" -> {
                             sources.command(op, args)
                             result(JSONObject().put("outcome", "dispatched").put("observation", "Await source state; audible completion is not confirmed"))
                         }

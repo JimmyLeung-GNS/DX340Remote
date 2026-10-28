@@ -1,0 +1,70 @@
+name: Apple build and simulator launch
+
+on:
+  push:
+    paths:
+      - 'apple/**'
+      - 'protocol/fixtures/**'
+      - 'scripts/build-apple.sh'
+      - '.github/workflows/apple-verification.yml'
+  pull_request:
+    paths:
+      - 'apple/**'
+      - 'protocol/fixtures/**'
+      - 'scripts/build-apple.sh'
+      - '.github/workflows/apple-verification.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: apple-verification-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  simulator:
+    # Standard public-repository runner; no signing, secrets, paid runner or device claims.
+    if: github.event.repository.private == false
+    runs-on: macos-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Select an available iPhone simulator
+        id: simulator
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          xcodebuild -version | tee artifacts/ci-xcode-version.txt
+          xcrun simctl list devices available --json > artifacts/ci-simulators.json
+          python3 - <<'PY'
+          import json, os, re
+          with open('artifacts/ci-simulators.json') as f:
+              devices = json.load(f)['devices']
+          candidates = [(tuple(map(int, re.findall(r'\d+', runtime))), device)
+                        for runtime, values in devices.items() if '.iOS-' in runtime
+                        for device in values if device.get('isAvailable') and device['name'].startswith('iPhone')]
+          if not candidates:
+              raise SystemExit('No available iPhone simulator runtime on this runner')
+          _, selected = max(candidates, key=lambda item: (item[0], item[1]['name']))
+          print('Selected:', selected['name'], selected['udid'])
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write('udid=' + selected['udid'] + '\n')
+          PY
+      - name: Test, build, install and launch
+        env:
+          SIMULATOR_UDID: ${{ steps.simulator.outputs.udid }}
+        run: sh scripts/build-apple.sh "$SIMULATOR_UDID"
+      - name: Preserve verification evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: apple-simulator-evidence
+          path: |
+            artifacts/*.txt
+            artifacts/*.json
+            artifacts/*.png
+          retention-days: 3
+          if-no-files-found: warn
