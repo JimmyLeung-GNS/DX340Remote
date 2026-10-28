@@ -19,9 +19,9 @@
 | T04 Latency | NOT MEASURED; distinguish ACK from observed state |
 | T05 Screen off /30min pause | NOT TESTED for BLE; optional Apple browsing requires on/unlocked |
 | T06 Ten range recoveries | NOT TESTED |
-| T07 Apple20 tracks/5 albums/2 playlists | PARTIAL research only; one outside-queue offline selection audibly confirmed; own-service one selected-state result, no phone |
+| T07 Apple20 tracks/5 albums/2 playlists | PARTIAL: prior research audible confirmation; actual own-service downloaded playlist selection outside complete20-item queue observed playing offline. New human audio confirmation pending; no phone |
 | T08 Mango20 FLAC/WAV/folders/playlists | PARTIAL one audible selection; root lacks folder/playlist categories. No format matrix passed |
-| T09 Source switching | IMPLEMENTED guarded handoff, NOT fully physically verified |
+| T09 Source switching | PARTIAL:12 local desired-state requests across awake/asleep tests and native/UI selected-item handoff observed correct target playing/other paused. No phone BLE or acoustic-overlap acceptance |
 | T10 Actual output volume | NOT TESTED; remote volume disabled |
 | T11 Rescan/SD/stale IDs | Software guards tested; physical media-change cases NOT TESTED |
 | T12 Interruptions | Partial Activity-recreation fixture test; real phone/radio/background matrix NOT TESTED |

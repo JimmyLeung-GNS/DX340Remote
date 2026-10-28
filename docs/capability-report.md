@@ -16,7 +16,7 @@
 | Apple offline outside-queue selection | VERIFIED foreground research + user-confirmed audio | “Paradise Paradise”, absent from prior101 queue; Wi-Fi0/default network none. ADB semantic navigation, not service/BLE acceptance |
 | Apple optional own UI adapter | VERIFIED sampled root/album/playlist/song reads and one observed selection | Actual bound companion AccessibilityService, debug DUMP-protected in-process probe, “Kuchibirukara Romantica” observed playing. Scroll/Back/stale-ID checks passed; Downloaded Playlists→AAA yielded downloaded rows. No BLE, fresh outside-queue or new human audio pass claimed |
 | Apple UI screen off/unlock | VERIFIED sleep rejection; REQUIRED limit | Actual service returned UI_SCREEN_UNLOCK_REQUIRED/canBrowse=false while playing=true. Secure-lock test pending. User accepted this optional mode |
-| Source handoff | IMPLEMENTED, NOT fully verified | UI selection validates target, pauses known competing session, observes pause before click. Both-source overlap/audio acceptance outstanding |
+| Source handoff | VERIFIED short local source-state samples; full acceptance pending | Shared desired-state/native-item/UI-item/queue preparation validates authorization/target before pause, then waits/revalidates.12 desired-state requests awake/asleep and native/UI item selections observed target playing/other paused. Queue path, phone BLE and acoustic-overlap acceptance outstanding |
 | Resume / cold launch / volume | NOT SUPPORTED beta | Capabilities false; no fabricated commands |
 | Sleep / range / battery / walking | NOT TESTED | Builds and source state observations do not establish radio/audio continuity |
 
