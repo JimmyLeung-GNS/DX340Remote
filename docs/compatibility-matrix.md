@@ -2,11 +2,13 @@
 
 29 October 2026. VERIFIED means only the stated observation. No complete T01–T18 acceptance run has passed.
 
+Latest local software checkpoint: Android builds/lint and64 aggregate JVM tests; Flutter analysis/22 tests/release APK/release lint pass. New generated packages are **not installed** because their signing identity differs from the installed apps. Current Swift changes have not compiled here; the connected Apple tool fails with xcrun ENOENT. Earlier launch/CI/source results below retain their historical scope. Full-scope audit: completion-audit.md; latest transport evidence: test-results/2026-10-29-indication-watchdog.md.
+
 | Platform / combination | Build | Open | Physical BLE controller |
 |---|---|---|---|
-| DX340 host, Android13/API33, eng.iBasso.20260812.181952 | VERIFIED Windows Gradle | VERIFIED on DX340 | Advertising callbacks only; central NOT TESTED |
-| Shared Flutter Android remote0.2.0+2 on DX340 | VERIFIED analysis/10 Dart tests/release APK/release lint | VERIFIED disconnected launch; prior four-screen/recovery captures have scoped visual review ship | NOT TESTED; same-device launch is not phone BLE |
-| Shared Flutter iPhone remote, iOS17+ proposed | VERIFIED Flutter3.41.4/Xcode26.6 unsigned simulator build and10 Dart tests, CI40723554411 at7921d75 | VERIFIED six disconnected captures inspected, same iPhone Air/iOS26.5 layout as prior scoped review; connected error copy untested | NOT TESTED; physical signing/installation open |
+| DX340 host, Android13/API33, eng.iBasso.20260812.181952 | VERIFIED latest Windows Gradle build/lint | Earlier build VERIFIED on DX340; latest package NOT INSTALLED | Historical advertising callbacks only; central NOT TESTED |
+| Shared Flutter Android remote0.2.0+2 | VERIFIED latest analysis/22 Dart tests/release APK/release lint | Earlier DX340 disconnected launch/captures only; latest package NOT INSTALLED | NOT TESTED; same-device launch is not phone BLE |
+| Shared Flutter iPhone remote, iOS17+ proposed | Historical Flutter3.41.4/Xcode26.6 unsigned simulator build/10 Dart tests, CI40723554411 at7921d75. Current Swift/iOS build BLOCKED here | Earlier six disconnected captures inspected; new elapsed/recovery changes NOT LAUNCHED on iOS | NOT TESTED; physical signing/installation open |
 | Android remote0.1.0 on same DX340 | VERIFIED Windows Gradle | VERIFIED screenshot/process | NOT TESTED; same-device UI is not phone radio proof |
 | Separate Android phone, API31+ proposed | APK available | NOT TESTED, device unavailable | NOT TESTED |
 | Native iPhone remote, iOS17+ proposed | VERIFIED Xcode26.6 unsigned simulator build, Swift3 tests | VERIFIED4 disconnected screens plus Player dark/largest-text captures on iPhone Air/iOS26.5;3 scoped UI fixes scored resolved | NOT TESTED |
@@ -26,12 +28,12 @@
 | T09 Source switching | PARTIAL:12 local desired-state requests across awake/asleep tests and native/UI selected-item handoff observed correct target playing/other paused. No phone BLE or acoustic-overlap acceptance |
 | T10 Actual output volume | PARTIAL: wheel36→35 and app API35→34 matched API/Mango display and user-reported quieter AMP15 output. Upward/boundaries/Apple/other-output/phone/reconnect NOT TESTED; remote volume remains disabled |
 | T11 Rescan/SD/stale IDs | Old Mango UI file tokens rejected locally; SD root and explicit empty Music folder read. Physical removal/rescan/duplicate cases NOT TESTED |
-| T12 Interruptions | Activity-recreation fixture and3 callback-ownership schedule tests pass; mixed native capability transition check passes without process restart. Real session replacement/phone/radio/background matrix NOT TESTED |
+| T12 Interruptions | Request/callback/session-access recovery and indication-deadline helpers pass software tests, alongside earlier activity/capability checks. Current-build actual permission recovery, session replacement, phone/radio/background matrix NOT TESTED |
 | T13 Matched battery runs | NOT TESTED |
 | T14 Walking | NOT TESTED |
 | T15 Authorization/revocation | Current-approval reply guard tested in software and pending frames cleared on disconnect; real unapproved/revoked central NOT TESTED |
-| T16 Protocol faults | JVM framing/dedup/routing/revision tests pass; physical transfer faults NOT TESTED |
-| T17 Installation/upgrade | DX340 debug upgrades/open verified; fresh permissions/credentials matrix NOT TESTED |
+| T16 Protocol faults | JVM framing/dedup/routing/revision and7 new confirmed-queue timeout/failure/priority tests pass; physical transfer faults and delayed same-peer callbacks NOT TESTED |
+| T17 Installation/upgrade | Earlier DX340 debug upgrades/open verified. Current upgrade BLOCKED on original-key transfer from another Windows PC; fresh permissions/credentials matrix NOT TESTED |
 | T18 Watch | NOT TESTED / implementation pending phone stability |
 
 Software tests use synthetic fixtures. Actual source probes run on DX340 with its installed apps; reports identify dispatch, observed state or user-confirmed audio. Neither category substitutes for phone Bluetooth acceptance.

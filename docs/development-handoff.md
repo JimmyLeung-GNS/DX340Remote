@@ -7,7 +7,7 @@ This file was absent when the user requested continuation. It is reconstructed f
 ## Read first
 
 1. `AGENTS.md`, `docs/implementation-plan.md`, `docs/status.md`.
-2. `docs/test-results/2026-10-29-signing-override.md` for the latest build setup, `2026-10-29-browse-access-recovery.md` for recovery work and `2026-10-29-elapsed-position.md` for elapsed timing.
+2. `docs/completion-audit.md` and `docs/test-results/2026-10-29-indication-watchdog.md` for the current blocker audit and transport work; the signing/browse/elapsed reports document preceding changes.
 3. `docs/phone-reliability-runbook.md`, `docs/compatibility-matrix.md`, and the separate Mango/Apple experiment reports before physical acceptance work.
 
 ## Saved implementation
@@ -18,7 +18,9 @@ Checkpoint400ec34 contains source-session callback ownership/capability guards a
 
 This continuation adds host position normalization and shared-phone elapsed estimates with native sample identity/age, lifecycle freeze/fresh-resume guards and no periodic BLE polling. See the test report and current working tree. New Swift changes require a fresh Mac build; earlier iOS CI results do not verify this source revision. No publication is performed by this continuation.
 
-Latest local verification: native build/lint57 JVM tests, Flutter analysis22 tests/release APK/release lint passed. Companion and phone packages are generated in artifacts but **not installed**. Both installed apps' certificate24f48aa3... differs from this checkout's ed3ffa7b... development key. The verified upgrade preflight stops before installation. Restore the original key securely outside Git before rebuilding/upgrading; preserve installed data. Current raw package hashes are in the signing-override report; full public certificate fingerprints are in the preceding elapsed report. Source is saved on local branch `codex/source-recovery-checkpoint`; use `git log -1` for the current checkpoint. It has not been pushed or published.
+Latest local verification: native build/lint64 JVM tests, Flutter analysis22 tests/release APK/release lint passed. Companion and phone packages are generated in artifacts but **not installed**. Both installed apps' certificate24f48aa3... differs from this checkout's ed3ffa7b... development key. The verified upgrade preflight stops before installation. Restore the original key securely outside Git before rebuilding/upgrading; preserve installed data. Current raw package hashes are in the indication-watchdog report; full public certificate fingerprints are in the preceding elapsed report. Source is saved on local branch `codex/source-recovery-checkpoint`; use `git log -1` for the current checkpoint. It has not been pushed or published.
+
+The host now has a tested confirmed-frame queue with per-indication completion deadlines, bounded failure cleanup and control/artwork priority. Native queue failures clear logical peer/authentication before requesting OS disconnect, without replaying controls. Software scheduling tests do not prove real BLE callback ordering, sleep timing or same-peer reconnect behavior. The connected Apple tool was also checked directly and failed to list simulators with xcrun ENOENT; a Mac/iOS build remains unavailable here.
 
 The preceding continuation guards native browse-request lifetime before cache mutation, carries authorization through play-item revalidation, invalidates requests/callback ownership/source epochs on detected notification-access loss, retries session observer registration after grant, and adds explicit refresh/recovery UI. Pure helper tests cover ordering/failure cases; actual device permission delivery and recovery are not tested.
 
@@ -53,4 +55,4 @@ On Mac, install the same Flutter revision and run `sh scripts/build-phone-ios.sh
 4. Volume: prior wheel/API downward steps only. Upward/output/Apple/phone/reconnect acceptance remains open. Do not enable phone volume from a reported AudioManager value alone.
 5. Finish the phone reliability/security/battery/walking/audio/install matrix before Watch. Watch inventory and stable-phone gate remain open.
 
-Keep the project goal active while the full system is incomplete. Do not mark completion from compile/simulator/proxy evidence; follow the actual goal lifecycle rules if external blockers persist.
+Goal is blocked after the same key/hardware gate persisted across more than three continuations. The full objective is preserved and remains incomplete. Resume when the original key is transferred or required hardware/build access becomes available, then revalidate current state and follow the exact acceptance steps above. Do not mark completion from compile/simulator/proxy evidence.

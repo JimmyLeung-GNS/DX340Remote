@@ -1,8 +1,16 @@
 # Implementation status
 
-Updated 29 October 2026 (Hong Kong). **Goal active; full system incomplete.**
+Updated 29 October 2026 (Hong Kong). **Goal blocked on original-key transfer and physical acceptance resources; full system incomplete.**
 
-## Latest continuation: original-key build support
+## Latest continuation: confirmed-indication recovery and blocker audit
+
+The host no longer waits indefinitely for an indication-completion callback. The tested confirmed-frame queue serializes sends, cancels successful per-frame deadlines, ignores stale scheduled deadlines after reconnection, prioritizes controls over artwork and drops queued frames on timeout/error/overflow. Native failure, unsubscribe, disconnect and stop clear the logical peer/authentication before OS disconnect processing. A stopped server ignores subsequent service/connection callbacks. No playback is retried or changed by transport recovery.
+
+VERIFIED: final Android build/lint/64 JVM tests and shared-phone analysis/22 tests/release APK/release lint. Current companion SHA2567e2bd68847573ef43e3252adc268d3d14759c327eb6a1603166522516421bce7; phone SHA256e9a5be9a8f65546c9df6d210bb82d32d9605adf5da03f12cc96a866711052c71. Fresh host signing preflight still rejects the mismatch; no new app/data/settings change occurred. XcodeBuildMCP list_sims actually failed with spawn xcrun ENOENT, confirming no usable Apple environment through that tool. Handler timing during sleep and delayed native callbacks from the same peer across reconnect remain NOT TESTED. See test-results/2026-10-29-indication-watchdog.md for actual scope, logs and limitations.
+
+Completion was audited against the original P0–P9/T01–T18 scope; it is unproven/incomplete. The same key/hardware blocker has persisted across more than three goal turns. Independent implementation/checks for these changes are complete; remaining installation/source/radio/audio/reliability gates require external input/resources. The original Windows PC is available, but debug.keystore has not been copied or located at a readable path here. Only DX340 is connected; physical phone/Mac/Watch gates remain open. Goal is blocked pending that external change, not complete. Exact resume action and required evidence are in completion-audit.md and development-handoff.md.
+
+## Preceding continuation: original-key build support
 
 The user confirms the original build computer is another available Windows PC but does not know the key path. This PC's standard Android signing locations contain only its nonmatching default key; original-key transfer is pending. User steps: open `%USERPROFILE%\.android` on the original PC and copy debug.keystore to a distinct private path here, preserving both existing defaults. A project-only DX340_DEBUG_KEYSTORE override now selects an external standard Android debug keystore for all native Android apps/instrumentation and shared Flutter Android release/debug builds. No default key or global environment is changed. A real disposable-key companion build produced a different certificate, the phone release-specific signing report resolved that same selected fixture key, and a nonexistent path failed instead of falling back. Disposable signing files were then removed.
 
