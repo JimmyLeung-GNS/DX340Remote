@@ -2,7 +2,13 @@
 
 Updated 29 October 2026 (Hong Kong). **Original signing key restored and both apps upgraded in place. Goal active; full system incomplete and physical phone/Mac acceptance remains pending.**
 
-## Current continuation: notification access lost during pending UI browse
+## Current continuation: Accessibility loss and honest item availability
+
+Actual Apple Accessibility revocation stopped browsing but exposed falsely advertised native/item selection despite an unavailable native browser. Native item support now requires its connected browser plus existing action/verification support; unavailable UI selection cannot borrow the generic MediaSession flag. Mango's unavailable assisted root entry is disabled. Shared-phone guards prevent cached assisted actions borrowing native capabilities; native Kotlin/Swift clients discard assisted frames when readiness changes, preserving native pages/queues.
+
+VERIFIED: two actual pending Accessibility revoke/rebind cases pass, old tokens reject and fresh pages recover. Ordinary session/queue capabilities, other service grants, global Accessibility/notification settings and paused playback are preserved. Both services rebound without host restart. Native build/lint74 tests, Flutter analysis32 tests/release/lint and the isolated Mango capability regression pass. Both current APKs installed with original key/data preserved. Swift remains uncompiled here; phone BLE is not proved. See test-results/2026-10-29-pending-accessibility.md for exact hashes, successful checks and the separately recorded ADB repeat failure. Portable source/APK manifest and next-machine instructions are in mac-continuation.md. Full system remains incomplete.
+
+## Preceding continuation: notification access lost during pending UI browse
 
 The unchanged installed companion passed two actual pending-browse notification-access tests: Apple and Mango requests stopped, source metadata/capabilities were cleared, epochs changed, new requests returned PERMISSION_REVOKED and canceled navigation tokens rejected after regrant. Fresh assisted pages and ordinary queues recovered automatically without restarting the companion. Only its own SessionListener grant was temporarily removed; the complete original listener set was restored and both sources remained paused. A preliminary harness checked restored settings too soon; bounded polling fixed that harness assumption.
 

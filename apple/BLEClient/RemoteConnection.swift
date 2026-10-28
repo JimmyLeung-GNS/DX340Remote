@@ -47,8 +47,13 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     private struct QueueLocation { let source: String; let epoch: String; let offset: Int; let revision: String? }
     private var queueLocations: [String: QueueLocation] = [:]
     private var activeQueueId: String?
-    var assistedBrowsing: Bool { (state["capabilities"] as? [String: Any])?["browseMode"] as? String == "ui-assisted" }
-    var sourceScope: String { (state["source"] as? String ?? "") + ":" + (state["sourceEpoch"] as? String ?? "") + ":" + String(assistedBrowsing) }
+    var assistedBrowsing: Bool { library["uiAssisted"] as? Bool == true || (state["capabilities"] as? [String: Any])?["browseMode"] as? String == "ui-assisted" }
+    private func isAssistedReady(_ snapshot: [String: Any]) -> Bool {
+        let caps = snapshot["capabilities"] as? [String: Any] ?? [:]
+        return caps[caps["browseMode"] as? String == "ui-assisted" ? "canBrowse" : "canBrowseFolders"] as? Bool == true
+    }
+    var assistedReady: Bool { authorized && isAssistedReady(state) }
+    var sourceScope: String { (state["source"] as? String ?? "") + ":" + (state["sourceEpoch"] as? String ?? "") + ":" + ((state["capabilities"] as? [String: Any])?["browseMode"] as? String ?? "direct") }
     private var assembler = Reassembler()
     override init() {
         super.init()
@@ -248,6 +253,9 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     private func applyState(_ new: [String: Any]) {
         if new["sourceEpoch"] as? String != state["sourceEpoch"] as? String || new["source"] as? String != state["source"] as? String || (new["capabilities"] as? [String: Any])?["browseMode"] as? String != (state["capabilities"] as? [String: Any])?["browseMode"] as? String {
             library = [:]; queue = []; queueRevision = ""; queuePage = [:]; artwork = nil; activeBrowseId = nil; activeQueueId = nil; browseLocations = [:]; queueLocations = [:]
+        } else if isAssistedReady(new) != isAssistedReady(state),
+                  assistedBrowsing || activeBrowseId.flatMap({ browseLocations[$0]?.parent })?.hasPrefix("mango-ui:") == true {
+            library = [:]; activeBrowseId = nil; browseLocations = [:]
         }
         state = new
         stateReceivedAt = ContinuousClock.now

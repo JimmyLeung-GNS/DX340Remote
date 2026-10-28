@@ -60,6 +60,9 @@ class Remote extends ChangeNotifier {
   bool action(String capability) => can(capability) && !busy;
   bool get assisted =>
       library['uiAssisted'] == true || caps['browseMode'] == 'ui-assisted';
+  bool get assistedReady => can(
+    caps['browseMode'] == 'ui-assisted' ? 'canBrowse' : 'canBrowseFolders',
+  );
   String get browseExplanation =>
       textValue(caps['uiBrowseReason'] ?? caps['reason']);
   bool get libraryLoading => library['loading'] == true;
@@ -220,6 +223,7 @@ class Remote extends ChangeNotifier {
     }
     final id = textValue(item['id']);
     if (id.isEmpty) return;
+    if ((assisted || item['uiAssisted'] == true) && !assistedReady) return;
     if (!assisted && item['uiAssisted'] != true) {
       _parents.add(currentParent ?? '');
     }
@@ -227,7 +231,13 @@ class Remote extends ChangeNotifier {
   }
 
   Future<void> back() async {
-    if (!canGoBack || !can('canBrowse') || libraryLoading || busy) return;
+    if (!canGoBack ||
+        !can('canBrowse') ||
+        libraryLoading ||
+        busy ||
+        (assisted && !assistedReady)) {
+      return;
+    }
     final parent = assisted
         ? textValue(library['backId'])
         : _parents.removeLast();
@@ -235,7 +245,13 @@ class Remote extends ChangeNotifier {
   }
 
   Future<void> more(int page) async {
-    if (!can('canBrowse') || libraryLoading || busy || page < 0) return;
+    if (!can('canBrowse') ||
+        libraryLoading ||
+        busy ||
+        page < 0 ||
+        (assisted && !assistedReady)) {
+      return;
+    }
     await invoke('browse', {
       'parent': assisted ? library['parent'] : currentParent,
       'page': page,
@@ -243,7 +259,10 @@ class Remote extends ChangeNotifier {
   }
 
   Future<void> playItem(Json item) async {
-    if (item['playable'] != true) return;
+    if (item['playable'] != true ||
+        ((assisted || item['uiAssisted'] == true) && !assistedReady)) {
+      return;
+    }
     await command('PLAY_ITEM', {
       'item': item['id'],
       'revision': library['revision'],

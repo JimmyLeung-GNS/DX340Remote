@@ -345,7 +345,10 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         } catch (e: Exception) { done(e.message ?: "SOURCE_NOT_READY") }
     }
     private fun version(pkg: String) = runCatching { context.packageManager.getPackageInfo(pkg, 0).let { "${it.versionName}|${it.longVersionCode}|${android.os.Build.FINGERPRINT}" } }.getOrNull() ?: "missing"
-    private fun nativeSelectionSupported(pkg: String) = supports(pkg, PlaybackState.ACTION_PLAY_FROM_MEDIA_ID) || verifiedPlayItem(pkg)
+    // Native item IDs must come from a connected browser and are revalidated there before play.
+    // A session action bit alone must not keep assisted item selection enabled after UI loss.
+    private fun nativeSelectionSupported(pkg: String) = browsers[pkg]?.isConnected == true &&
+        (supports(pkg, PlaybackState.ACTION_PLAY_FROM_MEDIA_ID) || verifiedPlayItem(pkg))
     private fun verifiedPlayItem(pkg: String): Boolean {
         if (pkg != PACKAGES[0]) return false
         val prefs = context.getSharedPreferences("source-verification", Context.MODE_PRIVATE)
@@ -480,7 +483,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
                 val nativeSelection = nativeSelectionSupported(pkg)
                 if (pkg == PACKAGES[0] && target == browser.root && page == 0 && mangoUiLibrary?.enabled == true) {
                     result.put(JSONObject().put("id", MANGO_UI_ROOT).put("title", "Local folders · assisted")
-                        .put("subtitle", mangoUiLibrary.explanation).put("browsable", true).put("playable", false).put("uiAssisted", true))
+                        .put("subtitle", mangoUiLibrary.explanation).put("browsable", mangoUiLibrary.ready).put("playable", false).put("uiAssisted", true))
                 }
                 visible.forEach { item ->
                     val id = item.mediaId ?: return@forEach

@@ -47,6 +47,72 @@ Json snapshot({
 
 void main() {
   test(
+    'cached assisted pages cannot borrow native Mango capabilities after UI loss',
+    () async {
+      final bridge = FakeBridge();
+      final remote = Remote(bridge)
+        ..accept(
+          snapshot(
+            caps: {
+              'canBrowse': true,
+              'canPlayItem': true,
+              'canNext': true,
+              'canBrowseFolders': false,
+              'browseMode': 'direct',
+            },
+            library: {
+              'uiAssisted': true,
+              'backId': 'old-back',
+              'parent': 'old-scroll',
+              'revision': 'old-ui',
+              'nextPage': 1,
+            },
+          ),
+        );
+      expect(remote.assistedReady, false);
+      await remote.open({'id': 'old-folder', 'browsable': true});
+      await remote.back();
+      await remote.more(1);
+      await remote.playItem({'id': 'old-file', 'playable': true});
+      expect(bridge.calls, isEmpty);
+      expect(await remote.command('NEXT', {}, 'canNext'), true);
+      await remote.root();
+      expect(bridge.calls.map((call) => call.$1), ['send', 'browse']);
+      remote.dispose();
+    },
+  );
+  test(
+    'cached optional folder entries stay disabled while native albums remain usable',
+    () async {
+      final bridge = FakeBridge();
+      final remote = Remote(bridge)
+        ..accept(
+          snapshot(
+            caps: {
+              'canBrowse': true,
+              'canPlayItem': true,
+              'canBrowseFolders': false,
+              'browseMode': 'direct',
+            },
+          ),
+        );
+      await remote.open({
+        'id': 'mango-ui:root',
+        'browsable': true,
+        'uiAssisted': true,
+      });
+      await remote.playItem({
+        'id': 'ui-file',
+        'playable': true,
+        'uiAssisted': true,
+      });
+      expect(bridge.calls, isEmpty);
+      await remote.open({'id': 'native-album', 'browsable': true});
+      expect(bridge.calls.single.$2, {'parent': 'native-album'});
+      remote.dispose();
+    },
+  );
+  test(
     'a retained queue row cannot select using a newer revision or another page',
     () async {
       final bridge = FakeBridge();
@@ -161,6 +227,7 @@ void main() {
             caps: {
               'canBrowse': true,
               'browseMode': 'direct',
+              'canBrowseFolders': true,
               'uiBrowseReason': 'Mango needs DX340 awake',
             },
           ),
@@ -176,6 +243,7 @@ void main() {
           caps: {
             'canBrowse': true,
             'browseMode': 'direct',
+            'canBrowseFolders': true,
             'uiBrowseReason': 'Mango needs DX340 awake',
           },
           library: {
@@ -279,6 +347,12 @@ void main() {
       final remote = Remote(bridge)
         ..accept(
           snapshot(
+            source: 'apple',
+            caps: {
+              'canBrowse': true,
+              'canPlayItem': true,
+              'browseMode': 'ui-assisted',
+            },
             library: {
               'uiAssisted': true,
               'backId': 'back-token',

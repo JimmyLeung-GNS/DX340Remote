@@ -84,21 +84,22 @@ private struct LibraryView: View {
             else if connection.assistedBrowsing { Text((connection.state["capabilities"] as? [String: Any])?["reason"] as? String ?? "Apple Music needs DX340 awake and unlocked.").foregroundStyle(.secondary) }
             else if !connection.can("canBrowse") { Text("This source has not exposed a usable browse connection. Open it on DX340 and refresh.").foregroundStyle(.secondary) }
             Button("Refresh library") { connection.browse(parent: parent) }.disabled(!connection.can("canBrowse"))
-            if connection.assistedBrowsing, let back = connection.library["backId"] as? String { Button("Back") { connection.browse(parent: back) }.disabled(!connection.can("canBrowse")) }
+            if connection.assistedBrowsing, let back = connection.library["backId"] as? String { Button("Back") { connection.browse(parent: back) }.disabled(!connection.can("canBrowse") || !connection.assistedReady) }
             if connection.library["loading"] as? Bool == true { ProgressView("Loading library") }
             let matches = (connection.assistedBrowsing || connection.library["requestedParent"] as? String == (parent ?? "")) && connection.library["scopeSource"] as? String == connection.state["source"] as? String && connection.library["scopeEpoch"] as? String == connection.state["sourceEpoch"] as? String
             let items = matches ? (connection.library["items"] as? [[String: Any]] ?? []) : []
             ForEach(items.indices, id: \.self) { i in
                 let item = items[i], id = item["id"] as? String ?? ""
+                let uiUnavailable = (connection.assistedBrowsing || item["uiAssisted"] as? Bool == true) && !connection.assistedReady
                 if item["browsable"] as? Bool == true {
-                    if connection.assistedBrowsing { Button(item["title"] as? String ?? "Folder") { connection.browse(parent: id) }.disabled(!connection.can("canBrowse")) }
-                    else { NavigationLink(item["title"] as? String ?? "Folder") { LibraryView(connection: connection, parent: id, openSetup: openSetup).navigationTitle(item["title"] as? String ?? "Library") } }
+                    if connection.assistedBrowsing { Button(item["title"] as? String ?? "Folder") { connection.browse(parent: id) }.disabled(!connection.can("canBrowse") || uiUnavailable) }
+                    else { NavigationLink(item["title"] as? String ?? "Folder") { LibraryView(connection: connection, parent: id, openSetup: openSetup).navigationTitle(item["title"] as? String ?? "Library") }.disabled(!connection.can("canBrowse") || uiUnavailable) }
                 } else {
                     Button(item["title"] as? String ?? "Untitled") { connection.send("PLAY_ITEM", args: ["item": id, "revision": connection.library["revision"] ?? ""]) }
-                        .disabled(!connection.can("canPlayItem") || item["playable"] as? Bool != true)
+                        .disabled(!connection.can("canPlayItem") || item["playable"] as? Bool != true || uiUnavailable)
                 }
             }
-            if matches, let page = connection.library["nextPage"] as? Int { Button("Next page") { connection.browse(parent: connection.assistedBrowsing ? connection.library["parent"] as? String : parent, page: page) } }
+            if matches, let page = connection.library["nextPage"] as? Int { Button("Next page") { connection.browse(parent: connection.assistedBrowsing ? connection.library["parent"] as? String : parent, page: page) }.disabled(!connection.can("canBrowse") || (connection.assistedBrowsing && !connection.assistedReady)) }
         }
         .task(id: parent) { if connection.authorized { connection.browse(parent: parent) } }
         .safeAreaInset(edge: .bottom) { Text(connection.title).font(.subheadline).padding().frame(maxWidth: .infinity).background(.bar) }

@@ -10,6 +10,99 @@ import 'remote_test.dart' show FakeBridge, snapshot;
 void main() {
   for (final platform in [TargetPlatform.android, TargetPlatform.iOS]) {
     testWidgets(
+      '$platform disables cached assisted rows without disabling native refresh',
+      (tester) async {
+        debugDefaultTargetPlatformOverride = platform;
+        addTearDown(() => debugDefaultTargetPlatformOverride = null);
+        final remote = Remote(FakeBridge());
+        await tester.pumpWidget(DX340App(remote: remote));
+        await tester.pumpAndSettle();
+        remote.accept(
+          snapshot(
+            caps: {
+              'canBrowse': true,
+              'canPlayItem': true,
+              'canBrowseFolders': false,
+              'browseMode': 'direct',
+              'uiBrowseReason': 'Enable Mango folder browsing on DX340.',
+            },
+            library: {
+              'uiAssisted': true,
+              'backId': 'old-back',
+              'parent': 'old-scroll',
+              'nextPage': 1,
+              'items': [
+                {
+                  'id': 'old-file',
+                  'title': 'Cached assisted file',
+                  'playable': true,
+                },
+              ],
+            },
+          ),
+        );
+        await tester.tap(find.text('Library').last);
+        await tester.pumpAndSettle();
+        expect(
+          find.text('Enable Mango folder browsing on DX340.'),
+          findsOneWidget,
+        );
+        if (platform == TargetPlatform.android) {
+          expect(
+            tester
+                .widget<ListTile>(
+                  find.widgetWithText(ListTile, 'Cached assisted file'),
+                )
+                .enabled,
+            false,
+          );
+          expect(
+            tester
+                .widget<OutlinedButton>(
+                  find.widgetWithText(OutlinedButton, 'Show more'),
+                )
+                .onPressed,
+            isNull,
+          );
+          expect(
+            tester
+                .widget<OutlinedButton>(
+                  find.widgetWithText(OutlinedButton, 'Browse source library'),
+                )
+                .onPressed,
+            isNotNull,
+          );
+        } else {
+          expect(
+            tester
+                .widget<CupertinoButton>(
+                  find.widgetWithText(CupertinoButton, 'Cached assisted file'),
+                )
+                .onPressed,
+            isNull,
+          );
+          expect(
+            tester
+                .widget<CupertinoButton>(
+                  find.widgetWithText(CupertinoButton, 'Show more'),
+                )
+                .onPressed,
+            isNull,
+          );
+          expect(
+            tester
+                .widget<CupertinoButton>(
+                  find.widgetWithText(CupertinoButton, 'Browse source library'),
+                )
+                .onPressed,
+            isNotNull,
+          );
+        }
+        await tester.pumpWidget(const SizedBox());
+        debugDefaultTargetPlatformOverride = null;
+      },
+    );
+    testWidgets(
       '$platform can reach the last queue window and return to start',
       (tester) async {
         debugDefaultTargetPlatformOverride = platform;

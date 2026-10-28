@@ -287,7 +287,10 @@ class _PhoneShellState extends State<PhoneShell>
       action(
         'Back to parent',
         perform(
-          remote.can('canBrowse') && !remote.libraryLoading && !remote.busy,
+          remote.can('canBrowse') &&
+              !remote.libraryLoading &&
+              !remote.busy &&
+              (!remote.assisted || remote.assistedReady),
           remote.back,
         ),
         icon: Icons.arrow_back,
@@ -312,7 +315,10 @@ class _PhoneShellState extends State<PhoneShell>
       action(
         remote.assisted ? 'Show more' : 'Next page',
         perform(
-          remote.can('canBrowse') && !remote.libraryLoading && !remote.busy,
+          remote.can('canBrowse') &&
+              !remote.libraryLoading &&
+              !remote.busy &&
+              (!remote.assisted || remote.assistedReady),
           () => remote.more(remote.nextPage!),
         ),
       ),
@@ -322,6 +328,9 @@ class _PhoneShellState extends State<PhoneShell>
     final browsable = !queue && item['browsable'] == true;
     final enabled =
         !remote.busy &&
+        (queue ||
+            (!(remote.assisted || item['uiAssisted'] == true) ||
+                remote.assistedReady)) &&
         (!queue || !remote.queueLoading) &&
         (browsable
             ? remote.can('canBrowse') && !remote.libraryLoading

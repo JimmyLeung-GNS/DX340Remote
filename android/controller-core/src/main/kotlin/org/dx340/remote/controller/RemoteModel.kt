@@ -144,9 +144,19 @@ class RemoteModel(context: Context) {
             update()
         } catch (_: Exception) { disconnect(); status = "Invalid host reply; reconnect."; update() }
     }
+    private fun isAssistedReady(snapshot: JSONObject): Boolean {
+        val caps = snapshot.optJSONObject("capabilities") ?: return false
+        return caps.optBoolean(if (caps.optString("browseMode") == "ui-assisted") "canBrowse" else "canBrowseFolders")
+    }
+    val assistedBrowsing get() = library.optBoolean("uiAssisted") || state.optJSONObject("capabilities")?.optString("browseMode") == "ui-assisted"
+    val assistedReady get() = authorized && isAssistedReady(state)
     private fun applyState(new: JSONObject) {
         if (state.optString("sourceEpoch") != new.optString("sourceEpoch") || state.optString("source") != new.optString("source") || state.optJSONObject("capabilities")?.optString("browseMode") != new.optJSONObject("capabilities")?.optString("browseMode")) {
             library = JSONObject(); queue = JSONArray(); queueRevision = ""; queuePage = JSONObject(); artworkBytes = null; activeBrowseId = null; activeQueueId = null; browseLocations.clear(); queueLocations.clear()
+        } else if (isAssistedReady(new) != isAssistedReady(state) &&
+            (assistedBrowsing || activeBrowseId?.let { browseLocations[it]?.parent?.startsWith("mango-ui:") } == true)) {
+            // Keep native pages/queues, but never republish an assisted frame across grant/sleep changes.
+            library = JSONObject(); activeBrowseId = null; browseLocations.clear()
         }
         state = new
         stateReceivedAt = android.os.SystemClock.elapsedRealtime()
