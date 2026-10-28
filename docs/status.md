@@ -1,6 +1,12 @@
 # Implementation status
 
-Updated 29 October 2026 (Hong Kong). **Goal blocked on original-key transfer and physical acceptance resources; full system incomplete.**
+Updated 29 October 2026 (Hong Kong). **Goal resumed; original-key transfer and physical acceptance resources still pending. Full system incomplete.**
+
+## Current resumed key-transfer check
+
+The user requested help copying/verifying the original key at `C:\Users\user.android\dx340-original-debug.keystore`. That exact path and the earlier suggested `C:\Users\user\.android\dx340-original-debug.keystore` are both absent. A narrow check of standard Android/Downloads/Desktop transfer locations found only the current PC's existing default key; its freshly exported public certificate is ed3ffa7b..., which still differs from installed24f48aa3.... Removable H:/I: are not readable; no transferred source file was found. The user clarified that the original key is **still only on the other Windows PC**. No key copy or app update occurred.
+
+Next: user copies the original PC's `%USERPROFILE%\.android\debug.keystore` onto a USB drive and connects it here (or supplies an accessible source path). The agent can then handle the final copy to the explicitly requested destination, verify the certificate and resume matching-key builds/updates. This is a fresh resumed blocked audit; previous blocked status is historical, not a new immediate blocked declaration.
 
 ## Latest continuation: confirmed-indication recovery and blocker audit
 

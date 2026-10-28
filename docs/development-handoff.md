@@ -2,6 +2,8 @@
 
 Updated 29 October 2026, Asia/Shanghai. Work in `C:\GitHub\DX340Remote`.
 
+Current resume: user asks for help copying the key to `C:\Users\user.android\dx340-original-debug.keystore` (literal requested path). That file and the earlier `.android` destination are absent. User confirms the key remains only on the other Windows PC. No readable USB transfer is connected. Current PC's default key was freshly checked and still has the nonmatching ed3ffa7b... certificate. Wait for the user to copy the original file onto USB and connect it here, or provide an accessible source; then perform the destination copy, certificate comparison, project-only signing rebuild and in-place update. Do not substitute this PC's default key. Goal has resumed; use a fresh blocked audit for this resumed run.
+
 This file was absent when the user requested continuation. It is reconstructed from the checked-in `AGENTS.md`, implementation plan, status and commit400ec34, plus the work recorded below. It does not claim to recover an older missing file's contents.
 
 ## Read first
@@ -55,4 +57,4 @@ On Mac, install the same Flutter revision and run `sh scripts/build-phone-ios.sh
 4. Volume: prior wheel/API downward steps only. Upward/output/Apple/phone/reconnect acceptance remains open. Do not enable phone volume from a reported AudioManager value alone.
 5. Finish the phone reliability/security/battery/walking/audio/install matrix before Watch. Watch inventory and stable-phone gate remain open.
 
-Goal is blocked after the same key/hardware gate persisted across more than three continuations. The full objective is preserved and remains incomplete. Resume when the original key is transferred or required hardware/build access becomes available, then revalidate current state and follow the exact acceptance steps above. Do not mark completion from compile/simulator/proxy evidence.
+The earlier goal run was blocked after the key/hardware gate persisted across more than three continuations. The user has now resumed it to obtain help with the transfer, and the fresh current check is recorded at the top. The full objective remains incomplete. Revalidate the source/key and continue the exact acceptance steps above once transfer or hardware access changes. Do not mark completion from compile/simulator/proxy evidence.
