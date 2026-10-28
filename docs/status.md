@@ -2,7 +2,13 @@
 
 Updated 29 October 2026 (Hong Kong). **Original signing key restored and both apps upgraded in place. Goal active; full system incomplete and physical phone/Mac acceptance remains pending.**
 
-## Current continuation: pending assisted-browse interruptions
+## Current continuation: notification access lost during pending UI browse
+
+The unchanged installed companion passed two actual pending-browse notification-access tests: Apple and Mango requests stopped, source metadata/capabilities were cleared, epochs changed, new requests returned PERMISSION_REVOKED and canceled navigation tokens rejected after regrant. Fresh assisted pages and ordinary queues recovered automatically without restarting the companion. Only its own SessionListener grant was temporarily removed; the complete original listener set was restored and both sources remained paused. A preliminary harness checked restored settings too soon; bounded polling fixed that harness assumption.
+
+New scripts/verify-pending-session-access.ps1 makes the test repeatable with strict finally restoration. No product source/build/install changed this continuation; preceding74 native/28 Flutter checks retain their scope. Evidence: test-results/2026-10-29-pending-session-access.md. This is actual source-session permission recovery, not controller approval/revocation or radio acceptance. Accessibility grant loss, physical phones/Mac and the full source/reliability matrices remain open. Goal active; full system incomplete.
+
+## Preceding continuation: pending assisted-browse interruptions
 
 Actual Apple Songs loading followed by screen-off reproduced a6.253second wait and generic UI_UNEXPECTED_SCREEN. Its wait loop now retries only transitional window/context errors, preserving terminal readiness errors immediately. Both adapters discard their action frame when browsing fails/cancels. Debug-only tagged STARTED/FINISHED reports and a bounded timed source-change trigger support repeatable own-adapter checks without instrumentation.
 
