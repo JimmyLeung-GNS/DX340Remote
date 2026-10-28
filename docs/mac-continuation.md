@@ -55,6 +55,8 @@ Complete Setup/Nearby Devices/notification prompts on the phone, start the compa
 
 ## Acceptance still required
 
+Current companion hash/79-test build, same-device recovery and unresolved Playlist timing are recorded in test-results/2026-10-29-mango-folder-timing.md. Source-local Playlist recovery still exceeds3seconds after the settling improvement; measure actual arrival/rendering over each phone separately. The manifest identifies this package independently of older report hashes.
+
 The full P0–P9/T01–T18 scope remains in implementation-plan.md/completion-audit.md. In particular: real BLE on both phones,30-minute sleep/range/security/fault tests,100 controls/source/phone, current Mac/iPhone builds/signing, source20-track/format matrices, Apple5 albums/2 playlists, Mango populated-playlist/SD/rescan proof, measured volume/audio/battery/walk and complete installation/upgrade acceptance. Mango's observed Playlist list is empty; no playlist was created. Do not invent collection or audio evidence. Approved-controller handoff needs measured connection-limit behavior before selecting/validating its mechanism. Watch follows stable phone acceptance.
 
 The plan's separate10,000-track synthetic metadata component fixture now passes on Windows; see test-results/2026-10-29-synthetic-metadata.md. LibraryIndex is standalone, not wired into the source adapter. Repeat its component check if useful, but actual cached/uncached page latency must still be measured over each phone/source path; the synthetic timings cannot fill that gate.

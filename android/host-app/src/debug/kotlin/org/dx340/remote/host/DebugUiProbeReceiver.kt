@@ -13,6 +13,7 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val pending = goAsync()
         val main = Handler(Looper.getMainLooper())
+        val startedAt = android.os.SystemClock.elapsedRealtime()
         var finished = false
         val reportTag = intent.getStringExtra("reportTag")
         if (reportTag != null && !reportTag.matches(Regex("[A-Za-z0-9_-]{1,48}"))) { pending.finish(); return }
@@ -28,6 +29,7 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
                 val report = JSONObject().put("kind", "physical-own-accessibility-adapter-debug-probe-no-ble")
                     .put("time", System.currentTimeMillis()).put("operation", intent.getStringExtra("operation") ?: "BROWSE")
                     .put("phase", "FINISHED").put("requestedSource", intent.getStringExtra("source") ?: "com.apple.android.music")
+                    .put("elapsedMs", android.os.SystemClock.elapsedRealtime() - startedAt)
                     .put("interruption", interruption ?: JSONObject.NULL)
                     .put("data", data ?: JSONObject.NULL).put("error", error ?: JSONObject.NULL)
                     .put("state", HostService.instance?.sources?.state() ?: JSONObject.NULL)

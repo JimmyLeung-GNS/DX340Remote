@@ -12,6 +12,7 @@ import org.dx340.remote.sources.MangoUiModel
 import org.dx340.remote.sources.ParsedMangoUi
 import org.dx340.remote.sources.SourceRegistry
 import org.dx340.remote.sources.UiNode
+import org.dx340.remote.sources.UiSnapshotStability
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.UUID
@@ -149,18 +150,25 @@ class MangoAccessibilityService : AccessibilityService() {
     }
     fun browse(parent: String?, page: Int, revision: String?, stillAuthorized: () -> Boolean, done: (JSONObject?, String?) -> Unit) {
         if (busy) { done(null, "UI_BUSY"); return }; busy = true
+        val startedAt = android.os.SystemClock.elapsedRealtime()
+        val steps = JSONArray()
+        navigationTrace = JSONObject().put("steps", steps)
+        fun trace(kind: String, details: JSONObject = JSONObject()) {
+            if (steps.length() < 64) steps.put(details.put("kind", kind).put("elapsedMs", android.os.SystemClock.elapsedRealtime() - startedAt))
+        }
         var finished = false
-        fun finish(value: JSONObject?, error: String?) { if (!finished) { finished = true; busy = false; cancelBrowse = null; if (error != null) last = null; done(value, error) } }
+        fun finish(value: JSONObject?, error: String?) { if (!finished) { finished = true; busy = false; cancelBrowse = null; if (error != null) last = null; trace("finished", JSONObject().put("error", error ?: JSONObject.NULL)); done(value, error) } }
         cancelBrowse = { finish(null, it) }
         val deadline = android.os.SystemClock.elapsedRealtime() + 8000
         fun guard() { require(stillAuthorized()) { "AUTHORIZATION_DENIED" }; readiness()?.let { error(it) }; check(android.os.SystemClock.elapsedRealtime() <= deadline) { "UI_ACTION_TIMEOUT" } }
         var storageClicked = false; var menuClicked = false; var libraryClicked = false; var resetFingerprint = ""; var launched = false
         var settled = ""; var since = 0L
-        var navigationTree = ""; var navigationSince = 0L
+        var navigationStability = UiSnapshotStability()
         fun openStorage(storage: String) {
             if (finished) return
             try {
-                guard(); val current = tree()
+                guard(); val treeStarted = android.os.SystemClock.elapsedRealtime(); val current = tree()
+                val treeMs = android.os.SystemClock.elapsedRealtime() - treeStarted
                 // Mango changes child indices during page animations. Only navigate from a
                 // stable semantic tree; a successful action is still dispatched just once.
                 val shownStorage = MangoUiModel.storages.entries.firstOrNull {
@@ -174,13 +182,19 @@ class MangoAccessibilityService : AccessibilityService() {
                         it.id.endsWith("/entry_title_tv") || it.id.endsWith("/playlist_view")
                 }.joinToString(";") { "${it.path}:${it.id}:${it.text}" }
                 val now = android.os.SystemClock.elapsedRealtime()
-                navigationTrace = JSONObject().put("storage", storage).put("menu", menu).put("storageClicked", storageClicked)
+                val stableMs = navigationStability.observe(current.window, signature, now)
+                navigationTrace.put("storage", storage).put("menu", menu).put("storageClicked", storageClicked)
                     .put("title", parsed?.title).put("root", parsed?.root).put("resetFingerprint", resetFingerprint)
-                    .put("fingerprint", parsed?.fingerprint).put("stableMs", now - navigationSince).put("remainingMs", deadline - now)
-                if (navigationTree != signature) { navigationTree = signature; navigationSince = now }
-                if (now - navigationSince < 300) { main.postDelayed({ openStorage(storage) }, 180); return }
+                    .put("fingerprint", parsed?.fingerprint).put("stableMs", stableMs).put("remainingMs", deadline - now)
+                trace("observed", JSONObject().put("treeMs", treeMs).put("nodes", current.nodes.size).put("menu", menu)
+                    .put("title", parsed?.title ?: JSONObject.NULL).put("stableMs", stableMs))
+                // One complete 450ms settling interval for a final folder. Previously the
+                // 300ms navigation wait was followed by a separate 450ms wait on that same
+                // fingerprint. Intermediate menus still settle for 300ms before any action.
+                val finalFolder = parsed?.storage == storage && parsed.root == null
+                if (stableMs < if (finalFolder) 450 else 300) { main.postDelayed({ openStorage(storage) }, 180); return }
                 if (menu) {
-                    if (!storageClicked) { val node = MangoUiModel.storageAction(current.nodes, storage); perform(current, Action(node.path, "storage", MangoUiModel.storages.getValue(storage)), stillAuthorized); storageClicked = true }
+                    if (!storageClicked) { val node = MangoUiModel.storageAction(current.nodes, storage); perform(current, Action(node.path, "storage", MangoUiModel.storages.getValue(storage)), stillAuthorized); storageClicked = true; trace("storage-click") }
                 } else {
                     if (parsed != null) {
                         val rootPath = parsed.root
@@ -193,9 +207,7 @@ class MangoAccessibilityService : AccessibilityService() {
                             }
                         }
                         else if (parsed.storage == storage) {
-                            val now = android.os.SystemClock.elapsedRealtime()
-                            if (settled != parsed.fingerprint) { settled = parsed.fingerprint; since = now }
-                            else if (now - since >= 450) { guard(); finish(result(current, storage, 0), null); return }
+                            guard(); finish(result(current, storage, 0), null); return
                         } else if (!menuClicked) {
                             val node = MangoUiModel.node(current.nodes, "nav_bar_back_iv") ?: error("UI_UNEXPECTED_SCREEN")
                             val click = MangoUiModel.clickable(current.nodes, node) ?: error("UI_ACTION_FAILED")
@@ -203,7 +215,7 @@ class MangoAccessibilityService : AccessibilityService() {
                         }
                     } else if (!storageClicked && !menuClicked && MangoUiModel.playlistMenuAction(current.nodes) != null) {
                         val node = MangoUiModel.playlistMenuAction(current.nodes)!!
-                        perform(current, Action(node.path, "menu"), stillAuthorized); menuClicked = true
+                        perform(current, Action(node.path, "menu"), stillAuthorized); menuClicked = true; trace("playlist-menu-click")
                     } else if (!storageClicked && MangoUiModel.node(current.nodes, "folder_detail_content") != null) {
                         if (!menuClicked) { val node = MangoUiModel.node(current.nodes, "nav_bar_back_iv") ?: error("UI_UNEXPECTED_SCREEN"); val click = MangoUiModel.clickable(current.nodes, node) ?: error("UI_ACTION_FAILED"); perform(current, Action(click.path, "menu"), stillAuthorized); menuClicked = true }
                     } else if (!storageClicked && !libraryClicked) {
@@ -217,7 +229,7 @@ class MangoAccessibilityService : AccessibilityService() {
                     try { guard(); val launch = packageManager.getLaunchIntentForPackage(PACKAGE) ?: error("MISSING_SOURCE"); startActivity(launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)); launched = true; main.postDelayed({ openStorage(storage) }, 200) }
                     catch (failure: Exception) { finish(null, failure.message ?: "UI_SETUP_REQUIRED") }
                 } else if (e.message == "UI_TREE_CHANGED" && android.os.SystemClock.elapsedRealtime() < deadline) {
-                    navigationTree = ""; main.postDelayed({ openStorage(storage) }, 180)
+                    navigationStability = UiSnapshotStability(); main.postDelayed({ openStorage(storage) }, 180)
                 } else finish(null, e.message ?: "UI_UNEXPECTED_SCREEN")
             }
         }

@@ -2,7 +2,13 @@
 
 Updated 29 October 2026 (Hong Kong). **Original signing key restored and both apps upgraded in place. Goal active; full system incomplete and physical phone/Mac acceptance remains pending.**
 
-## Current continuation: synthetic metadata fixture
+## Current continuation: Mango folder settling and measured recovery
+
+VERIFIED: actual Playlist recovery reproduced at4.612seconds over ADB. Diagnostics exposed duplicate final-folder settling waits; one450ms same-window/same-fingerprint interval replaces serial300+450ms waits. Intermediate menus retain300ms and live authorization/readiness/action validation. Native build/lint79 JVM tests pass. Original-key in-place companion upgrade preserved four preferences; installed bytes match0898571b... and both optional services are bound. Shared phone unchanged at09aaae78... with preceding32 Flutter checks; Swift still needs a Mac build.
+
+Three Playlist probes returned9 rows in3.829–4.119seconds (ADB4.115–4.376); a reusable-script run took3.540seconds/ADB3.858. **The proposed3second target still fails.** Root refresh534–741ms and Music-to-root2.164seconds succeeded; no phone latency is inferred. Four actual pending screen-off/in-process-source-change regressions reject old IDs/recover fresh pages. Both sources stayed paused, volume35 and grants unchanged. Details/current hashes: test-results/2026-10-29-mango-folder-timing.md. Full system incomplete; goal active.
+
+## Preceding continuation: synthetic metadata fixture
 
 VERIFIED at Windows JVM component scope: a reproducible10,000-track metadata fixture walks400 pages with complete identity/order, bounded Unicode JSON, sampled real framing/reassembly, LRU eviction/source/revision separation and replaced/missing selection rejection. Three new tests pass, bringing the native aggregate to77; targeted library-cache tests/benchmark pass. First cached/uncached component reads measured0.748/7.607101ms; maximum encoded page5,014 bytes. LibraryIndex remains a standalone component, not an active SourceRegistry page cache. No actual-source/Flutter/BLE latency is inferred; Mango's earlier4.57–5.12second recovery remains above target. See test-results/2026-10-29-synthetic-metadata.md. Product packages/installed data unchanged; preceding Android build/lint and Flutter32 checks remain applicable. Goal active; full system incomplete.
 
