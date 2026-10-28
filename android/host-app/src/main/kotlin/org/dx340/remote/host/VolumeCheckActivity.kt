@@ -56,6 +56,8 @@ class VolumeCheckActivity : Activity() {
         val data = registry?.outputVolume?.state()
         val check = control?.check
         val busy = control?.busy == true
+        // Returning from the companion must show the configuration bound to the pending check.
+        if (check != null && output.text.toString() != check.label) output.setText(check.label)
         displayedVolume = data?.optInt("current", -1) ?: -1; displayedCheck = check?.id ?: ""
         summary.text = if (registry == null) "Start Bluetooth remote in the companion first." else
             "${if (registry.selected == "com.ibasso.music") "Mango Player" else "Apple Music"} · volume $displayedVolume\n" +

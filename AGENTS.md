@@ -2,6 +2,8 @@
 
 ## Scope
 
+When resuming on another computer, read `docs/development-handoff.md` before changing code. It records the latest working branch, user decisions, verified evidence and unfinished checks; default `main` may be behind the handoff branch.
+
 Read `docs/implementation-plan.md` and `docs/status.md` before implementing. The full system is a DX340 BLE companion, iPhone remote, Android remote and later Watch extension. Begin with P0 through P2, then continue through the remaining stages. Do not stop at a plan, skeleton or mock UI when implementation is requested.
 
 Keep Wi-Fi, hotspots and cloud services out of the everyday control path. Music plays on DX340 through its existing source app. Preserve the Android Mango Player unless the user explicitly accepts a concrete alternative. Apple Music downloads remain managed by the installed Apple Music app. No root, firmware modifications, private-download extraction or impersonation of another application's identity.

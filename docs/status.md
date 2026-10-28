@@ -1,6 +1,10 @@
 # Implementation status
 
-Updated 29 October 2026 (Hong Kong). **Goal active; full system incomplete.**
+Updated 29 October 2026 (Hong Kong). **Goal paused at the user's request; full system incomplete.**
+
+## Device-transfer checkpoint
+
+Read **development-handoff.md** first when resuming. Continue `codex/output-volume`, not older default main400ec34. The handoff records all settled decisions, source/volume listening confirmations, exact package/build versions, signing/evidence-transfer limits, pending CI and next actions. Apple Music subsequently passed its separate local35→34→35 listening check and enabled34–35 for the current service session; fresh final state was Apple playing/volume35. Canonical phone release was restored over the synthetic fixture; font1.0/night yes restored. Latest local Android suite passed50 JVM tests, phone analysis/14 tests/release/lint passed. A final pending-label restoration fix passed APK/lint build but is not installed or physically checked. Phone rendering review/documentation is unfinished. iOS8b5b7c4 built/ran the app but failed synthetic readiness because Vision read an icon-prefixed volume label; matcher fix is pending. Shared run40740304213 and native40739133956 were still in progress when paused. No physical phone or complete-system claim is made. The following continuation sections describe earlier checkpoints; use the handoff for current facts.
 
 ## Bounded output-volume continuation
 

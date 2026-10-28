@@ -2,6 +2,10 @@
 
 DX340 serial d, Android13/API33, eng.iBasso.20260812.181952. Mango4.1.37/code240; Apple Music6.5.3/code1599 installed. AMP15 phone out is user reported. Bluetooth controller hardware is unavailable; **no phone volume command has been physically tested**.
 
+## Pause update
+
+Development paused for device transfer. The latest facts and resume order are in **../development-handoff.md**. Apple Music subsequently completed its own production35→34→35 local calibration, with separate human replies “Yes, Apple Music is quieter” and “Yes, Apple Music is louder again”. Its distinct proof enabled34–35; fresh final state was Apple playing/volume35, Mango paused. This is local source/audio evidence, not phone BLE. Final Android suite passed50 JVM tests (10 volume cases);14 Dart tests/release/lint passed. A final label-restoration correction passed APK/lint rebuild but was not installed. The canonical phone release was restored over the debug fixture. Source/run/package details and the known OCR readiness failure are in the handoff. Older NOT TESTED Apple rows below describe the initial Mango checkpoint.
+
 ## Verified local Mango calibration
 
 The preceding debug return34→35 read back35 and the user replied “Yes, the return to 35 is audibly louder”. That diagnostic enabled no capability. The installed production adapter was then checked separately through its local screen:
