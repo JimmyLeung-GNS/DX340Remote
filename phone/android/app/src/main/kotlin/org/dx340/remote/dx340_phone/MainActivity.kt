@@ -87,7 +87,9 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler {
         val remote = model
         val devices = JSONArray()
         remote?.found?.forEach { device ->
-            val name = runCatching { device.name }.getOrNull()?.takeIf { it.isNotBlank() } ?: "DX340"
+            val name = if (checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
+                try { device.name?.takeIf { it.isNotBlank() } ?: "DX340" } catch (_: SecurityException) { "DX340" }
+            } else "DX340"
             devices.put(JSONObject().put("id", device.address).put("name", name))
         }
         return JSONObject().put("bridgeVersion", 1).put("status", remote?.status ?: "Preparing Bluetooth remote…")

@@ -129,7 +129,10 @@ void main() {
       expect(bridge.calls.map((c) => c.$1), ['browse', 'browse', 'send']);
       expect(bridge.calls[0].$2, {'parent': 'back-token'});
       expect(bridge.calls[1].$2, {'parent': 'scroll-token', 'page': 2});
-      expect(bridge.calls[2].$2, {'type': 'PLAY_ITEM', 'args': {'item': 'song-token', 'revision': 'r1'}});
+      expect(bridge.calls[2].$2, {
+        'type': 'PLAY_ITEM',
+        'args': {'item': 'song-token', 'revision': 'r1'},
+      });
       remote.dispose();
     },
   );

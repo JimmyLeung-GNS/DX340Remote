@@ -22,6 +22,16 @@ try {
     }
     & $flutter build apk --release 2>&1 | Tee-Object "$repo/artifacts/flutter-android-build.txt"
     if ($LASTEXITCODE -ne 0) { throw 'Flutter Android build failed.' }
+    # Flutter 3.41 writes an unescaped Windows drive colon to generated properties;
+    # normalize only the ignored local file before Android lint parses it.
+    if ($IsWindows) {
+        (Get-Content android/local.properties) -replace '^((?:sdk.dir|flutter.sdk)=[A-Za-z]):', '$1\:' | Set-Content android/local.properties
+    }
+    Push-Location android
+    try {
+        & ./gradlew.bat --no-daemon :app:lintRelease 2>&1 | Tee-Object "$repo/artifacts/flutter-android-lint.txt"
+        if ($LASTEXITCODE -ne 0) { throw 'Flutter Android lint failed.' }
+    } finally { Pop-Location }
     Copy-Item build/app/outputs/flutter-apk/app-release.apk "$repo/artifacts/dx340-phone-0.2.0-development.apk"
     Get-FileHash "$repo/artifacts/dx340-phone-0.2.0-development.apk" -Algorithm SHA256 | Format-List | Out-File "$repo/artifacts/flutter-apk-sha256.txt"
 } finally { Pop-Location }

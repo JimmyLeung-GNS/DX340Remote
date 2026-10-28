@@ -25,8 +25,30 @@ void main() {
         addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
         await tester.tap(find.text('Player').last);
         await tester.pumpAndSettle();
-      await tester.scrollUntilVisible(find.text('Play'), 200, scrollable: find.byType(Scrollable).first);
+        await tester.scrollUntilVisible(
+          find.text('Play'),
+          200,
+          scrollable: find.byType(Scrollable).first,
+        );
         expect(tester.takeException(), isNull);
+        if (platform == TargetPlatform.iOS) {
+          expect(
+            MediaQuery.textScalerOf(
+              tester.element(find.text('Library').last),
+            ).scale(10),
+            10,
+            reason:
+                'Fixed-height iOS tabs follow Cupertino native sizing at accessibility text sizes.',
+          );
+          expect(
+            MediaQuery.textScalerOf(
+              tester.element(find.text('No track connected')),
+            ).scale(10),
+            greaterThan(10),
+            reason:
+                'Reading content must still respect the user’s larger text setting.',
+          );
+        }
         if (platform == TargetPlatform.android) {
           expect(
             tester
@@ -47,7 +69,7 @@ void main() {
           );
         }
         await tester.pumpWidget(const SizedBox());
-      debugDefaultTargetPlatformOverride = null;
+        debugDefaultTargetPlatformOverride = null;
       },
     );
   }

@@ -3,7 +3,8 @@
         android:label="DX340 Remote"
         android:name="${applicationName}"
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher">
+        android:dataExtractionRules="@xml/no_backups"
+        android:icon="@drawable/ic_dx340">
         <activity
             android:name=".MainActivity"
             android:exported="true"

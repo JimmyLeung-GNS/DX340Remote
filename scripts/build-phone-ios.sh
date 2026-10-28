@@ -31,7 +31,13 @@ capture() {
     attempt=0
     while [ "$attempt" -lt 15 ]; do
         xcrun simctl io "$simulator" screenshot "$path"
-        if work/check-flutter-capture "$path" "$heading" >> artifacts/flutter-capture-readiness.txt 2>&1; then return; fi
+        if work/check-flutter-capture "$path" "$heading" >> artifacts/flutter-capture-readiness.txt 2>&1; then
+            # Launch animation can still fade a readable first frame. Keep the
+            # final image only after a second ready frame one second later.
+            sleep 1
+            xcrun simctl io "$simulator" screenshot "$path"
+            if work/check-flutter-capture "$path" "$heading" >> artifacts/flutter-capture-readiness.txt 2>&1; then return; fi
+        fi
         attempt=$((attempt + 1)); sleep 1
     done
     return 1
