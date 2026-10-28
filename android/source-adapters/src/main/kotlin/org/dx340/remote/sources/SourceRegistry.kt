@@ -123,7 +123,8 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         put("canSeek", supports(pkg, PlaybackState.ACTION_SEEK_TO)); put("canReadQueue", controllers[pkg]?.queue != null)
         put("canPlayQueueItem", supports(pkg, PlaybackState.ACTION_SKIP_TO_QUEUE_ITEM))
         put("canBrowse", browsers[pkg]?.isConnected == true || (usingUi(pkg) && uiLibrary?.ready == true))
-        put("canPlayItem", supports(pkg, PlaybackState.ACTION_PLAY_FROM_MEDIA_ID) || verifiedPlayItem(pkg) || (usingUi(pkg) && uiLibrary?.ready == true) || (pkg == PACKAGES[0] && mangoUiLibrary?.ready == true))
+        put("canPlayNativeItem", nativeSelectionSupported(pkg))
+        put("canPlayItem", nativeSelectionSupported(pkg) || (usingUi(pkg) && uiLibrary?.ready == true) || (pkg == PACKAGES[0] && mangoUiLibrary?.ready == true))
         put("browseMode", if (usingUi(pkg)) "ui-assisted" else "direct")
         put("canBrowseFolders", pkg == PACKAGES[0] && mangoUiLibrary?.ready == true)
         if (pkg == PACKAGES[0] && mangoUiLibrary?.enabled == true) put("uiBrowseReason", mangoUiLibrary.explanation)
@@ -191,7 +192,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
             return
         }
         try {
-            require(capabilities(pkg).optBoolean("canPlayItem")) { "UNSUPPORTED_CAPABILITY" }
+            require(nativeSelectionSupported(pkg)) { "UNSUPPORTED_CAPABILITY" }
             require(args.getString("revision") == epoch(pkg)) { "STALE_LIBRARY" }
             val id = args.getString("item")
             val proof = proofs[pkg]?.get(id) ?: error("EXPIRED_ITEM")
@@ -204,6 +205,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
                     require((0 until list.length()).any { list.getJSONObject(it).getString("id") == id }) { "EXPIRED_ITEM" }
                     revisionGuard.validateSelection(proof.fingerprint, items[pkg]?.get(id)?.let(::fingerprint))
                     require(stillAuthorized()) { "AUTHORIZATION_DENIED" }
+                    require(nativeSelectionSupported(pkg)) { "UNSUPPORTED_CAPABILITY" }
                     preparePlayback(pkg, expectedEpoch, stillAuthorized, deadline) { handoffError ->
                         if (handoffError != null) done(handoffError)
                         else browse(proof.parent, proof.page) { _, finalError ->
@@ -307,6 +309,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         } catch (e: Exception) { done(e.message ?: "SOURCE_NOT_READY") }
     }
     private fun version(pkg: String) = runCatching { context.packageManager.getPackageInfo(pkg, 0).let { "${it.versionName}|${it.longVersionCode}|${android.os.Build.FINGERPRINT}" } }.getOrNull() ?: "missing"
+    private fun nativeSelectionSupported(pkg: String) = supports(pkg, PlaybackState.ACTION_PLAY_FROM_MEDIA_ID) || verifiedPlayItem(pkg)
     private fun verifiedPlayItem(pkg: String): Boolean {
         if (pkg != PACKAGES[0]) return false
         val prefs = context.getSharedPreferences("source-verification", Context.MODE_PRIVATE)
@@ -358,6 +361,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
             "NEXT" -> controls.skipToNext(); "PREVIOUS" -> controls.skipToPrevious()
             "SEEK" -> { val ms = args.getLong("position"); require(ms >= 0 && ms <= (c.metadata?.getLong("android.media.metadata.DURATION") ?: 0)) { "INVALID_ARGUMENT" }; controls.seekTo(ms) }
             "PLAY_ITEM_VALIDATED" -> {
+                require(nativeSelectionSupported(selected)) { "UNSUPPORTED_CAPABILITY" }
                 require(args.getString("revision") == epoch(selected)) { "STALE_LIBRARY" }
                 val item = items[selected]?.get(args.getString("item")) ?: error("EXPIRED_ITEM")
                 require(item.isPlayable) { "UNSUPPORTED_CAPABILITY" }; controls.playFromMediaId(item.mediaId, null)
@@ -421,6 +425,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
                 val known = items.getOrPut(pkg) { linkedMapOf() }
                 val knownProofs = proofs.getOrPut(pkg) { linkedMapOf() }
                 val result = JSONArray()
+                val nativeSelection = nativeSelectionSupported(pkg)
                 if (pkg == PACKAGES[0] && target == browser.root && page == 0 && mangoUiLibrary?.enabled == true) {
                     result.put(JSONObject().put("id", MANGO_UI_ROOT).put("title", "Local folders · assisted")
                         .put("subtitle", mangoUiLibrary.explanation).put("browsable", true).put("playable", false).put("uiAssisted", true))
@@ -433,7 +438,8 @@ class SourceRegistry(private val context: Context, private val listener: Compone
                     knownProofs[id] = ItemProof(target, page, fingerprint(item))
                     result.put(JSONObject().put("id", id).put("title", item.description.title?.toString()?.take(128) ?: "Untitled")
                         .put("subtitle", item.description.subtitle?.toString()?.take(64) ?: "")
-                        .put("browsable", item.isBrowsable).put("playable", item.isPlayable))
+                        .put("browsable", item.isBrowsable).put("playable", item.isPlayable && nativeSelection)
+                        .put("nativeTestable", pkg == PACKAGES[0] && item.isPlayable))
                 }
                 finish(JSONObject().put("parent", target).put("revision", revision).put("page", page)
                     .put("nextPage", if ((children.size > 25 && (page + 1) * 25 < children.size) || children.size == 25) page + 1 else JSONObject.NULL).put("items", result), null)

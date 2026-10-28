@@ -34,12 +34,13 @@ object MangoUiModel {
         val active = pages.maxBy { it.drawingOrder }
         require(pages.size == 1 || (active.drawingOrder > 0 && pages.count { it.drawingOrder == active.drawingOrder } == 1)) { "UI_ACTIVE_PAGE_UNVERIFIED" }
         val lists = nodes.filter { it.path.startsWith(active.path + ".") && it.id == PREFIX + "music_lib_all_music_list" }
-        require(lists.size == 1) { "UI_UNEXPECTED_SCREEN" }
-        val list = lists.single()
-        val names = ordered(nodes.filter { it.path.startsWith(list.path + ".") && it.id == PREFIX + "file_name_tv" })
+        val empty = nodes.singleOrNull { it.path.startsWith(active.path + ".") && it.id == PREFIX + "empty_view" }
+        require(lists.size == 1 && empty == null || lists.isEmpty() && empty?.description == "no data") { "UI_UNEXPECTED_SCREEN" }
+        val list = lists.singleOrNull()
+        val names = if (list == null) emptyList() else ordered(nodes.filter { it.path.startsWith(list.path + ".") && it.id == PREFIX + "file_name_tv" })
         val rows = names.map { name ->
             require(name.text.isNotBlank() && name.text.length <= 512 && !name.text.contains('\u0000')) { "UI_UNEXPECTED_SCREEN" }
-            val row = clickable(nodes, name, list.path) ?: error("UI_ACTION_FAILED")
+            val row = clickable(nodes, name, list!!.path) ?: error("UI_ACTION_FAILED")
             val children = nodes.filter { it.path.startsWith(row.path + ".") }
             require(children.count { it.id == PREFIX + "file_name_tv" } == 1) { "UI_UNEXPECTED_SCREEN" }
             val file = children.any { it.id == PREFIX + "file_info_index_tv" && it.text.matches(Regex("[0-9]+")) }
@@ -54,7 +55,7 @@ object MangoUiModel {
         val root = crumbs.firstOrNull()?.let { clickable(nodes, it)?.path ?: error("UI_ACTION_FAILED") }
         val back = crumbs.dropLast(1).lastOrNull()?.let { clickable(nodes, it)?.path ?: error("UI_ACTION_FAILED") }
         val title = if (crumbs.isEmpty()) storages.getValue(storage) else crumbs.joinToString(" / ") { it.text }
-        val scroll = list.takeIf { it.forward }?.path
+        val scroll = list?.takeIf { it.forward }?.path
         val signature = "$storage\u0000$title\u0000${rows.joinToString("\u0000") { "${it.path}:${it.title}:${it.playable}:${it.browsable}" }}:$back:$root:$scroll"
         val hash = MessageDigest.getInstance("SHA-256").digest(signature.toByteArray()).joinToString("") { "%02x".format(it.toInt() and 255) }
         return ParsedMangoUi(title, storage, rows, back, root, scroll, hash)

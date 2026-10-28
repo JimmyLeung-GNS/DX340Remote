@@ -116,6 +116,8 @@ The default read-only instrumentation uses the companion's ordinary package iden
 
 Restart the companion afterward. The runner records native browser roots/pages and a Media3 Apple Music root attempt. `INSTRUMENTATION_CODE: -1` is Android RESULT_OK for completion of the reporting runner; it is not an assertion that source gates passed. Inspect each result.
 
+On this DX340, finishing instrumentation also left the enabled optional browsing services listed as crashed/unbound. If assisted browsing reports missing access afterward, open Android Settings → Accessibility, select each DX340 browsing service, turn it off/confirm Stop, then turn it on/review Allow. Return to the companion and refresh. This manual recovery was verified; restarting the companion alone did not restore those bindings. A normal phone UI or source-only compile does not establish automatic process-death recovery.
+
 ## Optional Apple Music browsing
 
 The user accepted this screen-on/unlocked mode. Apple Music must be6.5.3/code1599; an update disables the unverified adapter. Its direct browser is denied in the tested interfaces. This mode navigates the installed app's visible Downloaded library; it does not extract downloads.
@@ -128,3 +130,14 @@ The user accepted this screen-on/unlocked mode. Apple Music must be6.5.3/code159
 Actual companion-service album/song reads, scroll, stale-ID and screen-off checks are recorded under test-results/. Complete playlist/song-count and phone BLE acceptance are still required. App updates may break semantic navigation; the mode must then be revalidated. The separate read-only research APK remains uninstalled and is not required for this mode.
 
 For development only, `am start -W --activity-clear-top -n org.dx340.remote.host/.MainActivity --ez developmentProbe true` recreates the debug companion Activity and starts probes; this avoids merely bringing an old Settings screen atop its task. The debug-only UI probe receiver requires Android's privileged DUMP permission, is absent from release, and is not an everyday control path. See the test report for its exact command and evidence limits.
+
+## Optional Mango folders
+
+This is the separately accepted screen-on/unlocked mode for Mango4.1.37/code240. Native All Music/Album/Artist/Genre remain available. The own companion service has browsed nested folders and selected a WAV track that the user confirmed audible; the full format/SD/phone Bluetooth matrix remains open.
+
+1. In DX340 Companion, tap **Enable optional Mango folders**. In Accessibility settings, enable **DX340 Mango folder browsing** and review Android's permission prompt. On the current development DX340, the optional mode and this service are already enabled.
+2. Keep DX340 awake and unlocked. In the connected phone's Library, choose **Local folders · assisted**, then **Internal Storage** or **SD Card**. Navigate folders and choose a playable FLAC/WAV row. Back/More follow the source's visible folder view. No Local Network option is exposed.
+3. To try the local test without a phone, choose **Test Mango library on this DX340** → **Local folders · assisted**. The test briefly opens Mango for each assisted operation and returns to the test screen. Select a file, confirm **Test selected file**, listen, then record the audible result. Local results do not verify phone Bluetooth or native play-by-ID.
+4. If the screen changes or an item expires, use **Retry library** / root refresh. If the device sleeps, wake/unlock it first. Turn the mode off with **Disable optional Mango folders**; the separate Android Accessibility permission can also be revoked. An app update requires adapter revalidation.
+
+This mode uses Mango's semantic UI, not a replacement audio engine. It does not enable seeking or output-volume control; those remain separately capability gated.

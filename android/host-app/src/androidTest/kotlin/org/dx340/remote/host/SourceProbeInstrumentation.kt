@@ -33,6 +33,7 @@ class SourceProbeInstrumentation : Instrumentation() {
         if (mode == "mango-transports") { MangoTransportProbe(this).run(); return }
         if (mode == "mango-observed-state") { MangoStateProbe(this).run(); return }
         if (mode == "ui-recreation") { UiRecreationProbe(this).run(); return }
+        if (mode == "mango-capability-boundary") { MangoCapabilityProbe(this).run(); return }
         val result = JSONObject().put("kind", "physical-read-only-source-probe")
         var registry: SourceRegistry? = null
         try {

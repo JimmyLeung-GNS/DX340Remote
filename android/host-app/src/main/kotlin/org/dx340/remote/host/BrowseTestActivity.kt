@@ -37,7 +37,7 @@ class BrowseTestActivity : Activity() {
         if (sources == null) status.text = "Return to the companion and tap Start Bluetooth remote first. Then open this test again."
         else { sources!!.select("com.ibasso.music"); if (!restorePending()) load(null) }
     }
-    private fun addButton(parent: LinearLayout, title: String, action: () -> Unit) { parent.addView(Button(this).apply { text = title; minHeight = (48 * resources.displayMetrics.density).toInt(); setOnClickListener { if (!requestRunning) action() } }) }
+    private fun addButton(parent: LinearLayout, title: String, action: () -> Unit): Button = Button(this).apply { text = title; minHeight = (48 * resources.displayMetrics.density).toInt(); setOnClickListener { if (!requestRunning) action() } }.also { parent.addView(it) }
     private fun returnFromMango() {
         requestRunning = false
         if (!isFinishing && !isDestroyed) startActivity(Intent(this, BrowseTestActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP))
@@ -76,14 +76,16 @@ class BrowseTestActivity : Activity() {
             if (assistedRequest) returnFromMango()
             if (isFinishing || isDestroyed) return@browse
             if (error != null || data == null) { status.text = "Mango returned ${error ?: "no library"}. Open Mango once, return here and retry."; return@browse }
-            page = data; status.text = "Choose a folder or a track to test."
+            page = data
+            status.text = if (data.optBoolean("uiAssisted")) "${data.optString("title", "Mango folders")}\nOptional folder mode needs DX340 awake/unlocked. Choose a folder or file to test." else "Choose a folder or a track to test."
             val items = data.getJSONArray("items")
+            if (data.optBoolean("uiAssisted") && items.length() == 0) status.append("\nNo local items are shown here. Use Back to choose another folder.")
             for (i in 0 until items.length()) {
                 val item = items.getJSONObject(i)
                 addButton(rows, item.optString("title")) {
                     if (item.optBoolean("browsable")) { if (!data.optBoolean("uiAssisted") && !item.optBoolean("uiAssisted")) parents.add(item.getString("id")); load(item.getString("id")) }
-                    else if (item.optBoolean("playable")) confirmTest(item)
-                }
+                    else if (item.optBoolean("playable") || item.optBoolean("nativeTestable")) confirmTest(item)
+                }.apply { isEnabled = item.optBoolean("browsable") || item.optBoolean("playable") || item.optBoolean("nativeTestable"); if (data.optBoolean("uiAssisted")) isAllCaps = false }
             }
             if (!data.isNull("nextPage")) addButton(rows, "Next page") { load(data.getString("parent"), data.getInt("nextPage")) }
         }; Unit }

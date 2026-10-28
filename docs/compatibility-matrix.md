@@ -1,12 +1,12 @@
 # Compatibility and acceptance matrix
 
-28 October 2026. VERIFIED means only the stated observation. No complete T01–T18 acceptance run has passed.
+29 October 2026. VERIFIED means only the stated observation. No complete T01–T18 acceptance run has passed.
 
 | Platform / combination | Build | Open | Physical BLE controller |
 |---|---|---|---|
 | DX340 host, Android13/API33, eng.iBasso.20260812.181952 | VERIFIED Windows Gradle | VERIFIED on DX340 | Advertising callbacks only; central NOT TESTED |
-| Shared Flutter Android remote0.2.0+2 on DX340 | VERIFIED analysis/9 Dart tests/release APK/release lint | VERIFIED four disconnected screens and Setup recovery; scoped Android visual review ship | NOT TESTED; same-device launch is not phone BLE |
-| Shared Flutter iPhone remote, iOS17+ proposed | VERIFIED Flutter3.41.4/Xcode26.6 unsigned simulator build and9 Dart tests, CI40713390473 | VERIFIED iPhone Air/iOS26.5 four disconnected screens plus Player dark/largest-text; scoped visual review ship | NOT TESTED; physical signing/installation open |
+| Shared Flutter Android remote0.2.0+2 on DX340 | VERIFIED analysis/10 Dart tests/release APK/release lint | VERIFIED disconnected launch; prior four-screen/recovery captures have scoped visual review ship | NOT TESTED; same-device launch is not phone BLE |
+| Shared Flutter iPhone remote, iOS17+ proposed | VERIFIED Flutter3.41.4/Xcode26.6 unsigned simulator build and10 Dart tests, CI40723554411 at7921d75 | VERIFIED six disconnected captures inspected, same iPhone Air/iOS26.5 layout as prior scoped review; connected error copy untested | NOT TESTED; physical signing/installation open |
 | Android remote0.1.0 on same DX340 | VERIFIED Windows Gradle | VERIFIED screenshot/process | NOT TESTED; same-device UI is not phone radio proof |
 | Separate Android phone, API31+ proposed | APK available | NOT TESTED, device unavailable | NOT TESTED |
 | Native iPhone remote, iOS17+ proposed | VERIFIED Xcode26.6 unsigned simulator build, Swift3 tests | VERIFIED4 disconnected screens plus Player dark/largest-text captures on iPhone Air/iOS26.5;3 scoped UI fixes scored resolved | NOT TESTED |
@@ -19,13 +19,13 @@
 | T02 Discovery | NOT TESTED; need ten trials per phone |
 | T03 100 controls/source/phone | NOT TESTED; local source probes are smaller and have no BLE |
 | T04 Latency | NOT MEASURED; distinguish ACK from observed state |
-| T05 Screen off /30min pause | NOT TESTED for BLE; optional Apple browsing requires on/unlocked |
+| T05 Screen off /30min pause | NOT TESTED for BLE; optional Apple/Mango browsing requires on/unlocked. Mango assisted rejection/native browse separation sampled locally |
 | T06 Ten range recoveries | NOT TESTED |
 | T07 Apple20 tracks/5 albums/2 playlists | PARTIAL: actual own-service downloaded playlist selection outside complete20-item queue observed playing offline; user-confirmed audible with delayed-snapshot caveat. Full20/5/2 and phone matrix NOT TESTED |
 | T08 Mango20 FLAC/WAV/folders/playlists | PARTIAL native audible selection plus accepted optional own-service nested-folder WAV selection user-confirmed audible. Native root lacks folder/playlist categories; full20/format/playlist/phone matrix open |
 | T09 Source switching | PARTIAL:12 local desired-state requests across awake/asleep tests and native/UI selected-item handoff observed correct target playing/other paused. No phone BLE or acoustic-overlap acceptance |
 | T10 Actual output volume | NOT TESTED; remote volume disabled |
-| T11 Rescan/SD/stale IDs | Software guards tested; physical media-change cases NOT TESTED |
+| T11 Rescan/SD/stale IDs | Old Mango UI file tokens rejected locally; SD root and explicit empty Music folder read. Physical removal/rescan/duplicate cases NOT TESTED |
 | T12 Interruptions | Partial Activity-recreation fixture test; real phone/radio/background matrix NOT TESTED |
 | T13 Matched battery runs | NOT TESTED |
 | T14 Walking | NOT TESTED |

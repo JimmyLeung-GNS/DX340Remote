@@ -61,4 +61,12 @@ class MangoUiModelTest {
         assertEquals(listOf("Visible.flac"), MangoUiModel.parse(nodes, "internal").rows.map { it.title })
         assertThrows(IllegalArgumentException::class.java) { MangoUiModel.parse(nodes.map { if (it.path == "0.2.1") it.copy(drawingOrder = 2) else it }, "internal") }
     }
+    @Test fun explicitEmptyActiveFolderDoesNotExposeCachedFilesOrInventAList() {
+        val nodes = folder().filterNot { it.path == "0.2.0.0" } +
+            UiNode("0.2.0.1", "0.2.0", p + "empty_view", description = "no data") +
+            listOf(UiNode("0.2.1", "0.2", p + "view_root", drawingOrder = 1), UiNode("0.2.1.0", "0.2.1", p + "music_lib_all_music_list")) + row(1, 0, "Cached.wav")
+        val parsed = MangoUiModel.parse(nodes, "internal")
+        assertTrue(parsed.rows.isEmpty()); assertNull(parsed.scroll)
+        assertThrows(IllegalArgumentException::class.java) { MangoUiModel.parse(nodes.map { if (it.id == p + "empty_view") it.copy(description = "unknown") else it }, "internal") }
+    }
 }

@@ -58,6 +58,8 @@ The shared phone implementation uses Flutter 3.41.4/Dart 3.11.1 above Kotlin And
 
 Both finish reviewers returned ship for their supplied disconnected captures only: Android dark/default-font screens and the six iPhone simulator states described below. This records the implemented system and those narrow verdicts. Whole-product, physical phone, connection stability and accessibility acceptance remain open.
 
+The optional Mango folders setting and local test surface extend the companion's existing system appearance. A separate reviewer returned ship only for nine DX340 dark/default-font states. That host review does not change the shared phone direction or broaden either earlier phone verdict.
+
 **Key Characteristics:**
 
 - One maintained phone presentation with platform-adaptive system controls.
@@ -113,7 +115,7 @@ Seeking appears only when the source advertises it; authorized unsupported state
 
 Capability-led lists distinguish browsable folders from playable selections, with a folder/music icon and a chevron for folders. Cupertino rows use buttons; Android rows use ListTile. Nonempty subtitles wrap within the row. Library loading uses an adaptive progress indicator. Parent navigation, native pagination and assisted Show more are distinct actions; queue and library selections use source IDs and revisions.
 
-Disconnected Library and Queue provide connection guidance and Open Setup. Supported native browsing and optional assisted browsing remain separate modes with explicit limitations; full browsing is not reduced to queue skipping. Connected content rendering remains outside the finish reviewers' screenshot scope. Production optional Mango folder-service integration is still pending.
+Disconnected Library and Queue provide connection guidance and Open Setup. Supported native browsing and optional assisted browsing remain separate modes with explicit limitations; full browsing is not reduced to queue skipping. Connected phone content rendering remains outside the finish reviewers' screenshot scope. The optional Mango folder service now has local adapter evidence; both phone BLE routes and full folder acceptance remain open.
 
 ### Navigation
 
@@ -127,13 +129,27 @@ Setup explains that music stays on DX340 and provides access, discovery, connect
 
 The phone owns presentation; native code owns BLE lifecycle, request IDs, epochs and recovery. The UI must preserve capability differences and interruption explanations when transport state changes.
 
+### Optional Mango companion test
+
+The host setting and test use existing Kotlin TextView, Button, ScrollView and AlertDialog controls under Theme.DeviceDefault.DayNight. They inherit the companion typography and minimum action target above; no palette, shape, material or spacing tokens are added. The raw-pixel root padding remains scoped implementation debt.
+
+The setting explicitly names optional Mango folders and explains Accessibility access, the awake/unlocked requirement and revalidation after Mango updates. The local test distinguishes DX340 source-interface checks from phone Bluetooth control, keeps the existing listening volume, and presents the current folder path and limitations in scrolling text. Assisted storage, folder and file labels preserve their source case. Rows without browsing or supported playback are disabled, with one explicit local diagnostic exception: a nativeTestable Mango row may open the separately confirmed public-API experiment even when playable is false. This flag does not authorize ordinary remote selection. Native category labels retain stock button casing. SourceRegistry independently gates native selection at validation, handoff and dispatch; native playable rows require advertised support or stored version-specific verification.
+
+Back, Open Mango Player and Retry library remain available alongside the folder rows. Empty folders explain that no local items are shown and direct the user to Back. Selecting a playable file first opens a confirmation dialog naming the file, the optional UI route and the listening check, with Cancel and Test selected file actions. The native play-by-ID experiment retains its separate explanation. A completed request then offers distinct audible-correct and wrong/silent/failed result actions; request success alone never records audible success. Pending-result and UI play-callback screens are implemented source behavior outside the nine-state visual review.
+
 ### Assets and provenance
 
 Android reuses ic_dx340.xml; five generated Flutter Android launcher PNGs were removed. The iPhone AppIcon and transparent launch placeholders remain provisional Flutter-template assets. phone/ASSET_ORIGINS.md and third_party/FLUTTER_LICENSE identify them. All 18 shipping PNGs embed their origins; the recorded embed-prompt scan reported 18 rasters and zero missing origins. No new raster illustration or generated artwork was introduced. Launcher branding is unfinished.
 
 ### Evidence and acceptance limits
 
-The current shared UI source is phone/lib/main.dart and phone/lib/remote.dart at capture revision 5f31f5d. The direction and quality bar are in docs/shared-phone-ui-brief.md. Host/native reference sources remain android/host-app, android/remote-app and apple/DXRemote/RemoteView.swift.
+The prior reviewed shared UI capture source is phone/lib/main.dart and phone/lib/remote.dart at revision 5f31f5d. The direction and quality bar are in docs/shared-phone-ui-brief.md. Host/native reference sources remain android/host-app, android/remote-app and apple/DXRemote/RemoteView.swift. The historical phone reviewer records below remain scoped to their supplied captures.
+
+**Verified, current shared phone checks:** at 7921d75, CI 40723554411 succeeded with analysis, ten Dart tests, an iOS simulator build and six disconnected captures; artifact 12831164026. Android analysis, ten Dart tests, release APK, release lint and launch on DX340 also passed; APK SHA256 8a38cf21a859deba032e3fd850b60ba57445f6f60349361a5ab6cebb03e87aba. These checks preserve the shared phone direction. They do not create a new visual-review verdict or establish connected phone operation.
+
+**Verified, scoped Mango host evidence:** companion debug 0.1.0, reviewed capture APK SHA256 0153c5740b227bb882341be716672ced480f40c3239473f046a95fd020eca4ac, on actual DX340 Android 13/API 33 with Mango 4.1.37/code 240. This hash identifies the historical capture build; a later capability-gating correction is separate. The independent reviewer confirmed ship remains limited to the unchanged nine 1080×2160 dark/default-font captures in .impeccable/review/mango/: host.png, native-root.png, storage-choices.png, internal-root.png, music.png, tayori.png, files.png, file-dialog.png and empty-sd-music.png. Music is a declared scrolled viewport. Local UI navigation and confirmation/cancel were observed. The captured device already held native selection verification, so the correction leaves these appearances unchanged; a fresh unverified install is visually not tested. The verdict excludes light mode, large fonts, screen readers, pending-result/UI-play-callback screens, phone BLE, audio quality and full-matrix acceptance.
+
+**Verified separately, user-reported audible adapter results:** the companion debug adapter selected 02. 白日夢.wav through Mango, and separately selected 02. 魔法.flac from the Tayori LIVE TOUR “magic” folder. For the FLAC, Mango reported 魔法/album magic playing and Apple Music paused, with Wi-Fi 0/no default network before selection. The user separately confirmed each correct song audible through AMP15 phone out. Both delayed listening replies and source-state observations are separate from the local UI navigation/confirmation observations and the nine-state visual verdict. They do not prove the test screen's play callback, native play-by-ID, phone Bluetooth, audio quality or the full format/library matrix. See docs/mango-ui-experiment.md and docs/test-results/2026-10-29-mango-folders.md.
 
 **Verified, scoped Android evidence:** APK 0.2.0+2, SHA256 5bef92a12d4d530ff95b5907eaae13deacf332ca7f7233e3740e2c1a0ab4ad60, installed on the actual DX340 Android 13/API 33. artifacts/flutter-android-{player,library,queue,setup,recovery}-dark.png are five 1080×2160 disconnected default-font captures. artifacts/flutter-android-capture-provenance.txt records source, package and observed development destination/Open Setup taps. The Android finish reviewer returned ship with no material fixes for only those states. This is not a separate controller phone or BLE test. UIAutomator returned null roots for both Flutter and the native companion; that is neither a screen-reader pass nor a demonstrated screen-reader failure. Analysis, nine Dart tests, release APK and release lint passed in artifacts/flutter-build-final-ui.txt.
 

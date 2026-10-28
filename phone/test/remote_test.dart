@@ -104,6 +104,18 @@ void main() {
       false,
     );
     expect(bridge.calls, isEmpty);
+    // Assisted selection can be available before native Mango play-by-ID is verified.
+    // The diagnostic-only testable flag must never authorize phone playback.
+    remote.accept(snapshot());
+    await remote.playItem({
+      'id': 'native-unverified',
+      'playable': false,
+      'nativeTestable': true,
+    });
+    expect(bridge.calls, isEmpty);
+    await remote.playItem({'id': 'ui-verified', 'playable': true});
+    expect(bridge.calls.single.$1, 'send');
+    expect(bridge.calls.single.$2['args']['item'], 'ui-verified');
     remote.dispose();
   });
   test(

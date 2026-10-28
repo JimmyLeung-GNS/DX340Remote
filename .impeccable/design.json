@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-28T15:27:35Z",
+  "generatedAt": "2026-10-28T16:28:53Z",
   "title": "Design System: DX340 Remote",
   "extensions": {
     "colorMeta": {
@@ -50,6 +50,7 @@
       "iPhoneTabChrome": "MediaQuery.withNoTextScaling around the fixed-height CupertinoTabBar, matching CupertinoTabScaffold chrome behavior; reading content still scales.",
       "errors": "Material colorScheme.error on Android; resolved CupertinoColors.systemRed on iPhone.",
       "retainedAndroid": "Kotlin Views with Theme.DeviceDefault.DayNight; raw-pixel root padding and four-button reference navigation remain scoped legacy debt.",
+      "optionalMangoHost": "Existing Kotlin TextView/Button/ScrollView/AlertDialog controls under Theme.DeviceDefault.DayNight. Existing companion typography and action targets apply; no new visual tokens. Assisted folder/file labels preserve source case; native categories keep stock button casing. Unsupported rows are disabled except nativeTestable Mango rows in the explicit local diagnostic experiment, which may remain enabled with playable=false. This flag does not authorize remote selection. SourceRegistry independently gates native selection at validation/handoff/dispatch; native playable rows require advertised support or stored version-specific verification. File selection requires confirmation; listening results are recorded separately from request success.",
       "retainedApple": "SwiftUI NavigationStack/TabView/List/Section; title2 bold track, wrapping footnote status in scrolling list, subheadline library now-playing bar inset, secondary nonempty metadata.",
       "shapesAndElevation": "Framework-owned button/navigation/list shapes and depth; no authored radius, shadow or motion scale.",
       "motion": "No authored duration/easing tokens. Reduced-motion behavior on physical controllers is unverified.",
@@ -67,6 +68,8 @@
     "sources": [
       "PRODUCT.md",
       "docs/shared-phone-ui-brief.md",
+      "docs/mango-ui-experiment.md",
+      "docs/test-results/2026-10-29-mango-folders.md",
       "phone/lib/main.dart",
       "phone/lib/remote.dart",
       "phone/android/app/src/main/kotlin/org/dx340/remote/dx340_phone/MainActivity.kt",
@@ -85,8 +88,49 @@
       "third_party/FLUTTER_LICENSE"
     ],
     "verification": {
-      "scope": "Both finish reviewers returned ship only for supplied disconnected states. Full system active/incomplete; physical Flutter parity and connection stability remain open.",
+      "scope": "Earlier phone reviewers returned ship only for their supplied disconnected states. A separate Mango host reviewer returned ship only for nine dark/default-font DX340 captures. Full system active/incomplete; physical Flutter parity and connection stability remain open.",
       "sourceRevision": "5f31f5d",
+      "sourceRevisionScope": "Historical shared phone reviewed capture baseline, preserved below; latest checks are recorded separately.",
+      "latestPhoneChecks": {
+        "status": "verified for software and disconnected capture scope",
+        "sourceRevision": "7921d75",
+        "iPhoneCiRun": "40723554411",
+        "iPhoneCiResult": "SUCCESS",
+        "iPhoneArtifactId": "12831164026",
+        "iPhoneChecks": "Analysis, 10 Dart tests, iOS simulator build and 6 disconnected captures passed.",
+        "androidChecks": "Analysis, 10 Dart tests, release APK, release lint and launch on DX340 passed.",
+        "androidApkSha256": "8a38cf21a859deba032e3fd850b60ba57445f6f60349361a5ab6cebb03e87aba",
+        "limit": "Shared phone direction unchanged. No new visual-review verdict, physical controller, connected-data or phone BLE acceptance follows."
+      },
+      "mangoHost": {
+        "status": "verified for captured host scope",
+        "device": "Actual DX340 Android 13/API 33, 1080×2160, dark/default font; Mango 4.1.37/code 240.",
+        "companionVersion": "0.1.0 debug",
+        "reviewedCaptureApkSha256": "0153c5740b227bb882341be716672ced480f40c3239473f046a95fd020eca4ac",
+        "captureBuildScope": "Historical reviewed capture APK, before the later capability-gating correction. The captured device already held native selection verification; these nine appearances remain unchanged. Fresh unverified-install rendering is not visually tested.",
+        "captures": [
+          ".impeccable/review/mango/host.png",
+          ".impeccable/review/mango/native-root.png",
+          ".impeccable/review/mango/storage-choices.png",
+          ".impeccable/review/mango/internal-root.png",
+          ".impeccable/review/mango/music.png",
+          ".impeccable/review/mango/tayori.png",
+          ".impeccable/review/mango/files.png",
+          ".impeccable/review/mango/file-dialog.png",
+          ".impeccable/review/mango/empty-sd-music.png"
+        ],
+        "captureScope": "Nine actual host/local-test states only. Music is a declared scrolled viewport.",
+        "interaction": "Local UI navigation and confirmation/cancel observed. Pending-result and UI play-callback states are implemented source behavior outside the supplied visual review.",
+        "review": {
+          "disposition": "ship",
+          "limit": "Reviewer confirmed ship remains scoped to the unchanged nine supplied dark/default-font DX340 captures. Excludes fresh-unverified-install/light/large-font/screen-reader/pending-result/UI-play-callback/phone BLE/audio-quality/full-matrix acceptance."
+        },
+        "separateAudibleEvidence": "Companion debug adapter selected 02. 白日夢.wav and separately 02. 魔法.flac from Tayori LIVE TOUR magic. For the FLAC, Mango reported 魔法/album magic playing, Apple Music paused, with Wi-Fi 0/no default network before selection. User separately confirmed each correct song audible through AMP15 phone out. Both delayed listening replies and source state are separate from local test-screen interactions and the visual verdict; no UI play-callback, native play-by-ID, phone BLE, audio-quality or full-format/library acceptance follows.",
+        "evidence": [
+          "docs/mango-ui-experiment.md",
+          "docs/test-results/2026-10-29-mango-folders.md"
+        ]
+      },
       "android": {
         "status": "verified for captured scope",
         "device": "Actual DX340 Android 13/API 33; no separate controller",
@@ -163,7 +207,7 @@
         "Physical Flutter parity sufficient to retire native phone references."
       ],
       "open": [
-        "Optional Mango folder production service pending.",
+        "Optional Mango folder service has local adapter evidence; full folder/format/library and both phone BLE routes remain unverified.",
         "Output volume remains disabled pending physical verification.",
         "Full-system acceptance remains incomplete."
       ],
@@ -204,6 +248,11 @@
       "description": "Live-region status, adaptive errors, pending explanation and disconnected Open Setup recovery appear inside the ListView, with capability-specific guidance."
     },
     {
+      "name": "Optional Mango companion test",
+      "kind": "custom",
+      "description": "Existing Kotlin system controls for optional folder settings and local DX340 tests. Scrolling path/limitations, case-preserved assisted labels, disabled unsupported rows with an explicit nativeTestable diagnostic exception, and empty-folder Back guidance. AlertDialog confirms file selection; separate audible-result actions distinguish listening from request success. No new tokens or browser approximation."
+    },
+    {
       "name": "Retained Kotlin action",
       "kind": "button",
       "refersTo": "android-action",
@@ -224,7 +273,7 @@
   ],
   "narrative": {
     "northStar": "Native system interface",
-    "overview": "The user selected native system appearance, then one shared Android/iPhone interface on 28 October 2026. Flutter/Dart now owns the phone screens, using stock Material controls on Android and Cupertino controls on iPhone. Light/dark appearance, system typography and familiar control states provide the visual identity. No custom screen palette, typeface or approved comp was introduced.\n\nThe shared phone implementation uses Flutter 3.41.4/Dart 3.11.1 above Kotlin Android Bluetooth/foreground-service and Swift CoreBluetooth/restoration code. The DX340 companion and source adapters remain Kotlin; the later Watch client remains native SwiftUI. Existing Kotlin and SwiftUI phone apps are retained as parity references. Their tokens below are explicitly scoped to those references and the companion, rather than applied to Flutter.\n\nBoth finish reviewers returned ship for their supplied disconnected captures only: Android dark/default-font screens and the six iPhone simulator states described below. This records the implemented system and those narrow verdicts. Whole-product, physical phone, connection stability and accessibility acceptance remain open.",
+    "overview": "The user selected native system appearance, then one shared Android/iPhone interface on 28 October 2026. Flutter/Dart now owns the phone screens, using stock Material controls on Android and Cupertino controls on iPhone. Light/dark appearance, system typography and familiar control states provide the visual identity. No custom screen palette, typeface or approved comp was introduced.\n\nThe shared phone implementation uses Flutter 3.41.4/Dart 3.11.1 above Kotlin Android Bluetooth/foreground-service and Swift CoreBluetooth/restoration code. The DX340 companion and source adapters remain Kotlin; the later Watch client remains native SwiftUI. Existing Kotlin and SwiftUI phone apps are retained as parity references. Their tokens below are explicitly scoped to those references and the companion, rather than applied to Flutter.\n\nBoth finish reviewers returned ship for their supplied disconnected captures only: Android dark/default-font screens and the six iPhone simulator states described below. This records the implemented system and those narrow verdicts. Whole-product, physical phone, connection stability and accessibility acceptance remain open.\n\nThe optional Mango folders setting and local test surface extend the companion's existing system appearance. A separate reviewer returned ship only for nine DX340 dark/default-font states. That host review does not change the shared phone direction or broaden either earlier phone verdict.",
     "keyCharacteristics": [
       "One maintained phone presentation with platform-adaptive system controls.",
       "Large labeled playback actions with authorization and capability-dependent states.",
