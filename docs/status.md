@@ -2,7 +2,13 @@
 
 Updated 29 October 2026 (Hong Kong). **Original signing key restored and both apps upgraded in place. Goal active; full system incomplete and physical phone/Mac acceptance remains pending.**
 
-## Current continuation: source switching and offline browse inventory
+## Current continuation: real Windows BLE central
+
+VERIFIED real over-air host evidence through this PC's Intel Bluetooth radio: service discovery and uncached INFO/RX/TX GATT enumeration; unpaired INFO/CCC reads, RX first-fragment write and indication subscription all deny with0x05 Insufficient Authentication. Five fresh awake and five screen-off watcher rounds all discover the host; off-state is USB-powered Dozing for short samples, not deep idle/30minute/phone acceptance. Windows11 Pro26300/driver24.20.0.3 and isolated Python/Bleak dependencies recorded. No product APK changed.
+
+An explicitly authenticated custom pairing attempt FAILED with no comparison callback and no bond; Android recorded a pairing notification. Windows native consent needs the present operator, whose availability question is pending. No weaker fallback or companion approval occurred. A basic native request is prepared/syntax checked, not success-tested. Both sources remain paused at35, all four preferences unchanged and both services bound. Details: test-results/2026-10-29-windows-ble.md and windows-ble-diagnostics.md. Full phone/Mac/listening/reliability scope remains incomplete; goal active.
+
+## Preceding continuation: source switching and offline browse inventory
 
 VERIFIED source-local reads:10 alternating-source rounds and10 Home-origin rounds each passed40 requests, including actual Apple Downloaded root and Mango native/assisted/storage reads. Earlier foreground/Apple-root failures did not reproduce; no application fix or general startup claim is inferred. Actual Apple browsing sampled five albums and two existing playlists with66/20 playable downloaded-row labels (80 distinct title/artist labels); no playback was started.
 
