@@ -22,6 +22,8 @@ if [ -n "$simulator" ]; then
     # boot fails if already booted; bootstatus below is the authority.
     xcrun simctl boot "$simulator" 2>/dev/null || true
     xcrun simctl bootstatus "$simulator" -b > artifacts/apple-simulator-boot.txt 2>&1
+    xcrun simctl ui "$simulator" appearance light
+    xcrun simctl ui "$simulator" content_size large
     xcrun simctl install "$simulator" artifacts/apple-simulator/Build/Products/Debug-iphonesimulator/DXRemote.app
     xcrun simctl launch "$simulator" org.dx340.remote.ios > artifacts/apple-simulator-launch.txt 2>&1
     sleep 2
@@ -30,16 +32,18 @@ if [ -n "$simulator" ]; then
     for tab in library queue setup; do
         xcrun simctl terminate "$simulator" org.dx340.remote.ios
         xcrun simctl launch "$simulator" org.dx340.remote.ios "--capture-tab=$tab" >> artifacts/apple-simulator-launch.txt 2>&1
-        sleep 1
+        sleep 2
         xcrun simctl io "$simulator" screenshot "artifacts/apple-$tab-light.png"
     done
     xcrun simctl terminate "$simulator" org.dx340.remote.ios
-    xcrun simctl launch "$simulator" org.dx340.remote.ios --capture-tab=player >> artifacts/apple-simulator-launch.txt 2>&1
     xcrun simctl ui "$simulator" appearance dark
-    sleep 1
+    xcrun simctl launch "$simulator" org.dx340.remote.ios --capture-tab=player >> artifacts/apple-simulator-launch.txt 2>&1
+    sleep 2
     xcrun simctl io "$simulator" screenshot artifacts/apple-player-dark.png
+    xcrun simctl terminate "$simulator" org.dx340.remote.ios
     xcrun simctl ui "$simulator" content_size accessibility-extra-extra-extra-large
-    sleep 1
+    xcrun simctl launch "$simulator" org.dx340.remote.ios --capture-tab=player >> artifacts/apple-simulator-launch.txt 2>&1
+    sleep 2
     xcrun simctl io "$simulator" screenshot artifacts/apple-player-large-dark.png
     xcrun simctl ui "$simulator" content_size large
     xcrun simctl ui "$simulator" appearance light

@@ -22,7 +22,7 @@ obj('sources', f'isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files
 obj('frameworks', 'isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0;')
 obj('resources', 'isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0;')
 for config in ['Debug', 'Release']:
-    obj('project:' + config, f'isa = XCBuildConfiguration; name = {config}; buildSettings = {{ SDKROOT = iphoneos; IPHONEOS_DEPLOYMENT_TARGET = 17.0; CLANG_ENABLE_MODULES = YES; SWIFT_VERSION = 5.0; }};')
+    obj('project:' + config, f'isa = XCBuildConfiguration; name = {config}; buildSettings = {{ SDKROOT = iphoneos; IPHONEOS_DEPLOYMENT_TARGET = 17.0; CLANG_ENABLE_MODULES = YES; SWIFT_VERSION = 5.0; SWIFT_ACTIVE_COMPILATION_CONDITIONS = "{"DEBUG" if config == "Debug" else ""}"; }};')
     obj('target:' + config, f'''isa = XCBuildConfiguration; name = {config}; buildSettings = {{ PRODUCT_BUNDLE_IDENTIFIER = org.dx340.remote.ios; PRODUCT_NAME = "$(TARGET_NAME)"; INFOPLIST_FILE = DXRemote/Info.plist; GENERATE_INFOPLIST_FILE = NO; TARGETED_DEVICE_FAMILY = 1; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; CODE_SIGN_STYLE = Automatic; MARKETING_VERSION = 0.1.0; CURRENT_PROJECT_VERSION = 1; SWIFT_OPTIMIZATION_LEVEL = "{'-Onone' if config == 'Debug' else '-O'}"; LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks"; }};''')
 for name in ['project', 'target']:
     obj(name + 'Config', f'isa = XCConfigurationList; buildConfigurations = ({uid(name + ":Debug")},{uid(name + ":Release")},); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release;')
