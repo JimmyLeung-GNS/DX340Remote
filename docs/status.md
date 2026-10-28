@@ -2,7 +2,13 @@
 
 Updated 29 October 2026 (Hong Kong). **Original signing key restored and both apps upgraded in place. Goal active; full system incomplete and physical phone/Mac acceptance remains pending.**
 
-## Current continuation: Mango folder settling and measured recovery
+## Current continuation: source switching and offline browse inventory
+
+VERIFIED source-local reads:10 alternating-source rounds and10 Home-origin rounds each passed40 requests, including actual Apple Downloaded root and Mango native/assisted/storage reads. Earlier foreground/Apple-root failures did not reproduce; no application fix or general startup claim is inferred. Actual Apple browsing sampled five albums and two existing playlists with66/20 playable downloaded-row labels (80 distinct title/artist labels); no playback was started.
+
+New repeatable scripts verify-source-library-switch.ps1, verify-apple-browse-inventory.ps1 and prepare-apple-listening-plan.ps1 passed on DX340. The pending20-candidate listening plan covers5 albums/2 playlists;17 candidate titles were absent from the complete101-item queue when prepared. All entries remain NOT TESTED; listening availability is pending. Both source sessions remained paused in159 audited raw probe reports and fresh final state, volume35/services unchanged. Product packages unchanged; preceding native79/Flutter32 checks retain scope. Details/paths: test-results/2026-10-29-source-library-inventory.md. Goal active; full system incomplete.
+
+## Preceding continuation: Mango folder settling and measured recovery
 
 VERIFIED: actual Playlist recovery reproduced at4.612seconds over ADB. Diagnostics exposed duplicate final-folder settling waits; one450ms same-window/same-fingerprint interval replaces serial300+450ms waits. Intermediate menus retain300ms and live authorization/readiness/action validation. Native build/lint79 JVM tests pass. Original-key in-place companion upgrade preserved four preferences; installed bytes match0898571b... and both optional services are bound. Shared phone unchanged at09aaae78... with preceding32 Flutter checks; Swift still needs a Mac build.
 

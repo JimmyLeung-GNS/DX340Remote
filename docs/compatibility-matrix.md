@@ -2,6 +2,8 @@
 
 29 October 2026. VERIFIED means only the stated observation. No complete T01–T18 acceptance run has passed.
 
+Latest source-only evidence:20 source-switch rounds/80 reads pass, including Home-origin launches; earlier failures did not reproduce. Actual Apple inventory browses5 albums/2 playlists and prepares20 NOT TESTED listening candidates. No new playback or audible result is claimed. See test-results/2026-10-29-source-library-inventory.md; original phone/source acceptance remains incomplete.
+
 Latest local software checkpoint: Android build/lint and79 JVM tests pass after the Mango settling correction. Current companion0898571b... is installed in place with original key/preferences preserved; the shared phone remains09aaae78... with preceding Flutter analysis32 tests/release/lint. Source-local Playlist recovery improves but still fails the proposed3second target; root/nested recovery and four pending interruption regressions pass (test-results/2026-10-29-mango-folder-timing.md). The10,000-record metadata component benchmark passes on Windows and is not host-cache/source/phone latency proof (test-results/2026-10-29-synthetic-metadata.md). Current Swift has not compiled here; the connected Apple tool fails with xcrun ENOENT. Earlier results retain their historical scope. Full-scope audit: completion-audit.md; preceding Accessibility/readiness evidence: test-results/2026-10-29-pending-accessibility.md; session access: test-results/2026-10-29-pending-session-access.md; earlier interruptions: test-results/2026-10-29-assisted-interruptions.md; queue evidence: test-results/2026-10-29-queue-pagination.md; preceding audio/key evidence: test-results/2026-10-29-original-key-upgrade.md.
 
 | Platform / combination | Build | Open | Physical BLE controller |
