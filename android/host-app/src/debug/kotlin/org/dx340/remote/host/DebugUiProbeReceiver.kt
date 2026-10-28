@@ -33,7 +33,9 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
             val sources = HostService.instance?.sources ?: return finish(null, "START_COMPANION_FIRST")
             sources.select(intent.getStringExtra("source") ?: "com.apple.android.music")
             val operation = intent.getStringExtra("operation") ?: "BROWSE"
-            if (operation == "GET_STATE") {
+            if (operation == "DESCRIBE_ITEM") {
+                finish(sources.nativeItemEvidence(intent.getStringExtra("item") ?: ""), null)
+            } else if (operation == "GET_STATE") {
                 finish(sources.state(), null)
             } else if (operation == "GET_QUEUE") {
                 finish(sources.queueState(), null)

@@ -150,6 +150,17 @@ class SourceRegistry(private val context: Context, private val listener: Compone
             .put("playbackState", c.playbackState?.state ?: PlaybackState.STATE_NONE)
             .put("playing", c.playbackState?.state == PlaybackState.STATE_PLAYING))
     } }
+    /** Public browser metadata only, for local developer diagnostics; never reads a file. */
+    fun nativeItemEvidence(id: String): JSONObject {
+        require(selected == PACKAGES[0]) { "WRONG_SOURCE" }
+        val item = items[selected]?.get(id) ?: error("EXPIRED_ITEM")
+        val description = item.description
+        return JSONObject().put("id", item.mediaId).put("title", description.title?.toString())
+            .put("subtitle", description.subtitle?.toString())
+            .put("mediaUri", description.mediaUri?.toString() ?: JSONObject.NULL)
+            .put("extraKeys", JSONArray(description.extras?.keySet()?.sorted()?.take(50) ?: emptyList<String>()))
+            .put("note", "Source-provided public description; no filesystem or private app storage read")
+    }
     fun getArtwork(key: String): JSONObject {
         require(key == state().optString("artworkKey")) { "EXPIRED_ITEM" }
         val bytes = artwork.get(key) ?: error("EXPIRED_ITEM")
