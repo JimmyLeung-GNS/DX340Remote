@@ -2,7 +2,11 @@
 
 Updated 29 October 2026 (Hong Kong). **Original signing key restored and both apps upgraded in place. Goal active; full system incomplete and physical phone/Mac acceptance remains pending.**
 
-## Current continuation: Accessibility loss and honest item availability
+## Current continuation: synthetic metadata fixture
+
+VERIFIED at Windows JVM component scope: a reproducible10,000-track metadata fixture walks400 pages with complete identity/order, bounded Unicode JSON, sampled real framing/reassembly, LRU eviction/source/revision separation and replaced/missing selection rejection. Three new tests pass, bringing the native aggregate to77; targeted library-cache tests/benchmark pass. First cached/uncached component reads measured0.748/7.607101ms; maximum encoded page5,014 bytes. LibraryIndex remains a standalone component, not an active SourceRegistry page cache. No actual-source/Flutter/BLE latency is inferred; Mango's earlier4.57–5.12second recovery remains above target. See test-results/2026-10-29-synthetic-metadata.md. Product packages/installed data unchanged; preceding Android build/lint and Flutter32 checks remain applicable. Goal active; full system incomplete.
+
+## Preceding continuation: Accessibility loss and honest item availability
 
 Actual Apple Accessibility revocation stopped browsing but exposed falsely advertised native/item selection despite an unavailable native browser. Native item support now requires its connected browser plus existing action/verification support; unavailable UI selection cannot borrow the generic MediaSession flag. Mango's unavailable assisted root entry is disabled. Shared-phone guards prevent cached assisted actions borrowing native capabilities; native Kotlin/Swift clients discard assisted frames when readiness changes, preserving native pages/queues.
 

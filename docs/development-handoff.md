@@ -18,6 +18,8 @@ The preceding queue checkpoint adds full pagination after discovering101 actual 
 
 This file was absent when the user requested continuation. It is reconstructed from the checked-in `AGENTS.md`, implementation plan, status and commit400ec34, plus the work recorded below. It does not claim to recover an older missing file's contents.
 
+Latest test-only checkpoint adds10,000 synthetic metadata records/400 pages and three correctness tests, bringing native aggregate results to77. Component first cached/uncached times0.748/7.607101ms pass the local smoke budgets. LibraryIndex is not wired into SourceRegistry: do not claim host cache, actual source or phone latency acceptance. Product packages remain those from the Accessibility checkpoint. Read test-results/2026-10-29-synthetic-metadata.md; real Mango recovery above3seconds and full physical acceptance remain open.
+
 ## Read first
 
 1. `AGENTS.md`, `docs/implementation-plan.md`, `docs/status.md`.
@@ -69,6 +71,6 @@ On Mac, install the same Flutter revision and run `sh scripts/build-phone-ios.sh
 3. Notification and Accessibility grant loss/regrant during both pending assisted adapters, old IDs and fresh recovery were exercised on DX340; continue actual controller-approval/radio interruptions on phones. Both services remain bound; older instrumentation left them unbound. Prefer the DUMP-protected receiver here. An ADB repeat had a local daemon connection failure; verify live device/grants before retrying. Initial occasional Apple root/foreground failures remain follow-ups. Do not replay playback.
 4. Volume: prior wheel/API downward steps only. Upward/output/Apple/phone/reconnect acceptance remains open. Do not enable phone volume from a reported AudioManager value alone.
 5. Finish the phone reliability/security/battery/walking/audio/install matrix before Watch. Watch inventory and stable-phone gate remain open.
-6. Audit the plan's10,000-track synthetic metadata/performance fixture, which has no verified benchmark yet. Keep Windows/software timing, actual-source latency and real-phone BLE timing separate. It remains independent work while phone/Mac access is pending.
+6. The10,000-track synthetic metadata component fixture now passes. Keep Windows/software timing, actual-source latency and real-phone BLE timing separate. LibraryIndex remains standalone; actual cached/uncached phone page timing, actual source latency and Mango recovery above the proposed3second target remain follow-ups.
 
 Earlier key-transfer blocks are historical and now resolved by the user-supplied ZIP. The goal is active; the full objective remains incomplete. Separate phones/Mac and full source/audio/reliability acceptance remain external gates. Do not mark completion from compile/simulator/proxy evidence.
