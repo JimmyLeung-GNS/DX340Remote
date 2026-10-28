@@ -4,9 +4,13 @@ $repo = Split-Path $PSScriptRoot -Parent
 $flutter = (Get-Command flutter -ErrorAction SilentlyContinue).Source
 if (!$flutter) { $flutter = "$env:LOCALAPPDATA/Flutter/bin/flutter.bat" }
 if (!(Test-Path -LiteralPath $flutter)) { throw 'Install Flutter 3.41.4 and put flutter on PATH.' }
-$version = (& $flutter --version --machine | ConvertFrom-Json).frameworkVersion
-if ($version -ne '3.41.4') { throw "Expected pinned Flutter 3.41.4; found $version" }
 New-Item -ItemType Directory -Force "$repo/artifacts", "$repo/work" | Out-Null
+& $flutter --version *> "$repo/artifacts/flutter-windows-toolchain.txt"
+if ($LASTEXITCODE -ne 0) { throw 'Flutter SDK bootstrap failed.' }
+$version = & $flutter --version --machine | ConvertFrom-Json
+if ($version.frameworkVersion -ne '3.41.4' -or $version.frameworkRevision -ne 'ff37bef603469fb030f2b72995ab929ccfc227f0') {
+    throw "Expected pinned Flutter 3.41.4 revision ff37bef603469fb030f2b72995ab929ccfc227f0; found $($version.frameworkVersion) / $($version.frameworkRevision)"
+}
 if ($IsWindows) {
     $env:JAVA_TOOL_OPTIONS = "-Djava.nio.channels.spi.SelectorProvider=sun.nio.ch.WindowsSelectorProvider -Djdk.net.unixdomain.tmpdir=$($repo.Replace('\','/'))/work -Djava.net.preferIPv4Stack=true"
 }

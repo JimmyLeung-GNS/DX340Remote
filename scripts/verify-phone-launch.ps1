@@ -42,7 +42,7 @@ $inventory = @{
 }
 $inventory | ConvertTo-Json | Set-Content "$repo/artifacts/flutter-android-launch.json"
 Invoke-Adb @('shell', 'screencap', '-p', '/sdcard/dx340-phone-launch.png') | Out-Null
-Invoke-Adb @('pull', '/sdcard/dx340-phone-launch.png', "$repo/artifacts/flutter-android-player-dark.png") | Out-Null
-Invoke-Adb @('shell', 'rm', '/sdcard/dx340-phone-launch.png', '/sdcard/dx340-phone-launch.xml') | Out-Null
-Write-Output 'Shared Android Player opened. Inspect the screenshot. Physical phone BLE remains NOT TESTED.'
+Invoke-Adb @('pull', '/sdcard/dx340-phone-launch.png', "$repo/artifacts/flutter-android-launch.png") | Out-Null
+Invoke-Adb @('shell', 'rm', '-f', '/sdcard/dx340-phone-launch.png', '/sdcard/dx340-phone-launch.xml') | Out-Null
+Write-Output 'Shared Android remote opened. Inspect its current screen. Physical phone BLE remains NOT TESTED.'
 if (!$ready) { Write-Warning 'UIAutomator readiness was not verified; inspect screenshot and record the automation limitation separately.' }

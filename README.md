@@ -1,8 +1,8 @@
 # DX340 Bluetooth Remote
 
-Development beta: Kotlin DX340 companion and a shared Flutter Android/iPhone interface over native Kotlin/Swift Bluetooth components, sharing BLE protocol v1. The user selected this phone UI migration on 28 October 2026; verification is in progress and native reference clients are retained. Music continues through the installed Mango Player or Apple Music on DX340. Everyday control has no Wi-Fi/cloud path.
+Development beta: Kotlin DX340 companion and a shared Flutter Android/iPhone interface over native Kotlin/Swift Bluetooth components, sharing BLE protocol v1. Native reference clients are retained during physical parity verification. Music continues through the installed Mango Player or Apple Music on DX340. Everyday control has no Wi-Fi/cloud path.
 
-Android APK builds, lint and JVM tests pass on Windows. Both Android apps have opened on the physical DX340. The native iOS app has now **compiled and opened in an iPhone Air/iOS26.5 simulator** on GitHub's standard Mac runner (Xcode26.6); three Swift protocol tests passed. This does not verify installation on the user's iPhone. Separate Android/iPhone Bluetooth acceptance and Watch remain incomplete. See [current status](docs/status.md) and [platform launch verification](docs/cross-platform-verification.md).
+The shared Flutter phone app **builds and opens on Android and in an iPhone simulator**: Android release build/lint,9 Dart tests and DX340 launch pass; [iPhone CI40713390473](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/40713390473) passes analysis/9 tests/unsigned build/launch and6 disconnected screen captures on iPhone Air/iOS26.5, Xcode26.6. Native reference Android build/lint/29 JVM tests and Swift3 protocol tests also pass. These results do not verify separate-phone Bluetooth stability or physical iPhone installation. Full browsing acceptance, volume and Watch remain incomplete. See [current status](docs/status.md) and [platform verification](docs/cross-platform-verification.md).
 
 ## Build and launch checks
 

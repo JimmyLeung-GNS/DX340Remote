@@ -4,7 +4,11 @@ Updated 28 October 2026 (Hong Kong). **Goal active; full system incomplete.**
 
 ## Current checkpoint
 
-**Shared phone UI migration in progress:** The user explicitly selected shared Android/iPhone interface/UI with stable connection. Branch `codex/shared-phone` now implements Flutter/Dart screens above the existing native Kotlin service/BLE and Swift CoreBluetooth/restoration code. The companion stays Kotlin. Flutter 3.41.4/Dart 3.11.1 is pinned; legacy native phones remain reference builds. Initial Flutter analysis/tests/builds are being executed; no Flutter runtime or physical BLE acceptance is claimed yet. The native checkpoint was merged/pushed to public main at ce6d8b3.
+**Shared phone UI implemented; acceptance in progress:** The user selected a shared Android/iPhone interface/UI with stable connection. Branch `codex/shared-phone` implements Flutter/Dart Player/Library/Queue/Setup above the same native Kotlin service/BLE and Swift CoreBluetooth/restoration code. The companion stays Kotlin. Flutter3.41.4/Dart3.11.1 is pinned; native phone apps remain parity references. Windows analysis/9 Dart tests/release APK/release lint passed; final APK SHA2565bef92a12d4d530ff95b5907eaae13deacf332ca7f7233e3740e2c1a0ab4ad60, same development signer as build1. The app installs/opens on DX340 and its four disconnected screens/recovery were observed. Independent Android reviewer returned **ship for only that captured disconnected dark/default-font scope**; physical phone, connected data, light/large-font hardware and TalkBack remain open.
+
+The actual Flutter iPhone app compiled and launched in hosted iPhone Air/iOS26.5, Xcode26.6/macOS26.6.2. Run40711487461 failed its last capture gate because largest-text tab labels collided; fixed to match native Cupertino fixed-height tab sizing while content scales. Corrected run40713390473 at5f31f5d **SUCCEEDED**: analysis/9 Dart tests/unsigned Runner.app build/install/6 launches and two-ready-frame captures. All6 final images were inspected; a fresh independent iPhone reviewer returned **ship for only the captured disconnected states**. Neither phone review establishes real Bluetooth stability, populated browsing, physical iPhone interaction or audio acceptance. The verified shared phone implementation at5f31f5d and its final documentation are consolidated into public main; native checkpoint ce6d8b3 and reference clients are preserved.
+
+The phone migration retains native request IDs/epochs/authorization, bounded reconnect and no automatic playback replay. Native iPhone connection setup now has a30second timeout and ignores old peripheral/characteristic callbacks. Pending mutations disable controls independently of artwork reads; malformed bridge data fails closed. Android service owns the connection through Activity recreation. These are mechanisms/software checks, not physical background/range/security acceptance. UIAutomator currently yields no root for both Flutter and native companion; launch/tap screenshots are recorded separately and screen-reader behavior is NOT TESTED.
 
 Both native platforms now have build/launch evidence. The Kotlin companion and Android remote build and open on the physical DX340. The SwiftUI iPhone app builds and opens in an iPhone Air/iOS 26.5 simulator on GitHub's standard Mac runner (macOS 26.6.2, Xcode 26.6). Android-on-DX340 launch is not a separate-phone BLE test; simulator launch is not physical iPhone installation, signing or Bluetooth proof. Only DX340 is connected locally.
 
@@ -36,14 +40,17 @@ The user chose shared Flutter phone UI after the Kotlin/Flutter comparison; docs
 | P1 | PARTIAL: host advertising/GATT callbacks verified, both client platforms build/open; real central/security/30-minute gate NOT TESTED |
 | P2 | PARTIAL: native Mango and accepted optional Apple route sampled; source/format/volume/restart matrix incomplete |
 | P3 | IMPLEMENTED BETA: bounded framing/dedup/epochs, bond+local approval, routing, shared handoff, reply revocation guards, library/queue/artwork; real security/recovery open |
-| P4 | IMPLEMENTED BETA: native Android client; launch on DX340 verified, separate-phone/radio and navigation polish open |
-| P5 | SIMULATOR VERIFIED: Swift3 tests/build/launch, scoped disconnected UI fixes; physical iPhone signing/BLE/interaction open |
+| P4 | IMPLEMENTED BETA: shared Flutter Android UI over native controller-core; build/lint/9 Dart tests/launch on DX340 verified; separate-phone/radio acceptance open |
+| P5 | SIMULATOR VERIFIED: shared Flutter iPhone build/launch/6 captures and9 tests, scoped disconnected review ship, plus native Swift reference; physical signing/BLE/interaction open |
 | P6 | IN PROGRESS: one Mango audible selection, native identity limitations sampled; optional Mango folder UI now authorized and under investigation |
 | P7 | PARTIAL: own-service offline outside-queue sample observed and user-confirmed audible; full20-track/5-album/2-playlist/phone matrix open |
 | P8 | PARTIAL: builds/checks/docs/matrix; physical reliability, battery, installation and audio acceptance open |
 | P9 | NOT STARTED: stable-phone gate unmet; Watch inventory unknown |
 
 ## Commands and evidence
+
+- scripts/build-phone.ps1 passed analysis/9 Dart tests/release APK/release lint; artifacts/flutter-build-final-ui.txt. Native reference Android build/lint/29 JVM tests also passed after controller-core extraction; artifacts/shared-controller-native-build.txt. Existing signing identity verified by apksigner and no Internet/Wi-Fi in release APK permissions. Native reference Swift run40710376253 passed after connection guards.
+- Shared phone actual-device captures: artifacts/flutter-android-{player,library,queue,setup,recovery}-dark.png; APK/source provenance in flutter-android-capture-provenance.txt. UIAutomator readiness failed independently of actual Activity/process/pixel evidence. Early script cleanup failure on missing XML was fixed. Physical iPhone/Android BLE paths remain NOT TESTED; see phone-reliability-runbook.md.
 
 - scripts/build-android.ps1: latest full build/lint/29 tests passed; artifacts/revocation-build-output.txt. Subsequent -WithoutTests APK/lint rebuild after permission check passed; artifacts/revocation-final-build-output.txt. APK hashes: artifacts/SHA256SUMS.txt. Source tests and simulated tests remain separate.
 - scripts/verify-android-launch.ps1 -Serial d passed; Activity Status:ok, process and inspected artifacts/android-remote-launch.png. Only a launch check on DX340.
@@ -56,9 +63,11 @@ The user chose shared Flutter phone UI after the Kotlin/Flutter comparison; docs
 
 ## Remaining actions
 
+0. Run shared phone parity and the physical reliability matrix when phones are available. Retain native references; do not equate a shared UI or simulator build with stable radio operation.
+
 1. Implement/test the now-authorized optional Mango folder adapter without reducing native browsing, then verify actual service selection of known FLAC/WAV files through Mango. Keep screen-on/unlock limits explicit. Add UI-backed playlists only after observing and validating their screens.
 2. Run full T07/T08 selection/format/library-change matrices. Source-state, user listening and phone Bluetooth evidence must be recorded separately. Stable duplicate-file/rescan/SD identity is still unresolved by native Mango metadata.
-3. On the personal Mac, open apple/DXRemote.xcodeproj, choose signing team and actual iPhone, build/run, and record exact hardware/OS/build. Ensure Xcode supports the reported device. Follow installation.md for physical pairing, with Wi-Fi/cellular off.
+3. On the personal Mac, install pinned Flutter, resolve phone/ dependencies and open phone/ios/Runner.xcworkspace; choose signing team/actual iPhone, build/run and record exact hardware/OS/build. Ensure Xcode supports the reported device. The native apple/DXRemote.xcodeproj remains a reference. Follow installation.md for physical pairing, with Wi-Fi/cellular off.
 4. Connect a separate Android phone (API31+ proposed), install/launch and test actual pairing, local approval, browsing, sleep/range and reconnection. No separate phone is currently available to this session.
 5. Finish live elapsed-position presentation without continuous BLE progress traffic; current clients display source snapshots. Complete source/permission/revocation interruption cases, including cancellation of in-flight UI navigation, and measured recovery.
 6. Verify low-level output volume/wheel behavior with human listening at safe levels before enabling volume. Complete compatibility-matrix.md/T01–T18 security, battery/walking/audio/install tests, then Watch after phone stability.
@@ -67,4 +76,4 @@ Single-controller beta still lacks automatic controller handoff. Request ledger 
 
 ## Authorizations and public source
 
-The user explicitly requested a public GitHub repository and pushing commits: https://github.com/JimmyLeung-GNS/DX340Remote. Current source-handoff work is on codex/source-handoff pending checkpoint consolidation into main. Signing keys, packages, raw device logs and scratch files remain excluded. Public source availability does not change verification limits. No root, firmware modification, protected-download extraction, identity spoofing, replacement engine, vendor contact or store release occurred.
+The user authorized public GitHub commits/pushes: https://github.com/JimmyLeung-GNS/DX340Remote. Native checkpoint ce6d8b3 and verified shared phone migration (implementation5f31f5d plus documentation) are consolidated in public main. Signing keys, packages, raw device logs and scratch files remain excluded. Public source availability does not change verification limits. No root, firmware modification, protected-download extraction, identity spoofing, replacement engine, vendor contact or store release occurred.

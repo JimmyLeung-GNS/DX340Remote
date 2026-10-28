@@ -5,6 +5,8 @@
 | Platform / combination | Build | Open | Physical BLE controller |
 |---|---|---|---|
 | DX340 host, Android13/API33, eng.iBasso.20260812.181952 | VERIFIED Windows Gradle | VERIFIED on DX340 | Advertising callbacks only; central NOT TESTED |
+| Shared Flutter Android remote0.2.0+2 on DX340 | VERIFIED analysis/9 Dart tests/release APK/release lint | VERIFIED four disconnected screens and Setup recovery; scoped Android visual review ship | NOT TESTED; same-device launch is not phone BLE |
+| Shared Flutter iPhone remote, iOS17+ proposed | VERIFIED Flutter3.41.4/Xcode26.6 unsigned simulator build and9 Dart tests, CI40713390473 | VERIFIED iPhone Air/iOS26.5 four disconnected screens plus Player dark/largest-text; scoped visual review ship | NOT TESTED; physical signing/installation open |
 | Android remote0.1.0 on same DX340 | VERIFIED Windows Gradle | VERIFIED screenshot/process | NOT TESTED; same-device UI is not phone radio proof |
 | Separate Android phone, API31+ proposed | APK available | NOT TESTED, device unavailable | NOT TESTED |
 | Native iPhone remote, iOS17+ proposed | VERIFIED Xcode26.6 unsigned simulator build, Swift3 tests | VERIFIED4 disconnected screens plus Player dark/largest-text captures on iPhone Air/iOS26.5;3 scoped UI fixes scored resolved | NOT TESTED |

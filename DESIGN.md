@@ -1,6 +1,6 @@
 ---
 name: DX340 Remote
-description: Native system controls for a Bluetooth music companion.
+description: Shared phone controls with adaptive system appearance for a Bluetooth music companion.
 colors:
   launcher-shell: "#263238"
   launcher-mark: "#FFFFFF"
@@ -21,10 +21,23 @@ typography:
     fontFamily: "sans"
     fontSize: "16sp"
 spacing:
+  phone-body: "16px 20px 32px"
+  phone-action-outer: "4px 0"
+  phone-action-icon-gap: "8px"
+  phone-playback-gap: "12px"
+  phone-section-before: "24px"
+  phone-label-before: "8px"
+  phone-label-after: "8px"
   android-label-before: "12dp"
   android-label-after: "8dp"
   apple-playback-gap: "20pt"
 components:
+  phone-action:
+    height: "48 logical px minimum"
+  phone-action-icon:
+    size: "22 logical px"
+  phone-artwork:
+    height: "220 logical px"
   android-action:
     size: "48dp minimum height"
   android-destination:
@@ -39,88 +52,112 @@ components:
 
 **Creative North Star: "Native system interface"**
 
-The user selected native system appearance on 28 October 2026. Use platform typography, colors, navigation and control states. The current interface is a functional diagnostic beta with large playback actions and explicit capability explanations. It has no separate screen palette or custom display typeface.
+The user selected native system appearance, then one shared Android/iPhone interface on 28 October 2026. Flutter/Dart now owns the phone screens, using stock Material controls on Android and Cupertino controls on iPhone. Light/dark appearance, system typography and familiar control states provide the visual identity. No custom screen palette, typeface or approved comp was introduced.
 
-This document records current Kotlin Views and SwiftUI source, Android captures and the corrected six-image Apple simulator matrix. It is a handoff for continuing native work, not whole-product visual acceptance. No Figma, web, comp or Flutter migration was selected. Android navigation polish remains open. Apple builds and opens on the hosted Mac; review resolved three scoped disconnected-state fixes, with broader visual and interaction acceptance still open.
+The shared phone implementation uses Flutter 3.41.4/Dart 3.11.1 above Kotlin Android Bluetooth/foreground-service and Swift CoreBluetooth/restoration code. The DX340 companion and source adapters remain Kotlin; the later Watch client remains native SwiftUI. Existing Kotlin and SwiftUI phone apps are retained as parity references. Their tokens below are explicitly scoped to those references and the companion, rather than applied to Flutter.
+
+Both finish reviewers returned ship for their supplied disconnected captures only: Android dark/default-font screens and the six iPhone simulator states described below. This records the implemented system and those narrow verdicts. Whole-product, physical phone, connection stability and accessibility acceptance remain open.
 
 **Key Characteristics:**
 
-- Native typography and appearance that follow system settings.
-- Large playback targets with capability-dependent disabled states.
-- Player, Library, Queue and Setup destinations.
-- Setup and diagnostic detail separated from everyday playback.
+- One maintained phone presentation with platform-adaptive system controls.
+- Large labeled playback actions with authorization and capability-dependent states.
+- Player, Library, Queue and Setup as stable bottom destinations.
+- Scrolling connection, recovery and source explanations that follow actual state.
 
 ## Colors
 
-Screen colors come from the operating system theme. Android host and controller inherit `Theme.DeviceDefault.DayNight`; SwiftUI uses default foregrounds, `.secondary` metadata and a `.bar` library now-playing background. Connection status uses a native list section. Do not freeze screenshot colors into an application palette. Apple light and dark disconnected screens are captured in the simulator; contrast across physical target phones has not been verified.
+Shared phone screen colors come from Flutter's stock Material 3 light/dark themes and Cupertino brightness/theme roles. ThemeMode.system follows the device setting. Errors use Material colorScheme.error on Android and resolved Cupertino systemRed on iPhone. These are system-owned roles; screenshot samples are not an authored palette.
 
-The frontmatter colors describe only the shared Android launcher artwork: a dark shell and white screen/radio mark from both `res/drawable/ic_dx340.xml` files. They are not button or background tokens. No secondary, tertiary, error or accent palette is defined by the app.
+The frontmatter colors describe existing Android launcher vector artwork only. The companion, native Android reference and shared Android phone reuse that mark. They are not application surface or text tokens. The retained Kotlin screens use Theme.DeviceDefault.DayNight. The retained SwiftUI reference uses system foregrounds, secondary metadata and bar material for its library now-playing inset.
 
-**The System Color Rule.** Let native theme roles supply screen colors and enabled, disabled, pressed and focus states; keep the launcher palette scoped to the launcher.
+**The System Color Rule.** Let platform-adaptive theme roles supply screen colors and control states; keep the launcher palette scoped to the launcher.
 
 ## Typography
 
-Android explicitly selects the platform `sans` family. Frontmatter records observed `TextView.textSize` roles in scalable `sp`; it does not assign those values to platform button labels. The Mango test title also uses the track-title size. Headings set the accessibility heading trait. Status is selectable on the host and a polite accessibility live region on the remote.
+The shared phone does not specify a custom font family or fixed font-size scale. It uses the Material text theme for headlineSmall track titles, titleLarge section headings, bodyLarge labels and bodyMedium connection/subtitle text. Cupertino buttons and navigation use their stock styles. Material icon glyphs are also used in the Cupertino shell; do not describe them as SF Symbols.
 
-Apple uses the system font and native text styles: track title `.title2` with `.bold()`, default list body text, `.footnote` connection status and `.subheadline` library now-playing text. Artist, album and explanatory metadata use secondary foreground emphasis. Empty artist and album strings are omitted. Preserve semantic styles rather than translating them into fixed point sizes. The largest-text dark Player simulator capture shows wrapping connection status in scrolling content; physical Dynamic Type, VoiceOver and large Android font settings still require review.
+Reading content follows the text scaler and wraps inside scrolling content. Headings expose header semantics; status exposes a live region; artwork and browsing/play icons have semantic labels. The iPhone fixed-height tab bar uses MediaQuery.withNoTextScaling, matching the chrome behavior normally provided by CupertinoTabScaffold, while reading content continues to scale. Its final largest-text screenshot shows only the initial viewport.
+
+Frontmatter typography keys prefixed android- record retained Kotlin host/reference TextView roles, not the shared Flutter type scale. Native Button labels keep platform typography. The SwiftUI reference retains title2 bold track text, footnote wrapping status, subheadline now-playing text and secondary nonempty metadata. Do not translate these semantic styles into invented font measurements.
 
 ## Layout
 
-Android uses vertical `LinearLayout` containers and scrolling content. The remote keeps its title, connection status and four equal-width destination buttons above a scrolling body. The host is one scrolling setup surface. Action buttons use the minimum height in frontmatter; destination buttons use its fixed height. Library and queue show now-playing text below their body content. Track artwork preserves aspect ratio with a 240dp maximum height.
+All phone dimensions in the frontmatter's phone- entries are Flutter logical pixels. The body token is CSS-order top/horizontal/bottom, extracted from EdgeInsets.fromLTRB(20, 16, 20, 32). Each screen uses a ListView under its navigation title with connection status, optional error/pending text and destination content. System safe areas and bottom navigation keep chrome separate from scrolling content.
 
-Apple uses one `NavigationStack` per `TabView` destination and native `List`/`Section` layout. Every destination places `ConnectionStatusSection` inside its scrolling list; its footnote text uses `.fixedSize(horizontal: false, vertical: true)` to wrap vertically. Connection status is not a root safe-area inset. This prevents the prior largest-text overlap while retaining native scrolling. The library alone has a separate now-playing inset. Playback actions use the minimum frames in frontmatter; artwork scales to fit within 240pt height. Playback spacing is recorded in frontmatter. Other list margins and default `.padding()` remain system-owned. The large-text screenshot is an initial viewport, not proof of scrolling or every control's reachability.
+Player actions normally occupy two equal-width columns with separate Play/Pause and Previous/Next rows. They stack when the available control area is below 340 logical pixels wide or the text scaler's scale(1) exceeds 1.4. This is a content-width rule, not a device-width breakpoint. The minimum action height, icon size/gap, row gap and artwork height are the authored phone tokens above. Artwork uses BoxFit.contain. Empty artist/album fields and an empty Source section are omitted.
 
-Current Android root margins are raw pixel values: host content uses 24px on each edge; remote insets add 20px horizontally and 12px vertically, after an initial 20px padding. These are implementation debt, not a density-independent spacing scale. System-bar insets are handled, but density, landscape, small-screen and large-text layouts remain unaccepted. There are no authored breakpoints or responsive grids.
+Shared labels use the before/after spacing tokens, with the section-before token for headings. Each action has the outer padding token; Android OutlinedButton additionally wraps its content in vertical padding of 12 logical pixels. Cupertino library rows use vertical padding of 16 logical pixels and a 16 logical-pixel icon gap. Material ListTile uses zero content padding and minVerticalPadding of 12 logical pixels; rows have a one-logical-pixel divider. These are component source values, not a new universal spacing scale.
+
+The companion remains one scrolling Kotlin setup surface. Its 24px root padding and the native Android reference's raw-pixel root insets are retained implementation debt, not phone layout standards. The native reference uses a four-button row above scrolling content and artwork capped at 240dp. The SwiftUI reference uses NavigationStack/TabView and List/Section, scrollable wrapping status, a library now-playing inset and artwork capped at 240pt; its playback gap/target tokens remain reference-only. Those prior layouts are not the current shared phone shell.
+
+No physical small-phone, landscape, Android large-font or scrolling-reachability acceptance follows from these source values or screenshots.
 
 ## Elevation & Depth
 
-No custom shadow or elevation vocabulary exists. Android native buttons provide their theme treatment; Apple list sections and bar materials provide grouping. Retain these platform treatments. No bespoke animation duration or easing is defined. Native motion should respect system reduced-motion preferences; that behavior has not been exercised on target Apple hardware.
+The shared phone uses stock Material and Cupertino surface, navigation, button and divider treatments. There is no authored shadow, elevation or motion scale. The companion and native references retain platform button/list/bar treatments. Do not infer reusable shadow values from pixels. Reduced-motion behavior has not been exercised on target controller hardware.
 
 ## Shapes
 
-Controls inherit platform corner shapes and native focus/pressed styling. The app defines no reusable radius token, custom card family or decorative clipping system. Do not infer an exact corner radius from screenshots because device theme and density determine the rendered result.
+Buttons, navigation indicators, chevrons and platform surfaces inherit framework shapes. No custom corner-radius scale or card family exists. Exact rendered radii and disabled/focus colors remain framework-owned; do not freeze them from these captures.
 
 ## Components
 
 ### Playback actions
 
-Android currently presents separate full-width text actions for Play, Pause, Previous and Next. SwiftUI presents labeled SF Symbol buttons in one borderless row. Both gate supported actions using authorization and source capabilities. Preserve independent Play and Pause semantics. The seek action is visible but disabled when unsupported; volume is explanatory text pending physical verification. Disconnected Apple Player omits empty metadata and the Source section when no sources exist. Minimum target dimensions describe source intent, not completed accessibility acceptance.
+Labeled and explicit. Shared actions use CupertinoButton on iPhone and OutlinedButton on Android, with flexible centered text, optional icons and the minimum source target recorded above. Null callbacks express disabled states. Play and Pause remain distinct desired-state actions. Native authorization, capability and pending-mutation state govern availability; cached titles or lists never authorize playback.
+
+Seeking appears only when the source advertises it; authorized unsupported states explain the limitation. Output volume remains explanatory text and disabled pending physical verification. The elapsed time is a source snapshot. A successful write does not establish audible playback.
 
 ### Library and queue rows
 
-Android uses native buttons; Apple uses native buttons and folder `NavigationLink` rows. Folder navigation, playable selections and pagination remain distinct actions. Capability explanations appear near unavailable browsing/queue controls. Disconnected Apple Library and Queue explain that a connection in Setup is needed and provide an `Open Setup` button that changes the selected tab. Authorized sources without browsing or queue capabilities retain source-specific explanations. Apple adds a native library loading indicator. Keep source-scoped stale-result behavior intact when changing presentation; scoped lifecycle and stale-result fixes were source-reviewed, not physically accepted.
+Capability-led lists distinguish browsable folders from playable selections, with a folder/music icon and a chevron for folders. Cupertino rows use buttons; Android rows use ListTile. Nonempty subtitles wrap within the row. Library loading uses an adaptive progress indicator. Parent navigation, native pagination and assisted Show more are distinct actions; queue and library selections use source IDs and revisions.
+
+Disconnected Library and Queue provide connection guidance and Open Setup. Supported native browsing and optional assisted browsing remain separate modes with explicit limitations; full browsing is not reduced to queue skipping. Connected content rendering remains outside the finish reviewers' screenshot scope. Production optional Mango folder-service integration is still pending.
 
 ### Navigation
 
-The four destination names are stable. Apple uses native tabs with system icons and navigation titles, selected through a typed destination binding. A DEBUG-only `--capture-tab=` launch argument selects actual native destinations for screenshots; it does not simulate source data or a connection. Capture routing and OCR readiness checks do not prove tab taps or `Open Setup` interaction. Android currently uses four ordinary text buttons in one row, with no selected-state semantics or active destination treatment. This is open polish debt; do not copy it as an approved navigation standard. Screen recreation/navigation restoration and physical large-text fit still need review.
+Four stable labels: Player, Library, Queue and Setup. Android uses Material NavigationBar with selectedIndex and system selection treatment. iPhone uses CupertinoNavigationBar and CupertinoTabBar with currentIndex. The destination index is restorable. Open Setup changes it directly. Debug capture routing selects actual disconnected screens without fabricating source data.
+
+Android development taps and the recovery route were observed through actual screenshots on DX340. iPhone capture routing and OCR readiness establish rendered destinations only; native finger taps, scrolling and recovery-action interaction have not been verified there. Synthetic Dart recovery tests are separate software evidence.
 
 ### Setup, status and diagnostics
 
-Setup explains that playback stays on DX340 and guides discovery, pairing and controller authorization. The companion exposes native action buttons for permissions, local tests, approval, optional Apple Music browsing and diagnostics. Technical diagnostics are toggled on the host. Apple connection status is a shared scrollable native section with the updates-frequently accessibility trait; it remains visible in disconnected screens without occupying a fixed root inset. Status text describes actual connection/source state; sending a command is not proof of audible playback. No custom input field, chip, tooltip or card component exists.
+Setup explains that music stays on DX340 and provides access, discovery, connect, approval retry and disconnect actions. Optional assisted browsing explains its awake/unlocked requirement. Connection status, error and pending-action explanations scroll with content; no fixed connection banner covers large text. Error roles are platform adaptive. Technical companion diagnostics stay in its setup flow.
 
-### Evidence and pending review
+The phone owns presentation; native code owns BLE lifecycle, request IDs, epochs and recovery. The UI must preserve capability differences and interruption explanations when transport state changes.
 
-Source references: `android/host-app/src/main/kotlin/org/dx340/remote/host/MainActivity.kt`, `android/remote-app/src/main/kotlin/org/dx340/remote/controller/MainActivity.kt`, both Android `res/values/styles.xml`, and `apple/DXRemote/RemoteView.swift`.
+### Assets and provenance
 
-Observed Android captures: `artifacts/android-remote-launch.png` shows disconnected Player with disabled controls; `artifacts/ui-host-final.png` shows the companion setup screen. Both show the DX340 dark native theme. The host capture predates optional Apple Music controls now present in source, so its filename does not establish current visual acceptance. These are not separate controller-phone or iPhone captures. DX340 inventory records Android 13, Mango 4.1.37 and Apple Music 6.5.3; Android app-build/capture correspondence and full accessibility checks remain unresolved.
+Android reuses ic_dx340.xml; five generated Flutter Android launcher PNGs were removed. The iPhone AppIcon and transparent launch placeholders remain provisional Flutter-template assets. phone/ASSET_ORIGINS.md and third_party/FLUTTER_LICENSE identify them. All 18 shipping PNGs embed their origins; the recorded embed-prompt scan reported 18 rasters and zero missing origins. No new raster illustration or generated artwork was introduced. Launcher branding is unfinished.
 
-Verified hosted Apple build evidence: Xcode 26.6 (17F113), macOS 26.6.2 (25G83), iPhone Air simulator running iOS 26.5; app build and launch succeeded and all three Swift protocol tests passed. App UI revision `77f828c` and capture-readiness revision `412b87a` produced the valid6 image matrix under `artifacts/apple-ci-40699505189/`: `apple-simulator-launch.png`, `apple-library-light.png`, `apple-queue-light.png`, `apple-setup-light.png`, `apple-player-dark.png` and `apple-player-large-dark.png`. Build, launch, version, Swift-test and capture-readiness logs sit alongside them. OCR readiness gates heading/tab visibility only; it is not interaction evidence.
+### Evidence and acceptance limits
 
-Reviewer disposition `ship:3` resolves only three scoped corrections: scrollable connection status avoids the prior largest-text overlap; disconnected Player omits blank metadata and orphan Source; disconnected Library/Queue provide correct recovery copy and `Open Setup`. No whole-product visual approval, tab/button tap testing, VoiceOver, connected library/queue data, physical iPhone or Bluetooth acceptance follows from that disposition or this capture matrix. See `docs/status.md` for the broader acceptance record. No browser approximation is provided as a substitute for native rendering.
+The current shared UI source is phone/lib/main.dart and phone/lib/remote.dart at capture revision 5f31f5d. The direction and quality bar are in docs/shared-phone-ui-brief.md. Host/native reference sources remain android/host-app, android/remote-app and apple/DXRemote/RemoteView.swift.
+
+**Verified, scoped Android evidence:** APK 0.2.0+2, SHA256 5bef92a12d4d530ff95b5907eaae13deacf332ca7f7233e3740e2c1a0ab4ad60, installed on the actual DX340 Android 13/API 33. artifacts/flutter-android-{player,library,queue,setup,recovery}-dark.png are five 1080×2160 disconnected default-font captures. artifacts/flutter-android-capture-provenance.txt records source, package and observed development destination/Open Setup taps. The Android finish reviewer returned ship with no material fixes for only those states. This is not a separate controller phone or BLE test. UIAutomator returned null roots for both Flutter and the native companion; that is neither a screen-reader pass nor a demonstrated screen-reader failure. Analysis, nine Dart tests, release APK and release lint passed in artifacts/flutter-build-final-ui.txt.
+
+**Verified, scoped iPhone simulator evidence:** CI 40713390473 succeeded at 5f31f5d; artifact 12828870069. Environment: iPhone Air/iOS 26.5, Xcode 26.6 (17F113), macOS 26.6.2 (25G83), Flutter 3.41.4/Dart 3.11.1. Analysis, nine Dart tests, unsigned Runner.app build/install, six launches and two-ready-frame OCR gates passed. artifacts/flutter-ios-40713390473/ contains flutter-player-light.png, flutter-library-light.png, flutter-queue-light.png, flutter-setup-light.png, flutter-player-dark.png and flutter-player-large-dark.png plus build/test/toolchain/readiness logs. The iPhone finish reviewer returned ship with no material fixes for only these six disconnected states. The largest-text image is an initial viewport; scrolling, VoiceOver and native finger interaction remain unverified. Earlier 24d0484 label collision/faded Setup captures are superseded by this final evidence.
+
+**Verified reference checks:** Kotlin host/native Android reference build, lint and 29 JVM tests passed after controller-core extraction (artifacts/shared-controller-native-build.txt). Native Swift reference CI 40710376253 passed three protocol tests, build, launch and captures after timeout/stale-callback guards. Historical native screenshots under artifacts/apple-ci-40699505189/ and artifacts/android-remote-launch.png remain reference evidence; artifacts/ui-host-final.png predates optional Apple controls. These checks do not broaden shared UI acceptance.
+
+**Not tested / open:** signing and install on a physical iPhone; separate Android controller hardware; connected library/queue rendering on either phone; target-phone TalkBack/VoiceOver, contrast, scrolling and large-font accessibility; BLE interoperability/security/background/range/reconnection, source audio, walking and battery acceptance. No web detector ran for this adaptive mobile UI. Native references remain until Flutter parity is physically verified. Full-system work is active and incomplete; source browsing and volume acceptance remain governed by docs/status.md.
 
 ## Do's and Don'ts
 
 ### Do:
 
-- **Do** use native system typography, colors and control feedback.
-- **Do** preserve large playback targets, scalable text and screen-reader labels.
-- **Do** explain unsupported capabilities and show actual connection state.
-- **Do** keep Player, Library, Queue and Setup distinct and diagnostics in setup flows.
-- **Do** verify current builds on target devices in light, dark and large-text settings before acceptance.
+- **Do** use stock Material/Cupertino appearance and system theme roles for the shared phone.
+- **Do** preserve scalable reading content, semantic labels and the authored minimum action target.
+- **Do** keep Player, Library, Queue and Setup stable and connection guidance scrollable.
+- **Do** let authorization, source capability and pending state decide available actions.
+- **Do** retain companion/native-reference tokens in their stated scope until parity is verified.
+- **Do** identify device, source revision and capture/interaction limits when accepting UI work.
 
 ### Don't:
 
-- **Don't** promote launcher colors into a fixed screen palette.
-- **Don't** treat the Android four-button navigation row or raw-pixel margins as approved final patterns.
-- **Don't** replace native components with a different UI stack without a selected migration.
-- **Don't** expand the three scoped Apple review fixes into whole-product, interaction, accessibility, Bluetooth or audible-playback acceptance.
+- **Don't** turn launcher artwork colors or screenshot samples into a screen palette.
+- **Don't** copy the retained Kotlin reference's raw-pixel insets or four-button row into shared phone standards.
+- **Don't** invent a custom typeface, radius, shadow scale or browser approximation of native rendering.
+- **Don't** treat disconnected screenshots, synthetic tests or builds as physical accessibility, Bluetooth, source-audio or whole-product acceptance.
+- **Don't** describe provisional iPhone template icons as finished launcher branding.

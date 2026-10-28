@@ -1,181 +1,257 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-28T13:55:27Z",
+  "generatedAt": "2026-10-28T15:27:35Z",
   "title": "Design System: DX340 Remote",
   "extensions": {
     "colorMeta": {
       "launcher-shell": {
         "role": "neutral",
         "displayName": "Launcher dark shell",
-        "scope": "Android launcher artwork only; not an application surface color."
+        "scope": "Existing Android launcher vector only, reused by companion/native reference/shared phone; not an application surface."
       },
       "launcher-mark": {
         "role": "neutral",
         "displayName": "Launcher white mark",
-        "scope": "Android launcher artwork only; not an application text color."
+        "scope": "Existing Android launcher vector only; not application text."
       }
     },
     "typographyMeta": {
       "android-app-title": {
-        "displayName": "Android application title",
-        "purpose": "Companion and remote title TextViews; accessibility headings."
+        "displayName": "Retained Kotlin application title",
+        "purpose": "Companion/native-reference TextView heading; not the shared Flutter text scale."
       },
       "android-track-title": {
-        "displayName": "Android track and test title",
-        "purpose": "Player track title and Mango test screen heading."
+        "displayName": "Retained Kotlin track and test title",
+        "purpose": "Native-reference Player and Mango test heading; not the shared Flutter text scale."
       },
       "android-section-title": {
-        "displayName": "Android section title",
-        "purpose": "Library and queue headings."
+        "displayName": "Retained Kotlin section title",
+        "purpose": "Native-reference library/queue heading; not the shared Flutter text scale."
       },
       "android-body": {
-        "displayName": "Android body",
-        "purpose": "Metadata, capability explanations and host instructions; native Button labels retain platform typography."
+        "displayName": "Retained Kotlin body",
+        "purpose": "Companion/native-reference metadata and instructions; native Button typography remains platform-owned."
       },
       "android-status": {
-        "displayName": "Android status",
-        "purpose": "Host selectable status and remote polite live region."
+        "displayName": "Retained Kotlin status",
+        "purpose": "Companion selectable status/native-reference polite live region; not the shared Flutter text scale."
       }
     },
-    "nativeAppearance": {
-      "android": "Kotlin platform Views; Theme.DeviceDefault.DayNight; system Button styling and state feedback.",
-      "apple": "SwiftUI system font, title2 bold track title, wrapping footnote connection status inside each scrolling List, subheadline library now-playing inset with bar material; secondary nonempty metadata, Section, TabView and NavigationStack.",
-      "shapesAndElevation": "Platform-owned corner shapes and depth; no app radius or shadow scale.",
-      "motion": "No authored duration or easing tokens. Native motion should follow reduced-motion settings; physical behavior is unverified.",
-      "ramps": "No authored color ramps. Launcher-only fixed artwork colors are not expanded into an invented screen palette.",
-      "previews": "Omitted: browser HTML/CSS cannot establish native rendering fidelity and no browser approximation was requested."
+    "tokenScopes": {
+      "phone-*": "Authored Flutter logical-pixel dimensions; phone-body is CSS order top/horizontal/bottom, corresponding to EdgeInsets.fromLTRB. Values are source intent, not physical accessibility acceptance.",
+      "android-*": "Retained Kotlin companion/native phone reference tokens only. They do not set Flutter typography or navigation.",
+      "apple-playback*": "Retained SwiftUI reference only; shared Cupertino phone actions use the phone tokens.",
+      "launcher-*": "Android vector artwork only."
     },
+    "nativeAppearance": {
+      "sharedAndroid": "Flutter Material 3 ThemeData light/dark with ThemeMode.system; AppBar, NavigationBar, OutlinedButton and ListTile. No custom palette or font family.",
+      "sharedIPhone": "Flutter CupertinoTheme brightness, CupertinoPageScaffold, CupertinoNavigationBar, CupertinoTabBar and CupertinoButton; shared reading text uses Material semantic text-theme roles. Material icon glyphs also appear in this shell.",
+      "readingText": "headlineSmall track title; titleLarge section heading; bodyLarge label; bodyMedium connection/subtitle. Reading content scales and wraps.",
+      "iPhoneTabChrome": "MediaQuery.withNoTextScaling around the fixed-height CupertinoTabBar, matching CupertinoTabScaffold chrome behavior; reading content still scales.",
+      "errors": "Material colorScheme.error on Android; resolved CupertinoColors.systemRed on iPhone.",
+      "retainedAndroid": "Kotlin Views with Theme.DeviceDefault.DayNight; raw-pixel root padding and four-button reference navigation remain scoped legacy debt.",
+      "retainedApple": "SwiftUI NavigationStack/TabView/List/Section; title2 bold track, wrapping footnote status in scrolling list, subheadline library now-playing bar inset, secondary nonempty metadata.",
+      "shapesAndElevation": "Framework-owned button/navigation/list shapes and depth; no authored radius, shadow or motion scale.",
+      "motion": "No authored duration/easing tokens. Reduced-motion behavior on physical controllers is unverified.",
+      "ramps": "No authored screen palette or color ramps. Do not synthesize ramps for launcher-only artwork.",
+      "previews": "No HTML/CSS browser approximations: the components are Flutter/native mobile controls and actual app captures are the rendering evidence."
+    },
+    "breakpoints": [
+      {
+        "name": "stacked-playback",
+        "value": "340 Flutter logical pixels of available control width",
+        "condition": "available control width < 340 Flutter logical pixels OR textScaler.scale(1) > 1.4",
+        "purpose": "Stack the four playback actions; otherwise use two equal-width columns. Evaluated in LayoutBuilder, not against whole-device width."
+      }
+    ],
     "sources": [
+      "PRODUCT.md",
+      "docs/shared-phone-ui-brief.md",
+      "phone/lib/main.dart",
+      "phone/lib/remote.dart",
+      "phone/android/app/src/main/kotlin/org/dx340/remote/dx340_phone/MainActivity.kt",
+      "phone/ios/Runner/PhoneBridge.swift",
+      "phone/ios/Runner/AppDelegate.swift",
+      "android/controller-core",
+      "android/host-app/src/main/kotlin/org/dx340/remote/host/MainActivity.kt",
+      "android/host-app/src/main/kotlin/org/dx340/remote/host/BrowseTestActivity.kt",
+      "android/remote-app/src/main/kotlin/org/dx340/remote/controller/MainActivity.kt",
       "android/host-app/src/main/res/values/styles.xml",
       "android/remote-app/src/main/res/values/styles.xml",
       "android/host-app/src/main/res/drawable/ic_dx340.xml",
       "android/remote-app/src/main/res/drawable/ic_dx340.xml",
-      "android/host-app/src/main/kotlin/org/dx340/remote/host/MainActivity.kt",
-      "android/host-app/src/main/kotlin/org/dx340/remote/host/BrowseTestActivity.kt",
-      "android/remote-app/src/main/kotlin/org/dx340/remote/controller/MainActivity.kt",
-      "apple/DXRemote/RemoteView.swift"
+      "apple/DXRemote/RemoteView.swift",
+      "phone/ASSET_ORIGINS.md",
+      "third_party/FLUTTER_LICENSE"
     ],
     "verification": {
-      "scope": "Functional diagnostic beta; no whole-product visual approval.",
-      "observed": [
-        "Android remote disconnected Player capture: artifacts/android-remote-launch.png.",
-        "Android companion setup capture: artifacts/ui-host-final.png; predates optional Apple Music controls in current source.",
-        "Captures show DX340 Android 13 dark native theme, not a separate controller phone.",
-        "Inventory records Mango 4.1.37 and Apple Music 6.5.3; Android app-build/capture correspondence remains unresolved."
-      ],
-      "sourceReviewed": "Scoped lifecycle and stale-result fixes; source review is not physical acceptance.",
-      "appleBuild": {
-        "status": "verified",
-        "environment": "Hosted Mac; Xcode 26.6 (17F113), macOS 26.6.2 (25G83), iPhone Air simulator / iOS 26.5.",
-        "result": "App build and simulator launch succeeded; all three Swift protocol tests passed.",
-        "appUiRevision": "77f828c",
-        "captureReadinessRevision": "412b87a",
-        "evidenceDirectory": "artifacts/apple-ci-40699505189"
-      },
-      "appleCaptures": {
-        "matrix": "valid6",
-        "files": [
-          "artifacts/apple-ci-40699505189/apple-simulator-launch.png",
-          "artifacts/apple-ci-40699505189/apple-library-light.png",
-          "artifacts/apple-ci-40699505189/apple-queue-light.png",
-          "artifacts/apple-ci-40699505189/apple-setup-light.png",
-          "artifacts/apple-ci-40699505189/apple-player-dark.png",
-          "artifacts/apple-ci-40699505189/apple-player-large-dark.png"
+      "scope": "Both finish reviewers returned ship only for supplied disconnected states. Full system active/incomplete; physical Flutter parity and connection stability remain open.",
+      "sourceRevision": "5f31f5d",
+      "android": {
+        "status": "verified for captured scope",
+        "device": "Actual DX340 Android 13/API 33; no separate controller",
+        "packageVersion": "0.2.0+2",
+        "apkSha256": "5bef92a12d4d530ff95b5907eaae13deacf332ca7f7233e3740e2c1a0ab4ad60",
+        "captures": [
+          "artifacts/flutter-android-player-dark.png",
+          "artifacts/flutter-android-library-dark.png",
+          "artifacts/flutter-android-queue-dark.png",
+          "artifacts/flutter-android-setup-dark.png",
+          "artifacts/flutter-android-recovery-dark.png"
         ],
-        "scope": "Actual disconnected native simulator screens; light Player/Library/Queue/Setup, dark Player and largest-text dark Player initial viewport.",
-        "readiness": "DEBUG capture routing selects destinations. OCR gates heading/tab visibility only; neither establishes tap or recovery-action interaction."
+        "captureScope": "Five actual 1080×2160 dark/default-font disconnected screens. Development destination taps and Library Open Setup recovery observed via screenshots.",
+        "provenance": "artifacts/flutter-android-capture-provenance.txt",
+        "buildChecks": "Analysis, 9 Dart tests, release APK and release lint passed; artifacts/flutter-build-final-ui.txt.",
+        "review": {
+          "disposition": "ship",
+          "materialFixes": 0,
+          "limit": "Only five supplied dark/default-font disconnected captures. No light/large-font hardware, separate phone, connected-data or Bluetooth acceptance."
+        },
+        "uiAutomator": "Null roots for both Flutter remote and native companion; neither a screen-reader pass nor a demonstrated screen-reader failure."
       },
-      "appleReview": {
-        "disposition": "ship:3",
-        "resolvedScopeOnly": [
-          "ConnectionStatusSection scrolls inside each native List instead of a root safe-area inset, avoiding the prior largest-text overlap.",
-          "Disconnected Player omits blank artist/album metadata and the orphan Source section.",
-          "Disconnected Library and Queue show correct recovery copy and an Open Setup action."
+      "iPhone": {
+        "status": "verified for simulator capture scope",
+        "ciRun": "40713390473",
+        "ciResult": "SUCCESS",
+        "artifactId": "12828870069",
+        "environment": "iPhone Air simulator / iOS 26.5; Xcode 26.6 (17F113); macOS 26.6.2 (25G83); Flutter 3.41.4 / Dart 3.11.1.",
+        "checks": "Analysis, 9 Dart tests, unsigned Runner.app build/install, six launches and two-ready-frame OCR gates passed.",
+        "captures": [
+          "artifacts/flutter-ios-40713390473/flutter-player-light.png",
+          "artifacts/flutter-ios-40713390473/flutter-library-light.png",
+          "artifacts/flutter-ios-40713390473/flutter-queue-light.png",
+          "artifacts/flutter-ios-40713390473/flutter-setup-light.png",
+          "artifacts/flutter-ios-40713390473/flutter-player-dark.png",
+          "artifacts/flutter-ios-40713390473/flutter-player-large-dark.png"
         ],
-        "limit": "No whole-product visual approval or interaction, VoiceOver, connected-data, physical iPhone or Bluetooth acceptance."
+        "logs": [
+          "artifacts/flutter-ios-40713390473/flutter-ios-build.txt",
+          "artifacts/flutter-ios-40713390473/flutter-ios-analyze.txt",
+          "artifacts/flutter-ios-40713390473/flutter-ios-tests.txt",
+          "artifacts/flutter-ios-40713390473/flutter-ios-toolchain.json",
+          "artifacts/flutter-ios-40713390473/flutter-capture-readiness.txt",
+          "artifacts/flutter-ios-40713390473/flutter-xcode-version.txt",
+          "artifacts/flutter-ios-40713390473/flutter-macos-version.txt",
+          "artifacts/flutter-ios-40713390473/flutter-simulator-launch.txt"
+        ],
+        "review": {
+          "disposition": "ship",
+          "materialFixes": 0,
+          "limit": "Only six supplied disconnected simulator states; largest text is the initial viewport. No finger taps, scrolling/reachability, VoiceOver, connected-data, physical install/signing or Bluetooth acceptance."
+        },
+        "superseded": "Earlier 24d0484 tab-label collision and faded Setup captures were corrected in final source/capture; they are not acceptance evidence.",
+        "readiness": "DEBUG capture routing and OCR establish rendered destination/frame readiness only. Synthetic Dart recovery taps are separate software evidence."
       },
-      "debt": [
-        "Android ordinary four-button navigation lacks selected-state semantics and active destination treatment.",
-        "Android root padding uses raw pixels, not a density-independent spacing scale.",
-        "Android current-build recaptures, Activity recreation/navigation restoration, density, landscape and large-text checks remain unaccepted."
-      ],
+      "references": {
+        "android": "Host/native reference build/lint/29 JVM tests passed after controller-core extraction; artifacts/shared-controller-native-build.txt.",
+        "apple": "Native Swift reference CI 40710376253 passed 3 protocol tests/build/launch/captures after timeout/stale-callback guards.",
+        "historical": "artifacts/apple-ci-40699505189/ and artifacts/android-remote-launch.png remain prior native reference evidence; artifacts/ui-host-final.png predates optional Apple controls.",
+        "limit": "Reference checks do not establish shared phone whole-product or physical parity acceptance."
+      },
+      "assets": {
+        "status": "Provenance recorded; iPhone launcher branding unfinished.",
+        "android": "Reuses existing ic_dx340.xml vector. Five generated Flutter Android launcher PNGs removed.",
+        "iPhone": "Provisional official Flutter-template AppIcon and transparent launch placeholders; phone/ASSET_ORIGINS.md; third_party/FLUTTER_LICENSE.",
+        "scan": "Recorded impeccable embed-prompt scan: 18 shipping PNG rasters, zero missing origins.",
+        "generatedArtwork": "No new raster illustration or AI-generated artwork."
+      },
       "notTested": [
-        "Apple tab/button taps, Open Setup interaction, scrolling reachability, VoiceOver and connected-data rendering.",
-        "Physical iPhone signing/install, accessibility and Bluetooth acceptance.",
-        "Light and dark appearance and contrast across actual controller phones.",
-        "Whole-product visual acceptance and radio/audio acceptance."
-      ]
+        "Physical iPhone signing/install; separate Android controller hardware.",
+        "Connected library/queue rendering on either phone.",
+        "Target-phone TalkBack/VoiceOver, contrast, scrolling reachability, Android large fonts and landscape/small-phone layouts.",
+        "BLE interoperability, security, background/range/reconnection stability, source audio, walk and battery acceptance.",
+        "Physical Flutter parity sufficient to retire native phone references."
+      ],
+      "open": [
+        "Optional Mango folder production service pending.",
+        "Output volume remains disabled pending physical verification.",
+        "Full-system acceptance remains incomplete."
+      ],
+      "webDetector": "Not run: adaptive native mobile surface."
     }
   },
   "components": [
     {
-      "name": "Android action",
+      "name": "Shared Android action",
       "kind": "button",
-      "refersTo": "android-action",
-      "description": "Platform Button used for text playback, setup and browse actions; native theme feedback and capability-dependent enabled state. Frontmatter records the minimum target intent."
+      "refersTo": "phone-action",
+      "description": "Material OutlinedButton; flexible centered label, optional icon, authored minimum height and native feedback. Authorization/capability/pending state gates callback."
     },
     {
-      "name": "Android disabled action",
+      "name": "Shared iPhone action",
       "kind": "button",
-      "refersTo": "android-action",
-      "description": "The same platform Button with isEnabled false when authorization or source capability is unavailable; nearby explanatory text supplies context."
+      "refersTo": "phone-action",
+      "description": "CupertinoButton with flexible centered label and optional Material icon; native enabled/disabled feedback and the shared minimum height."
     },
     {
-      "name": "Android destinations",
+      "name": "Adaptive playback layout",
+      "kind": "custom",
+      "description": "Separate desired-state Play/Pause and Previous/Next actions; two columns or a stacked layout at the documented content-width/text-scale condition. See extensions.breakpoints."
+    },
+    {
+      "name": "Shared phone navigation",
+      "kind": "nav",
+      "description": "Player/Library/Queue/Setup; Material NavigationBar or CupertinoTabBar, current selection and restorable destination index. iPhone fixed-height labels do not scale; reading content scales."
+    },
+    {
+      "name": "Library and queue row",
+      "kind": "custom",
+      "description": "Material ListTile or CupertinoButton row with folder/music icon, wrapping title/subtitle and folder chevron. Parent/page/assisted navigation and playable selection use source-scoped IDs/revisions."
+    },
+    {
+      "name": "Scrollable connection and recovery",
+      "kind": "custom",
+      "description": "Live-region status, adaptive errors, pending explanation and disconnected Open Setup recovery appear inside the ListView, with capability-specific guidance."
+    },
+    {
+      "name": "Retained Kotlin action",
+      "kind": "button",
+      "refersTo": "android-action",
+      "description": "Companion/native reference Button. Reference-only; not the shared Flutter action."
+    },
+    {
+      "name": "Retained Kotlin destinations",
       "kind": "nav",
       "refersTo": "android-destination",
-      "description": "Equal-width Player, Library, Queue and Setup buttons above the scrolling body; selected-state semantics and active treatment remain polish debt."
+      "description": "Native reference four-button row; selected-state/raw-pixel layout debt remains. Not the shared phone NavigationBar."
     },
     {
-      "name": "Apple playback action",
+      "name": "Retained SwiftUI playback",
       "kind": "button",
       "refersTo": "apple-playback",
-      "description": "SwiftUI borderless SF Symbol action in the Playback section, with a spoken accessibility label and capability-based disabled state."
-    },
-    {
-      "name": "Apple navigation",
-      "kind": "nav",
-      "description": "Native TabView with Player, Library, Queue and Setup labels and symbols; each destination has a NavigationStack. A typed selection binding supports Open Setup recovery. DEBUG launch routing enables actual screen captures without proving taps."
-    },
-    {
-      "name": "Library capability context",
-      "kind": "custom",
-      "description": "Native text explains unavailable browsing or optional assisted browsing; disconnected Apple Library and Queue give connection guidance plus Open Setup. Apple additionally uses a ProgressView for library loading. This is explanatory UI, not a custom card or chip."
-    },
-    {
-      "name": "Apple connection status",
-      "kind": "custom",
-      "description": "ConnectionStatusSection is a native Section inside each destination's scrolling List. Its footnote Text wraps vertically with fixedSize(horizontal: false, vertical: true) and retains the updates-frequently accessibility trait. No root fixed inset or custom spacing token."
+      "description": "Native reference borderless SF Symbol action with spoken label. Retained for parity reference; not the shared Cupertino phone action."
     }
   ],
   "narrative": {
     "northStar": "Native system interface",
-    "overview": "The user selected native system appearance on 28 October 2026. Use platform typography, colors, navigation and control states. The current interface is a functional diagnostic beta with large playback actions and explicit capability explanations. It has no separate screen palette or custom display typeface.\n\nThis document records current Kotlin Views and SwiftUI source, Android captures and the corrected six-image Apple simulator matrix. It is a handoff for continuing native work, not whole-product visual acceptance. No Figma, web, comp or Flutter migration was selected. Android navigation polish remains open. Apple builds and opens on the hosted Mac; review resolved three scoped disconnected-state fixes, with broader visual and interaction acceptance still open.",
+    "overview": "The user selected native system appearance, then one shared Android/iPhone interface on 28 October 2026. Flutter/Dart now owns the phone screens, using stock Material controls on Android and Cupertino controls on iPhone. Light/dark appearance, system typography and familiar control states provide the visual identity. No custom screen palette, typeface or approved comp was introduced.\n\nThe shared phone implementation uses Flutter 3.41.4/Dart 3.11.1 above Kotlin Android Bluetooth/foreground-service and Swift CoreBluetooth/restoration code. The DX340 companion and source adapters remain Kotlin; the later Watch client remains native SwiftUI. Existing Kotlin and SwiftUI phone apps are retained as parity references. Their tokens below are explicitly scoped to those references and the companion, rather than applied to Flutter.\n\nBoth finish reviewers returned ship for their supplied disconnected captures only: Android dark/default-font screens and the six iPhone simulator states described below. This records the implemented system and those narrow verdicts. Whole-product, physical phone, connection stability and accessibility acceptance remain open.",
     "keyCharacteristics": [
-      "Native typography and appearance that follow system settings.",
-      "Large playback targets with capability-dependent disabled states.",
-      "Player, Library, Queue and Setup destinations.",
-      "Setup and diagnostic detail separated from everyday playback."
+      "One maintained phone presentation with platform-adaptive system controls.",
+      "Large labeled playback actions with authorization and capability-dependent states.",
+      "Player, Library, Queue and Setup as stable bottom destinations.",
+      "Scrolling connection, recovery and source explanations that follow actual state."
     ],
     "rules": [
       {
         "name": "The System Color Rule",
-        "body": "Let native theme roles supply screen colors and enabled, disabled, pressed and focus states; keep the launcher palette scoped to the launcher.",
+        "body": "Let platform-adaptive theme roles supply screen colors and control states; keep the launcher palette scoped to the launcher.",
         "section": "colors"
       }
     ],
     "dos": [
-      "**Do** use native system typography, colors and control feedback.",
-      "**Do** preserve large playback targets, scalable text and screen-reader labels.",
-      "**Do** explain unsupported capabilities and show actual connection state.",
-      "**Do** keep Player, Library, Queue and Setup distinct and diagnostics in setup flows.",
-      "**Do** verify current builds on target devices in light, dark and large-text settings before acceptance."
+      "**Do** use stock Material/Cupertino appearance and system theme roles for the shared phone.",
+      "**Do** preserve scalable reading content, semantic labels and the authored minimum action target.",
+      "**Do** keep Player, Library, Queue and Setup stable and connection guidance scrollable.",
+      "**Do** let authorization, source capability and pending state decide available actions.",
+      "**Do** retain companion/native-reference tokens in their stated scope until parity is verified.",
+      "**Do** identify device, source revision and capture/interaction limits when accepting UI work."
     ],
     "donts": [
-      "**Don't** promote launcher colors into a fixed screen palette.",
-      "**Don't** treat the Android four-button navigation row or raw-pixel margins as approved final patterns.",
-      "**Don't** replace native components with a different UI stack without a selected migration.",
-      "**Don't** expand the three scoped Apple review fixes into whole-product, interaction, accessibility, Bluetooth or audible-playback acceptance."
+      "**Don't** turn launcher artwork colors or screenshot samples into a screen palette.",
+      "**Don't** copy the retained Kotlin reference's raw-pixel insets or four-button row into shared phone standards.",
+      "**Don't** invent a custom typeface, radius, shadow scale or browser approximation of native rendering.",
+      "**Don't** treat disconnected screenshots, synthetic tests or builds as physical accessibility, Bluetooth, source-audio or whole-product acceptance.",
+      "**Don't** describe provisional iPhone template icons as finished launcher branding."
     ]
   }
 }

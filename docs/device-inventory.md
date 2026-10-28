@@ -18,6 +18,6 @@
 | Watch | NOT TESTED: model/watchOS unknown; phone stability gate not met | Plan P9 |
 | Output | USER REPORTED AMP15 phone out; correct Mango and Apple selected-track audio confirmed | Gain/volume mapping/audio quality NOT MEASURED |
 | Collection | PARTIAL: Mango All Music returned466 items; total files/SD layout/format counts unknown | Native browser sample, not full storage inventory |
-| Flutter toolchain | VERIFIED installed3.41.4 stable/Dart3.11.1 | artifacts/flutter-version.txt, flutter-doctor.txt; Android license warning; no migration selected |
+| Flutter toolchain | VERIFIED3.41.4 stable/Dart3.11.1, revision ff37bef603469fb030f2b72995ab929ccfc227f0 | User selected shared phone UI; release Android build/lint/9 Dart tests and iPhone simulator build/launch passed. License first-run warning was an earlier inventory result, not a failed final build |
 
 Bluetooth MAC and unrelated notifications are omitted from tracked reports. Raw ADB dumps stay under ignored artifacts/. No root, firmware changes, Wi-Fi setup or source replacement performed.

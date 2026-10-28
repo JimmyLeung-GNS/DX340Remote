@@ -1,34 +1,22 @@
 # Android and iOS launch verification
 
-28 October 2026. User requested explicit verification that the remote can open on both platforms, and a revised setup/implementation plan if needed.
+28 October 2026. The user chose a shared Android/iPhone interface after the Kotlin/Flutter comparison. Flutter now supplies one phone UI, with native Kotlin Android Bluetooth/service and Swift CoreBluetooth/restoration retained. The Kotlin DX340 companion and installed source apps are unchanged by this choice.
 
-| Item | Result |
+| Item | Evidence and limits |
 |---|---|
-| Android companion | VERIFIED installed and opened on DX340 Android 13; physical source experiments separately recorded |
-| Android remote | VERIFIED installed and opened on the same available DX340 as an Android launch test; process and focused Activity observed, screenshot artifacts/android-remote-open-check.png. This is not a separate-controller BLE test |
-| iOS remote | VERIFIED unsigned simulator build and native screen captures, final CI40699505189 at412b87a. NOT SIGNED/OPENED on a physical iPhone |
-| Mac tooling | Local Windows xcrun unavailable. Standard GitHub Mac runner now verified: macOS26.6.2/Xcode26.6, iPhone Air/iOS26.5 simulator. User's Mac/signing/actual iPhone remain unavailable |
-| Flutter | VERIFIED installed: Flutter 3.41.4 stable, Dart 3.11.1; artifacts/flutter-version.txt and flutter-doctor.txt |
+| Shared Flutter Android phone app0.2.0+2 | VERIFIED Windows release-mode development-signed build, analysis,9 state/widget tests and release lint. Installed/opens on DX340 Android13; Player/Library/Queue/Setup and recovery captures inspected. This is not a separate-phone BLE test |
+| Shared Flutter iPhone app | VERIFIED unsigned build and simulator launch on hosted macOS26.6.2/Xcode26.6, iPhone Air/iOS26.5 at b1fdf4c/24d0484. Corrected final six-image capture matrix passed in CI40713390473 at5f31f5d. Physical signing/installation NOT TESTED |
+| Native reference clients | Retained. Native Android build/lint/29JVM tests pass after controller-core extraction. SwiftUI reference CI40710376253 succeeded with3 shared Swift protocol tests, build/launch/captures |
+| Physical phones | Only DX340 USB connected. Separate Android controller and actual iPhone/Mac/signing inventory are unavailable. BLE/stability acceptance remains NOT TESTED |
+| Toolchain | Pinned Flutter3.41.4/Dart3.11.1, Gradle8.14+checksum, AGP8.11.1, Kotlin2.1.10, JDK21, Android SDK36; phone minimum API31 / iOS17 proposed |
 
-The existing architecture uses separate native Android and iPhone apps sharing BLE protocol v1. An APK does not run on iOS. A Flutter app also produces separate Android/iOS packages, but shares its Dart application code. Flutter does not remove the Mac/Xcode/signing or physical Bluetooth test requirements. [Official Flutter iOS build requirements](https://docs.flutter.dev/deployment/ios).
+Flutter produces separate Android and iOS packages from shared Dart UI. An APK cannot run on iOS. Flutter still needs Mac/Xcode/signing for physical iPhone deployment. [Official iOS requirements](https://docs.flutter.dev/deployment/ios).
 
-## Verification/setup plan
+## Repeatable checks and actual phone steps
 
-1. Preserve the working Kotlin DX340 companion, source adapters, optional accepted Apple Music UI-assisted mode and versioned BLE protocol.
-2. Resolve the user's phone-client preference: retain native Kotlin/Swift clients, or make a shared Flutter phone project canonical. The choice is pending; do not discard working code or silently migrate the host.
-3. If native is retained: run scripts/build-apple.sh on the Mac; repair actual Swift/Xcode errors, then sign/install on the user's iPhone. Continue Android and iOS controller tests against the actual DX340.
-4. If Flutter is selected: create one Android/iOS phone project, reuse native Kotlin/CoreBluetooth transport via platform channels, implement common protocol/state/browsing UI and supported-action handling, and retain old clients as reference rather than deleting them. Pin the installed toolchain/dependencies and add Dart envelope/reconnect/capability tests.
-5. Build/test the selected Android remote here and verify launch on the available Android hardware, clearly labelling DX340-only launch checks. Build/sign the selected iOS remote on Mac; a scaffold or Windows analysis is not an iOS launch pass.
-6. With both phones available, rerun actual BLE pairing/security, Wi-Fi/cellular-off connection, browsing, source selection, reconnection and background tests. Neither framework choice supplies that evidence automatically.
+1. Windows: `./scripts/build-phone.ps1` runs dependency-lock verification, analysis, meaningful state/widget tests, release-mode APK build and Android release lint. It keeps generated Windows properties normalization/Java workaround local to development. Output artifacts/dx340-phone-0.2.0-development.apk uses the existing development key outside Git.
+2. `./scripts/verify-phone-launch.ps1 -Serial <serial>` installs/opens, checks process/inventory and captures the shared Player. DX340 currently yields null UIAutomator roots for both Flutter and native companion; automation failure is recorded separately from Activity/process/screenshots. TalkBack is NOT TESTED. Actual tab and OpenSetup development taps were separately observed from screenshots.
+3. Mac: install pinned Flutter3.41.4 and suitable Xcode, run `flutter pub get --enforce-lockfile` in phone/, open phone/ios/Runner.xcworkspace, select signing team/actual iPhone and build/run. Record exact hardware/OS/build. For a simulator, run `sh scripts/build-phone-ios.sh <iPhone-UDID>` from the root. The public Mac CI performs unsigned simulator checks only.
+4. Both physical phones: follow installation.md and phone-reliability-runbook.md for authenticated pairing/local approval, Wi-Fi/cellular-off control, full browsing/selection, sleep/background, range loss, radio toggles, revocation and upgrade. No source-only, compile, screenshot or simulated result passes this matrix.
 
-No cloud build service, remote repository, paid service or publication is introduced by this plan. Apple signing remains a local Mac/user-account step. Bluetooth-only everyday operation and Mango playback remain requirements under either client framework.
-
-## Repeatable launch checks added
-
-`./scripts/verify-android-launch.ps1 -Serial <serial>` installs the remote, checks Activity launch and process, records device inventory and captures the UI. Executed successfully on serial d (DX340), and the screenshot was inspected: Player, Library, Queue and Setup are visible; disconnected playback controls are disabled. Evidence: artifacts/android-remote-launch.{json,txt,png}. This is an Android launch pass only.
-
-On Mac, run `sh scripts/build-apple.sh`, then `xcrun simctl list devices available`, then `sh scripts/build-apple.sh <iPhone-simulator-UDID>`. The script runs Swift tests, builds, installs, launches and captures the chosen simulator. Logs and screenshot go to artifacts/. The first hosted run completed successfully: [CI40691819981](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/40691819981), source53d26ec, Swift3 tests, BUILD SUCCEEDED, launch PID8195 and inspected native Player screenshot. Its bottom status banner obscured tab labels; a correction and expanded native-screen captures are under verification in run40693857668. Then open apple/DXRemote.xcodeproj, select signing team and actual iPhone, run, and record model/OS/build plus any errors. Use docs/installation.md for physical BLE steps.
-
-Continue the native implementation while the optional framework preference remains unanswered, following the original Kotlin/Swift requirement. Missing Mac verification alone is not evidence that native iOS is incompatible, so it does not justify discarding the working native clients.
-
-Final update: [CI40699505189](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/40699505189) passed after correcting actual UI defects and capture timing. All4 native disconnected screens, Player dark and largest-text dark were captured. The reviewer scored the3 listed fixes resolved; see test-results/2026-10-28-ios-simulator.md for exact scope and prior invalid evidence. Native Android and iOS now both have build/launch evidence, with physical-device scope kept explicit. A Flutter rewrite is not needed to establish these two platform builds.
+Full browsing, Mango preservation and Bluetooth-only everyday operation remain requirements. Optional Mango folder integration remains independent host work, authorized but not implemented by the phone migration. Shared-phone test history: test-results/2026-10-28-shared-phone.md. Architecture/parity plan: shared-phone-migration.md.
