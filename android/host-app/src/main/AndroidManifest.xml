@@ -9,6 +9,7 @@
     <application android:label="DX340 Companion" android:icon="@drawable/ic_dx340" android:theme="@style/AppTheme" android:dataExtractionRules="@xml/no_backups" android:allowBackup="false" android:supportsRtl="true">
         <activity android:name=".MainActivity" android:exported="true"><intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter></activity>
         <activity android:name=".BrowseTestActivity" android:exported="false" />
+        <activity android:name=".VolumeCheckActivity" android:exported="false" />
         <service android:name=".HostService" android:exported="false" android:foregroundServiceType="connectedDevice" />
         <service android:name=".AppleMusicAccessibilityService" android:exported="true" android:label="DX340 Apple Music browsing" android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter><action android:name="android.accessibilityservice.AccessibilityService" /></intent-filter>

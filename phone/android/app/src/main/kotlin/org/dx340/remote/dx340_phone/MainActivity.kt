@@ -20,7 +20,7 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler {
     private var sink: EventChannel.EventSink? = null
     private var bound = false
     private var permissionReply: MethodChannel.Result? = null
-    private val operations = setOf("GET_STATE", "GET_QUEUE", "SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "SELECT_SOURCE", "PLAY_ITEM", "PLAY_QUEUE_ITEM")
+    private val operations = setOf("GET_STATE", "GET_QUEUE", "SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "SELECT_SOURCE", "PLAY_ITEM", "PLAY_QUEUE_ITEM", "ADJUST_VOLUME")
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName, binder: IBinder) {
             model = (binder as RemoteService.LocalBinder).service.model
@@ -46,6 +46,7 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler {
                     return@setMethodCallHandler
                 }
                 if (call.method == "snapshot") { result.success(snapshot()); return@setMethodCallHandler }
+                if (call.method == "captureTab") { result.success(if (applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE != 0) intent.getStringExtra("captureTab") else null); return@setMethodCallHandler }
                 val remote = model ?: error("Bluetooth service is starting. Try again in a moment.")
                 when (call.method) {
                     "scan" -> { requireBluetoothPermission(); remote.scan() }

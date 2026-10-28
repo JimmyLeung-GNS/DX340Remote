@@ -33,7 +33,7 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
             val sources = HostService.instance?.sources ?: return finish(null, "START_COMPANION_FIRST")
             sources.select(intent.getStringExtra("source") ?: "com.apple.android.music")
             val operation = intent.getStringExtra("operation") ?: "BROWSE"
-            if (operation == "PROBE_VOLUME_DOWN") {
+            if (operation == "PROBE_VOLUME_DOWN" || operation == "PROBE_VOLUME_UP_RETURN") {
                 val state = sources.state()
                 require(intent.getStringExtra("sourceEpoch") == state.optString("sourceEpoch")) { "STALE_SOURCE" }
                 val audio = context.getSystemService(android.media.AudioManager::class.java)
@@ -41,15 +41,20 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
                 val current = audio.getStreamVolume(stream)
                 require(intent.hasExtra("expectedVolume") && current == intent.getIntExtra("expectedVolume", -1)) { "STALE_VOLUME" }
                 require(!audio.isVolumeFixed && audio.isMusicActive && state.optBoolean("playing")) { "VOLUME_PROBE_NOT_READY" }
-                require(current > audio.getStreamMinVolume(stream)) { "VOLUME_AT_MINIMUM" }
-                val requested = current - 1
-                // Absolute, downward-only diagnostic: retrying the same expected value cannot
-                // lower the volume twice. No Bluetooth capability is enabled by this probe.
+                val requested = if (operation == "PROBE_VOLUME_DOWN") {
+                    require(current > audio.getStreamMinVolume(stream)) { "VOLUME_AT_MINIMUM" }; current - 1
+                } else {
+                    val previous = intent.getIntExtra("returnVolume", -1)
+                    require(previous.toLong() == current.toLong() + 1 && previous <= audio.getStreamMaxVolume(stream)) { "INVALID_RETURN_VOLUME" }
+                    previous
+                }
+                // Absolute one-step diagnostic, with an explicit one-step return. An old expected
+                // value cannot repeat the write. This probe does not enable a Bluetooth capability.
                 audio.setStreamVolume(stream, requested, 0)
                 main.postDelayed({
                     try {
                         val observed = audio.getStreamVolume(stream)
-                        finish(JSONObject().put("kind", "physical-public-volume-api-downward-probe-no-ble")
+                        finish(JSONObject().put("kind", "physical-public-volume-api-probe-no-ble")
                             .put("before", current).put("requested", requested).put("observed", observed)
                             .put("note", "Reported API values; listening confirmation required"), if (observed == requested) null else "VOLUME_NOT_OBSERVED")
                     } catch (e: Exception) { finish(null, e.message ?: "VOLUME_PROBE_FAILED") }

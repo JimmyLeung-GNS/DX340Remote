@@ -2,7 +2,15 @@
 
 Updated 29 October 2026 (Hong Kong). **Goal active; full system incomplete.**
 
-## Source recovery continuation
+## Bounded output-volume continuation
+
+Implemented a shared local/BLE public AudioManager volume adapter, source/session/app/build/output-bound listening verification, stale-value/profile guards and serialized one-step writes with readback. Verification is memory-only, expires on companion stop/audio-device changes, and enables only the exact two locally confirmed levels. The companion now offers **Verify output volume on this DX340**; Flutter Player has shared Android/iPhone down/up controls, with native mutation guards and bridge allowlists on both platforms. Expected value/profile must match each deliberate command; reconnect never replays it. Native reference phone UIs do not yet expose volume buttons.
+
+On the actual DX340/Mango4.1.37, the new production calibration adapter performed35→34→35. The user separately confirmed the quieter step and louder return through AMP15 phone out; the local screen then enabled only34–35. This is local companion evidence, **not a phone BLE pass**. The preceding debug return34→35 was separately user-confirmed louder too. Minimum/maximum, Apple Music, changed amp/output/gain, phone BLE and reconnect acceptance remain open. Android cannot identify every amp/gain/headphone change; the local UI explicitly requires rechecking those changes.
+
+Android build/lint and48 JVM tests passed (8 new volume-coordinator cases); Flutter analysis/14 Dart tests/release APK/release lint passed. Companion SHA25651cf92b5c1850525a3803237b1c67aa0d986e8bd2d8b450c7890f9ba03cc1e94; phone4c1937dbe4554008e085478d85f49b1ab5d11ea07bb699e22f3adebd91f94405. A fresh independent reviewer returned **ship only for six actual DX340 dark/default-font volume-check states**. Phone/native rendering review and updated iOS CI are in progress; synthetic volume fixtures are separate debug entry points, never Bluetooth evidence. See test-results/2026-10-29-volume-controls.md.
+
+## Source recovery continuation (historical checkpoint)
 
 The preceding goal turn made progress: optional Mango folders, separate audible WAV/FLAC confirmations, builds/tests/reviews and public checkpoint3b1ebe4. This continuation adds callback ownership guards so a replaced session's late callback cannot clear the new source. Three synthetic lifecycle tests and the full Android build/lint/40 JVM tests pass. Native selection capability changes now advance sourceEpoch, invalidating phone library/queue data; unchanged confirmations do not churn it. Same-session parent proofs remain refreshable and item identity is revalidated before dispatch.
 

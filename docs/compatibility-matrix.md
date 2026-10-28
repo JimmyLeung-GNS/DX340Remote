@@ -24,7 +24,7 @@
 | T07 Apple20 tracks/5 albums/2 playlists | PARTIAL: actual own-service downloaded playlist selection outside complete20-item queue observed playing offline; user-confirmed audible with delayed-snapshot caveat. Full20/5/2 and phone matrix NOT TESTED |
 | T08 Mango20 FLAC/WAV/folders/playlists | PARTIAL native audible selection plus accepted optional own-service nested-folder WAV selection user-confirmed audible. Native root lacks folder/playlist categories; full20/format/playlist/phone matrix open |
 | T09 Source switching | PARTIAL:12 local desired-state requests across awake/asleep tests and native/UI selected-item handoff observed correct target playing/other paused. No phone BLE or acoustic-overlap acceptance |
-| T10 Actual output volume | PARTIAL: wheel36→35 and app API35→34 matched API/Mango display and user-reported quieter AMP15 output. Upward/boundaries/Apple/other-output/phone/reconnect NOT TESTED; remote volume remains disabled |
+| T10 Actual output volume | PARTIAL: wheel36→35 and debug35→34→35 user-confirmed; new production local calibration35→34→35 separately confirmed quieter/louder through AMP15. Only Mango34–35 enabled for this companion session. Hardware extrema/Apple/other-output/phone/reconnect NOT TESTED; see volume-controls report |
 | T11 Rescan/SD/stale IDs | Old Mango UI file tokens rejected locally; SD root and explicit empty Music folder read. Physical removal/rescan/duplicate cases NOT TESTED |
 | T12 Interruptions | Activity-recreation fixture and3 callback-ownership schedule tests pass; mixed native capability transition check passes without process restart. Real session replacement/phone/radio/background matrix NOT TESTED |
 | T13 Matched battery runs | NOT TESTED |

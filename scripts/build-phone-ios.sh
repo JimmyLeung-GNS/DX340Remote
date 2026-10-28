@@ -60,3 +60,22 @@ xcrun simctl launch "$simulator" org.dx340.remote.ios --capture-tab=player >> ar
 capture DX340 artifacts/flutter-player-large-dark.png
 xcrun simctl ui "$simulator" content_size large
 xcrun simctl ui "$simulator" appearance light
+
+# Separate synthetic entry point: native rendering evidence, never a BLE connection.
+cd "$repo/phone"
+flutter build ios --simulator --debug --no-codesign --target test_support/volume_capture.dart > ../artifacts/flutter-ios-volume-fixture-build.txt 2>&1
+cd "$repo"
+xcrun simctl terminate "$simulator" org.dx340.remote.ios 2>/dev/null || true
+xcrun simctl install "$simulator" phone/build/ios/iphonesimulator/Runner.app
+for mode in volume-high volume-low; do
+    xcrun simctl terminate "$simulator" org.dx340.remote.ios 2>/dev/null || true
+    xcrun simctl launch "$simulator" org.dx340.remote.ios "--capture-tab=$mode" >> artifacts/flutter-volume-fixture-launch.txt 2>&1
+    capture 'Volume up' "artifacts/flutter-synthetic-$mode-light.png"
+done
+xcrun simctl terminate "$simulator" org.dx340.remote.ios
+xcrun simctl ui "$simulator" appearance dark
+xcrun simctl ui "$simulator" content_size accessibility-extra-extra-extra-large
+xcrun simctl launch "$simulator" org.dx340.remote.ios --capture-tab=volume-high >> artifacts/flutter-volume-fixture-launch.txt 2>&1
+capture 'Volume up' artifacts/flutter-synthetic-volume-large-dark.png
+xcrun simctl ui "$simulator" content_size large
+xcrun simctl ui "$simulator" appearance light

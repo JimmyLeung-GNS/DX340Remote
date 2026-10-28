@@ -198,6 +198,18 @@ class HostService : Service() {
                                 ledger.finish(id, value); mutationGate.leave(id); gateEntered = false
                             }
                         }
+                        "ADJUST_VOLUME" -> {
+                            val source = sources.selected; val sourceEpoch = sources.epoch(source)
+                            reply(device, request, "ACCEPTED")
+                            sources.outputVolume.control.adjust(args.opt("delta"), args.opt("expectedVolume"), args.optString("profileId"), {
+                                authenticated == device && approved.getBoolean(device.address, false) && device.bondState == BluetoothDevice.BOND_BONDED &&
+                                    sources.selected == source && sources.epoch(source) == sourceEpoch
+                            }) { error ->
+                                val data = if (error == null) JSONObject().put("outcome", "observed") else JSONObject().put("code", error)
+                                val value = reply(device, request, if (error == null) "RESULT" else "ERROR", data.put("state", sources.state()))
+                                ledger.finish(id, value); mutationGate.leave(id); gateEntered = false
+                            }
+                        }
                         "NEXT", "PREVIOUS", "SEEK" -> {
                             sources.command(op, args)
                             result(JSONObject().put("outcome", "dispatched").put("observation", "Await source state; audible completion is not confirmed"))

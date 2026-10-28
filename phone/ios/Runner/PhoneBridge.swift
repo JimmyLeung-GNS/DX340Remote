@@ -10,7 +10,7 @@ import CoreBluetooth
     private var commands: FlutterMethodChannel?
     private var channel: FlutterEventChannel?
     private var observationGeneration = 0
-    private let operations: Set<String> = ["GET_STATE", "GET_QUEUE", "SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "SELECT_SOURCE", "PLAY_ITEM", "PLAY_QUEUE_ITEM"]
+    private let operations: Set<String> = ["GET_STATE", "GET_QUEUE", "SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "SELECT_SOURCE", "PLAY_ITEM", "PLAY_QUEUE_ITEM", "ADJUST_VOLUME"]
 
     func attach(_ messenger: FlutterBinaryMessenger) {
         commands = FlutterMethodChannel(name: "org.dx340.remote/commands", binaryMessenger: messenger)

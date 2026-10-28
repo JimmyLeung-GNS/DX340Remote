@@ -29,7 +29,7 @@ class RemoteModel(context: Context) {
     var artworkBytes: ByteArray? = null; private set
     private val main = Handler(Looper.getMainLooper())
     private val pending get() = session.pending
-    private val mutations = setOf("SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "SELECT_SOURCE", "PLAY_ITEM", "PLAY_QUEUE_ITEM")
+    private val mutations = setOf("SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "SELECT_SOURCE", "PLAY_ITEM", "PLAY_QUEUE_ITEM", "ADJUST_VOLUME")
     val mutationPending get() = pending.values.any { it in mutations }
     private data class BrowseLocation(val source: String, val epoch: String, val parent: String?)
     private val browseLocations = mutableMapOf<String, BrowseLocation>()
@@ -87,7 +87,7 @@ class RemoteModel(context: Context) {
             if (type != "ACCEPTED") queueLocations.remove(id)
             if (type != "ACCEPTED" && id.isNotEmpty()) pending.remove(id)
             if (type == "HELLO") { session.hello(reply.getString("hostEpoch")); authorize(); return }
-            if (type == "ERROR") { browseLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); status = errorMessage(data.optString("code", "Unknown source error")); update(); return }
+            if (type == "ERROR") { data.optJSONObject("state")?.takeIf { reply.optString("hostEpoch") == epoch }?.let(::applyState); browseLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); status = errorMessage(data.optString("code", "Unknown source error")); update(); return }
             if (type == "ACCEPTED") { status = "Waiting for source…"; update(); return }
             if (operation == "AUTHORIZE" && data.optBoolean("authorized")) { session.approve(reply.getString("hostEpoch")); status = "Connected to DX340" }
             if (reply.optString("hostEpoch") != epoch) { disconnect(); return }
@@ -130,6 +130,9 @@ class RemoteModel(context: Context) {
         state = new
     }
     private fun errorMessage(code: String) = when (code) {
+        "STALE_VOLUME" -> "Volume changed on DX340. Refresh before choosing another step."
+        "VOLUME_AT_BOUNDARY" -> "This is the edge of the locally confirmed range. Recheck volume on DX340 to use another range."
+        "VOLUME_PROFILE_CHANGED", "VOLUME_VERIFICATION_REQUIRED", "VOLUME_SOURCE_NOT_READY" -> "Play the selected source and verify its output volume in the DX340 companion."
         "UI_PERMISSION_REQUIRED" -> "On DX340, enable the selected player's optional browsing service in Accessibility settings."
         "UI_SCREEN_UNLOCK_REQUIRED" -> "Wake and unlock DX340 for assisted browsing."
         "UI_FOREGROUND_REQUIRED", "UI_SETUP_REQUIRED", "UI_UNEXPECTED_SCREEN", "UI_STORAGE_CONTEXT_REQUIRED" -> "Open the selected player's local/downloaded library on DX340, then refresh."

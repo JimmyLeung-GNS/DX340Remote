@@ -143,3 +143,9 @@ This is the separately accepted screen-on/unlocked mode for Mango4.1.37/code240.
 4. If the screen changes or an item expires, use **Retry library** / root refresh. If the device sleeps, wake/unlock it first. Turn the mode off with **Disable optional Mango folders**; the separate Android Accessibility permission can also be revoked. An app update requires adapter revalidation.
 
 This mode uses Mango's semantic UI, not a replacement audio engine. It does not enable seeking or output-volume control; those remain separately capability gated.
+
+## Local output-volume verification
+
+In the running companion, choose **Verify output volume on this DX340**. Play the intended source at your usual low listening level, select that source, and enter the amp/output configuration. Choose **Test one step quieter**, listen, and confirm only if it became quieter. Choose **Return to starting volume**, listen, then confirm the return. A successful check enables only those two levels in the shared phone's Player; each button moves one level and stops at the confirmed boundary. The displayed units are device levels, not percentages or dB.
+
+The check sends no automatic return or retry. Cancelling leaves the current volume; use the wheel deliberately if needed. Verification lasts only for the companion service session and matching source/app/firmware/output inventory; stopping the service or an audio-device change clears it. Recheck after amp, output, headphones or gain changes because Android cannot identify every such change. Apple Music needs its own check. If a wheel change makes the phone stale, refresh Player before issuing a new step. Native reference phone UIs have no volume buttons; use the canonical shared Flutter phone app. Physical phone volume acceptance remains pending.

@@ -41,6 +41,10 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     var selected = PACKAGES.first(); private set
     var accessError: String? = null; private set
     private var closed = false
+    val outputVolume = AndroidOutputVolume(context, main, { selected + "|" + epoch(selected) + "|" + version(selected) }, {
+        !closed && accessError == null && controllers[selected]?.playbackState?.state == PlaybackState.STATE_PLAYING &&
+            runCatching { manager.getActiveSessions(listener).none { it.packageName != selected && it.playbackState?.state !in listOf(PlaybackState.STATE_PAUSED, PlaybackState.STATE_STOPPED, PlaybackState.STATE_NONE) } }.getOrDefault(false)
+    }, changed)
     private val sessionsChanged = MediaSessionManager.OnActiveSessionsChangedListener { refresh() }
 
     fun start() {
@@ -50,6 +54,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     }
     fun close() {
         closed = true
+        outputVolume.close()
         callbackGuard.close()
         main.removeCallbacksAndMessages(null)
         manager.removeOnActiveSessionsChangedListener(sessionsChanged)
@@ -68,6 +73,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
             override fun onPlaybackStateChanged(state: PlaybackState?) = callbackGuard.dispatch(lease, changed)
             override fun onMetadataChanged(metadata: android.media.MediaMetadata?) = callbackGuard.dispatch(lease, changed)
             override fun onQueueChanged(queue: MutableList<android.media.session.MediaSession.QueueItem>?) = callbackGuard.dispatch(lease, changed)
+            override fun onAudioInfoChanged(info: MediaController.PlaybackInfo) = callbackGuard.dispatch(lease, changed)
             override fun onSessionDestroyed() {
                 if (!callbackGuard.retire(lease)) return
                 controllers.remove(pkg); tokens.remove(pkg); callbacks.remove(pkg)
@@ -137,9 +143,9 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         put("browseMode", if (usingUi(pkg)) "ui-assisted" else "direct")
         put("canBrowseFolders", pkg == PACKAGES[0] && mangoUiLibrary?.ready == true)
         if (pkg == PACKAGES[0] && mangoUiLibrary?.enabled == true) put("uiBrowseReason", mangoUiLibrary.explanation)
-        put("canSearch", false); put("canAdjustVolume", false); put("canResume", false); put("canColdLaunch", false)
+        put("canSearch", false); put("canAdjustVolume", pkg == selected && outputVolume.state().optBoolean("verified")); put("canResume", false); put("canColdLaunch", false)
         put("canShuffle", false); put("canRepeat", false)
-        put("reason", if (usingUi(pkg)) uiLibrary?.explanation else "Actions reflect advertised/observed source APIs; physical acceptance remains separate. Volume is disabled until output is measured.")
+        put("reason", if (usingUi(pkg)) uiLibrary?.explanation else "Actions reflect advertised/observed source APIs; physical acceptance remains separate.")
     }
     fun sources(): JSONArray = JSONArray().apply { PACKAGES.forEach { pkg ->
         val version = runCatching { context.packageManager.getPackageInfo(pkg, 0).versionName }.getOrNull()
@@ -157,6 +163,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
             .put("duration", m?.getLong("android.media.metadata.DURATION") ?: 0)
             .put("position", p?.position ?: 0).put("playing", p?.state == PlaybackState.STATE_PLAYING)
             .put("playbackState", p?.state ?: 0).put("capabilities", capabilities(selected))
+            .put("volume", outputVolume.state())
             .put("accessError", accessError ?: JSONObject.NULL)
     }
     fun select(pkg: String) { require(pkg in PACKAGES) { "MISSING_SOURCE" }; selected = pkg; changed() }
