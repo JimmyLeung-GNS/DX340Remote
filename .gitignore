@@ -29,3 +29,7 @@ artifacts/
 work/
 *.log
 Thumbs.db
+
+# Python diagnostic bytecode
+__pycache__/
+*.pyc

@@ -22,6 +22,8 @@ Requirements come from AGENTS.md, implementation-plan.md, the shared-phone decis
 
 The detailed T01–T18 status remains in compatibility-matrix.md. T03/T04 require real controls and observed latency; T05/T06/T12 require sleep/range/interruptions; T07/T08 require full source selection; T10/T11 require actual output/SD/library changes; T13/T14 need measured battery/walking; T15/T16 need real unauthorized/revoked/faulted transfers; T17 still needs the fresh-install/separate-phone matrix after successful DX340 upgrades; T18 remains Watch-gated. Synthetic fixtures cannot fill those rows.
 
+Current Windows protocol preparation has19 separate software tests and a live unpaired/protectionNONE refusal before explicit GATT/characteristic operations. HELLO/approval denial, a held manual-approval connection and authorized state/duplicate-read modes are prepared. Authenticated execution is still NOT TESTED; see test-results/2026-10-29-windows-protocol-preparation.md. This adds no native/Flutter or whole-stage acceptance.
+
 Current Mango prefetch comparison/build:86 native tests/lint, source-local nested/root recovery and four interruption/token regressions pass. Three retained Playlist reads3.704–3.952seconds were below six baseline samples4.100–4.518seconds, but all still fail the proposed3second target. No general tree-throughput/root-refresh/phone performance or new audio acceptance follows. Companion40114ff8... is installed with real preferences preserved; see test-results/2026-10-29-mango-prefetch.md.
 
 ## Current resources and resume

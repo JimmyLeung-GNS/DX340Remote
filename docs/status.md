@@ -2,7 +2,13 @@
 
 Updated 29 October 2026 (Hong Kong). **Original signing key restored and both apps upgraded in place. Goal active; full system incomplete and physical phone/Mac acceptance remains pending.**
 
-## Current continuation: measured Mango prefetch comparison
+## Current continuation: read-only Windows protocol preparation
+
+Prepared HELLO/local-approval-denial/state diagnostics with a three-operation read-only allowlist, bounded framing/reply correlation, explicit protected indication access and disconnect cleanup. An explicit45second approval-wait mode keeps the pending request alive while the operator approves locally; it never approves/pairs or controls playback. VERIFIED19 software conformance/failure tests and a live unpaired refusal before explicit GATT/characteristic operations. Windows reports paired=false/protection=NONE, so actual authenticated protocol, approval/revocation and both phone paths remain NOT TESTED.
+
+Product APKs remain companion40114ff8.../phone09aaae78...; preceding native86/Flutter32 scopes retain their limits. Operator pairing/listening availability, separate phones/Mac and full latency/reliability acceptance remain pending. Commands/evidence: windows-ble-diagnostics.md and test-results/2026-10-29-windows-protocol-preparation.md. Goal active; full system incomplete.
+
+## Preceding continuation: measured Mango prefetch comparison
 
 VERIFIED source-local before/experiment/restored-baseline comparison: six Playlist recovery baselines4.100–4.518seconds versus three retained root/child prefetch samples3.704–3.952seconds (sample mean about450ms/10.5% lower). Android33 tree reads now complete bounded hybrid prefetch batches before child traversal; Android31/32 retain preceding APIs. Tree throughput did not consistently improve and root-refresh improvement is not claimed. The proposed3second uncached-page target still FAILS; no phone timing is inferred.
 

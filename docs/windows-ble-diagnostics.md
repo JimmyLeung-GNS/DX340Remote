@@ -30,6 +30,38 @@ The script selects exactly one matching service advertisement, requests native e
 
 If a bond already exists, it is retained and inspected. If the result is unknown or times out, inspect both OS bond states before another request. Do not uninstall/reset apps, delete other bonds, edit permissions or weaken host protection to obtain a passing test.
 
-After a verified authenticated bond, a separate protocol diagnostic still needs to subscribe, exchange HELLO, verify LOCAL_APPROVAL_REQUIRED before companion approval, approve the identified pending controller visibly, authorize and read state. It must disconnect before another controller test. Bonding, application approval and a live authorized session are distinct. That exchange is not yet verified; do not treat pair status alone as completing P1 or T15. Physical phones must complete their own runbook afterward.
+## Read-only protocol checks after pairing
+
+The prepared scripts/verify-windows-protocol.py refuses an unpaired/unknown/weaker Windows bond before any explicit GATT connect/characteristic operation. It never requests pairing, approves/revokes a controller, changes source or sends playback/volume commands. Nineteen software conformance/failure checks pass; the actual authenticated exchange is NOT TESTED. A live preflight on29 October stopped with AUTHENTICATED_OS_BOND_REQUIRED, paired=false/protection=NONE, zero protocol frames.
+
+After native pairing is verified, reopen the companion's60second pairing window while this PC has no companion approval. Run:
+
+```powershell
+./work/ble-diagnostic/Scripts/python.exe scripts/verify-windows-protocol.py approval-boundary --label before-local-approval
+```
+
+Expect protected INFO/indication access and HELLO, followed by LOCAL_APPROVAL_REQUIRED for AUTHORIZE and AUTHORIZATION_DENIED for GET_STATE, without metadata. Do not approve during this denial run. Existing approved PCs must not be counted as unapproved; the script will fail rather than remove their approval. Disconnect cleanup runs when the command exits. A successful attribute operation alone is not a passing protocol check.
+
+Disconnect clears the host's pending request. To approve this PC, reopen the60second pairing window and use a fresh held connection:
+
+```powershell
+./work/ble-diagnostic/Scripts/python.exe scripts/verify-windows-protocol.py await-approval --label local-approval-and-state
+```
+
+Review the identified pending request under Controller access on DX340 and tap Approve there. This mode polls AUTHORIZE every two seconds for up to45seconds; it performs no approval itself. After success it reads state and repeats the identical GET_STATE request ID to check the cached read result. It never repeats a playback action. The whole run is bounded and disconnects before another test. If no approval is observed, it fails; do not infer acceptance from a timeout. Then a fresh connection can check the saved approval:
+
+```powershell
+./work/ble-diagnostic/Scripts/python.exe scripts/verify-windows-protocol.py authorized-state --label saved-approval-state
+```
+
+Reports exclude Bluetooth addresses and music labels; fixed check results/error codes remain under artifacts/windows-ble/. They include explicit failure/cleanup status. OS bond/protection reporting, companion approval and live authorization are distinct; the tool checks all three but has not completed these physical steps here. Native authenticated pairing, revocation during a pending request, same-peer callback ordering, another real controller's retention and the complete phone/security/reliability matrix remain open. Physical phones must complete their own runbook.
+
+Software-only checks can be repeated without a radio or Windows dependencies using Python3.11+:
+
+```powershell
+./work/ble-diagnostic/Scripts/python.exe -m unittest discover -s scripts -p test_windows_ble_protocol.py -v
+```
+
+See test-results/2026-10-29-windows-protocol-preparation.md for scope and evidence. Bonding/consent must be completed by the present operator; neither tool accepts native dialogs.
 
 Primary references: [Bleak scanner](https://bleak.readthedocs.io/en/stable/api/scanner.html), [Bleak Windows backend](https://bleak.readthedocs.io/en/latest/backends/windows.html), [Windows BLE device/uncached discovery](https://learn.microsoft.com/en-us/uwp/api/windows.devices.bluetooth.bluetoothledevice.frombluetoothaddressasync), [Windows pairing/protection levels](https://learn.microsoft.com/en-us/uwp/api/windows.devices.enumeration.deviceinformationpairing.pairasync). Windows objects/service enumeration and a requested protection level are not by themselves proof of authenticated application traffic.

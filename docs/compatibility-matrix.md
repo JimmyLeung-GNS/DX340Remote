@@ -2,6 +2,8 @@
 
 29 October 2026. VERIFIED means only the stated observation. No complete T01–T18 acceptance run has passed.
 
+Current diagnostic checkpoint: read-only Windows HELLO/local approval/state modes are prepared with19 software checks and live unpaired/protectionNONE refusal before explicit GATT/characteristic operations. Native pairing/authenticated protocol/local approval/revocation are still unverified; no APK changed. See test-results/2026-10-29-windows-protocol-preparation.md and windows-ble-diagnostics.md.
+
 Current application checkpoint: companion40114ff8... uses Android33 root/child hybrid uninterrupted prefetch. Source-local Playlist samples3.704–3.952seconds are lower than six4.100–4.518second baseline samples; the proposed3second target still fails. Native build/lint86 tests, nested/root recovery and four pending-interruption/token regressions pass. Preferences unchanged, sources paused at35/services bound; shared phone09aaae78.../preceding Flutter32 scope. Current Swift/physical phone/audio acceptance remains open. See test-results/2026-10-29-mango-prefetch.md.
 
 Preceding application checkpoint: individual-controller management and request-scoped authorization leases, native build/lint86 JVM tests, isolated Android storage/UI checks and its unpaired radio regression pass. Companion e8a21bd4... is superseded; shared phone remains09aaae78... with preceding Flutter32 scope. Actual authenticated revocation/reapproval is not verified. See test-results/2026-10-29-controller-management.md.
