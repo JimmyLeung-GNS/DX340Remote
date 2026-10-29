@@ -2,7 +2,8 @@
 
 No pairing, controller approval/revocation, playback, source change or volume operation.
 Run approval-boundary before local approval; await-approval holds a fresh connection for
-up to45seconds while the operator approves on DX340. authorized-state checks a saved approval.
+45seconds by default (--approval-wait30..180) while the operator approves on DX340.
+This client wait does not extend a host security deadline. authorized-state checks a saved approval.
 """
 import argparse
 import asyncio
@@ -84,9 +85,9 @@ async def verify(args, report):
         report['checks'].append({'check': 'protected INFO read and indication subscription', 'passed': True})
         report['phase'] = 'read-only-protocol'
         def approval_requested():
-            print('AUTHORIZE now requires local approval. Review the identified pending request on DX340; waiting up to45seconds. No approval is performed by this script.', flush=True)
+            print(f'AUTHORIZE now requires local approval. Review the identified pending request on DX340; waiting up to {args.approval_wait} seconds. No approval is performed by this script.', flush=True)
         await run_read_only_checks(session, 'authorized-state' if args.mode == 'await-disconnect' else args.mode,
-                                   report['checks'], approval_requested=approval_requested)
+                                   report['checks'], approval_wait=args.approval_wait, approval_requested=approval_requested)
         if args.mode == 'await-disconnect':
             report['phase'] = 'await-operator-disconnect'
             print(f'Authorized read checks passed. Waiting up to{args.operator_wait}seconds for your local Revoke action on DX340; this script changes no approvals or playback.', flush=True)
@@ -125,9 +126,11 @@ async def main(args):
               'gattConnectionAttempted': False, 'framesWritten': 0, 'allChecksPassed': False,
               'checks': [],
               'playbackCommandsSent': 0, 'pairingRequested': False,
+              'approvalWaitSeconds': args.approval_wait if args.mode == 'await-approval' else None,
               'scope': 'PC development diagnostic; not physical phone or audio acceptance'}
     try:
-        await asyncio.wait_for(verify(args, report), 90 + (args.operator_wait if args.mode == 'await-disconnect' else 0))
+        hold = args.operator_wait if args.mode == 'await-disconnect' else args.approval_wait if args.mode == 'await-approval' else 0
+        await asyncio.wait_for(verify(args, report), 90 + hold)
     except Exception as error:
         # Record fixed local codes/types only; OS messages may contain device identities.
         report['allChecksPassed'] = False
@@ -144,7 +147,8 @@ if __name__ == '__main__':
     parser.add_argument('--seconds', type=float, default=5)
     parser.add_argument('--label', default='protocol-check')
     parser.add_argument('--operator-wait', type=int, default=120, help='Bounded30..180second hold for await-disconnect only')
+    parser.add_argument('--approval-wait', type=int, default=45, help='Bounded30..180second client hold for await-approval only; host deadlines unchanged')
     options = parser.parse_args()
-    if not 1 <= options.seconds <= 15 or not 30 <= options.operator_wait <= 180 or not re.fullmatch(r'[a-zA-Z0-9_-]{1,48}', options.label):
-        parser.error('Bounded seconds1..15 and an alphanumeric/hyphen/underscore label are required')
+    if not 1 <= options.seconds <= 15 or not 30 <= options.operator_wait <= 180 or not 30 <= options.approval_wait <= 180 or not re.fullmatch(r'[a-zA-Z0-9_-]{1,48}', options.label):
+        parser.error('Bounded scan1..15seconds, operator/approval waits30..180seconds and an alphanumeric/hyphen/underscore label are required')
     raise SystemExit(asyncio.run(main(options)))

@@ -1,5 +1,7 @@
 # Windows PC diagnostic central
 
+30 October update: the current PC now passes the two-sided native bond check and a protected BLE unapproved-boundary session. Local app approval remains separate; the first45second hold expired without observed approval. `verify-windows-protocol.py await-approval --seconds 5 --approval-wait 180 --label <unique-label>` permits a longer bounded operator wait (default45, allowed30..180). This does not change the host's security/connection deadlines. Verify the identified live row and yield promptly; inspect the same process/report after the operator acts. See test-results/2026-10-30-paired-ble-boundary.md; older unpaired/preparation passages keep their dated scope.
+
 This development tool exercises the DX340 host over a real PC Bluetooth radio. It is not a product remote or a substitute for Android/iPhone acceptance. Tested PC/driver and precise verification scope: test-results/2026-10-29-windows-ble.md. The everyday control path remains native phone Bluetooth, with existing DX340 apps playing the audio.
 
 Resumed discovery update: the host now includes the existing Android Bluetooth name in a separate scan response when it fits. This DX340 is observed as **DX340**, not DX340 Remote. Name is for finding the device only; authenticated bond and identified local approval still decide access. The initial programmatic native request failed without a bond; a present operator is using normal Windows Bluetooth Settings. See test-results/2026-10-29-named-advertising.md for build/over-air/update evidence and remaining limits.
