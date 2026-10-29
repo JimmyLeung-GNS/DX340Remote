@@ -118,3 +118,26 @@ xcrun simctl ui "$simulator" appearance dark
 xcrun simctl ui "$simulator" content_size accessibility-extra-extra-extra-large
 xcrun simctl launch "$simulator" org.dx340.remote.ios --capture-tab=browsing-library >> artifacts/flutter-browsing-fixture-launch.txt 2>&1
 capture Library artifacts/flutter-synthetic-browsing-large-dark.png
+
+# Explicit ownership action, pending and control-loss presentation. The native
+# proposal/lease is tested separately; these labeled fixtures have no BLE path.
+cd "$repo/phone"
+flutter build ios --simulator --debug --no-codesign --target test_support/handoff_capture.dart > ../artifacts/flutter-ios-handoff-fixture-build.txt 2>&1
+cd "$repo"
+xcrun simctl terminate "$simulator" org.dx340.remote.ios 2>/dev/null || true
+xcrun simctl install "$simulator" phone/build/ios/iphonesimulator/Runner.app
+xcrun simctl ui "$simulator" content_size large
+xcrun simctl ui "$simulator" appearance light
+for mode in ready pending lost; do
+    xcrun simctl terminate "$simulator" org.dx340.remote.ios 2>/dev/null || true
+    xcrun simctl launch "$simulator" org.dx340.remote.ios "--capture-tab=handoff-$mode" >> artifacts/flutter-handoff-fixture-launch.txt 2>&1
+    capture Setup "artifacts/flutter-synthetic-handoff-$mode-light.png"
+done
+xcrun simctl terminate "$simulator" org.dx340.remote.ios
+xcrun simctl ui "$simulator" appearance dark
+xcrun simctl launch "$simulator" org.dx340.remote.ios --capture-tab=handoff-ready >> artifacts/flutter-handoff-fixture-launch.txt 2>&1
+capture Setup artifacts/flutter-synthetic-handoff-ready-dark.png
+xcrun simctl terminate "$simulator" org.dx340.remote.ios
+xcrun simctl ui "$simulator" content_size accessibility-extra-extra-extra-large
+xcrun simctl launch "$simulator" org.dx340.remote.ios --capture-tab=handoff-ready >> artifacts/flutter-handoff-fixture-launch.txt 2>&1
+capture Setup artifacts/flutter-synthetic-handoff-large-dark.png

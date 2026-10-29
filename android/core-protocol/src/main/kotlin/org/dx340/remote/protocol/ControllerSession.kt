@@ -9,7 +9,7 @@ class ControllerSession {
     fun hello(epoch: String) { require(epoch.isNotBlank()); lost(); hostEpoch = epoch }
     fun approve(epoch: String) { require(hostEpoch.isNotEmpty() && epoch == hostEpoch) { "STALE_HOST" }; authorized = true }
     fun register(id: String, operation: String) {
-        require(authorized || operation == "HELLO" || operation == "AUTHORIZE") { "AUTHORIZATION_DENIED" }
+        require(authorized || operation == "HELLO" || operation == "AUTHORIZE" || operation == "REQUEST_CONTROL") { "AUTHORIZATION_DENIED" }
         require(pending.size < 8) { "PENDING_LIMIT" }
         pending[id] = operation
     }

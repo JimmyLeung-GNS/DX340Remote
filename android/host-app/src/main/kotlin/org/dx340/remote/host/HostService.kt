@@ -38,6 +38,7 @@ class HostService : Service() {
     private val approved by lazy { ControllerApprovalStore(this) }
     private val authorization = AuthorizationSession()
     private val ledgers = mutableMapOf<String, CommandLedger>()
+    private val controlGrants = mutableMapOf<String, MutableMap<String, AuthorizationSession.Lease>>()
     private val mutationGate = MutationGate()
     private var authenticated: BluetoothDevice? = null
     var pending: BluetoothDevice? = null; private set
@@ -54,8 +55,8 @@ class HostService : Service() {
             }
         }
     }
-    private var requestsInWindow = 0
-    private var windowStart = 0L
+    private data class RequestWindow(var start: Long, var count: Int = 0)
+    private val requestWindows = mutableMapOf<String, RequestWindow>()
     override fun onBind(intent: Intent?) = null
     override fun onCreate() {
         super.onCreate(); instance = this
@@ -64,6 +65,7 @@ class HostService : Service() {
             authorization.revoke(device.address)
             if (authenticated == device) authenticated = null
             if (pending == device) pending = null
+            requestWindows.remove(device.address)
             observer?.invoke()
         }, ::receive)
         val events = IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED).apply { addAction(Intent.ACTION_SCREEN_OFF); addAction(Intent.ACTION_USER_PRESENT) }
@@ -151,7 +153,8 @@ class HostService : Service() {
         var request = JSONObject()
         var ledger: CommandLedger? = null
         var reserved = false
-        var gateEntered = false
+        var gateLease: MutationGate.Lease? = null
+        fun releaseGate() { val previous = gateLease; gateLease = null; mutationGate.leave(previous) }
         var requestLease: AuthorizationSession.Lease? = null
         fun respond(type: String, data: JSONObject = JSONObject()) = reply(device = device, request = request, type = type, data = data, requiredLease = requestLease)
         try {
@@ -162,8 +165,9 @@ class HostService : Service() {
             val id = request.getString("id"); require(id.matches(Regex("[A-Za-z0-9-]{1,64}"))) { "MALFORMED_MESSAGE" }
             val op = request.getString("type")
             val now = SystemClock.elapsedRealtime()
-            if (now - windowStart > 1000) { requestsInWindow = 0; windowStart = now }
-            require(++requestsInWindow <= 20) { "RATE_LIMIT" }
+            val window = requestWindows.getOrPut(device.address) { RequestWindow(now) }
+            if (now - window.start > 1000) { window.count = 0; window.start = now }
+            require(++window.count <= 20) { "RATE_LIMIT" }
             require(device.bondState == BluetoothDevice.BOND_BONDED) { "AUTHORIZATION_DENIED" }
             if (op == "HELLO") { respond("HELLO", JSONObject().put("maxMessage", 65536).put("pairingSecurity", "OS authenticated bond; physical verification pending")); return }
             if (op == "AUTHORIZE") {
@@ -171,10 +175,45 @@ class HostService : Service() {
                     if (now <= ble.pairingUntil) { pending = device; record("NEW_CONTROLLER: approve on DX340") }
                     error("LOCAL_APPROVAL_REQUIRED")
                 }
-                require(authenticated == null || authenticated == device) { "CONTROLLER_BUSY" }
+                if (authenticated != null && authenticated != device) {
+                    respond("ERROR", JSONObject().put("code", "CONTROLLER_BUSY").put("ownershipRevision", authorization.ownershipRevision()))
+                    return
+                }
                 requestLease = authorization.authorize(device.address)
                 authenticated = device
+                ble.setControlling(device, true)
                 respond("RESULT", JSONObject().put("authorized", true).put("state", sources.state()).put("sources", sources.sources())); return
+            }
+            if (op == "REQUEST_CONTROL") {
+                require(approved.contains(device.address)) { "LOCAL_APPROVAL_REQUIRED" }
+                require(request.getString("hostEpoch") == epoch) { "STALE_HOST" }
+                if (!ledgers.containsKey(device.address)) { require(ledgers.size < 8) { "SESSION_LIMIT" }; ledgers[device.address] = CommandLedger() }
+                ledger = ledgers.getValue(device.address)
+                ledger.begin(id, text)?.let { previous ->
+                    val grant = controlGrants[device.address]?.get(id)
+                    when {
+                        previous == "PENDING" -> respond("ACCEPTED")
+                        grant != null && !authorization.isCurrent(grant) -> respond("ERROR", JSONObject().put("code", "CONTROL_REQUEST_USED"))
+                        else -> ble.send(device, previous.toByteArray(Charsets.UTF_8))
+                    }
+                    return
+                }
+                reserved = true
+                val previous = authenticated
+                val grant = authorization.takeControl(device.address, request.getJSONObject("args").getString("ownershipRevision"))
+                requestLease = grant; authenticated = device
+                controlGrants.getOrPut(device.address) { mutableMapOf() }[id] = grant
+                ble.setControlling(device, true)
+                if (previous != null && previous != device) {
+                    // Invalidate old async work before discarding unsent metadata.
+                    // An already submitted indication may still finish.
+                    ble.discardQueued(previous); ble.setControlling(previous, false)
+                    reply(previous, JSONObject(), "CONTROL_CHANGED", JSONObject().put("code", "CONTROL_MOVED"))
+                }
+                val value = respond("RESULT", JSONObject().put("authorized", true).put("state", sources.state()).put("sources", sources.sources()))
+                ledger.finish(id, value)
+                record("CONTROL_TRANSFERRED: approved controller accepted; playback unchanged")
+                return
             }
             requestLease = authorization.current(device.address)
             require(requestLease != null && authenticated == device && approved.contains(device.address)) { "AUTHORIZATION_DENIED" }
@@ -186,9 +225,9 @@ class HostService : Service() {
                 return
             }
             reserved = true
-            if (op in setOf("SELECT_SOURCE", "SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "PLAY_ITEM", "PLAY_QUEUE_ITEM", "ADJUST_VOLUME", "SET_SHUFFLE", "SET_REPEAT")) { mutationGate.enter(id); gateEntered = true }
+            if (op in setOf("SELECT_SOURCE", "SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "PLAY_ITEM", "PLAY_QUEUE_ITEM", "ADJUST_VOLUME", "SET_SHUFFLE", "SET_REPEAT")) { gateLease = mutationGate.enter(id) }
             val args = request.optJSONObject("args") ?: JSONObject()
-            fun result(data: JSONObject) { val value = respond("RESULT", data); ledger.finish(id, value); if (gateEntered) { mutationGate.leave(id); gateEntered = false } }
+            fun result(data: JSONObject) { val value = respond("RESULT", data); ledger.finish(id, value); releaseGate() }
             when (op) {
                 "LIST_SOURCES", "GET_CAPABILITIES" -> result(JSONObject().put("sources", sources.sources()))
                 "GET_STATE", "SUBSCRIBE_STATE" -> {
@@ -214,21 +253,21 @@ class HostService : Service() {
                             sources.playItem(args, { authorization.isCurrent(requestLease) && authenticated == device && approved.contains(device.address) && device.bondState == BluetoothDevice.BOND_BONDED }) { error ->
                                 val value = respond(if (error == null) "RESULT" else "ERROR", if (error == null) JSONObject().put("outcome", "dispatched") else JSONObject().put("code", error))
                                 ledger.finish(id, value)
-                                mutationGate.leave(id); gateEntered = false
+                                releaseGate()
                             }
                         }
                         "SET_PLAYING" -> {
                             respond("ACCEPTED")
                             sources.setPlaying(args.getBoolean("playing"), stillAuthorized = { authorization.isCurrent(requestLease) && authenticated == device && approved.contains(device.address) && device.bondState == BluetoothDevice.BOND_BONDED }) { error ->
                                 val value = respond(if (error == null) "RESULT" else "ERROR", if (error == null) JSONObject().put("outcome", "observed").put("state", sources.state()) else JSONObject().put("code", error))
-                                ledger.finish(id, value); mutationGate.leave(id); gateEntered = false
+                                ledger.finish(id, value); releaseGate()
                             }
                         }
                         "PLAY_QUEUE_ITEM" -> {
                             respond("ACCEPTED")
                             sources.playQueueItem(args, { authorization.isCurrent(requestLease) && authenticated == device && approved.contains(device.address) && device.bondState == BluetoothDevice.BOND_BONDED }) { error ->
                                 val value = respond(if (error == null) "RESULT" else "ERROR", if (error == null) JSONObject().put("outcome", "dispatched") else JSONObject().put("code", error))
-                                ledger.finish(id, value); mutationGate.leave(id); gateEntered = false
+                                ledger.finish(id, value); releaseGate()
                             }
                         }
                         "NEXT", "PREVIOUS", "SEEK" -> {
@@ -242,7 +281,7 @@ class HostService : Service() {
                             }) { error ->
                                 val data = if (error == null) JSONObject().put("outcome", "observed") else JSONObject().put("code", error)
                                 val value = respond(if (error == null) "RESULT" else "ERROR", data.put("state", sources.state()))
-                                ledger.finish(id, value); mutationGate.leave(id); gateEntered = false
+                                ledger.finish(id, value); releaseGate()
                             }
                         }
                         else -> error("UNSUPPORTED_CAPABILITY")
@@ -253,7 +292,7 @@ class HostService : Service() {
             val code = e.message?.takeIf { it.matches(Regex("[A-Z_]{3,64}")) } ?: "MALFORMED_MESSAGE"
             val value = respond("ERROR", JSONObject().put("code", code))
             if (reserved) ledger?.finish(request.optString("id"), value)
-            if (gateEntered) mutationGate.leave(request.optString("id"))
+            releaseGate()
             record("REQUEST_ERROR:$code")
         }
     }

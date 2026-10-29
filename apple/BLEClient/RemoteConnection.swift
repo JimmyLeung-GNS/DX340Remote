@@ -10,6 +10,8 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     var status = "Find your DX340 to connect directly over Bluetooth."
     var devices: [CBPeripheral] = []
     var authorized = false
+    private var controlProposal = ControlProposal()
+    var canRequestControl: Bool { !authorized && controlProposal.available && !pending.values.contains("REQUEST_CONTROL") }
     var state: [String: Any] = [:]
     var stateSampleId = ""
     private var stateReceivedAt: ContinuousClock.Instant?
@@ -87,7 +89,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         if let p = peripheral { manager.cancelPeripheralConnection(p) }
         clearConnection(); status = "Disconnected. Cached lists may be stale."
     }
-    private func clearConnection() { connectionGeneration += 1; connectionTimeout?.cancel(); connectionTimeout = nil; writeTimeout?.cancel(); writeTimeout = nil; authorized = false; rx = nil; tx = nil; writing = false; writes = []; pending = [:]; browseLocations = [:]; queueLocations = [:]; activeBrowseId = nil; activeQueueId = nil; hostEpoch = ""; assembler.clear() }
+    private func clearConnection() { connectionGeneration += 1; connectionTimeout?.cancel(); connectionTimeout = nil; writeTimeout?.cancel(); writeTimeout = nil; authorized = false; controlProposal.clear(); rx = nil; tx = nil; writing = false; writes = []; pending = [:]; browseLocations = [:]; queueLocations = [:]; activeBrowseId = nil; activeQueueId = nil; hostEpoch = ""; assembler.clear() }
     private func beginConnection(_ device: CBPeripheral) {
         guard wantsConnection, manager.state == .poweredOn else { return }
         status = "Connecting…"; armConnectionTimeout(device); manager.connect(device)
@@ -195,6 +197,11 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     func readQueue(offset: Int = 0) {
         send("GET_QUEUE", args: ["offset": offset, "revision": offset == 0 ? NSNull() : queueRevision as Any])
     }
+    func requestControl() {
+        guard canRequestControl, let revision = controlProposal.consume() else { return }
+        status = "Requesting control on this phone…"
+        send("REQUEST_CONTROL", args: ["ownershipRevision": revision], bootstrap: true)
+    }
     func browse(parent: String? = nil, page: Int = 0) {
         send("BROWSE", args: ["parent": parent.map { $0 as Any } ?? NSNull(), "page": page, "revision": parent == nil ? NSNull() : (library["revision"] ?? state["sourceEpoch"] ?? "")])
     }
@@ -202,15 +209,27 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         guard let reply = try JSONSerialization.jsonObject(with: value) as? [String: Any], reply["v"] as? Int == 1,
               let type = reply["type"] as? String, let data = reply["data"] as? [String: Any] else { throw WireError.malformed }
         let id = reply["id"] as? String ?? "", operation = pending[id], location = browseLocations[id]
+        if type == "CONTROL_CHANGED" {
+            if reply["hostEpoch"] as? String == hostEpoch, data["code"] as? String == "CONTROL_MOVED" {
+                disconnect(); status = "Control moved to another approved controller. Music continues on DX340."
+            }
+            return
+        }
         if type != "STATE_CHANGED" && operation == nil { return }
         let queueLocation = queueLocations[id]
         if type != "ACCEPTED" { queueLocations[id] = nil }
         if type != "ACCEPTED" { pending[id] = nil }
-        if type == "HELLO" { hostEpoch = reply["hostEpoch"] as? String ?? ""; authorize(); return }
+        if type == "HELLO" { controlProposal.clear(); hostEpoch = reply["hostEpoch"] as? String ?? ""; authorize(); return }
+        if type == "ERROR", reply["hostEpoch"] as? String == hostEpoch, operation == "AUTHORIZE", !authorized {
+            if data["code"] as? String == "CONTROLLER_BUSY" {
+                wantsConnection = false
+                controlProposal.observeBusy(replyHost: reply["hostEpoch"] as? String ?? "", expectedHost: hostEpoch, value: data["ownershipRevision"] as? String ?? "")
+            } else { controlProposal.clear() }
+        }
         if type == "ERROR" { if reply["hostEpoch"] as? String == hostEpoch, let fresh = data["state"] as? [String: Any] { applyState(fresh) }; browseLocations[id] = nil; if id == activeBrowseId { library = [:] }; if id == activeQueueId { queue = []; queueRevision = ""; queuePage = [:] }; status = errorMessage(data["code"] as? String ?? "Source error"); return }
         if type == "ACCEPTED" { status = "Waiting for source…"; return }
         guard reply["hostEpoch"] as? String == hostEpoch else { disconnect(); return }
-        if operation == "AUTHORIZE", data["authorized"] as? Bool == true { authorized = true; status = "Connected to DX340" }
+        if ["AUTHORIZE", "REQUEST_CONTROL"].contains(operation ?? ""), data["authorized"] as? Bool == true { controlProposal.clear(); authorized = true; wantsConnection = true; status = "Connected to DX340" }
         if let new = data["state"] as? [String: Any] { applyState(new) }
         if type == "STATE_CHANGED" { applyState(data) }
         if let list = data["sources"] as? [[String: Any]] { sources = list }
@@ -263,6 +282,8 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     }
     private func errorMessage(_ code: String) -> String {
         switch code {
+        case "CONTROLLER_BUSY": return "Another approved controller has control. Open Setup to take control on this phone."
+        case "STALE_CONTROL", "CONTROL_REQUEST_USED": return "Control changed. Retry authorization to check who has control."
         case "STALE_VOLUME": return "Volume changed on DX340. Refresh before choosing another step."
         case "VOLUME_AT_BOUNDARY": return "This is the edge of the locally confirmed range. Recheck volume on DX340 to use another range."
         case "VOLUME_PROFILE_CHANGED", "VOLUME_VERIFICATION_REQUIRED", "VOLUME_SOURCE_NOT_READY": return "Play the selected source and verify its output volume in the DX340 companion."

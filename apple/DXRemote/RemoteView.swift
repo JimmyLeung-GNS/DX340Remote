@@ -147,6 +147,10 @@ private struct SetupView: View {
                 Button("Find DX340") { connection.scan() }
                 ForEach(connection.devices, id: \.identifier) { device in Button(device.name ?? "DX340") { connection.connect(device) } }
                 Button("Retry authorization after approval") { connection.authorize() }
+                if connection.canRequestControl {
+                    Text("Taking control here disconnects the other approved controller. Music keeps playing on DX340.")
+                    Button("Take control on this phone") { connection.requestControl() }
+                }
                 Button("Disconnect") { connection.disconnect() }
             }
             Section("Capabilities") { Text("Mango and Apple Music expose different controls. Browsing is available only through a source interface that accepts this companion.") }

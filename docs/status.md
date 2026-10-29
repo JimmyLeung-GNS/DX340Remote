@@ -2,6 +2,10 @@
 
 Updated 29 October 2026 (Hong Kong). **Goal active after the user's continuation request; full system incomplete.**
 
+## Approved-controller handoff (current implementation)
+
+Added an explicit shared-phone Setup action backed by native host-bound proposals, one controlling authorization lease and at most two transports; the second must already be bonded/approved. Old async work/replies are invalidated, duplicate grant IDs cannot retake ownership, and no source/playback/volume action is sent by handoff. Per-link framing and global indication serialization are bounded; missing OS completion closes the server with restart instructions. Native build/lint120 JVM tests and Flutter analysis46 tests pass. Release lint/rendering/current iOS verification are in progress at this checkpoint. The new companion candidate is **not installed**: source-local Mango20 evidence still belongs to04846d60.../8f9af73. Physical two-central/phone/security/continuity acceptance remains NOT TESTED. Read test-results/2026-10-29-controller-handoff.md and controller-handoff-runbook.md. Goal active; full system incomplete.
+
 ## Mango listening matrix checkpoint (latest)
 
 Twenty Mango local-file selections across five album folders/three artist folders are separately user-confirmed audible:11 WAV/9 FLAC, all inspected headers48kHz/24-bit/stereo. Final two selections reached UI page3. All21 attempts use installed host04846d60...; one filename/title-tag verification failure is preserved, then corrected using the complete embedded title before a fresh5 selection. This is not a clean20-attempt or phone T08 pass. Eight header-parser checks pass separately from native108/unchanged Flutter42/iOS evidence. Both players paused37; volume proof remains disabled, both optional services bound, HiBy stopped. Full phone BLE/native album-playlist/SD/rescan/wider format/quality/reliability/Watch remain open. See test-results/2026-10-29-mango-listening-matrix.md. Goal active; full system incomplete.

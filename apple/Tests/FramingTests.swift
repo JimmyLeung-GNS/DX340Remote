@@ -2,6 +2,24 @@ import XCTest
 @testable import DXProtocol
 
 final class FramingTests: XCTestCase {
+    func testControlProposalNeedsCurrentHostAndExplicitSingleConsumption() {
+        var proposal = ControlProposal()
+        proposal.observeBusy(replyHost: "other-host", expectedHost: "host-A", value: "revision-1")
+        XCTAssertFalse(proposal.available)
+        proposal.observeBusy(replyHost: "host-A", expectedHost: "host-A", value: "revision-1")
+        XCTAssertEqual(proposal.consume(), "revision-1"); XCTAssertNil(proposal.consume())
+        proposal.observeBusy(replyHost: "host-A", expectedHost: "host-A", value: "revision-2")
+        proposal.clear(); XCTAssertNil(proposal.consume())
+    }
+    func testControlProposalRejectsMissingHostAndMalformedRevision() {
+        var proposal = ControlProposal()
+        for revision in ["", "unsafe:value", String(repeating: "a", count: 65), "字"] {
+            proposal.observeBusy(replyHost: "host-A", expectedHost: "host-A", value: revision)
+            XCTAssertFalse(proposal.available)
+        }
+        proposal.observeBusy(replyHost: "", expectedHost: "", value: "revision-1")
+        XCTAssertFalse(proposal.available)
+    }
     func testFullLimitAndAttBoundaries() throws {
         for capacity in [20, 61, 244, 512] {
             for size in [1, 12, 13, 500, 65536] {

@@ -5,18 +5,21 @@ import org.junit.Test
 
 class ProtocolTest {
     @Test fun aDifferentSessionCannotBorrowMutationOwnershipUsingTheSameRequestId() {
-        val gate = MutationGate(); gate.enter("shared-id")
+        val gate = MutationGate(); val first = gate.enter("shared-id")
         assertThrows(IllegalStateException::class.java) { gate.enter("shared-id") }
-        gate.leave("other-id")
+        gate.leave(MutationGate().enter("shared-id"))
         assertThrows(IllegalStateException::class.java) { gate.enter("shared-id") }
-        gate.leave("shared-id"); gate.enter("shared-id")
+        gate.leave(first); val second = gate.enter("shared-id")
+        gate.leave(first) // A late old callback cannot release the new identical-ID operation.
+        assertThrows(IllegalStateException::class.java) { gate.enter("third") }
+        gate.leave(second); gate.enter("third")
     }
     @Test fun asynchronousSelectionCannotInterleaveWithAnotherMutation() {
-        val gate = MutationGate(); gate.enter("selection")
+        val gate = MutationGate(); val lease = gate.enter("selection")
         assertThrows(IllegalStateException::class.java) { gate.enter("next") }
-        gate.leave("unrelated")
+        gate.leave(MutationGate().enter("unrelated"))
         assertThrows(IllegalStateException::class.java) { gate.enter("next") }
-        gate.leave("selection"); gate.enter("next")
+        gate.leave(lease); gate.enter("next")
     }
     @Test fun reconnectClearsUnsentControlsAndRequiresFreshAuthorization() {
         val session = ControllerSession(); session.hello("host1"); session.approve("host1"); session.register("skip1", "NEXT")

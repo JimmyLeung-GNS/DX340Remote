@@ -24,6 +24,7 @@ import CoreBluetooth
         let value: [String: Any] = [
             "bridgeVersion": 1, "status": remote.status, "authorized": remote.authorized,
             "mutationPending": remote.mutationPending, "state": remote.state,
+            "controlRequestAvailable": remote.canRequestControl,
             "stateSampleId": remote.stateSampleId, "stateAgeMs": remote.stateAgeMs as Any? ?? NSNull(),
             "sources": remote.sources, "library": remote.library, "queue": remote.queue,
             "queueRevision": remote.queueRevision, "queuePage": remote.queuePage, "queueLoading": remote.queueLoading,
@@ -71,6 +72,7 @@ import CoreBluetooth
             remote.connect(device)
         case "disconnect": remote.disconnect()
         case "authorize": remote.authorize()
+        case "requestControl": remote.requestControl()
         case "resume": remote.refreshOnForeground()
         case "browse":
             let page = (args["page"] as? NSNumber)?.intValue ?? 0

@@ -58,6 +58,7 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler {
                     }
                     "disconnect" -> { remote.disconnect(); stopService(Intent(this, RemoteService::class.java)) }
                     "authorize" -> { requireBluetoothPermission(); remote.authorize() }
+                    "requestControl" -> { requireBluetoothPermission(); remote.requestControl() }
                     "resume" -> remote.refreshOnForeground()
                     "browse" -> remote.browse(call.argument<String>("parent"), (call.argument<Number>("page")?.toInt() ?: 0).also { require(it in 0..100000) })
                     "send" -> {
@@ -95,6 +96,7 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler {
         }
         return JSONObject().put("bridgeVersion", 1).put("status", remote?.status ?: "Preparing Bluetooth remote…")
             .put("authorized", remote?.authorized ?: false).put("mutationPending", remote?.mutationPending ?: false)
+            .put("controlRequestAvailable", remote?.canRequestControl ?: false)
             .put("state", remote?.state ?: JSONObject()).put("sources", remote?.sources ?: JSONArray())
             .put("stateSampleId", remote?.stateSampleId ?: "").put("stateAgeMs", remote?.stateAgeMs ?: JSONObject.NULL)
             .put("library", remote?.library ?: JSONObject()).put("queue", remote?.queue ?: JSONArray())

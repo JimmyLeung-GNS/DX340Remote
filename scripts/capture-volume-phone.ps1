@@ -2,7 +2,7 @@ param(
     [Parameter(Mandatory=$true)][string]$Serial,
     [Parameter(Mandatory=$true)][string]$FixtureApk,
     [Parameter(Mandatory=$true)][string]$ProductionApk,
-    [ValidateSet('volume','browsing')][string]$Scenario = 'volume',
+    [ValidateSet('volume','browsing','handoff')][string]$Scenario = 'volume',
     [string]$Adb = "$env:LOCALAPPDATA/Android/Sdk/platform-tools/adb.exe"
 )
 $ErrorActionPreference = 'Stop'
@@ -30,7 +30,7 @@ $record = [ordered]@{
     fixtureSha256 = (Get-FileHash -LiteralPath $fixture -Algorithm SHA256).Hash.ToLowerInvariant()
     productionSha256 = (Get-FileHash -LiteralPath $production -Algorithm SHA256).Hash.ToLowerInvariant()
     originalFontScale = $originalFont; originalNightMode = $nightToRestore
-    fixtureEntryPoint = if ($Scenario -eq 'volume') { 'phone/test_support/volume_capture.dart' } else { 'phone/test_support/browsing_capture.dart' }
+    fixtureEntryPoint = "phone/test_support/${Scenario}_capture.dart"
     semanticReadiness = 'UIAutomator unavailable on this device; inspect actual pixels. No BLE or audio claim.'
     ordinaryAppRestored = $false
 }
@@ -41,10 +41,16 @@ try {
         @{ name='synthetic-high-dark.png'; mode='volume-high'; night='yes'; scale='1.0' },
         @{ name='synthetic-low-light.png'; mode='volume-low'; night='no'; scale='1.0' },
         @{ name='synthetic-large-dark.png'; mode='volume-high'; night='yes'; scale='1.5' }
-    ) } else { @(
+    ) } elseif ($Scenario -eq 'browsing') { @(
         @{ name='synthetic-library-dark.png'; mode='browsing-library'; night='yes'; scale='1.0' },
         @{ name='synthetic-queue-light.png'; mode='browsing-queue'; night='no'; scale='1.0' },
         @{ name='synthetic-library-large-dark.png'; mode='browsing-library'; night='yes'; scale='1.5' }
+    ) } else { @(
+        @{ name='synthetic-handoff-dark.png'; mode='handoff-ready'; night='yes'; scale='1.0' },
+        @{ name='synthetic-handoff-light.png'; mode='handoff-ready'; night='no'; scale='1.0' },
+        @{ name='synthetic-handoff-large-dark.png'; mode='handoff-ready'; night='yes'; scale='1.5' },
+        @{ name='synthetic-handoff-pending.png'; mode='handoff-pending'; night='no'; scale='1.0' },
+        @{ name='synthetic-handoff-lost.png'; mode='handoff-lost'; night='yes'; scale='1.0' }
     ) }
     foreach ($state in $states) {
         Invoke-CaptureAdb @('shell','cmd','uimode','night',$state.night) | Out-Null

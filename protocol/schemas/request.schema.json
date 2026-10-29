@@ -6,13 +6,19 @@
   "properties": {
     "v": {"const": 1},
     "id": {"type": "string", "pattern": "^[A-Za-z0-9-]{1,64}$"},
-    "type": {"type": "string", "enum": ["HELLO", "AUTHORIZE", "GET_CAPABILITIES", "GET_STATE", "SUBSCRIBE_STATE", "LIST_SOURCES", "SELECT_SOURCE", "SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "ADJUST_VOLUME", "SET_SHUFFLE", "SET_REPEAT", "BROWSE", "SEARCH", "PLAY_ITEM", "GET_QUEUE", "PLAY_QUEUE_ITEM", "GET_ARTWORK"]},
+    "type": {"type": "string", "enum": ["HELLO", "AUTHORIZE", "REQUEST_CONTROL", "GET_CAPABILITIES", "GET_STATE", "SUBSCRIBE_STATE", "LIST_SOURCES", "SELECT_SOURCE", "SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "ADJUST_VOLUME", "SET_SHUFFLE", "SET_REPEAT", "BROWSE", "SEARCH", "PLAY_ITEM", "GET_QUEUE", "PLAY_QUEUE_ITEM", "GET_ARTWORK"]},
     "hostEpoch": {"type": "string", "maxLength": 64},
     "source": {"type": "string", "maxLength": 256},
     "sourceEpoch": {"type": "string", "maxLength": 64},
     "args": {"type": "object"}
   },
   "allOf": [
+    {"if": {"properties": {"type": {"const": "REQUEST_CONTROL"}}}, "then": {
+      "required": ["hostEpoch", "args"],
+      "properties": {"args": {"required": ["ownershipRevision"], "properties": {
+        "ownershipRevision": {"type": "string", "pattern": "^[A-Za-z0-9-]{1,64}$"}
+      }, "additionalProperties": false}}
+    }},
     {"if": {"properties": {"type": {"not": {"enum": ["HELLO", "AUTHORIZE"]}}}}, "then": {"required": ["hostEpoch"]}},
     {"if": {"properties": {"type": {"const": "GET_QUEUE"}}}, "then": {
       "properties": {"args": {

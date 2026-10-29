@@ -118,6 +118,8 @@ class BleCentral(private val context: Context, private val status: (String) -> U
             reconnect = Runnable { if (desired == device && gatt == null) connectAttempt(device) }.also { main.postDelayed(it, delay) }
         }
     }
+    fun pauseReconnection() { desired = null; retries = 0; reconnect?.let { main.removeCallbacks(it) }; reconnect = null }
+    fun resumeReconnection() { if (established) { desired = gatt?.device; retries = 0 } }
     fun disconnect() {
         desired = null; retries = 0; reconnect?.let { main.removeCallbacks(it) }; reconnect = null; clearLink()
     }

@@ -10,6 +10,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.util.UUID
 import org.dx340.remote.protocol.ControllerSession
+import org.dx340.remote.protocol.ControlProposal
 
 @SuppressLint("MissingPermission")
 class RemoteModel(context: Context) {
@@ -19,6 +20,8 @@ class RemoteModel(context: Context) {
     private val snapshotFile = java.io.File(context.cacheDir, "dx340-metadata.json")
     var status = "Enable Bluetooth, then find your DX340."; private set
     private val session = ControllerSession()
+    private val controlProposal = ControlProposal()
+    val canRequestControl get() = !authorized && controlProposal.available && pending.values.none { it == "REQUEST_CONTROL" }
     val authorized get() = session.authorized
     var state = JSONObject(); private set
     var stateSampleId = ""; private set
@@ -45,7 +48,7 @@ class RemoteModel(context: Context) {
     private val devices = linkedMapOf<String, BluetoothDevice>()
     val found get() = devices.values.toList()
     private val ble = BleCentral(context, { status = it; update() }, { devices[it.address] = it; update() }, { send("HELLO", bootstrap = true) }, ::receive) {
-        session.lost(); browseLocations.clear(); queueLocations.clear(); activeBrowseId = null; activeQueueId = null; status = "Disconnected. Cached lists may be stale; reconnect to control."; update()
+        session.lost(); controlProposal.clear(); browseLocations.clear(); queueLocations.clear(); activeBrowseId = null; activeQueueId = null; status = "Disconnected. Cached lists may be stale; reconnect to control."; update()
     }
     init {
         runCatching {
@@ -58,10 +61,16 @@ class RemoteModel(context: Context) {
     }
     fun scan() { devices.clear(); runCatching { ble.scan() }.onFailure { status = it.message ?: "Bluetooth unavailable" }; update() }
     fun connect(device: BluetoothDevice) = ble.connect(device)
-    fun disconnect() { session.lost(); browseLocations.clear(); queueLocations.clear(); activeBrowseId = null; activeQueueId = null; ble.disconnect(); status = "Disconnected. Cached lists may be stale; reconnect to control."; update() }
+    fun disconnect() { session.lost(); controlProposal.clear(); browseLocations.clear(); queueLocations.clear(); activeBrowseId = null; activeQueueId = null; ble.disconnect(); status = "Disconnected. Cached lists may be stale; reconnect to control."; update() }
     fun refreshOnForeground() { if (authorized) send("GET_STATE") else update() }
     fun close() { ble.stopScan(); ble.disconnect(); main.removeCallbacksAndMessages(null) }
     fun authorize() = send("AUTHORIZE", bootstrap = true)
+    fun requestControl() {
+        if (!canRequestControl) return
+        val revision = controlProposal.consume() ?: return
+        status = "Requesting control on this phone…"
+        send("REQUEST_CONTROL", JSONObject().put("ownershipRevision", revision), bootstrap = true)
+    }
     fun send(type: String, args: JSONObject = JSONObject(), bootstrap: Boolean = false) {
         if (!bootstrap && !authorized) { status = "Reconnect and authorize before controlling playback."; update(); return }
         if (type in mutations && mutationPending) { status = "Wait for the current playback action to finish."; update(); return }
@@ -91,16 +100,28 @@ class RemoteModel(context: Context) {
         try {
             val reply = JSONObject(String(bytes, Charsets.UTF_8)); require(reply.getInt("v") == 1)
             val id = reply.optString("id"); val type = reply.getString("type"); val data = reply.getJSONObject("data")
+            if (type == "CONTROL_CHANGED") {
+                if (reply.optString("hostEpoch") == epoch && data.optString("code") == "CONTROL_MOVED") {
+                    disconnect(); status = "Control moved to another approved controller. Music continues on DX340."; update()
+                }
+                return
+            }
             val operation = pending[id]
             if (type != "STATE_CHANGED" && operation == null) return
             val location = browseLocations[id]
             val queueLocation = queueLocations[id]
             if (type != "ACCEPTED") queueLocations.remove(id)
             if (type != "ACCEPTED" && id.isNotEmpty()) pending.remove(id)
-            if (type == "HELLO") { session.hello(reply.getString("hostEpoch")); authorize(); return }
+            if (type == "HELLO") { controlProposal.clear(); session.hello(reply.getString("hostEpoch")); authorize(); return }
+            if (type == "ERROR" && reply.optString("hostEpoch") == epoch && operation == "AUTHORIZE" && !authorized) {
+                if (data.optString("code") == "CONTROLLER_BUSY") {
+                    ble.pauseReconnection()
+                    controlProposal.observeBusy(reply.optString("hostEpoch"), epoch, data.optString("ownershipRevision"))
+                } else controlProposal.clear()
+            }
             if (type == "ERROR") { data.optJSONObject("state")?.takeIf { reply.optString("hostEpoch") == epoch }?.let(::applyState); browseLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); if (id == activeQueueId) { queue = JSONArray(); queueRevision = ""; queuePage = JSONObject() }; status = errorMessage(data.optString("code", "Unknown source error")); update(); return }
             if (type == "ACCEPTED") { status = "Waiting for source…"; update(); return }
-            if (operation == "AUTHORIZE" && data.optBoolean("authorized")) { session.approve(reply.getString("hostEpoch")); status = "Connected to DX340" }
+            if (operation in listOf("AUTHORIZE", "REQUEST_CONTROL") && data.optBoolean("authorized")) { controlProposal.clear(); session.approve(reply.getString("hostEpoch")); ble.resumeReconnection(); status = "Connected to DX340" }
             if (reply.optString("hostEpoch") != epoch) { disconnect(); return }
             data.optJSONObject("state")?.let(::applyState)
             if (type == "STATE_CHANGED") applyState(data)
@@ -163,6 +184,8 @@ class RemoteModel(context: Context) {
         stateSampleId = UUID.randomUUID().toString()
     }
     private fun errorMessage(code: String) = when (code) {
+        "CONTROLLER_BUSY" -> "Another approved controller has control. Open Setup to take control on this phone."
+        "STALE_CONTROL", "CONTROL_REQUEST_USED" -> "Control changed. Retry authorization to check who has control."
         "STALE_VOLUME" -> "Volume changed on DX340. Refresh before choosing another step."
         "VOLUME_AT_BOUNDARY" -> "This is the edge of the locally confirmed range. Recheck volume on DX340 to use another range."
         "VOLUME_PROFILE_CHANGED", "VOLUME_VERIFICATION_REQUIRED", "VOLUME_SOURCE_NOT_READY" -> "Play the selected source and verify its output volume in the DX340 companion."

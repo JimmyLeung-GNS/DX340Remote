@@ -56,6 +56,10 @@ class MainActivity : Activity() {
                 button("Find DX340") { model.scan() }
                 model.found.forEach { device -> button("Connect to DX340 ${device.address.takeLast(5)}") { startForegroundService(Intent(this, RemoteService::class.java)); model.connect(device) } }
                 button("Retry authorization after approval") { model.authorize() }
+                if (model.canRequestControl) {
+                    label("Taking control here disconnects the other approved controller. Music keeps playing on DX340.")
+                    button("Take control on this phone") { model.requestControl() }
+                }
                 button("Disconnect") { model.disconnect(); stopService(Intent(this, RemoteService::class.java)) }
             }
             "Player" -> {

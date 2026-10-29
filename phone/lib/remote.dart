@@ -37,6 +37,10 @@ class Remote extends ChangeNotifier {
   String? error;
   bool authorized = false;
   bool mutationPending = false;
+  bool controlRequestAvailable = false;
+  bool _dispatchingControl = false;
+  bool get canRequestControl =>
+      controlRequestAvailable && !authorized && !busy && !_dispatchingControl;
   bool _dispatchingMutation = false;
   bool _disposed = false;
   Json state = {}, library = {};
@@ -129,6 +133,7 @@ class Remote extends ChangeNotifier {
       final wasAuthorized = authorized;
       state = object(data['state']);
       authorized = data['authorized'] == true;
+      controlRequestAvailable = data['controlRequestAvailable'] == true;
       mutationPending = data['mutationPending'] == true;
       status = data['status'];
       sources = objects(data['sources']);
@@ -161,6 +166,7 @@ class Remote extends ChangeNotifier {
   void _bridgeFailed(Object issue) {
     if (_disposed) return;
     authorized = false;
+    controlRequestAvailable = false;
     progress.invalidate();
     mutationPending = false;
     _nativeQueueLoading = false;
@@ -187,6 +193,21 @@ class Remote extends ChangeNotifier {
         notifyListeners();
       }
       return false;
+    }
+  }
+
+  Future<void> requestControl() async {
+    if (!canRequestControl) return;
+    // Consume presentation availability before awaiting the platform channel.
+    // Native code separately consumes the host-bound proposal exactly once.
+    controlRequestAvailable = false;
+    _dispatchingControl = true;
+    notifyListeners();
+    try {
+      await invoke('requestControl');
+    } finally {
+      _dispatchingControl = false;
+      if (!_disposed) notifyListeners();
     }
   }
 

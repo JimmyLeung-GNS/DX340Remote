@@ -557,6 +557,15 @@ class _PhoneShellState extends State<PhoneShell>
       ),
   ];
   List<Widget> setupView() => [
+    if (remote.controlRequestAvailable) ...[
+      action(
+        'Take control on this phone',
+        perform(remote.canRequestControl, remote.requestControl),
+      ),
+      label(
+        'Taking control here disconnects the other approved controller. Music keeps playing on DX340.',
+      ),
+    ],
     label(
       'Music plays on DX340. This phone sends controls directly over Bluetooth.',
     ),

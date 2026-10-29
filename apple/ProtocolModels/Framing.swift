@@ -18,6 +18,20 @@ public enum Wire {
     }
 }
 
+/// A handoff proposal is bound to the observed host and consumed only by a user action.
+public struct ControlProposal {
+    private var revision: String?
+    public init() {}
+    public var available: Bool { revision != nil }
+    public mutating func observeBusy(replyHost: String, expectedHost: String, value: String) {
+        let bytes = Array(value.utf8)
+        let valid = (1...64).contains(bytes.count) && bytes.allSatisfy { (48...57).contains($0) || (65...90).contains($0) || (97...122).contains($0) || $0 == 45 }
+        revision = !expectedHost.isEmpty && replyHost == expectedHost && valid ? value : nil
+    }
+    public mutating func consume() -> String? { let value = revision; revision = nil; return value }
+    public mutating func clear() { revision = nil }
+}
+
 public final class Reassembler {
     private struct Partial { let count: Int; let start: TimeInterval; var pieces: Int; var bytes: Data }
     private var partials: [Int: Partial] = [:]
