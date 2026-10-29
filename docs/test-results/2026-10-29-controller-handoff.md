@@ -2,7 +2,7 @@
 
 29 October2026, Windows continuation, branch `codex/source-recovery-checkpoint`.
 
-**IMPLEMENTED BETA; physical two-controller behavior NOT TESTED.** The installed playback-evidence companion remains04846d60bc4e65065028d510286b56cba91577840a994d351146c55dff418fa2 (source8f9af73). The new candidate has not been installed on DX340. Twenty Mango audible confirmations and earlier Apple results do not verify this candidate or either phone Bluetooth path.
+**IMPLEMENTED BETA; physical two-controller behavior NOT TESTED.** The installed playback-evidence companion is restored to04846d60bc4e65065028d510286b56cba91577840a994d351146c55dff418fa2 (source8f9af73) after one candidate PC denial smoke test below. Twenty Mango audible confirmations and earlier Apple results do not verify candidate playback or either phone Bluetooth path.
 
 ## Behavior and bounds
 
@@ -23,3 +23,30 @@ Toolchain: pinned Gradle8.14/AGP8.11.1/Kotlin2.1.10/SDK36/JDK21.0.9 and Flutter3
 Current primary API sequencing reference: [Android onNotificationSent](https://developer.android.com/reference/android/bluetooth/BluetoothGattServerCallback#onNotificationSent(android.bluetooth.BluetoothDevice,int)) requires completion before another submission; the candidate serializes globally and treats a missing completion as server failure. This is an implementation rule, not proof of DX340 multi-central behavior.
 
 Exact physical next steps: [controller-handoff-runbook.md](../controller-handoff-runbook.md). Complete both phone offline/background/source tests before considering Watch.
+
+## Windows packages and rendering
+
+Source implementation04b04aa32d73c5d8f0052bdfec9f84ca6220d998. Native final build/lint120 tests pass. Flutter analysis and46 tests pass in handoff-phone-final-build.txt; release compilation succeeds. Its lint step failed after an accidentally overlapping fixture build rewrote generated Windows local.properties. A serial rebuild still reused the stale lint report. Correct escaped properties plus `:app:lintAnalyzeRelease --rerun :app:lintRelease` passed in handoff-phone-lint-fresh.txt. A final serial `scripts/build-phone.ps1 -WithoutTests` also passes analysis/release/lint (handoff-phone-serial-confirmation.txt), same23c536e7... package. No warning baseline or product permission was weakened. Keep phone build/capture/lint commands serial.
+
+| APK role | SHA256 | Installed/evidence scope |
+|---|---|---|
+| Handoff companion candidate | b1b83f260044383f9d96f966d799332a89d56b8b1c67bcd2e3fc811ab47834a4 | Temporarily installed for one read-only PC approval-denial smoke test, then earlier companion restored; no candidate playback/two-peer proof |
+| Ordinary shared phone |23c536e7890ddc58a84552fcd3bd4be4eac578722daa8553c3a94d7bf932328d| Installed/restored on DX340 for launch/rendering only; pulled bytes match |
+| Synthetic handoff fixture |e38f629b191dad97c38e2060e75cf7745284d3fef94792a402610d5f2db02a2b| Separate debug target, cannot send BLE commands; removed by ordinary-app restoration |
+| Retained installed companion |04846d60bc4e65065028d510286b56cba91577840a994d351146c55dff418fa2| Pulled bytes unchanged; earlier Mango20 local audio evidence only |
+
+`scripts/capture-volume-phone.ps1 -Serial d -FixtureApk artifacts/dx340-phone-handoff-fixture-debug.apk -ProductionApk artifacts/dx340-phone-0.2.0-development.apk -Scenario handoff` captured ready light/dark/font1.5, pending/lost and restored ordinary Player. All six actual DX3401080×2160 images were inspected. Fresh independent finish reviewer: **disposition: ship**, scoped to these six renders; pre-existing SystemUI shortcut-covered pixels excluded. No TalkBack, phone interaction, BLE, ownership or audio pass. Local captures/provenance/review: artifacts/handoff-captures/ and handoff-android-review.md. No new design tokens/assets; DESIGN.md records only this extension.
+
+Current candidate companion/ordinary phone APK permission inspection also passes: no Internet, Wi-Fi or network-state permission. `aapt2 dump permissions` output is retained in handoff-package-permissions.txt. The debug presentation fixture is separate from the ordinary release package; a permission inventory alone does not establish physical offline operation from either phone.
+
+Read-only postflight GET_STATE still shows both intended sources paused at37, volume proof false, Wi-Fi0/no default network. Both optional services enabled/bound, none crashed; HiBy stopped=true. All four companion preference digests match the Mango20 postflight; PC approval was not restored. Phone original-key install-r and settings restoration passed (font1.0/night=yes). Raw state/settings/pulled APKs under artifacts/handoff-postflight/. Saved verified-mango20-companion-04846d60.apk/verified-phone-b12f83e4.apk preserve the earlier package pair separately from candidate outputs.
+
+## One actual PC approval-boundary smoke test
+
+**VERIFIED in the stated scope, not two-controller acceptance.** Windows11 Pro26300/Python3.14/Bleak3.0.2 preflight still reports paired=true/ENCRYPTION_AND_AUTHENTICATION. No pairing request was sent and no app approval was restored. After original-signature verification, candidateb1b83f26... was installed with adb install-r and its60-second pairing window opened through the companion's own service so the already bonded, unapproved PC could connect. `work/ble-diagnostic/Scripts/python.exe scripts/verify-windows-protocol.py approval-boundary --seconds 3 --label handoff-candidate-unapproved` passes all four checks: protected INFO/subscription, correlated HELLO, AUTHORIZE local-approval denial, and GET_STATE authorization denial.29 framing writes, negotiated MTU517, zero playback commands, zero pairing requests, successful client cleanup and unchanged authenticated OS bond. Host events show transports=1 and the expected denial codes. A denied state read is **not** an authorized metadata/playback pass.
+
+The temporary pending approval was never accepted. A finally block reinstalled baseline04846d60... and started the ordinary companion; pulled bytes match the baseline hash. Fresh read-only post-restoration GET_STATE confirms both sources paused37/volume proof false/offline, both browsing bindings with no crashes, HiBy stopped and all four preference digests unchanged. A fresh service process also closes the temporary pairing window. Logs: handoff-bond-preflight.json, handoff-candidate-smoke.txt/summary.json, windows-ble/handoff-candidate-unapproved.json, handoff-candidate-diagnostic.json/accessibility.txt and handoff-restored-postflight/ under ignored artifacts. Two-peer hosting, REQUEST_CONTROL, live notice/revocation and continuity still need the physical runbook.
+
+## Hosted Apple verification
+
+Native Swift reference workflow [40881374344](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/40881374344) **SUCCEEDED** at04b04aa:5 Swift protocol tests (including host-bound/consume-once proposals), unsigned native application build/launch,12 matcher cases and six capture-readiness states. Shared Flutter workflow [40881374524](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/40881374524) also **SUCCEEDED** at04b04aa: analysis46 tests, unsigned ordinary/volume/browsing/handoff fixture builds, launches/readiness captures and ordinary main-target restoration (18 PNG states total). macOS26.6.2/Xcode26.6, iPhone Air/iOS26.5 hosted simulator. Downloaded evidence artifacts/handoff-native-ios-40881374344/ and handoff-flutter-ios-40881374524/. Six new/recovery iPhone handoff captures were inspected and independently reviewed: **disposition: ship** for these six renders only (handoff-ios-review.md). At largest text the complete action remains visible; scrolling continuation is acceptable. Physical interaction, VoiceOver, signing/iPhone/Bluetooth and audible continuity remain NOT TESTED.

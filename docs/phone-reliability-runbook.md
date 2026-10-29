@@ -1,5 +1,7 @@
 # Phone connection acceptance
 
+Explicit approved-controller handoff has a separate [two-controller acceptance sequence](controller-handoff-runbook.md). It is beta until both physical phones pass; source-local20-track Mango/Apple evidence does not establish phone or ownership-transfer behavior. Updated Setup offers **Take control on this phone** only after a busy response for an already approved identity. Enroll new controllers separately with all existing transports disconnected.
+
 Status: NOT TESTED on separate physical phones. Flutter UI tests, DX340-only launch and iPhone simulator checks do not pass these steps. Use this with compatibility-matrix.md/T01–T18; keep Android and iPhone results separate.
 
 Record phone model, exact OS/build, app version/commit, DX340 firmware/build, Mango/Apple versions, AMP15 output and APK/signing identity. Do not change volume during connection testing. Start with the verified source already playing at the user's comfortable level.
