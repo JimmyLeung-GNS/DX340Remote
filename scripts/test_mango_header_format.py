@@ -54,6 +54,12 @@ class MangoHeaderTest(unittest.TestCase):
         self.assertEqual("Starting", text_tags(prefix)["titleTag"])
         self.assertNotIn("titleTag", text_tags(prefix[:-1]))
 
+    def test_id3_frame_outside_declared_tag_size_is_not_a_title(self):
+        frame = b"TIT2\0\0\0\x05\0\0\x03fake"
+        tag = b"ID3\x04\0\0\0\0\0\0" + frame
+        wave = b"RIFF\0\0\0\0WAVEid3 " + len(tag).to_bytes(4, "little") + tag
+        self.assertNotIn("titleTag", text_tags(wave))
+
 
 if __name__ == "__main__":
     unittest.main()

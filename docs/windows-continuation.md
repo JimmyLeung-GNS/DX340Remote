@@ -18,6 +18,8 @@ Current code c24be4c: Android build/lint103 JVM tests; Flutter analysis42 tests/
 
 Latest native-cache continuation: installed companion04846d60.../native108 tests, phone unchanged. Run scripts/verify-native-browse-cache.ps1 for read-only native cached/fresh/refresh/source-switch/expiry checks; both sources must be paused. PLAY_ITEM always revalidates fresh. Read test-results/2026-10-29-native-page-cache.md before device work. Earlier listening/UI evidence above retains its package scope.
 
+Mango listening continuation:20 local WAV/FLAC samples are confirmed across five album folders on the same04846d60... host;21 attempts retain1 diagnostic title mismatch, and19/20 selected page3 rows. Both sources paused37. Read test-results/2026-10-29-mango-listening-matrix.md and its exact one-selection/recording commands before starting another listening test. No answer is pending.
+
 ## Existing toolchain and signing
 
 Current host is JIMMYAH. The earlier `C:\Users\user`/Android Studio JBR paths described a previous environment; use the verified paths below on this PC:

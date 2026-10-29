@@ -42,6 +42,9 @@ try {
     $page=Open-MangoLocation $probe $candidate.locationLabels
     $track=Find-MangoRow $probe $page $candidate.fileLabel $false
     if ($track.Page.data.title -cne ($candidate.locationLabels -join ' / ')) { throw 'Exact candidate folder not observed' }
+    $summary.selectionUiPage=$track.Page.data.page
+    $summary.selectionFolderHeader=$track.Page.data.title
+    $summary.selectedFileLabel=$track.Row.title
     $headerFile=Join-Path $out 'public-file-header.json'
     & $Python -X utf8 (Join-Path $PSScriptRoot 'inspect-mango-public-header.py') --candidate $candidateFile --output $headerFile --adb $Adb --serial $Serial > (Join-Path $out 'public-header-command.txt')
     if ($LASTEXITCODE -ne 0) { throw 'Candidate container header could not be verified; no playback was sent' }

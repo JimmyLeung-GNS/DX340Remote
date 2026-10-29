@@ -13,15 +13,20 @@ def text_tags(data: bytes):
                 if data[start:start+3] != b"ID3" or start + 10 > len(data):
                     break
                 version, flags = data[start+3], data[start+5]
-                if version not in (3, 4) or flags & ~0x10:
+                if version not in (3, 4) or flags & ~(0x10 if version == 4 else 0):
                     break  # Do not guess through unsynchronization/extended headers.
+                tag_size_bytes = data[start+6:start+10]
+                if any(value & 128 for value in tag_size_bytes):
+                    break
+                tag_size = sum(value << (7 * (3-i)) for i, value in enumerate(tag_size_bytes))
+                tag_end = min(start + 10 + tag_size, offset + 8 + size, len(data))
                 pos = start + 10
-                while pos + 10 <= min(offset + 8 + size, len(data)):
+                while pos + 10 <= tag_end:
                     frame, encoded_size = data[pos:pos+4], data[pos+4:pos+8]
                     if version == 4 and any(value & 128 for value in encoded_size):
                         break
                     length = int.from_bytes(encoded_size, "big") if version == 3 else sum(value << (7 * (3-i)) for i, value in enumerate(encoded_size))
-                    if not length or pos + 10 + length > min(offset + 8 + size, len(data)):
+                    if not length or pos + 10 + length > tag_end:
                         break
                     key = {b"TIT2": "titleTag", b"TPE1": "artistTag", b"TALB": "albumTag"}.get(frame)
                     if key and data[pos+8:pos+10] == b"\0\0":

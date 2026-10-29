@@ -2,9 +2,9 @@
 
 Updated 29 October 2026 (Hong Kong). **Goal active after the user's continuation request; full system incomplete.**
 
-## Mango listening matrix in progress (latest)
+## Mango listening matrix checkpoint (latest)
 
-New read-only folder inventory completed72 guarded probes/131 FLAC-WAV filename labels in six sampled directories. Prepared20 candidates across five album folders; all20 public container headers declare48kHz/24-bit stereo (not output/quality proof). Four samples are separately user-confirmed audible. Selection5 has a fresh matching Delusion:All source-state result and awaits the human answer; its initial filename-derived title mismatch remains failed, with the embedded ID3 title verified before a new deliberate selection. No source APK change: host04846d60.../phoneb12f83e4...; native108/preceding Flutter42/iOS scopes remain unchanged. Seven header-parser tests pass. See test-results/2026-10-29-mango-listening-matrix.md and actual artifacts/mango-listening-summary.json before continuing; do not replay or infer pending answers. Full system remains incomplete.
+Twenty Mango local-file selections across five album folders/three artist folders are separately user-confirmed audible:11 WAV/9 FLAC, all inspected headers48kHz/24-bit/stereo. Final two selections reached UI page3. All21 attempts use installed host04846d60...; one filename/title-tag verification failure is preserved, then corrected using the complete embedded title before a fresh5 selection. This is not a clean20-attempt or phone T08 pass. Eight header-parser checks pass separately from native108/unchanged Flutter42/iOS evidence. Both players paused37; volume proof remains disabled, both optional services bound, HiBy stopped. Full phone BLE/native album-playlist/SD/rescan/wider format/quality/reliability/Watch remain open. See test-results/2026-10-29-mango-listening-matrix.md. Goal active; full system incomplete.
 
 ## Native Mango page cache (latest)
 
