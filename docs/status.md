@@ -1,8 +1,14 @@
 # Implementation status
 
-Updated 29 October 2026 (Hong Kong). **Original signing key restored and both apps upgraded in place. Goal active; full system incomplete and physical phone/Mac acceptance remains pending.**
+Updated 29 October 2026 (Hong Kong). **Original signing key restored and both apps upgraded in place. Goal blocked on native pairing/listening participation and physical phone/Mac resources; full system incomplete.**
 
-## Current continuation: read-only Windows protocol preparation
+## Current continuation: negative prefetch result and physical resource gate
+
+The matching breadth-first prefetch hypothesis was tested and rejected: three experimental Playlist recoveries3.812–4.342seconds versus six before/restored hybrid samples3.622–3.922seconds. Both exceed3seconds. The experimental code/APK was reverted; fresh installed SHA matches40114ff8..., all four preferences unchanged, sources paused at35/services bound/offline. Shared phone remains09aaae78.... See test-results/2026-10-29-mango-breadth-prefetch.md.
+
+Fresh resource audit still finds only DX340 d, Windows unpaired/protectionNONE and no local xcodebuild. Native pairing/listening availability remains unanswered; no live build/test is waiting. The same resource gates persisted through three preceding goal checkpoints while independent implementation/preparation progressed. Further required authenticated/phone/audio acceptance needs operator/hardware state to change. Goal BLOCKED, not complete; exact next steps and unresolved latency/handoff/cache/source/Watch scope are in test-results/2026-10-29-continuation-resources.md and completion-audit.md. Earlier active-goal notes below describe their dated checkpoints.
+
+## Preceding continuation: read-only Windows protocol preparation
 
 Prepared HELLO/local-approval-denial/state diagnostics with a three-operation read-only allowlist, bounded framing/reply correlation, explicit protected indication access and disconnect cleanup. An explicit45second approval-wait mode keeps the pending request alive while the operator approves locally; it never approves/pairs or controls playback. VERIFIED19 software conformance/failure tests and a live unpaired refusal before explicit GATT/characteristic operations. Windows reports paired=false/protection=NONE, so actual authenticated protocol, approval/revocation and both phone paths remain NOT TESTED.
 
