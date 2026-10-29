@@ -22,6 +22,14 @@ For a screen-off sample, put DX340's screen off normally, record dumpsys power b
 
 ## Native authenticated pairing, operator required
 
+Check both native inventories directly rather than asking the operator to infer success from a device row:
+
+```powershell
+./work/ble-diagnostic/Scripts/python.exe scripts/verify-windows-pairing-state.py --serial d --label current-pairing-state
+```
+
+This reads the USB-confirmed DX340 identity and compares the real current PC radio address with Android bonds, then reads Windows pairing/protection. It performs no pairing, scan, GATT, approval or playback operation. Exit0 requires a mutual classic bond and Windows-reported authenticated protection; it still does not establish protected BLE/application access. Its current negative case is verified, positive case remains open. See test-results/2026-10-30-pairing-state-check.md: a stale Windows-only bond was removed and the pre-existing desktop DevicePairingWizard.exe successfully exposed matching native dialogs when the modern Shell picker could not be targeted. The final security buttons remain manual; the agent checks the result afterward. If one dialog closes, discard the old comparison screen and prepare a fresh attempt when the operator is ready.
+
 The operator must be present for Windows and DX340 system consent. Open the companion on DX340 and press Open pairing for60 seconds. Then run:
 
 ```powershell
