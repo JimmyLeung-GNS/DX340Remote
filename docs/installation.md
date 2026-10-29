@@ -12,6 +12,8 @@ Mac: install the pinned Flutter3.41.4 SDK and Xcode, run `flutter pub get --enfo
 
 Use Setup → allow Bluetooth/Nearby Devices → Find DX340. Open pairing on the companion; connect and accept both system prompts; approve the pending controller on DX340; retry authorization. Test Player/Library/Queue with Wi-Fi and controller cellular data off. Switching source does not start playback. Optional assisted source browsing needs DX340 awake/unlocked. Continue the separate-phone sleep/range/revocation matrix in compatibility-matrix.md; no framework promises physical stability.
 
+Native Mango metadata pages may be reused briefly while browsing. Use Library refresh to request fresh source data; a selection always revalidates with Mango before playback. The optional screen-assisted modes still require live DX340 screen-on/unlocked validation.
+
 While connected, Library and Queue retain a playback bar above the four destinations. Tap its track information to open Player; its separate Play/Pause control follows source capabilities and pending-command state. It disappears on disconnection. At large text the compact title truncates visually while its accessible label and full Player retain the metadata. Rendering and software checks do not replace physical phone Bluetooth/interaction acceptance.
 
 The older native client instructions below remain as reference build/recovery documentation. Do not overwrite build2 with build1 as a routine update; Android version downgrade and signing mismatch require deliberate handling.

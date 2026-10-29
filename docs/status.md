@@ -2,6 +2,10 @@
 
 Updated 29 October 2026 (Hong Kong). **Goal active after the user's continuation request; full system incomplete.**
 
+## Native Mango page cache (latest)
+
+Latest native host adds a bounded10-second/200-page metadata cache for Mango native browsing;108 JVM tests/build/lint pass. Installed companion04846d60... preserves four preferences and both browsing bindings. Actual read-only cached pages64–85ms versus fresh110–202ms in sampled local probes; refresh/source switching/expiry bypass or clear cache. Four assisted interruption/recovery regressions pass. Both players paused37; volume proof remains cleared. Native PLAY_ITEM still revalidates freshly twice; assisted UI pages remain live. Phone c24be4c/Flutter42/iOS40857287517 evidence is unchanged. The20 Apple audio confirmations remain scoped to earlier mixed builds; physical phone BLE, full Mango/SD/format/reliability/Watch remain open. See test-results/2026-10-29-native-page-cache.md. Goal active; full system incomplete.
+
 ## Resumed checkpoint reconciliation
 
 Completed source-local Apple listening matrix:20 distinct selections across five albums/two playlists observed playing with Mango paused and separately user-confirmed audible;16 outside the full public queue at selection.24 attempts retain four safe rejections, including the reproduced toolbar bug and a legitimately changed playlist. The toolbar-only fingerprint correction preserves row/header/window/live-action guards; Android build/lint103 tests pass, installed companion469ce971.../preferences preserved.1–6 pre-fix,7–20 corrected build; this is not a clean final-build20 or phone T07 pass. Four current-build interruption/token/recovery regressions pass. Shared Library/Queue playback bar passes analysis42 tests/release/lint and hosted iOS40857287517 atc24be4c; both scoped native rendering reviews ship. Android upper content under SystemUI tooltip excluded. Ordinary phone b12f83e4.../font1.0/night=yes restored, shortcut position within1pixel and final move-tooltip gone. Both sources paused37, HiBy remains stopped, PC approval absent/bond retained. See test-results/2026-10-29-apple-listening-matrix.md. Full system remains incomplete.

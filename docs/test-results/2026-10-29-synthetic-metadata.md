@@ -1,5 +1,7 @@
 # Synthetic metadata component check, 29 October 2026
 
+Historical component benchmark scope below is unchanged. A later production NativeBrowsePageCache now uses LibraryIndex inside SourceRegistry; its implementation and separate DX340 results are in 2026-10-29-native-page-cache.md. The component timing below is not a production-host timing result.
+
 **VERIFIED at Windows JVM component scope.** No Android device or music app participates in this check. The full source/phone performance gate remains open. This adds the implementation plan's previously missing metadata fixture; the preceding test used10,000 integer IDs only.
 
 Environment: Windows11, Android Studio JBR21.0.7, existing Gradle8.14/Kotlin toolchain. The product APKs are unchanged from the pending-Accessibility report (companion8ab23122..., shared phone09aaae78...). Native aggregate results now contain77 passing tests: preceding74 plus three new metadata correctness tests. The targeted library-cache suite and benchmark were run after the final fixture edit. Preceding Android build/lint and Flutter analysis32 tests/release/lint retain their recorded scope; they were not unnecessarily repeated for test-only changes. Current Swift still needs a Mac build.

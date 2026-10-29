@@ -15,6 +15,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.util.UUID
 import org.dx340.remote.library.RevisionGuard
+import org.dx340.remote.library.LibraryIndex
 
 /** Uses only public Android 13 APIs and our real application identity. */
 class SourceRegistry(private val context: Context, private val listener: ComponentName, private val uiLibrary: UiLibraryAdapter? = null, private val mangoUiLibrary: UiLibraryAdapter? = null, private val changed: () -> Unit) {
@@ -39,6 +40,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     private val proofs = mutableMapOf<String, LinkedHashMap<String, ItemProof>>()
     private val browseRequests = mutableSetOf<SourceRequest<JSONObject>>()
     private val revisionGuard = RevisionGuard()
+    private val nativePages = NativeBrowsePageCache({ android.os.SystemClock.elapsedRealtime() })
     var selected = PACKAGES.first(); private set
     val accessError get() = sessionAccess.error
     private var closed = false
@@ -56,6 +58,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     }
     fun close() {
         closed = true
+        PACKAGES.forEach(nativePages::invalidate)
         outputVolume.close()
         callbackGuard.close()
         browseRequests.toList().forEach { it.cancel("SOURCE_NOT_READY") }
@@ -70,7 +73,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         val lease = callbackGuard.replace(pkg)
         callbacks[pkg]?.let { controllers[pkg]?.unregisterCallback(it) }
         epochs[pkg] = UUID.randomUUID().toString(); tokens[pkg] = controller.sessionToken
-        items.remove(pkg); proofs.remove(pkg)
+        items.remove(pkg); proofs.remove(pkg); nativePages.invalidate(pkg)
         controllers[pkg] = controller
         val cb = object : MediaController.Callback() {
             override fun onPlaybackStateChanged(state: PlaybackState?) = callbackGuard.dispatch(lease, changed)
@@ -80,7 +83,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
             override fun onSessionDestroyed() {
                 if (!callbackGuard.retire(lease)) return
                 controllers.remove(pkg); tokens.remove(pkg); callbacks.remove(pkg)
-                epochs[pkg] = UUID.randomUUID().toString(); items.remove(pkg); proofs.remove(pkg); changed()
+                epochs[pkg] = UUID.randomUUID().toString(); items.remove(pkg); proofs.remove(pkg); nativePages.invalidate(pkg); changed()
             }
         }
         callbacks[pkg] = cb; controller.registerCallback(cb, main)
@@ -104,6 +107,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         callbackGuard.invalidateAll()
         controllers.forEach { (pkg, controller) -> callbacks[pkg]?.let { runCatching { controller.unregisterCallback(it) } } }
         controllers.clear(); tokens.clear(); callbacks.clear(); items.clear(); proofs.clear(); rootSamples.clear()
+        PACKAGES.forEach(nativePages::invalidate)
         PACKAGES.forEach { epochs[it] = UUID.randomUUID().toString() }
         outputVolume.control.reset()
     }
@@ -135,8 +139,8 @@ class SourceRegistry(private val context: Context, private val listener: Compone
                     b.subscribe(b.root, callback)
                     main.postDelayed({ if (!rootSamples.containsKey(pkg)) { b.unsubscribe(b.root, callback); rootSamples[pkg] = JSONObject().put("error", "SOURCE_TIMEOUT"); changed() } }, 8000)
                 }
-                override fun onConnectionFailed() { if (closed) return; browserStatus[pkg] = "CLIENT_DENIED_OR_FAILED"; changed() }
-                override fun onConnectionSuspended() { if (closed) return; browserStatus[pkg] = "SUSPENDED"; changed() }
+                override fun onConnectionFailed() { if (closed) return; nativePages.invalidate(pkg); browserStatus[pkg] = "CLIENT_DENIED_OR_FAILED"; changed() }
+                override fun onConnectionSuspended() { if (closed) return; nativePages.invalidate(pkg); browserStatus[pkg] = "SUSPENDED"; changed() }
             }, null)
             browsers[pkg] = browser
             try { browser.connect() } catch (e: Exception) { browserStatus[pkg] = "FAILED:${e.javaClass.simpleName}" }
@@ -194,7 +198,11 @@ class SourceRegistry(private val context: Context, private val listener: Compone
             .put("volume", outputVolume.state())
             .put("accessError", accessError ?: JSONObject.NULL)
     }
-    fun select(pkg: String) { require(pkg in PACKAGES) { "MISSING_SOURCE" }; selected = pkg; changed() }
+    fun select(pkg: String) {
+        require(pkg in PACKAGES) { "MISSING_SOURCE" }
+        if (selected != pkg) PACKAGES.forEach(nativePages::invalidate)
+        selected = pkg; changed()
+    }
     fun observedSources(): JSONArray = JSONArray().apply { controllers.forEach { (pkg, c) ->
         put(JSONObject().put("source", pkg).put("sourceEpoch", epoch(pkg))
             .put("title", c.metadata?.getString("android.media.metadata.TITLE") ?: "")
@@ -217,7 +225,10 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         val bytes = artwork.get(key) ?: error("EXPIRED_ITEM")
         return JSONObject().put("key", key).put("mime", "image/jpeg").put("base64", android.util.Base64.encodeToString(bytes, android.util.Base64.NO_WRAP))
     }
-    private fun fingerprint(item: MediaBrowser.MediaItem) = listOf(item.mediaId, item.flags.toString(), item.description.title?.toString(), item.description.subtitle?.toString(), item.description.mediaUri?.toString()).joinToString("\u0000")
+    private fun fingerprint(item: MediaBrowser.MediaItem): String {
+        val identity = listOf(item.mediaId, item.flags.toString(), item.description.title?.toString(), item.description.subtitle?.toString(), item.description.mediaUri?.toString()).joinToString("\u0000")
+        return java.security.MessageDigest.getInstance("SHA-256").digest(identity.toByteArray(Charsets.UTF_8)).joinToString("") { "%02x".format(it.toInt() and 255) }
+    }
     fun playItem(args: JSONObject, stillAuthorized: () -> Boolean, done: (String?) -> Unit) {
         val pkg = selected
         val deadline = android.os.SystemClock.elapsedRealtime() + 10000
@@ -462,6 +473,36 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         val browser = browsers[pkg]?.takeIf { it.isConnected } ?: return done(null, "BROWSE_UNAVAILABLE")
         val target = if (nativeRoot) browser.root else parent ?: browser.root
         if (target != browser.root && items[pkg]?.get(target)?.isBrowsable != true) return done(null, "EXPIRED_ITEM")
+        // A root refresh always queries the source and drops old presentation pages.
+        // Playback revalidation deliberately passes no revision, bypassing this cache twice.
+        if (target == browser.root && (nativeRoot || expectedRevision == null)) nativePages.invalidate(pkg)
+        val cacheKey = LibraryIndex.Key(pkg, "$revision|${version(pkg)}", target, page)
+        fun render(rows: List<NativeBrowsePageCache.Row>, nextPage: Int?, cached: Boolean, ageMs: Long = 0): JSONObject {
+            val result = JSONArray()
+            val nativeSelection = nativeSelectionSupported(pkg)
+            if (pkg == PACKAGES[0] && target == browser.root && page == 0 && mangoUiLibrary?.enabled == true) {
+                result.put(JSONObject().put("id", MANGO_UI_ROOT).put("title", "Local folders · assisted")
+                    .put("subtitle", mangoUiLibrary.explanation).put("browsable", mangoUiLibrary.ready).put("playable", false).put("uiAssisted", true))
+            }
+            rows.forEach { row ->
+                result.put(JSONObject().put("id", row.id).put("title", row.title).put("subtitle", row.subtitle)
+                    .put("browsable", row.browsable).put("playable", row.playable && nativeSelection)
+                    .put("nativeTestable", pkg == PACKAGES[0] && row.playable))
+            }
+            return JSONObject().put("parent", target).put("revision", revision).put("page", page)
+                .put("nextPage", nextPage ?: JSONObject.NULL).put("items", result)
+                .put("cached", cached).put("cacheAgeMs", ageMs)
+        }
+        val cached = nativePages.read(cacheKey, expectedRevision == revision && target != browser.root) { row ->
+            val proof = proofs[pkg]?.get(row.id)
+            proof?.parent == target && proof.page == page && proof.fingerprint == row.fingerprint &&
+                items[pkg]?.get(row.id)?.let(::fingerprint) == row.fingerprint
+        }
+        if (cached != null) {
+            invalid()?.let { done(null, it); return }
+            done(render(cached.rows, cached.nextPage, true, android.os.SystemClock.elapsedRealtime() - cached.observedAt), null)
+            return
+        }
         val options = Bundle().apply { putInt(MediaBrowser.EXTRA_PAGE, page); putInt(MediaBrowser.EXTRA_PAGE_SIZE, 25) }
         lateinit var cb: MediaBrowser.SubscriptionCallback
         lateinit var request: SourceRequest<JSONObject>
@@ -481,31 +522,28 @@ class SourceRegistry(private val context: Context, private val listener: Compone
                 if (children.size > 10000) { finish(null, "SOURCE_LIBRARY_LIMIT"); return }
                 // Legacy services may ignore paging options. Paginate their bounded result on DX340.
                 val visible = if (children.size > 25) children.drop(page * 25).take(25) else children
+                val rows = visible.mapNotNull { item ->
+                    val id = item.mediaId ?: return@mapNotNull null
+                    if (id.toByteArray(Charsets.UTF_8).size > 512) { finish(null, "SOURCE_ID_TOO_LARGE"); return }
+                    NativeBrowsePageCache.Row(id, item.description.title?.toString()?.take(128) ?: "Untitled",
+                        item.description.subtitle?.toString()?.take(64) ?: "", item.isBrowsable, item.isPlayable, fingerprint(item))
+                }
+                if (rows.map { it.id }.distinct().size != rows.size) { finish(null, "SOURCE_ID_AMBIGUOUS"); return }
                 if (revisionGuard.update("$pkg\u0000$target\u0000$page", visible.associate { (it.mediaId ?: "") to fingerprint(it) })) {
-                    epochs[pkg] = UUID.randomUUID().toString(); items.remove(pkg); proofs.remove(pkg); changed()
+                    epochs[pkg] = UUID.randomUUID().toString(); items.remove(pkg); proofs.remove(pkg); nativePages.invalidate(pkg); changed()
                     finish(null, "STALE_LIBRARY"); return
                 }
                 val known = items.getOrPut(pkg) { linkedMapOf() }
                 val knownProofs = proofs.getOrPut(pkg) { linkedMapOf() }
-                val result = JSONArray()
-                val nativeSelection = nativeSelectionSupported(pkg)
-                if (pkg == PACKAGES[0] && target == browser.root && page == 0 && mangoUiLibrary?.enabled == true) {
-                    result.put(JSONObject().put("id", MANGO_UI_ROOT).put("title", "Local folders · assisted")
-                        .put("subtitle", mangoUiLibrary.explanation).put("browsable", mangoUiLibrary.ready).put("playable", false).put("uiAssisted", true))
-                }
                 visible.forEach { item ->
                     val id = item.mediaId ?: return@forEach
-                    if (id.toByteArray().size > 512) { finish(null, "SOURCE_ID_TOO_LARGE"); return }
                     if (known.size >= 10000 && !known.containsKey(id)) { val oldest = known.keys.first(); known.remove(oldest); knownProofs.remove(oldest) }
                     known[id] = item
                     knownProofs[id] = ItemProof(target, page, fingerprint(item))
-                    result.put(JSONObject().put("id", id).put("title", item.description.title?.toString()?.take(128) ?: "Untitled")
-                        .put("subtitle", item.description.subtitle?.toString()?.take(64) ?: "")
-                        .put("browsable", item.isBrowsable).put("playable", item.isPlayable && nativeSelection)
-                        .put("nativeTestable", pkg == PACKAGES[0] && item.isPlayable))
                 }
-                finish(JSONObject().put("parent", target).put("revision", revision).put("page", page)
-                    .put("nextPage", if ((children.size > 25 && (page + 1) * 25 < children.size) || children.size == 25) page + 1 else JSONObject.NULL).put("items", result), null)
+                val nextPage = if ((children.size > 25 && (page + 1) * 25 < children.size) || children.size == 25) page + 1 else null
+                nativePages.remember(cacheKey, rows, nextPage)
+                finish(render(rows, nextPage, false), null)
             }
             override fun onError(parentId: String) = finish(null, "BROWSE_DENIED")
             override fun onError(parentId: String, options: Bundle) = finish(null, "BROWSE_DENIED")

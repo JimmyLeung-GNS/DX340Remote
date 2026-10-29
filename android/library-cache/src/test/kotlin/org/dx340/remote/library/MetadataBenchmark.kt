@@ -72,7 +72,7 @@ object MetadataBenchmark {
             .put("framingCapacity185", samples { MetadataFixture.frameRoundTrip(bytes, 185) })
             .put("walkAllPagesMs", allPagesMs).put("maxEncodedPageBytes", maxPageBytes)
             .put("componentTimingTargetMet", coldCached < 500 && coldUncached < 3000 && cachedSamples.getDouble("maxMs") < 500 && uncachedSamples.getDouble("maxMs") < 3000)
-            .put("limitations", JSONArray(listOf("LibraryIndex is a standalone cache component, not wired into SourceRegistry.", "SourceRegistry uses RevisionGuard; fixture JSON rendering is a test harness using documented fields/limits.", "Metadata source is already in memory; fixture generation is measured separately.", "No disk-cache restore, Android MediaBrowser, device CPU, Flutter render, BLE radio, artwork, playback or audio timing is measured.")))
+            .put("limitations", JSONArray(listOf("This benchmark isolates LibraryIndex; it does not exercise SourceRegistry or its production NativeBrowsePageCache.", "SourceRegistry uses RevisionGuard; fixture JSON rendering is a test harness using documented fields/limits.", "Metadata source is already in memory; fixture generation is measured separately.", "No disk-cache restore, Android MediaBrowser, device CPU, Flutter render, BLE radio, artwork, playback or audio timing is measured.")))
         output.writeText(result.toString(2), Charsets.UTF_8)
         check(result.getBoolean("componentTimingTargetMet")) { "Local component timing exceeded proposed targets; inspect ${output.path}" }
         println("10,000 synthetic metadata records / 400 pages verified; report ${output.path}")
