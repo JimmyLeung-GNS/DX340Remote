@@ -51,8 +51,13 @@ class BlePeripheral(
         override fun onServiceAdded(code: Int, service: BluetoothGattService) { main.post {
             if (server == null) return@post
             if (code != BluetoothGatt.GATT_SUCCESS) { status("GATT_SERVICE_FAILED:$code"); return@post }
+            // Keep the service UUID in the advertisement and the existing device name in
+            // the separate scan response. Never rename the user's Bluetooth adapter.
+            // An oversized name must not prevent the host from advertising its service.
+            val nameBytes = manager.adapter?.name?.toByteArray(Charsets.UTF_8)?.size ?: 0
+            val scanResponse = if (nameBytes in 1..29) AdvertiseData.Builder().setIncludeDeviceName(true).build() else null
             advertiser?.startAdvertising(AdvertiseSettings.Builder().setConnectable(true).setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY).build(),
-                AdvertiseData.Builder().addServiceUuid(ParcelUuid(UUID.fromString(Wire.SERVICE))).build(), advertiseCallback)
+                AdvertiseData.Builder().addServiceUuid(ParcelUuid(UUID.fromString(Wire.SERVICE))).build(), scanResponse, advertiseCallback)
         } }
         override fun onConnectionStateChange(device: BluetoothDevice, code: Int, newState: Int) { main.post {
             if (server == null) return@post

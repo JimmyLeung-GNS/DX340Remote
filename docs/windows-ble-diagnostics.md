@@ -2,6 +2,8 @@
 
 This development tool exercises the DX340 host over a real PC Bluetooth radio. It is not a product remote or a substitute for Android/iPhone acceptance. Tested PC/driver and precise verification scope: test-results/2026-10-29-windows-ble.md. The everyday control path remains native phone Bluetooth, with existing DX340 apps playing the audio.
 
+Resumed discovery update: the host now includes the existing Android Bluetooth name in a separate scan response when it fits. This DX340 is observed as **DX340**, not DX340 Remote. Name is for finding the device only; authenticated bond and identified local approval still decide access. The initial programmatic native request failed without a bond; a present operator is using normal Windows Bluetooth Settings. See test-results/2026-10-29-named-advertising.md for build/over-air/update evidence and remaining limits.
+
 ## Bootstrap and unpaired checks
 
 From the repository root, use Python3.11 on this Windows11 PC. If the ignored environment already exists, use it rather than overwriting a global installation:
