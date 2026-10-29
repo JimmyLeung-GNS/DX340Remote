@@ -16,6 +16,7 @@ class SourceProbeInstrumentation : Instrumentation() {
     private var expectedTitle: String? = null
     override fun onCreate(arguments: Bundle?) { super.onCreate(arguments); mode = arguments?.getString("mode"); expectedTitle = arguments?.getString("expectedTitle"); start() }
     override fun onStart() {
+        if (mode == "mango-native-counts") { MangoNativeCountsProbe(this).run(); return }
         if (mode == "apple-queue-baseline") {
             val report = JSONObject().put("kind", "physical-public-apple-queue-before-ui-selection").put("candidateTitle", expectedTitle)
             try {

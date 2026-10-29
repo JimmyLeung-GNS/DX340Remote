@@ -24,6 +24,8 @@ Mango listening continuation:20 local WAV/FLAC samples are confirmed across five
 
 ## Existing toolchain and signing
 
+Read-only Mango native coverage can be repeated with `scripts/verify-mango-native-inventory.ps1 -Serial d -Adb (Get-Command adb).Source` while both players are paused37/offline. Current22 Album rows expose635 entries; All Music exposes500, independently confirmed at Mango's public browser boundary. This is metadata coverage, not native Album playback or phone T08. See test-results/2026-10-29-mango-native-inventory.md. Its Android instrumentation probe restarts the host/bindings and is separate from the ordinary read-only script; use the documented backup/restoration sequence if rerunning it.
+
 Current resumption host is DESKTOP-T9ICUE4. GitHub checkpoint096601a was fetched and fast-forwarded here; its preceding build/audio/handoff reports include work on JIMMYAH. Those results retain their original host/package scope. The paths below were verified for this session:
 
 | Purpose | Local path/version |
