@@ -14,6 +14,7 @@ cd "$repo"
 mkdir -p artifacts
 mkdir -p work
 swiftc scripts/check-apple-capture.swift -o work/check-apple-capture
+work/check-apple-capture --self-test > artifacts/apple-capture-matcher-tests.txt
 capture() {
     capture_path=$1
     capture_heading=$2

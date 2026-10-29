@@ -1,6 +1,12 @@
 # Implementation status
 
-Updated 29 October 2026 (Hong Kong). **Original signing key restored and both apps upgraded in place. Goal blocked on native pairing/listening participation and physical phone/Mac resources; full system incomplete.**
+Updated 29 October 2026 (Hong Kong). **Goal active after the user's continuation request; full system incomplete.**
+
+## Resumed checkpoint reconciliation
+
+The active source is `C:\GitHub\DX340Remote`, `codex/source-recovery-checkpoint` at a2f92be plus this continuation. Remote branches were compared before any product install. DX340's installed companion SHA25640114ff8... matches the newer recovery checkpoint; the older `codex/output-volume` branch diverged at400ec34 and retains separate bounded-volume work/user listening evidence. It has not been merged over newer cancellation, queue or authorization-lifetime guards. An initial old-branch OCR helper correction is being carried forward separately. See test-results/2026-10-29-checkpoint-reconciliation.md.
+
+The user is now available for pairing and listening. On this Windows host, the pinned diagnostic dependencies install under an isolated Python3.14 environment;19 read-only protocol software tests pass. A real three-second scan sees one matching host. The basic native authenticated pairing request returned FAILED/protectionNONE; no bond or approval was created. Windows Bluetooth Settings has been opened for the operator's native pairing flow. Product playback/volume were not changed. Current-code Mac CI and local builds are being checked; no phone/radio/complete-system claim is made.
 
 ## Local workspace/checkpoint update
 
