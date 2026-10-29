@@ -7,7 +7,7 @@ func readiness(_ rawLines: [String], heading rawHeading: String) -> (ready: Bool
     let lines = rawLines.map { $0.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) }
     // Vision reads the adjacent volume icon as a bullet in the observed fixture.
     // Accept only those specific control-label spellings; navigation titles stay exact.
-    let allowed = heading == "volume up" ? [heading, "• " + heading, "· " + heading] : [heading]
+    let allowed = heading == "volume up" ? [heading, "• " + heading, "· " + heading, "» " + heading] : [heading]
     let count = lines.filter { allowed.contains($0) }.count
     let requiredCount = ["dx340", "volume up"].contains(heading) ? 1 : 2
     let tabs = ["player", "library", "queue", "setup"].allSatisfy { lines.contains($0) }
@@ -20,6 +20,8 @@ if CommandLine.arguments.count == 2 && CommandLine.arguments[1] == "--self-test"
         ("observed icon prefix", ["DX340", "Synthetic volume UI", "• volume up"] + tabs, "volume up", true),
         ("plain control", ["Volume up"] + tabs, "volume up", true),
         ("middle dot control", ["· Volume up"] + tabs, "volume up", true),
+        ("observed large disabled icon", ["» Volume up"] + tabs, "volume up", true),
+        ("icon prefix cannot hide arbitrary text", ["» Not volume up"] + tabs, "volume up", false),
         ("arbitrary text prefix", ["Not volume up"] + tabs, "volume up", false),
         ("wrong control", ["Volume down"] + tabs, "volume up", false),
         ("incomplete screen", ["• volume up", "Player", "Library", "Queue"], "volume up", false),

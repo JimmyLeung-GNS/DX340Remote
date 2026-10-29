@@ -167,13 +167,15 @@ class MangoAccessibilityService : AccessibilityService() {
         cancelBrowse = { finish(null, it) }
         val deadline = android.os.SystemClock.elapsedRealtime() + 8000
         fun guard() { require(stillAuthorized()) { "AUTHORIZATION_DENIED" }; readiness()?.let { error(it) }; check(android.os.SystemClock.elapsedRealtime() <= deadline) { "UI_ACTION_TIMEOUT" } }
-        var storageClicked = false; var menuClicked = false; var libraryClicked = false; var resetFingerprint = ""; var launched = false
+        var storageClicked = false; var menuClicked = false; var libraryClicked = false; var resetFingerprint = ""
+        val foregroundStartup = org.dx340.remote.sources.UiForegroundStartup()
         var settled = ""; var since = 0L
         var navigationStability = UiSnapshotStability()
         fun openStorage(storage: String) {
             if (finished) return
             try {
                 guard(); val treeStarted = android.os.SystemClock.elapsedRealtime(); val current = tree()
+                foregroundStartup.observed()
                 val treeMs = android.os.SystemClock.elapsedRealtime() - treeStarted
                 // Mango changes child indices during page animations. Only navigate from a
                 // stable semantic tree; a successful action is still dispatched just once.
@@ -231,8 +233,21 @@ class MangoAccessibilityService : AccessibilityService() {
                 }
                 main.postDelayed({ openStorage(storage) }, 180)
             } catch (e: Exception) {
-                if (e.message == "UI_FOREGROUND_REQUIRED" && !launched) {
-                    try { guard(); val launch = packageManager.getLaunchIntentForPackage(PACKAGE) ?: error("MISSING_SOURCE"); startActivity(launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)); launched = true; main.postDelayed({ openStorage(storage) }, 200) }
+                if (e.message == "UI_FOREGROUND_REQUIRED") {
+                    try {
+                        guard()
+                        when (foregroundStartup.missing(android.os.SystemClock.elapsedRealtime())) {
+                            org.dx340.remote.sources.UiForegroundStartup.Missing.LAUNCH -> {
+                                val launch = packageManager.getLaunchIntentForPackage(PACKAGE) ?: error("MISSING_SOURCE")
+                                startActivity(launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)); trace("foreground-launch")
+                                main.postDelayed({ openStorage(storage) }, 200)
+                            }
+                            org.dx340.remote.sources.UiForegroundStartup.Missing.WAIT -> {
+                                trace("foreground-wait"); main.postDelayed({ openStorage(storage) }, 180)
+                            }
+                            org.dx340.remote.sources.UiForegroundStartup.Missing.FAIL -> finish(null, "UI_FOREGROUND_REQUIRED")
+                        }
+                    }
                     catch (failure: Exception) { finish(null, failure.message ?: "UI_SETUP_REQUIRED") }
                 } else if (e.message == "UI_TREE_CHANGED" && android.os.SystemClock.elapsedRealtime() < deadline) {
                     navigationStability = UiSnapshotStability(); main.postDelayed({ openStorage(storage) }, 180)
