@@ -12,6 +12,8 @@ Mac: install the pinned Flutter3.41.4 SDK and Xcode, run `flutter pub get --enfo
 
 Use Setup → allow Bluetooth/Nearby Devices → Find DX340. Open pairing on the companion; connect and accept both system prompts; approve the pending controller on DX340; retry authorization. Test Player/Library/Queue with Wi-Fi and controller cellular data off. Switching source does not start playback. Optional assisted source browsing needs DX340 awake/unlocked. Continue the separate-phone sleep/range/revocation matrix in compatibility-matrix.md; no framework promises physical stability.
 
+While connected, Library and Queue retain a playback bar above the four destinations. Tap its track information to open Player; its separate Play/Pause control follows source capabilities and pending-command state. It disappears on disconnection. At large text the compact title truncates visually while its accessible label and full Player retain the metadata. Rendering and software checks do not replace physical phone Bluetooth/interaction acceptance.
+
 The older native client instructions below remain as reference build/recovery documentation. Do not overwrite build2 with build1 as a routine update; Android version downgrade and signing mismatch require deliberate handling.
 
 ## Windows build
@@ -155,6 +157,8 @@ The shared Flutter phone Player has volume buttons, enabled only for a locally c
 **Clear verification / cancel check** leaves the current volume unchanged. Interrupted commands do not automatically retry or restore volume. Use the DX340 wheel when manual adjustment is needed. Each human observation and API readback must be recorded separately; successful BLE delivery is not an acoustic result.
 
 ## Optional Apple Music browsing
+
+If Apple Music finishes loading rows or changes its visible list, the remote may report that the library changed. Refresh the library and select again. The companion refuses the old snapshot rather than selecting a row whose identity changed. Toolbar collapse alone is handled for unchanged song rows; this does not remove the screen-on/unlocked requirement.
 
 The user accepted this screen-on/unlocked mode. Apple Music must be6.5.3/code1599; an update disables the unverified adapter. Its direct browser is denied in the tested interfaces. This mode navigates the installed app's visible Downloaded library; it does not extract downloads.
 

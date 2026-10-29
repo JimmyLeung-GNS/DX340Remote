@@ -1,6 +1,10 @@
 # Current recovery checkpoint iOS build/launch
 
-## Latest source8d73a48
+## Latest shared-phone source c24be4c
+
+VERIFIED shared Flutter workflow40857287517 SUCCEEDED: analysis42 tests, ordinary/volume/browsing/restoration builds/install/launch, capture readiness and12 matcher regressions. Hosted macOS26.6.2/25G83, Xcode26.6/17F113, iPhone Air/iOS26.5, Flutter3.41.4/Dart3.11.1. Artifact12890946500 downloaded under artifacts/browsing-ios/. Three synthetic browsing views and ordinary restored Player were inspected and independently reviewed ship only at supplied simulator-render scope. Synthetic fixtures cannot send Bluetooth commands. Physical signing/phone BLE/interaction/VoiceOver/audio remain NOT TESTED. Native Swift application source is unchanged from the passing reference workflow40850675500 below. See 2026-10-29-apple-listening-matrix.md for independent source-local audio evidence and exact review limits.
+
+## Preceding source8d73a48
 
 VERIFIED corrected shared Flutter workflow40850675516 and native reference40850675500 both SUCCEEDED. Hosted macOS26.6.2/25G83, Xcode26.6/17F113, iPhone Air/iOS26.5 simulator, pinned Flutter3.41.4/Dart3.11.1. Flutter analysis/36 tests, ordinary/fixture/restore builds/install/launch, six ordinary plus three synthetic plus one restored capture readiness checks and12 matcher cases pass. Native3 Swift tests/build/launch/capture checks and12 matcher cases pass. Artifacts12888375329/12887965219 downloaded into artifacts/resume-volume-{flutter,native}-ios-final/.
 
