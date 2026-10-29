@@ -4,6 +4,13 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class ProtocolTest {
+    @Test fun aDifferentSessionCannotBorrowMutationOwnershipUsingTheSameRequestId() {
+        val gate = MutationGate(); gate.enter("shared-id")
+        assertThrows(IllegalStateException::class.java) { gate.enter("shared-id") }
+        gate.leave("other-id")
+        assertThrows(IllegalStateException::class.java) { gate.enter("shared-id") }
+        gate.leave("shared-id"); gate.enter("shared-id")
+    }
     @Test fun asynchronousSelectionCannotInterleaveWithAnotherMutation() {
         val gate = MutationGate(); gate.enter("selection")
         assertThrows(IllegalStateException::class.java) { gate.enter("next") }

@@ -77,6 +77,11 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
                             .put("note", "Reported API values; listening confirmation required"), if (observed == requested) null else "VOLUME_NOT_OBSERVED")
                     } catch (e: Exception) { finish(null, e.message ?: "VOLUME_PROBE_FAILED") }
                 }, 500)
+            } else if (operation == "CHECK_CONTROLLER_APPROVALS") {
+                Thread({
+                    try { val report = ControllerApprovalCheck(context.applicationContext).run(); main.post { finish(report, null) } }
+                    catch (e: Exception) { main.post { finish(null, e.message ?: "CHECK_FAILED") } }
+                }, "ControllerApprovalCheck").start()
             } else if (operation == "CHECK_MANGO_CAPABILITIES") {
                 Thread({
                     try {

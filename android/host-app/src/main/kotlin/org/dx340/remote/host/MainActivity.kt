@@ -15,6 +15,8 @@ class MainActivity : Activity() {
     private var showDiagnostics = false
     private lateinit var appleMode: Button
     private lateinit var mangoMode: Button
+    private lateinit var controllers: ControllerManagementPanel
+    private val pairingExpiry = Runnable { refresh() }
     private val permissions get() = mutableListOf(Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.BLUETOOTH_ADVERTISE).apply { if (android.os.Build.VERSION.SDK_INT >= 33) add(Manifest.permission.POST_NOTIFICATIONS) }.toTypedArray()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,13 +45,18 @@ class MainActivity : Activity() {
         button("Grant Bluetooth permissions") { requestPermissions(permissions, 340) }
         button("Enable playback session access") { startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)) }
         button("Open pairing for 60 seconds") { start("PAIR") }
-        button("Approve pending controller") { HostService.instance?.approve(); refresh() }
+        controllers = ControllerManagementPanel(this, ::refresh)
+        content.addView(controllers)
         button("Probe source capabilities") { start("PROBE") }
         button("Show / hide technical diagnostics") { showDiagnostics = !showDiagnostics; refresh() }
         button("Export diagnostics") {
             startActivityForResult(Intent(Intent.ACTION_CREATE_DOCUMENT).setType("application/json").putExtra(Intent.EXTRA_TITLE, "dx340-diagnostic.json").addCategory(Intent.CATEGORY_OPENABLE), 341)
         }
-        button("Revoke all controller approvals") { HostService.instance?.revokeAll() }
+        button("Revoke all controller approvals") {
+            val service = HostService.instance
+            if (service != null) service.revokeAll() else ControllerApprovalStore(this).revokeAll()
+            refresh()
+        }
         button("Stop Bluetooth remote") { stopService(Intent(this, HostService::class.java)); refresh() }
         status = TextView(this).apply { textSize = 16f; setTextIsSelectable(true) }; content.addView(status)
         refresh()
@@ -66,10 +73,13 @@ class MainActivity : Activity() {
         if (::appleMode.isInitialized) appleMode.text = if (getSharedPreferences("apple-ui", MODE_PRIVATE).getBoolean("enabled", false)) "Disable optional Apple Music browsing" else "Enable optional Apple Music browsing"
         if (::mangoMode.isInitialized) mangoMode.text = if (getSharedPreferences("mango-ui", MODE_PRIVATE).getBoolean("enabled", false)) "Disable optional Mango folders" else "Enable optional Mango folders"
         val service = HostService.instance
+        if (::controllers.isInitialized) controllers.render(service)
+        content.removeCallbacks(pairingExpiry)
+        if (service != null && service.pairingRemainingMs > 0) content.postDelayed(pairingExpiry, service.pairingRemainingMs + 25)
         status.text = if (service == null) "Remote stopped. Tap Start Bluetooth remote, then Test Mango library to try browsing on this DX340." else if (showDiagnostics) service.status + "\n\n" + service.sources.diagnostic().toString(2) else "${service.status}\n\nNo controller phone is required for the local Mango library test. A phone running DX340 Remote is required to test Bluetooth control.\n\nApple Music library access is still under investigation."
     }
     override fun onResume() { super.onResume(); attach(); refresh() }
-    override fun onPause() { HostService.instance?.observer = null; super.onPause() }
+    override fun onPause() { HostService.instance?.observer = null; content.removeCallbacks(pairingExpiry); super.onPause() }
     @Deprecated("Activity result API for dependency-free diagnostic app")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

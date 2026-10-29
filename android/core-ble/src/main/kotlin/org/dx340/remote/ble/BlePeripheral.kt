@@ -149,6 +149,8 @@ class BlePeripheral(
         if (device == peer) forgetPeer()
         runCatching { server?.cancelConnection(device) }
     }
+    fun disconnectController(address: String) { peer?.takeIf { it.address == address }?.let(::disconnect) }
+    fun disconnectCurrent() { peer?.let(::disconnect) }
     fun stop() {
         val previousServer = server
         server = null

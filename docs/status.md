@@ -2,7 +2,13 @@
 
 Updated 29 October 2026 (Hong Kong). **Original signing key restored and both apps upgraded in place. Goal active; full system incomplete and physical phone/Mac acceptance remains pending.**
 
-## Current continuation: real Windows BLE central
+## Current continuation: individual controller management and session lifetime
+
+Implemented local Controller access list/per-identity revocation, identified pending approval and stopped-host management. Revocation preserves other approvals/OS bonds, invalidates the selected session and disconnects that peer. Opaque request-scoped authorization leases prevent old async work becoming valid after same-address reauthorization; mutation ownership cannot be borrowed with the same request ID. Unknown/offline bond snapshots no longer trigger blanket approval cleanup.
+
+VERIFIED: native build/lint86 JVM tests; isolated Android store checks preserve seven other identities on disk, reject invalid/capacity cases and retain approvals on an unknown snapshot. The real panel's isolated UI sequence2→1→0 passed with fixture cleanup; no real approval was touched. Final Windows unpaired GATT regression still denies all four protected operations0x05. Original-key in-place upgrade preserved all four preferences; installed companion e8a21bd4... matches the build. Shared phone stays09aaae78.../preceding Flutter32 checks. Both sources paused at35/services bound. Actual authenticated revocation/reapproval, native pairing consent, phones/Mac/listening/full reliability remain pending. See test-results/2026-10-29-controller-management.md. Goal active; full system incomplete.
+
+## Preceding continuation: real Windows BLE central
 
 VERIFIED real over-air host evidence through this PC's Intel Bluetooth radio: service discovery and uncached INFO/RX/TX GATT enumeration; unpaired INFO/CCC reads, RX first-fragment write and indication subscription all deny with0x05 Insufficient Authentication. Five fresh awake and five screen-off watcher rounds all discover the host; off-state is USB-powered Dozing for short samples, not deep idle/30minute/phone acceptance. Windows11 Pro26300/driver24.20.0.3 and isolated Python/Bleak dependencies recorded. No product APK changed.
 

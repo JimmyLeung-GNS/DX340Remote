@@ -96,10 +96,10 @@ Use a separate physical phone, API 31 or newer. Do not install on DX340 and coun
 
 1. Open DX340 Remote → **Setup**, grant Nearby Devices/notification access, then **Find DX340**.
 2. On DX340, **Open pairing for 60 seconds**. On the phone select the discovered DX340 and accept the OS authenticated pairing prompts on both devices.
-3. On DX340 tap **Approve pending controller**. On the phone tap **Retry authorization after approval**. If the window expired, reopen it first.
+3. On DX340 review the requesting identity under **Controller access**, then tap **Approve** for that named controller. On the phone tap **Retry authorization after approval**. If the pairing window expired, reopen it first. A changed request must be reviewed again.
 4. Player shows individually supported controls. Library browses the selected source; Queue displays only a source-provided queue. Disabled controls are not implemented by pretending a BLE write succeeded. Actual volume remains disabled pending output verification.
 5. The connection foreground service survives Activity recreation. Range recovery makes bounded retries and discards unsent commands; reconnection observes state without changing playback. Actual background/radio behavior remains untested on a separate phone.
-6. Tap **Disconnect** before switching controllers. The current beta accepts one controlling peer. Visible automatic handoff is still outstanding. Revoking approvals on DX340 denies future access; OS Bluetooth bonds are separate and retained.
+6. Tap **Disconnect** before switching controllers. The current beta accepts one controlling peer; automatic handoff is still outstanding. In DX340's **Controller access**, **Revoke access for…** removes only that identity's approval and disconnects its active session, retaining other approvals and OS bonds. Management also works while the remote service is stopped. **Revoke all controller approvals** removes all application approvals and closes pairing. These actions leave source playback running; actual multi-controller revocation/reapproval still requires physical acceptance.
 
 ## Mac and iPhone
 
