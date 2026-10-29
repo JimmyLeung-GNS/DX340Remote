@@ -2,6 +2,10 @@
 
 Updated 29 October 2026 (Hong Kong). **Goal active after the user's continuation request; full system incomplete.**
 
+## Mango listening matrix in progress (latest)
+
+New read-only folder inventory completed72 guarded probes/131 FLAC-WAV filename labels in six sampled directories. Prepared20 candidates across five album folders; all20 public container headers declare48kHz/24-bit stereo (not output/quality proof). Four samples are separately user-confirmed audible. Selection5 has a fresh matching Delusion:All source-state result and awaits the human answer; its initial filename-derived title mismatch remains failed, with the embedded ID3 title verified before a new deliberate selection. No source APK change: host04846d60.../phoneb12f83e4...; native108/preceding Flutter42/iOS scopes remain unchanged. Seven header-parser tests pass. See test-results/2026-10-29-mango-listening-matrix.md and actual artifacts/mango-listening-summary.json before continuing; do not replay or infer pending answers. Full system remains incomplete.
+
 ## Native Mango page cache (latest)
 
 Latest native host adds a bounded10-second/200-page metadata cache for Mango native browsing;108 JVM tests/build/lint pass. Installed companion04846d60... preserves four preferences and both browsing bindings. Actual read-only cached pages64–85ms versus fresh110–202ms in sampled local probes; refresh/source switching/expiry bypass or clear cache. Four assisted interruption/recovery regressions pass. Both players paused37; volume proof remains cleared. Native PLAY_ITEM still revalidates freshly twice; assisted UI pages remain live. Phone c24be4c/Flutter42/iOS40857287517 evidence is unchanged. The20 Apple audio confirmations remain scoped to earlier mixed builds; physical phone BLE, full Mango/SD/format/reliability/Watch remain open. See test-results/2026-10-29-native-page-cache.md. Goal active; full system incomplete.
