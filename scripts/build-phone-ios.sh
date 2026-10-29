@@ -97,3 +97,24 @@ xcrun simctl ui "$simulator" appearance dark
 xcrun simctl ui "$simulator" content_size accessibility-extra-extra-extra-large
 xcrun simctl launch "$simulator" org.dx340.remote.ios --capture-tab=volume-high >> artifacts/flutter-volume-fixture-launch.txt 2>&1
 capture 'Volume up' artifacts/flutter-synthetic-volume-large-dark.png
+
+# Persistent browsing controls use a distinct synthetic target, also covered by
+# the ordinary-app EXIT restoration above. No fixture ever sends BLE commands.
+cd "$repo/phone"
+flutter build ios --simulator --debug --no-codesign --target test_support/browsing_capture.dart > ../artifacts/flutter-ios-browsing-fixture-build.txt 2>&1
+cd "$repo"
+xcrun simctl terminate "$simulator" org.dx340.remote.ios 2>/dev/null || true
+xcrun simctl install "$simulator" phone/build/ios/iphonesimulator/Runner.app
+xcrun simctl ui "$simulator" content_size large
+xcrun simctl ui "$simulator" appearance light
+for destination in library queue; do
+    xcrun simctl terminate "$simulator" org.dx340.remote.ios 2>/dev/null || true
+    xcrun simctl launch "$simulator" org.dx340.remote.ios "--capture-tab=browsing-$destination" >> artifacts/flutter-browsing-fixture-launch.txt 2>&1
+    if [ "$destination" = library ]; then heading=Library; else heading=Queue; fi
+    capture "$heading" "artifacts/flutter-synthetic-browsing-$destination-light.png"
+done
+xcrun simctl terminate "$simulator" org.dx340.remote.ios
+xcrun simctl ui "$simulator" appearance dark
+xcrun simctl ui "$simulator" content_size accessibility-extra-extra-extra-large
+xcrun simctl launch "$simulator" org.dx340.remote.ios --capture-tab=browsing-library >> artifacts/flutter-browsing-fixture-launch.txt 2>&1
+capture Library artifacts/flutter-synthetic-browsing-large-dark.png

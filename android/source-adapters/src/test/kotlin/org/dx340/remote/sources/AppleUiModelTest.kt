@@ -59,6 +59,20 @@ class AppleUiModelTest {
         assertEquals(before.rows[0].title, after.rows[0].title)
         assertNotEquals(before.fingerprint, after.fingerprint)
     }
+    @Test fun toolbarSiblingMovementDoesNotExpireUnchangedRowsButRowMovementDoes() {
+        val back = UiNode("0.4", "0", className = "android.widget.ImageButton", description = "Navigate up", clickable = true)
+        val nodes = songs() + back
+        val before = AppleUiModel.parse(nodes, true)
+        val collapsed = nodes.map { if (it == back) it.copy(path = "0.5") else it }
+        val after = AppleUiModel.parse(collapsed, true)
+        assertNotEquals(before.back, after.back)
+        assertEquals(before.rows, after.rows)
+        assertEquals(before.fingerprint, after.fingerprint)
+        assertNotEquals(before.fingerprint, AppleUiModel.parse(songs(), true).fingerprint)
+        val movedRow = collapsed.map { if (it.path == "0.2.0" || it.path.startsWith("0.2.0."))
+            it.copy(path = it.path.replaceFirst("0.2.0", "0.2.9"), parent = it.parent?.replaceFirst("0.2.0", "0.2.9")) else it }
+        assertNotEquals(before.fingerprint, AppleUiModel.parse(movedRow, true).fingerprint)
+    }
     @Test fun recognizesObservedPlaylistRowsOnlyInsideVerifiedList() {
         val nodes = listOf(tab,
             UiNode("0.1", "0", "com.apple.android.music:id/toolbar_title", "Playlists"),

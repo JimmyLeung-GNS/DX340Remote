@@ -73,6 +73,96 @@ class _PhoneShellState extends State<PhoneShell>
   }
 
   void setup() => setState(() => _tab.value = 3);
+  Widget? browsingPlaybackBar() {
+    final title = textValue(remote.state['title']);
+    if (!remote.authorized || title.isEmpty || !{1, 2}.contains(_tab.value)) {
+      return null;
+    }
+    final artist = textValue(remote.state['artist']);
+    final playing = remote.state['playing'] == true;
+    final name = playing ? 'Pause' : 'Play';
+    final capability = playing ? 'canPause' : 'canPlay';
+    final details = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
+        if (artist.isNotEmpty &&
+            MediaQuery.textScalerOf(context).scale(1) <= 1.4)
+          Text(artist, maxLines: 1, overflow: TextOverflow.ellipsis),
+      ],
+    );
+    void open() => setState(() => _tab.value = 0);
+    final metadata = Semantics(
+      label: 'Open Player, $title${artist.isEmpty ? '' : ', $artist'}',
+      excludeSemantics: true,
+      button: true,
+      onTap: open,
+      child: apple
+          ? CupertinoButton(
+              alignment: Alignment.centerLeft,
+              onPressed: open,
+              child: details,
+            )
+          : TextButton(
+              onPressed: open,
+              child: Align(alignment: Alignment.centerLeft, child: details),
+            ),
+    );
+    return DecoratedBox(
+      key: const ValueKey('browsing-playback-bar'),
+      decoration: BoxDecoration(
+        color: apple
+            ? CupertinoColors.systemBackground.resolveFrom(context)
+            : Theme.of(context).colorScheme.surface,
+        border: Border(
+          top: BorderSide(
+            color: apple
+                ? CupertinoColors.separator.resolveFrom(context)
+                : Theme.of(context).dividerColor,
+          ),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        child: Row(
+          children: [
+            Expanded(child: metadata),
+            const SizedBox(width: 8),
+            SizedBox(
+              width: 48,
+              height: 48,
+              child: apple
+                  ? CupertinoButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: perform(
+                        remote.action(capability),
+                        () => remote.command('SET_PLAYING', {
+                          'playing': !playing,
+                        }, capability),
+                      ),
+                      child: Semantics(
+                        label: name,
+                        child: Icon(playing ? Icons.pause : Icons.play_arrow),
+                      ),
+                    )
+                  : IconButton(
+                      tooltip: name,
+                      onPressed: perform(
+                        remote.action(capability),
+                        () => remote.command('SET_PLAYING', {
+                          'playing': !playing,
+                        }, capability),
+                      ),
+                      icon: Icon(playing ? Icons.pause : Icons.play_arrow),
+                    ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget label(String text, {bool heading = false}) => Padding(
     padding: EdgeInsets.only(top: heading ? 24 : 8, bottom: 8),
     child: Semantics(
@@ -546,6 +636,7 @@ class _PhoneShellState extends State<PhoneShell>
         Icons.queue_music,
         Icons.bluetooth,
       ];
+      final playbackBar = browsingPlaybackBar();
       if (apple) {
         return CupertinoTheme(
           data: CupertinoThemeData(brightness: Theme.of(context).brightness),
@@ -563,6 +654,7 @@ class _PhoneShellState extends State<PhoneShell>
                       child: content,
                     ),
                   ),
+                  ?playbackBar,
                   // CupertinoTabScaffold normally supplies this chrome behavior;
                   // this shared shell composes the same fixed-height bar directly.
                   MediaQuery.withNoTextScaling(
@@ -588,7 +680,14 @@ class _PhoneShellState extends State<PhoneShell>
         appBar: AppBar(
           title: Text(_tab.value == 0 ? 'DX340' : _tabs[_tab.value]),
         ),
-        body: SafeArea(child: content),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(child: content),
+              ?playbackBar,
+            ],
+          ),
+        ),
         bottomNavigationBar: NavigationBar(
           selectedIndex: _tab.value,
           onDestinationSelected: (value) => setState(() => _tab.value = value),

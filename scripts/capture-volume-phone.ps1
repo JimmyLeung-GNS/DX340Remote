@@ -2,13 +2,14 @@ param(
     [Parameter(Mandatory=$true)][string]$Serial,
     [Parameter(Mandatory=$true)][string]$FixtureApk,
     [Parameter(Mandatory=$true)][string]$ProductionApk,
+    [ValidateSet('volume','browsing')][string]$Scenario = 'volume',
     [string]$Adb = "$env:LOCALAPPDATA/Android/Sdk/platform-tools/adb.exe"
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path $PSScriptRoot -Parent
 $fixture = (Resolve-Path -LiteralPath $FixtureApk).Path
 $production = (Resolve-Path -LiteralPath $ProductionApk).Path
-$captureRoot = Join-Path $repo 'artifacts/volume-captures'
+$captureRoot = Join-Path $repo "artifacts/$Scenario-captures"
 New-Item -ItemType Directory -Force -Path $captureRoot | Out-Null
 function Invoke-CaptureAdb([string[]]$CommandArguments) {
     & $Adb -s $Serial @CommandArguments
@@ -25,22 +26,27 @@ $nightToRestore = $Matches[1]
 & "$PSScriptRoot/verify-android-signing.ps1" -Serial $Serial -Apk $fixture -Adb $Adb
 & "$PSScriptRoot/verify-android-signing.ps1" -Serial $Serial -Apk $production -Adb $Adb
 $record = [ordered]@{
-    kind = 'native-Android-rendering-of-synthetic-volume-states-no-Bluetooth'
+    kind = "native-Android-rendering-of-synthetic-$Scenario-states-no-Bluetooth"
     fixtureSha256 = (Get-FileHash -LiteralPath $fixture -Algorithm SHA256).Hash.ToLowerInvariant()
     productionSha256 = (Get-FileHash -LiteralPath $production -Algorithm SHA256).Hash.ToLowerInvariant()
     originalFontScale = $originalFont; originalNightMode = $nightToRestore
-    fixtureEntryPoint = 'phone/test_support/volume_capture.dart'
+    fixtureEntryPoint = if ($Scenario -eq 'volume') { 'phone/test_support/volume_capture.dart' } else { 'phone/test_support/browsing_capture.dart' }
     semanticReadiness = 'UIAutomator unavailable on this device; inspect actual pixels. No BLE or audio claim.'
     ordinaryAppRestored = $false
 }
 $cleanupErrors = [System.Collections.Generic.List[string]]::new()
 try {
     Invoke-CaptureAdb @('install','-r',$fixture) | Out-Null
-    foreach ($state in @(
+    $states = if ($Scenario -eq 'volume') { @(
         @{ name='synthetic-high-dark.png'; mode='volume-high'; night='yes'; scale='1.0' },
         @{ name='synthetic-low-light.png'; mode='volume-low'; night='no'; scale='1.0' },
         @{ name='synthetic-large-dark.png'; mode='volume-high'; night='yes'; scale='1.5' }
-    )) {
+    ) } else { @(
+        @{ name='synthetic-library-dark.png'; mode='browsing-library'; night='yes'; scale='1.0' },
+        @{ name='synthetic-queue-light.png'; mode='browsing-queue'; night='no'; scale='1.0' },
+        @{ name='synthetic-library-large-dark.png'; mode='browsing-library'; night='yes'; scale='1.5' }
+    ) }
+    foreach ($state in $states) {
         Invoke-CaptureAdb @('shell','cmd','uimode','night',$state.night) | Out-Null
         Invoke-CaptureAdb @('shell','settings','put','system','font_scale',$state.scale) | Out-Null
         Invoke-CaptureAdb @('shell','am','force-stop','org.dx340.remote.controller') | Out-Null

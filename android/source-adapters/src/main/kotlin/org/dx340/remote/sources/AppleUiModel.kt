@@ -70,7 +70,12 @@ object AppleUiModel {
             val identity = nodes.filter { it.path == row.path || it.path.startsWith(row.path + ".") }
                 .joinToString("\u0000") { "${it.path}\u0000${it.id}\u0000${it.text}\u0000${it.description}" }
             "${row.path}:${row.title}:${row.subtitle}:${row.playable}:${row.browsable}\u0000$identity"
-        } + ":$back:$scroll"
+        // A collapsing toolbar can move its Back button among root siblings while
+        // the entire collection and every actionable row remain unchanged. Bind
+        // navigation availability here; perform() still checks the issued action's
+        // exact live path and signature before dispatch. Row paths/identity remain
+        // in the fingerprint, so moving/replacing a song still expires its ID.
+        } + ":back=${back != null}:$scroll"
         val hash = MessageDigest.getInstance("SHA-256").digest(signature.toByteArray()).joinToString("") { "%02x".format(it.toInt() and 255) }
         return ParsedAppleUi(header, rows, back, scroll, root, hash)
     }

@@ -28,6 +28,7 @@ class AppleMusicAccessibilityService : AccessibilityService() {
     private var last: Frame? = null
     private var eventPending = false
     private var lastReadiness = "not-bound"
+    private var lastValidation: JSONObject? = null
     private data class Tree(val window: Int, val nodes: List<UiNode>)
     private data class Action(val path: String, val kind: String, val signature: String)
     private data class Frame(val revision: String, val window: Int, val parsed: ParsedAppleUi, val actions: Map<String, Action>)
@@ -71,7 +72,7 @@ class AppleMusicAccessibilityService : AccessibilityService() {
     private fun signature(node: UiNode) = "${node.id}\u0000${node.text}\u0000${node.description}\u0000${node.className}"
     fun debugSnapshot(): JSONObject {
         val current = tree()
-        return JSONObject().put("window", current.window).put("nodes", JSONArray().apply { current.nodes.forEach { n ->
+        return JSONObject().put("window", current.window).put("validation", lastValidation ?: JSONObject.NULL).put("nodes", JSONArray().apply { current.nodes.forEach { n ->
             put(JSONObject().put("path", n.path).put("id", n.id).put("text", n.text).put("description", n.description)
                 .put("class", n.className).put("clickable", n.clickable).put("selected", n.selected).put("forward", n.forward))
         } })
@@ -117,7 +118,16 @@ class AppleMusicAccessibilityService : AccessibilityService() {
         val action = previous.actions[item] ?: error("EXPIRED_ITEM")
         require(kind == null || action.kind == kind) { "UNSUPPORTED_CAPABILITY" }
         val current = tree(); val parsed = AppleUiModel.parse(current.nodes, offlineContext)
-        require(current.window == previous.window && parsed.fingerprint == previous.parsed.fingerprint) { "STALE_LIBRARY" }
+        if (current.window != previous.window || parsed.fingerprint != previous.parsed.fingerprint) {
+            fun details(window: Int, value: ParsedAppleUi) = JSONObject().put("window", window).put("title", value.title)
+                .put("fingerprint", value.fingerprint).put("back", value.back).put("scroll", value.scroll)
+                .put("rows", JSONArray().apply { value.rows.forEach { row -> put(JSONObject().put("path", row.path)
+                    .put("title", row.title).put("subtitle", row.subtitle).put("playable", row.playable).put("browsable", row.browsable)) } })
+            // Bounded public-UI metadata for the debug receiver; never used to relax validation.
+            lastValidation = JSONObject().put("kind", kind ?: action.kind).put("actionPath", action.path)
+                .put("previous", details(previous.window, previous.parsed)).put("current", details(current.window, parsed))
+            error("STALE_LIBRARY")
+        }
         return current to action
     }
     fun validatePlayable(item: String, revision: String): String? = try { validate(item, revision, "play"); null } catch (e: Exception) { e.message ?: "UI_UNEXPECTED_SCREEN" }
