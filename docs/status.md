@@ -1,6 +1,8 @@
 # Implementation status
 
-Updated 29 October 2026 (Hong Kong). **Goal active after the user's continuation request; full system incomplete.**
+Updated 29 October 2026 (Hong Kong). **Goal BLOCKED on native pairing/listening participation and separate phone/Mac resources; full system incomplete.**
+
+Latest resumed audit: the same operator/hardware gates persisted throughc4ab197,e08b7cf and this turn after fresh local builds/signing, native metadata discrimination and preservation work. Only DX340 d is attached, its fresh bond dump lists JIMMYAH only, no new matching-code answer/approval was received, and current XcodeBuildMCP again fails spawn xcrun ENOENT. No live test/build is waiting. Fresh both sources paused37/proof false; no device setting changed by the audit. Full P0–P9/T01–T18 requirements remain intact and incomplete; no further justified independent product patch identified. Read test-results/2026-10-29-resumed-resource-audit.md for completion findings and exact resume steps. Earlier active-goal wording below records preceding checkpoints.
 
 ## Native Mango album coverage and source category limit
 
