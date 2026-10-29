@@ -3,6 +3,7 @@ package org.dx340.remote.host
 import android.accessibilityservice.AccessibilityService
 import android.app.KeyguardManager
 import android.content.Intent
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
@@ -22,6 +23,7 @@ class MangoAccessibilityService : AccessibilityService() {
     companion object {
         var instance: MangoAccessibilityService? = null; private set
         const val PACKAGE = "com.ibasso.music"
+        private const val PREFETCH = AccessibilityNodeInfo.FLAG_PREFETCH_DESCENDANTS_HYBRID or AccessibilityNodeInfo.FLAG_PREFETCH_UNINTERRUPTIBLE
     }
     private val main = Handler(Looper.getMainLooper())
     private val session = UUID.randomUUID().toString()
@@ -55,7 +57,11 @@ class MangoAccessibilityService : AccessibilityService() {
     fun hasForegroundWindow() = rootInActiveWindow?.packageName?.toString() == PACKAGE
     private fun tree(): Tree {
         readiness()?.let { error(it) }
-        val root = rootInActiveWindow ?: error("UI_FOREGROUND_REQUIRED")
+        // Complete the public API's bounded prefetch batch before walking it, so
+        // child requests do not interrupt that batch. Live action validation stays separate.
+        val root = (if (Build.VERSION.SDK_INT >= 33) getRootInActiveWindow(
+            PREFETCH
+        ) else rootInActiveWindow) ?: error("UI_FOREGROUND_REQUIRED")
         require(root.packageName?.toString() == PACKAGE) { "UI_FOREGROUND_REQUIRED" }
         val nodes = mutableListOf<UiNode>()
         val pending = ArrayDeque<Pair<AccessibilityNodeInfo, String>>(); pending.add(root to "0")
@@ -71,7 +77,7 @@ class MangoAccessibilityService : AccessibilityService() {
             require(path.count { it == '.' } <= 32 && node.childCount <= 100) { "UI_TREE_LIMIT" }
             val count = node.childCount
             for (i in 0 until count) {
-                val child = try { node.getChild(i) } catch (_: IndexOutOfBoundsException) { error("UI_TREE_CHANGED") }
+                val child = try { if (Build.VERSION.SDK_INT >= 33) node.getChild(i, PREFETCH) else node.getChild(i) } catch (_: IndexOutOfBoundsException) { error("UI_TREE_CHANGED") }
                 child?.let { pending.add(it to "$path.$i") }
             }
         }

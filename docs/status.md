@@ -2,7 +2,13 @@
 
 Updated 29 October 2026 (Hong Kong). **Original signing key restored and both apps upgraded in place. Goal active; full system incomplete and physical phone/Mac acceptance remains pending.**
 
-## Current continuation: individual controller management and session lifetime
+## Current continuation: measured Mango prefetch comparison
+
+VERIFIED source-local before/experiment/restored-baseline comparison: six Playlist recovery baselines4.100–4.518seconds versus three retained root/child prefetch samples3.704–3.952seconds (sample mean about450ms/10.5% lower). Android33 tree reads now complete bounded hybrid prefetch batches before child traversal; Android31/32 retain preceding APIs. Tree throughput did not consistently improve and root-refresh improvement is not claimed. The proposed3second uncached-page target still FAILS; no phone timing is inferred.
+
+Native build/lint86 JVM tests pass. Nested Music/root recovery and four pending screen-off/source-change/token regressions pass. Original-key companion40114ff8... installed/pulled exactly, four preferences unchanged, sources paused at35/services bound/offline. Shared phone remains09aaae78.../preceding Flutter32 scope; current Swift still needs Mac compilation. Evidence/scope: test-results/2026-10-29-mango-prefetch.md. Physical pairing/revocation/phones/listening/full reliability remain pending; goal active, full system incomplete.
+
+## Preceding continuation: individual controller management and session lifetime
 
 Implemented local Controller access list/per-identity revocation, identified pending approval and stopped-host management. Revocation preserves other approvals/OS bonds, invalidates the selected session and disconnects that peer. Opaque request-scoped authorization leases prevent old async work becoming valid after same-address reauthorization; mutation ownership cannot be borrowed with the same request ID. Unknown/offline bond snapshots no longer trigger blanket approval cleanup.
 
