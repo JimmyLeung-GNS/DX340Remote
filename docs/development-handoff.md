@@ -1,5 +1,7 @@
 # Development handoff — 29 October 2026
 
+**Superseding workspace notice:** continue in `C:\GitHub\DX340Remote`, branch `codex/source-recovery-checkpoint` (b3511ec and later), on the current Windows PC JIMMYAH. This old checkout/branch is preserved history. The primary checkout includes newer cancellation, queue pagination, elapsed state and authorization lifetime guards, real authenticated Windows diagnostic evidence, current iOS baseline builds and the selectively ported volume implementation. Read its latest status and dated reports before any device action. Do not reuse old34–35 proof to enable a new build; fresh37→36→37 listening is being recorded there. Full physical-phone/Watch acceptance remains incomplete.
+
 **Resume notice:** the user subsequently requested continuing development on29 October. The goal is active again; read the newest continuation in `docs/status.md` before using the historical pause checkpoint below.
 
 **Implementation paused at the user's request so development can move to another computer. The full system is incomplete.** This document is the latest checkpoint; older dated sections in status.md are historical evidence, not the current feature summary. Resume only when the user asks to continue.

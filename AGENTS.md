@@ -2,6 +2,8 @@
 
 ## Scope
 
+Current workspace notice (29 October2026): active development continues in `C:\GitHub\DX340Remote` on `codex/source-recovery-checkpoint`. This `Documents\Codex\DX340Remote` checkout on `codex/output-volume` is historical. Read the primary checkout's AGENTS.md/status/handoff before editing; do not overwrite its newer queue, elapsed, source-cancellation or authorization-lease changes with this branch. Historical34–35 listening evidence remains separate from its fresh37→36→37 check.
+
 When resuming on another computer, read `docs/development-handoff.md` before changing code. It records the latest working branch, user decisions, verified evidence and unfinished checks; default `main` may be behind the handoff branch.
 
 Read `docs/implementation-plan.md` and `docs/status.md` before implementing. The full system is a DX340 BLE companion, iPhone remote, Android remote and later Watch extension. Begin with P0 through P2, then continue through the remaining stages. Do not stop at a plan, skeleton or mock UI when implementation is requested.

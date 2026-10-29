@@ -1,5 +1,7 @@
 # DX340 Bluetooth Remote
 
+Current development continues in `C:\GitHub\DX340Remote`, branch `codex/source-recovery-checkpoint` (b3511ec and later). This `codex/output-volume` checkout is historical; read the primary checkout's AGENTS.md, docs/status.md and docs/development-handoff.md before continuing. Public source/evidence summaries are on that branch; main can lag the active checkpoint.
+
 **Continuing on another computer:** read [the development handoff](docs/development-handoff.md) and check out `codex/output-volume`. Development was paused by the user on29 October2026; the full system is incomplete.
 
 Development beta: Kotlin DX340 companion and a shared Flutter Android/iPhone interface over native Kotlin/Swift Bluetooth components, sharing BLE protocol v1. Native reference clients are retained during physical parity verification. Music continues through the installed Mango Player or Apple Music on DX340. Everyday control has no Wi-Fi/cloud path.
