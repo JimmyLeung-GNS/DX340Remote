@@ -6,9 +6,66 @@ import 'package:dx340_phone/main.dart';
 import 'package:dx340_phone/remote.dart';
 import 'package:dx340_phone/playback_progress.dart';
 import 'remote_test.dart' show FakeBridge, snapshot;
+import '../test_support/volume_capture.dart' show VolumeCaptureBridge;
 
 void main() {
   for (final platform in [TargetPlatform.android, TargetPlatform.iOS]) {
+    testWidgets(
+      '$platform volume boundaries remain readable and guarded at large text',
+      (tester) async {
+        debugDefaultTargetPlatformOverride = platform;
+        addTearDown(() => debugDefaultTargetPlatformOverride = null);
+        tester.platformDispatcher.textScaleFactorTestValue = 2.5;
+        addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+        await tester.pumpWidget(
+          DX340App(remote: Remote(VolumeCaptureBridge(low: false))),
+        );
+        await tester.pumpAndSettle();
+        await tester.scrollUntilVisible(
+          find.text('Volume up'),
+          200,
+          scrollable: find.byType(Scrollable).first,
+        );
+        expect(tester.takeException(), isNull);
+        if (platform == TargetPlatform.android) {
+          expect(
+            tester
+                .widget<OutlinedButton>(
+                  find.widgetWithText(OutlinedButton, 'Volume down'),
+                )
+                .onPressed,
+            isNotNull,
+          );
+          expect(
+            tester
+                .widget<OutlinedButton>(
+                  find.widgetWithText(OutlinedButton, 'Volume up'),
+                )
+                .onPressed,
+            isNull,
+          );
+        } else {
+          expect(
+            tester
+                .widget<CupertinoButton>(
+                  find.widgetWithText(CupertinoButton, 'Volume down'),
+                )
+                .onPressed,
+            isNotNull,
+          );
+          expect(
+            tester
+                .widget<CupertinoButton>(
+                  find.widgetWithText(CupertinoButton, 'Volume up'),
+                )
+                .onPressed,
+            isNull,
+          );
+        }
+        await tester.pumpWidget(const SizedBox());
+        debugDefaultTargetPlatformOverride = null;
+      },
+    );
     testWidgets(
       '$platform disables cached assisted rows without disabling native refresh',
       (tester) async {

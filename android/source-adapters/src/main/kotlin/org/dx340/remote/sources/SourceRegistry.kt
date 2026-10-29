@@ -46,12 +46,17 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     private val sessionAccess = SourceSessionAccess(
         { manager.addOnActiveSessionsChangedListener(sessionsChanged, listener, main) },
         { manager.removeOnActiveSessionsChangedListener(sessionsChanged) }, ::loseSessionAccess)
+    val outputVolume = AndroidOutputVolume(context, main, { selected + "|" + epoch(selected) + "|" + version(selected) }, {
+        !closed && accessError == null && controllers[selected]?.playbackState?.state == PlaybackState.STATE_PLAYING &&
+            runCatching { manager.getActiveSessions(listener).none { it.packageName != selected && it.playbackState?.state !in listOf(PlaybackState.STATE_PAUSED, PlaybackState.STATE_STOPPED, PlaybackState.STATE_NONE) } }.getOrDefault(false)
+    }, changed)
 
     fun start() {
         refresh(); probeBrowsers()
     }
     fun close() {
         closed = true
+        outputVolume.close()
         callbackGuard.close()
         browseRequests.toList().forEach { it.cancel("SOURCE_NOT_READY") }
         main.removeCallbacksAndMessages(null)
@@ -71,6 +76,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
             override fun onPlaybackStateChanged(state: PlaybackState?) = callbackGuard.dispatch(lease, changed)
             override fun onMetadataChanged(metadata: android.media.MediaMetadata?) = callbackGuard.dispatch(lease, changed)
             override fun onQueueChanged(queue: MutableList<android.media.session.MediaSession.QueueItem>?) = callbackGuard.dispatch(lease, changed)
+            override fun onAudioInfoChanged(info: MediaController.PlaybackInfo) = callbackGuard.dispatch(lease, changed)
             override fun onSessionDestroyed() {
                 if (!callbackGuard.retire(lease)) return
                 controllers.remove(pkg); tokens.remove(pkg); callbacks.remove(pkg)
@@ -99,6 +105,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         controllers.forEach { (pkg, controller) -> callbacks[pkg]?.let { runCatching { controller.unregisterCallback(it) } } }
         controllers.clear(); tokens.clear(); callbacks.clear(); items.clear(); proofs.clear(); rootSamples.clear()
         PACKAGES.forEach { epochs[it] = UUID.randomUUID().toString() }
+        outputVolume.control.reset()
     }
     fun probeBrowsers() {
         if (closed) return
@@ -154,9 +161,9 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         put("browseMode", if (usingUi(pkg)) "ui-assisted" else "direct")
         put("canBrowseFolders", pkg == PACKAGES[0] && mangoUiLibrary?.ready == true)
         if (pkg == PACKAGES[0] && mangoUiLibrary?.enabled == true) put("uiBrowseReason", mangoUiLibrary.explanation)
-        put("canSearch", false); put("canAdjustVolume", false); put("canResume", false); put("canColdLaunch", false)
+        put("canSearch", false); put("canAdjustVolume", pkg == selected && outputVolume.state().optBoolean("verified")); put("canResume", false); put("canColdLaunch", false)
         put("canShuffle", false); put("canRepeat", false)
-        put("reason", if (usingUi(pkg)) uiLibrary?.explanation else "Actions reflect advertised/observed source APIs; physical acceptance remains separate. Volume is disabled until output is measured.")
+        put("reason", if (usingUi(pkg)) uiLibrary?.explanation else "Actions reflect advertised/observed source APIs; physical acceptance remains separate.")
         if (!sessionReady) {
             // A connected browser or saved Mango verification must not keep controls enabled.
             keys().asSequence().filter { it.startsWith("can") }.toList().forEach { put(it, false) }
@@ -184,6 +191,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
             .put("duration", duration).put("position", progress.position).put("playbackSpeed", progress.speed)
             .put("playing", p?.state == PlaybackState.STATE_PLAYING)
             .put("playbackState", p?.state ?: 0).put("capabilities", capabilities(selected))
+            .put("volume", outputVolume.state())
             .put("accessError", accessError ?: JSONObject.NULL)
     }
     fun select(pkg: String) { require(pkg in PACKAGES) { "MISSING_SOURCE" }; selected = pkg; changed() }

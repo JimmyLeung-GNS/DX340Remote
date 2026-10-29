@@ -21,6 +21,14 @@
         "additionalProperties": false,
         "allOf": [{"if": {"required": ["offset"], "properties": {"offset": {"minimum": 1}}}, "then": {"required": ["revision"], "properties": {"revision": {"type": "string", "minLength": 1}}}}]
       }}
+    }},
+    {"if": {"properties": {"type": {"const": "ADJUST_VOLUME"}}}, "then": {
+      "required": ["source", "sourceEpoch", "args"],
+      "properties": {"args": {"required": ["delta", "expectedVolume", "profileId"], "properties": {
+        "delta": {"type": "integer", "enum": [-1, 1]},
+        "expectedVolume": {"type": "integer", "minimum": 0, "maximum": 2147483647},
+        "profileId": {"type": "string", "minLength": 1, "maxLength": 64}
+      }}}
     }}
   ],
   "additionalProperties": false

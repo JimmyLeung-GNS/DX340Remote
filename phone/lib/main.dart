@@ -234,7 +234,34 @@ class _PhoneShellState extends State<PhoneShell>
         ),
       if (remote.authorized && !remote.can('canSeek'))
         label('Seeking is unavailable for this source.'),
-      label('Volume control awaits verification on the DX340 output.'),
+      label('Volume', heading: true),
+      if (remote.can('canAdjustVolume') &&
+          remote.volume['verified'] == true) ...[
+        label(
+          'Level ${remote.volume['current']} · ${textValue(remote.volume['outputLabel'])}',
+        ),
+        label(
+          'Confirmed range ${remote.volume['verifiedMinimum']}–${remote.volume['verifiedMaximum']}. Recheck on DX340 after changing the output or gain.',
+        ),
+        action(
+          'Volume down',
+          perform(
+            remote.volumeStepAvailable(-1),
+            () => remote.adjustVolume(-1),
+          ),
+          icon: Icons.volume_down,
+        ),
+        action(
+          'Volume up',
+          perform(remote.volumeStepAvailable(1), () => remote.adjustVolume(1)),
+          icon: Icons.volume_up,
+        ),
+      ] else
+        label(
+          remote.authorized && textValue(remote.volume['reason']).isNotEmpty
+              ? textValue(remote.volume['reason'])
+              : 'Verify this source and output in the DX340 companion before using phone volume.',
+        ),
       action(
         'Refresh player',
         perform(remote.authorized, () => remote.command('GET_STATE')),

@@ -39,7 +39,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     private var connectionGeneration = 0
     private var writeTimeout: Task<Void, Never>?
     private var pending: [String: String] = [:]
-    private let mutations: Set<String> = ["SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "SELECT_SOURCE", "PLAY_ITEM", "PLAY_QUEUE_ITEM"]
+    private let mutations: Set<String> = ["SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "SELECT_SOURCE", "PLAY_ITEM", "PLAY_QUEUE_ITEM", "ADJUST_VOLUME"]
     var mutationPending: Bool { pending.values.contains { mutations.contains($0) } }
     private struct BrowseLocation { let source: String; let epoch: String; let parent: String? }
     private var browseLocations: [String: BrowseLocation] = [:]
@@ -207,7 +207,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         if type != "ACCEPTED" { queueLocations[id] = nil }
         if type != "ACCEPTED" { pending[id] = nil }
         if type == "HELLO" { hostEpoch = reply["hostEpoch"] as? String ?? ""; authorize(); return }
-        if type == "ERROR" { browseLocations[id] = nil; if id == activeBrowseId { library = [:] }; if id == activeQueueId { queue = []; queueRevision = ""; queuePage = [:] }; status = errorMessage(data["code"] as? String ?? "Source error"); return }
+        if type == "ERROR" { if reply["hostEpoch"] as? String == hostEpoch, let fresh = data["state"] as? [String: Any] { applyState(fresh) }; browseLocations[id] = nil; if id == activeBrowseId { library = [:] }; if id == activeQueueId { queue = []; queueRevision = ""; queuePage = [:] }; status = errorMessage(data["code"] as? String ?? "Source error"); return }
         if type == "ACCEPTED" { status = "Waiting for source…"; return }
         guard reply["hostEpoch"] as? String == hostEpoch else { disconnect(); return }
         if operation == "AUTHORIZE", data["authorized"] as? Bool == true { authorized = true; status = "Connected to DX340" }
@@ -263,6 +263,9 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     }
     private func errorMessage(_ code: String) -> String {
         switch code {
+        case "STALE_VOLUME": return "Volume changed on DX340. Refresh before choosing another step."
+        case "VOLUME_AT_BOUNDARY": return "This is the edge of the locally confirmed range. Recheck volume on DX340 to use another range."
+        case "VOLUME_PROFILE_CHANGED", "VOLUME_VERIFICATION_REQUIRED", "VOLUME_SOURCE_NOT_READY": return "Play the selected source and verify its output volume in the DX340 companion."
         case "UI_PERMISSION_REQUIRED": return "On DX340, enable the selected player's optional browsing service in Accessibility settings."
         case "UI_SCREEN_UNLOCK_REQUIRED": return "Wake and unlock DX340 for assisted browsing."
         case "UI_FOREGROUND_REQUIRED", "UI_SETUP_REQUIRED", "UI_UNEXPECTED_SCREEN", "UI_STORAGE_CONTEXT_REQUIRED": return "Open the selected player's local/downloaded library on DX340, then refresh."

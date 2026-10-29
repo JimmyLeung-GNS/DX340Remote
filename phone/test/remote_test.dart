@@ -47,6 +47,75 @@ Json snapshot({
 
 void main() {
   test(
+    'verified volume range and identity must accompany each deliberate step',
+    () async {
+      final bridge = FakeBridge();
+      final remote = Remote(bridge);
+      Json volumeSnapshot({bool authorized = true, bool mutation = false}) {
+        final data = snapshot(
+          authorized: authorized,
+          mutation: mutation,
+          caps: {'canAdjustVolume': true},
+        );
+        data['state']['volume'] = {
+          'current': 35,
+          'verified': true,
+          'verifiedMinimum': 34,
+          'verifiedMaximum': 35,
+          'profileId': 'local-proof',
+        };
+        return data;
+      }
+
+      remote.accept(volumeSnapshot());
+      await remote.adjustVolume(1);
+      expect(bridge.calls, isEmpty);
+      await remote.adjustVolume(-1);
+      expect(bridge.calls.single.$2, {
+        'type': 'ADJUST_VOLUME',
+        'args': {'delta': -1, 'expectedVolume': 35, 'profileId': 'local-proof'},
+      });
+      bridge.calls.clear();
+      remote.accept(volumeSnapshot(authorized: false));
+      await remote.adjustVolume(-1);
+      expect(bridge.calls, isEmpty);
+      remote.accept(volumeSnapshot(mutation: true));
+      await remote.adjustVolume(-1);
+      expect(bridge.calls, isEmpty);
+      final bad = volumeSnapshot();
+      bad['state']['volume']['current'] = '35';
+      remote.accept(bad);
+      await remote.adjustVolume(-1);
+      expect(bridge.calls, isEmpty);
+      remote.dispose();
+    },
+  );
+  test(
+    'volume double tap and reconnection do not replay a pending step',
+    () async {
+      final bridge = FakeBridge()..pending = Completer();
+      final remote = Remote(bridge);
+      final data = snapshot(caps: {'canAdjustVolume': true});
+      data['state']['volume'] = {
+        'current': 35,
+        'verified': true,
+        'verifiedMinimum': 34,
+        'verifiedMaximum': 35,
+        'profileId': 'proof',
+      };
+      remote.accept(data);
+      final first = remote.adjustVolume(-1);
+      await remote.adjustVolume(-1);
+      expect(bridge.calls.length, 1);
+      remote.accept(snapshot(authorized: false));
+      bridge.pending!.complete();
+      await first;
+      remote.accept(data);
+      expect(bridge.calls.length, 1);
+      remote.dispose();
+    },
+  );
+  test(
     'cached assisted pages cannot borrow native Mango capabilities after UI loss',
     () async {
       final bridge = FakeBridge();

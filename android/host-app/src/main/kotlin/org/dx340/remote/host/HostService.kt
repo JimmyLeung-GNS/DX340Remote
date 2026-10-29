@@ -235,6 +235,16 @@ class HostService : Service() {
                             sources.command(op, args)
                             result(JSONObject().put("outcome", "dispatched").put("observation", "Await source state; audible completion is not confirmed"))
                         }
+                        "ADJUST_VOLUME" -> {
+                            respond("ACCEPTED")
+                            sources.outputVolume.control.adjust(args.opt("delta"), args.opt("expectedVolume"), args.optString("profileId"), {
+                                authorization.isCurrent(requestLease) && authenticated == device && approved.contains(device.address) && device.bondState == BluetoothDevice.BOND_BONDED
+                            }) { error ->
+                                val data = if (error == null) JSONObject().put("outcome", "observed") else JSONObject().put("code", error)
+                                val value = respond(if (error == null) "RESULT" else "ERROR", data.put("state", sources.state()))
+                                ledger.finish(id, value); mutationGate.leave(id); gateEntered = false
+                            }
+                        }
                         else -> error("UNSUPPORTED_CAPABILITY")
                     }
                 }

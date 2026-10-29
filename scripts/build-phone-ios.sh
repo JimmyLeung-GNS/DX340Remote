@@ -19,7 +19,7 @@ cd phone
 flutter pub get --enforce-lockfile
 flutter analyze > ../artifacts/flutter-ios-analyze.txt 2>&1
 flutter test --reporter expanded > ../artifacts/flutter-ios-tests.txt 2>&1
-flutter build ios --simulator --debug --no-codesign > ../artifacts/flutter-ios-build.txt 2>&1
+flutter build ios --simulator --debug --no-codesign --target lib/main.dart > ../artifacts/flutter-ios-build.txt 2>&1
 cd "$repo"
 swiftc scripts/check-apple-capture.swift -o work/check-flutter-capture
 work/check-flutter-capture --self-test > artifacts/flutter-capture-matcher-tests.txt
@@ -44,6 +44,7 @@ capture() {
     return 1
 }
 xcrun simctl ui "$simulator" appearance light
+
 xcrun simctl ui "$simulator" content_size large
 for tab in player library queue setup; do
     xcrun simctl terminate "$simulator" org.dx340.remote.ios 2>/dev/null || true
@@ -61,3 +62,38 @@ xcrun simctl launch "$simulator" org.dx340.remote.ios --capture-tab=player >> ar
 capture DX340 artifacts/flutter-player-large-dark.png
 xcrun simctl ui "$simulator" content_size large
 xcrun simctl ui "$simulator" appearance light
+
+# The fixture is a separate debug target. Always restore the ordinary target/app,
+# including when capture verification fails, so Xcode never inherits a fake remote.
+restore_ordinary_phone() {
+    fixture_status=$?
+    trap - EXIT
+    cd "$repo/phone"
+    if ! flutter build ios --simulator --debug --no-codesign --target lib/main.dart > ../artifacts/flutter-ios-restore-build.txt 2>&1; then exit 1; fi
+    cd "$repo"
+    xcrun simctl terminate "$simulator" org.dx340.remote.ios 2>/dev/null || true
+    if ! xcrun simctl install "$simulator" phone/build/ios/iphonesimulator/Runner.app; then exit 1; fi
+    xcrun simctl ui "$simulator" content_size large
+    xcrun simctl ui "$simulator" appearance light
+    if ! xcrun simctl launch "$simulator" org.dx340.remote.ios --capture-tab=player >> artifacts/flutter-restored-launch.txt 2>&1; then exit 1; fi
+    if [ "$fixture_status" -eq 0 ]; then
+        if ! capture DX340 artifacts/flutter-restored-player-light.png; then exit 1; fi
+    fi
+    exit "$fixture_status"
+}
+trap restore_ordinary_phone EXIT
+cd "$repo/phone"
+flutter build ios --simulator --debug --no-codesign --target test_support/volume_capture.dart > ../artifacts/flutter-ios-volume-fixture-build.txt 2>&1
+cd "$repo"
+xcrun simctl terminate "$simulator" org.dx340.remote.ios 2>/dev/null || true
+xcrun simctl install "$simulator" phone/build/ios/iphonesimulator/Runner.app
+for mode in volume-high volume-low; do
+    xcrun simctl terminate "$simulator" org.dx340.remote.ios 2>/dev/null || true
+    xcrun simctl launch "$simulator" org.dx340.remote.ios "--capture-tab=$mode" >> artifacts/flutter-volume-fixture-launch.txt 2>&1
+    capture 'Volume up' "artifacts/flutter-synthetic-$mode-light.png"
+done
+xcrun simctl terminate "$simulator" org.dx340.remote.ios
+xcrun simctl ui "$simulator" appearance dark
+xcrun simctl ui "$simulator" content_size accessibility-extra-extra-extra-large
+xcrun simctl launch "$simulator" org.dx340.remote.ios --capture-tab=volume-high >> artifacts/flutter-volume-fixture-launch.txt 2>&1
+capture 'Volume up' artifacts/flutter-synthetic-volume-large-dark.png

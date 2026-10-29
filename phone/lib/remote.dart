@@ -58,6 +58,35 @@ class Remote extends ChangeNotifier {
   bool get busy => mutationPending || _dispatchingMutation;
   bool can(String capability) => authorized && caps[capability] == true;
   bool action(String capability) => can(capability) && !busy;
+  Json get volume => object(state['volume']);
+  bool volumeStepAvailable(int delta) {
+    if (!action('canAdjustVolume') ||
+        volume['verified'] != true ||
+        !{-1, 1}.contains(delta) ||
+        textValue(volume['profileId']).isEmpty) {
+      return false;
+    }
+    final current = volume['current'],
+        low = volume['verifiedMinimum'],
+        high = volume['verifiedMaximum'];
+    return current is int &&
+        low is int &&
+        high is int &&
+        low <= current &&
+        current <= high &&
+        current + delta >= low &&
+        current + delta <= high;
+  }
+
+  Future<void> adjustVolume(int delta) async {
+    if (!volumeStepAvailable(delta)) return;
+    await command('ADJUST_VOLUME', {
+      'delta': delta,
+      'expectedVolume': volume['current'],
+      'profileId': volume['profileId'],
+    }, 'canAdjustVolume');
+  }
+
   bool get assisted =>
       library['uiAssisted'] == true || caps['browseMode'] == 'ui-assisted';
   bool get assistedReady => can(

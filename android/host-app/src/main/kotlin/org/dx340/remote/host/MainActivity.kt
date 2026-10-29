@@ -26,6 +26,7 @@ class MainActivity : Activity() {
         content.addView(TextView(this).apply { text = "Music stays in Mango Player or Apple Music. Enable the remote, then authorize your phone here."; textSize = 18f })
         button("Start Bluetooth remote") { start("START") }
         button("Test Mango library on this DX340") { startActivity(Intent(this, BrowseTestActivity::class.java)) }
+        button("Verify output volume on this DX340") { startActivity(Intent(this, VolumeCheckActivity::class.java)) }
         appleMode = button("Enable optional Apple Music browsing") {
             val prefs = getSharedPreferences("apple-ui", MODE_PRIVATE)
             val enable = !prefs.getBoolean("enabled", false)
