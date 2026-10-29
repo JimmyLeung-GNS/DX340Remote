@@ -1,5 +1,7 @@
 # Development handoff — 29 October 2026
 
+**Resume notice:** the user subsequently requested continuing development on29 October. The goal is active again; read the newest continuation in `docs/status.md` before using the historical pause checkpoint below.
+
 **Implementation paused at the user's request so development can move to another computer. The full system is incomplete.** This document is the latest checkpoint; older dated sections in status.md are historical evidence, not the current feature summary. Resume only when the user asks to continue.
 
 ## Open the right source

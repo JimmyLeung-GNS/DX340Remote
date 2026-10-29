@@ -1,6 +1,10 @@
 # Implementation status
 
-Updated 29 October 2026 (Hong Kong). **Goal paused at the user's request; full system incomplete.**
+Updated 29 October 2026 (Hong Kong). **Goal active after the user's resume request; full system incomplete.**
+
+## Resumed continuation
+
+Resumed from clean `codex/output-volume` at0f9d2ad; DX340 serial d is connected again. The saved native iOS run40739133956 completed successfully (3 Swift tests/build/launch). Shared run40740304213 failed the same synthetic control OCR gate: Vision read an icon-prefixed volume label. Canonical Flutter analysis/14 tests/build/launch had succeeded; the workflow itself did not pass. Evidence was downloaded to artifacts/resume-native-40739133956/ and resume-flutter-40740304213/. A narrow observed bullet/middle-dot control-label matcher and10 positive/negative readiness cases are now being verified on Mac CI. Navigation-title/tab and complete-screen checks remain strict. No playback/radio claim follows from capture readiness. Phone rendering review/documentation and physical verification remain unfinished.
 
 ## Device-transfer checkpoint
 

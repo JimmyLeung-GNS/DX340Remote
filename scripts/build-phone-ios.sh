@@ -22,6 +22,7 @@ flutter test --reporter expanded > ../artifacts/flutter-ios-tests.txt 2>&1
 flutter build ios --simulator --debug --no-codesign > ../artifacts/flutter-ios-build.txt 2>&1
 cd "$repo"
 swiftc scripts/check-apple-capture.swift -o work/check-flutter-capture
+work/check-flutter-capture --self-test > artifacts/flutter-capture-matcher-tests.txt
 xcrun simctl boot "$simulator" 2>/dev/null || true
 xcrun simctl bootstatus "$simulator" -b > artifacts/flutter-simulator-boot.txt 2>&1
 xcrun simctl install "$simulator" phone/build/ios/iphonesimulator/Runner.app
