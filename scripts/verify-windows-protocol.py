@@ -14,10 +14,11 @@ import platform
 import re
 
 from bleak import BleakClient, BleakScanner
+from bleak.exc import BleakGATTProtocolError
 from winrt.windows.devices.bluetooth import BluetoothAdapter, BluetoothLEDevice
 from winrt.windows.devices.enumeration import DeviceInformation
 from windows_ble_protocol import (SERVICE, INFO, RX, TX, MAX_MESSAGE, ReadOnlySession,
-                                  decode_object, require_authenticated_bond, run_read_only_checks)
+                                  decode_object, require_authenticated_bond, run_read_only_checks, diagnostic_failure)
 
 OUT = Path(__file__).resolve().parents[1] / 'artifacts' / 'windows-ble'
 
@@ -34,17 +35,20 @@ async def inspect_bond(device):
 
 
 async def verify(args, report):
+    report['phase'] = 'adapter'
     adapter = await BluetoothAdapter.get_default_async()
     if adapter is None or not adapter.is_low_energy_supported or not adapter.is_central_role_supported:
         raise ValueError('BLE_CENTRAL_REQUIRED')
     radio = await adapter.get_radio_async()
     if radio.state.name != 'ON':
         raise ValueError('BLUETOOTH_OFF')
+    report['phase'] = 'scan'
     devices = await BleakScanner.discover(timeout=args.seconds, service_uuids=[SERVICE], return_adv=True)
     matching = [device for device, adv in devices.values() if SERVICE in adv.service_uuids]
     if len(matching) != 1:
         raise ValueError('EXACTLY_ONE_COMPANION_REQUIRED')
     device = matching[0]
+    report['phase'] = 'bond-preflight'
     report['bondBefore'] = await inspect_bond(device)
     require_authenticated_bond(report['bondBefore']['paired'], report['bondBefore']['protection'])
     session = None
@@ -53,29 +57,52 @@ async def verify(args, report):
                          disconnected_callback=lambda _: session.close() if session else None)
     try:
         report['gattConnectionAttempted'] = True
+        report['phase'] = 'connect-and-enumerate'
         await asyncio.wait_for(client.connect(), 15)
+        report['phase'] = 'validate-layout'
+        report['negotiatedAttMtu'] = client.mtu_size
         service = client.services.get_service(SERVICE)
         if service is None or {char.uuid for char in service.characteristics} != {INFO, RX, TX}:
             raise ValueError('UNEXPECTED_GATT_LAYOUT')
         for characteristic, required in ((INFO, 'read'), (RX, 'write'), (TX, 'indicate')):
             if required not in client.services.get_characteristic(characteristic).properties:
                 raise ValueError('UNEXPECTED_GATT_PROPERTIES')
+        report['phase'] = 'protected-info-read'
         info = decode_object(bytes(await asyncio.wait_for(client.read_gatt_char(INFO, use_cached=False), 10)))
         if type(info.get('v')) is not int or info != {'v': 1, 'security': 'bond-mitm-and-local-approval', 'maxMessage': MAX_MESSAGE}:
             raise ValueError('UNEXPECTED_INFO_OR_METADATA')
 
         async def write(frame):
+            report['phase'] = 'request-write'
+            report['operation'] = session.operation
             await client.write_gatt_char(RX, frame, response=True)
+            report['phase'] = 'reply-await'
 
         session = ReadOnlySession(write, allow_authorized_metadata=args.mode != 'approval-boundary')
+        report['phase'] = 'protected-indication-subscription'
         await asyncio.wait_for(client.start_notify(TX, lambda _, data: session.feed(bytes(data)), force_indicate=True), 10)
         report['checks'].append({'check': 'protected INFO read and indication subscription', 'passed': True})
-        if args.mode == 'await-approval':
-            print('Review the identified pending request on DX340 and approve it locally. Waiting up to45seconds; no approval is performed by this script.', flush=True)
-        await run_read_only_checks(session, args.mode, report['checks'])
+        report['phase'] = 'read-only-protocol'
+        def approval_requested():
+            print('AUTHORIZE now requires local approval. Review the identified pending request on DX340; waiting up to45seconds. No approval is performed by this script.', flush=True)
+        await run_read_only_checks(session, 'authorized-state' if args.mode == 'await-disconnect' else args.mode,
+                                   report['checks'], approval_requested=approval_requested)
+        if args.mode == 'await-disconnect':
+            report['phase'] = 'await-operator-disconnect'
+            print(f'Authorized read checks passed. Waiting up to{args.operator_wait}seconds for your local Revoke action on DX340; this script changes no approvals or playback.', flush=True)
+            try:
+                async with asyncio.timeout(args.operator_wait):
+                    while client.is_connected:
+                        await asyncio.sleep(0.1)
+            except TimeoutError:
+                raise ValueError('OPERATOR_DISCONNECT_NOT_OBSERVED') from None
+            report['disconnectObserved'] = True
+            report['checks'].append({'check': 'connection closed during operator action; revocation requires host/reconnect evidence', 'passed': True})
+        report['phase'] = 'bond-postflight'
         report['bondAfter'] = await inspect_bond(device)
         require_authenticated_bond(report['bondAfter']['paired'], report['bondAfter']['protection'])
         report['allChecksPassed'] = True
+        report['phase'] = 'complete'
     finally:
         if session:
             report['framesWritten'] = session.frames_written
@@ -100,12 +127,11 @@ async def main(args):
               'playbackCommandsSent': 0, 'pairingRequested': False,
               'scope': 'PC development diagnostic; not physical phone or audio acceptance'}
     try:
-        await asyncio.wait_for(verify(args, report), 90)
+        await asyncio.wait_for(verify(args, report), 90 + (args.operator_wait if args.mode == 'await-disconnect' else 0))
     except Exception as error:
         # Record fixed local codes/types only; OS messages may contain device identities.
         report['allChecksPassed'] = False
-        report['errorType'] = type(error).__name__
-        report['errorCode'] = str(error) if isinstance(error, ValueError) and re.fullmatch(r'[A-Z_]{3,80}', str(error)) else 'DIAGNOSTIC_FAILED'
+        report.update(diagnostic_failure(error, int(error.code) if isinstance(error, BleakGATTProtocolError) else None))
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / f'{args.label}.json').write_text(json.dumps(report, indent=2), encoding='utf-8')
     print(json.dumps(report, indent=2))
@@ -114,10 +140,11 @@ async def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('mode', choices=['approval-boundary', 'await-approval', 'authorized-state'])
+    parser.add_argument('mode', choices=['approval-boundary', 'await-approval', 'authorized-state', 'await-disconnect'])
     parser.add_argument('--seconds', type=float, default=5)
     parser.add_argument('--label', default='protocol-check')
+    parser.add_argument('--operator-wait', type=int, default=120, help='Bounded30..180second hold for await-disconnect only')
     options = parser.parse_args()
-    if not 1 <= options.seconds <= 15 or not re.fullmatch(r'[a-zA-Z0-9_-]{1,48}', options.label):
+    if not 1 <= options.seconds <= 15 or not 30 <= options.operator_wait <= 180 or not re.fullmatch(r'[a-zA-Z0-9_-]{1,48}', options.label):
         parser.error('Bounded seconds1..15 and an alphanumeric/hyphen/underscore label are required')
     raise SystemExit(asyncio.run(main(options)))

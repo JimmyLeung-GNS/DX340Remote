@@ -6,7 +6,22 @@ import struct
 import unittest
 
 from windows_ble_protocol import (Assembler, MAX_MESSAGE, ReadOnlySession, decode_object,
-                                  frames, require_authenticated_bond, run_read_only_checks)
+                                  frames, require_authenticated_bond, run_read_only_checks, diagnostic_failure)
+
+
+class DiagnosticFailureTests(unittest.TestCase):
+    def test_domain_codes_preserved_but_os_paths_and_messages_omitted(self):
+        self.assertEqual(diagnostic_failure(ValueError('AUTHENTICATED_OS_BOND_REQUIRED'))['errorCode'], 'AUTHENTICATED_OS_BOND_REQUIRED')
+        failure = diagnostic_failure(FileNotFoundError(2, 'private device identity', 'private path'))
+        self.assertEqual(failure, {'errorType': 'FileNotFoundError', 'errorCode': 'DIAGNOSTIC_FAILED', 'errno': 2})
+        self.assertNotIn('private', json.dumps(failure))
+
+    def test_numeric_gatt_error_does_not_leak_message_or_accept_arbitrary_values(self):
+        failure = diagnostic_failure(RuntimeError('private device address'), 5)
+        self.assertEqual(failure['gattProtocolError'], 5)
+        self.assertNotIn('private', json.dumps(failure))
+        for invalid in (-1, 256, True, '5'):
+            self.assertNotIn('gattProtocolError', diagnostic_failure(RuntimeError('private'), invalid))
 
 
 class FramingTests(unittest.TestCase):
@@ -279,6 +294,30 @@ class SessionTests(unittest.IsolatedAsyncioTestCase):
             await run_read_only_checks(peer.session, 'await-approval', approval_wait=0.01, approval_poll_interval=0.02)
         self.assertFalse(peer.approved)
         self.assertEqual([request['type'] for request in peer.requests], ['HELLO', 'AUTHORIZE'])
+
+    async def test_request_timeout_is_not_reported_as_operator_deadline(self):
+        peer = Peer(timeout=0.01)
+        peer.session.allow_authorized_metadata = True
+        authorization_count = [0]
+        def handler(request):
+            if request['type'] == 'AUTHORIZE':
+                authorization_count[0] += 1
+                if authorization_count[0] == 2:
+                    return None  # No reply to the poll, before the operator deadline.
+            return peer.normal(request)
+        peer.handler = handler
+        notices = []
+        with self.assertRaisesRegex(ValueError, 'APPROVAL_REQUEST_TIMEOUT'):
+            await run_read_only_checks(peer.session, 'await-approval', approval_wait=1,
+                                       approval_poll_interval=0.001, approval_requested=lambda: notices.append(True))
+        self.assertEqual(notices, [True])
+        self.assertFalse(peer.approved)
+
+    async def test_no_pending_approval_notice_for_already_approved_peer(self):
+        peer = Peer(approved=True)
+        notices = []
+        await run_read_only_checks(peer.session, 'await-approval', approval_requested=lambda: notices.append(True))
+        self.assertEqual(notices, [])
 
 
 if __name__ == '__main__':

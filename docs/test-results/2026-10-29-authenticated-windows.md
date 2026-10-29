@@ -1,0 +1,24 @@
+# Authenticated Windows diagnostic exchange and revocation boundary
+
+29 October2026, Hong Kong. Actual DX340 Android13/API33 build eng.iBasso.20260812.181952; companion f0812c2f349e84cad7ff3769d408dc5a6baf821769778754b8f9e90ceb7a368e. Windows11/build26300, Intel Bluetooth radio, isolated Python3.14/Bleak3.0.2/committed WinRT dependencies. **This is a PC development diagnostic, not either phone's acceptance.**
+
+The user confirmed availability and completed normal Windows/DX340 system pairing. Fresh WinRT observations report paired=true and ENCRYPTION_AND_AUTHENTICATION. Earlier programmatic requests failed/protectionNONE and are retained as failures. Adding the existing DX340 scan-response name made identification observable; it does not prove the cause of the earlier pairing failure.
+
+| Result | Case | Evidence / limit |
+|---|---|---|
+| VERIFIED actual OS observation | Authenticated encrypted bond | resumed-authenticated-os-bond.json; user reported paired successfully |
+| VERIFIED actual over-air boundary | Paired but not locally approved | Protected INFO/subscription and correlated HELLO pass; AUTHORIZE returns LOCAL_APPROVAL_REQUIRED and GET_STATE AUTHORIZATION_DENIED without metadata; cleanup and bond postflight pass |
+| VERIFIED local user action | Identified PC approved | Host CONTROLLER_APPROVED event; later fresh authorized-state checks verify saved approval |
+| FAILED partial attempts | Initial held/fresh connection checks | Expired-window coordination, FileNotFoundError during setup, one GATT protocol error1 during a duplicate read, and a held request timeout occurred. These are not passes and their underlying intermittent GATT causes are unresolved |
+| VERIFIED four fresh connections | One traced authorized-state check plus three additional samples | Protected GATT, HELLO/epoch, AUTHORIZE, GET_STATE and identical cached duplicate read all pass; authenticated bond retained and client cleanup complete. Negotiated ATT MTU517; conservative writes remain20bytes |
+| NOT VERIFIED live disconnect timing | Operator revocation hold | Initial45second hold expired before the user's revoke action. Do not count its OPERATOR_DISCONNECT_NOT_OBSERVED result as a passed immediate-disconnect test |
+| VERIFIED local removal + fresh denial | User revoked the PC; bond retained | User said the entry disappeared, host recorded approval revoked/OS bond retained; fresh approval-boundary check again denies AUTHORIZE and GET_STATE with no metadata and clean disconnect |
+| NOT TESTED | Phones, long sleep/range/walking/battery, controls/audio over BLE | No playback/volume/source command was allowed or sent by these scripts; four PC reads do not establish T01–T18 acceptance |
+
+All runs use only HELLO, AUTHORIZE and GET_STATE. The diagnostic cannot approve/revoke, request pairing, change a source or play audio. Its output excludes music labels/device addresses. Unsolicited states are ignored after authorization, not used as request results. The PC is left OS-bonded but without companion approval after the user's revocation; do not silently reapprove it.
+
+The helper now records fixed connection phase/operation, numeric OS/ATT error and MTU without exception messages/paths.23 software cases pass, including error redaction and distinguishing an individual approval-poll request timeout from the overall operator deadline. The approval prompt is emitted after the actual authorization denial, not before HELLO. A bounded120second await-disconnect mode is prepared for later operator timing; that longer hold has not been physically verified. No automatic retry/replay or security fallback was added.
+
+Development-only pairing-window coordination used `adb shell run-as org.dx340.remote.host am start-foreground-service --user 0 -n org.dx340.remote.host/.HostService -a PAIR` with the debuggable app's own UID. This opens the normal60second window; it does not bond or approve the PC. Plain shell cannot start the non-exported service. It is not an everyday phone-control path and requires authorized USB debugging.
+
+Ignored artifacts/windows-ble/: resumed-before-local-approval.json, resumed-local-approval-and-state.json, resumed-local-approval-4.json, resumed-local-approval-5.json, resumed-saved-approval-state.json, resumed-saved-approval-traced.json, resumed-approved-reconnect-1/2/3.json, resumed-local-revocation-observation.json and resumed-revoked-controller-denial.json. Host events: resume-after-user-revocation.json. Software log: resume-windows-diagnostic-tests-23.txt. No raw addresses/notifications are copied into this tracked report.

@@ -13,6 +13,19 @@ TX = 'e7e01003-4a76-4b53-9c8f-c7a12b00d340'
 MAX_MESSAGE = 65536
 
 
+def diagnostic_failure(error, gatt_code=None):
+    """Fixed domain codes and numeric OS details only; never exception messages/paths."""
+    code = str(error) if isinstance(error, ValueError) and re.fullmatch(r'[A-Z_]{3,80}', str(error)) else 'DIAGNOSTIC_FAILED'
+    result = {'errorType': type(error).__name__, 'errorCode': code}
+    for key in ('winerror', 'hresult', 'errno'):
+        value = getattr(error, key, None)
+        if isinstance(value, int) and not isinstance(value, bool):
+            result[key] = value
+    if type(gatt_code) is int and 0 <= gatt_code <= 255:
+        result['gattProtocolError'] = gatt_code
+    return result
+
+
 def frames(data, capacity, serial):
     if not data or len(data) > MAX_MESSAGE or not 9 <= capacity <= 512 or not 0 <= serial <= 65535:
         raise ValueError('MALFORMED_FRAME')
@@ -213,7 +226,7 @@ class ReadOnlySession:
             self.operation = None
 
 
-async def run_read_only_checks(session, mode, checks=None, approval_wait=45, approval_poll_interval=2):
+async def run_read_only_checks(session, mode, checks=None, approval_wait=45, approval_poll_interval=2, approval_requested=None):
     if mode not in {'approval-boundary', 'await-approval', 'authorized-state'}:
         raise ValueError('INVALID_MODE')
     checks = [] if checks is None else checks
@@ -224,15 +237,18 @@ async def run_read_only_checks(session, mode, checks=None, approval_wait=45, app
         if authorization['data'] != {'code': 'LOCAL_APPROVAL_REQUIRED'}:
             raise ValueError('UNEXPECTED_APPROVAL_ERROR')
         checks.append({'check': 'local approval initially required', 'passed': True})
+        if approval_requested is not None:
+            approval_requested()
+        approval_deadline = asyncio.timeout(approval_wait)
         try:
-            async with asyncio.timeout(approval_wait):
+            async with approval_deadline:
                 while authorization['type'] == 'ERROR':
                     await asyncio.sleep(approval_poll_interval)
                     authorization = await session.exchange('AUTHORIZE')
                     if authorization['type'] == 'ERROR' and authorization['data'] != {'code': 'LOCAL_APPROVAL_REQUIRED'}:
                         raise ValueError('UNEXPECTED_APPROVAL_ERROR')
         except TimeoutError:
-            raise ValueError('LOCAL_APPROVAL_NOT_OBSERVED') from None
+            raise ValueError('LOCAL_APPROVAL_NOT_OBSERVED' if approval_deadline.expired() else 'APPROVAL_REQUEST_TIMEOUT') from None
     if mode == 'approval-boundary':
         if authorization['type'] != 'ERROR' or authorization['data'] != {'code': 'LOCAL_APPROVAL_REQUIRED'}:
             raise ValueError('EXPECTED_LOCAL_APPROVAL_DENIAL_NO_METADATA')
