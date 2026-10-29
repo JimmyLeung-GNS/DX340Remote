@@ -2,6 +2,12 @@
 
 Updated 29 October 2026 (Hong Kong). **Original signing key restored and both apps upgraded in place. Goal blocked on native pairing/listening participation and physical phone/Mac resources; full system incomplete.**
 
+## Local workspace/checkpoint update
+
+The user confirmed continued development on this Windows PC, not another Windows PC. Updated AGENTS.md, README and development-handoff.md to make `C:\GitHub\DX340Remote`/`codex/source-recovery-checkpoint` the primary workspace. windows-continuation.md now gives exact local toolchain/signing/build/resume steps; mac-continuation.md covers only later Mac/iPhone and additional-device work. README's obsolete current test/iOS claims now point to native86/Flutter32/diagnostic19 scopes and explicitly leave current Swift/physical acceptance open.
+
+Verified the existing pinned Flutter revision, Java/SDK/key paths and checkpoint/package hashes. This is a local documentation/checkpoint update; no app or dependency update/install is needed. The Git bundle/manifest are refreshed as a local recovery copy. Physical pairing/listening/phone/Mac acceptance gates remain unchanged; no other Windows PC is required.
+
 ## Current continuation: negative prefetch result and physical resource gate
 
 The matching breadth-first prefetch hypothesis was tested and rejected: three experimental Playlist recoveries3.812–4.342seconds versus six before/restored hybrid samples3.622–3.922seconds. Both exceed3seconds. The experimental code/APK was reverted; fresh installed SHA matches40114ff8..., all four preferences unchanged, sources paused at35/services bound/offline. Shared phone remains09aaae78.... See test-results/2026-10-29-mango-breadth-prefetch.md.

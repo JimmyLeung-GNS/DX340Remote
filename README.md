@@ -2,7 +2,9 @@
 
 Development beta: Kotlin DX340 companion and a shared Flutter Android/iPhone interface over native Kotlin/Swift Bluetooth components, sharing BLE protocol v1. Native reference clients are retained during physical parity verification. Music continues through the installed Mango Player or Apple Music on DX340. Everyday control has no Wi-Fi/cloud path.
 
-The shared Flutter phone app **builds and opens on Android and in an iPhone simulator**: Android release build/lint,10 Dart tests and DX340 launch pass; [iPhone CI40729419337](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/40729419337) passes analysis/10 tests/unsigned build/launch and6 disconnected capture-readiness checks on iPhone Air/iOS26.5, Xcode26.6. Native Android build/lint/40 JVM tests and Swift3 protocol tests also pass. These results do not verify separate-phone Bluetooth stability or physical iPhone installation. Full browsing acceptance, volume and Watch remain incomplete. See [current status](docs/status.md) and [platform verification](docs/cross-platform-verification.md).
+Current Windows checkpoint: native Android build/lint and 86 JVM tests pass; shared Flutter Android analysis, 32 tests, release build/lint pass; the separate Windows read-only diagnostic has 19 software tests. Companion40114ff8... and shared phone09aaae78... are the verified installed packages. Current Swift/iPhone compilation and physical phone BLE acceptance remain unverified. [Earlier iPhone simulator CI40729419337](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/40729419337) records an older source revision and does not validate this checkpoint. Full browsing/audio/reliability acceptance, volume and Watch remain incomplete. See [current status](docs/status.md) and [completion audit](docs/completion-audit.md).
+
+Development continues on this Windows PC in `C:\GitHub\DX340Remote`, branch `codex/source-recovery-checkpoint`. Start with [Windows resume steps](docs/windows-continuation.md) and [development handoff](docs/development-handoff.md). The local Git bundle/manifest are a recovery checkpoint. A second Windows PC is not required; the separate Mac guide covers iPhone-specific build/validation work.
 
 ## Build and launch checks
 
@@ -15,7 +17,7 @@ Shared phone UI (Flutter 3.41.4): `./scripts/build-phone.ps1` on Windows, or `sh
 
 Packages and evidence are generated in ignored `artifacts/`. Launching the remote on DX340 checks Android installation/UI only; a separate phone is required for controller Bluetooth testing.
 
-On Mac with Xcode:
+For the shared iPhone app, follow [Mac/iPhone validation](docs/mac-continuation.md) and use `phone/ios/Runner.xcworkspace` for physical signing. The commands below exercise the retained native Apple reference client on a Mac with Xcode:
 
 ```sh
 sh scripts/build-apple.sh
@@ -23,7 +25,7 @@ xcrun simctl list devices available
 sh scripts/build-apple.sh <iPhone-simulator-UDID>
 ```
 
-The second build command installs/launches the app in the selected simulator and captures evidence. The [Apple CI workflow](docs/continuous-verification.md) also runs this unsigned verification on a standard public-repository Mac runner. Open `apple/DXRemote.xcodeproj` to sign and run on a physical iPhone. Simulator launch cannot establish BLE compatibility.
+The second build command installs/launches the native reference app in the selected simulator and captures evidence. The [Apple CI workflow](docs/continuous-verification.md) documents its unsigned verification. `apple/DXRemote.xcodeproj` remains the native reference project; the shared phone app is the canonical interface. Simulator launch cannot establish BLE compatibility.
 
 ## Source support so far
 

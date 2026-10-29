@@ -1,4 +1,6 @@
-# Move this checkpoint to the next test machine
+# Mac build and additional test-device workflow
+
+The user confirmed on 29 October 2026 that development remains on the current Windows PC in `C:\GitHub\DX340Remote`. Start with windows-continuation.md for everyday development. This guide covers the separate Mac/Xcode/iPhone validation and additional test devices; it does not require moving development to another Windows PC.
 
 The local branch codex/source-recovery-checkpoint has not been pushed or published. The generated source bundle artifacts/dx340-checkpoint.bundle contains that branch and reachable tracked history, including the current handoff. It excludes ignored APKs/logs/work tools and signing keys. artifacts/checkpoint-manifest.json records the exact source commit, bundle hash and APK hashes. Verify the manifest against the actual transferred files; do not assume older reports describe the latest packages.
 

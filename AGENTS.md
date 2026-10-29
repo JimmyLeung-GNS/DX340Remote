@@ -14,6 +14,8 @@ Use meaningful tests for framing, duplicate commands, routing, stale IDs, reconn
 
 ## Evidence and continuity
 
+Development location confirmed on 29 October 2026: continue in `C:\GitHub\DX340Remote` on the current Windows PC. Do not assume a move to another Windows PC. Use `docs/windows-continuation.md` for the local workflow; Mac/Xcode instructions cover the later iPhone build/validation work.
+
 Update `docs/status.md` with completed work, commands/results, unresolved facts and next actions. Store device inventory, capability findings and physical test results under `docs/`. Label each result as verified, failed, blocked or not tested, identifying device, OS, app versions and evidence.
 
 Do not reduce full browsing to play/pause or queue skipping. Full Apple Music browsing requires selecting a downloaded song outside the current queue while offline. Full Mango integration requires selecting a local file that actually plays through Mango. Accessibility-based browsing and replacement playback engines are separate decisions with stated tradeoffs.
