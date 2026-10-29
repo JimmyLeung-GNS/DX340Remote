@@ -1,5 +1,7 @@
 # Source and BLE capability findings
 
+Resumed29 October update: current host395be729.../source8d73a48 passes102 native tests; shared phone36 checks/release/lint pass. Native Windows authenticated bond/four approved read sessions/fresh revocation denial are verified separately from phones; live disconnect timing and intermittent ATT/setup failures remain open. Local production-adapter37→36→37 steps were separately user-confirmed audible for Mango and Apple on AMP15 phone out in92b5f9c2...; only36–37 was enabled per source/session. The later service restart deliberately cleared proof. Shared Flutter volume UI and local check screens have scoped Android/iPhone rendering reviews; actual phone volume remains unverified. Both accepted browsing services were restored enabled/bound by the user. Current source-only read/cancellation checks pass; the full source/format/SD/phone matrix remains incomplete. See2026-10-29-resumed-volume.md, mango-foreground-startup.md and authenticated-windows.md under test-results/. Older table observations below retain their dated scope.
+
 28 October 2026. Physical DX340 Android13/API33, firmware fingerprint `DX340-userdebug 13 TKQ1.221013.002 eng.iBasso.20260812.181952 release-keys`. Companion0.1.0 debug; Mango4.1.37/code240; Apple Music6.5.3/code1599. User reports AMP15 phone out.
 
 | Area | Result | Evidence / limit |

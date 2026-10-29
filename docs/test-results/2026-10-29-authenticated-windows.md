@@ -1,5 +1,17 @@
 # Authenticated Windows diagnostic exchange and revocation boundary
 
+## Later resumed attempts on395be729... /8d73a48
+
+The longer live-revocation test is still NOT VERIFIED. A fresh await-approval connection passed INFO/subscription/HELLO/initial denial, then failed an AUTHORIZE write with ATT error1 (resumed-live-revoke-approval.json). Logs show host disconnect and concurrent HiBy Bluetooth/Classic profile activity; this is correlation, not a demonstrated cause.
+
+The user explicitly authorized temporarily stopping HiBy Music (com.hiby.music) for isolation. With it stopped, a second connection retained the protected initial exchange but reached LOCAL_APPROVAL_NOT_OBSERVED after45seconds (resumed-hiby-stopped-approval.json). User subsequently reported approving, but the host log/panel still showed no recorded approval/zero approved controllers. Preserve both observations; do not promote that answer to a saved approval. A fresh await-disconnect attempt then timed out at protected INFO before any protocol frame (resumed-hiby-stopped-live-revoke.json), so the120second operator hold never began. Cleanup completed in all three failed attempts. No playback/volume command was sent by the diagnostic. These samples do not establish a HiBy workaround or stable PC connection; preceding four complete approved read sessions below retain their earlier package scope.
+
+Restoration limitation: generic HiBy launcher resolution failed; its observed StartActivity launched successfully, but its session then reported playing. It was immediately force-stopped again; final observations show Mango/Apple paused at37. No acoustic assertion is made for that brief HiBy state. **HiBy is currently stopped, not restored to its earlier running state.** It can be reopened normally by the user when wanted. No pairing/security/profile configuration was weakened or changed; OS bond remains retained and companion approval remains absent.
+
+For the next operator-run attempt, keep Controller access visible and watch the diagnostic console directly (avoid an asynchronous question/answer round trip during the45second approval window). Open the normal60second pairing window, run `work/ble-diagnostic/Scripts/python.exe scripts/verify-windows-protocol.py await-approval --label operator-local-approval`, and tap only the identified matching PC. Require the host's1-approved row/CONTROLLER_APPROVED event and a fresh authorized-state pass. Then run `await-disconnect --operator-wait 120 --label operator-live-revoke`, wait for its explicit authorized-read success message, and revoke locally. Verify disconnect, host removal and a fresh approval-boundary denial separately. Do not skip any failed prerequisite or auto-approve. Physical phone tests remain separate.
+
+## Earlier verified checkpoint and failures
+
 29 October2026, Hong Kong. Actual DX340 Android13/API33 build eng.iBasso.20260812.181952; companion f0812c2f349e84cad7ff3769d408dc5a6baf821769778754b8f9e90ceb7a368e. Windows11/build26300, Intel Bluetooth radio, isolated Python3.14/Bleak3.0.2/committed WinRT dependencies. **This is a PC development diagnostic, not either phone's acceptance.**
 
 The user confirmed availability and completed normal Windows/DX340 system pairing. Fresh WinRT observations report paired=true and ENCRYPTION_AND_AUTHENTICATION. Earlier programmatic requests failed/protectionNONE and are retained as failures. Adding the existing DX340 scan-response name made identification observable; it does not prove the cause of the earlier pairing failure.

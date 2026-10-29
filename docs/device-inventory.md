@@ -1,5 +1,7 @@
 # Device inventory — updated 29 October 2026
 
+Resumed host JIMMYAH uses Microsoft JDK21.0.9 and SDK/pinned Flutter3.41.4 under C:\Users\JimmyLeung\AppData\Local. Earlier JBR/Users-user paths below describe the preceding environment; windows-continuation.md has current exact paths. Windows native pairing reports ENCRYPTION_AND_AUTHENTICATION; four earlier approved protocol reads/fresh post-revocation denial passed, while later ATT1/approval/INFO failures remain unresolved. Companion approval currently absent, OS bond retained. Only DX340 d is connected. AMP15 phone-out Mango and Apple37→36→37 local steps were each user-confirmed audible in92b5f9c2...; current395be729... restart clears memory proof. Both corrected iOS workflows pass at8d73a48; physical iPhone/signing remain unavailable. HiBy currently stopped after authorized isolation; both intended players paused37 and both browsing services enabled/bound.
+
 | Component | Result | Evidence |
 |---|---|---|
 | Development host | VERIFIED current: Windows11 Pro10.0.26300, Android Studio JBR21.0.7 selected per process; Android SDK available | Current Windows/SDK inspection; windows-ble/windows-version.json and preceding build reports |

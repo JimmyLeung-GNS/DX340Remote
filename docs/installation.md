@@ -142,6 +142,18 @@ On this DX340, finishing instrumentation also left the enabled optional browsing
 
 For the native/assisted capability-boundary component test, prefer the debug receiver's `CHECK_MANGO_CAPABILITIES` operation documented in test-results/2026-10-29-source-recovery.md. It uses actual native Mango with simulated readiness/verification in temporary isolated preferences and sends no playback command. The actual run kept the same process and both service bindings. It requires privileged DUMP access, is absent from release and does not test phone Bluetooth. The older instrumentation mode still restarts the target process.
 
+## Local output-volume verification
+
+The shared Flutter phone Player has volume buttons, enabled only for a locally confirmed pair of levels in the current companion session. The older native reference phone screens do not yet expose these buttons. Phone Bluetooth operation remains a separate acceptance test.
+
+1. Connect your usual headphones/output and choose a comfortable low level with the DX340 wheel. Play the intended source in Mango or Apple Music; leave the other source paused.
+2. In DX340 Companion, start Bluetooth remote, then tap **Verify output volume on this DX340**. Choose the matching source. Source selection alone does not start music.
+3. Enter the amp/output configuration, for example **AMP15 phone out**. Tap **Test one step quieter**. Confirm **I heard the quieter step** only if you heard it.
+4. Tap **Return to starting volume**, then **I heard the return · enable this range** only if you heard that return. Only the starting level and one step below are enabled; this does not verify the entire hardware range.
+5. On an authorized phone, refresh Player. At either boundary only the inward step is enabled. Restarting/stopping the companion, losing source-session access or an output-device callback clears the check. A wheel value outside the confirmed band disables it. Recheck separately for the other source and after changing amp/output/headphones/gain, since Android cannot identify every physical configuration.
+
+**Clear verification / cancel check** leaves the current volume unchanged. Interrupted commands do not automatically retry or restore volume. Use the DX340 wheel when manual adjustment is needed. Each human observation and API readback must be recorded separately; successful BLE delivery is not an acoustic result.
+
 ## Optional Apple Music browsing
 
 The user accepted this screen-on/unlocked mode. Apple Music must be6.5.3/code1599; an update disables the unverified adapter. Its direct browser is denied in the tested interfaces. This mode navigates the installed app's visible Downloaded library; it does not extract downloads.
