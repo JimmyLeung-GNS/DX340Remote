@@ -104,7 +104,7 @@ class MainActivity : Activity() {
         if (intent.getBooleanExtra("developmentProbe", false) && applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE != 0) start("PROBE")
     }
     private fun label(text: String, size: Float = 16f, heading: Boolean = false, parent: LinearLayout = content): TextView = TextView(this).apply {
-        this.text = text; textSize = size; if (heading) setAccessibilityHeading(true)
+        this.text = text; textSize = size; useCompanionPrimaryText(); if (heading) setAccessibilityHeading(true)
     }.also { parent.addView(it) }
     private fun section(text: String) = label(text, 22f, true).apply {
         layoutParams = (layoutParams as LinearLayout.LayoutParams).apply { topMargin = dp(24); bottomMargin = dp(8) }
@@ -153,8 +153,15 @@ class MainActivity : Activity() {
         setupToggle.text = if (showSetup) "Hide permissions and access" else "Review permissions and access"
         val mangoEnabled = getSharedPreferences("mango-ui", MODE_PRIVATE).getBoolean("enabled", false)
         val appleEnabled = getSharedPreferences("apple-ui", MODE_PRIVATE).getBoolean("enabled", false)
-        fun browsingState(enabled: Boolean, access: Boolean) = if (!enabled) "off" else if (access) "on" else "on · Accessibility access needed"
-        browsingSummary.text = "Mango folders/playlists: ${browsingState(mangoEnabled, MangoAccessibilityService.instance != null)}\nApple Music downloads: ${browsingState(appleEnabled, AppleMusicAccessibilityService.instance != null)}"
+        val accessServices = Settings.Secure.getString(contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES).orEmpty()
+            .split(':').mapNotNull(ComponentName::unflattenFromString).toSet()
+        fun browsingState(enabled: Boolean, component: Class<*>, bound: Boolean) = when {
+            !enabled -> "off"
+            ComponentName(this, component) !in accessServices -> "on · Accessibility access needed"
+            !bound -> "on · access not ready"
+            else -> "on"
+        }
+        browsingSummary.text = "Mango folders/playlists: ${browsingState(mangoEnabled, MangoAccessibilityService::class.java, MangoAccessibilityService.instance != null)}\nApple Music downloads: ${browsingState(appleEnabled, AppleMusicAccessibilityService::class.java, AppleMusicAccessibilityService.instance != null)}"
         browsingActions.visibility = if (showBrowsing) View.VISIBLE else View.GONE
         browsingToggle.text = if (showBrowsing) "Hide browsing and local checks" else "Review browsing and local checks"
         appleMode.text = if (appleEnabled) "Disable optional Apple Music browsing" else "Enable optional Apple Music browsing"
@@ -165,7 +172,7 @@ class MainActivity : Activity() {
         technical.visibility = if (showDiagnostics) View.VISIBLE else View.GONE
         if (showDiagnostics) technical.text = if (service == null) "Remote stopped." else service.status + "\n\n" + service.sources.diagnostic().toString(2)
     }
-    override fun onResume() { super.onResume(); attach(); refresh() }
+    override fun onResume() { super.onResume(); matchCompanionStatusBar(); attach(); refresh() }
     override fun onPause() { HostService.instance?.observer = null; content.removeCallbacks(pairingExpiry); super.onPause() }
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putBoolean("showSetup", showSetup); outState.putBoolean("showBrowsing", showBrowsing); outState.putBoolean("showAdvanced", showAdvanced); outState.putBoolean("showDiagnostics", showDiagnostics)

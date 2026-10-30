@@ -25,7 +25,7 @@ class ControllerManagementPanel(context: Context, private val changed: () -> Uni
     private var requestNotice: String? = null
     init { orientation = VERTICAL }
     private fun caption(text: String, heading: Boolean = false) {
-        addView(TextView(context).apply { this.text = text; textSize = if (heading) 22f else 16f; if (heading) setAccessibilityHeading(true) })
+        addView(TextView(context).apply { this.text = text; textSize = if (heading) 22f else 16f; useCompanionPrimaryText(); if (heading) setAccessibilityHeading(true) })
     }
     private fun action(text: String, enabled: Boolean = true, run: () -> Unit) {
         addView(Button(context).apply { this.text = text; isEnabled = enabled; minHeight = (48 * resources.displayMetrics.density).toInt(); setOnClickListener { run(); changed() } })

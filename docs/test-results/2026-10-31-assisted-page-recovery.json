@@ -7,7 +7,8 @@
     "jvmFailures": 0,
     "jvmErrors": 0,
     "androidAssemblyLintAnalyze": "PASS",
-    "swift": "PENDING current hosted run41119813702; shared run41119813675 also in progress"
+    "swift": "PASS14 at31047c22; native41119813702 SUCCESS",
+    "sharedIos": "PASS56/build/captures/ordinary restoration at31047c22; shared41119813675 SUCCESS; simulator only"
   },
   "physical": {
     "device": "Pixel9a Android16/API36 to DX340 Android13/API33; Mango4.1.37/code240; Apple6.5.3/code1599",

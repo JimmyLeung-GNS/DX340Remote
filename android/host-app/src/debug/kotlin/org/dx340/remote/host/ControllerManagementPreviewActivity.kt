@@ -19,8 +19,8 @@ class ControllerManagementPreviewActivity : Activity() {
             val density = resources.displayMetrics.density
             setPadding((20 * density).toInt(), (16 * density).toInt(), (20 * density).toInt(), (24 * density).toInt())
         }
-        layout.addView(TextView(this).apply { text = "Development preview"; textSize = 28f; setAccessibilityHeading(true) })
-        layout.addView(TextView(this).apply { text = "Synthetic controller states. No OS bond or live controller is changed."; textSize = 16f })
+        layout.addView(TextView(this).apply { text = "Development preview"; textSize = 28f; useCompanionPrimaryText(); setAccessibilityHeading(true) })
+        layout.addView(TextView(this).apply { text = "Synthetic controller states. No OS bond or live controller is changed."; textSize = 16f; useCompanionPrimaryText() })
         val scenario = intent.getStringExtra("scenario") ?: "saved"
         val approved = listOf(ApprovedControllerState("AA:00:00:00:00:01", "Example phone · 00:00:01", "Paired"),
             ApprovedControllerState("AA:00:00:00:00:02", "Example laptop · 00:00:02", "Paired"))
@@ -40,5 +40,6 @@ class ControllerManagementPreviewActivity : Activity() {
             panel.renderSnapshot(state)
         }
     }
+    override fun onResume() { super.onResume(); matchCompanionStatusBar() }
     override fun onDestroy() { deleteSharedPreferences(preferencesName); super.onDestroy() }
 }

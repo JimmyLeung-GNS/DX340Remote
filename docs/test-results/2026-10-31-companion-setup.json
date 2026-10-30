@@ -1,0 +1,44 @@
+{
+  "savedGrantPhoneConnectAndStateRead": "PASS on Pixel ea9f165d with companion9578394c; no new approval/window",
+  "ordinaryPhoneDisconnect": "verified",
+  "playbackOrVolumeCommandsSent": 0,
+  "controllersPreferencesPreserved": true,
+  "mango-uiPreferencesPreserved": true,
+  "apple-uiPreferencesPreserved": true,
+  "source-verificationPreferencesPreserved": true,
+  "companionSha256": "9578394c945584db69f7241453b528291a2d019b579afda6cc940766e4217597",
+  "phoneSha256": "ea9f165da9d4feff1061f62e3a290031e9045a204faf3c12f815837a7492b978",
+  "sourceStates": {
+    "com.ibasso.music": 2,
+    "com.apple.android.music": 2
+  },
+  "volume": {
+    "current": 37,
+    "minimum": 0,
+    "maximum": 100,
+    "verified": false,
+    "profileId": null,
+    "verifiedMinimum": null,
+    "verifiedMaximum": null,
+    "outputLabel": null,
+    "reason": "Play this source on DX340 and verify its output in the companion."
+  },
+  "bleStatus": "ADVERTISING: controller disconnected, playback unchanged",
+  "display": {
+    "font": "1.0",
+    "night": "Night mode: yes"
+  },
+  "date": "2026-10-31",
+  "scope": "Companion setup presentation and saved-grant phone metadata reconnect; no new audio pass",
+  "androidJvmTests": 164,
+  "phoneTestsUnchanged": 56,
+  "nativeAppleTests": 14,
+  "nativeAppleRun": 41119813702,
+  "sharedAppleRun": 41119813675,
+  "bothAppleRuns": "SUCCESS at31047c22; simulator only",
+  "nativeArtifactSha256": "bcf53639c6fd3f9fbf9d8203c021e37b96a1b7bd33d9d536b426de50e2da4854",
+  "sharedArtifactSha256": "f90a0bea80c7dedd4cc84d0ee49c1b797ae4801e895e44127f2c0acab4071696",
+  "review": "SHIP only scored F1/F3 pixels and F2 logic; nine exact captures in private review; stale captures excluded",
+  "remaining": "Owner requested simpler connection mechanism/shared UI; icons, full accessibility and physical phone/source/reliability/signing/Watch gates remain open",
+  "fullGoal": "ACTIVE/incomplete"
+}
