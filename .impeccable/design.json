@@ -56,7 +56,7 @@
       "launcher-*": "Original Remote/Companion launcher artwork across Android vectors and opaque shared/native iPhone exports only."
     },
     "nativeAppearance": {
-      "setupCupertinoActionCorrection": "At c8ff4b7, Setup alone resolves systemBlue.highContrastColor in light mode and adaptive systemBlue.darkColor/darkHighContrastColor in dark/high-contrast mode, with white light filled labels and black dark filled labels. Other tabs retain prior tint. Software palette ratios are not corrected-pixel acceptance; F1 recapture/verdict pending.",
+      "setupCupertinoActionCorrection": "At c8ff4b7, Setup alone resolves systemBlue.highContrastColor in light mode and adaptive systemBlue.darkColor/darkHighContrastColor in dark/high-contrast mode, with white light filled labels and black dark filled labels. Other tabs retain prior tint. F1-only actual-light-pixel confirmation now ships at7.56089235:1 in shared41138111275; other palette predictions do not establish further pixel acceptance.",
       "companionSetup": "Main/controller-panel required text resolves theme textColorPrimary. Native APPEARANCE_LIGHT_STATUS_BARS follows current theme brightness. Main uses dp content/section insets and scalable sp; stock buttons keep native feedback. No new palette, shapes or assets.",
       "sharedAndroid": "Flutter Material 3 ThemeData light/dark with ThemeMode.system; AppBar, NavigationBar, OutlinedButton and ListTile. No custom palette or font family.",
       "sharedIPhone": "Flutter CupertinoTheme brightness, CupertinoPageScaffold, CupertinoNavigationBar, CupertinoTabBar and CupertinoButton; shared reading text uses Material semantic text-theme roles. Material icon glyphs also appear in this shell.",
@@ -102,6 +102,28 @@
       "third_party/FLUTTER_LICENSE"
     ],
     "verification": {
+      "setupF1Confirmation41138111275": {
+        "sourceRevision": "c8ff4b7b9fd8472e09bf13707ba61068cf1ab56a",
+        "reviewReport": "artifacts/connection-flow-20261031/setup-contrast-verdict.md",
+        "run": "41138111275 SUCCESS",
+        "artifactId": "13018038764",
+        "archiveSha256": "5f199039aba6ea116076bf159dc0475e828aae1482cc3fbe48f1e29bfe2a1aa5",
+        "archiveVerified": true,
+        "captures": [
+          "artifacts/connection-flow-20261031/ci-41138111275/flutter-synthetic-setup-idle-light.png",
+          "artifacts/connection-flow-20261031/ci-41138111275/flutter-synthetic-setup-approval-light.png",
+          "artifacts/connection-flow-20261031/ci-41138111275/flutter-synthetic-setup-choosing-light.png",
+          "artifacts/connection-flow-20261031/ci-41138111275/flutter-synthetic-setup-connected-light.png",
+          "artifacts/connection-flow-20261031/ci-41138111275/flutter-synthetic-setup-approval-large-dark.png"
+        ],
+        "review": {
+          "disposition": "ship",
+          "scope": "One F1-only confirmation: light Setup action contrast resolved, no introduced regression in these five synthetic frames. Four light frames use actualRGB0,64,221 against white, measured7.56089235:1.",
+          "limit": "Largest dark frame is initial viewport only. No new scroll/Cancel, screen-reader, physical Apple/BLE/audio, whole-UI or full-project acceptance. Original15-frame FIX review/archive and all earlier Android/icon scopes preserved."
+        },
+        "software": "67Flutter tests/analyze, ordinary/fixture builds/captures and final ordinary restoration pass;12 capture-matcher regressions pass.",
+        "unchanged": "Physical Pixel4449ee74…/Companionb0e1f582… unchanged. Icon review separate; icon Apple CI not yet started."
+      },
       "iconFamily20261031": {
         "report": "docs/test-results/2026-10-31-icon-family.md",
         "reviewReport": "artifacts/icon-family-20261031/finish-review.md",
@@ -118,7 +140,7 @@
         "candidateCompanionSha256": "491dbbffabda8f7a20d64a2f591caa486427e036ba9e3821d831ccf6eff5934a",
         "packageScope": "Original signers verified; candidates built/linted and emulator-installed only. Physical Pixel4449ee74…/Companionb0e1f582… unchanged; previous physical/audio evidence keeps its binary scope.",
         "assetChecks": "Recorded export SHA256s, opaque RGB/catalog dimensions and PNG origin/geometry/generator metadata verified. Android/native/shared asset builds/lint pass; runtime code unchanged and prior67Flutter/166JVM tests not rerun for assets.",
-        "pending": "iOS catalog/native-reference builds, actual iOS/Android monochrome/physical launcher renders, broader UX-01/signing/Watch gates. Separate c8ff4b7 shared41138111275 still running; no F1 contrast confirmation.",
+        "pending": "iOS catalog/native-reference builds, actual iOS/Android monochrome/physical launcher renders, broader UX-01/signing/Watch gates. Separate shared41138111275 later succeeded with c8ff4b7 F1-only contrast acceptance; icon Apple CI not yet started.",
         "direction": "Original deterministic icon-family extension, native system screen world retained. No third-party or AI-generated icon artwork."
       },
       "setupRecoveryValidationC8ff4b7": {
@@ -148,19 +170,19 @@
           "disposition": "fix",
           "finding": "F1: normal-weight17pt iOS light Setup action text and filled labels measure approximately4.017:1, below4.5:1. No new Android material fix requested.",
           "scope": "Exactly15 synthetic no-BLE Setup frames, separate from earlier7 real Android SHIP views. Android emulator font2 scrolling reaches Cancel; largest iOS frame is initial viewport only.",
-          "confirmation": "c8ff4b7 correction implemented; actual F1 recaptures and verdict pending. No new SHIP."
+          "confirmation": "Historical initial FIX checkpoint. Later c8ff4b7 actual recaptures resolve F1 only; see setupF1Confirmation41138111275. Original FIX/archive preserved."
         },
         "verifiedAppleSoftware": {
           "source": "cde1aa8aadbae3eafc14353d500e0a7012cef1d8",
           "native": "41131663595 SUCCESS:16 Swift tests/build/captures; verified archive bf787421ca95bcde6d24440619a3f09f21d45dd5168aba95cdcd9fe465da00c6",
           "shared": "41131662763 SUCCESS:63 Flutter tests/build/captures/ordinary restoration; verified archive292db69ad4217196e2fa9fd12f78867d60cdad9da80055e3dc58149521cd0af4",
-          "limit": "No physical Apple/signing/BLE/audio pass; new Setup contrast correction requires its own shared confirmation."
+          "limit": "No physical Apple/signing/BLE/audio pass. Separate c8ff4b7 shared confirmation later succeeded with F1-only appearance acceptance."
         },
-        "correctionSoftware": "67 localFlutter tests/analyze/release/lint pass, including light/dark/high-contrast Setup action pairs, unchanged Player tint and iOS text3.2 scrolling; Android font2 unchanged. Native/reference rebuild/lint pass, protocol/cache/adapter code unchanged from166 prior JVM tests. Shared41138111275 IN PROGRESS at this checkpoint.",
-        "predictedPaletteContrast": "Software math only:7.561:1 light,5.757:1 dark,7.417:1 high-contrast dark. Not confirmed new pixels.",
+        "correctionSoftware": "67 localFlutter tests/analyze/release/lint pass, including light/dark/high-contrast Setup action pairs, unchanged Player tint and iOS text3.2 scrolling; Android font2 unchanged. Native/reference rebuild/lint pass, protocol/cache/adapter code unchanged from166 prior JVM tests. Shared41138111275 later SUCCESS with67Flutter/analyze/ordinary+fixture builds/captures/restoration and12 matcher regressions; see F1-only confirmation record.",
+        "predictedPaletteContrast": "Original software predictions:7.561:1 light,5.757:1 dark,7.417:1 high-contrast dark. Later actual light frames measure7.56089235:1; dark/high-contrast ratios remain software math.",
         "separatePhysicalCleanup": "Installed original-signer Pixel4449ee74a3545f29e5cb261aeb4f60159be23521ffc145eaf0f4a09bf5b6db84/unchanged hostb0e1f582…: remembered Connect/GET_STATE/Disconnect clears foreground and startRequested while UI stays bound. Four host preferences preserved; both paused37/proof false. No playback/volume command or new audio proof.",
         "background": "Earlier e309eccf… hold ABORTED:27 samples,last853.066seconds,Remote returned foreground; no30-minute pass. Fresh readiness pending; no active observer.",
-        "open": "Corrected iOS pixels/verdict, physical Apple, screen readers, approval/multiple players, audio/background/reliability, icons/signing/Watch. Native system world and shipping rasters unchanged."
+        "open": "Physical Apple, screen readers, approval/multiple players, audio/background/reliability, icon platform checks/signing/Watch. F1-only corrected-pixel verdict completed separately. Native system world and shipping rasters unchanged."
       },
       "guidedConnectionAndroid20261031": {
         "report": "docs/test-results/2026-10-31-guided-connection.md",
@@ -183,7 +205,7 @@
           "limit": "No material fix or further appearance round owed for these seven views. No iOS appearance/build/physical pass. Broader state matrix, touch/scroll/screen-reader, audio/Bluetooth reliability, full UX-01/icons/Watch acceptance remain open."
         },
         "separateChecks": "Original-signer host/phone installed and re-pulled byte-identical. Android166 JVM/63 Flutter tests, builds/analyze/lint and reported saved-grant reconnect/Cancel/Disconnect observations are separate software/physical evidence. No playback/volume command or new audio proof; earlier listening retains earlier binary scopes.",
-        "followupAppleSoftware": "cde1aa8 native41131663595 SUCCESS16Swift and shared41131662763 SUCCESS63Flutter/build/captures/ordinary restoration, archives verified. Separate simulated review returned FIX for iOS light Setup contrast; c8ff4b7 correction/current shared41138111275 confirmation pending. Earlier7 Android SHIP scope unchanged; no physical Apple pass.",
+        "followupAppleSoftware": "cde1aa8 native41131663595 SUCCESS16Swift and shared41131662763 SUCCESS63Flutter/build/captures/ordinary restoration, archives verified. Separate simulated review returned FIX for iOS light Setup contrast; c8ff4b7 shared41138111275 later SUCCESS and one F1-only confirmation SHIP. Earlier7 Android SHIP scope unchanged; no physical Apple pass.",
         "open": "New unapproved enrollment/automatic approval completion, multiple actual players, broader error/takeover/dark/large states, scrolling/screen readers, physical iPhone/audio/reliability, icons and Watch.",
         "assets": "No shipping raster changed; incumbent native system world preserved."
       },
@@ -409,7 +431,7 @@
       "name": "Guided phone connection",
       "kind": "custom",
       "description": "Setup presents one phase-specific Connect flow covering permissions, discovery or remembered-player reconnect and bounded local-approval observation. Each phase shows its next action or Cancel. Multiple/other players and controller handoff remain deliberate; help is secondary. Authorization remembers the player and updates Companion connected status.",
-      "primaryAction": "Material FilledButton with centered label and phone-setup-primary-android padding, or native CupertinoButton.filled; both use phone-setup-primary-outer spacing. Secondary actions retain existing outlined/native treatment. cde1aa8 iOS builds passed but appearance review found F1 light contrast; Setup-only c8ff4b7 semantic-color correction awaits actual rendered confirmation/verdict.",
+      "primaryAction": "Material FilledButton with centered label and phone-setup-primary-android padding, or native CupertinoButton.filled; both use phone-setup-primary-outer spacing. Secondary actions retain existing outlined/native treatment. cde1aa8 iOS builds passed but appearance review found F1 light contrast; Setup-only c8ff4b7 semantic-color correction later passed shared41138111275 and F1-only actual rendered confirmation; broader acceptance remains separate.",
       "scrollIdentity": "Setup PageStorageKey includes connection phase; Library/Queue identities and geometry unchanged.",
       "companionFlow": "Stopped: Set up first phone without approvals, otherwise Enable phone control. Running: Ready/tap Connect, separate Set up a new phone, Stop under Advanced. Approval observation completes automatically in updated phones, with older-app Retry wording. Confirmed authorization notifies the local status observer; no source-command replay.",
       "verificationRef": "extensions.verification.guidedConnectionAndroid20261031"

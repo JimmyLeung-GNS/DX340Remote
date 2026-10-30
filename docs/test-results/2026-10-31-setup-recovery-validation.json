@@ -38,7 +38,7 @@
     "protocolCacheAdapterTestsUnchangedPriorPass": 166,
     "nativeAppleTestsAtCde1aa8": 16,
     "sharedAppleTestsAtCde1aa8": 63,
-    "newSharedCaptureConfirmation": "PENDING"
+    "newSharedCaptureConfirmation": "SUCCESS: analyze/67 Flutter tests/ordinary+fixture builds/captures/ordinary restoration"
   },
   "background": {
     "status": "ABORTED; background precondition contradicted",
@@ -69,7 +69,16 @@
   "sharedConfirmation": {
     "source": "c8ff4b7b9fd8472e09bf13707ba61068cf1ab56a",
     "run": 41138111275,
-    "lastObserved": "IN PROGRESS",
-    "review": "F1 contrast confirmation pending; prior disposition fix"
+    "lastObserved": "SUCCESS",
+    "review": "SHIP for F1 contrast correction only; five new frames, no introduced regression",
+    "artifact": 13018038764,
+    "archiveSha256": "5f199039aba6ea116076bf159dc0475e828aae1482cc3fbe48f1e29bfe2a1aa5",
+    "renderedLightActionRGB": [
+      0,
+      64,
+      221
+    ],
+    "renderedLightActionWhiteContrast": 7.560892352027087,
+    "ordinaryAppRestored": true
   }
 }
