@@ -1,0 +1,390 @@
+{
+  "kind": "sanitized-source-local-Mango-playlist-pagination-no-BLE",
+  "date": "2026-10-30",
+  "device": {
+    "model": "DX340",
+    "android": "13/API33",
+    "mango": "4.1.37/code240",
+    "appleMusic": "6.5.3/code1599",
+    "output": "AMP15 phone out",
+    "volume": 37,
+    "wifiOff": true,
+    "activeNetwork": "none"
+  },
+  "installedCompanionSha256": "068c39ec88b6dadc8c9ea88dc7bb91302748e82f0ecf44be4789bb952c289235",
+  "applicationSource": "5491be7983643c8bd7a31e33126e9e86c0c3c727",
+  "readOnlyPagination": {
+    "kind": "actual-source-local-read-only-playlist-pagination-no-BLE",
+    "sourceCommit": "5491be7983643c8bd7a31e33126e9e86c0c3c727",
+    "sourceTreeDirty": false,
+    "expectedCompanionSha256": "068c39ec88b6dadc8c9ea88dc7bb91302748e82f0ecf44be4789bb952c289235",
+    "playlist": "DX340 Remote pagination verification",
+    "expectedTracks": 30,
+    "status": "ALL_POSITIONS_AND_END_VERIFIED_READ_ONLY",
+    "pages": [
+      {
+        "page": 0,
+        "positions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "nextPage": 1
+      },
+      {
+        "page": 1,
+        "positions": [
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "nextPage": 2
+      },
+      {
+        "page": 2,
+        "positions": [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "nextPage": 3
+      },
+      {
+        "page": 3,
+        "positions": [
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "nextPage": 4
+      },
+      {
+        "page": 4,
+        "positions": [
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "nextPage": 5
+      },
+      {
+        "page": 5,
+        "positions": [
+          25,
+          26,
+          27,
+          28,
+          29,
+          30
+        ],
+        "nextPage": null
+      }
+    ],
+    "rows": [
+      {
+        "position": 1,
+        "title": "Starting",
+        "artist": "AAA"
+      },
+      {
+        "position": 2,
+        "title": "777～We can sing a song!～",
+        "artist": "AAA"
+      },
+      {
+        "position": 3,
+        "title": "SUNSHINE",
+        "artist": "AAA"
+      },
+      {
+        "position": 4,
+        "title": "Love Is In The Air",
+        "artist": "AAA"
+      },
+      {
+        "position": 5,
+        "title": "LOVER",
+        "artist": "AAA"
+      },
+      {
+        "position": 6,
+        "title": "Intermission 1",
+        "artist": "AAA"
+      },
+      {
+        "position": 7,
+        "title": "V.O.L",
+        "artist": "AAA"
+      },
+      {
+        "position": 8,
+        "title": "唇からロマンチカ",
+        "artist": "AAA"
+      },
+      {
+        "position": 9,
+        "title": "逢いたい理由",
+        "artist": "AAA"
+      },
+      {
+        "position": 10,
+        "title": "Summer Revolution",
+        "artist": "AAA"
+      },
+      {
+        "position": 11,
+        "title": "CALL",
+        "artist": "AAA"
+      },
+      {
+        "position": 12,
+        "title": "負けない心",
+        "artist": "AAA"
+      },
+      {
+        "position": 13,
+        "title": "Still Love You",
+        "artist": "AAA"
+      },
+      {
+        "position": 14,
+        "title": "Love",
+        "artist": "AAA"
+      },
+      {
+        "position": 15,
+        "title": "ハリケーン・リリ、ボストン・マリ",
+        "artist": "AAA"
+      },
+      {
+        "position": 16,
+        "title": "Lil’ Infinity",
+        "artist": "AAA"
+      },
+      {
+        "position": 17,
+        "title": "風に薫る夏の記憶",
+        "artist": "AAA"
+      },
+      {
+        "position": 18,
+        "title": "ぼくの憂鬱と不機嫌な彼女",
+        "artist": "AAA"
+      },
+      {
+        "position": 19,
+        "title": "さよならの前に",
+        "artist": "AAA"
+      },
+      {
+        "position": 20,
+        "title": "恋音と雨空",
+        "artist": "AAA"
+      },
+      {
+        "position": 21,
+        "title": "Instrucmental 1",
+        "artist": "AAA"
+      },
+      {
+        "position": 22,
+        "title": "Next Stage",
+        "artist": "AAA"
+      },
+      {
+        "position": 23,
+        "title": "愛してるのに、愛せない",
+        "artist": "AAA"
+      },
+      {
+        "position": 24,
+        "title": "SHOUT & SHAKE",
+        "artist": "AAA"
+      },
+      {
+        "position": 25,
+        "title": "Intermission 2",
+        "artist": "AAA"
+      },
+      {
+        "position": 26,
+        "title": "Game Over?",
+        "artist": "AAA"
+      },
+      {
+        "position": 27,
+        "title": "PARTY IT UP",
+        "artist": "AAA"
+      },
+      {
+        "position": 28,
+        "title": "MUSIC!!!",
+        "artist": "AAA"
+      },
+      {
+        "position": 29,
+        "title": "One Night Animal",
+        "artist": "AAA"
+      },
+      {
+        "position": 30,
+        "title": "旅ダチノウタ",
+        "artist": "AAA"
+      }
+    ],
+    "helperSha256": "b3094ea506049cf34af5dd9bf9cbc319bcdd7d6520fa55ff898a3e802e8adefe",
+    "commonHelperSha256": "de76602d0063036afc0c49ad66eba9ce2d941b06947ec5bd1f33205b5794ec99",
+    "requestCount": 9,
+    "completedUtc": "2026-10-30T11:04:10.7734222Z"
+  },
+  "selection": {
+    "kind": "source-local-production-playlist-page5-row30-no-BLE",
+    "sourceCommit": "5491be7983643c8bd7a31e33126e9e86c0c3c727",
+    "sourceTreeDirty": false,
+    "installedCompanionSha256": "068c39ec88b6dadc8c9ea88dc7bb91302748e82f0ecf44be4789bb952c289235",
+    "expectedTitle": "旅ダチノウタ",
+    "expectedArtist": "AAA",
+    "page": 5,
+    "position": 30,
+    "selectionSent": true,
+    "humanAudio": {
+      "answer": "Yes, the correct song was audible",
+      "questionScope": "Page5 row30, after metadata delay, before pause; local AMP15 phone out37, no phone BLE",
+      "confirmedUtc": "2026-10-30T11:07:54.8419905Z"
+    },
+    "status": "LATER_CORRECT_SOURCE_STATE_AND_OWNER_AUDIO_CONFIRMED_INITIAL_METADATA_VERIFIER_FAILED",
+    "laterObservedCorrectPlayingState": true,
+    "laterStateEvidence": "settled-and-pause/001-GET_STATE.json",
+    "initialObservedTitle": "風のたより"
+  },
+  "fixture": {
+    "name": "DX340 Remote pagination verification",
+    "authorization": "Create, test and remove the 30-track playlist",
+    "state": "REMOVED_EMPTY_LIST_RESTORED_ALL_30_ORIGINAL_FILE_ROWS_PRESENT",
+    "targetTracks": 30,
+    "cleanup": "Remove only named playlist after testing; preserve original music files",
+    "createdUtc": "2026-10-30T10:50:20.4269721Z",
+    "addedTracks": [
+      "01. Starting.flac",
+      "02. 777～We can sing a song!～.flac",
+      "03. SUNSHINE.flac",
+      "04. Love Is In The Air.flac",
+      "05. LOVER.flac",
+      "06. Intermission 1.flac",
+      "07. V.O.L.flac",
+      "08. 唇からロマンチカ.flac",
+      "09. 逢いたい理由.flac",
+      "10. Summer Revolution.flac",
+      "11. CALL.flac",
+      "12. 負けない心.flac",
+      "13. Still Love You.flac",
+      "14. Love.flac",
+      "15. ハリケーン・リリ、ボストン・マリ.flac",
+      "16. Lil’ Infinity.flac",
+      "17. 風に薫る夏の記憶.flac",
+      "18. ぼくの憂鬱と不機嫌な彼女.flac",
+      "19. さよならの前に.flac",
+      "20. 恋音と雨空.flac",
+      "21. Instrucmental 1.flac",
+      "22. Next Stage.flac",
+      "23. 愛してるのに、愛せない.flac",
+      "24. SHOUT & SHAKE.flac",
+      "25. Intermission 2.flac",
+      "26. Game Over.flac",
+      "27. PARTY IT UP.flac",
+      "28. MUSIC!!!.flac",
+      "29. One Night Animal.flac",
+      "30. 旅ダチノウタ.flac"
+    ],
+    "paginationReport": "artifacts/mango-playlist-pagination-20261030-110346/summary.json",
+    "cleanupUtc": "2026-10-30T11:08:07.2049052Z",
+    "retainedOriginalRows": 33,
+    "retainedAddedTracks": 30
+  },
+  "originalFolder": {
+    "retainedRows": 33,
+    "reachedEnd": true,
+    "fileLabels": [
+      "01. Starting.flac",
+      "02. 777～We can sing a song!～.flac",
+      "03. SUNSHINE.flac",
+      "04. Love Is In The Air.flac",
+      "05. LOVER.flac",
+      "06. Intermission 1.flac",
+      "07. V.O.L.flac",
+      "08. 唇からロマンチカ.flac",
+      "09. 逢いたい理由.flac",
+      "10. Summer Revolution.flac",
+      "11. CALL.flac",
+      "12. 負けない心.flac",
+      "13. Still Love You.flac",
+      "14. Love.flac",
+      "15. ハリケーン・リリ、ボストン・マリ.flac",
+      "16. Lil’ Infinity.flac",
+      "17. 風に薫る夏の記憶.flac",
+      "18. ぼくの憂鬱と不機嫌な彼女.flac",
+      "19. さよならの前に.flac",
+      "20. 恋音と雨空.flac",
+      "21. Instrucmental 1.flac",
+      "22. Next Stage.flac",
+      "23. 愛してるのに、愛せない.flac",
+      "24. SHOUT & SHAKE.flac",
+      "25. Intermission 2.flac",
+      "26. Game Over.flac",
+      "27. PARTY IT UP.flac",
+      "28. MUSIC!!!.flac",
+      "29. One Night Animal.flac",
+      "30. 旅ダチノウタ.flac",
+      "31. Wake up!.flac",
+      "32. 虹.flac",
+      "33. Ending.flac"
+    ],
+    "byteHashes": "Not compared"
+  },
+  "software": {
+    "aggregateJvmTests": 147,
+    "failuresOrErrors": 0,
+    "playlistParserTests": 12,
+    "newCapturedScreenTests": 4,
+    "firstTargetedRun": "Loopback launch failure before tests; tool transcript only",
+    "oldParserRed": "11 tests,2 failed",
+    "assemblyAndLint": "PASS"
+  },
+  "retainedFailures": [
+    "46c49572 first scroll timeout after positions1-6",
+    "48933886 later scroll timeout after1-17",
+    "068c39ec initial two-read selection verifier failed; later matching state and owner audio retained separately"
+  ],
+  "finalState": {
+    "bothSourcesPaused": true,
+    "volume": 37,
+    "volumeVerified": false,
+    "allFourPreferenceDigestsMatch": true,
+    "fontScale": 1.0,
+    "hostForeground": true,
+    "bothAccessibilityServicesBound": true,
+    "pcApproval": "JIMMYAH preserved, no BLE/revoke or OS bond operations",
+    "pendingQuestionsOrFixture": false
+  },
+  "notVerified": [
+    "Both physical phones Bluetooth/offline/signing",
+    "Immediate metadata responsiveness",
+    "Thirty audible selections",
+    "Multiple/duplicate playlists",
+    "SD/rescan/wider formats",
+    "Background/range/battery/walking/handoff/Watch"
+  ]
+}
