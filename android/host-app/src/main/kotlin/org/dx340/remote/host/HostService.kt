@@ -182,6 +182,7 @@ class HostService : Service() {
                 requestLease = authorization.authorize(device.address)
                 authenticated = device
                 ble.setControlling(device, true)
+                record("CONTROLLER_CONNECTED: approved controller; playback unchanged")
                 respond("RESULT", JSONObject().put("authorized", true).put("state", sources.state()).put("sources", sources.sources())); return
             }
             if (op == "REQUEST_CONTROL") {

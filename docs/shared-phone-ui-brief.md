@@ -8,7 +8,7 @@ Scope: Flutter phone migration; Operate mode. User confirmed native system appea
 
 **OWN-WORLD:** System light/dark appearance, system typography, Material Android and Cupertino iPhone controls. Stock components and clear text labels carry the interface. Preserve native disabled, selected and focus states; keep setup instructions within scrolling content.
 
-**STORY:** Open Setup to grant access, discover/connect and authorize. Player exposes separate Play/Pause and source selection; Library handles native pages or an explicit assisted screen; Queue uses source-provided IDs. A disconnected list gives a working route back to Setup.
+**STORY:** Setup presents one Connect action that requests access, discovers or reconnects the remembered approved player, and observes local approval without a manual retry step. Multiple/other players and controller handoff remain deliberate choices. Each connection phase shows its next action or Cancel; detailed help is secondary. Player exposes separate Play/Pause and source selection; Library handles native pages or an explicit assisted screen; Queue uses source-provided IDs. A disconnected list gives a working route back to Setup. The Companion guides enabling phone control and setting up a new phone separately from normal saved-grant reconnect.
 
 **FIRST VIEWPORT:** Navigation title above a scrolling status/content area, four stable bottom destinations. Player begins with available track metadata and large labeled controls; disconnected state provides Open Setup. No fixed connection banner covers content at large text. Cupertino fixed-height tab labels follow native scaling while reading content scales and scrolls.
 

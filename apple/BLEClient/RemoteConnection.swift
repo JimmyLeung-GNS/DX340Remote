@@ -103,6 +103,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
             clearConnection()
             if central.state == .unauthorized { pendingQuickConnect = false; connectionPhase = "permission"; status = "Allow Bluetooth access in iPhone Settings." }
             else if central.state == .poweredOff { pendingQuickConnect = false; connectionPhase = "bluetoothOff"; status = "Turn on Bluetooth to connect." }
+            else if central.state == .unsupported { pendingQuickConnect = false; wantsConnection = false; connectionPhase = "failed"; status = "Bluetooth is unavailable on this device." }
             else { connectionPhase = "preparing"; status = "Preparing Bluetooth…" }
         }
     }
@@ -115,8 +116,8 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         guard !authorized, !["searching", "connecting", "approval"].contains(connectionPhase) else { return }
         guard manager.state == .poweredOn else {
             pendingQuickConnect = manager.state == .unknown || manager.state == .resetting
-            connectionPhase = pendingQuickConnect ? "preparing" : (manager.state == .unauthorized ? "permission" : "bluetoothOff")
-            status = "Allow Bluetooth access and turn on Bluetooth to connect."; return
+            connectionPhase = pendingQuickConnect ? "preparing" : (manager.state == .unauthorized ? "permission" : (manager.state == .unsupported ? "failed" : "bluetoothOff"))
+            status = manager.state == .unsupported ? "Bluetooth is unavailable on this device." : "Allow Bluetooth access and turn on Bluetooth to connect."; return
         }
         disconnect()
         if let text = UserDefaults.standard.string(forKey: "approvedPlayerId"), let id = UUID(uuidString: text),
@@ -223,6 +224,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         guard peripheral == self.peripheral else { return }
         let expiryNotice = setupExpiryNotice
         clearConnection(); status = expiryNotice ?? (wantsConnection ? "Disconnected; pending commands discarded. Reconnecting…" : "Disconnected. Cached lists may be stale.")
+        if expiryNotice != nil { connectionPhase = "failed" }
         if wantsConnection && central.state == .poweredOn && reconnectAttempts < 5 {
             connectionPhase = "connecting"
             let delay = min(15, 1 << reconnectAttempts); reconnectAttempts += 1
@@ -234,7 +236,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         guard let restored = (dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral])?.first else { return }
         peripheral = restored; restored.delegate = self; wantsConnection = true
         clearConnection()
-        if restored.state == .connected { armConnectionTimeout(restored); restored.discoverServices([CBUUID(string: Wire.service)]) }
+        if restored.state == .connected { connectionPhase = "connecting"; armConnectionTimeout(restored); restored.discoverServices([CBUUID(string: Wire.service)]) }
     }
     func refreshOnForeground() {
         if expireSetupIfNeeded() { return }

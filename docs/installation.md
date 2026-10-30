@@ -1,5 +1,7 @@
 # Build, installation and first use
 
+31 October current guided setup: Companion **b0e1f582cfc1f1edfdf5ca98630c359ba8a3dad8f0a664e4a849332119d57301**, shared Pixel phone **e309eccf9bdee05c77006609230fa0ffd1d816e2df85d6cac82036e5d6ddf35b**, original signer retained. One Connect, remembered-player reconnect and normal Disconnect have physical Pixel/DX340 evidence. Fresh enrollment/automatic local approval and physical iPhone remain untested. Read [guided connection evidence](test-results/2026-10-31-guided-connection.md); earlier package summaries below are historical.
+
 Current shared Android phone **111a29f854a8038613c3818ace5948020f8516842b7b57ba5df22e6baeaa0c6d**, source587ea78, upgrades in place with the original signer. Assisted Mango PLAY_ITEM gets30s of pending observation; native/Apple selections and ordinary controls remain12s, artwork75s. This does not relax host/source guards or retry playback. Companion **6c390636.../sourcead44610** remains unchanged and has one newly owner-confirmed page3 folder selection, then paused. Phone installation/launch on DX340 does not establish a separate-phone connection. See [current package/evidence scopes](test-results/2026-10-30-assisted-reply-budget.md); prior14d08e14... below is historical.
 
 Latest30 October: original-key companion **6c390636fa8fb64c86f1153d93b0d459f4d623b3eea725bd97848fad7cfeb85a** and shared Android phone **14d08e149209467566ffc769829074acc7f70f8c9e6b9e1dc262e16478f804ee**, sourcead44610, are installed on DX340 for source/launch checks. The phone APK has no separate-phone BLE acceptance. Upgrade both native bridges to receive slower bulk artwork: framing permits10s idle/60s total progress and GET_ARTWORK alone gets75s for a reply; other control deadlines remain12s. Earlier clients can discard large replies at10s. Existing signing, permissions and Mac/iPhone setup steps below still apply. [Failure, fix and current scopes](test-results/2026-10-30-artwork-progress.md).
@@ -16,7 +18,9 @@ Windows: install pinned Flutter3.41.4, JDK21 and SDK36; run `./scripts/build-pho
 
 Mac: install the pinned Flutter3.41.4 SDK and Xcode, run `flutter pub get --enforce-lockfile` in phone/, then open phone/ios/Runner.xcworkspace. Choose your signing team and connected iPhone; build/run Runner. Bundle ID remains org.dx340.remote.ios. Record exact Mac/Xcode/iPhone model/OS/build. The reported iOS27.2 requires a compatible Xcode; hosted simulator evidence does not establish that compatibility or device signing. To verify a simulator, run `sh scripts/build-phone-ios.sh <UDID>` from the root.
 
-Use Setup → allow Bluetooth/Nearby Devices → Find DX340. Open pairing on the companion; connect and accept both system prompts; approve the pending controller on DX340; retry authorization. Test Player/Library/Queue with Wi-Fi and controller cellular data off. Switching source does not start playback. Optional assisted source browsing needs DX340 awake/unlocked. Continue the separate-phone sleep/range/revocation matrix in compatibility-matrix.md; no framework promises physical stability.
+On the player, open Companion and choose **Set up first phone** (or **Enable phone control** if it already has approved controllers). On the shared phone app, open **Setup → Connect** and allow Bluetooth/Nearby Devices if prompted. Previously approved players are remembered. For a new phone, choose **Set up a new phone** in the running Companion, confirm matching OS codes on both devices and approve the identified controller under **Controller access**. The updated app observes approval automatically within its bounded setup attempt; reconnect if the attempt expired. Multiple discovered players require your choice. Use **Connection help → Choose another player** to switch deliberately. **Open Player** continues after connection; **Disconnect** leaves source playback running. Another controller's ownership needs the explicit **Take control on this phone** action when offered; it is never automatic.
+
+Test Player/Library/Queue with Wi-Fi and controller cellular data off. Switching source does not start playback. Optional assisted source browsing needs DX340 awake/unlocked. Continue the separate-phone sleep/range/revocation matrix in compatibility-matrix.md; no framework promises physical stability. Current granted-Pixel reconnect evidence does not prove fresh-phone approval or iPhone acceptance.
 
 Native Mango metadata pages may be reused briefly while browsing. Use Library refresh to request fresh source data; a selection always revalidates with Mango before playback. The optional screen-assisted modes still require live DX340 screen-on/unlocked validation.
 
@@ -95,7 +99,7 @@ Use **Export diagnostics** to save an internal capability/event snapshot through
 
 Only run the second command after recording a result. A file's absence is not a failed audio test.
 
-## Android phone remote
+## Android phone remote (retained native reference)
 
 Use a separate physical phone, API 31 or newer. Do not install on DX340 and count its UI as a controller radio test.
 
@@ -105,11 +109,11 @@ Use a separate physical phone, API 31 or newer. Do not install on DX340 and coun
 ```
 
 1. Open DX340 Remote → **Setup**, grant Nearby Devices/notification access, then **Find DX340**.
-2. On DX340, **Open pairing for 60 seconds**. On the phone select the discovered DX340 and accept the OS authenticated pairing prompts on both devices.
-3. On DX340 review the requesting identity under **Controller access**, then tap **Approve** for that named controller. On the phone tap **Retry authorization after approval**. If the pairing window expired, reopen it first. A changed request must be reviewed again.
+2. On current DX340 Companion choose **Set up a new phone** (older builds label it Open pairing for60 seconds). On the reference phone select the discovered DX340 and accept the OS authenticated pairing prompts on both devices.
+3. On DX340 review the requesting identity under **Controller access**, then tap **Approve** for that named controller. Updated native connection code observes approval automatically; older installed clients may need **Retry authorization after approval**. If the pairing window expired, reopen it first. A changed request must be reviewed again.
 4. Player shows individually supported controls. Library browses the selected source; Queue displays only a source-provided queue. Disabled controls are not implemented by pretending a BLE write succeeded. Actual volume remains disabled pending output verification.
 5. The connection foreground service survives Activity recreation. Range recovery makes bounded retries and discards unsent commands; reconnection observes state without changing playback. Actual background/radio behavior remains untested on a separate phone.
-6. Tap **Disconnect** before switching controllers. The current beta accepts one controlling peer; automatic handoff is still outstanding. In DX340's **Controller access**, **Revoke access for…** removes only that identity's approval and disconnects its active session, retaining other approvals and OS bonds. Management also works while the remote service is stopped. **Revoke all controller approvals** removes all application approvals and closes pairing. These actions leave source playback running; actual multi-controller revocation/reapproval still requires physical acceptance.
+6. The beta accepts one controlling peer. Tap **Disconnect** before switching, or use the offered explicit **Take control on this phone** action on the shared phone app. Handoff is never automatic. In DX340's **Controller access**, **Revoke access for…** removes only that identity's approval and disconnects its active session, retaining other approvals and OS bonds. Management also works while the remote service is stopped. **Revoke all controller approvals** removes all application approvals and closes pairing. These actions leave source playback running; actual multi-controller revocation/reapproval still requires physical acceptance. Do not repeat revocation tests against retained development approvals without owner instruction.
 
 ## Mac and iPhone
 

@@ -2,6 +2,16 @@
 
 Scope: implement the owner's simpler connection mechanism and UI request on the existing Flutter phones/native bridges and Kotlin Companion. Preserve Bluetooth-only control, local approval, remembered-controller access and source playback. Full project remains ACTIVE/incomplete.
 
+## Final Android status correction
+
+After the initial ee98c10 checkpoint, actual captures showed that AUTHORIZE completed on the phone while the Companion still displayed Ready: the host had not notified its local UI when control became authenticated. Added a bounded connection-status record/observer notification immediately after the existing authorization grant; no authorization rules or source commands changed. Native APK/lint rebuild PASS (protocol/cache/adapter code unchanged from166 tests). Corrected Companion **b0e1f582cfc1f1edfdf5ca98630c359ba8a3dad8f0a664e4a849332119d57301** was original-signer upgraded in place and re-pulled byte-identical; phone **e309eccf…** unchanged.
+
+Saved-player reconnect on the corrected host is VERIFIED: fresh Pixel UI says Connected to DX340 and the simultaneously observed Companion says Controller connected. Normal Disconnect returns the Companion to Ready/advertising and the phone to remembered Connect. Final-corrected preflight comparison again preserves all4 host preferences, two approvals/bonds, both sources paused2, output37/prooffalse, both optional modes and bound AccessibilityON, original fonts/themes/radios. No playback/volume command or new listening proof. Private exact captures: `host-verified-connected.png`, `phone-verified-connected-clean.png`, `host-verified-ready.png`, `phone-verified-idle.png`. Earlier10b… and misleadingly named intermediate captures below are historical and excluded from final corrected-host appearance evidence.
+
+Hosted jobs at ee98c1033a7be29f394eb16f3fbcca738b1645bf: [native Apple41130610830](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/41130610830), [shared iPhone41130610891](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/41130610891). Last observed in progress; the later Android-only status correction does not alter their Apple/shared application code.
+
+The follow-up also fixes iOS unsupported-Bluetooth presentation (failed/unavailable instead of indefinite Preparing), marks connected restoration as Connecting, and retains the failure phase after a setup-expiry disconnect callback. These are unverified native Apple changes until the follow-up hosted jobs finish. Their push supersedes the initial ee98c10 jobs; do not cite a superseded run as evidence for the new Swift code. Android/shared Dart binaries are unaffected by these Swift corrections.
+
 ## Implemented
 
 - Phone Setup has a phase-specific next action: Connect, progress/Cancel, approve on player, choose among discovered players, explicit controller handoff, connected/Open Player/Disconnect, and permission/radio recovery. Permissions, discovery and connection no longer require three manual buttons. Connection help is secondary. Setup scroll resets on a phase change; Library/Queue geometry handling is retained.

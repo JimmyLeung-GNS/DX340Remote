@@ -1,0 +1,109 @@
+{
+  "date": "2026-10-31",
+  "scope": "Guided connection; existing-grant physical Android checks only",
+  "fullGoal": "ACTIVE/incomplete",
+  "inventory": {
+    "DX340": {
+      "model": "DX340",
+      "android": "13",
+      "sdk": "33",
+      "build": "DX340-userdebug 13 TKQ1.221013.002 eng.iBasso.20260812.181952 release-keys",
+      "packages": {
+        "org.dx340.remote.host": {
+          "versionName": "0.1.0",
+          "versionCode": "1"
+        },
+        "com.ibasso.music": {
+          "versionName": "4.1.37",
+          "versionCode": "240"
+        },
+        "com.apple.android.music": {
+          "versionName": "6.5.3",
+          "versionCode": "1599"
+        }
+      }
+    },
+    "Pixel9a": {
+      "model": "Pixel 9a",
+      "android": "16",
+      "sdk": "36",
+      "build": "CP1A.260405.005",
+      "packages": {
+        "org.dx340.remote.controller": {
+          "versionName": "0.2.0",
+          "versionCode": "2"
+        }
+      }
+    }
+  },
+  "builds": {
+    "androidJvmTests": 166,
+    "protocolTests": 48,
+    "cacheTests": 7,
+    "adapterTests": 111,
+    "flutterTests": 63,
+    "nativeAndroidBuildLint": "PASS",
+    "sharedAndroidReleaseAnalyzeLint": "PASS",
+    "appleNativeAndShared": "PENDING current hosted checks; target Swift16, no physical Apple result"
+  },
+  "packages": {
+    "companionSha256": "b0e1f582cfc1f1edfdf5ca98630c359ba8a3dad8f0a664e4a849332119d57301",
+    "phoneSha256": "e309eccf9bdee05c77006609230fa0ffd1d816e2df85d6cac82036e5d6ddf35b",
+    "installedPulledBytesEqualCandidates": true,
+    "inPlaceUpgrade": true,
+    "sameOriginalSigner": true
+  },
+  "physicalAndroid": {
+    "oneConnectWithUniqueDiscoveryAndExistingGrant": "VERIFIED",
+    "rememberedColdLaunchReconnect": "VERIFIED",
+    "explicitSearchCancelNoDelayedConnect": "VERIFIED",
+    "currentMetadataAndGetState": "VERIFIED",
+    "bothScreensShowConnectedAfterHostCorrection": "VERIFIED",
+    "normalDisconnect": "VERIFIED",
+    "newUnapprovedLocalEnrollmentAndAutomaticApproval": "NOT TESTED",
+    "actualMultipleDapDiscovery": "NOT TESTED",
+    "playbackOrVolumeCommandsSent": 0,
+    "newAudioProof": false
+  },
+  "final": {
+    "controllersPreferencesPreserved": true,
+    "mangoPreferencesPreserved": true,
+    "applePreferencesPreserved": true,
+    "sourceVerificationPreferencesPreserved": true,
+    "bothSourcesPausedState": 2,
+    "volume": 37,
+    "volumeVerified": false,
+    "mangoOptionalAndBoundAccessibility": "ON",
+    "appleOptionalAndBoundAccessibility": "ON",
+    "controllerApprovalsPreserved": 2,
+    "osBondsPreserved": true,
+    "phone": "disconnected",
+    "host": "advertising",
+    "hostSettings": {
+      "font_scale": "1.0",
+      "wifi_on": "0",
+      "mobile_data": "0",
+      "bluetooth_on": "1",
+      "night": "Night mode: yes"
+    },
+    "phoneSettings": {
+      "font_scale": "1.0",
+      "wifi_on": "0",
+      "mobile_data": "1",
+      "bluetooth_on": "1",
+      "night": "Night mode: no"
+    }
+  },
+  "remaining": [
+    "fresh unapproved local approval and cancellation during authorization",
+    "physical iPhone",
+    "actual other DAP compatibility; current Android minimum API31",
+    "screen readers",
+    "full source audio format SD background range reliability acceptance",
+    "original playback/disconnect incident cause",
+    "icons",
+    "production signing and store upload",
+    "Watch"
+  ],
+  "privateEvidence": "artifacts/connection-flow-20261031/"
+}
