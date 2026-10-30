@@ -56,7 +56,7 @@
     "nativeControllerBuildLintAndJvmTests": 151,
     "flutterTests": 46,
     "sharedBudgetFixtureCases": 13,
-    "swiftNewPolicy": "Pending exact source587ea78 hosted job"
+    "swiftNewPolicy": "9 tests pass on source587ea78 native simulator; shared target remains pending"
   },
   "olderSharedIos": {
     "source": "ad446107e854f6ac83c68dd04f6fe44a9800b0a0",
@@ -71,9 +71,19 @@
   },
   "newMacRuns": {
     "source": "587ea785b616b91151a6af3abe2fa851805013e0",
-    "native": 41061726898,
-    "shared": 41061727005,
-    "status": "Running; inspect same jobs before claiming new-build success"
+    "native": {
+      "run": 41061726898,
+      "result": "success",
+      "swiftTests": 9,
+      "captureMatcherTests": 12,
+      "artifact": 12980796472,
+      "artifactSha256": "37aa1c316fd1c65866f50295b6b328e4b3f14d70a2f82179663dd157287893fb"
+    },
+    "shared": {
+      "run": 41061727005,
+      "status": "in_progress",
+      "nextAction": "Inspect same terminal result; do not restart solely because log/observation is unavailable"
+    }
   },
   "scope": "One companion-local FLAC audible result, not20-file or physical phone/Bluetooth/latency acceptance"
 }
