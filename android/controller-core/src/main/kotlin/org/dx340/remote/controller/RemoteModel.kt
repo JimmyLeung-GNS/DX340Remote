@@ -12,6 +12,9 @@ import java.util.UUID
 import org.dx340.remote.protocol.ControllerSession
 import org.dx340.remote.protocol.ControlProposal
 import org.dx340.remote.protocol.ReplyBudget
+import org.dx340.remote.protocol.BrowseContext
+import org.dx340.remote.protocol.BrowseContextTransition
+import org.dx340.remote.protocol.BrowseReset
 
 @SuppressLint("MissingPermission")
 class RemoteModel(context: Context) {
@@ -89,7 +92,11 @@ class RemoteModel(context: Context) {
             activeBrowseId = id; library = JSONObject().put("loading", true); status = "Loading library…"; update()
         }
         update()
-        try { ble.send(request.toString().toByteArray()) }
+        try {
+            ble.send(request.toString().toByteArray())
+            // Types only: no metadata, identities, arguments or credentials.
+            android.util.Log.i("DX340RemoteClient", "QUEUED:$type")
+        }
         catch (e: Exception) { pending.remove(id); browseLocations.remove(id); queueLocations.remove(id); status = e.message ?: "Send failed"; update(); return }
         main.postDelayed({ if (pending.remove(id) != null) { browseLocations.remove(id); queueLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); status = "Reply timed out; outcome unknown. Refresh state before retrying."; update() } }, ReplyBudget.milliseconds(type, args.optString("item")))
     }
@@ -120,11 +127,11 @@ class RemoteModel(context: Context) {
                     controlProposal.observeBusy(reply.optString("hostEpoch"), epoch, data.optString("ownershipRevision"))
                 } else controlProposal.clear()
             }
-            if (type == "ERROR") { data.optJSONObject("state")?.takeIf { reply.optString("hostEpoch") == epoch }?.let(::applyState); browseLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); if (id == activeQueueId) { queue = JSONArray(); queueRevision = ""; queuePage = JSONObject() }; status = errorMessage(data.optString("code", "Unknown source error")); update(); return }
+            if (type == "ERROR") { data.optJSONObject("state")?.takeIf { reply.optString("hostEpoch") == epoch }?.let { applyState(it, false) }; browseLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); if (id == activeQueueId) { queue = JSONArray(); queueRevision = ""; queuePage = JSONObject() }; status = errorMessage(data.optString("code", "Unknown source error")); update(); return }
             if (type == "ACCEPTED") { status = "Waiting for source…"; update(); return }
             if (operation in listOf("AUTHORIZE", "REQUEST_CONTROL") && data.optBoolean("authorized")) { controlProposal.clear(); session.approve(reply.getString("hostEpoch")); ble.resumeReconnection(); status = "Connected to DX340" }
             if (reply.optString("hostEpoch") != epoch) { disconnect(); return }
-            data.optJSONObject("state")?.let(::applyState)
+            data.optJSONObject("state")?.let { applyState(it, operation !in listOf("AUTHORIZE", "REQUEST_CONTROL")) }
             if (type == "STATE_CHANGED") applyState(data)
             data.optJSONArray("sources")?.let { sources = it }
             if (operation == "BROWSE") {
@@ -172,14 +179,21 @@ class RemoteModel(context: Context) {
     }
     val assistedBrowsing get() = library.optBoolean("uiAssisted") || state.optJSONObject("capabilities")?.optString("browseMode") == "ui-assisted"
     val assistedReady get() = authorized && isAssistedReady(state)
-    private fun applyState(new: JSONObject) {
-        if (state.optString("sourceEpoch") != new.optString("sourceEpoch") || state.optString("source") != new.optString("source") || state.optJSONObject("capabilities")?.optString("browseMode") != new.optJSONObject("capabilities")?.optString("browseMode")) {
+    private fun applyState(new: JSONObject, notifyLibraryChange: Boolean = true) {
+        fun context(value: JSONObject) = BrowseContext(value.optString("source"), value.optString("sourceEpoch"),
+            value.optJSONObject("capabilities")?.optString("browseMode") ?: "", isAssistedReady(value))
+        val transition = BrowseContextTransition.evaluate(context(state), context(new),
+            library.length() > 0 || activeBrowseId != null,
+            queue.length() > 0 || queuePage.length() > 0 || queueRevision.isNotEmpty() || activeQueueId != null,
+            assistedBrowsing || activeBrowseId?.let { browseLocations[it]?.parent?.startsWith("mango-ui:") } == true,
+            notifyLibraryChange && authorized)
+        if (transition.reset == BrowseReset.ALL) {
             library = JSONObject(); queue = JSONArray(); queueRevision = ""; queuePage = JSONObject(); artworkBytes = null; activeBrowseId = null; activeQueueId = null; browseLocations.clear(); queueLocations.clear()
-        } else if (isAssistedReady(new) != isAssistedReady(state) &&
-            (assistedBrowsing || activeBrowseId?.let { browseLocations[it]?.parent?.startsWith("mango-ui:") } == true)) {
+        } else if (transition.reset == BrowseReset.ASSISTED) {
             // Keep native pages/queues, but never republish an assisted frame across grant/sleep changes.
             library = JSONObject(); activeBrowseId = null; browseLocations.clear()
         }
+        transition.message?.let { status = it }
         state = new
         stateReceivedAt = android.os.SystemClock.elapsedRealtime()
         stateSampleId = UUID.randomUUID().toString()

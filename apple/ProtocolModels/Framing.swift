@@ -1,5 +1,33 @@
 import Foundation
 
+public struct BrowseContext: Equatable {
+    public let source: String
+    public let epoch: String
+    public let mode: String
+    public let assistedReady: Bool
+    public init(source: String, epoch: String, mode: String, assistedReady: Bool) {
+        self.source = source; self.epoch = epoch; self.mode = mode; self.assistedReady = assistedReady
+    }
+}
+public enum BrowseReset: String { case none = "NONE", all = "ALL", assisted = "ASSISTED" }
+public struct BrowseInvalidation {
+    public let reset: BrowseReset
+    public let message: String?
+}
+/// Presentation invalidation only; never sends a request or retries playback.
+public enum BrowseContextTransition {
+    public static func evaluate(_ old: BrowseContext, _ new: BrowseContext, hasLibrary: Bool, hasQueue: Bool,
+                                assistedLibrary: Bool, notify: Bool) -> BrowseInvalidation {
+        if old.source != new.source || old.epoch != new.epoch || old.mode != new.mode {
+            return BrowseInvalidation(reset: .all, message: notify && (hasLibrary || hasQueue) ? "Library changed. Browse again or refresh Queue." : nil)
+        }
+        if old.assistedReady != new.assistedReady && assistedLibrary {
+            return BrowseInvalidation(reset: .assisted, message: notify && hasLibrary ? "Assisted browsing changed. Browse again; wake/unlock DX340 and check browsing access if needed." : nil)
+        }
+        return BrowseInvalidation(reset: .none, message: nil)
+    }
+}
+
 public enum WireError: Error { case malformed, incompatible, outOfOrder, limit }
 /// Pending observation only; host authorization, source deadlines and no-replay rules stay separate.
 public enum ReplyBudget {

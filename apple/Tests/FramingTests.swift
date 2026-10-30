@@ -2,6 +2,22 @@ import XCTest
 @testable import DXProtocol
 
 final class FramingTests: XCTestCase {
+    func testSharedBrowseContextTransitionsKeepNativePagesAndAuthorizationStatus() throws {
+        let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        let cases = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("protocol/fixtures/browse-invalidation.json"))) as! [[String: Any]]
+        func context(_ value: Any) -> BrowseContext {
+            let fields = value as! [String: Any]
+            return BrowseContext(source: fields["source"] as! String, epoch: fields["epoch"] as! String,
+                                 mode: fields["mode"] as! String, assistedReady: fields["assistedReady"] as! Bool)
+        }
+        for item in cases {
+            let result = BrowseContextTransition.evaluate(context(item["old"]!), context(item["new"]!),
+                hasLibrary: item["hasLibrary"] as! Bool, hasQueue: item["hasQueue"] as! Bool,
+                assistedLibrary: item["assistedLibrary"] as! Bool, notify: item["notify"] as! Bool)
+            XCTAssertEqual(result.reset.rawValue, item["reset"] as! String, item["name"] as! String)
+            XCTAssertEqual(result.message, item["message"] as? String, item["name"] as! String)
+        }
+    }
     func testReplyBudgetsMatchSharedContractAndRetainObservedAssistedSelection() throws {
         let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
         let cases = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("protocol/fixtures/reply-budgets.json"))) as! [[String: Any]]

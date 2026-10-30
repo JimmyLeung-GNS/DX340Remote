@@ -1,0 +1,254 @@
+[
+  {
+    "name": "metadata-only-keeps-native-and-queue",
+    "old": {
+      "source": "mango",
+      "epoch": "a",
+      "mode": "direct",
+      "assistedReady": true
+    },
+    "new": {
+      "source": "mango",
+      "epoch": "a",
+      "mode": "direct",
+      "assistedReady": true
+    },
+    "hasLibrary": true,
+    "hasQueue": true,
+    "assistedLibrary": false,
+    "notify": true,
+    "reset": "NONE",
+    "message": null
+  },
+  {
+    "name": "storage-epoch-retires-both",
+    "old": {
+      "source": "mango",
+      "epoch": "a",
+      "mode": "direct",
+      "assistedReady": true
+    },
+    "new": {
+      "source": "mango",
+      "epoch": "b",
+      "mode": "direct",
+      "assistedReady": true
+    },
+    "hasLibrary": true,
+    "hasQueue": true,
+    "assistedLibrary": false,
+    "notify": true,
+    "reset": "ALL",
+    "message": "Library changed. Browse again or refresh Queue."
+  },
+  {
+    "name": "source-change-retires-both",
+    "old": {
+      "source": "mango",
+      "epoch": "a",
+      "mode": "direct",
+      "assistedReady": true
+    },
+    "new": {
+      "source": "apple",
+      "epoch": "a",
+      "mode": "direct",
+      "assistedReady": true
+    },
+    "hasLibrary": true,
+    "hasQueue": true,
+    "assistedLibrary": false,
+    "notify": true,
+    "reset": "ALL",
+    "message": "Library changed. Browse again or refresh Queue."
+  },
+  {
+    "name": "browse-mode-change-retires-both",
+    "old": {
+      "source": "mango",
+      "epoch": "a",
+      "mode": "direct",
+      "assistedReady": true
+    },
+    "new": {
+      "source": "mango",
+      "epoch": "a",
+      "mode": "ui-assisted",
+      "assistedReady": true
+    },
+    "hasLibrary": true,
+    "hasQueue": true,
+    "assistedLibrary": false,
+    "notify": true,
+    "reset": "ALL",
+    "message": "Library changed. Browse again or refresh Queue."
+  },
+  {
+    "name": "first-state-with-no-lists-keeps-connection-message",
+    "old": {
+      "source": "",
+      "epoch": "",
+      "mode": "",
+      "assistedReady": true
+    },
+    "new": {
+      "source": "mango",
+      "epoch": "a",
+      "mode": "direct",
+      "assistedReady": true
+    },
+    "hasLibrary": false,
+    "hasQueue": false,
+    "assistedLibrary": false,
+    "notify": true,
+    "reset": "ALL",
+    "message": null
+  },
+  {
+    "name": "queue-only-gets-refresh-guidance",
+    "old": {
+      "source": "mango",
+      "epoch": "a",
+      "mode": "direct",
+      "assistedReady": true
+    },
+    "new": {
+      "source": "mango",
+      "epoch": "b",
+      "mode": "direct",
+      "assistedReady": true
+    },
+    "hasLibrary": false,
+    "hasQueue": true,
+    "assistedLibrary": false,
+    "notify": true,
+    "reset": "ALL",
+    "message": "Library changed. Browse again or refresh Queue."
+  },
+  {
+    "name": "authorization-result-keeps-connection-message",
+    "old": {
+      "source": "mango",
+      "epoch": "a",
+      "mode": "direct",
+      "assistedReady": true
+    },
+    "new": {
+      "source": "mango",
+      "epoch": "b",
+      "mode": "direct",
+      "assistedReady": true
+    },
+    "hasLibrary": true,
+    "hasQueue": true,
+    "assistedLibrary": false,
+    "notify": false,
+    "reset": "ALL",
+    "message": null
+  },
+  {
+    "name": "native-mango-survives-assisted-access-loss",
+    "old": {
+      "source": "mango",
+      "epoch": "a",
+      "mode": "direct",
+      "assistedReady": true
+    },
+    "new": {
+      "source": "mango",
+      "epoch": "a",
+      "mode": "direct",
+      "assistedReady": false
+    },
+    "hasLibrary": true,
+    "hasQueue": true,
+    "assistedLibrary": false,
+    "notify": true,
+    "reset": "NONE",
+    "message": null
+  },
+  {
+    "name": "assisted-loss-retires-library-only",
+    "old": {
+      "source": "mango",
+      "epoch": "a",
+      "mode": "direct",
+      "assistedReady": true
+    },
+    "new": {
+      "source": "mango",
+      "epoch": "a",
+      "mode": "direct",
+      "assistedReady": false
+    },
+    "hasLibrary": true,
+    "hasQueue": true,
+    "assistedLibrary": true,
+    "notify": true,
+    "reset": "ASSISTED",
+    "message": "Assisted browsing changed. Browse again; wake/unlock DX340 and check browsing access if needed."
+  },
+  {
+    "name": "assisted-return-retires-library-only",
+    "old": {
+      "source": "mango",
+      "epoch": "a",
+      "mode": "direct",
+      "assistedReady": false
+    },
+    "new": {
+      "source": "mango",
+      "epoch": "a",
+      "mode": "direct",
+      "assistedReady": true
+    },
+    "hasLibrary": true,
+    "hasQueue": true,
+    "assistedLibrary": true,
+    "notify": true,
+    "reset": "ASSISTED",
+    "message": "Assisted browsing changed. Browse again; wake/unlock DX340 and check browsing access if needed."
+  },
+  {
+    "name": "no-assisted-rows-keeps-queue-status",
+    "old": {
+      "source": "mango",
+      "epoch": "a",
+      "mode": "direct",
+      "assistedReady": true
+    },
+    "new": {
+      "source": "mango",
+      "epoch": "a",
+      "mode": "direct",
+      "assistedReady": false
+    },
+    "hasLibrary": false,
+    "hasQueue": true,
+    "assistedLibrary": true,
+    "notify": true,
+    "reset": "ASSISTED",
+    "message": null
+  },
+  {
+    "name": "epoch-reset-takes-precedence-over-assisted-reset",
+    "old": {
+      "source": "mango",
+      "epoch": "a",
+      "mode": "direct",
+      "assistedReady": true
+    },
+    "new": {
+      "source": "mango",
+      "epoch": "b",
+      "mode": "direct",
+      "assistedReady": false
+    },
+    "hasLibrary": true,
+    "hasQueue": true,
+    "assistedLibrary": true,
+    "notify": true,
+    "reset": "ALL",
+    "message": "Library changed. Browse again or refresh Queue."
+  }
+]

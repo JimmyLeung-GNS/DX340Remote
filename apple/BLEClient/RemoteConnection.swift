@@ -227,11 +227,11 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
                 controlProposal.observeBusy(replyHost: reply["hostEpoch"] as? String ?? "", expectedHost: hostEpoch, value: data["ownershipRevision"] as? String ?? "")
             } else { controlProposal.clear() }
         }
-        if type == "ERROR" { if reply["hostEpoch"] as? String == hostEpoch, let fresh = data["state"] as? [String: Any] { applyState(fresh) }; browseLocations[id] = nil; if id == activeBrowseId { library = [:] }; if id == activeQueueId { queue = []; queueRevision = ""; queuePage = [:] }; status = errorMessage(data["code"] as? String ?? "Source error"); return }
+        if type == "ERROR" { if reply["hostEpoch"] as? String == hostEpoch, let fresh = data["state"] as? [String: Any] { applyState(fresh, notifyLibraryChange: false) }; browseLocations[id] = nil; if id == activeBrowseId { library = [:] }; if id == activeQueueId { queue = []; queueRevision = ""; queuePage = [:] }; status = errorMessage(data["code"] as? String ?? "Source error"); return }
         if type == "ACCEPTED" { status = "Waiting for source…"; return }
         guard reply["hostEpoch"] as? String == hostEpoch else { disconnect(); return }
         if ["AUTHORIZE", "REQUEST_CONTROL"].contains(operation ?? ""), data["authorized"] as? Bool == true { controlProposal.clear(); authorized = true; wantsConnection = true; status = "Connected to DX340" }
-        if let new = data["state"] as? [String: Any] { applyState(new) }
+        if let new = data["state"] as? [String: Any] { applyState(new, notifyLibraryChange: !["AUTHORIZE", "REQUEST_CONTROL"].contains(operation ?? "")) }
         if type == "STATE_CHANGED" { applyState(data) }
         if let list = data["sources"] as? [[String: Any]] { sources = list }
         if operation == "BROWSE" {
@@ -270,13 +270,22 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         if data["outcome"] as? String == "observed" { status = "Playback state confirmed by source." }
         if let snapshot = try? JSONSerialization.data(withJSONObject: ["state": state, "sources": sources, "library": library]), snapshot.count <= 262144 { try? snapshot.write(to: snapshotURL(), options: .atomic) }
     }
-    private func applyState(_ new: [String: Any]) {
-        if new["sourceEpoch"] as? String != state["sourceEpoch"] as? String || new["source"] as? String != state["source"] as? String || (new["capabilities"] as? [String: Any])?["browseMode"] as? String != (state["capabilities"] as? [String: Any])?["browseMode"] as? String {
+    private func applyState(_ new: [String: Any], notifyLibraryChange: Bool = true) {
+        func context(_ value: [String: Any]) -> BrowseContext {
+            BrowseContext(source: value["source"] as? String ?? "", epoch: value["sourceEpoch"] as? String ?? "",
+                          mode: (value["capabilities"] as? [String: Any])?["browseMode"] as? String ?? "", assistedReady: isAssistedReady(value))
+        }
+        let transition = BrowseContextTransition.evaluate(context(state), context(new),
+            hasLibrary: !library.isEmpty || activeBrowseId != nil,
+            hasQueue: !queue.isEmpty || !queuePage.isEmpty || !queueRevision.isEmpty || activeQueueId != nil,
+            assistedLibrary: assistedBrowsing || activeBrowseId.flatMap({ browseLocations[$0]?.parent })?.hasPrefix("mango-ui:") == true,
+            notify: notifyLibraryChange && authorized)
+        if transition.reset == .all {
             library = [:]; queue = []; queueRevision = ""; queuePage = [:]; artwork = nil; activeBrowseId = nil; activeQueueId = nil; browseLocations = [:]; queueLocations = [:]
-        } else if isAssistedReady(new) != isAssistedReady(state),
-                  assistedBrowsing || activeBrowseId.flatMap({ browseLocations[$0]?.parent })?.hasPrefix("mango-ui:") == true {
+        } else if transition.reset == .assisted {
             library = [:]; activeBrowseId = nil; browseLocations = [:]
         }
+        if let message = transition.message { status = message }
         state = new
         stateReceivedAt = ContinuousClock.now
         stateSampleId = UUID().uuidString
