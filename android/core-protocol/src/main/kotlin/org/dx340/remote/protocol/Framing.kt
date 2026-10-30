@@ -24,13 +24,13 @@ object Wire {
     }
 }
 
-class Reassembler(private val now: () -> Long = System::currentTimeMillis) {
-    private data class Partial(val count: Int, val start: Long, val pieces: MutableList<ByteArray>, var bytes: Int)
+class Reassembler(private val now: () -> Long = { System.nanoTime() / 1_000_000 }) {
+    private data class Partial(val count: Int, val start: Long, var lastProgress: Long, val pieces: MutableList<ByteArray>, var bytes: Int)
     private val partials = mutableMapOf<Int, Partial>()
     fun clear() = partials.clear()
     fun accept(frame: ByteArray): ByteArray? {
         val time = now()
-        partials.entries.removeAll { time - it.value.start >= 10000 }
+        partials.entries.removeAll { time < it.value.lastProgress || time - it.value.lastProgress >= 10000 || time - it.value.start >= 60000 }
         require(frame.size in 9..512) { "MALFORMED_FRAME" }
         val b = ByteBuffer.wrap(frame)
         require(b.get() == 0x44.toByte() && b.get() == 1.toByte()) { "INCOMPATIBLE_PROTOCOL" }
@@ -40,12 +40,13 @@ class Reassembler(private val now: () -> Long = System::currentTimeMillis) {
         require(count in 1..65535 && index < count) { "MALFORMED_FRAME" }
         val p = partials[id] ?: run {
             require(index == 0 && partials.size < 4) { "OUT_OF_ORDER" }
-            Partial(count, time, mutableListOf(), 0).also { partials[id] = it }
+            Partial(count, time, time, mutableListOf(), 0).also { partials[id] = it }
         }
         if (p.count != count || index != p.pieces.size || p.bytes + b.remaining() > Wire.MAX_MESSAGE) {
             partials.remove(id); throw IllegalArgumentException("MALFORMED_FRAME")
         }
         val piece = ByteArray(b.remaining()); b.get(piece); p.pieces.add(piece); p.bytes += piece.size
+        p.lastProgress = time
         if (p.pieces.size != count) return null
         partials.remove(id)
         return ByteArray(p.bytes).also { result -> var offset = 0; p.pieces.forEach { it.copyInto(result, offset); offset += it.size } }

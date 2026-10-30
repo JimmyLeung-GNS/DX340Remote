@@ -25,6 +25,40 @@ class DiagnosticFailureTests(unittest.TestCase):
 
 
 class FramingTests(unittest.TestCase):
+    def test_large_reply_may_progress_for_more_than_ten_seconds(self):
+        now = [0]
+        a = Assembler(lambda: now[0])
+        data = bytes(i % 251 for i in range(44 * 1024))
+        sequence = frames(data, 512, 9)
+        for index, frame in enumerate(sequence):
+            now[0] = index * 0.5
+            value = a.accept(frame)
+            self.assertEqual(value, data if index == len(sequence) - 1 else None)
+        self.assertGreater(now[0], 10)
+        self.assertLess(now[0], 60)
+
+    def test_other_messages_cannot_extend_an_idle_partial(self):
+        now = [0]
+        a = Assembler(lambda: now[0]); sequence = frames(b'x' * 40, 20, 8)
+        a.accept(sequence[0]); now[0] = 9.999
+        self.assertEqual(a.accept(frames(b'x', 20, 9)[0]), b'x')
+        now[0] = 10
+        with self.assertRaises(ValueError):
+            a.accept(sequence[1])
+
+    def test_total_lifetime_and_clock_rollback_fail_despite_progress(self):
+        now = [0]
+        a = Assembler(lambda: now[0]); sequence = frames(b'x' * 120, 20, 7)
+        for index in range(7):
+            now[0] = index * 9
+            self.assertIsNone(a.accept(sequence[index]))
+        now[0] = 60
+        with self.assertRaises(ValueError):
+            a.accept(sequence[7])
+        a.accept(sequence[0]); now[0] = 59.999
+        with self.assertRaises(ValueError):
+            a.accept(sequence[1])
+
     def test_shared_kotlin_swift_fixtures(self):
         fixture = Path(__file__).resolve().parents[1] / 'protocol/fixtures/framing.json'
         for case in json.loads(fixture.read_text(encoding='utf-8')):

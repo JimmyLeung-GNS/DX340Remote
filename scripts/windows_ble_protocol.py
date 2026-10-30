@@ -47,7 +47,8 @@ class Assembler:
 
     def accept(self, frame):
         now = self.clock()
-        self.partials = {key: value for key, value in self.partials.items() if now - value[0] < 10}
+        self.partials = {key: value for key, value in self.partials.items()
+                         if now >= value[4] and now - value[4] < 10 and now - value[0] < 60}
         if not 9 <= len(frame) <= 512:
             raise ValueError('MALFORMED_FRAME')
         magic, version, serial, index, count = struct.unpack('>BBHHH', frame[:8])
@@ -58,13 +59,14 @@ class Assembler:
         if serial not in self.partials:
             if index != 0 or len(self.partials) >= 4:
                 raise ValueError('OUT_OF_ORDER')
-            self.partials[serial] = [now, count, 0, bytearray()]
+            self.partials[serial] = [now, count, 0, bytearray(), now]
         partial = self.partials[serial]
         if partial[1] != count or partial[2] != index or len(partial[3]) + len(frame) - 8 > MAX_MESSAGE:
             del self.partials[serial]
             raise ValueError('MALFORMED_FRAME')
         partial[2] += 1
         partial[3].extend(frame[8:])
+        partial[4] = now
         if partial[2] != count:
             return None
         del self.partials[serial]

@@ -33,13 +33,13 @@ public struct ControlProposal {
 }
 
 public final class Reassembler {
-    private struct Partial { let count: Int; let start: TimeInterval; var pieces: Int; var bytes: Data }
+    private struct Partial { let count: Int; let start: TimeInterval; var lastProgress: TimeInterval; var pieces: Int; var bytes: Data }
     private var partials: [Int: Partial] = [:]
     private let now: () -> TimeInterval
     public init(now: @escaping () -> TimeInterval = { ProcessInfo.processInfo.systemUptime }) { self.now = now }
     public func clear() { partials.removeAll() }
     public func accept(_ data: Data) throws -> Data? {
-        let time = now(); partials = partials.filter { time - $0.value.start < 10 }
+        let time = now(); partials = partials.filter { time >= $0.value.lastProgress && time - $0.value.lastProgress < 10 && time - $0.value.start < 60 }
         guard (9...512).contains(data.count) else { throw WireError.malformed }
         let b = [UInt8](data)
         guard b[0] == 0x44, b[1] == 1 else { throw WireError.incompatible }
@@ -47,13 +47,14 @@ public final class Reassembler {
         guard count > 0, index < count else { throw WireError.malformed }
         if partials[id] == nil {
             guard index == 0, partials.count < 4 else { throw WireError.outOfOrder }
-            partials[id] = Partial(count: count, start: time, pieces: 0, bytes: Data())
+            partials[id] = Partial(count: count, start: time, lastProgress: time, pieces: 0, bytes: Data())
         }
         var p = partials[id]!
         guard p.count == count, p.pieces == index, p.bytes.count + b.count - 8 <= 65536 else {
             partials[id] = nil; throw WireError.malformed
         }
         p.bytes.append(contentsOf: b.dropFirst(8)); p.pieces += 1
+        p.lastProgress = time
         if p.pieces == count { partials[id] = nil; return p.bytes }
         partials[id] = p; return nil
     }

@@ -37,6 +37,31 @@ final class FramingTests: XCTestCase {
         XCTAssertThrowsError(try a.accept(frames[1]))
         _ = try a.accept(frames[0]); a.clear(); XCTAssertThrowsError(try a.accept(frames[1]))
     }
+    func testLargeReplyMayProgressForMoreThanTenSeconds() throws {
+        var time: TimeInterval = 0
+        let a = Reassembler(now: { time }), bytes = Data((0..<(44 * 1024)).map { UInt8($0 % 251) })
+        let frames = try Wire.frames(bytes, capacity: 512, id: 9)
+        for (index, frame) in frames.enumerated() {
+            time = Double(index) * 0.5
+            if index == frames.count - 1 { XCTAssertEqual(try a.accept(frame), bytes) }
+            else { XCTAssertNil(try a.accept(frame)) }
+        }
+        XCTAssertGreaterThan(time, 10); XCTAssertLessThan(time, 60)
+    }
+    func testOtherMessagesCannotExtendIdlePartial() throws {
+        var time: TimeInterval = 0
+        let a = Reassembler(now: { time }), frames = try Wire.frames(Data(repeating: 1, count: 40), capacity: 20, id: 8)
+        _ = try a.accept(frames[0]); time = 9.999
+        XCTAssertEqual(try a.accept(try Wire.frames(Data([1]), capacity: 20, id: 9)[0]), Data([1]))
+        time = 10; XCTAssertThrowsError(try a.accept(frames[1]))
+    }
+    func testTotalLifetimeAndClockRollbackFailDespiteProgress() throws {
+        var time: TimeInterval = 0
+        let a = Reassembler(now: { time }), frames = try Wire.frames(Data(repeating: 1, count: 120), capacity: 20, id: 7)
+        for index in 0...6 { time = Double(index) * 9; XCTAssertNil(try a.accept(frames[index])) }
+        time = 60; XCTAssertThrowsError(try a.accept(frames[7]))
+        _ = try a.accept(frames[0]); time = 59.999; XCTAssertThrowsError(try a.accept(frames[1]))
+    }
     func testSharedFixtures() throws {
         let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
         let fixtures = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("protocol/fixtures/framing.json"))) as! [[String: Any]]

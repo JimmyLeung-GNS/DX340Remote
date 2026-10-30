@@ -64,6 +64,33 @@ class ProtocolTest {
         assembler.accept(frames[0]); assembler.clear()
         assertThrows(IllegalArgumentException::class.java) { assembler.accept(frames[1]) }
     }
+    @Test fun aLargeReplyMayProgressForMoreThanTenSeconds() {
+        var now = 0L; val assembler = Reassembler { now }
+        val bytes = ByteArray(44 * 1024) { (it % 251).toByte() }
+        val frames = Wire.frames(bytes, 512, 9)
+        frames.forEachIndexed { index, frame ->
+            now = index * 500L
+            if (index == frames.lastIndex) assertArrayEquals(bytes, assembler.accept(frame))
+            else assertNull(assembler.accept(frame))
+        }
+        assertTrue(now > 10000 && now < 60000)
+    }
+    @Test fun otherMessagesCannotExtendAnIdlePartial() {
+        var now = 0L; val assembler = Reassembler { now }
+        val frames = Wire.frames(ByteArray(40), 20, 8)
+        assembler.accept(frames[0]); now = 9999
+        assertArrayEquals(byteArrayOf(1), assembler.accept(Wire.frames(byteArrayOf(1), 20, 9).single()))
+        now = 10000
+        assertThrows(IllegalArgumentException::class.java) { assembler.accept(frames[1]) }
+    }
+    @Test fun totalLifetimeAndClockRollbackFailEvenWithProgress() {
+        var now = 0L; val assembler = Reassembler { now }; val frames = Wire.frames(ByteArray(120), 20, 7)
+        for (index in 0..6) { now = index * 9000L; assertNull(assembler.accept(frames[index])) }
+        now = 60000
+        assertThrows(IllegalArgumentException::class.java) { assembler.accept(frames[7]) }
+        assembler.accept(frames[0]); now = 59999
+        assertThrows(IllegalArgumentException::class.java) { assembler.accept(frames[1]) }
+    }
     @Test fun rejectsOversizedAndMalformedMessages() {
         assertThrows(IllegalArgumentException::class.java) { Wire.frames(ByteArray(65537), 20, 0) }
         assertThrows(IllegalArgumentException::class.java) { Wire.frames(ByteArray(65536), 9, 0) }
