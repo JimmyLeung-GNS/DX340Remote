@@ -442,6 +442,8 @@ class _PhoneShellState extends State<PhoneShell>
   ];
   Widget musicRow(Json item, {required bool queue}) {
     final queueRevision = remote.queueRevision;
+    final libraryRevision = textValue(remote.library['revision']);
+    final sourceScope = remote.scope;
     final browsable = !queue && item['browsable'] == true;
     final enabled =
         !remote.busy &&
@@ -459,7 +461,11 @@ class _PhoneShellState extends State<PhoneShell>
           ? remote.playQueue(item, revision: queueRevision)
           : browsable
           ? remote.open(item)
-          : remote.playItem(item),
+          : remote.playItem(
+              item,
+              revision: libraryRevision,
+              sourceScope: sourceScope,
+            ),
     );
     final title = Text(
       textValue(item['title']).isEmpty ? 'Untitled' : textValue(item['title']),
@@ -470,6 +476,12 @@ class _PhoneShellState extends State<PhoneShell>
       semanticLabel: browsable ? 'Browse' : 'Play',
     );
     return Column(
+      key: ValueKey((
+        queue,
+        sourceScope,
+        queue ? queueRevision : libraryRevision,
+        item['id'],
+      )),
       children: [
         if (apple)
           CupertinoButton(
@@ -599,38 +611,72 @@ class _PhoneShellState extends State<PhoneShell>
       'Optional assisted browsing needs DX340 awake and unlocked. Enable it in the companion only when you want that mode.',
     ),
   ];
+  Widget statusContent() => Semantics(
+    liveRegion: true,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(remote.status, style: Theme.of(context).textTheme.bodyMedium),
+        if (remote.error != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: Text(
+              remote.error!,
+              style: TextStyle(
+                color: apple
+                    ? CupertinoColors.systemRed.resolveFrom(context)
+                    : Theme.of(context).colorScheme.error,
+              ),
+            ),
+          ),
+        if (remote.busy)
+          label(
+            'Waiting for the playback action. Refresh if its outcome is unknown.',
+          ),
+      ],
+    ),
+  );
+
+  // Status can change while a finger is over a song. Give it its own scrolling
+  // viewport, so wrapping text and pending messages never reflow the music list.
+  // The viewport scales with text, remains bounded on short displays and never
+  // truncates the recovery message; its content can be scrolled independently.
+  Widget stableBrowsingContent(Widget content) => LayoutBuilder(
+    builder: (context, bounds) {
+      final style = Theme.of(context).textTheme.bodyMedium!;
+      final height =
+          (MediaQuery.textScalerOf(context).scale(style.fontSize!) *
+                      (style.height ?? 1.5) *
+                      3 +
+                  24)
+              .clamp(0.0, bounds.maxHeight * 0.35)
+              .toDouble();
+      return Column(
+        children: [
+          SizedBox(
+            height: height,
+            child: SingleChildScrollView(
+              key: ValueKey((remote.status, remote.error, remote.busy)),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              child: statusContent(),
+            ),
+          ),
+          const Divider(height: 1),
+          Expanded(child: content),
+        ],
+      );
+    },
+  );
   @override
   Widget build(BuildContext context) => AnimatedBuilder(
     animation: remote,
     builder: (context, child) {
+      final browsing = {1, 2}.contains(_tab.value);
       final content = ListView(
         key: PageStorageKey(_tab.value),
         padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
         children: [
-          Semantics(
-            liveRegion: true,
-            child: Text(
-              remote.status,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ),
-          if (remote.error != null)
-            Padding(
-              padding: const EdgeInsets.only(top: 12),
-              child: Text(
-                remote.error!,
-                style: TextStyle(
-                  color: apple
-                      ? CupertinoColors.systemRed.resolveFrom(context)
-                      : Theme.of(context).colorScheme.error,
-                ),
-              ),
-            ),
-          if (remote.busy)
-            label(
-              'Waiting for the playback action. Refresh if its outcome is unknown.',
-            ),
-          const SizedBox(height: 20),
+          if (!browsing) ...[statusContent(), const SizedBox(height: 20)],
           ...switch (_tab.value) {
             1 => library(),
             2 => queueView(),
@@ -660,7 +706,9 @@ class _PhoneShellState extends State<PhoneShell>
                   Expanded(
                     child: Material(
                       type: MaterialType.transparency,
-                      child: content,
+                      child: browsing
+                          ? stableBrowsingContent(content)
+                          : content,
                     ),
                   ),
                   ?playbackBar,
@@ -692,7 +740,9 @@ class _PhoneShellState extends State<PhoneShell>
         body: SafeArea(
           child: Column(
             children: [
-              Expanded(child: content),
+              Expanded(
+                child: browsing ? stableBrowsingContent(content) : content,
+              ),
               ?playbackBar,
             ],
           ),

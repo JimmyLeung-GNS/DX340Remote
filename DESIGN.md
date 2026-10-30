@@ -38,6 +38,9 @@ components:
     size: "22 logical px"
   phone-artwork:
     height: "220 logical px"
+  phone-browsing-status:
+    height: "3 scaled bodyMedium line heights + 24 logical px, capped at 35% of available height"
+    padding: "12px 20px"
   android-action:
     size: "48dp minimum height"
   android-destination:
@@ -87,7 +90,7 @@ Frontmatter typography keys prefixed android- record retained Kotlin host/refere
 
 ## Layout
 
-All phone dimensions in the frontmatter's phone- entries are Flutter logical pixels. The body token is CSS-order top/horizontal/bottom, extracted from EdgeInsets.fromLTRB(20, 16, 20, 32). Each screen uses a ListView under its navigation title with connection status, optional error/pending text and destination content. System safe areas and bottom navigation keep chrome separate from scrolling content.
+All phone dimensions in the frontmatter's phone- entries are Flutter logical pixels. The body token is CSS-order top/horizontal/bottom, extracted from EdgeInsets.fromLTRB(20, 16, 20, 32). Each screen uses a ListView under its navigation title. Player and Setup keep connection status and optional error/pending text in that list. Library and Queue reserve a separate, independently scrollable status viewport above the destination list, divided by a one-logical-pixel divider, so status wrapping or pending messages do not move music rows. Its height is three scaled bodyMedium line heights plus 24 logical pixels, capped at 35% of the available browsing height; status padding is 20 horizontal and 12 vertical logical pixels. Longer messages scroll within that space. System safe areas and bottom navigation keep chrome separate from scrolling content.
 
 Player actions normally occupy two equal-width columns with separate Play/Pause and Previous/Next rows. They stack when the available control area is below 340 logical pixels wide or the text scaler's scale(1) exceeds 1.4. This is a content-width rule, not a device-width breakpoint. The minimum action height, icon size/gap, row gap and artwork height are the authored phone tokens above. Artwork uses BoxFit.contain. Empty artist/album fields and an empty Source section are omitted.
 
@@ -123,6 +126,8 @@ The companion's local VolumeCheckActivity uses scrolling TextView, EditText and 
 
 Capability-led lists distinguish browsable folders from playable selections, with a folder/music icon and a chevron for folders. Cupertino rows use buttons; Android rows use ListTile. Nonempty subtitles wrap within the row. Library loading uses an adaptive progress indicator. Parent navigation, native pagination and assisted Show more are distinct actions; queue and library selections use source IDs and revisions.
 
+Rows retain identity using destination, source scope, rendered revision and item ID. Library playback validates the rendered revision/source scope and current playable ID/title membership before sending the command; queue playback independently validates its rendered revision and current ID/title membership. These guards and the separate status viewport correct the reported moving-row selection bug within the incumbent native appearance; they do not establish physical connected selection accuracy.
+
 Disconnected Library and Queue provide connection guidance and Open Setup. Supported native browsing and optional assisted browsing remain separate modes with explicit limitations; full browsing is not reduced to queue skipping. Connected phone content rendering remains outside the finish reviewers' screenshot scope. The optional Mango folder service now has local adapter evidence; both phone BLE routes and full folder acceptance remain open.
 
 ### Persistent playback while browsing
@@ -139,7 +144,7 @@ Android development taps and the recovery route were observed through actual scr
 
 ### Setup, status and diagnostics
 
-Setup explains that music stays on DX340 and provides access, discovery, connect, approval retry and disconnect actions. Optional assisted browsing explains its awake/unlocked requirement. Connection status, error and pending-action explanations scroll with content; no fixed connection banner covers large text. Error roles are platform adaptive. Technical companion diagnostics stay in its setup flow.
+Setup explains that music stays on DX340 and provides access, discovery, connect, approval retry and disconnect actions. Optional assisted browsing explains its awake/unlocked requirement. Connection status, error and pending-action explanations scroll with Player/Setup content; on Library/Queue they scroll independently in the reserved status viewport described under Layout, without overlaying music rows. Error roles are platform adaptive. Technical companion diagnostics stay in its setup flow.
 
 For an already approved phone with a current native busy proposal, Setup places **Take control on this phone** ahead of new-phone instructions, followed by the explanation that taking control disconnects the other approved controller while music stays on DX340. It reuses the shared adaptive action and wrapping label components, without a modal, new visual tokens or assets. Authorization, pending work and consume-once native availability govern the action; sending the request hides it, while pending or control-lost status remains in the scrolling live region. A new native proposal is required before offering the action again. This describes presentation and guards, not verified physical transfer or playback continuity.
 
@@ -158,6 +163,8 @@ Back, Open Mango Player and Retry library remain available alongside the folder 
 Android reuses ic_dx340.xml; five generated Flutter Android launcher PNGs were removed. The iPhone AppIcon and transparent launch placeholders remain provisional Flutter-template assets. phone/ASSET_ORIGINS.md and third_party/FLUTTER_LICENSE identify them. All 18 shipping PNGs embed their origins; the recorded embed-prompt scan reported 18 rasters and zero missing origins. No new raster illustration or generated artwork was introduced. Launcher branding is unfinished.
 
 ### Evidence and acceptance limits
+
+**Verified, scoped Library status-layout rendering, 31 October 2026:** the reviewer returned ship only for four actual Pixel 9a/Android 16 disconnected cached-row Library captures under artifacts/library-selection-20261031/: pixel-library-default.png, pixel-library-dark.png, pixel-library-dark-large.png and pixel-library-light-large.png (light/dark, font scales 1.0/2.0). This verdict covers those supplied appearances, not Queue or connected interaction. flutter-analyze-final.txt reports no issues and flutter-tests-final.txt records 51 passing Flutter software tests, including layout/selection guards. There is no new actual iOS build/capture or connected BLE/audio pass for this correction. Existing platform appearance, native bridge/reference architecture and UX-01 scope remain unchanged; no whole-surface or full-system completion follows.
 
 **Verified, scoped controller-handoff Android rendering:** at04b04aa, artifacts/handoff-android-review.md returns ship for six actual1080×2160 DX340 Android13/API33 captures under artifacts/handoff-captures/: synthetic-handoff-dark.png, synthetic-handoff-light.png, synthetic-handoff-large-dark.png, synthetic-handoff-pending.png, synthetic-handoff-lost.png and ordinary-app-restored.png. Ready states expose the complete takeover action, including the initial large-text viewport; pending/lost states omit it. Provenance records separate debug fixture e38f629b... and restored ordinary release23c536e7..., font1.0/night yes restored with no cleanup errors. The OS floating shortcut's covered patch is excluded. No native detector ran. This verdict covers only those renders, not finger scrolling, TalkBack, separate controller-phone interaction, two-controller BLE, audio continuity or whole-product acceptance. phone/test_support/handoff_capture.dart is explicitly labeled synthetic and rejects control actions; the ordinary app restoration is separate. Incumbent tokens and sidecar remain unchanged.
 

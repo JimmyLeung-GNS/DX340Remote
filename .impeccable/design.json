@@ -88,6 +88,23 @@
       "third_party/FLUTTER_LICENSE"
     ],
     "verification": {
+      "libraryStatusLayout20261031": {
+        "status": "verified for supplied disconnected Library capture scope",
+        "device": "Actual Pixel 9a / Android 16",
+        "captures": [
+          "artifacts/library-selection-20261031/pixel-library-default.png",
+          "artifacts/library-selection-20261031/pixel-library-dark.png",
+          "artifacts/library-selection-20261031/pixel-library-dark-large.png",
+          "artifacts/library-selection-20261031/pixel-library-light-large.png"
+        ],
+        "captureScope": "Disconnected cached-row Library, light/dark, font scales 1.0/2.0 only.",
+        "review": {
+          "disposition": "ship",
+          "limit": "Only the four supplied Library appearances; no Queue, connected selection, BLE/audio, physical accessibility or whole-surface/UX-01 acceptance."
+        },
+        "software": "artifacts/library-selection-20261031/flutter-analyze-final.txt: no issues; flutter-tests-final.txt: 51 Flutter tests passed, including layout/selection guards.",
+        "notTested": "No new actual iOS build/capture or connected BLE/audio pass for this correction. Native appearance and bridge/reference architecture unchanged."
+      },
       "scope": "Earlier phone reviewers returned ship only for their supplied disconnected states. A separate Mango host reviewer returned ship only for nine dark/default-font DX340 captures. Full system active/incomplete; physical Flutter parity and connection stability remain open.",
       "sourceRevision": "5f31f5d",
       "sourceRevisionScope": "Historical shared phone reviewed capture baseline, preserved below; latest checks are recorded separately.",
@@ -240,12 +257,23 @@
     {
       "name": "Library and queue row",
       "kind": "custom",
-      "description": "Material ListTile or CupertinoButton row with folder/music icon, wrapping title/subtitle and folder chevron. Parent/page/assisted navigation and playable selection use source-scoped IDs/revisions."
+      "description": "Material ListTile or CupertinoButton row with folder/music icon, wrapping title/subtitle and folder chevron. Row identity includes destination, source scope, rendered revision and item ID. Library playback checks rendered revision/scope and current playable ID/title membership; queue playback checks rendered revision and current ID/title membership. Parent/page/assisted navigation remain distinct."
     },
     {
       "name": "Scrollable connection and recovery",
       "kind": "custom",
-      "description": "Live-region status, adaptive errors, pending explanation and disconnected Open Setup recovery appear inside the ListView, with capability-specific guidance."
+      "description": "Player/Setup retain live-region status, adaptive errors and pending explanation in the destination ListView. Library/Queue put those messages in the separate stable browsing status viewport; disconnected Open Setup recovery remains in destination content, with capability-specific guidance."
+    },
+    {
+      "name": "Stable browsing status viewport",
+      "kind": "custom",
+      "refersTo": "phone-browsing-status",
+      "description": "Library/Queue reserve independently scrollable live-region status/error/pending space above their independent destination ListView, with a one-logical-pixel divider. Status changes do not reflow music rows; long messages scroll without overlaying rows. Uses incumbent Material/Cupertino text and error roles, without a browser approximation.",
+      "layout": {
+        "heightCalculation": "min(textScaler.scale(bodyMedium.fontSize) * (bodyMedium.height ?? 1.5) * 3 + 24, availableHeight * 0.35)",
+        "statusScrollIdentity": "Current status, error and busy state; a changed message resets the status scroll viewport."
+      },
+      "verificationRef": "extensions.verification.libraryStatusLayout20261031"
     },
     {
       "name": "Optional Mango companion test",

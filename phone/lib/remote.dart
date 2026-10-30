@@ -308,14 +308,28 @@ class Remote extends ChangeNotifier {
     });
   }
 
-  Future<void> playItem(Json item) async {
-    if (item['playable'] != true ||
+  Future<void> playItem(
+    Json item, {
+    required String revision,
+    required String sourceScope,
+  }) async {
+    if (libraryLoading ||
+        revision.isEmpty ||
+        revision != textValue(library['revision']) ||
+        sourceScope != scope ||
+        !objects(library['items']).any(
+          (current) =>
+              current['id'] == item['id'] &&
+              current['title'] == item['title'] &&
+              current['playable'] == true,
+        ) ||
+        item['playable'] != true ||
         ((assisted || item['uiAssisted'] == true) && !assistedReady)) {
       return;
     }
     await command('PLAY_ITEM', {
       'item': item['id'],
-      'revision': library['revision'],
+      'revision': revision,
     }, 'canPlayItem');
   }
 

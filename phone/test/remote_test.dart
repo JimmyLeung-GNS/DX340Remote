@@ -134,6 +134,9 @@ void main() {
               'backId': 'old-back',
               'parent': 'old-scroll',
               'revision': 'old-ui',
+              'items': [
+                {'id': 'old-file', 'playable': true},
+              ],
               'nextPage': 1,
             },
           ),
@@ -142,7 +145,11 @@ void main() {
       await remote.open({'id': 'old-folder', 'browsable': true});
       await remote.back();
       await remote.more(1);
-      await remote.playItem({'id': 'old-file', 'playable': true});
+      await remote.playItem(
+        {'id': 'old-file', 'playable': true},
+        revision: textValue(remote.library['revision']),
+        sourceScope: remote.scope,
+      );
       expect(bridge.calls, isEmpty);
       expect(await remote.command('NEXT', {}, 'canNext'), true);
       await remote.root();
@@ -163,6 +170,12 @@ void main() {
               'canBrowseFolders': false,
               'browseMode': 'direct',
             },
+            library: {
+              'revision': 'folder-r',
+              'items': [
+                {'id': 'ui-file', 'playable': true, 'uiAssisted': true},
+              ],
+            },
           ),
         );
       await remote.open({
@@ -170,11 +183,11 @@ void main() {
         'browsable': true,
         'uiAssisted': true,
       });
-      await remote.playItem({
-        'id': 'ui-file',
-        'playable': true,
-        'uiAssisted': true,
-      });
+      await remote.playItem(
+        {'id': 'ui-file', 'playable': true, 'uiAssisted': true},
+        revision: textValue(remote.library['revision']),
+        sourceScope: remote.scope,
+      );
       expect(bridge.calls, isEmpty);
       await remote.open({'id': 'native-album', 'browsable': true});
       expect(bridge.calls.single.$2, {'parent': 'native-album'});
@@ -348,14 +361,27 @@ void main() {
     expect(bridge.calls, isEmpty);
     // Assisted selection can be available before native Mango play-by-ID is verified.
     // The diagnostic-only testable flag must never authorize phone playback.
-    remote.accept(snapshot());
-    await remote.playItem({
-      'id': 'native-unverified',
-      'playable': false,
-      'nativeTestable': true,
-    });
+    remote.accept(
+      snapshot(
+        library: {
+          'revision': 'r',
+          'items': [
+            {'id': 'ui-verified', 'playable': true},
+          ],
+        },
+      ),
+    );
+    await remote.playItem(
+      {'id': 'native-unverified', 'playable': false, 'nativeTestable': true},
+      revision: textValue(remote.library['revision']),
+      sourceScope: remote.scope,
+    );
     expect(bridge.calls, isEmpty);
-    await remote.playItem({'id': 'ui-verified', 'playable': true});
+    await remote.playItem(
+      {'id': 'ui-verified', 'playable': true},
+      revision: textValue(remote.library['revision']),
+      sourceScope: remote.scope,
+    );
     expect(bridge.calls.single.$1, 'send');
     expect(bridge.calls.single.$2['args']['item'], 'ui-verified');
     remote.dispose();
@@ -427,13 +453,20 @@ void main() {
               'backId': 'back-token',
               'parent': 'scroll-token',
               'revision': 'r1',
+              'items': [
+                {'id': 'song-token', 'playable': true},
+              ],
               'nextPage': 2,
             },
           ),
         );
       await remote.back();
       await remote.more(2);
-      await remote.playItem({'id': 'song-token', 'playable': true});
+      await remote.playItem(
+        {'id': 'song-token', 'playable': true},
+        revision: textValue(remote.library['revision']),
+        sourceScope: remote.scope,
+      );
       expect(bridge.calls.map((c) => c.$1), ['browse', 'browse', 'send']);
       expect(bridge.calls[0].$2, {'parent': 'back-token'});
       expect(bridge.calls[1].$2, {'parent': 'scroll-token', 'page': 2});
