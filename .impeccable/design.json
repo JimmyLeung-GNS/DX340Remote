@@ -16,6 +16,15 @@
       }
     },
     "typographyMeta": {
+      "companion-setup-title": {
+        "purpose": "Revised native Main title only; system font/scalable sp, not shared-phone typography."
+      },
+      "companion-setup-heading": {
+        "purpose": "Revised Main/controller-panel headings only; other local tests and retained references keep historical values."
+      },
+      "companion-setup-body": {
+        "purpose": "Required revised Main/controller-panel body text, native textColorPrimary; other surfaces retain their scoped values."
+      },
       "android-app-title": {
         "displayName": "Retained Kotlin application title",
         "purpose": "Companion/native-reference TextView heading; not the shared Flutter text scale."
@@ -38,12 +47,14 @@
       }
     },
     "tokenScopes": {
+      "companion-setup-*": "Revised native Companion Main/controller panel only. dp layout and minimum action height, scalable sp/system fonts. Historical android-* values remain for other companion/reference surfaces.",
       "phone-*": "Authored Flutter logical-pixel dimensions; phone-body is CSS order top/horizontal/bottom, corresponding to EdgeInsets.fromLTRB. Values are source intent, not physical accessibility acceptance.",
       "android-*": "Retained Kotlin companion/native phone reference tokens only. They do not set Flutter typography or navigation.",
       "apple-playback*": "Retained SwiftUI reference only; shared Cupertino phone actions use the phone tokens.",
       "launcher-*": "Android vector artwork only."
     },
     "nativeAppearance": {
+      "companionSetup": "Main/controller-panel required text resolves theme textColorPrimary. Native APPEARANCE_LIGHT_STATUS_BARS follows current theme brightness. Main uses dp content/section insets and scalable sp; stock buttons keep native feedback. No new palette, shapes or assets.",
       "sharedAndroid": "Flutter Material 3 ThemeData light/dark with ThemeMode.system; AppBar, NavigationBar, OutlinedButton and ListTile. No custom palette or font family.",
       "sharedIPhone": "Flutter CupertinoTheme brightness, CupertinoPageScaffold, CupertinoNavigationBar, CupertinoTabBar and CupertinoButton; shared reading text uses Material semantic text-theme roles. Material icon glyphs also appear in this shell.",
       "readingText": "headlineSmall track title; titleLarge section heading; bodyLarge label; bodyMedium connection/subtitle. Reading content scales and wraps.",
@@ -88,6 +99,31 @@
       "third_party/FLUTTER_LICENSE"
     ],
     "verification": {
+      "companionSetup9578394c": {
+        "report": "docs/test-results/2026-10-31-companion-setup.md",
+        "reviewReport": "artifacts/companion-setup-20261031/appearance-review.md",
+        "companionSha256": "9578394c945584db69f7241453b528291a2d019b579afda6cc940766e4217597",
+        "packageScope": "Final corrected Companion stage, superseding initial 49eb… candidate; ordinary Pixel ea9f165d… unchanged. No shared-phone UI code change in this stage.",
+        "captures": [
+          "artifacts/companion-setup-20261031/main-running-dark.png",
+          "artifacts/companion-setup-20261031/main-running-light.png",
+          "artifacts/companion-setup-20261031/main-large-dark.png",
+          "artifacts/companion-setup-20261031/preview-paired-light.png",
+          "artifacts/companion-setup-20261031/preview-paired-large-dark.png",
+          "artifacts/companion-setup-20261031/verified-preview-unpaired-dark.png",
+          "artifacts/companion-setup-20261031/verified-preview-expired-dark.png",
+          "artifacts/companion-setup-20261031/verified-preview-ended-dark.png",
+          "artifacts/companion-setup-20261031/verified-preview-approved-dark.png"
+        ],
+        "review": {
+          "disposition": "ship",
+          "scope": "F1 status-bar color contrast and F3 required light body-copy contrast resolved in corrected pixels; F2 configured-grant versus bound-readiness resolved in presentation logic only. Nine exact actual DX340 1080x2160 captures, default light/dark and supplied initial font2 dark states. Controller previews are isolated synthetic states without a live approval service; stale earlier preview frames excluded.",
+          "limit": "Floating OS shortcut covered patch, OEM font2 status-bar overlap and debug-fixture title-fit limitations excluded. Transient physical unbound readiness, all-section font2 scrolling/reachability, TalkBack, actual approval and whole-surface/UX-01 acceptance remain unverified. No further appearance batch owed for these three scored corrections."
+        },
+        "software": "Existing 164 JVM tests and native build/lint pass. Prior application checkpoint 31047c22 Apple jobs 41119813702/native14 and 41119813675/shared56/build/captures succeed with verified artifacts; no physical Apple pass.",
+        "separatePhysicalEvidence": "Saved-grant Pixel ea9f165d… connect and GET_STATE succeeded on companion9578394c… without a new pairing window/approval, then ordinary Disconnect. No playback/volume commands; four host preference XMLs byte-normalized equal. Both sources paused37/proof false; Mango/Apple optional modes and Accessibility on retained; DX340 font1.0/night yes restored. Earlier audio on ea9f165d…/58314b84… retains its package scope.",
+        "remainingRequest": "Owner subsequently requested simpler connection mechanisms and UI on both ends. This Companion reorder does not complete that request, UX-01 or icons."
+      },
       "assistedPageRecovery31047c22": {
         "sourceRevision": "31047c22f0bba7a2efede50616f80a63b1ff49c0",
         "reviewReport": "artifacts/assisted-page-recovery-20261031/appearance-review.md",
@@ -272,6 +308,13 @@
     }
   },
   "components": [
+    {
+      "name": "Companion connection and approval setup",
+      "kind": "custom",
+      "refersTo": "companion-setup-action",
+      "description": "Native Main puts connection summary and explicit Start/Stop/pairing controls before controller access. Pending approval precedes collapsed saved controllers. Permissions, browsing/local checks and advanced diagnostics have separate disclosures. Existing bond/window/host-epoch/capacity approval guards remain; missing Accessibility grant and configured-but-unbound readiness are distinct. Refresh changes no settings.",
+      "verificationRef": "extensions.verification.companionSetup9578394c"
+    },
     {
       "name": "Shared Android action",
       "kind": "button",

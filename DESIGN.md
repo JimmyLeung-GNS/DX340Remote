@@ -20,6 +20,12 @@ typography:
   android-status:
     fontFamily: "sans"
     fontSize: "16sp"
+  companion-setup-title:
+    fontSize: "28sp"
+  companion-setup-heading:
+    fontSize: "22sp"
+  companion-setup-body:
+    fontSize: "16sp"
 spacing:
   phone-body: "16px 20px 32px"
   phone-action-outer: "4px 0"
@@ -31,6 +37,9 @@ spacing:
   android-label-before: "12dp"
   android-label-after: "8dp"
   apple-playback-gap: "20pt"
+  companion-setup-body: "16dp 20dp 24dp"
+  companion-setup-section-before: "24dp"
+  companion-setup-section-after: "8dp"
 components:
   phone-action:
     height: "48 logical px minimum"
@@ -47,6 +56,8 @@ components:
     height: "56dp"
   apple-playback:
     size: "44pt minimum width and height"
+  companion-setup-action:
+    height: "48dp minimum"
 ---
 
 # Design System: DX340 Remote
@@ -78,6 +89,8 @@ Shared phone screen colors come from Flutter's stock Material 3 light/dark theme
 
 The frontmatter colors describe existing Android launcher vector artwork only. The companion, native Android reference and shared Android phone reuse that mark. They are not application surface or text tokens. The retained Kotlin screens use Theme.DeviceDefault.DayNight. The retained SwiftUI reference uses system foregrounds, secondary metadata and bar material for its library now-playing inset.
 
+Companion Main/setup-panel required text resolves the native theme's textColorPrimary, including light mode. Native APPEARANCE_LIGHT_STATUS_BARS follows current theme brightness for system glyph contrast. These are theme roles, not new palette colors; the OEM font2 status-bar overlap remains a separate limitation.
+
 **The System Color Rule.** Let platform-adaptive theme roles supply screen colors and control states; keep the launcher palette scoped to the launcher.
 
 ## Typography
@@ -88,6 +101,8 @@ Reading content follows the text scaler and wraps inside scrolling content. Head
 
 Frontmatter typography keys prefixed android- record retained Kotlin host/reference TextView roles, not the shared Flutter type scale. Native Button labels keep platform typography. The SwiftUI reference retains title2 bold track text, footnote wrapping status, subheadline now-playing text and secondary nonempty metadata. Do not translate these semantic styles into invented font measurements.
 
+The companion-setup- typography entries apply only to the revised native Main/controller panel: 28sp Main title, 22sp headings and 16sp required body text, with system fonts and scalable sp. They supersede the historical host/reference body/section values only on those revised surfaces; local test screens and retained phone references keep their own values.
+
 ## Layout
 
 All phone dimensions in the frontmatter's phone- entries are Flutter logical pixels. The body token is CSS-order top/horizontal/bottom, extracted from EdgeInsets.fromLTRB(20, 16, 20, 32). Each screen uses a ListView under its navigation title. Player and Setup keep connection status and optional error/pending text in that list. Library and Queue reserve a separate, independently scrollable status viewport above the destination list, divided by a one-logical-pixel divider, so status wrapping or pending messages do not move music rows. Its height is three scaled bodyMedium line heights plus 24 logical pixels, capped at 35% of the available browsing height; status padding is 20 horizontal and 12 vertical logical pixels. Longer messages scroll within that space. System safe areas and bottom navigation keep chrome separate from scrolling content.
@@ -96,7 +111,7 @@ Player actions normally occupy two equal-width columns with separate Play/Pause 
 
 Shared labels use the before/after spacing tokens, with the section-before token for headings. Each action has the outer padding token; Android OutlinedButton additionally wraps its content in vertical padding of 12 logical pixels. Cupertino library rows use vertical padding of 16 logical pixels and a 16 logical-pixel icon gap. Material ListTile uses zero content padding and minVerticalPadding of 12 logical pixels; rows have a one-logical-pixel divider. These are component source values, not a new universal spacing scale.
 
-The companion remains one scrolling Kotlin setup surface. Its 24px root padding and the native Android reference's raw-pixel root insets are retained implementation debt, not phone layout standards. The native reference uses a four-button row above scrolling content and artwork capped at 240dp. The SwiftUI reference uses NavigationStack/TabView and List/Section, scrollable wrapping status, a library now-playing inset and artwork capped at 240pt; its playback gap/target tokens remain reference-only. Those prior layouts are not the current shared phone shell.
+The companion remains one scrolling Kotlin setup surface. Revised Main content uses 20dp horizontal, 16dp top and 24dp bottom padding beneath system-bar insets; sections use 24dp before and 8dp after. This replaces Main's historical 24px root inset. The native Android phone reference's raw-pixel insets remain scoped debt, not shared-phone standards; that reference uses a four-button row above scrolling content and artwork capped at 240dp. The SwiftUI reference uses NavigationStack/TabView and List/Section, scrollable wrapping status, a library now-playing inset and artwork capped at 240pt; its playback gap/target tokens remain reference-only. Those prior layouts are not the current shared phone shell.
 
 No physical small-phone, landscape, Android large-font or scrolling-reachability acceptance follows from these source values or screenshots.
 
@@ -154,6 +169,12 @@ For an already approved phone with a current native busy proposal, Setup places 
 
 The phone owns presentation; native code owns BLE lifecycle, request IDs, epochs and recovery. The UI must preserve capability differences and interruption explanations when transport state changes.
 
+### Companion connection and approval setup
+
+At the 9578394c… companion stage, Main puts connection summary, explicit Start/Stop and pairing-window action first, then controller access. Pending approval precedes the collapsed saved-controller list. Permissions/access, music browsing/local checks and advanced diagnostics use separate disclosures. The panel distinguishes unpaired, closed-window, awaiting-approval, approved/retry and ended-request states without inventing an expiry cause. Existing bond/window/host-epoch/capacity checks still govern approval; native buttons retain 48dp minimum height. Configured Accessibility grants are read separately from bound-service readiness: missing grants say access is needed; configured-but-unbound says access is not ready. Refresh changes no settings.
+
+This documents the implemented Companion stage, with no shared-phone UI change. The owner's subsequent request to simplify connection mechanisms and UI on both ends remains further work; this reorder does not complete that request or UX-01/icons.
+
 ### Optional Mango companion test
 
 The host setting and test use existing Kotlin TextView, Button, ScrollView and AlertDialog controls under Theme.DeviceDefault.DayNight. They inherit the companion typography and minimum action target above; no palette, shape, material or spacing tokens are added. The raw-pixel root padding remains scoped implementation debt.
@@ -167,6 +188,10 @@ Back, Open Mango Player and Retry library remain available alongside the folder 
 Android reuses ic_dx340.xml; five generated Flutter Android launcher PNGs were removed. The iPhone AppIcon and transparent launch placeholders remain provisional Flutter-template assets. phone/ASSET_ORIGINS.md and third_party/FLUTTER_LICENSE identify them. All 18 shipping PNGs embed their origins; the recorded embed-prompt scan reported 18 rasters and zero missing origins. No new raster illustration or generated artwork was introduced. Launcher branding is unfinished.
 
 ### Evidence and acceptance limits
+
+**Verified, bounded Companion setup appearance:** artifacts/companion-setup-20261031/appearance-review.md returns ship for F1 status-bar color contrast and F3 required light body-text contrast in corrected pixels, and F2 grant-versus-bound-service readiness in inspected presentation logic only. Exactly nine final actual DX340 1080×2160 captures are covered under artifacts/companion-setup-20261031/: main-running-dark.png, main-running-light.png, main-large-dark.png, preview-paired-light.png, preview-paired-large-dark.png, verified-preview-unpaired-dark.png, verified-preview-expired-dark.png, verified-preview-ended-dark.png and verified-preview-approved-dark.png. Older stale preview frames are excluded. Default light/dark and supplied initial font2 dark views retain native appearance; isolated controller previews have no live approval service. The floating OS shortcut's covered patch, OEM font2 status-bar overlap and debug-preview title-fit limitation are excluded. Transient physical unbound readiness, all-section font2 scrolling/reachability, TalkBack and actual approval remain unverified. No further appearance batch is owed for these three scored corrections; no whole-surface/UX-01 acceptance follows.
+
+**Verified separately, Companion setup software/physical checks:** final installed companion SHA256 9578394c945584db69f7241453b528291a2d019b579afda6cc940766e4217597 supersedes the initial 49eb… candidate; existing 164 JVM tests and native build/lint pass. Unchanged ordinary Pixel ea9f165d… completed saved-grant connection and GET_STATE on 9578394c… without a new pairing window/approval, followed by ordinary Disconnect. No playback/volume command was sent; four preference XMLs compare byte-normalized equal, both sources remain paused at 37 with volume proof false, Mango/Apple optional modes and Accessibility remain on, and DX340 font1.0/night mode yes were restored. Earlier ea9f165d…/58314b84… audible results retain that older companion scope. Apple jobs 41119813702 (native 14 Swift tests) and 41119813675 (shared 56 Flutter tests/build/captures) succeeded at the prior 31047c22 checkpoint with verified artifacts; no physical Apple pass follows. See docs/test-results/2026-10-31-companion-setup.md. The newer both-end connection simplification remains pending.
 
 **Verified, scoped assisted-page recovery appearance at 31047c22:** artifacts/assisted-page-recovery-20261031/appearance-review.md returns ship only for artifacts/browsing-captures/synthetic-expired-light.png (font1.0) and synthetic-expired-large-dark.png (font2.0), actual Pixel 9a synthetic presentation captures without BLE. The final short instruction is fully visible in both initial viewports; the original longer-copy finding is resolved. Independent long-status/list scrolling, complete large-text reachability, screen readers, connected recovery and iPhone rendering are outside this appearance verdict. No new visual world/assets or full UX-01/iPhone/Watch acceptance follows.
 
