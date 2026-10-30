@@ -27,7 +27,8 @@ import org.dx340.remote.protocol.AssistedPageUse
 @SuppressLint("MissingPermission")
 class RemoteModel(private val context: Context) {
     var observer: (() -> Unit)? = null
-    private fun update() { observer?.invoke() }
+    internal var connectionObserver: (() -> Unit)? = null
+    private fun update() { connectionObserver?.invoke(); observer?.invoke() }
     private val cacheDir = java.io.File(context.cacheDir, "dx340").apply { mkdirs() }
     private val snapshotFile = java.io.File(context.cacheDir, "dx340-metadata.json")
     var status = "Enable Bluetooth, then find your DX340."; private set
@@ -83,6 +84,9 @@ class RemoteModel(private val context: Context) {
     private fun bluetoothAccess() = listOf(Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT).all { context.checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }
     private fun bluetoothOn() = bluetoothAccess() && runCatching { context.getSystemService(BluetoothManager::class.java).adapter?.isEnabled == true }.getOrDefault(false)
     val bluetoothReady get() = bluetoothOn()
+    /** Keep foreground ownership for a live link or bounded connection work only. */
+    internal val needsConnectionService get() = bluetoothReady && (authorized ||
+        connectionPhase in setOf("searching", "connecting", "approval", "busy"))
     val connectionSetup: JSONObject get() = JSONObject()
         .put("phase", when { !bluetoothAccess() -> "permission"; !bluetoothOn() -> "bluetoothOff"; authorized -> "connected"; canRequestControl -> "busy"; else -> connectionPhase })
         .put("savedName", connectionPreferences.getString("name", "Player"))
@@ -153,6 +157,12 @@ class RemoteModel(private val context: Context) {
         schedule()
     }
     fun disconnect() { discoveryGeneration++; ble.stopScan(); cancelApprovalCheck(); abandonAssistedPage(); session.lost(); controlProposal.clear(); browseLocations.clear(); queueLocations.clear(); activeBrowseId = null; activeQueueId = null; ble.disconnect(); status = "Disconnected. Cached lists may be stale; reconnect to control."; update() }
+    internal fun bluetoothAvailabilityChanged() {
+        // Adapter shutdown need not deliver a GATT connection-loss callback.
+        // Clear the old session/retries now; enabling the radio only refreshes
+        // readiness and never replays a command or grants authorization.
+        if (!bluetoothReady) disconnect() else update()
+    }
     fun refreshOnForeground() { if (!bluetoothAccess() || !bluetoothOn()) { disconnect(); status = "Enable Bluetooth and allow access to connect."; update(); return }; if (expireSetupIfNeeded()) return; if (authorized) send("GET_STATE") else update() }
     fun close() { ble.stopScan(); ble.disconnect(); main.removeCallbacksAndMessages(null) }
     fun authorize() = send("AUTHORIZE", bootstrap = true)
