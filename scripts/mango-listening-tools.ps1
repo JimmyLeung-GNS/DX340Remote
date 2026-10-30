@@ -1,4 +1,5 @@
 # Shared development helpers for source-local Mango inventory/listening, never phone BLE proof.
+. (Join-Path $PSScriptRoot 'debug-probe-tools.ps1')
 function New-MangoProbeContext([string]$OutputDirectory, [string]$Serial, [string]$Adb, [bool]$AllowSelection = $false, [int]$ExpectedVolume = 37) {
     New-Item -ItemType Directory -Force -Path $OutputDirectory | Out-Null
     [pscustomobject]@{OutputDirectory=$OutputDirectory;Serial=$Serial;Adb=$Adb;AllowSelection=$AllowSelection;ExpectedVolume=$ExpectedVolume;RequestCount=0;SelectionSent=$false}
@@ -23,10 +24,7 @@ function Invoke-MangoProbe($Context, [string]$Operation = 'BROWSE', [string[]]$E
     $label = '{0:D3}-{1}' -f $Context.RequestCount,$Operation
     & $Context.Adb -s $Context.Serial shell am broadcast -a org.dx340.remote.host.DEBUG_UI_PROBE -n org.dx340.remote.host/.DebugUiProbeReceiver --es operation $Operation --es source com.ibasso.music --es reportTag $tag @Extra > (Join-Path $Context.OutputDirectory "$label-broadcast.txt")
     if ($LASTEXITCODE -ne 0) { throw "Broadcast failed: $label" }
-    $raw = & $Context.Adb -s $Context.Serial shell run-as org.dx340.remote.host cat "files/debug-probe-$tag.json"
-    if ($LASTEXITCODE -ne 0) { throw "Missing report: $label" }
-    $raw | Set-Content (Join-Path $Context.OutputDirectory "$label.json")
-    $r = ($raw -join "`n") | ConvertFrom-Json
+    $r = Read-DebugProbeReceipt -Adb $Context.Adb -Serial $Context.Serial -Tag $tag -Operation $Operation -Source com.ibasso.music -OutputFile (Join-Path $Context.OutputDirectory "$label.json")
     if ($r.phase -ne 'FINISHED' -or $r.operation -ne $Operation -or $r.requestedSource -ne 'com.ibasso.music' -or $r.error) { throw "Failed $label ($($r.error))" }
     foreach ($field in @('sourceStatesBefore','sourceStatesAfter')) {
         $states=@($r.$field)

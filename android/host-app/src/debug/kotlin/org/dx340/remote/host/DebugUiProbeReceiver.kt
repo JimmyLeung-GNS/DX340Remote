@@ -40,12 +40,21 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
                 reportFile.writeText(report.toString(2))
             } finally { releasePending() }
         }
-        val freshValidation = intent.getStringExtra("operation") == "VALIDATE_MANGO_UI_ITEM_FRESH"
-        main.postDelayed({ finish(null, "DEBUG_PROBE_TIMEOUT") }, if (freshValidation) 25000 else 9500)
+        val operation = intent.getStringExtra("operation") ?: "BROWSE"
+        val asynchronous = operation in setOf("VALIDATE_MANGO_UI_ITEM_FRESH", "PLAY_ITEM")
+        val budgetMs = when (operation) {
+            "VALIDATE_MANGO_UI_ITEM_FRESH" -> 25000L
+            // Up to3.5s source handoff,20s folder refresh and1.2s observation delay.
+            "PLAY_ITEM" -> 30000L
+            else -> 9500L
+        }
+        val deadline = startedAt + budgetMs
+        fun stillActive() = !finished && android.os.SystemClock.elapsedRealtime() < deadline
+        main.postDelayed({ finish(null, "DEBUG_PROBE_TIMEOUT") }, budgetMs)
         try {
             val sources = HostService.instance?.sources ?: return finish(null, "START_COMPANION_FIRST")
+            require(!asynchronous || reportTag != null) { "REPORT_TAG_REQUIRED" }
             sources.select(intent.getStringExtra("source") ?: "com.apple.android.music")
-            val operation = intent.getStringExtra("operation") ?: "BROWSE"
             if (intent.hasExtra("changeSourceAfterMs")) {
                 require(operation == "BROWSE") { "INVALID_ARGUMENT" }
                 val delay = intent.getIntExtra("changeSourceAfterMs", -1)
@@ -105,7 +114,7 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
                 require(item.startsWith("mango-ui:") && revision.isNotBlank()) { "INVALID_ARGUMENT" }
                 val service = MangoAccessibilityService.instance ?: return finish(null, "UI_PERMISSION_REQUIRED")
                 val expectedEpoch = sources.state().optString("sourceEpoch")
-                service.validateFreshPlayable(item, revision, { !finished && sources.selected == "com.ibasso.music" && sources.state().optString("sourceEpoch") == expectedEpoch }) { issue ->
+                service.validateFreshPlayable(item, revision, { stillActive() && sources.selected == "com.ibasso.music" && sources.state().optString("sourceEpoch") == expectedEpoch }) { issue ->
                     finish(JSONObject().put("validationOnly", true).put("dispatchedPlayback", false), issue)
                 }
                 // Host foreground service owns this bounded read-only job. Do not keep
@@ -142,11 +151,11 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
                         put(JSONObject().put("id", it.queueId.toString()).put("title", it.description.title?.toString()))
                     } }), null)
             } else if (operation == "SET_PLAYING") {
-                sources.setPlaying(intent.getBooleanExtra("playing", false), stillAuthorized = { true }) { error ->
+                sources.setPlaying(intent.getBooleanExtra("playing", false), stillAuthorized = ::stillActive) { error ->
                     finish(if (error == null) JSONObject().put("outcome", "observed") else null, error)
                 }
             } else if (operation == "PLAY_QUEUE_ITEM") {
-                sources.playQueueItem(JSONObject().put("item", intent.getStringExtra("item")).put("revision", intent.getStringExtra("revision")), { true }) { error ->
+                sources.playQueueItem(JSONObject().put("item", intent.getStringExtra("item")).put("revision", intent.getStringExtra("revision")), ::stillActive) { error ->
                     if (error != null) finish(null, error)
                     else main.postDelayed({ finish(JSONObject().put("outcome", "dispatched; inspect observed state separately"), null) }, 1200)
                 }
@@ -157,10 +166,13 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
                 val serviceSnapshot = if (sources.selected == "com.ibasso.music") MangoAccessibilityService.instance?.debugSnapshot() else AppleMusicAccessibilityService.instance?.debugSnapshot()
                 finish(serviceSnapshot, if (serviceSnapshot == null) "UI_PERMISSION_REQUIRED" else null)
             } else if (operation == "PLAY_ITEM") {
-                sources.playItem(JSONObject().put("item", intent.getStringExtra("item")).put("revision", intent.getStringExtra("revision")), { true }) { error ->
+                sources.playItem(JSONObject().put("item", intent.getStringExtra("item")).put("revision", intent.getStringExtra("revision")), ::stillActive) { error ->
                     if (error != null) finish(null, error)
                     else main.postDelayed({ finish(JSONObject().put("outcome", "dispatched; inspect observed state separately"), null) }, 1200)
                 }
+                // The foreground host owns the bounded operation; polling this unique
+                // receipt must never rebroadcast a possibly dispatched playback command.
+                releasePending()
             } else if (operation == "BROWSE") {
                 sources.browse(intent.getStringExtra("parent"), intent.getIntExtra("page", 0), intent.getStringExtra("revision"), ::finish)
             } else finish(null, "UNSUPPORTED_OPERATION")

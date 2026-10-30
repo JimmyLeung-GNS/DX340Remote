@@ -89,3 +89,6 @@ try {
     $summary|ConvertTo-Json -Depth 10|Set-Content (Join-Path $fixture 'summary.json')
     Write-Output (Join-Path $fixture 'summary.json')
 }
+if($created -and $summary.cleanup -cne 'VERIFIED_ABSENT') {
+    throw 'Owned fixture cleanup was not verified; consult its manifest and summary before continuing'
+}

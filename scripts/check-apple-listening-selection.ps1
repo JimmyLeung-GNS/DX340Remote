@@ -8,6 +8,7 @@ param(
 # Deliberate ONE-selection hardware experiment, never a batch playback loop.
 # Human listening is recorded separately; this helper cannot assert audible success.
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'debug-probe-tools.ps1')
 $repo = Split-Path $PSScriptRoot -Parent
 if (!$PlanPath) { $PlanPath = Join-Path $repo 'artifacts/apple-listening-plan.json' }
 $plan = Get-Content -LiteralPath $PlanPath -Raw | ConvertFrom-Json
@@ -29,10 +30,7 @@ function Probe([string]$Label, [string]$Operation='BROWSE', [string[]]$Extra=@()
     $tag = [guid]::NewGuid().ToString('N')
     & $Adb -s $Serial shell am broadcast -a org.dx340.remote.host.DEBUG_UI_PROBE -n org.dx340.remote.host/.DebugUiProbeReceiver --es operation $Operation --es source com.apple.android.music --es reportTag $tag @Extra > (Join-Path $out "$Label-broadcast.txt")
     if ($LASTEXITCODE -ne 0) { throw "Broadcast failed: $Label" }
-    $raw = & $Adb -s $Serial shell run-as org.dx340.remote.host cat "files/debug-probe-$tag.json"
-    if ($LASTEXITCODE -ne 0) { throw "Missing report: $Label" }
-    $raw | Set-Content (Join-Path $out "$Label.json")
-    $r = ($raw -join "`n") | ConvertFrom-Json
+    $r = Read-DebugProbeReceipt -Adb $Adb -Serial $Serial -Tag $tag -Operation $Operation -Source com.apple.android.music -OutputFile (Join-Path $out "$Label.json")
     if ($r.phase -ne 'FINISHED' -or $r.operation -ne $Operation -or $r.requestedSource -ne 'com.apple.android.music' -or $r.error) { throw "Failed $Label ($($r.error))" }
     if ($r.state.volume.current -ne $ExpectedVolume) { throw 'Output level changed; no automatic adjustment sent' }
     return $r
