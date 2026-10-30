@@ -316,7 +316,7 @@ class MangoAccessibilityService : AccessibilityService() {
                                 resetFingerprint = parsed.fingerprint
                             }
                         }
-                        else if (parsed.storage == storage) {
+                        else if (parsed.storage == storage && storageClicked) {
                             guard(); finish(result(current, storage, 0), null); return
                         } else if (!menuClicked) {
                             val node = MangoUiModel.node(current.nodes, "nav_bar_back_iv") ?: error("UI_UNEXPECTED_SCREEN")
