@@ -1,0 +1,110 @@
+{
+  "date": "2026-10-31",
+  "fullGoal": "ACTIVE/incomplete",
+  "sourceCommit": "b3f0638365b601bc95f30b236f77614f29ae5ad5",
+  "finalPhoneApk": "04d4397e6cf4f6129691e6120725fb57fd88c964b51a118ac4502b24a93ae98d",
+  "companionApk": "491dbbffabda8f7a20d64a2f591caa486427e036ba9e3821d831ccf6eff5934a",
+  "originalSignerAndInstalledBytesVerified": true,
+  "failedPredecessors": {
+    "1a592c56b87b68aa0861ce0e955bc66c41ee8e13938a942d0180ee29a75b2e9b": "foreground/started state remained after radio off",
+    "28f01ef8979420a641da34f1aa2d5e146d98711cd54b7ce726edb434d65051f4": "emulator scan/Cancel passed; physical background radio-off foreground cleanup failed and stale connected UI after radio restoration"
+  },
+  "builds": {
+    "nativeReferenceAssemblyLint": "PASS",
+    "sharedAnalyzeReleaseLint": "PASS",
+    "priorUnchangedFlutterSwiftJvmCounts": [
+      67,
+      16,
+      166
+    ],
+    "runtimeLifecycleEvidence": "actual emulator and Pixel; unrelated tests not rerun"
+  },
+  "emulator": {
+    "apkSha256": "04d4397e6cf4f6129691e6120725fb57fd88c964b51a118ac4502b24a93ae98d",
+    "kind": "ordinary virtual Android test, not physical BLE/audio",
+    "status": "PASS",
+    "activeScanForeground": true,
+    "radioOffForegroundCleared": true,
+    "processPreserved": true,
+    "radioOnIdleNoAutoConnect": true,
+    "scanExpiryForegroundCleared": true,
+    "cancelForegroundCleared": true,
+    "bluetoothRestored": "1"
+  },
+  "physical": {
+    "apkSha256": "04d4397e6cf4f6129691e6120725fb57fd88c964b51a118ac4502b24a93ae98d",
+    "backgroundRadioOffCleanup": true,
+    "phoneBluetoothRestored": true
+  },
+  "postRestore": {
+    "idleNoAutoConnectOrForeground": true,
+    "rememberedPlayerRetained": true,
+    "deliberateProtectedAuthorization": true,
+    "stateReadUiRoute": true,
+    "normalDisconnectClearsForeground": true,
+    "transportLatencyMeasured": false,
+    "audioPlaybackVolumeActions": 0
+  },
+  "preservation": {
+    "hostPreferences": {
+      "controllers": true,
+      "mango-ui": true,
+      "apple-ui": true,
+      "source-verification": true
+    },
+    "observedBondIdentityAndTypeInventories": {
+      "phone": true,
+      "host": true
+    },
+    "wholeBondDiagnosticBlocksEqual": {
+      "phone": false,
+      "host": true
+    },
+    "bondDiagnosticLimit": "Initial whole-block equality failed: adapter restart clears cached Pairing Algorithm LE3 to N/A and Settings package association on phone. Exposed identity/type/count preserved and saved-grant protected reconnect succeeded; no new pairing/encryption-grade audit inferred.",
+    "sourceStates": [
+      2,
+      2
+    ],
+    "volume": 37,
+    "route": "headset(4)",
+    "browsingModesAndBindings": "ON/healthy",
+    "radioFontThemeSettingsPreserved": true,
+    "phoneRuntimeGrantsRestored": true,
+    "phoneForegroundAfterDisconnect": false
+  },
+  "devices": {
+    "phone": "Pixel9a Android16/API36 CP1A.260405.005 app0.2.0/code2",
+    "host": "DX340 Android13/API33 eng.iBasso.20260812.181952 Companion0.1.0/code1",
+    "mango": "4.1.37/code240",
+    "appleMusic": "6.5.3/code1599"
+  },
+  "remaining": [
+    "physical transient/range retry preservation",
+    "host restart",
+    "current04 permission-loss regression",
+    "full T12 and other phone platform",
+    "controlled30-minute/background/range/battery/walking",
+    "source/audio/formats/SD/signing/Watch"
+  ],
+  "rawEvidenceHashes": {
+    "candidate1-radio-off-events.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fixed-background-off-service.txt": "a6f40c3462316faf6f654e75562a1da7480d29f88cf6ead5d9c164593e7f0b10",
+    "fixed-before-off-pid.txt": "6b1d70b2bdcfe881ced7177b2cb9f92eee48c1cf8cf5530d1b44c04481e08fc7",
+    "fixed-before-off-service.txt": "a56705d02cb802a8acc8f31b25beac16f8ed2453ea39d4c418778f81eb3ac337",
+    "phone-off-events.txt": "4af115522c4107f16fe46f01361b94191c3405470eb037abd8dd1768a7b86e74",
+    "phone-off-foreground-ui-service.txt": "dc672ace877336a5bb8956e91a5284da8b5e091b671c6cfd1cdd67b21fdf2873",
+    "phone-off-service.txt": "2e6e8420e6f1ddef849517dd532cfe2bda0c32621a2ba1b812bd817650463cd0",
+    "phone-old-restored-disconnected-service.txt": "9fc74458d88736caeee25d813e5a5369f4f401ea5e3dff901766c0d73ecded4c",
+    "phone-service-before-off.txt": "0bad37c1f1e8d779fc58d916de730cd574f0bffb50fc449d17b11de7b41e3f51",
+    "receiver-background-off-activities.txt": "121fc66b95084b78921c069b6fd7158fca30d80d0f60f4bf8bf6ec69de6516c0",
+    "receiver-background-off-pid.txt": "aa4fa8088a4551aa5ba5a1ddbebefe0928edde6ef5dc808eb5247b8912717818",
+    "receiver-background-off-service.txt": "5f686081238766ca66d6e0a3e3e6a2fcbae1e9efd6a03ccbdd6252776e320eae",
+    "receiver-before-off-pid.txt": "aa4fa8088a4551aa5ba5a1ddbebefe0928edde6ef5dc808eb5247b8912717818",
+    "receiver-before-off-service.txt": "b936b4ef6d4d7963698ab2fa918855def5c4f7aac4bcdbfae2ebb9fcfe2b0bce",
+    "receiver-final-host-services.txt": "2988d48aa157b3183038c9dac6a123b623573e33bf8d0104c2d6024b1ab88042",
+    "receiver-final-phone-package.txt": "6d430680c0e6d0498d569ecbb8fbf6963534927d62f2e2cd06e7ee0ae5af11af",
+    "receiver-final-phone-services.txt": "420c6f4893c11c9d1024e969fd490ba9e0a85d7d1e83ea4fd27b4e442a08fb78",
+    "receiver-restored-idle-service.txt": "9a016e37b4ddcce4d3ddb2c2d0af8716ad0d4ddd2153cac73967c9e381d3a74a"
+  },
+  "failedCandidatePatchSha256": "61008cf2bbae42ac8e283591650b3e4898622511d0f8461b5fa7260f4281b642"
+}

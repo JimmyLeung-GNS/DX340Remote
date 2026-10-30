@@ -43,7 +43,6 @@
     "shutDown": true
   },
   "notTested": [
-    "shared iPhone catalog build (native reference verified)",
     "actual iPhone launcher",
     "actual Android monochrome/theme launcher",
     "Apple layered Icon Composer",
@@ -114,7 +113,7 @@
     "source": "2feaa0aac2413cff26847a0c5d187cac47dc9842",
     "shared": 41141154633,
     "native": 41141154690,
-    "lastObserved": "native SUCCESS and archive verified; shared IN PROGRESS",
+    "lastObserved": "BOTH SUCCESS, both archives verified",
     "nativeResult": {
       "conclusion": "SUCCESS",
       "artifact": 13019425434,
@@ -123,6 +122,16 @@
       "captureMatcherTests": 12,
       "appIconCatalogCompiled": true,
       "buildInstallLaunch": "PASS",
+      "actualIPhoneLauncher": "NOT TESTED"
+    },
+    "sharedResult": {
+      "conclusion": "SUCCESS",
+      "artifact": 13020017223,
+      "sha256": "7341fe307170a64afdbd8e2f0b9018faf64af1ad9a475da327c7c90a3474fe70",
+      "flutterTests": 67,
+      "captureMatcherTests": 12,
+      "analyzeBuildFixturesOrdinaryRestore": "PASS",
+      "restoredOrdinaryFrameInspected": true,
       "actualIPhoneLauncher": "NOT TESTED"
     }
   }

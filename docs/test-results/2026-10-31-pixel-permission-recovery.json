@@ -1,0 +1,115 @@
+{
+  "date": "2026-10-31",
+  "status": "VERIFIED for this physical Android permission-loss case only",
+  "fullGoal": "ACTIVE/incomplete",
+  "phone": {
+    "model": "Pixel9a",
+    "os": "Android16/API36 CP1A.260405.005",
+    "app": "0.2.0/code2",
+    "sha256": "1a592c56b87b68aa0861ce0e955bc66c41ee8e13938a942d0180ee29a75b2e9b"
+  },
+  "host": {
+    "model": "DX340",
+    "os": "Android13/API33 eng.iBasso.20260812.181952",
+    "app": "0.1.0/code1",
+    "sha256": "491dbbffabda8f7a20d64a2f591caa486427e036ba9e3821d831ccf6eff5934a"
+  },
+  "case": {
+    "initialAuthorizedSession": true,
+    "settingsNearbyGroupDenied": true,
+    "scanConnectDeniedVerified": true,
+    "osKilledControllerReason": "permissions revoked",
+    "noForegroundAfterDenial": true,
+    "setupShowsAllowBluetoothAccess": true,
+    "fourPlaybackControlsDisabled": true,
+    "appSettingsRouteObserved": true,
+    "runtimeAccessAndFlagsRestored": true,
+    "savedGrantReconnectWithoutEnrollment": true,
+    "freshReadAndNormalDisconnect": true,
+    "finalForegroundCleared": true,
+    "playbackVolumeActionsSent": 0,
+    "audioAcceptance": false
+  },
+  "runtimePermissionStates": {
+    "BLUETOOTH_SCAN": {
+      "before": {
+        "granted": true,
+        "flags": "USER_SET|USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED"
+      },
+      "denied": {
+        "granted": false,
+        "flags": "USER_SET|USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED"
+      },
+      "restored": {
+        "granted": true,
+        "flags": "USER_SET|USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED"
+      }
+    },
+    "BLUETOOTH_CONNECT": {
+      "before": {
+        "granted": true,
+        "flags": "USER_SET|USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED"
+      },
+      "denied": {
+        "granted": false,
+        "flags": "USER_SET|USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED"
+      },
+      "restored": {
+        "granted": true,
+        "flags": "USER_SET|USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED"
+      }
+    },
+    "POST_NOTIFICATIONS": {
+      "before": {
+        "granted": true,
+        "flags": "USER_SET|USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED"
+      },
+      "denied": {
+        "granted": true,
+        "flags": "USER_SET|USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED"
+      },
+      "restored": {
+        "granted": true,
+        "flags": "USER_SET|USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED"
+      }
+    }
+  },
+  "preservation": {
+    "hostPreferences": {
+      "controllers": true,
+      "mango-ui": true,
+      "apple-ui": true,
+      "source-verification": true
+    },
+    "bondInventories": {
+      "phone": true,
+      "host": true
+    },
+    "runtimePermissionsAndFlagsRestored": true,
+    "notificationPermissionUntouched": true,
+    "bothSourcesPaused": true,
+    "outputVolume": 37,
+    "outputRoute": "headset(4)",
+    "radioFontThemeSettingsPreserved": true
+  },
+  "limits": [
+    "One Android runtime-permission group loss/recovery; not full T12",
+    "No iPhone Bluetooth/privacy result",
+    "Not controller revocation/unapproved authorization",
+    "No radio-toggle, call, range, screen-off, battery or source-audio pass"
+  ],
+  "rawEvidenceHashes": {
+    "host-final-events.txt": "f66e2b9daa5e9fb6a9e025ce012b2f2bf1e368cccf3473f243d40632c2d6ad3f",
+    "host-loss-events.txt": "9587aaa322038ad3caf930166b2aad62081e1eecc63af5c8542c5fd92dfcf958",
+    "phone-denial-events.txt": "34258ec4672cc0d07802f79fe8046ac206b7b0fd5a85c8fd43d094eba69e0a79",
+    "phone-final-events.txt": "c1137ccdcc9696002ba674a27cf7cb8ac91bc6ced83f321118951d7da0c1c11c",
+    "phone-package-before.txt": "c0ccca73498d24a0e601a5f3df21025d885268ee3029be15c149cb1884406671",
+    "phone-package-denied.txt": "e9fb60c341c168f32e1ec1e7fe947a09980227b8a2481166400826d65e0b0199",
+    "phone-package-restored.txt": "995bd8713d8f709a1d153af9a8e39910982702d3b591382ccc2762f16af2524f",
+    "phone-pid-after-denial.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "phone-pid-before-denial.txt": "3bff9fea5c87a0267eb21daaa42a26e3396805c4ce7547f8fd284ddd122bc7d6",
+    "phone-service-after-denial.txt": "7610f81ffd15bd5e3ca1fa90255c7f45b691ca0afbdcad60cbf2d0cb006a0d90",
+    "phone-service-connected-before-denial.txt": "18593ab194701078f89a6c4b511dccb20bcd84298b7a755bb848d7ac697ab961",
+    "phone-service-denied-open-ui.txt": "1e3838ac2b6339765dc2c17baaf8929e75f8f76a88f73a06a51db655233eae57"
+  }
+}
