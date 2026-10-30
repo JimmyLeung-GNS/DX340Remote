@@ -183,16 +183,15 @@ class MangoAccessibilityService : AccessibilityService() {
                 if (issue != null || value == null) { fail(issue ?: "UI_UNEXPECTED_SCREEN"); return }
                 try {
                     require(guarded()) { "AUTHORIZATION_DENIED" }
-                    // Re-entering a folder starts at its first page. Restore the exact
-                    // source-visible page before comparing a later-page selection proof.
-                    if (value.getInt("page") < frame.page) {
-                        require(!value.isNull("nextPage")) { "STALE_LIBRARY" }
+                    val fresh = last ?: error("STALE_LIBRARY")
+                    require(fresh.window == frame.window) { "STALE_LIBRARY" }
+                    // Mango can retain its scroll offset when reopening. Trust only an
+                    // exact refreshed viewport proof, not the newly assigned logical page.
+                    if (fresh.parsed?.fingerprint != parsed.fingerprint) {
+                        require(value.getInt("page") < frame.page && !value.isNull("nextPage")) { "STALE_LIBRARY" }
                         browse(value.getString("parent"), value.getInt("nextPage"), last!!.revision, guarded, ::checked)
                         return
                     }
-                    require(value.getInt("page") == frame.page) { "STALE_LIBRARY" }
-                    val fresh = last ?: error("STALE_LIBRARY")
-                    require(fresh.window == frame.window && fresh.parsed?.fingerprint == parsed.fingerprint) { "STALE_LIBRARY" }
                     val matches = fresh.actions.filterValues { it.kind == "play" && it.title == original.title }
                     require(matches.size == 1) { "STALE_LIBRARY" }
                     val (tree, action) = validate(matches.keys.single(), fresh.revision, "play")
@@ -316,7 +315,7 @@ class MangoAccessibilityService : AccessibilityService() {
                                 resetFingerprint = parsed.fingerprint
                             }
                         }
-                        else if (parsed.storage == storage && storageClicked) {
+                        else if (parsed.storage == storage) {
                             guard(); finish(result(current, storage, 0), null); return
                         } else if (!menuClicked) {
                             val node = MangoUiModel.node(current.nodes, "nav_bar_back_iv") ?: error("UI_UNEXPECTED_SCREEN")
