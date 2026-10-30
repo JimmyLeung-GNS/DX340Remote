@@ -125,6 +125,9 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
                     if (error != null) finish(null, error)
                     else main.postDelayed({ finish(JSONObject().put("outcome", "dispatched; inspect observed state separately"), null) }, 1200)
                 }
+            } else if (operation == "SNAPSHOT_WINDOWS" && sources.selected == "com.ibasso.music") {
+                val snapshot = MangoAccessibilityService.instance?.debugWindowSnapshot()
+                finish(snapshot, if (snapshot == null) "UI_PERMISSION_REQUIRED" else null)
             } else if (operation == "SNAPSHOT") {
                 val serviceSnapshot = if (sources.selected == "com.ibasso.music") MangoAccessibilityService.instance?.debugSnapshot() else AppleMusicAccessibilityService.instance?.debugSnapshot()
                 finish(serviceSnapshot, if (serviceSnapshot == null) "UI_PERMISSION_REQUIRED" else null)

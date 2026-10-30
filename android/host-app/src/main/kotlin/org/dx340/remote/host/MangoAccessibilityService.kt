@@ -15,6 +15,8 @@ import org.dx340.remote.sources.ParsedMangoUi
 import org.dx340.remote.sources.SourceRegistry
 import org.dx340.remote.sources.UiNode
 import org.dx340.remote.sources.UiSnapshotStability
+import org.dx340.remote.sources.UiWindow
+import org.dx340.remote.sources.UiWindowGuard
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.UUID
@@ -56,6 +58,16 @@ class MangoAccessibilityService : AccessibilityService() {
         return null
     }
     fun hasForegroundWindow() = rootInActiveWindow?.packageName?.toString() == PACKAGE
+    private fun windowStates() = windows.map { UiWindow(it.id, it.type, it.layer, it.isActive, it.isFocused) }
+    private fun requireUnobscured(window: Int) { require(UiWindowGuard.permits(window, windowStates())) { "UI_UNEXPECTED_SCREEN" } }
+    fun debugWindowSnapshot(): JSONObject {
+        readiness()?.let { error(it) }
+        val root = rootInActiveWindow ?: error("UI_FOREGROUND_REQUIRED")
+        require(root.packageName?.toString() == PACKAGE) { "UI_FOREGROUND_REQUIRED" }
+        return JSONObject().put("rootWindow", root.windowId).put("flags", serviceInfo.flags).put("windows", JSONArray().apply {
+            windowStates().forEach { put(JSONObject().put("id", it.id).put("type", it.type).put("layer", it.layer).put("active", it.active).put("focused", it.focused)) }
+        })
+    }
     private fun tree(): Tree {
         readiness()?.let { error(it) }
         // Complete the public API's bounded prefetch batch before walking it, so
@@ -64,6 +76,7 @@ class MangoAccessibilityService : AccessibilityService() {
             PREFETCH
         ) else rootInActiveWindow) ?: error("UI_FOREGROUND_REQUIRED")
         require(root.packageName?.toString() == PACKAGE) { "UI_FOREGROUND_REQUIRED" }
+        requireUnobscured(root.windowId)
         val nodes = mutableListOf<UiNode>()
         val pending = ArrayDeque<Pair<AccessibilityNodeInfo, String>>(); pending.add(root to "0")
         while (pending.isNotEmpty()) {
@@ -132,6 +145,7 @@ class MangoAccessibilityService : AccessibilityService() {
     }
     private fun perform(current: Tree, action: Action, allowed: () -> Boolean) {
         require(allowed()) { "AUTHORIZATION_DENIED" }; readiness()?.let { error(it) }
+        requireUnobscured(current.window)
         val expected = current.nodes.firstOrNull { it.path == action.path } ?: error("STALE_LIBRARY")
         var live = rootInActiveWindow ?: error("UI_FOREGROUND_REQUIRED")
         require(live.packageName?.toString() == PACKAGE && live.windowId == current.window) { "STALE_LIBRARY" }
@@ -150,6 +164,7 @@ class MangoAccessibilityService : AccessibilityService() {
             require(labels.count { it == action.title } == 1) { "STALE_LIBRARY" }
         }
         require(allowed()) { "AUTHORIZATION_DENIED" }
+        requireUnobscured(current.window)
         check(live.performAction(if (action.kind == "scroll") AccessibilityNodeInfo.ACTION_SCROLL_FORWARD else AccessibilityNodeInfo.ACTION_CLICK)) { "UI_ACTION_FAILED" }
     }
     fun validatePlayable(item: String, revision: String): String? = try { validate(item, revision, "play"); null } catch (e: Exception) { e.message ?: "UI_UNEXPECTED_SCREEN" }
