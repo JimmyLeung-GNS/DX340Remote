@@ -121,7 +121,7 @@ class ReadOnlySession:
     """One request at a time,20-byte writes, no automatic retry or reconnect."""
     ALLOWED = frozenset({'HELLO', 'AUTHORIZE', 'GET_STATE'})
 
-    def __init__(self, write, timeout=12, allow_authorized_metadata=False, allow_queue_reads=False):
+    def __init__(self, write, timeout=12, allow_authorized_metadata=False, allow_queue_reads=False, allow_artwork_reads=False):
         self.write = write
         self.timeout = timeout
         self.assembler = Assembler()
@@ -132,6 +132,7 @@ class ReadOnlySession:
         self.closed = False
         self.allow_authorized_metadata = allow_authorized_metadata
         self.allow_queue_reads = allow_queue_reads
+        self.allow_artwork_reads = allow_artwork_reads
         self.authorized = False
         self.operation = None
         self.unsolicited_states = 0
@@ -187,7 +188,15 @@ class ReadOnlySession:
             self.close('INVALID_OR_STALE_REPLY')
 
     async def exchange(self, operation, request_id=None, *, args=None, source=None, source_epoch=None):
-        if operation == 'GET_QUEUE':
+        if operation == 'GET_ARTWORK':
+            if not self.allow_artwork_reads or not self.allow_authorized_metadata or not self.authorized:
+                raise ValueError('AUTHORIZED_ARTWORK_MODE_REQUIRED')
+            if (not isinstance(args, dict) or set(args) != {'key'} or
+                    not isinstance(args['key'], str) or not re.fullmatch(r'[a-f0-9]{64}', args['key']) or
+                    source not in {'com.ibasso.music', 'com.apple.android.music'} or
+                    not isinstance(source_epoch, str) or not 1 <= len(source_epoch) <= 128):
+                raise ValueError('INVALID_ARTWORK_READ')
+        elif operation == 'GET_QUEUE':
             if not self.allow_queue_reads or not self.allow_authorized_metadata or not self.authorized:
                 raise ValueError('AUTHORIZED_QUEUE_MODE_REQUIRED')
             if (not isinstance(args, dict) or set(args) - {'offset', 'revision'} or
@@ -207,8 +216,8 @@ class ReadOnlySession:
         request_id = request_id or str(uuid.uuid4())
         if not re.fullmatch(r'[A-Za-z0-9-]{1,64}', request_id):
             raise ValueError('INVALID_REQUEST_ID')
-        request = {'v': 1, 'id': request_id, 'type': operation, 'args': args if operation == 'GET_QUEUE' else {}}
-        if operation == 'GET_QUEUE':
+        request = {'v': 1, 'id': request_id, 'type': operation, 'args': args if operation in {'GET_QUEUE', 'GET_ARTWORK'} else {}}
+        if operation in {'GET_QUEUE', 'GET_ARTWORK'}:
             request.update(source=source, sourceEpoch=source_epoch)
         if self.host_epoch is not None:
             request['hostEpoch'] = self.host_epoch

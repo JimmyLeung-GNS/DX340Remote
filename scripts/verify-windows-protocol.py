@@ -6,6 +6,8 @@ Run approval-boundary before local approval; await-approval holds a fresh connec
 This client wait does not extend a host security deadline. authorized-state checks a saved approval.
 authorized-queue additionally reads all pages of the selected paused source's public
 queue, cached duplicates and stale revision rejection. It never selects a source.
+authorized-artwork checks the selected paused source's public JPEG integrity,
+cached duplicate, expired-key rejection and fresh recovery; it stores no image.
 """
 import argparse
 import asyncio
@@ -22,6 +24,7 @@ from winrt.windows.devices.bluetooth import BluetoothAdapter, BluetoothLEDevice
 from winrt.windows.devices.enumeration import DeviceInformation
 from windows_ble_protocol import (SERVICE, INFO, RX, TX, MAX_MESSAGE, ReadOnlySession,
                                   decode_object, require_authenticated_bond, run_read_only_checks, run_queue_checks, diagnostic_failure)
+from windows_artwork_diagnostic import run_artwork_checks
 
 OUT = Path(__file__).resolve().parents[1] / 'artifacts' / 'windows-ble'
 
@@ -87,17 +90,20 @@ async def verify(args, report):
             report['phase'] = 'reply-await'
 
         session = ReadOnlySession(write, allow_authorized_metadata=args.mode != 'approval-boundary',
-                                  allow_queue_reads=args.mode == 'authorized-queue')
+                                  allow_queue_reads=args.mode == 'authorized-queue',
+                                  allow_artwork_reads=args.mode == 'authorized-artwork')
         report['phase'] = 'protected-indication-subscription'
         await asyncio.wait_for(client.start_notify(TX, lambda _, data: session.feed(bytes(data)), force_indicate=True), 10)
         report['checks'].append({'check': 'protected INFO read and indication subscription', 'passed': True})
         report['phase'] = 'read-only-protocol'
         def approval_requested():
             print(f'AUTHORIZE now requires local approval. Review the identified pending request on DX340; waiting up to {args.approval_wait} seconds. No approval is performed by this script.', flush=True)
-        await run_read_only_checks(session, 'authorized-state' if args.mode in {'await-disconnect', 'authorized-queue'} else args.mode,
+        await run_read_only_checks(session, 'authorized-state' if args.mode in {'await-disconnect', 'authorized-queue', 'authorized-artwork'} else args.mode,
                                    report['checks'], approval_wait=args.approval_wait, approval_requested=approval_requested)
         if args.mode == 'authorized-queue':
             report['queueSummary'] = await run_queue_checks(session, report['checks'])
+        if args.mode == 'authorized-artwork':
+            report['artworkSummary'] = await run_artwork_checks(session, report['checks'])
         if args.mode == 'await-disconnect':
             report['phase'] = 'await-operator-disconnect'
             print(f'Authorized read checks passed. Waiting up to{args.operator_wait}seconds for your local Revoke action on DX340; this script changes no approvals or playback.', flush=True)
@@ -154,7 +160,7 @@ async def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('mode', choices=['approval-boundary', 'await-approval', 'authorized-state', 'authorized-queue', 'await-disconnect'])
+    parser.add_argument('mode', choices=['approval-boundary', 'await-approval', 'authorized-state', 'authorized-queue', 'authorized-artwork', 'await-disconnect'])
     parser.add_argument('--seconds', type=float, default=5)
     parser.add_argument('--label', default='protocol-check')
     parser.add_argument('--operator-wait', type=int, default=120, help='Bounded30..180second hold for await-disconnect only')
