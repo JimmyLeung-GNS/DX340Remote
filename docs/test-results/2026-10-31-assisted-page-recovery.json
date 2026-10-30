@@ -1,0 +1,89 @@
+{
+  "date": "2026-10-31",
+  "applicationSource": "31047c22f0bba7a2efede50616f80a63b1ff49c0",
+  "software": {
+    "flutterTests": 56,
+    "jvmTests": 164,
+    "jvmFailures": 0,
+    "jvmErrors": 0,
+    "androidAssemblyLintAnalyze": "PASS",
+    "swift": "PENDING current hosted run41119813702; shared run41119813675 also in progress"
+  },
+  "physical": {
+    "device": "Pixel9a Android16/API36 to DX340 Android13/API33; Mango4.1.37/code240; Apple6.5.3/code1599",
+    "selections": [
+      {
+        "file": "01. Intro -GOLD SYMPHONY-.flac",
+        "title": "Intro -GOLD SYMPHONY-",
+        "playTaps": 1,
+        "ownerConfirmedExpectedAudio": true,
+        "observedMatchingPlaying": "MATCHING_SOURCE_PLAYING_OBSERVED",
+        "scriptElapsedAtMatchingPlayingSeconds": 13.078,
+        "elapsedIncludesUiCaptureOverhead": true,
+        "beforePendingAndExpiredRowBounds": "[53,1457][1028,1648]",
+        "expiredRowEnabled": false
+      },
+      {
+        "file": "01. OPENING VTR.flac",
+        "title": "OPENING VTR",
+        "playTaps": 1,
+        "ownerConfirmedExpectedAudio": true,
+        "observedMatchingPlaying": "MATCHING_SOURCE_PLAYING_OBSERVED",
+        "scriptElapsedAtMatchingPlayingSeconds": 11.969,
+        "elapsedIncludesUiCaptureOverhead": true,
+        "beforePendingAndExpiredRowBounds": "[53,1457][1028,1648]",
+        "expiredRowEnabled": false
+      }
+    ],
+    "savedGrantReconnect": true,
+    "expiredBackDisabled": true,
+    "freshRootAndFoldersRecoveredWhileSourcePlaying": true,
+    "bothPhonePausesSourceConfirmed": true,
+    "manualFingerOrScreenReaderAcceptance": "NOT TESTED",
+    "rapidTapOrBackgroundReliability": "NOT TESTED"
+  },
+  "cleanup": {
+    "applicationSource": "31047c22f0bba7a2efede50616f80a63b1ff49c0",
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "companionSha256": "58314b84cd45447fd866c1ea9a48922c39edd9584f14100c47cd3cb8c91ee97e",
+    "phoneSha256": "ea9f165da9d4feff1061f62e3a290031e9045a204faf3c12f815837a7492b978",
+    "phoneMatchesOrdinaryCandidate": true,
+    "controllerPreferencesPreserved": true,
+    "mangoOptionalMode": true,
+    "appleOptionalMode": true,
+    "mangoAccessibilityEnabled": true,
+    "appleAccessibilityEnabled": true,
+    "phoneDisplay": {
+      "fontScale": "1.0",
+      "nightMode": "Night mode: no"
+    },
+    "pixelNetwork": {
+      "wifi_on": "0",
+      "mobile_data": "1",
+      "bluetooth_on": "1"
+    },
+    "musicVolume": 37,
+    "route": "headset(4)",
+    "volumeProofVerified": false,
+    "ordinaryDisconnectVerified": true,
+    "savedApprovalCount": 2,
+    "savedApprovals": "Pixel/JIMMYAH retained; no revocation/unpair",
+    "mangoEnabledPreference": "Owner prefers ongoing enabled browsing; supersedes earlier test-only restoration-off default"
+  },
+  "appearance": {
+    "disposition": "SHIP only two supplied final Pixel synthetic renders",
+    "captures": [
+      "artifacts/browsing-captures/synthetic-expired-light.png",
+      "artifacts/browsing-captures/synthetic-expired-large-dark.png"
+    ],
+    "limits": "Presentation only; no physical iPhone, BLE, full scrolling or TalkBack/VoiceOver acceptance"
+  },
+  "unresolved": [
+    "Original error133/silent-disconnect sequence not independently reconstructed",
+    "Metadata lag/lingering dispatched status; no latency percentile pass",
+    "Full phone/source/format/SD/background/audio-quality/signing/iPhone/Watch gates incomplete"
+  ]
+}

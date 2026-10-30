@@ -1,5 +1,8 @@
 # Implementation status
 
+31 October latest: source31047c22/current installed original-signer Pixel ea9f165d…; companion58314b84… unchanged. Consumed Mango assisted pages now retain row geometry but disable stale song/folder/Back/page actions; explicit fresh browsing recovers without playback replay.56 Flutter/164 JVM/Android release/lint pass. Intro and OPENING VTR on this same package are separately owner-audible; fresh-root/folder recovery during playback and both phone Pauses pass. New Apple native41119813702/shared41119813675 are still in progress, not passed. Final both paused37/proof false, Pixel normal Disconnect, approvals/bonds preserved. Mango app mode/Accessibility now stay ON per owner preference, Apple ON; this supersedes earlier restoration-off notes. Read docs/test-results/2026-10-31-assisted-page-recovery.md. Metadata lag/lingering dispatched status, original133/full failure, broader UX-01/icons and physical iPhone/source/format/SD/background/reliability/signing/Watch remain open; full goal ACTIVE/incomplete. Earlier pending states below are historical.
+
+
 31 October follow-up: Mango post-selection page recovery is implemented in Kotlin/Swift/shared Flutter. Host code deliberately discards assisted action IDs after play; matching terminal/timeout/loss now retires that displayed page without moving its rows or replaying playback.56 Flutter/164 JVM and Android release/lint pass; confirmation captures, physical recovery and new Apple CI are still pending. The owner now prefers Mango optional browsing kept enabled: app mode and Accessibility were enabled through visible UI, Apple remains on, grants/bonds retained. This supersedes earlier test-only restoration-off notes. Read docs/test-results/2026-10-31-assisted-page-recovery.md; full goal ACTIVE/incomplete.
 
 
@@ -265,9 +268,9 @@ The user chose shared Flutter phone UI after the Kotlin/Flutter comparison; docs
 | P1 | PARTIAL: approved Pixel reads/controls and a no-SIM/offline saved-grant Play/Pause subset verified; setup failures retained, SIM-installed/iPhone/30-minute gates open |
 | P2 | PARTIAL: native Mango and accepted optional Apple route sampled; source/format/volume/restart matrix incomplete |
 | P3 | IMPLEMENTED BETA: bounded framing/dedup/epochs, bond+local approval, routing, shared handoff, reply revocation guards, library/queue/artwork; real security/recovery open |
-| P4 | IMPLEMENTED BETA: sourcef5f5a03 shared Flutter53/native162 build/lint; current Pixel765…/companion583… scoped folder audio, saved-grant reconnect, invalidation/queue and no-SIM offline controls pass; full Android matrix open |
-| P5 | SIMULATOR VERIFIED: sourcef5f5a03 native Swift12 and shared Flutter53/build/captures/ordinary restoration pass hosted CI; owner-iPhone signing/BLE/interaction open |
-| P6 | IN PROGRESS: earlier scoped folder/native/playlist matrices retained; latest Pixel two assisted-folder selections owner-audible on765…/583…, native24-item Queue read. Full current-build/phone formats/playlists/SD/rescan open |
+| P4 | IMPLEMENTED BETA: source31047c22 shared Flutter56/native164 build/lint; current Pixel ea9f…/companion583… two owner-audible selections and consumed-page recovery pass. Earlier765… invalidation/queue/no-SIM controls retain their package scope; full Android matrix open |
+| P5 | SIMULATOR VERIFIED: sourcef5f5a03 native Swift12/shared Flutter53/build/captures/restoration passed; current31047c22 native/shared jobs in progress, not passed; owner-iPhone signing/BLE/interaction open |
+| P6 | IN PROGRESS: earlier scoped folder/native/playlist matrices retained; latest Pixel two assisted-folder selections owner-audible on ea9f…/583… and explicit post-selection recovery; earlier765… native24-item Queue read. Full current-build/phone formats/playlists/SD/rescan open |
 | P7 | PARTIAL: earlier source-local20-track Apple matrix retained; Pixel Downloaded album/track reads and101-item queue windows pass, phone outside-queue playback/audio and iPhone matrix open |
 | P8 | PARTIAL: builds/checks/docs/matrix; physical reliability, battery, installation and audio acceptance open |
 | P9 | NOT STARTED: stable-phone gate unmet; Watch inventory unknown |

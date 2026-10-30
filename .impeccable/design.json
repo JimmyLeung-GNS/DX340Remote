@@ -88,6 +88,25 @@
       "third_party/FLUTTER_LICENSE"
     ],
     "verification": {
+      "assistedPageRecovery31047c22": {
+        "sourceRevision": "31047c22f0bba7a2efede50616f80a63b1ff49c0",
+        "reviewReport": "artifacts/assisted-page-recovery-20261031/appearance-review.md",
+        "captures": [
+          "artifacts/browsing-captures/synthetic-expired-light.png",
+          "artifacts/browsing-captures/synthetic-expired-large-dark.png"
+        ],
+        "captureScope": "Actual Pixel 9a synthetic presentation fixtures without BLE; light/font1.0 and dark/font2.0 initial viewports.",
+        "review": {
+          "disposition": "ship",
+          "resolvedFinding": "Short recovery instruction is fully visible in both initial viewports; the original longer-copy finding is resolved.",
+          "limit": "Only these two rendered expired-page states. Independent long-status/list scrolling, full large-text reachability/accessibility, connected recovery and iPhone rendering are outside this review. No full UX-01/iPhone/Watch acceptance."
+        },
+        "software": "Analysis/56 Flutter tests, 164 aggregate JVM tests and Android release/lint pass. Current-source Apple runs 41119813675/41119813702 remain in progress at this checkpoint; no pass claimed.",
+        "separateFunctionalEvidence": "Ordinary original-signer Pixel package ea9f165da9d4feff1061f62e3a290031e9045a204faf3c12f815837a7492b978 installed/pulled/hash-verified against unchanged companion 58314b84…. Intro and OPENING VTR on this same package separately owner-confirmed audible; fresh root/folder recovery while playing and two phone pauses succeeded. artifacts/assisted-page-recovery-20261031/actual-expired-page.png is functional evidence outside the two-capture appearance review.",
+        "ownerPreference": "Mango app mode and Accessibility intentionally remain on under the new owner preference; Apple remains on and grants are retained.",
+        "functionalReport": "docs/test-results/2026-10-31-assisted-page-recovery.md",
+        "unchanged": "Existing status tokens, native world/assets, native Mango/Apple selection routes and historical review scopes."
+      },
       "browsingScrollFollowupF5f5a03": {
         "sourceRevision": "f5f5a03b04ea46d1631328e44097a4caf9512215",
         "status": "verified for seven supplied appearances only; functional checks recorded separately",
@@ -280,6 +299,8 @@
       "kind": "custom",
       "description": "Material ListTile or CupertinoButton row with folder/music icon, wrapping title/subtitle and folder chevron. Row identity includes destination, source scope, rendered revision and item ID. Library playback checks rendered revision/scope and current playable ID/title membership; queue playback checks rendered revision and current ID/title membership. Parent/page/assisted navigation remain distinct.",
       "pageScrollRestoration": "At f5f5a03, Library PageStorageKey includes source scope, revision, current/returned parent, page and loading state; Queue includes source scope, revision and offset. Status/error/busy do not change list identity. Same-location offsets can restore without another folder/page/revision inheriting them.",
+      "assistedPageRecovery": "At 31047c22, matching Mango assisted selection completion, timeout/send failure or connection loss retires only that page while retaining cached rows and offset. Stale row/Back/more actions disable; explicit fresh-root browsing recovers. No playback replay or native Mango/Apple selection-route change.",
+      "recoveryVerificationRef": "extensions.verification.assistedPageRecovery31047c22",
       "followupVerificationRef": "extensions.verification.browsingScrollFollowupF5f5a03"
     },
     {
@@ -294,7 +315,8 @@
       "description": "Library/Queue reserve independently scrollable live-region status/error/pending space above their independent destination ListView, with a one-logical-pixel divider. Status changes do not reflow music rows; long messages scroll without overlaying rows. Uses incumbent Material/Cupertino text and error roles, without a browser approximation.",
       "layout": {
         "heightCalculation": "min(textScaler.scale(bodyMedium.fontSize) * (bodyMedium.height ?? 1.5) * 3 + 24, availableHeight * 0.35)",
-        "statusScrollIdentity": "Current status, error and busy state; a changed message resets the status scroll viewport."
+        "statusScrollIdentity": "Current status, error, busy state and library invalidation; a changed message or invalidation resets the status scroll viewport.",
+        "assistedRecoveryCopy": "Page expired after selection. Tap Browse source library."
       },
       "verificationRef": "extensions.verification.libraryStatusLayout20261031"
     },
