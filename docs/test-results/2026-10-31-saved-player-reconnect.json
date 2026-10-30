@@ -1,0 +1,181 @@
+{
+  "kind": "physical USB desk saved-player foreground reconnect/Disconnect regression; not discovery/bag-distance/screen-off/range/audio acceptance",
+  "phoneApkSha256": "1a592c56b87b68aa0861ce0e955bc66c41ee8e13938a942d0180ee29a75b2e9b",
+  "hostApkSha256": "491dbbffabda8f7a20d64a2f591caa486427e036ba9e3821d831ccf6eff5934a",
+  "attempts": 10,
+  "passes": 10,
+  "failure": null,
+  "timingLimit": "upper bound includes fresh UI dump/ADB overhead, not native discovery or ACK latency",
+  "rounds": [
+    {
+      "round": 1,
+      "status": "PASS",
+      "connectUiObservationUpperBoundSeconds": 7.438,
+      "authorizedUi": true,
+      "foregroundWhileConnected": true,
+      "disconnectedUi": true,
+      "foregroundAfterDisconnect": false,
+      "serviceStartedAfterDisconnect": false
+    },
+    {
+      "round": 2,
+      "status": "PASS",
+      "connectUiObservationUpperBoundSeconds": 7.5,
+      "authorizedUi": true,
+      "foregroundWhileConnected": true,
+      "disconnectedUi": true,
+      "foregroundAfterDisconnect": false,
+      "serviceStartedAfterDisconnect": false
+    },
+    {
+      "round": 3,
+      "status": "PASS",
+      "connectUiObservationUpperBoundSeconds": 7.484,
+      "authorizedUi": true,
+      "foregroundWhileConnected": true,
+      "disconnectedUi": true,
+      "foregroundAfterDisconnect": false,
+      "serviceStartedAfterDisconnect": false
+    },
+    {
+      "round": 4,
+      "status": "PASS",
+      "connectUiObservationUpperBoundSeconds": 7.5,
+      "authorizedUi": true,
+      "foregroundWhileConnected": true,
+      "disconnectedUi": true,
+      "foregroundAfterDisconnect": false,
+      "serviceStartedAfterDisconnect": false
+    },
+    {
+      "round": 5,
+      "status": "PASS",
+      "connectUiObservationUpperBoundSeconds": 7.515,
+      "authorizedUi": true,
+      "foregroundWhileConnected": true,
+      "disconnectedUi": true,
+      "foregroundAfterDisconnect": false,
+      "serviceStartedAfterDisconnect": false
+    },
+    {
+      "round": 6,
+      "status": "PASS",
+      "connectUiObservationUpperBoundSeconds": 7.438,
+      "authorizedUi": true,
+      "foregroundWhileConnected": true,
+      "disconnectedUi": true,
+      "foregroundAfterDisconnect": false,
+      "serviceStartedAfterDisconnect": false
+    },
+    {
+      "round": 7,
+      "status": "PASS",
+      "connectUiObservationUpperBoundSeconds": 7.421,
+      "authorizedUi": true,
+      "foregroundWhileConnected": true,
+      "disconnectedUi": true,
+      "foregroundAfterDisconnect": false,
+      "serviceStartedAfterDisconnect": false
+    },
+    {
+      "round": 8,
+      "status": "PASS",
+      "connectUiObservationUpperBoundSeconds": 7.484,
+      "authorizedUi": true,
+      "foregroundWhileConnected": true,
+      "disconnectedUi": true,
+      "foregroundAfterDisconnect": false,
+      "serviceStartedAfterDisconnect": false
+    },
+    {
+      "round": 9,
+      "status": "PASS",
+      "connectUiObservationUpperBoundSeconds": 7.453,
+      "authorizedUi": true,
+      "foregroundWhileConnected": true,
+      "disconnectedUi": true,
+      "foregroundAfterDisconnect": false,
+      "serviceStartedAfterDisconnect": false
+    },
+    {
+      "round": 10,
+      "status": "PASS",
+      "connectUiObservationUpperBoundSeconds": 7.5,
+      "authorizedUi": true,
+      "foregroundWhileConnected": true,
+      "disconnectedUi": true,
+      "foregroundAfterDisconnect": false,
+      "serviceStartedAfterDisconnect": false
+    }
+  ],
+  "preservation": {
+    "hostPreferences": {
+      "controllers": true,
+      "mango-ui": true,
+      "apple-ui": true,
+      "source-verification": true
+    },
+    "bothSourceStatesPaused": true,
+    "outputVolume": 37,
+    "radioFontThemeSettings": true,
+    "playbackVolumeCommandsSent": 0
+  },
+  "nativeEventWindow": {
+    "date": "10-31",
+    "localDeviceClockBounds": [
+      "07:00:40.000",
+      "07:03:10.000"
+    ],
+    "limit": "device clocks differ; no cross-device latency calculated; phone ring buffer retains only last5 handshakes",
+    "phoneFirstRetainedEvent": "10-31 07:01:45.392",
+    "phoneHelloQueuedRetained": 5,
+    "phoneAuthorizeQueuedRetained": 5,
+    "phoneGattConnectedRetained": 5,
+    "nonzeroGattConnectionStatusesInRetainedTail": 0,
+    "hostApprovedConnections": 10,
+    "hostEncryptedSubscriptions": 10,
+    "hostReturnedAdvertising": 10,
+    "phoneMutationQueueCountInRetainedTail": 0
+  },
+  "collectionLimit": "Initial post-run check expected10 phone handshakes and failed because the rolling phone buffer only retained5. Preserved original logs; no repeat/whole-run phone-GATT error-free claim. All10 UI/service records and host approvals are available.",
+  "rawEvidenceHashes": {
+    "host-events.txt": "ef02bba86b38fc023bb15e0a49dbd5d09f7c5b7d2455e56d521cd356ccbad8e5",
+    "phone-events.txt": "5899ca763706043dada01ede52a0973687acc0d55fab5463201419872cda14f6",
+    "round-01-before-service.txt": "5fe3457284e9f5c4c29db570d95e09b6ba26dd006c91f29b4417193473790a1f",
+    "round-01-connected-service.txt": "4e7562d55522582c68a753ee334eac27f23578e1564a57e6f88fe82502aaae85",
+    "round-01-disconnected-service.txt": "f412a06315388423a2f62d455a1d4d10cebaa5ce2aa57b8a2ba6cfb0d7217b55",
+    "round-02-before-service.txt": "8d0d757049d42b67408a05902353f50355c0a670e7ea3915e10be2b93b4fae4e",
+    "round-02-connected-service.txt": "5742483943086c396d437bc99801606c14cfc505b0d47c372e3df7ef93bbd1fc",
+    "round-02-disconnected-service.txt": "c7659e590614f420d6eb6f2ea79f9cb4fa406862a1539926c6520526b30a531b",
+    "round-03-before-service.txt": "04a3cdf0af9f869581cec4f4350604cc5d66eafd1894eaa6a98bcb2a8193660d",
+    "round-03-connected-service.txt": "2c1a0c1a96eaeed368a9f76bd7eb3a98c15dee6f71b75a408d8f0f7a89b64f81",
+    "round-03-disconnected-service.txt": "fc7bcd393162830c7516677e2c0eb0407bbf37ff01e9e2aec4a5176268626f40",
+    "round-04-before-service.txt": "ec3b812c2b6cfa78ab8fb2a4093b1822799acb0466b60bac4b6effbc635376f5",
+    "round-04-connected-service.txt": "715bc42e1940ccb6c459a882e377fd70da171c0bf801f1fae4897adad27cc11c",
+    "round-04-disconnected-service.txt": "28d4860b647b1951eeae60b6a54c14536c52ae8778c5cbef3c7b9a212b55c099",
+    "round-05-before-service.txt": "302ba3c2ae3885e6159073ffe8239937e6fa952aba01d18ed36b5a0321322ab1",
+    "round-05-connected-service.txt": "61ccf2ecc2ecf581765882b5c02d1302be568a5d9cbb7d221d111821ede7a5e8",
+    "round-05-disconnected-service.txt": "54b7ab621b8d8e51bbce26c0f069b51c9d0e518fa98d747394b1a22a9f1badbf",
+    "round-06-before-service.txt": "df789533ba1e82274aa362c829322a3b65f383d8325fe023ade0125c8a9d73e6",
+    "round-06-connected-service.txt": "b97ec77ef158c6c801cfa4834e37d9a6f2b7f9942ade40989493c5886689c778",
+    "round-06-disconnected-service.txt": "55af39c4813d8f9e6f97e05b30a48b15fd4ba22a2a5a48a16e7aba1a773ae8bb",
+    "round-07-before-service.txt": "0e46effc1110a0e93ed4e3fd442e78d0cd6ecca97474d51b72f79dc1f1f49411",
+    "round-07-connected-service.txt": "5ab31d8038ec30416a660291a7bb321c8f3e1d291030800301d12503be22161f",
+    "round-07-disconnected-service.txt": "2cc2a0851812adb407c7e22cf32ba1366ff67600d82ac52c2331e8e734d25710",
+    "round-08-before-service.txt": "765ffa2e23bfca7e6194d3dc9794b475adcfd1c9b3db60e5797eef389719d6b9",
+    "round-08-connected-service.txt": "c88e694c8e20f4d3851c35ff76ccbed0c18ba9b0cec0befb2689bb148bfe1707",
+    "round-08-disconnected-service.txt": "d5b7f63c367a38a7700e82c66978f21dd71f3d47a19f657313483fc8d6a3c7ea",
+    "round-09-before-service.txt": "ab28aa2151fc748f3b60cde3a255b73e0f0b9e1b73e722dfac0b5a08540ee611",
+    "round-09-connected-service.txt": "48f36931a6b0ad03d47ff9595a4ce32d17bfe101520affc99dbcc77537d191b3",
+    "round-09-disconnected-service.txt": "42b01f227c652f10731df864ab4b9cf28655127d966b63d56e1acfd4dc5c945d",
+    "round-10-before-service.txt": "7c2dfa8e95a66d011060be9f1bc81c364d726af751257c673fc70ac6a058560d",
+    "round-10-connected-service.txt": "efbd60d64b2ed9d52ff09713e895c191f7f239d20a78c4cb1cef4c4d2d5299d4",
+    "round-10-disconnected-service.txt": "e10719b0a1e9a026f03f6c8db4dc801dcb5cdce3551e40a7d644cd3fa30b7a93"
+  },
+  "deviceVersions": {
+    "phone": "Pixel9a Android16/API36 CP1A.260405.005; app0.2.0/code2",
+    "host": "DX340 Android13/API33 eng.iBasso.20260812.181952; app0.1.0/code1",
+    "mango": "4.1.37/code240",
+    "appleMusic": "6.5.3/code1599"
+  }
+}

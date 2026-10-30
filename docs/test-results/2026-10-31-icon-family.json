@@ -43,7 +43,7 @@
     "shutDown": true
   },
   "notTested": [
-    "iPhone catalog/native-reference build",
+    "shared iPhone catalog build (native reference verified)",
     "actual iPhone launcher",
     "actual Android monochrome/theme launcher",
     "Apple layered Icon Composer",
@@ -114,6 +114,16 @@
     "source": "2feaa0aac2413cff26847a0c5d187cac47dc9842",
     "shared": 41141154633,
     "native": 41141154690,
-    "lastObserved": "IN PROGRESS; icon catalog builds unconfirmed"
+    "lastObserved": "native SUCCESS and archive verified; shared IN PROGRESS",
+    "nativeResult": {
+      "conclusion": "SUCCESS",
+      "artifact": 13019425434,
+      "sha256": "ec2f9934215242cf241de960a8ea044edc06a1b13247e58a30caf111201243cf",
+      "swiftTests": 16,
+      "captureMatcherTests": 12,
+      "appIconCatalogCompiled": true,
+      "buildInstallLaunch": "PASS",
+      "actualIPhoneLauncher": "NOT TESTED"
+    }
   }
 }

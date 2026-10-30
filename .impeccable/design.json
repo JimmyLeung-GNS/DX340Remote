@@ -102,6 +102,17 @@
       "third_party/FLUTTER_LICENSE"
     ],
     "verification": {
+      "nativeIconCatalog41141154690": {
+        "sourceRevision": "2feaa0aac2413cff26847a0c5d187cac47dc9842",
+        "run": "41141154690 SUCCESS",
+        "artifactId": "13019425434",
+        "archiveSha256": "ec2f9934215242cf241de960a8ea044edc06a1b13247e58a30caf111201243cf",
+        "archiveVerified": true,
+        "evidence": "artifacts/icon-family-20261031/ci-41141154690/",
+        "checks": "16 Swift tests,12 capture-matcher regressions,simulator build/install/launch. apple-build.txt records CompileAssetCatalog/actool new nativeAssets.xcassets --app-icon AppIcon,generated iconPNGs and BUILD SUCCEEDED.",
+        "scope": "Native-reference catalog integration only; no new appearance verdict or actual iPhone launcher/theme/physical BLE acceptance.",
+        "pending": "Shared41141154633 remains LIVE/IN PROGRESS; shared catalog build not yet verified. Current physical1a592c56…/491dbbff… and existing F1/icon review scopes unchanged. Fresh30-minute readiness pending;no active observer."
+      },
       "physicalIconPackageContinuation20261031": {
         "localSource": "7aba520",
         "pushedCheckpoint": "2feaa0aac2413cff26847a0c5d187cac47dc9842",
@@ -115,7 +126,7 @@
         ],
         "appearanceScope": "Physically observed launcher evidence only; no new peer-review or whole-product SHIP. Earlier emulator launcher/software-preview SHIP scope unchanged. Older separate DX340 Remote Flutter-mark app on DX340 untouched/not uninstalled and excluded from icon acceptance.",
         "functionalScope": "Saved-grant Connect/state read/normal Disconnect succeeded. Phone ends without foreground state/startRequestedfalse. Four host preferences, both sources paused37/proof false, radios/fonts, optional modes ON and healthy bindings preserved. No new audio proof; older4449ee74…/b0e1f582… physical/audio records keep their scope.",
-        "pendingApple": "Shared41141154633/native41141154690 IN PROGRESS at pushed2feaa0aac2413cff26847a0c5d187cac47dc9842; icon-catalog builds not yet verified.",
+        "appleFollowup": "At pushed2feaa0aac2413cff26847a0c5d187cac47dc9842,native41141154690 subsequently SUCCESS with verified catalog integration; shared41141154633 remains LIVE/IN PROGRESS and shared catalog build pending. See nativeIconCatalog41141154690.",
         "remaining": "Prior c8ff4b7 F1-only SHIP closed without a new review. Fresh30-minute readiness pending/no active observer. Wider physical Apple/audio/reliability/accessibility/signing/Watch/full-system gates remain open."
       },
       "setupF1Confirmation41138111275": {
@@ -150,13 +161,13 @@
         "review": {
           "disposition": "ship",
           "scope": "Actual emulator Android circular launcher plus explicitly labeled software square/circle/rounded/themed family preview only; no material fixes.",
-          "limit": "No actual iOS/monochrome-theme/physical launcher, iOS catalog/native-reference build, full UX-01 or whole-project acceptance. Software preview does not supply those platform renders."
+          "limit": "This appearance verdict supplies no actual iOS/monochrome-theme/physical launcher,full UX-01 or whole-project acceptance. Native-reference catalog build later verified separately; shared build pending. Software preview does not supply platform renders."
         },
         "candidatePhoneSha256": "1a592c56b87b68aa0861ce0e955bc66c41ee8e13938a942d0180ee29a75b2e9b",
         "candidateCompanionSha256": "491dbbffabda8f7a20d64a2f591caa486427e036ba9e3821d831ccf6eff5934a",
         "packageScope": "Original icon-review checkpoint: original signers verified, candidates built/linted and emulator-installed only, physical4449ee74…/b0e1f582… unchanged then. Later physical upgrades are separate under physicalIconPackageContinuation20261031; earlier physical/audio evidence keeps its binary scope.",
         "assetChecks": "Recorded export SHA256s, opaque RGB/catalog dimensions and PNG origin/geometry/generator metadata verified. Android/native/shared asset builds/lint pass; runtime code unchanged and prior67Flutter/166JVM tests not rerun for assets.",
-        "pending": "iOS catalog/native-reference builds and actual iOS/Android monochrome rendering, broader UX-01/signing/Watch gates. Physical launcher observations are separate, without a new review. Shared41141154633/native41141154690 icon CI IN PROGRESS at2feaa0a. Earlier c8ff4b7 F1-only SHIP stays closed.",
+        "pending": "Shared iPhone catalog build and actual iOS/Android monochrome rendering,broader UX-01/signing/Watch gates. Physical launcher observations remain separate without a new review. Native41141154690 SUCCESS/catalog verified;shared41141154633 LIVE/IN PROGRESS at2feaa0a. Earlier c8ff4b7 F1-only SHIP stays closed.",
         "direction": "Original deterministic icon-family extension, native system screen world retained. No third-party or AI-generated icon artwork."
       },
       "setupRecoveryValidationC8ff4b7": {
@@ -414,7 +425,7 @@
       "assets": {
         "status": "Original Remote/Companion family exported; scoped emulator launcher/software-preview review shipped. Platform/physical launcher acceptance remains incomplete.",
         "android": "Adaptive foreground/background and Android13+ monochrome resources for host/shared/native Remote; ic_dx340.xml fallback names retained. Historical five earlier Flutter launcher PNGs were removed.",
-        "iPhone": "Shared/native reference catalogs now use identical original opaque square Remote PNGs; native PBX catalog/AppIcon wiring added. Builds/actual launcher still pending. Transparent Flutter-template LaunchImage placeholders unchanged; phone/ASSET_ORIGINS.md; third_party/FLUTTER_LICENSE.",
+        "iPhone": "Shared/native reference catalogs use identical original opaque square Remote PNGs; native PBX catalog/AppIcon wiring build verified in41141154690. Shared41141154633 remains in progress;actual iPhone launcher/theme appearance pending. Transparent Flutter-template LaunchImage placeholders unchanged;phone/ASSET_ORIGINS.md;third_party/FLUTTER_LICENSE.",
         "scan": "Historical pre-extension impeccable embed-prompt scan:18 shipping PNG rasters,zero missing origins. New icon exports carry geometry/generator/origin metadata and assets/icons/exports.json hashes; do not reuse the historical count as current inventory.",
         "generatedArtwork": "Original deterministic project icon geometry/export; no third-party/AI-generated icons or new raster illustration."
       },

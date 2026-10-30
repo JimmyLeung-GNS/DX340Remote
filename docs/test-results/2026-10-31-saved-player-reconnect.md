@@ -1,0 +1,17 @@
+# Repeated saved-player connection and Disconnect
+
+**VERIFIED:10/10 foreground desk reconnects**,31 October2026. Full goal remains ACTIVE/incomplete. This is not T02 bag-distance discovery, T04 native/ACK latency, T05 screen-off, range recovery, audio or full reliability acceptance.
+
+Actual Pixel9a Android16/API36 CP1A.260405.005, shared app0.2.0/code2 SHA256 `1a592c56b87b68aa0861ce0e955bc66c41ee8e13938a942d0180ee29a75b2e9b`; DX340 Android13/API33 eng.iBasso.20260812.181952, Companion0.1.0/code1 SHA256 `491dbbffabda8f7a20d64a2f591caa486427e036ba9e3821d831ccf6eff5934a`. Mango4.1.37/code240 and Apple Music6.5.3/code1599 remain the playback engines. No APK/code changes were made for this test.
+
+The ordinary shared phone Setup was used for ten deliberate Connect to DX340 → authorized UI → Disconnect cycles. Each action used exactly one current enabled app node from a fresh Pixel UI tree; no DX340 UIAutomator was used. Each cycle observed the connected foreground service, returned to remembered-player Connect, then verified no foreground flag and `startRequested=false` while UI binding remained. No setup window, controller approval/revocation, OS pairing, radio change or playback/volume action was requested.
+
+All ten UI/service sequences pass. Host events independently retain ten encrypted-subscription records, ten approved-controller connections and ten returns to advertising during the test window. UI-observation upper bounds range7.421–7.515seconds, including ADB, fresh pre-action UI dump and post-action observation overhead. These are not native Bluetooth connection times, discovery measurements or transport ACK/state p95. Device clocks differ, so no cross-device latency is inferred.
+
+The post-run phone log ring buffer retains only the last five handshakes, starting07:01:45.392; those show five HELLO/AUTHORIZE queues and successful GATT connects, with no nonzero connection status in that retained tail. An initial collector check expecting ten phone log handshakes failed and was corrected to record the retention limit. Do not claim complete phone-native logs or absence of transient errors throughout all ten from that tail. All ten fresh UI/service records and host approval records remain available. No test was repeated merely to replace the missing early logs.
+
+All four normalized host preferences match preflight: controllers, mango-ui, apple-ui and source-verification. Both sources remain paused2, output37/headset(4), verification disabled. Both optional browsing modes and existing controller grants remain preserved. Phone/host radio, font and theme settings match preflight. Final ordinary phone Setup is disconnected; no observer is running. No new audible-playback proof follows.
+
+Raw evidence: `artifacts/saved-reconnect-20261031/`, including each round's before/connected/disconnected XML/service observations, `rounds.json`, `summary.json` and native event files. The adjacent sanitized JSON records all ten outcomes, package/device versions, event counts, limits and raw service/log hashes. Pre/post preferences/source/output/settings are under `artifacts/connection-flow-20261031/repeated-connect-{preflight,final}-*`. The private scratch driver is `work/check_saved_reconnects.py`.
+
+A fresh controlled30-minute availability response is still pending after the earlier aborted mixed foreground/background attempt. Keep that test, actual iPhone, bag/range/walking/battery, full source/audio/format/SD and installation/security/Watch requirements open.
