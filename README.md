@@ -1,5 +1,7 @@
 # DX340 Bluetooth Remote
 
+30 October playlist update: optional assisted existing-playlist browsing passes local navigation/stale-token checks and two separate offline Mango/AMP15 audible selections on d2c24a52.... The authorized test playlist was removed and original files retained. Final46c49572... adds physical popup rejection/recovery and builds/lints with143 JVM tests; audio remains scoped to the preceding build. Native proofs now include album descriptions. [Evidence and remaining tests](docs/test-results/2026-10-30-mango-playlists.md). Physical phone BLE, longer playlists, SD/rescan, signing/reliability and Watch acceptance remain open.
+
 30 October native boundary run: all20 selected native locations have source-state and owner audio confirmations on companion7129c307..., including All Music first/last and later-page Album rows. Intro/ending clips, two delayed snapshots and helper revisions limit this result; full file/format/playlist/phone acceptance remains open. [Complete native matrix evidence](docs/test-results/2026-10-30-native-mango-matrix.md).
 
 Latest Mango fix: native Album selection exposed an item-index mismatch. The pinned dispatch correction builds/lints with126 JVM tests; the new companion7129c307... has separate user-confirmed experimental and production native-album playback of 白日夢. Existing20-folder evidence remains on the earlier companion. [Correction and verification](docs/test-results/2026-10-30-mango-native-id-correction.md); full phone/native matrix remains incomplete.

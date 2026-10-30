@@ -60,6 +60,8 @@ Both finish reviewers returned ship for their supplied disconnected captures onl
 
 The optional Mango folders setting and local test surface extend the companion's existing system appearance. A separate reviewer returned ship only for nine DX340 dark/default-font states. That host review does not change the shared phone direction or broaden either earlier phone verdict.
 
+30 October narrow copy update: that setting/service now says optional Mango browsing and includes existing playlists. The separate assisted Library entry uses the same row presentation; no shared phone layout/theme changed. Actual default-font DX340 companion copy was inspected. The font2.0 capture did not reach the new setting; full large-font verification remains open. The prior nine-state review does not cover this update. See docs/test-results/2026-10-30-mango-playlists.md for physical source checks and the display-toggle restoration incident.
+
 **Key Characteristics:**
 
 - One maintained phone presentation with platform-adaptive system controls.

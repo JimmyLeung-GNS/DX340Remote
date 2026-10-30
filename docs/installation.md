@@ -173,13 +173,14 @@ Actual companion-service album/song reads, scroll, stale-ID and screen-off check
 
 For development only, `am start -W --activity-clear-top -n org.dx340.remote.host/.MainActivity --ez developmentProbe true` recreates the debug companion Activity and starts probes; this avoids merely bringing an old Settings screen atop its task. The debug-only UI probe receiver requires Android's privileged DUMP permission, is absent from release, and is not an everyday control path. See the test report for its exact command and evidence limits.
 
-## Optional Mango folders
+## Optional Mango folders and existing playlists
 
 This is the separately accepted screen-on/unlocked mode for Mango4.1.37/code240. Native All Music/Album/Artist/Genre remain available. The own companion service has browsed nested folders and selected a WAV track that the user confirmed audible; the full format/SD/phone Bluetooth matrix remains open.
 
-1. In DX340 Companion, tap **Enable optional Mango folders**. In Accessibility settings, enable **DX340 Mango folder browsing** and review Android's permission prompt. On the current development DX340, the optional mode and this service are already enabled.
+1. In DX340 Companion, tap **Enable optional Mango browsing**. In Accessibility settings, enable **DX340 Mango browsing** and review Android's permission prompt. On the current development DX340, the optional mode and this service are already enabled. Older builds called these “Mango folders” / “DX340 Mango folder browsing”; the service component is unchanged.
 2. Keep DX340 awake and unlocked. In the connected phone's Library, choose **Local folders · assisted**, then **Internal Storage** or **SD Card**. Navigate folders and choose a playable FLAC/WAV row. Back/More follow the source's visible folder view. No Local Network option is exposed.
 3. To try the local test without a phone, choose **Test Mango library on this DX340** → **Local folders · assisted**. The test briefly opens Mango for each assisted operation and returns to the test screen. Select a file, confirm **Test selected file**, listen, then record the audible result. Local results do not verify phone Bluetooth or native play-by-ID.
-4. If the screen changes or an item expires, use **Retry library** / root refresh. If the device sleeps, wake/unlock it first. Turn the mode off with **Disable optional Mango folders**; the separate Android Accessibility permission can also be revoked. An app update requires adapter revalidation.
+4. For an existing playlist, choose **Playlists · assisted**, then the named playlist and a track. The remote cannot create, edit or delete playlists. Two local playlist selections were audibly verified on d2c24a52...; final46c49572... has paused navigation/window-guard evidence only. Long-playlist scrolling and phone Bluetooth remain pending; see `test-results/2026-10-30-mango-playlists.md`.
+5. If the screen changes or an item expires, dismiss any Mango popup, then use **Retry library** / root refresh. If the device sleeps, wake/unlock it first. Turn the mode off with **Disable optional Mango browsing**; the separate Android Accessibility permission can also be revoked. An app update requires adapter revalidation.
 
 This mode uses Mango's semantic UI, not a replacement audio engine. It does not enable seeking or output-volume control; those remain separately capability gated.

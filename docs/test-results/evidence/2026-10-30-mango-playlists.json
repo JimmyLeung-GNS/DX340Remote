@@ -1,0 +1,123 @@
+{
+  "kind": "sanitized-source-local-Mango-playlist-and-native-proof-evidence-no-BLE",
+  "date": "2026-10-30",
+  "device": {
+    "model": "DX340",
+    "android": "13/API33",
+    "mango": "4.1.37/code240",
+    "appleMusic": "6.5.3/code1599",
+    "output": "AMP15 phone out",
+    "volume": 37,
+    "wifiOff": true,
+    "activeNetwork": "none"
+  },
+  "audioBuild": {
+    "sha256": "d2c24a521bfcfae6bf5cb29585e2a65ea29454021edb8e4bbdcaaae26412b49a",
+    "source": "9e8afb0eb41863696ad7677fed2935225111ef60",
+    "checks": [
+      "separate root and existing playlist list",
+      "two exact playable rows; no editing/play-all/menu controls",
+      "detail back returns existing playlists",
+      "old revision rejected after refresh"
+    ],
+    "readOnlyRequests": 8,
+    "selections": [
+      {
+        "track": "白日夢",
+        "observedCorrectPlayingState": true,
+        "selectionSent": true,
+        "humanAudio": {
+          "answer": "Yes, the correct song is audible",
+          "output": "AMP15 phone out",
+          "confirmedUtc": "2026-10-30T10:35:49.697042Z",
+          "scope": "Owner answer to playlist selection 1/2, separate from matching source-state observations"
+        },
+        "status": "SOURCE_STATE_AND_OWNER_AUDIO_CONFIRMED",
+        "requestCount": 7
+      },
+      {
+        "track": "風のたより",
+        "observedCorrectPlayingState": true,
+        "selectionSent": true,
+        "humanAudio": {
+          "answer": "Yes, the correct song is audible",
+          "output": "AMP15 phone out",
+          "confirmedUtc": "2026-10-30T10:37:06.7403832Z",
+          "scope": "Owner answer to playlist selection 2/2, separate from matching source-state observations"
+        },
+        "status": "SOURCE_STATE_AND_OWNER_AUDIO_CONFIRMED",
+        "requestCount": 8
+      }
+    ]
+  },
+  "finalBuild": {
+    "sha256": "46c495721dbd7fdce59d1ea09a13034b5bdf0f2000f5d181356e904b0c0c26bd",
+    "source": "36a0aa215a2dd33e37527ac0072344e3d87bd253",
+    "nativeTests": 143,
+    "failuresOrErrors": 0,
+    "buildAndLint": "PASS",
+    "audio": "NOT_RETESTED",
+    "popupWindows": {
+      "rootId": 1701,
+      "rootType": 1,
+      "rootLayer": 0,
+      "popupId": 1714,
+      "popupType": 1,
+      "popupLayer": 1,
+      "popupFocused": false
+    },
+    "savedBackRejected": "UI_UNEXPECTED_SCREEN",
+    "settledFreshEmptyListRecovery": "PASS",
+    "initialAttempt": "Captured window list before popup registered; immediate recovery rejected; retained separately"
+  },
+  "fixture": {
+    "name": "DX340 Remote verification",
+    "authorization": "Create and remove that test playlist",
+    "authorizedTracks": [
+      "白日夢",
+      "風のたより"
+    ],
+    "state": "REMOVED_EMPTY_LIST_RESTORED_BOTH_ORIGINAL_FILES_PRESENT",
+    "createdUtc": "2026-10-30T10:18:03.4770135Z",
+    "preExistingPlaylistCount": 0,
+    "cleanup": "Remove only this test playlist after verification; never delete music files",
+    "observedTracks": [
+      "白日夢",
+      "風のたより"
+    ],
+    "cleanupUtc": "2026-10-30T10:38:19.6287486Z",
+    "retainedFiles": [
+      "02. 白日夢.wav",
+      "03. 風のたより.wav"
+    ]
+  },
+  "nativeProof": {
+    "oldTests": 5,
+    "oldFailed": 4,
+    "correctedTests": 5,
+    "scope": "Software conditional reused-ID/album and serialization collisions; physical SD/rescan NOT TESTED"
+  },
+  "finalState": {
+    "bothPaused": true,
+    "volume": 37,
+    "volumeVerified": false,
+    "allFourPreferenceDigestsMatch": true,
+    "hostForeground": true,
+    "bothAccessibilityServicesBound": true,
+    "fontScale": 1.0,
+    "pcApproval": "JIMMYAH retained; no BLE/revocation or bond operations"
+  },
+  "retainedFailures": [
+    "First playlist build nullable-property smart cast; fixed",
+    "Direct unexported service start denied; own Activity startup succeeded",
+    "UIAutomator null roots and incomplete font2.0 target capture",
+    "Display swipe briefly disabled Apple optional mode; restored with matching preference digest"
+  ],
+  "notVerified": [
+    "Final-build audio",
+    "Physical phone BLE",
+    "Long/duplicate-file playlists",
+    "SD/rescan/full formats",
+    "Signing/background/reliability/handoff/Watch"
+  ]
+}
