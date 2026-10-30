@@ -32,7 +32,8 @@ Checkpoint: <verified pushed commit>
 
 Before changing code, read AGENTS.md, CODEX_GOAL_PROMPT.txt,
 docs/development-handoff.md, docs/device-switch-handoff.md,
-docs/implementation-plan.md and docs/status.md in the current checkout.
+docs/implementation-plan.md, docs/status.md and docs/ui-branding-plan.md
+in the current checkout.
 Inspect the branch, local changes, remote checkpoint, host OS/toolchain,
 signing access and connected hardware. Preserve any newer work and adapt
 the platform continuation guide to this environment; do not assume the old

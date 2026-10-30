@@ -1,4 +1,4 @@
-param([string]$Serial='d', [string]$Adb='', [string]$Python='')
+param([string]$Serial='d', [string]$Adb='', [string]$Python='', [string]$ControllerSerial='')
 $ErrorActionPreference='Stop'
 $repo=Split-Path $PSScriptRoot -Parent
 Set-Location $repo
@@ -20,6 +20,13 @@ if ($LASTEXITCODE) { throw 'Bundle creation failed' }
 Copy-Item docs/device-continuation.md "$out/START_HERE.md"
 Copy-Item scripts/verify-device-checkpoint.py "$out/verify-checkpoint.py"
 $packages=@()
+function Copy-VerifiedInstalledBackup([string]$Role, [string]$Destination) {
+    $record=@($previous.preservedInstalledPackages | Where-Object { $_.role -eq $Role })
+    if ($record.Count -ne 1) { throw "No recorded installed backup for $Role; do not substitute older bytes" }
+    $backup=Join-Path $repo ('artifacts/'+$record[0].file)
+    if ((Get-FileHash $backup).Hash.ToLowerInvariant() -ne $record[0].sha256) { throw "Installed backup hash mismatch for $Role" }
+    Copy-Item -LiteralPath $backup -Destination $Destination
+}
 if (!$Adb) { $Adb=(Get-Command adb -ErrorAction SilentlyContinue).Source }
 $online=$false
 if ($Adb) { $model=((& $Adb -s $Serial shell getprop ro.product.model 2>$null) -join '').Trim(); $online=$LASTEXITCODE -eq 0 -and $model -eq 'DX340' }
@@ -32,11 +39,27 @@ foreach ($role in @(@('installed-companion','org.dx340.remote.host'),@('installe
         if ($LASTEXITCODE) { throw 'Installed APK preservation failed' }
         $scope='Fresh installed DX340 bytes; earlier listening/rendering reports keep their recorded source/package scope'
     } else {
-        $saved=if ($role[1] -eq 'org.dx340.remote.host') { 'verified-installed-companion-04846d60.apk' } else { 'verified-installed-phone-23c536e7.apk' }
-        Copy-Item (Join-Path $repo "artifacts/resumed-096601a/$saved") "$out/$file"
+        Copy-VerifiedInstalledBackup $role[0] "$out/$file"
         $scope='Previously verified installed backup; DX340 unavailable during export, current device state not reverified'
     }
     $packages += [ordered]@{role=$role[0];file=$file;sha256=(Get-FileHash "$out/$file").Hash.ToLowerInvariant();scope=$scope}
+}
+if ($ControllerSerial) {
+    if (!$Adb) { throw 'ADB is required to preserve a separate controller phone' }
+    $model=((& $Adb -s $ControllerSerial shell getprop ro.product.model 2>$null) -join '').Trim()
+    if ($LASTEXITCODE -ne 0 -or !$model) {
+        $file='installed-android-controller-phone.apk'
+        Copy-VerifiedInstalledBackup 'installed-android-controller-phone' "$out/$file"
+        $packages += [ordered]@{role='installed-android-controller-phone';file=$file;sha256=(Get-FileHash "$out/$file").Hash.ToLowerInvariant();scope='Previously pulled and hash-verified separate controller backup; device unavailable at export. Current device state not reverified. No bond, private app data or signing key exported.'}
+    } else {
+    if ($model -eq 'DX340') { throw 'Expected a separate controller phone' }
+    $path=((& $Adb -s $ControllerSerial shell pm path org.dx340.remote.controller | Select-Object -First 1) -replace '^package:','').Trim()
+    if ($path -notmatch '^/data/app/[A-Za-z0-9_~+./=-]+/base\.apk$') { throw 'Unexpected controller APK path' }
+    $file='installed-android-controller-phone.apk'
+    & $Adb -s $ControllerSerial pull $path "$out/$file" > "$out/controller-phone-pull.txt"
+    if ($LASTEXITCODE) { throw 'Controller phone APK preservation failed' }
+    $packages += [ordered]@{role='installed-android-controller-phone';file=$file;sha256=(Get-FileHash "$out/$file").Hash.ToLowerInvariant();deviceModel=$model;scope='Fresh separate Android controller bytes; inspect the dated phone report for source/build and physical verification scope. No OS bond, private app data or signing key exported.'}
+    }
 }
 foreach ($file in @('dx340-companion-0.1.0-debug.apk','dx340-phone-0.2.0-development.apk')) {
     $record=@($previous.candidatePackages | Where-Object { $_.file -eq $file })

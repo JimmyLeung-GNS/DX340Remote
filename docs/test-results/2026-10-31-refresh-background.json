@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-31",
+  "scope": "Physical Pixel UI checks plus incomplete USB-powered background observations; no new audio confirmation",
+  "applicationSource": "5b8175d0f33b88f105eb81591dcd9df3c824b98c",
+  "companionSha256": "58314b84cd45447fd866c1ea9a48922c39edd9584f14100c47cd3cb8c91ee97e",
+  "pixelApkSha256": "2dce4f99b502d31529dc944e504f441313ae46e05f7903c6ef40d673768150e0",
+  "controller": "Pixel 9a Android16/API36 CP1A.260405.005",
+  "software": {
+    "aggregateJvmTests": 160,
+    "flutterTests": 46,
+    "swiftTests": 10,
+    "sharedTransitionCases": 12,
+    "androidBuildLint": "PASS",
+    "nativeMacRun": 41087921312,
+    "sharedMacRun": 41087921694,
+    "bothMacRuns": "SUCCESS; simulator only"
+  },
+  "physicalUI": {
+    "savedGrantConnection": true,
+    "nativeAlbumInvalidationMessage": true,
+    "queueInvalidationMessage": true,
+    "queueRecovery": "1-23 of23",
+    "storageBoundary": "SYNTHETIC, not SD",
+    "assistedMessage": "NOT TESTED; Mango optional mode observed off"
+  },
+  "firstBackgroundAttempt": {
+    "result": "INCOMPLETE; paused precondition failed",
+    "elapsedSeconds": 347.428,
+    "samples": 12,
+    "unexpectedMangoPlaying": true,
+    "cause": "Unconfirmed; operator unsure",
+    "recovery": "One local desired-state Pause; both sources then paused37"
+  },
+  "repeatBackgroundAttempt": {
+    "kind": "physical-USB-powered-Android-background-observation-no-BLE-commands",
+    "requestedSeconds": 1800,
+    "elapsedSeconds": 1779.414,
+    "samples": 56,
+    "observationComplete": false,
+    "failure": "Device observation failed (shell); do not restart the experiment solely from a monitoring failure",
+    "postReturnBluetoothRead": "NOT TESTED; both devices absent from ADB at handoff",
+    "limits": "No audio, unlocked/unplugged reliability, range, battery, radio continuity or full Gate A/T05 pass follows from service/process observations alone",
+    "rawEvidence": "Ignored artifacts/android-background-hold/20261031-003237-8ce35/",
+    "lastSuccessfulSampleSeconds": 1749.339,
+    "lastSuccessfulSampleAt": "2026-10-31T01:01:46.8720338+08:00",
+    "all56SamplesProcessesServicesPausedOutputUnchanged": true,
+    "lastObservedVolume": 37,
+    "lastObservedRoute": "headset(4)",
+    "result": "INCOMPLETE; monitoring read failed before1800seconds"
+  },
+  "handoff": {
+    "devicesAvailable": false,
+    "finalDisconnect": "NOT VERIFIED; do not infer USB removal disconnected BLE",
+    "wifiRestoration": "NOT PERFORMED; last Pixel wifi0, original1",
+    "lastNetworkSettings": [
+      0,
+      1,
+      1
+    ],
+    "lastSourceState": "both paused37/proof false; not reverified after device loss",
+    "lastModes": {
+      "MangoUI": false,
+      "AppleUI": true
+    },
+    "modeChangeCause": "Unconfirmed; preserve current choice",
+    "grants": "Pixel/JIMMYAH retained; no revoke",
+    "resumeFirst": "Inspect actual devices; disconnect Pixel normally and restore original Wi-Fi if desired before testing"
+  },
+  "pendingDesignTask": "UX-01 docs/ui-branding-plan.md; no design implementation started",
+  "fullGoal": "ACTIVE/incomplete"
+}
