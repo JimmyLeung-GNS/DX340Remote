@@ -1,11 +1,12 @@
 """Synthetic diagnostic regressions; not DX340, radio, image decoding or audio evidence."""
 import base64
+import asyncio
 import copy
 import hashlib
 import unittest
 
 from test_windows_ble_protocol import Peer
-from windows_ble_protocol import run_read_only_checks
+from windows_ble_protocol import run_read_only_checks, frames
 from windows_artwork_diagnostic import MAX_ARTWORK, run_artwork_checks, verify_artwork
 
 
@@ -75,6 +76,29 @@ class ArtworkSessionTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(all(r['sourceEpoch'] == 'source-epoch' for r in requests))
         self.assertEqual({r['type'] for r in peer.requests}, {'HELLO', 'AUTHORIZE', 'GET_STATE', 'GET_ARTWORK'})
         self.assertNotIn('雪', str(result))
+        traces = peer.session.exchange_traces
+        self.assertNotIn('synthetic', str(traces))
+        self.assertNotIn('artworkKey', str(traces))
+        self.assertTrue(all(t['elapsedMs'] >= t.get('writesCompletedMs', 0) for t in traces))
+        self.assertTrue(all('operation' in t and 'framesReceived' in t for t in traces))
+
+    async def test_timeout_keeps_bounded_fragment_progress_without_image_payload(self):
+        peer, _ = self.peer()
+        await run_read_only_checks(peer.session, 'authorized-state')
+        peer.session.timeout = 0.02
+        def handler(request):
+            peer.session.feed(frames(b'{"private":"' + b'x' * 100 + b'"}', 20, 99)[0])
+            return None
+        peer.handler = handler
+        with self.assertRaises(asyncio.TimeoutError):
+            await peer.session.exchange('GET_STATE')
+        trace = peer.session.exchange_traces[-1]
+        self.assertEqual(trace['outcome'], 'TimeoutError')
+        self.assertEqual(trace['lastFrame']['index'], 0)
+        self.assertGreater(trace['lastFrame']['count'], 1)
+        self.assertEqual(trace['partialMessages'][0]['receivedFrames'], 1)
+        self.assertNotIn('private', str(trace))
+        self.assertTrue(peer.session.closed)
 
     async def test_opt_in_authorization_and_schema_gates_before_writes(self):
         peer, key = self.peer()

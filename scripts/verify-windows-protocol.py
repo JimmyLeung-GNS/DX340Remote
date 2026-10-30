@@ -103,6 +103,9 @@ async def verify(args, report):
         if args.mode == 'authorized-queue':
             report['queueSummary'] = await run_queue_checks(session, report['checks'])
         if args.mode == 'authorized-artwork':
+            # Diagnostic budget only: bulk artwork is not a control-latency pass.
+            # Product framing/reassembly/indication deadlines are not changed.
+            session.timeout = 45
             report['artworkSummary'] = await run_artwork_checks(session, report['checks'])
         if args.mode == 'await-disconnect':
             report['phase'] = 'await-operator-disconnect'
@@ -125,6 +128,7 @@ async def verify(args, report):
             report['framesWritten'] = session.frames_written
             report['framesReceived'] = session.frames_received
             report['unsolicitedStatesIgnored'] = session.unsolicited_states
+            report['exchangeTraces'] = session.exchange_traces
             session.close('DIAGNOSTIC_FINISHED')
         try:
             await asyncio.wait_for(client.disconnect(), 5)
@@ -147,7 +151,7 @@ async def main(args):
               'scope': 'PC development diagnostic; not physical phone or audio acceptance'}
     try:
         hold = args.operator_wait if args.mode == 'await-disconnect' else args.approval_wait if args.mode == 'await-approval' else 0
-        await asyncio.wait_for(verify(args, report), (180 if args.mode == 'authorized-queue' else 90) + hold)
+        await asyncio.wait_for(verify(args, report), (180 if args.mode in {'authorized-queue', 'authorized-artwork'} else 90) + hold)
     except Exception as error:
         # Record fixed local codes/types only; OS messages may contain device identities.
         report['allChecksPassed'] = False

@@ -139,6 +139,8 @@ class ReadOnlySession:
         self.frames_written = 0
         self.frames_received = 0
         self.last_reply_bytes = 0
+        self.exchange_traces = []
+        self.active_trace = None
 
     def close(self, code='DISCONNECTED'):
         self.closed = True
@@ -151,6 +153,11 @@ class ReadOnlySession:
         if self.closed:
             return
         self.frames_received += 1
+        if self.active_trace is not None and 'firstAnyFrameMs' not in self.active_trace:
+            self.active_trace['firstAnyFrameMs'] = round((time.monotonic() - self.active_trace_start) * 1000, 3)
+        if self.active_trace is not None and 9 <= len(frame) <= 512:
+            _, _, _, index, count = struct.unpack('>BBHHH', frame[:8])
+            self.active_trace['lastFrame'] = {'bytes': len(frame), 'index': index, 'count': count}
         try:
             data = self.assembler.accept(frame)
             if data is None:
@@ -225,6 +232,10 @@ class ReadOnlySession:
         self.pending = asyncio.get_running_loop().create_future()
         self.request_id = request_id
         self.operation = operation
+        trace = {'operation': operation}
+        self.active_trace = trace
+        self.active_trace_start = time.monotonic()
+        written_before, received_before = self.frames_written, self.frames_received
         try:
             async with asyncio.timeout(self.timeout):
                 outgoing = frames(data, 20, self.serial)
@@ -234,16 +245,26 @@ class ReadOnlySession:
                         raise ValueError('SESSION_UNAVAILABLE')
                     await self.write(frame)
                     self.frames_written += 1
+                trace['writesCompletedMs'] = round((time.monotonic() - self.active_trace_start) * 1000, 3)
                 reply = await self.pending
+                trace['outcome'] = reply['type']
             if operation == 'HELLO':
                 if reply['type'] != 'HELLO' or type(reply['data'].get('maxMessage')) is not int or reply['data']['maxMessage'] != MAX_MESSAGE or set(reply['data']) - {'maxMessage', 'pairingSecurity'}:
                     raise ValueError('UNEXPECTED_HELLO_OR_METADATA')
                 self.host_epoch = reply['hostEpoch']
             return reply
-        except BaseException:
+        except BaseException as error:
+            trace['outcome'] = type(error).__name__
+            trace['partialMessages'] = [{'expectedFrames': p[1], 'receivedFrames': p[2], 'receivedBytes': len(p[3])}
+                                        for p in self.assembler.partials.values()]
             self.close('REQUEST_FAILED')
             raise
         finally:
+            trace.update(elapsedMs=round((time.monotonic() - self.active_trace_start) * 1000, 3),
+                         framesWritten=self.frames_written - written_before, framesReceived=self.frames_received - received_before)
+            if len(self.exchange_traces) < 32:
+                self.exchange_traces.append(trace)
+            self.active_trace = None
             if not self.pending.done():
                 self.pending.cancel()
             elif not self.pending.cancelled():
