@@ -14,10 +14,6 @@
     "artifacts/dx340-phone-0.2.0-development.apk": "1a592c56b87b68aa0861ce0e955bc66c41ee8e13938a942d0180ee29a75b2e9b",
     "artifacts/dx340-companion-0.1.0-debug.apk": "491dbbffabda8f7a20d64a2f591caa486427e036ba9e3821d831ccf6eff5934a"
   },
-  "physicalPackagesUnchanged": {
-    "phone": "4449ee74a3545f29e5cb261aeb4f60159be23521ffc145eaf0f4a09bf5b6db84",
-    "companion": "b0e1f582cfc1f1edfdf5ca98630c359ba8a3dad8f0a664e4a849332119d57301"
-  },
   "exports": {
     "manifest": "assets/icons/exports.json",
     "allHashes": "PASS",
@@ -50,8 +46,8 @@
     "iPhone catalog/native-reference build",
     "actual iPhone launcher",
     "actual Android monochrome/theme launcher",
-    "physical launcher",
-    "Apple layered Icon Composer"
+    "Apple layered Icon Composer",
+    "whole-product physical acceptance"
   ],
   "captures": {
     "android-all-apps.png": {
@@ -70,5 +66,54 @@
         500
       ]
     }
+  },
+  "physicalPackagesUnchangedAtInitialEmulatorReview": {
+    "phone": "4449ee74a3545f29e5cb261aeb4f60159be23521ffc145eaf0f4a09bf5b6db84",
+    "companion": "b0e1f582cfc1f1edfdf5ca98630c359ba8a3dad8f0a664e4a849332119d57301"
+  },
+  "physicalDeployment": {
+    "status": "VERIFIED in-place original-signer installs and re-pulled byte identity",
+    "phoneSha256": "1a592c56b87b68aa0861ce0e955bc66c41ee8e13938a942d0180ee29a75b2e9b",
+    "hostSha256": "491dbbffabda8f7a20d64a2f591caa486427e036ba9e3821d831ccf6eff5934a",
+    "phone": "Pixel9a Android16 CP1A.260405.005 /0.2.0 code2",
+    "host": "DX340 Android13 eng.iBasso.20260812.181952 /0.1.0 code1",
+    "savedGrantConnectReadDisconnect": "PASS",
+    "foregroundClearedAfterDisconnect": true,
+    "allFourHostPreferencesPreserved": true,
+    "bothBrowsingModesOnAndBound": true,
+    "controllerGrantsPreserved": true,
+    "sourceStates": [
+      2,
+      2
+    ],
+    "outputVolume": 37,
+    "outputRoute": "headset(4)",
+    "volumeProof": false,
+    "radiosFontsThemesPreserved": true,
+    "newPlaybackOrVolumeCommands": 0,
+    "newAudioAcceptance": false,
+    "launcherVisualScope": "parent observed physical installed icons; no new peer review",
+    "captures": {
+      "icon-pixel-launcher.png": {
+        "sha256": "a87982abab6f451d798397716b0e094df30f989ae0c32e9c8a41ff1b2ff3a495",
+        "pixels": [
+          1080,
+          2424
+        ]
+      },
+      "icon-dx-launcher.png": {
+        "sha256": "15f3ad18676ec76e9e2c95213c65128a04483e253802761923eff86d29cf832c",
+        "pixels": [
+          1080,
+          2160
+        ]
+      }
+    }
+  },
+  "newAppleRuns": {
+    "source": "2feaa0aac2413cff26847a0c5d187cac47dc9842",
+    "shared": 41141154633,
+    "native": 41141154690,
+    "lastObserved": "IN PROGRESS; icon catalog builds unconfirmed"
   }
 }

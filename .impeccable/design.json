@@ -102,6 +102,22 @@
       "third_party/FLUTTER_LICENSE"
     ],
     "verification": {
+      "physicalIconPackageContinuation20261031": {
+        "localSource": "7aba520",
+        "pushedCheckpoint": "2feaa0aac2413cff26847a0c5d187cac47dc9842",
+        "report": "docs/test-results/2026-10-31-icon-family.md",
+        "phoneSha256": "1a592c56b87b68aa0861ce0e955bc66c41ee8e13938a942d0180ee29a75b2e9b",
+        "companionSha256": "491dbbffabda8f7a20d64a2f591caa486427e036ba9e3821d831ccf6eff5934a",
+        "installation": "Original signers preserved; both adb install -r upgrades re-pulled byte-identical.",
+        "observedCaptures": [
+          "artifacts/connection-flow-20261031/icon-pixel-launcher.png",
+          "artifacts/connection-flow-20261031/icon-dx-launcher.png"
+        ],
+        "appearanceScope": "Physically observed launcher evidence only; no new peer-review or whole-product SHIP. Earlier emulator launcher/software-preview SHIP scope unchanged. Older separate DX340 Remote Flutter-mark app on DX340 untouched/not uninstalled and excluded from icon acceptance.",
+        "functionalScope": "Saved-grant Connect/state read/normal Disconnect succeeded. Phone ends without foreground state/startRequestedfalse. Four host preferences, both sources paused37/proof false, radios/fonts, optional modes ON and healthy bindings preserved. No new audio proof; older4449ee74…/b0e1f582… physical/audio records keep their scope.",
+        "pendingApple": "Shared41141154633/native41141154690 IN PROGRESS at pushed2feaa0aac2413cff26847a0c5d187cac47dc9842; icon-catalog builds not yet verified.",
+        "remaining": "Prior c8ff4b7 F1-only SHIP closed without a new review. Fresh30-minute readiness pending/no active observer. Wider physical Apple/audio/reliability/accessibility/signing/Watch/full-system gates remain open."
+      },
       "setupF1Confirmation41138111275": {
         "sourceRevision": "c8ff4b7b9fd8472e09bf13707ba61068cf1ab56a",
         "reviewReport": "artifacts/connection-flow-20261031/setup-contrast-verdict.md",
@@ -122,7 +138,7 @@
           "limit": "Largest dark frame is initial viewport only. No new scroll/Cancel, screen-reader, physical Apple/BLE/audio, whole-UI or full-project acceptance. Original15-frame FIX review/archive and all earlier Android/icon scopes preserved."
         },
         "software": "67Flutter tests/analyze, ordinary/fixture builds/captures and final ordinary restoration pass;12 capture-matcher regressions pass.",
-        "unchanged": "Physical Pixel4449ee74…/Companionb0e1f582… unchanged. Icon review separate; icon Apple CI not yet started."
+        "checkpointScope": "At this F1-only review, physical Pixel4449ee74…/Companionb0e1f582… were unchanged and icon Apple CI had not started. Later physical upgrades/current CI are recorded in physicalIconPackageContinuation20261031; this F1 verdict remains closed."
       },
       "iconFamily20261031": {
         "report": "docs/test-results/2026-10-31-icon-family.md",
@@ -138,9 +154,9 @@
         },
         "candidatePhoneSha256": "1a592c56b87b68aa0861ce0e955bc66c41ee8e13938a942d0180ee29a75b2e9b",
         "candidateCompanionSha256": "491dbbffabda8f7a20d64a2f591caa486427e036ba9e3821d831ccf6eff5934a",
-        "packageScope": "Original signers verified; candidates built/linted and emulator-installed only. Physical Pixel4449ee74…/Companionb0e1f582… unchanged; previous physical/audio evidence keeps its binary scope.",
+        "packageScope": "Original icon-review checkpoint: original signers verified, candidates built/linted and emulator-installed only, physical4449ee74…/b0e1f582… unchanged then. Later physical upgrades are separate under physicalIconPackageContinuation20261031; earlier physical/audio evidence keeps its binary scope.",
         "assetChecks": "Recorded export SHA256s, opaque RGB/catalog dimensions and PNG origin/geometry/generator metadata verified. Android/native/shared asset builds/lint pass; runtime code unchanged and prior67Flutter/166JVM tests not rerun for assets.",
-        "pending": "iOS catalog/native-reference builds, actual iOS/Android monochrome/physical launcher renders, broader UX-01/signing/Watch gates. Separate shared41138111275 later succeeded with c8ff4b7 F1-only contrast acceptance; icon Apple CI not yet started.",
+        "pending": "iOS catalog/native-reference builds and actual iOS/Android monochrome rendering, broader UX-01/signing/Watch gates. Physical launcher observations are separate, without a new review. Shared41141154633/native41141154690 icon CI IN PROGRESS at2feaa0a. Earlier c8ff4b7 F1-only SHIP stays closed.",
         "direction": "Original deterministic icon-family extension, native system screen world retained. No third-party or AI-generated icon artwork."
       },
       "setupRecoveryValidationC8ff4b7": {

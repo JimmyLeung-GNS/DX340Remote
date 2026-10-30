@@ -33,3 +33,15 @@ The bounded finish verdict is **SHIP** for the supplied Android circle-launcher 
 The separate30-minute physical hold is not running; a fresh owner-availability answer remains pending after the aborted foreground-return attempt. Do not use the old agreement or an emulator launcher check as a background-connection pass.
 
 Platform references: [Android adaptive icon layers and safe zone](https://developer.android.com/develop/ui/compose/system/icon_design_adaptive), [Apple asset-catalog app icons](https://developer.apple.com/documentation/xcode/configuring-your-app-icon).
+
+## Subsequent physical deployment and read check
+
+The initial emulator-only candidate distinction above is historical. Both original-signer packages were subsequently installed in place and re-pulled byte-identical: Pixel **1a592c56…**, Companion **491dbbff…**. Older4449ee74…/b0e1f582… backups and evidence remain preserved; audio proof is not transferred to these new packages.
+
+Companion was explicitly enabled through its visible normal-control button after upgrade. The Pixel retained its approved player and completed Connect, protected saved-grant authorization, Open Player/Refresh player and normal Disconnect. Foreground state is removed after Disconnect (`isForeground=true` absent, `startRequested=false` while bound). A final fresh Setup tree shows Connect to DX340, not a connected state. One Home action overlapped the last UI snapshot in the automation sequence; the service assertion and separate final Setup read establish the disconnected outcome, rather than relying on that launcher snapshot as a Setup capture. No replay/playback/volume command was sent.
+
+All4 normalized host preference files equal preflight, including controller grants, both optional browsing modes and source verification. Both sources remain paused2 at output37/headset(4), proof disabled. Radios, fonts/themes unchanged. Host foreground and both actual source Accessibility bindings are healthy. Existing Pixel/JIMMYAH approvals and OS bonds were preserved. Device/source versions remain as in the adjacent JSON and prior recovery report.
+
+Parent visual inspection confirms actual installed launcher icons in `artifacts/connection-flow-20261031/icon-pixel-launcher.png` and `icon-dx-launcher.png`; their hashes/dimensions are recorded in the adjacent JSON. This is physical appearance observation, not a new finish-review verdict. An older separate DX340 Remote launcher entry with a Flutter mark remains untouched/excluded; the controlled DX340 install here is the Companion. The earlier emulator/icon SHIP retains its exact scope.
+
+New hosted jobs at2feaa0aac2413cff26847a0c5d187cac47dc9842 are shared41141154633 and native41141154690, both last observed IN PROGRESS. Their icon catalog builds are not yet passed. The separate c8ff4b7 Setup F1 confirmation remains SUCCESS/SHIP. No observer is running and no30-minute background pass follows from this short foreground read/reconnect/Disconnect check.
