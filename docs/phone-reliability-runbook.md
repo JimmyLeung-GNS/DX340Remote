@@ -1,5 +1,7 @@
 # Phone connection acceptance
 
+Storage changes: [current implementation/test report](test-results/2026-10-30-storage-invalidation.md) distinguishes simulated volume-model tests, source-adapter synthetic boundaries and real Pixel BLE row clearing from still-unexecuted SD removal/rescan. Run scripts/verify-storage-invalidation.ps1 only with both sessions paused and both optional browsing services ready; it changes browse epochs, not storage/files/playback/grants. Actual owner-assisted safe-eject/remove/reinsert steps remain separate. Pixel111…/host583… clears stale rows but retains old loaded-status copy; explicit refresh recovers. Do not call that a complete presentation review.
+
 Explicit approved-controller handoff has a separate [two-controller acceptance sequence](controller-handoff-runbook.md). It is beta until both physical phones pass; source-local20-track Mango/Apple evidence does not establish phone or ownership-transfer behavior. Updated Setup offers **Take control on this phone** only after a busy response for an already approved identity. Enroll new controllers separately with all existing transports disconnected.
 
 Status: PARTIAL on Pixel9a/Android16; [first phone report](test-results/2026-10-30-pixel-first-bluetooth.md). One native Mango audible selection/reconnect/Pause and read-only browsing do not pass the full sequence. Physical iPhone remains NOT TESTED. Use this with compatibility-matrix.md/T01–T18; keep Android and iPhone results separate.

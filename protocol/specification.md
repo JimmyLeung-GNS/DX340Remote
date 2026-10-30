@@ -1,5 +1,7 @@
 # DX340 BLE protocol v1 — diagnostic beta
 
+Storage boundaries reuse existing v1 sourceEpoch/STALE_LIBRARY behavior. On a public storage-volume event the companion retires both source epochs before cancelling native/assisted browse requests and clearing native item proofs, revision baselines, UI tokens/downloaded context and volume proof; the changed epochs also retire queue revisions. Controllers must remove old library/queue actions when the source epoch changes and explicitly fetch fresh data; no playback is replayed. Storage observation failure disables arbitrary library/queue selection and reports why, while transport controls remain separately capability-gated. This changes no wire fields. [Current scoped tests](../docs/test-results/2026-10-30-storage-invalidation.md) include synthetic boundaries over real Pixel BLE; actual SD event delivery is not yet verified.
+
 No audio is sent over this service. All JSON is UTF-8. Commands operate installed DX340 source apps through public interfaces. Service UUID: `e7e01000-4a76-4b53-9c8f-c7a12b00d340`. INFO ends `1001`, RX ends `1002`, TX ends `1003` with the same suffix. Full constants live in Kotlin Wire and Swift Wire.
 
 ## GATT and authorization

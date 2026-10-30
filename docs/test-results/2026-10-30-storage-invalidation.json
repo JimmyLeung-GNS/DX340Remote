@@ -1,0 +1,85 @@
+{
+  "kind": "actual-source-adapters-with-synthetic-storage-boundaries-no-SD-event-no-BLE-no-playback",
+  "passed": true,
+  "nativeProofAndPageRejected": true,
+  "bothUiFramesRetired": true,
+  "heldUiItemsRejected": true,
+  "oldQueueRevisionRejected": true,
+  "freshNativeAndAssistedRecovery": true,
+  "pendingBrowseCases": [
+    "mango-ui",
+    "apple-ui",
+    "native"
+  ],
+  "bothSourcesPaused": true,
+  "volume": 37,
+  "volumeVerified": false,
+  "selectedSource": "com.ibasso.music",
+  "requests": 35,
+  "physicalSdRemoval": "NOT TESTED",
+  "sourceCommit": "cf3bccc11567c44371d044701a0043b700d5a1d6",
+  "companionSha256": "58314b84cd45447fd866c1ea9a48922c39edd9584f14100c47cd3cb8c91ee97e",
+  "previousCompanionSha256": "6c390636fa8fb64c86f1153d93b0d459f4d623b3eea725bd97848fad7cfeb85a",
+  "controller": {
+    "model": "Google Pixel 9a",
+    "android": "16/API36",
+    "build": "CP1A.260405.005",
+    "apkSha256": "111a29f854a8038613c3818ace5948020f8516842b7b57ba5df22e6baeaa0c6d",
+    "appSource": "587ea785b616b91151a6af3abe2fa851805013e0",
+    "appUnchanged": true
+  },
+  "monitor": {
+    "status": "ACTIVE",
+    "retainedVolumes": 2,
+    "actualCallbackEvents": 0,
+    "libraryInvalidations": 6,
+    "syntheticSourceOnlyBoundaries": 4,
+    "syntheticPhoneObservedBoundaries": 2
+  },
+  "software": {
+    "aggregateJvmTests": 159,
+    "newTests": 8,
+    "failures": 0,
+    "errors": 0,
+    "hostBuildAndLint": "PASS",
+    "simulatedVolumeEvents": true
+  },
+  "PixelBluetooth": {
+    "savedGrantReconnect": true,
+    "newOwnerApprovalNeeded": false,
+    "nativeAlbumRowsRemovedAfterSyntheticBoundary": true,
+    "freshRootRecovered": true,
+    "queueBefore": "1-23 of23",
+    "queueClearedAfterSyntheticBoundary": true,
+    "queueRefreshRecovered": "1-23 of23",
+    "playbackCommands": 0,
+    "volumeCommands": 0,
+    "actualSdEvent": false,
+    "finalDisconnected": true,
+    "wifiRestored": 1,
+    "strictT01": "NOT VERIFIED"
+  },
+  "preservation": {
+    "companionPreferenceDigestsUnchanged": 4,
+    "PixelAndPCGrantsRetained": true,
+    "bothSourcesPaused": true,
+    "volume": 37,
+    "volumeVerified": false,
+    "MangoSelected": true,
+    "bothAccessibilityServicesBound": true,
+    "newAudioConfirmation": false
+  },
+  "remaining": [
+    "actual SD removal/reinsertion/callback delivery",
+    "source rescan",
+    "loaded-status refresh guidance",
+    "full phone source/format/audio/control matrix",
+    "background/lock/range/latency",
+    "physical signed iPhone",
+    "volume/output",
+    "battery/walking",
+    "two-controller handoff",
+    "Watch"
+  ],
+  "fullGoal": "ACTIVE/incomplete"
+}
