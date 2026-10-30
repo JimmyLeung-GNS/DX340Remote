@@ -38,7 +38,7 @@ class MangoAccessibilityService : AccessibilityService() {
     private var lastReadiness = "not-bound"
     private var navigationTrace = JSONObject()
     private data class Tree(val window: Int, val nodes: List<UiNode>)
-    private data class Action(val path: String, val kind: String, val title: String = "", val storage: String = "")
+    private data class Action(val path: String, val kind: String, val title: String = "", val storage: String = "", val expiresAt: Long = Long.MAX_VALUE)
     private data class Frame(val revision: String, val window: Int, val parsed: ParsedMangoUi?, val actions: Map<String, Action>, val page: Int = 0)
     override fun onServiceConnected() { instance = this; notifyHost(true) }
     override fun onUnbind(intent: Intent?): Boolean { instance = null; cancelBrowse?.invoke("UI_PERMISSION_REQUIRED"); main.removeCallbacksAndMessages(null); last = null; notifyHost(true); return super.onUnbind(intent) }
@@ -144,6 +144,7 @@ class MangoAccessibilityService : AccessibilityService() {
         return current to action
     }
     private fun perform(current: Tree, action: Action, allowed: () -> Boolean) {
+        require(android.os.SystemClock.elapsedRealtime() <= action.expiresAt) { "UI_ACTION_TIMEOUT" }
         require(allowed()) { "AUTHORIZATION_DENIED" }; readiness()?.let { error(it) }
         requireUnobscured(current.window)
         val expected = current.nodes.firstOrNull { it.path == action.path } ?: error("STALE_LIBRARY")
@@ -165,6 +166,7 @@ class MangoAccessibilityService : AccessibilityService() {
         }
         require(allowed()) { "AUTHORIZATION_DENIED" }
         requireUnobscured(current.window)
+        require(android.os.SystemClock.elapsedRealtime() <= action.expiresAt) { "UI_ACTION_TIMEOUT" }
         check(live.performAction(if (action.kind == "scroll") AccessibilityNodeInfo.ACTION_SCROLL_FORWARD else AccessibilityNodeInfo.ACTION_CLICK)) { "UI_ACTION_FAILED" }
     }
     fun validatePlayable(item: String, revision: String): String? = try { validate(item, revision, "play"); null } catch (e: Exception) { e.message ?: "UI_UNEXPECTED_SCREEN" }
@@ -195,7 +197,8 @@ class MangoAccessibilityService : AccessibilityService() {
                     val matches = fresh.actions.filterValues { it.kind == "play" && it.title == original.title }
                     require(matches.size == 1) { "STALE_LIBRARY" }
                     val (tree, action) = validate(matches.keys.single(), fresh.revision, "play")
-                    done(tree, action, null)
+                    require(guarded()) { "AUTHORIZATION_DENIED" }
+                    done(tree, action.copy(expiresAt = deadline), null)
                 } catch (e: Exception) { fail(e.message ?: "UI_UNEXPECTED_SCREEN") }
             }
             if (parsed.back == null) {
