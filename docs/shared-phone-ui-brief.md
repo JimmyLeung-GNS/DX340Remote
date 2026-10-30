@@ -16,6 +16,10 @@ Scope: Flutter phone migration; Operate mode. User confirmed native system appea
 
 **FINISH:** unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 
+## Icon family extension — 31 October
+
+Retain the incumbent slate `#263238`, white device silhouette and two signal arcs. Distinguish Remote with its narrow controller body/buttons and Companion with a wider player/play symbol. App names and identifiers stay unchanged. Author editable vector geometry; export Android adaptive layers with monochrome support and opaque, square iOS assets. Native masks supply launcher corners. The native phone references share the corresponding Remote artwork. Do not claim a universal DAP brand or Apple layered-icon treatment from these flattened assets. Judge role recognition at launcher size and clipping under circle/rounded masks; asset previews and actual OS renders must be labeled separately.
+
 ## Quality bar
 
 Clear current/disabled/recovery states; readable normal/dark/large-text screens; at least48 logical-pixel action targets; bottom destinations remain usable; long titles wrap; stale cache never enables playback. Review scope must identify screenshots versus tap tests versus synthetic tests. Simulator/launch/UI review cannot establish pairing, BLE, source audio, screen-reader or walking/battery acceptance. iOS template launcher artwork remains provisional and separately documented in phone/ASSET_ORIGINS.md.

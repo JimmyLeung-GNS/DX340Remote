@@ -1,0 +1,14 @@
+# Icon export hashes are portable across Windows/macOS checkouts.
+assets/icons/** text eol=lf
+scripts/generate-app-icons.py text eol=lf
+android/host-app/src/main/res/drawable/ic_dx340.xml text eol=lf
+android/host-app/src/main/res/drawable/ic_launcher_*.xml text eol=lf
+android/host-app/src/main/res/mipmap-anydpi-v*/ic_launcher.xml text eol=lf
+android/remote-app/src/main/res/drawable/ic_dx340.xml text eol=lf
+android/remote-app/src/main/res/drawable/ic_launcher_*.xml text eol=lf
+android/remote-app/src/main/res/mipmap-anydpi-v*/ic_launcher.xml text eol=lf
+phone/android/app/src/main/res/drawable/ic_dx340.xml text eol=lf
+phone/android/app/src/main/res/drawable/ic_launcher_*.xml text eol=lf
+phone/android/app/src/main/res/mipmap-anydpi-v*/ic_launcher.xml text eol=lf
+apple/DXRemote/Assets.xcassets/**/Contents.json text eol=lf
+*.png binary

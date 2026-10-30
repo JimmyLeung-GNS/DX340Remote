@@ -4,7 +4,7 @@
         android:name="${applicationName}"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/no_backups"
-        android:icon="@drawable/ic_dx340">
+        android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
             android:exported="true"
