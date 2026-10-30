@@ -3,6 +3,14 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class LibraryIndexTest {
+    @Test fun storageBoundaryAllowsFreshPageBaselineWhileHeldSelectionStillRejectsChangedContent() {
+        val guard = RevisionGuard()
+        assertFalse(guard.update("mango:album:0", mapOf("1" to "old-file")))
+        guard.clear()
+        assertFalse(guard.update("mango:album:0", mapOf("1" to "replacement-file")))
+        assertThrows(IllegalArgumentException::class.java) { guard.validateSelection("old-file", "replacement-file") }
+        assertTrue(guard.update("mango:album:0", mapOf("1" to "another-file")))
+    }
     @Test fun positionalSourceIdsCannotSilentlySelectChangedItems() {
         val guard = RevisionGuard()
         assertFalse(guard.update("mango:root:0", mapOf("5" to "song-A")))

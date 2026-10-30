@@ -12,4 +12,5 @@ class RevisionGuard {
         require(current != null) { "EXPIRED_ITEM" }
         require(original == current) { "STALE_LIBRARY" }
     }
+    fun clear() { snapshots.clear() }
 }

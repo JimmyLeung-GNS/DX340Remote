@@ -5,6 +5,7 @@ import org.dx340.remote.sources.UiLibraryAdapter
 import org.json.JSONObject
 
 class AppleUiAdapterProvider(private val context: Context) : UiLibraryAdapter {
+    override fun invalidateLibrary() { service?.invalidateLibrary() }
     override val enabled get() = context.getSharedPreferences("apple-ui", Context.MODE_PRIVATE).getBoolean("enabled", false)
     private val service get() = AppleMusicAccessibilityService.instance
     override val ready get() = enabled && service?.readiness() == null && service != null

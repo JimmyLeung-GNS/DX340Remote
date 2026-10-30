@@ -55,6 +55,29 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
             val sources = HostService.instance?.sources ?: return finish(null, "START_COMPANION_FIRST")
             require(!asynchronous || reportTag != null) { "REPORT_TAG_REQUIRED" }
             sources.select(intent.getStringExtra("source") ?: "com.apple.android.music")
+            fun requirePausedSources() {
+                val states = sources.observedSources()
+                require(states.length() == org.dx340.remote.sources.SourceRegistry.PACKAGES.size &&
+                    (0 until states.length()).all { states.getJSONObject(it).optInt("playbackState") in listOf(1, 2) }) { "PAUSE_BOTH_SOURCES_FIRST" }
+            }
+            fun storageDiagnostic() = sources.storageDiagnostic()
+                .put("appleUi", AppleMusicAccessibilityService.instance?.libraryDiagnostic() ?: JSONObject.NULL)
+                .put("mangoUi", MangoAccessibilityService.instance?.libraryDiagnostic() ?: JSONObject.NULL)
+            if (intent.hasExtra("changeStorageAfterMs")) {
+                require(operation == "BROWSE" && !intent.hasExtra("changeSourceAfterMs")) { "INVALID_ARGUMENT" }
+                requirePausedSources()
+                val delay = intent.getIntExtra("changeStorageAfterMs", -1)
+                require(delay in 0..1000) { "INVALID_ARGUMENT" }
+                main.postDelayed({
+                    if (!finished) {
+                        interruption = JSONObject().put("kind", "synthetic-storage-boundary-no-SD-event")
+                            .put("before", storageDiagnostic())
+                        sources.invalidateStorageLibrary()
+                        // Cancellation can synchronously finish the receipt; query
+                        // STORAGE_DIAGNOSTIC separately for the completed boundary.
+                    }
+                }, delay.toLong())
+            }
             if (intent.hasExtra("changeSourceAfterMs")) {
                 require(operation == "BROWSE") { "INVALID_ARGUMENT" }
                 val delay = intent.getIntExtra("changeSourceAfterMs", -1)
@@ -89,6 +112,21 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
                             .put("note", "Reported API values; listening confirmation required"), if (observed == requested) null else "VOLUME_NOT_OBSERVED")
                     } catch (e: Exception) { finish(null, e.message ?: "VOLUME_PROBE_FAILED") }
                 }, 500)
+            } else if (operation == "STORAGE_DIAGNOSTIC") {
+                finish(storageDiagnostic(), null)
+            } else if (operation == "INVALIDATE_STORAGE_LIBRARY") {
+                requirePausedSources()
+                val old = org.dx340.remote.sources.SourceRegistry.PACKAGES.associateWith { sources.epoch(it) }
+                val previous = storageDiagnostic()
+                sources.invalidateStorageLibrary()
+                finish(JSONObject().put("kind", "synthetic-storage-boundary-no-SD-event-no-playback")
+                    .put("before", previous).put("after", storageDiagnostic())
+                    .put("bothSourceEpochsRetired", old.all { (pkg, epoch) -> sources.epoch(pkg) != epoch }), null)
+            } else if (operation == "VALIDATE_APPLE_UI_ITEM") {
+                require(sources.selected == "com.apple.android.music") { "INVALID_SOURCE" }
+                val service = AppleMusicAccessibilityService.instance ?: return finish(null, "UI_PERMISSION_REQUIRED")
+                finish(JSONObject().put("validationOnly", true).put("dispatchedPlayback", false),
+                    service.validatePlayable(intent.getStringExtra("item") ?: "", intent.getStringExtra("revision") ?: ""))
             } else if (operation == "CHECK_CONTROLLER_APPROVALS") {
                 Thread({
                     try { val report = ControllerApprovalCheck(context.applicationContext).run(); main.post { finish(report, null) } }

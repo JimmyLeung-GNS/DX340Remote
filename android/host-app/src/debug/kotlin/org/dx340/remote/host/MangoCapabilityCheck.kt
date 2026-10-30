@@ -28,6 +28,7 @@ class MangoCapabilityCheck(private val context: Context) {
         }
         var uiCalls = 0
         val ui = object : UiLibraryAdapter {
+            override fun invalidateLibrary() = Unit
             override val enabled = true
             override val ready = true
             override val explanation = "SIMULATED UI readiness for native capability isolation only"

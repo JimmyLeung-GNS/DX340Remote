@@ -35,6 +35,8 @@ class AppleMusicAccessibilityService : AccessibilityService() {
     override fun onServiceConnected() { instance = this; notifyHost(true) }
     override fun onUnbind(intent: android.content.Intent?): Boolean { instance = null; cancelBrowse?.invoke("UI_PERMISSION_REQUIRED"); main.removeCallbacksAndMessages(null); last = null; notifyHost(true); return super.onUnbind(intent) }
     override fun onInterrupt() { last = null; offlineContext = false; cancelBrowse?.invoke("UI_ACTION_INTERRUPTED"); notifyHost(true) }
+    fun invalidateLibrary() { last = null; offlineContext = false; cancelBrowse?.invoke("STALE_LIBRARY") }
+    fun libraryDiagnostic() = JSONObject().put("hasFrame", last != null).put("busy", busy).put("offlineContext", offlineContext)
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         if (!eventPending) { eventPending = true; main.postDelayed({ eventPending = false; notifyHost() }, 500) }
     }

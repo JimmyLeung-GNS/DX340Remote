@@ -5,6 +5,7 @@ import org.dx340.remote.sources.UiLibraryAdapter
 import org.json.JSONObject
 
 class MangoUiAdapterProvider(private val context: Context) : UiLibraryAdapter {
+    override fun invalidateLibrary() { service?.invalidateLibrary() }
     override val enabled get() = context.getSharedPreferences("mango-ui", Context.MODE_PRIVATE).getBoolean("enabled", false)
     private val service get() = MangoAccessibilityService.instance
     override val ready get() = enabled && service != null && service?.readiness() == null

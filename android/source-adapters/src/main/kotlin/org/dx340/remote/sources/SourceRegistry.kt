@@ -53,12 +53,15 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         !closed && accessError == null && controllers[selected]?.playbackState?.state == PlaybackState.STATE_PLAYING &&
             runCatching { manager.getActiveSessions(listener).none { it.packageName != selected && it.playbackState?.state !in listOf(PlaybackState.STATE_PAUSED, PlaybackState.STATE_STOPPED, PlaybackState.STATE_NONE) } }.getOrDefault(false)
     }, changed)
+    private var storageInvalidations = 0L
+    private val storage = StorageVolumeObserver(context, ::invalidateStorageLibrary)
 
     fun start() {
-        refresh(); probeBrowsers()
+        storage.start(); refresh(); probeBrowsers()
     }
     fun close() {
         closed = true
+        storage.close()
         PACKAGES.forEach(nativePages::invalidate)
         outputVolume.close()
         callbackGuard.close()
@@ -68,6 +71,19 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         controllers.forEach { (p, c) -> callbacks[p]?.let { c.unregisterCallback(it) } }
         browsers.values.forEach { it.disconnect() }; browsers.clear()
     }
+    /** Main-thread boundary; deliberately leaves media sessions and playback intact. */
+    fun invalidateStorageLibrary() {
+        if (closed) return
+        if (storageInvalidations < Long.MAX_VALUE) storageInvalidations++
+        // Retire every source context before cancellation can run reentrant callbacks.
+        PACKAGES.forEach { epochs[it] = UUID.randomUUID().toString() }
+        items.clear(); proofs.clear(); rootSamples.clear(); revisionGuard.clear()
+        PACKAGES.forEach(nativePages::invalidate)
+        uiLibrary?.invalidateLibrary(); mangoUiLibrary?.invalidateLibrary()
+        browseRequests.toList().forEach { it.cancel("STALE_LIBRARY") }
+        outputVolume.control.reset()
+    }
+    fun storageDiagnostic(): JSONObject = storage.diagnostic().put("libraryInvalidations", storageInvalidations)
     private fun attach(pkg: String, controller: MediaController) {
         if (closed || accessError != null) return
         if (tokens[pkg] == controller.sessionToken) return
@@ -127,18 +143,24 @@ class SourceRegistry(private val context: Context, private val listener: Compone
                     val b = browsers.getValue(pkg)
                     attach(pkg, MediaController(context, b.sessionToken))
                     browserStatus[pkg] = "CONNECTED"; changed()
+                    val probeEpoch = epoch(pkg)
                     val callback = object : MediaBrowser.SubscriptionCallback() {
                         override fun onChildrenLoaded(parentId: String, children: MutableList<MediaBrowser.MediaItem>) {
                             if (closed) return
                             b.unsubscribe(parentId, this)
+                            if (epoch(pkg) != probeEpoch) return
                             rootSamples[pkg] = JSONObject().put("root", parentId).put("count", children.size).put("items", JSONArray().apply {
                                 children.take(50).forEach { put(JSONObject().put("id", it.mediaId).put("title", it.description.title?.toString()).put("browsable", it.isBrowsable).put("playable", it.isPlayable)) }
                             }); changed()
                         }
-                        override fun onError(parentId: String) { if (closed) return; b.unsubscribe(parentId, this); rootSamples[pkg] = JSONObject().put("error", "BROWSE_DENIED"); changed() }
+                        override fun onError(parentId: String) { if (closed) return; b.unsubscribe(parentId, this); if (epoch(pkg) != probeEpoch) return; rootSamples[pkg] = JSONObject().put("error", "BROWSE_DENIED"); changed() }
                     }
                     b.subscribe(b.root, callback)
-                    main.postDelayed({ if (!rootSamples.containsKey(pkg)) { b.unsubscribe(b.root, callback); rootSamples[pkg] = JSONObject().put("error", "SOURCE_TIMEOUT"); changed() } }, 8000)
+                    main.postDelayed({
+                        if (closed) return@postDelayed
+                        runCatching { if (b.isConnected) b.unsubscribe(b.root, callback) }
+                        if (epoch(pkg) == probeEpoch && !rootSamples.containsKey(pkg)) { rootSamples[pkg] = JSONObject().put("error", "SOURCE_TIMEOUT"); changed() }
+                    }, 8000)
                 }
                 override fun onConnectionFailed() { if (closed) return; nativePages.invalidate(pkg); browserStatus[pkg] = "CLIENT_DENIED_OR_FAILED"; changed() }
                 override fun onConnectionSuspended() { if (closed) return; nativePages.invalidate(pkg); browserStatus[pkg] = "SUSPENDED"; changed() }
@@ -169,6 +191,10 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         put("canSearch", false); put("canAdjustVolume", pkg == selected && outputVolume.state().optBoolean("verified")); put("canResume", false); put("canColdLaunch", false)
         put("canShuffle", false); put("canRepeat", false)
         put("reason", if (usingUi(pkg)) uiLibrary?.explanation else "Actions reflect advertised/observed source APIs; physical acceptance remains separate.")
+        if (!storage.active) {
+            put("canPlayNativeItem", false); put("canPlayItem", false); put("canPlayQueueItem", false)
+            put("reason", "Storage-change monitoring unavailable. Restart the companion before selecting library or queue items.")
+        }
         if (!sessionReady) {
             // A connected browser or saved Mango verification must not keep controls enabled.
             keys().asSequence().filter { it.startsWith("can") }.toList().forEach { put(it, false) }
@@ -232,6 +258,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
             description.subtitle?.toString(), description.description?.toString(), description.mediaUri?.toString())
     }
     fun playItem(args: JSONObject, stillAuthorized: () -> Boolean, done: (String?) -> Unit) {
+        if (!storage.active) { done("SOURCE_NOT_READY"); return }
         val pkg = selected
         val deadline = android.os.SystemClock.elapsedRealtime() + 10000
         if (usingUi(pkg) || (pkg == PACKAGES[0] && args.optString("item").startsWith("mango-ui:"))) {
@@ -368,7 +395,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     private fun version(pkg: String) = runCatching { context.packageManager.getPackageInfo(pkg, 0).let { "${it.versionName}|${it.longVersionCode}|${android.os.Build.FINGERPRINT}" } }.getOrNull() ?: "missing"
     // Native item IDs must come from a connected browser and are revalidated there before play.
     // A session action bit alone must not keep assisted item selection enabled after UI loss.
-    private fun nativeSelectionSupported(pkg: String) = browsers[pkg]?.isConnected == true &&
+    private fun nativeSelectionSupported(pkg: String) = storage.active && browsers[pkg]?.isConnected == true &&
         (supports(pkg, PlaybackState.ACTION_PLAY_FROM_MEDIA_ID) || verifiedPlayItem(pkg))
     private fun verifiedPlayItem(pkg: String): Boolean {
         if (pkg != PACKAGES[0]) return false
@@ -576,7 +603,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         main.postDelayed({ finish(null, "SOURCE_TIMEOUT") }, 8000)
     }
     fun diagnostic(): JSONObject = JSONObject().put("device", android.os.Build.MODEL).put("os", android.os.Build.VERSION.RELEASE)
-        .put("build", android.os.Build.DISPLAY).put("sources", sources()).put("state", state()).put("reportedAudioManager", runCatching {
+        .put("build", android.os.Build.DISPLAY).put("sources", sources()).put("state", state()).put("storage", storageDiagnostic()).put("reportedAudioManager", runCatching {
             val audio = context.getSystemService(android.media.AudioManager::class.java)
             JSONObject().put("musicMin", audio.getStreamMinVolume(android.media.AudioManager.STREAM_MUSIC))
                 .put("musicMax", audio.getStreamMaxVolume(android.media.AudioManager.STREAM_MUSIC)).put("musicCurrent", audio.getStreamVolume(android.media.AudioManager.STREAM_MUSIC))
