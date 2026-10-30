@@ -14,6 +14,14 @@ $choices=@($plan.selections | Where-Object sequence -eq $Sequence)
 if ($choices.Count -ne 1 -or $choices[0].mode -ne 'native' -or $choices[0].source -ne 'com.ibasso.music') { throw 'Expected one native candidate' }
 $candidate=$choices[0]
 if ($candidate.id -notmatch '^[A-Za-z0-9_]+$' -or $candidate.parent -notmatch '^[A-Za-z0-9_]+$' -or $candidate.page -notin 0..10000) { throw 'Invalid native identity/page' }
+$expectedAlbum=$null
+if ($candidate.albumLabel) {
+    $albumOrdinal=[regex]::Match($candidate.parent,'^__ARTIST_GENRE_ALBUM__\d+_\d+_([1-9][0-9]*)$')
+    if (!$albumOrdinal.Success) { throw 'Unsupported native album context' }
+    $albumSuffix=' '+$albumOrdinal.Groups[1].Value
+    if (!$candidate.albumLabel.EndsWith($albumSuffix,[StringComparison]::Ordinal)) { throw 'Album label ordinal differs from its parent' }
+    $expectedAlbum=$candidate.albumLabel.Substring(0,$candidate.albumLabel.Length-$albumSuffix.Length)
+}
 $run=[DateTime]::UtcNow.ToString('yyyyMMdd-HHmmss')+'-'+[guid]::NewGuid().ToString('N').Substring(0,8)
 $out=Join-Path $repo "artifacts/mango-native-matrix/$('{0:D2}' -f $Sequence)-$run"
 $probe=New-MangoProbeContext $out $Serial $Adb $true $ExpectedVolume
@@ -21,6 +29,7 @@ $summary=[ordered]@{kind='actual-offline-native-Mango-production-selection-no-BL
 $summary.planSha256=(Get-FileHash -LiteralPath $PlanPath).Hash.ToLowerInvariant()
 $summary.helperSha256=(Get-FileHash -LiteralPath $PSCommandPath).Hash.ToLowerInvariant()
 $summary.commonHelperSha256=(Get-FileHash -LiteralPath (Join-Path $PSScriptRoot 'mango-listening-tools.ps1')).Hash.ToLowerInvariant()
+$summary.expectedAlbum=$expectedAlbum
 try {
     $installedPath=((& $Adb -s $Serial shell pm path org.dx340.remote.host) -join '').Trim() -replace '^package:',''
     if ($installedPath -notmatch '^/data/app/[A-Za-z0-9_~+./=-]+/base\.apk$') { throw 'Installed package identity missing' }
@@ -51,7 +60,7 @@ try {
     for ($poll=0; $poll -lt 8; $poll++) {
         $seen=Invoke-MangoProbe $probe 'GET_STATE'
         $summary.lastObservedState=$seen.state
-        if ($seen.state.playing -and $seen.state.title -ceq $candidate.expectedTitle -and $seen.state.artist -ceq $candidate.expectedArtist) { $matchingReads++ } else { $matchingReads=0 }
+        if ($seen.state.playing -and $seen.state.title -ceq $candidate.expectedTitle -and $seen.state.artist -ceq $candidate.expectedArtist -and (!$expectedAlbum -or $seen.state.album -ceq $expectedAlbum)) { $matchingReads++ } else { $matchingReads=0 }
         if ($matchingReads -ge 2) { break }
         Start-Sleep -Milliseconds 500
     }

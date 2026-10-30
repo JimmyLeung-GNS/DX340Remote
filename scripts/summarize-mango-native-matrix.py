@@ -24,14 +24,21 @@ def summarize(plan, attempts):
     entries = []
     for sequence, candidate in sorted(candidates.items()):
         passed = per_sequence.get(sequence, [])
+        original = passed[0].get('lastObservedState', {}) if passed else {}
+        confirmation = passed[0].get('confirmationObservedState', {}) if passed else {}
         entries.append({'sequence': sequence, 'parent': candidate['parent'], 'page': candidate['page'],
                         'ordinal': candidate['ordinal'], 'title': candidate['expectedTitle'],
                         'artist': candidate['expectedArtist'], 'albumLabel': candidate['albumLabel'],
                         'humanConfirmed': bool(passed), 'userQuote': passed[0]['humanAudio'] if passed else None,
                         'confirmedUtc': passed[0].get('confirmedUtc') if passed else None,
+                        'observedUtc': passed[0].get('observedUtc') if passed else None,
+                        'originalObservedTitle': original.get('title'), 'originalObservedArtist': original.get('artist'),
+                        'originalObservedAlbum': original.get('album'), 'originalObservedDurationMs': original.get('duration'),
+                        'confirmationObservedTitle': confirmation.get('title'),
+                        'confirmationObservedAlbum': confirmation.get('album'),
                         'attemptCount': sum(r['sequence'] == sequence for r in accepted),
                         'confirmationSnapshotMatchesOriginalTitle':
-                            passed[0].get('confirmationObservedState', {}).get('title') == candidate['expectedTitle'] if passed else None,
+                            confirmation.get('title') == candidate['expectedTitle'] if confirmation else None,
                         'pauseObserved': passed[0].get('pausedAfterConfirmation') if passed else None})
     pending = [r['sequence'] for r in entries if not r['humanConfirmed']]
     return {'kind': 'native-Mango-boundary-matrix-summary', 'createdUtc': datetime.now(timezone.utc).isoformat(),
