@@ -60,6 +60,8 @@ Installation now requires the recorded app/worktree receipts to match, including
 
 The `Mac runner and staged iPhone preparation` GitHub workflow exercises the Python guards on an actual hosted Mac (including symlinks), inventories that runner, and runs both native/shared simulator builds through mac-iphone-tests.py in an isolated worktree. Its CI-selected simulator is only a hosted test target; personal Mac device selection and signing remain explicit. Inspect the actual workflow result and artifact summaries before calling that runner verified. No physical iPhone, signing credentials or Bluetooth/audio pass is supplied by the job.
 
+On a fresh Flutter checkout, the runner first logs an ordinary --version bootstrap (which may download Dart/cache through Flutter's standard wrapper), then requests strict machine JSON and verifies the exact pin. This avoids treating first-run download progress as JSON. It does not install or change Xcode/Android SDKs or a global Flutter installation. Keep the bootstrap log when diagnosing first-use failures.
+
 ## 5. Physical acceptance, recorded separately
 
 Run phone-reliability-runbook.md and controller-handoff-runbook.md. Record iPhone model/exact OS/build, Mac/Xcode, source commit, app ID/team, DX340/app versions and selected companion APK hash. Keep the PC's saved approval for development; disconnect its live diagnostic link during first iPhone enrollment/session on the installed single-controller host. Initial setup may use internet; actual remote tests require DX340/iPhone Wi-Fi off and iPhone cellular data off.

@@ -30,7 +30,7 @@ jobs:
               loader.discover('scripts', pattern='test_device_checkpoint.py'),
           ])
           result = unittest.TextTestRunner(verbosity=2).run(suite)
-          if not result.wasSuccessful() or result.skipped or result.testsRun < 17:
+          if not result.wasSuccessful() or result.skipped or result.testsRun < 18:
               raise SystemExit('All provenance/symlink/checkpoint guards must execute on macOS')
           PY
       - name: Install the pinned Flutter SDK

@@ -208,6 +208,9 @@ class Session:
             self.report['status'] = 'NEEDS_PINNED_FLUTTER'
             return False
         self.env['PATH'] = str(Path(flutter).parent) + os.pathsep + self.env.get('PATH', '')
+        # A fresh pinned checkout can put Dart download progress on stdout even
+        # for --machine. Finish that wrapper bootstrap before strict JSON input.
+        self.call('flutter-bootstrap', [flutter, '--version'], timeout=600)
         _, version = self.call('flutter-version', [flutter, '--version', '--machine'], timeout=180)
         self.report['flutter'] = json.loads(version)
         if self.report['flutter'].get('frameworkVersion') != FLUTTER_VERSION or self.report['flutter'].get('frameworkRevision') != FLUTTER_REVISION:

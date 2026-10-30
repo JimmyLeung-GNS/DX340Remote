@@ -15,6 +15,31 @@ spec.loader.exec_module(mac)
 
 
 class BuildReceiptTests(unittest.TestCase):
+    def test_cold_flutter_bootstrap_finishes_before_strict_machine_json(self):
+        with tempfile.TemporaryDirectory() as temp:
+            session = mac.Session('test', Path(temp))
+            bootstrapped = False
+            def call(label, *args, **kwargs):
+                nonlocal bootstrapped
+                if label == 'flutter-bootstrap':
+                    bootstrapped = True
+                    return 0, 'download progress, then ordinary version output'
+                if label == 'flutter-version':
+                    if not bootstrapped:
+                        return 0, 'download progress\n{}'
+                    return 0, json.dumps({'frameworkVersion': mac.FLUTTER_VERSION,
+                                         'frameworkRevision': mac.FLUTTER_REVISION})
+                if label == 'simulators':
+                    return 0, '{"devices": {}}'
+                if label == 'source-commit':
+                    return 0, 'a' * 40
+                return 0, ''
+            session.call = call
+            with patch.object(mac.platform, 'system', return_value='Darwin'), patch.object(mac.shutil, 'which', return_value='/fixture/flutter'):
+                self.assertTrue(session.inventory())
+            self.assertTrue(bootstrapped)
+            self.assertEqual(mac.FLUTTER_REVISION, session.report['flutter']['frameworkRevision'])
+
     def test_unreadable_bundle_directory_cannot_be_omitted_from_the_receipt(self):
         with tempfile.TemporaryDirectory() as temp:
             app = self.app(Path(temp))

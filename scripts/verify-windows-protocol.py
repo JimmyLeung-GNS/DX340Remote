@@ -62,6 +62,11 @@ async def verify(args, report):
         await asyncio.wait_for(client.connect(), 15)
         report['phase'] = 'validate-layout'
         report['negotiatedAttMtu'] = client.mtu_size
+        report['gattLayout'] = [{'uuid': item.uuid, 'handle': item.handle,
+                                 'characteristics': [{'uuid': char.uuid, 'handle': char.handle,
+                                                      'properties': char.properties}
+                                                     for char in item.characteristics]}
+                                for item in client.services]
         service = client.services.get_service(SERVICE)
         if service is None or {char.uuid for char in service.characteristics} != {INFO, RX, TX}:
             raise ValueError('UNEXPECTED_GATT_LAYOUT')
