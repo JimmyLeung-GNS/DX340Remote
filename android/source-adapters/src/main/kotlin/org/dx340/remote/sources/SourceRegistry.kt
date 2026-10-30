@@ -226,8 +226,9 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         return JSONObject().put("key", key).put("mime", "image/jpeg").put("base64", android.util.Base64.encodeToString(bytes, android.util.Base64.NO_WRAP))
     }
     private fun fingerprint(item: MediaBrowser.MediaItem): String {
-        val identity = listOf(item.mediaId, item.flags.toString(), item.description.title?.toString(), item.description.subtitle?.toString(), item.description.mediaUri?.toString()).joinToString("\u0000")
-        return java.security.MessageDigest.getInstance("SHA-256").digest(identity.toByteArray(Charsets.UTF_8)).joinToString("") { "%02x".format(it.toInt() and 255) }
+        val description = item.description
+        return NativeItemFingerprint.of(item.mediaId, item.flags, description.title?.toString(),
+            description.subtitle?.toString(), description.description?.toString(), description.mediaUri?.toString())
     }
     fun playItem(args: JSONObject, stillAuthorized: () -> Boolean, done: (String?) -> Unit) {
         val pkg = selected
