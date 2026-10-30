@@ -24,9 +24,16 @@ try {
     if($page.requestedSource -cne 'com.ibasso.music' -or !$page.data.uiAssisted -or $row.Count -ne 1 -or $row[0].id -notmatch '^mango-ui:[A-Za-z0-9:_-]+$' -or $page.data.revision -notmatch '^[A-Za-z0-9:_-]+$'){throw 'Expected exact held assisted-file proof'}
     $tag='file_validation_'+[guid]::NewGuid().ToString('N').Substring(0,12)
     & $Adb -s $Serial shell am broadcast -a org.dx340.remote.host.DEBUG_UI_PROBE -n org.dx340.remote.host/.DebugUiProbeReceiver --es operation VALIDATE_MANGO_UI_ITEM_FRESH --es source com.ibasso.music --es item $row[0].id --es revision $page.data.revision --es reportTag $tag > (Join-Path $out 'validation-broadcast.txt')
-    $raw=& $Adb -s $Serial shell run-as org.dx340.remote.host cat "files/debug-probe-$tag.json"
-    $raw|Set-Content (Join-Path $out 'validation.json')
-    $result=($raw -join "`n")|ConvertFrom-Json
+    $deadline=[DateTime]::UtcNow.AddSeconds(27)
+    do {
+        $raw=& $Adb -s $Serial shell run-as org.dx340.remote.host cat "files/debug-probe-$tag.json"
+        if($LASTEXITCODE -ne 0){throw 'Validation report unavailable; do not restart the job automatically'}
+        $raw|Set-Content (Join-Path $out 'validation.json')
+        $result=($raw -join "`n")|ConvertFrom-Json
+        if($result.phase -ceq 'FINISHED'){break}
+        if($result.phase -cne 'STARTED' -or $result.operation -cne 'VALIDATE_MANGO_UI_ITEM_FRESH'){throw 'Unrecognized diagnostic job state'}
+        Start-Sleep -Milliseconds 150
+    } while([DateTime]::UtcNow -lt $deadline)
     $summary.observedError=$result.error
     $summary.elapsedMs=$result.elapsedMs
     if($result.phase -cne 'FINISHED' -or !$result.data.validationOnly -or $result.data.dispatchedPlayback){throw 'Not a completed validation-only result'}

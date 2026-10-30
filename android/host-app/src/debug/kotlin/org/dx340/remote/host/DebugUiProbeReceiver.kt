@@ -15,6 +15,8 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
         val main = Handler(Looper.getMainLooper())
         val startedAt = android.os.SystemClock.elapsedRealtime()
         var finished = false
+        var pendingReleased = false
+        fun releasePending() { if (!pendingReleased) { pendingReleased = true; pending.finish() } }
         val reportTag = intent.getStringExtra("reportTag")
         if (reportTag != null && !reportTag.matches(Regex("[A-Za-z0-9_-]{1,48}"))) { pending.finish(); return }
         val reportFile = File(context.filesDir, if (reportTag == null) "apple-ui-live-test.json" else "debug-probe-$reportTag.json")
@@ -36,9 +38,10 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
                     .put("sourceStatesBefore", before ?: JSONObject.NULL)
                     .put("sourceStatesAfter", HostService.instance?.sources?.observedSources() ?: JSONObject.NULL)
                 reportFile.writeText(report.toString(2))
-            } finally { pending.finish() }
+            } finally { releasePending() }
         }
-        main.postDelayed({ finish(null, "DEBUG_PROBE_TIMEOUT") }, 9500)
+        val freshValidation = intent.getStringExtra("operation") == "VALIDATE_MANGO_UI_ITEM_FRESH"
+        main.postDelayed({ finish(null, "DEBUG_PROBE_TIMEOUT") }, if (freshValidation) 25000 else 9500)
         try {
             val sources = HostService.instance?.sources ?: return finish(null, "START_COMPANION_FIRST")
             sources.select(intent.getStringExtra("source") ?: "com.apple.android.music")
@@ -101,9 +104,13 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
                 val revision = intent.getStringExtra("revision") ?: error("INVALID_ARGUMENT")
                 require(item.startsWith("mango-ui:") && revision.isNotBlank()) { "INVALID_ARGUMENT" }
                 val service = MangoAccessibilityService.instance ?: return finish(null, "UI_PERMISSION_REQUIRED")
-                service.validateFreshPlayable(item, revision, { !finished }) { issue ->
+                val expectedEpoch = sources.state().optString("sourceEpoch")
+                service.validateFreshPlayable(item, revision, { !finished && sources.selected == "com.ibasso.music" && sources.state().optString("sourceEpoch") == expectedEpoch }) { issue ->
                     finish(JSONObject().put("validationOnly", true).put("dispatchedPlayback", false), issue)
                 }
+                // Host foreground service owns this bounded read-only job. Do not keep
+                // an Android broadcast open across a potentially20-second UI refresh.
+                releasePending()
             } else if (operation == "VALIDATE_MANGO_UI_ITEM") {
                 require(sources.selected == "com.ibasso.music") { "INVALID_SOURCE" }
                 val item = intent.getStringExtra("item") ?: error("INVALID_ARGUMENT")
