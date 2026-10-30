@@ -14,7 +14,17 @@ Use meaningful tests for framing, duplicate commands, routing, stale IDs, reconn
 
 ## Evidence and continuity
 
-Development location confirmed on 29 October 2026: continue in `C:\GitHub\DX340Remote` on the current Windows PC. Do not assume a move to another Windows PC. Use `docs/windows-continuation.md` for the local workflow; Mac/Xcode instructions cover the later iPhone build/validation work.
+Last verified development location (29 October 2026): `C:\GitHub\DX340Remote`, branch `codex/source-recovery-checkpoint`. This identifies the previous Windows environment, not a required path on another device. When the user switches devices, inspect the actual checkout, host OS, tools and connected hardware. Read `docs/development-handoff.md` and `docs/device-switch-handoff.md` first; use the Windows or Mac guide as applicable.
+
+### Standing instruction: stopping to switch devices
+
+Whenever the user says to stop development because they are switching devices, perform the handoff automatically without asking for confirmation. This applies to iPhone, Android, Windows and Mac destinations. The user authorizes checkpoint commits and pushes to the existing `JimmyLeung-GNS/DX340Remote` GitHub repository for this purpose.
+
+Stop feature implementation; safely finish or stop any running work and preserve its outcome. Update `docs/status.md`, `docs/development-handoff.md` and affected evidence/runbooks with the current branch, application/evidence revisions, completed work, actual commands/results, failures, unresolved facts, device state, remaining work and precise next actions. Keep simulated tests, builds, physical Bluetooth and human audio evidence distinct. Record the goal as paused when supported; never describe the incomplete system as complete.
+
+Review the diff for secrets and unintended files, commit all intended project changes, push the active handoff branch, and verify the remote commit. Do not overwrite newer remote work or force-push. If there are no changes, verify that the current checkpoint is pushed. If a push fails, report the exact failure and preserve a local recovery checkpoint; do not claim success. Keep signing keys, credentials and private device data out of Git. Identify ignored packages/logs/evidence that require separate transfer; refresh an existing local bundle/manifest when available without claiming those files were pushed.
+
+End with the repository URL, exact branch and commit, any separate transfer requirements, and a copyable continuation prompt. The prompt must direct the next Codex to read AGENTS.md, CODEX_GOAL_PROMPT.txt, the development handoff, implementation plan and status before acting, inspect the destination environment, preserve previous decisions/evidence, and continue the unfinished work. Do not assume the destination phone can perform desktop or Xcode builds. See `docs/device-switch-handoff.md` for the reusable procedure and prompt.
 
 Update `docs/status.md` with completed work, commands/results, unresolved facts and next actions. Store device inventory, capability findings and physical test results under `docs/`. Label each result as verified, failed, blocked or not tested, identifying device, OS, app versions and evidence.
 

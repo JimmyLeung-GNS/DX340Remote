@@ -1,12 +1,23 @@
 # Mac build and additional test-device workflow
 
-The user confirmed on 29 October 2026 that development remains on the current Windows PC in `C:\GitHub\DX340Remote`. Start with windows-continuation.md for everyday development. This guide covers the separate Mac/Xcode/iPhone validation and additional test devices; it does not require moving development to another Windows PC.
+For a Mac destination, first read device-switch-handoff.md and development-handoff.md, then inventory the actual Mac/Xcode/iPhone and signing access. The last verified development host was Windows; its paths do not apply to a new Mac. This guide covers Mac builds, physical iPhone validation and additional test devices. Development is paused until the user resumes it.
 
-The local branch codex/source-recovery-checkpoint has not been pushed or published. The generated source bundle artifacts/dx340-checkpoint.bundle contains that branch and reachable tracked history, including the current handoff. It excludes ignored APKs/logs/work tools and signing keys. artifacts/checkpoint-manifest.json records the exact source commit, bundle hash and APK hashes. Verify the manifest against the actual transferred files; do not assume older reports describe the latest packages.
+The active branch `codex/source-recovery-checkpoint` is published in the authorized public repository [JimmyLeung-GNS/DX340Remote](https://github.com/JimmyLeung-GNS/DX340Remote). Clone/fetch that branch and verify the handoff commit before changing code. A separately transferred `artifacts/dx340-checkpoint.bundle` is an offline alternative; it contains tracked history, excluding ignored APKs/logs/work tools and signing keys. Its local checkpoint-manifest.json records the source/bundle/package hashes. Verify transferred files against that manifest; these ignored artifacts are not included in a GitHub clone.
 
 ## Mac source/build
 
-Copy the bundle and manifest securely to the Mac. Replace the example path below with its actual location:
+For a new checkout, use the published branch:
+
+```sh
+git clone --branch codex/source-recovery-checkpoint https://github.com/JimmyLeung-GNS/DX340Remote.git DX340Remote
+cd DX340Remote
+git rev-parse HEAD
+git status --short
+```
+
+Compare HEAD with the outgoing handoff prompt. If the checkout already exists, inspect and preserve local changes before fetching/updating it.
+
+Offline alternative: copy the bundle and manifest securely to the Mac. Replace the example path below with its actual location and use a new destination directory:
 
 ```sh
 shasum -a 256 /path/to/dx340-checkpoint.bundle

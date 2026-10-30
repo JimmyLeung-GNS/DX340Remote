@@ -1,8 +1,19 @@
-# Continue development on this Windows PC
+# Windows development and continuation
 
-Confirmed by the user on 29 October 2026: keep developing in `C:\GitHub\DX340Remote` on the current Windows PC. The working branch is `codex/source-recovery-checkpoint`. Continue this checkout rather than creating a second clone or assuming a move to another Windows PC.
+The last verified Windows checkout (29 October 2026) is `C:\GitHub\DX340Remote`, branch `codex/source-recovery-checkpoint`. Reuse it on that PC. On another device, read device-switch-handoff.md/development-handoff.md, verify the latest published branch, and inspect the destination paths/toolchain rather than assuming this PC's configuration. The application/evidence checkpoints are04b04aa/096601a; dated older snapshots below retain their original scope. Development is paused until the user resumes it.
 
 ## Resume the existing checkout
+
+On a new Windows PC, clone the published handoff branch into your chosen project folder and verify its commit against the continuation prompt:
+
+```powershell
+git clone --branch codex/source-recovery-checkpoint https://github.com/JimmyLeung-GNS/DX340Remote.git DX340Remote
+Set-Location DX340Remote
+git rev-parse HEAD
+git status --short
+```
+
+For an existing checkout, preserve local changes before fetching/updating it. The absolute paths and machine inventory below describe the previous PC and must be adapted.
 
 Use PowerShell 7 (7.6.5 was verified here). Read AGENTS.md, development-handoff.md, implementation-plan.md and status.md. Check the local branch/checkpoint:
 

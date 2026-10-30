@@ -1,6 +1,10 @@
 # Implementation status
 
-Updated 29 October 2026 (Hong Kong). **Goal active after the user's continuation request; full system incomplete.**
+Updated 30 October 2026 (Hong Kong). **Development paused at the user's request for a device change; full system incomplete.**
+
+## Automatic device-switch handoff
+
+The user now requires every stop-for-device-change request to trigger documentation/evidence updates, checkpoint commit/push verification and a copyable continuation prompt automatically, for iPhone, Android, Windows or Mac. This standing authorization and procedure are recorded in AGENTS.md and device-switch-handoff.md. This update changes documentation only; no application build or hardware test was rerun. The verified application remains04b04aa and its completed evidence checkpoint096601a. Inspect the actual destination checkout/toolchain instead of assuming the prior Windows paths or hardware. Earlier active/blocked notes below describe their historical checkpoints; development remains paused until the user resumes it.
 
 ## Approved-controller handoff (current implementation)
 
