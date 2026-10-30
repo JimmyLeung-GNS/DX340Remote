@@ -371,6 +371,9 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     private fun verifiedPlayItem(pkg: String): Boolean {
         if (pkg != PACKAGES[0]) return false
         val prefs = context.getSharedPreferences("source-verification", Context.MODE_PRIVATE)
+        // Older confirmation used raw source IDs. It cannot prove the corrected
+        // zero-based dispatch scheme; require a new explicit local listening check.
+        if (prefs.getString("mangoNativeSelectionScheme", null) != MangoNativePlaybackId.SCHEME) return false
         val saved = prefs.getString("mangoPlayItemVersion", null) ?: return false
         val current = version(pkg)
         if (saved == current) return true
@@ -388,7 +391,14 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     fun confirmMangoPlayItem(success: Boolean) {
         require(selected == PACKAGES[0]) { "WRONG_SOURCE" }
         val previous = nativeSelectionSupported(selected)
-        check(context.getSharedPreferences("source-verification", Context.MODE_PRIVATE).edit().apply { if (success) putString("mangoPlayItemVersion", version(selected)) else remove("mangoPlayItemVersion") }.commit()) { "VERIFICATION_STORE_FAILED" }
+        check(context.getSharedPreferences("source-verification", Context.MODE_PRIVATE).edit().apply {
+            if (success) {
+                putString("mangoPlayItemVersion", version(selected))
+                putString("mangoNativeSelectionScheme", MangoNativePlaybackId.SCHEME)
+            } else {
+                remove("mangoPlayItemVersion"); remove("mangoNativeSelectionScheme")
+            }
+        }.commit()) { "VERIFICATION_STORE_FAILED" }
         // Native clients clear visible/cached rows when sourceEpoch changes. Keep the
         // same-session parent proofs so the local test can refresh its current folder.
         if (previous != nativeSelectionSupported(selected)) epochs[selected] = UUID.randomUUID().toString()
@@ -403,7 +413,15 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         val controller = controllers[selected] ?: error("SOURCE_NOT_READY")
         val other = try { manager.getActiveSessions(listener).firstOrNull { it.packageName != selected && it.playbackState?.state == PlaybackState.STATE_PLAYING } } catch (_: SecurityException) { error("PERMISSION_REVOKED") }
         check(other == null) { "Pause ${other?.packageName} on DX340 before the test." }
-        controller.transportControls.playFromMediaId(itemId, null)
+        controller.transportControls.playFromMediaId(nativePlaybackId(selected, item), null)
+    }
+    private fun nativePlaybackId(pkg: String, item: MediaBrowser.MediaItem): String? {
+        if (pkg != PACKAGES[0]) return item.mediaId
+        val id = item.mediaId ?: error("EXPIRED_ITEM")
+        val proof = proofs[pkg]?.get(id) ?: error("EXPIRED_ITEM")
+        val installed = context.packageManager.getPackageInfo(pkg, 0)
+        return MangoNativePlaybackId.resolve(installed.versionName, installed.longVersionCode,
+            proof.parent, id, item.description.title?.toString() ?: "")
     }
     fun command(op: String, args: JSONObject) {
         require(accessError == null) { "PERMISSION_REVOKED" }
@@ -427,7 +445,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
                 require(nativeSelectionSupported(selected)) { "UNSUPPORTED_CAPABILITY" }
                 require(args.getString("revision") == epoch(selected)) { "STALE_LIBRARY" }
                 val item = items[selected]?.get(args.getString("item")) ?: error("EXPIRED_ITEM")
-                require(item.isPlayable) { "UNSUPPORTED_CAPABILITY" }; controls.playFromMediaId(item.mediaId, null)
+                require(item.isPlayable) { "UNSUPPORTED_CAPABILITY" }; controls.playFromMediaId(nativePlaybackId(selected, item), null)
             }
             "PLAY_QUEUE_ITEM" -> {
                 require(args.getString("revision") == queueRevision(c.queue ?: emptyList())) { "STALE_LIBRARY" }
