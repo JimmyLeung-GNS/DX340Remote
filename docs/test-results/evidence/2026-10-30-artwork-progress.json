@@ -1,0 +1,679 @@
+{
+  "kind": "physical-PC-BLE-artwork-integrity-with-retained-failures-no-playback",
+  "cases": [
+    {
+      "label": "mango-public-artwork-7a",
+      "helperSource": "0c5c978",
+      "helperHashesReconstructedFromGit": {
+        "windows_ble_protocol.py": "f1164f2e2c4c8d5ea98e2d5bb513ef6749de8d2f8f7edc804b682e9e0e1c49f2",
+        "windows_artwork_diagnostic.py": "b43f00f962a2dc656e9b586736fbd1b0de05dd5d982c4d7d5989114856ffdafb",
+        "verify-windows-protocol.py": "d0adb6e56b0bab751d1dc84838b6627fd891370bd5a1f288f66c2de1c3d5230f"
+      },
+      "installedCompanionSha256": "7aee0f7eb54345d213c0969471f78ca0c252e3f1e61ae14cfe553569ee72bab6",
+      "kind": "Windows-BLE-read-only-protocol-diagnostic",
+      "mode": "authorized-artwork",
+      "createdUtc": "2026-10-30T12:41:38.309938+00:00",
+      "allChecksPassed": false,
+      "checks": [
+        {
+          "check": "protected INFO read and indication subscription",
+          "passed": true
+        },
+        {
+          "check": "correlated HELLO with host epoch",
+          "passed": true
+        },
+        {
+          "check": "AUTHORIZE succeeds after local approval",
+          "passed": true
+        },
+        {
+          "check": "GET_STATE returns current source identity/state",
+          "passed": true
+        },
+        {
+          "check": "duplicate read ID returns identical cached result",
+          "passed": true
+        }
+      ],
+      "phase": "reply-await",
+      "operation": "GET_ARTWORK",
+      "bondBefore": {
+        "paired": true,
+        "protection": "ENCRYPTION_AND_AUTHENTICATION"
+      },
+      "negotiatedAttMtu": 517,
+      "framesWritten": 75,
+      "framesReceived": 62,
+      "unsolicitedStatesIgnored": 2,
+      "clientCleanupCompleted": true,
+      "errorType": "TimeoutError",
+      "errorCode": "DIAGNOSTIC_FAILED",
+      "playbackCommandsSent": 0,
+      "pairingRequested": false,
+      "scope": "PC development diagnostic; not physical phone or audio acceptance"
+    },
+    {
+      "label": "mango-public-artwork-7a-bulk45",
+      "helperSource": "6225ee8",
+      "helperHashesReconstructedFromGit": {
+        "windows_ble_protocol.py": "acda396f03019af96b5e8ee2eee7c511311062ff9937922e2bf70b1421b9281f",
+        "windows_artwork_diagnostic.py": "b43f00f962a2dc656e9b586736fbd1b0de05dd5d982c4d7d5989114856ffdafb",
+        "verify-windows-protocol.py": "d50c96a4aaaa346aba4edec8332028f06bf986e0b380b666153c0112781ff925"
+      },
+      "installedCompanionSha256": "7aee0f7eb54345d213c0969471f78ca0c252e3f1e61ae14cfe553569ee72bab6",
+      "kind": "Windows-BLE-read-only-protocol-diagnostic",
+      "mode": "authorized-artwork",
+      "createdUtc": "2026-10-30T12:44:04.902682+00:00",
+      "allChecksPassed": false,
+      "checks": [
+        {
+          "check": "protected INFO read and indication subscription",
+          "passed": true
+        },
+        {
+          "check": "correlated HELLO with host epoch",
+          "passed": true
+        },
+        {
+          "check": "AUTHORIZE succeeds after local approval",
+          "passed": true
+        },
+        {
+          "check": "GET_STATE returns current source identity/state",
+          "passed": true
+        },
+        {
+          "check": "duplicate read ID returns identical cached result",
+          "passed": true
+        }
+      ],
+      "phase": "reply-await",
+      "operation": "GET_ARTWORK",
+      "bondBefore": {
+        "paired": true,
+        "protection": "ENCRYPTION_AND_AUTHENTICATION"
+      },
+      "negotiatedAttMtu": 517,
+      "framesWritten": 75,
+      "framesReceived": 46,
+      "unsolicitedStatesIgnored": 2,
+      "clientCleanupCompleted": true,
+      "errorType": "ValueError",
+      "errorCode": "INVALID_OR_STALE_REPLY",
+      "exchangeTraces": [
+        {
+          "operation": "HELLO",
+          "writesCompletedMs": 2400.534,
+          "firstAnyFrameMs": 2521.919,
+          "lastFrame": {
+            "bytes": 226,
+            "index": 0,
+            "count": 1
+          },
+          "outcome": "HELLO",
+          "elapsedMs": 2522.229,
+          "framesWritten": 7,
+          "framesReceived": 1
+        },
+        {
+          "operation": "AUTHORIZE",
+          "writesCompletedMs": 4798.01,
+          "firstAnyFrameMs": 5337.153,
+          "lastFrame": {
+            "bytes": 371,
+            "index": 6,
+            "count": 7
+          },
+          "outcome": "RESULT",
+          "elapsedMs": 7741.364,
+          "framesWritten": 11,
+          "framesReceived": 7
+        },
+        {
+          "operation": "GET_STATE",
+          "writesCompletedMs": 4316.781,
+          "firstAnyFrameMs": 4741.924,
+          "lastFrame": {
+            "bytes": 430,
+            "index": 2,
+            "count": 3
+          },
+          "outcome": "RESULT",
+          "elapsedMs": 5996.392,
+          "framesWritten": 11,
+          "framesReceived": 3
+        },
+        {
+          "operation": "GET_STATE",
+          "firstAnyFrameMs": 1198.689,
+          "lastFrame": {
+            "bytes": 430,
+            "index": 2,
+            "count": 3
+          },
+          "writesCompletedMs": 5098.714,
+          "outcome": "RESULT",
+          "elapsedMs": 6480.206,
+          "framesWritten": 11,
+          "framesReceived": 6
+        },
+        {
+          "operation": "GET_STATE",
+          "writesCompletedMs": 2818.771,
+          "firstAnyFrameMs": 3598.505,
+          "lastFrame": {
+            "bytes": 430,
+            "index": 2,
+            "count": 3
+          },
+          "outcome": "RESULT",
+          "elapsedMs": 4381.389,
+          "framesWritten": 11,
+          "framesReceived": 3
+        },
+        {
+          "operation": "GET_ARTWORK",
+          "firstAnyFrameMs": 956.741,
+          "lastFrame": {
+            "bytes": 512,
+            "index": 22,
+            "count": 53
+          },
+          "writesCompletedMs": 8517.907,
+          "outcome": "ValueError",
+          "partialMessages": [],
+          "elapsedMs": 19260.934,
+          "framesWritten": 24,
+          "framesReceived": 26
+        }
+      ],
+      "playbackCommandsSent": 0,
+      "pairingRequested": false,
+      "scope": "PC development diagnostic; not physical phone or audio acceptance"
+    },
+    {
+      "label": "mango-artwork-progress-receiver-old7a",
+      "helperSource": "ad446107e854f6ac83c68dd04f6fe44a9800b0a0",
+      "helperHashesReconstructedFromGit": {
+        "windows_ble_protocol.py": "486d456603a2fcc596dbc27c7c9f762feead26ae530d87ba5c444a8ab32edf49",
+        "windows_artwork_diagnostic.py": "b43f00f962a2dc656e9b586736fbd1b0de05dd5d982c4d7d5989114856ffdafb",
+        "verify-windows-protocol.py": "d50c96a4aaaa346aba4edec8332028f06bf986e0b380b666153c0112781ff925"
+      },
+      "installedCompanionSha256": "7aee0f7eb54345d213c0969471f78ca0c252e3f1e61ae14cfe553569ee72bab6",
+      "kind": "Windows-BLE-read-only-protocol-diagnostic",
+      "mode": "authorized-artwork",
+      "createdUtc": "2026-10-30T12:49:14.808584+00:00",
+      "allChecksPassed": true,
+      "checks": [
+        {
+          "check": "protected INFO read and indication subscription",
+          "passed": true
+        },
+        {
+          "check": "correlated HELLO with host epoch",
+          "passed": true
+        },
+        {
+          "check": "AUTHORIZE succeeds after local approval",
+          "passed": true
+        },
+        {
+          "check": "GET_STATE returns current source identity/state",
+          "passed": true
+        },
+        {
+          "check": "duplicate read ID returns identical cached result",
+          "passed": true
+        },
+        {
+          "check": "bounded public JPEG/base64 markers and SHA256 after complete reassembly",
+          "passed": true
+        },
+        {
+          "check": "duplicate artwork ID returns identical cached result",
+          "passed": true
+        },
+        {
+          "check": "non-current artwork key rejected without image data",
+          "passed": true
+        },
+        {
+          "check": "fresh artwork recovery and selected paused state/volume retained",
+          "passed": true
+        }
+      ],
+      "phase": "complete",
+      "operation": "GET_STATE",
+      "bondBefore": {
+        "paired": true,
+        "protection": "ENCRYPTION_AND_AUTHENTICATION"
+      },
+      "bondAfter": {
+        "paired": true,
+        "protection": "ENCRYPTION_AND_AUTHENTICATION"
+      },
+      "negotiatedAttMtu": 517,
+      "framesWritten": 158,
+      "framesReceived": 186,
+      "unsolicitedStatesIgnored": 2,
+      "clientCleanupCompleted": true,
+      "artworkSummary": {
+        "source": "com.ibasso.music",
+        "decodedBytes": 19366,
+        "sha256": "0b866b2068d1160dcd13cd6db128db8a98e0eadd3f114d012a097219ba18c2d0",
+        "replyBytes": 26385,
+        "receivedFrames": 56,
+        "elapsedMs": 33542.855,
+        "scope": "PC BLE public artwork integrity; JPEG markers are not full image decoding, phone caching or control-priority latency acceptance"
+      },
+      "exchangeTraces": [
+        {
+          "operation": "HELLO",
+          "writesCompletedMs": 2405.773,
+          "firstAnyFrameMs": 2456.655,
+          "lastFrame": {
+            "bytes": 226,
+            "index": 0,
+            "count": 1
+          },
+          "outcome": "HELLO",
+          "elapsedMs": 2456.898,
+          "framesWritten": 7,
+          "framesReceived": 1
+        },
+        {
+          "operation": "AUTHORIZE",
+          "writesCompletedMs": 2819.816,
+          "firstAnyFrameMs": 3720.027,
+          "lastFrame": {
+            "bytes": 371,
+            "index": 6,
+            "count": 7
+          },
+          "outcome": "RESULT",
+          "elapsedMs": 7020.683,
+          "framesWritten": 11,
+          "framesReceived": 7
+        },
+        {
+          "operation": "GET_STATE",
+          "writesCompletedMs": 3061.161,
+          "firstAnyFrameMs": 3724.397,
+          "lastFrame": {
+            "bytes": 430,
+            "index": 2,
+            "count": 3
+          },
+          "outcome": "RESULT",
+          "elapsedMs": 4382.402,
+          "framesWritten": 11,
+          "framesReceived": 3
+        },
+        {
+          "operation": "GET_STATE",
+          "firstAnyFrameMs": 666.246,
+          "lastFrame": {
+            "bytes": 430,
+            "index": 2,
+            "count": 3
+          },
+          "writesCompletedMs": 3716.213,
+          "outcome": "RESULT",
+          "elapsedMs": 4796.88,
+          "framesWritten": 11,
+          "framesReceived": 6
+        },
+        {
+          "operation": "GET_STATE",
+          "writesCompletedMs": 2999.84,
+          "firstAnyFrameMs": 3480.183,
+          "lastFrame": {
+            "bytes": 430,
+            "index": 2,
+            "count": 3
+          },
+          "outcome": "RESULT",
+          "elapsedMs": 4679.953,
+          "framesWritten": 11,
+          "framesReceived": 3
+        },
+        {
+          "operation": "GET_ARTWORK",
+          "firstAnyFrameMs": 482.14,
+          "lastFrame": {
+            "bytes": 185,
+            "index": 52,
+            "count": 53
+          },
+          "writesCompletedMs": 6966.178,
+          "outcome": "RESULT",
+          "elapsedMs": 33542.394,
+          "framesWritten": 24,
+          "framesReceived": 56
+        },
+        {
+          "operation": "GET_ARTWORK",
+          "writesCompletedMs": 5397.28,
+          "firstAnyFrameMs": 5756.443,
+          "lastFrame": {
+            "bytes": 185,
+            "index": 52,
+            "count": 53
+          },
+          "outcome": "RESULT",
+          "elapsedMs": 29763.006,
+          "framesWritten": 24,
+          "framesReceived": 53
+        },
+        {
+          "operation": "GET_ARTWORK",
+          "writesCompletedMs": 5274.346,
+          "firstAnyFrameMs": 5454.939,
+          "lastFrame": {
+            "bytes": 156,
+            "index": 0,
+            "count": 1
+          },
+          "outcome": "ERROR",
+          "elapsedMs": 5455.338,
+          "framesWritten": 24,
+          "framesReceived": 1
+        },
+        {
+          "operation": "GET_ARTWORK",
+          "writesCompletedMs": 5461.9,
+          "firstAnyFrameMs": 5639.976,
+          "lastFrame": {
+            "bytes": 185,
+            "index": 52,
+            "count": 53
+          },
+          "outcome": "RESULT",
+          "elapsedMs": 30780.403,
+          "framesWritten": 24,
+          "framesReceived": 53
+        },
+        {
+          "operation": "GET_STATE",
+          "writesCompletedMs": 2398.724,
+          "firstAnyFrameMs": 2997.814,
+          "lastFrame": {
+            "bytes": 430,
+            "index": 2,
+            "count": 3
+          },
+          "outcome": "RESULT",
+          "elapsedMs": 3538.958,
+          "framesWritten": 11,
+          "framesReceived": 3
+        }
+      ],
+      "playbackCommandsSent": 0,
+      "pairingRequested": false,
+      "scope": "PC development diagnostic; not physical phone or audio acceptance"
+    },
+    {
+      "label": "apple-artwork-progress-new6c",
+      "helperSource": "ad446107e854f6ac83c68dd04f6fe44a9800b0a0",
+      "helperHashesReconstructedFromGit": {
+        "windows_ble_protocol.py": "486d456603a2fcc596dbc27c7c9f762feead26ae530d87ba5c444a8ab32edf49",
+        "windows_artwork_diagnostic.py": "b43f00f962a2dc656e9b586736fbd1b0de05dd5d982c4d7d5989114856ffdafb",
+        "verify-windows-protocol.py": "d50c96a4aaaa346aba4edec8332028f06bf986e0b380b666153c0112781ff925"
+      },
+      "installedCompanionSha256": "6c390636fa8fb64c86f1153d93b0d459f4d623b3eea725bd97848fad7cfeb85a",
+      "kind": "Windows-BLE-read-only-protocol-diagnostic",
+      "mode": "authorized-artwork",
+      "createdUtc": "2026-10-30T12:53:31.177553+00:00",
+      "allChecksPassed": true,
+      "checks": [
+        {
+          "check": "protected INFO read and indication subscription",
+          "passed": true
+        },
+        {
+          "check": "correlated HELLO with host epoch",
+          "passed": true
+        },
+        {
+          "check": "AUTHORIZE succeeds after local approval",
+          "passed": true
+        },
+        {
+          "check": "GET_STATE returns current source identity/state",
+          "passed": true
+        },
+        {
+          "check": "duplicate read ID returns identical cached result",
+          "passed": true
+        },
+        {
+          "check": "bounded public JPEG/base64 markers and SHA256 after complete reassembly",
+          "passed": true
+        },
+        {
+          "check": "duplicate artwork ID returns identical cached result",
+          "passed": true
+        },
+        {
+          "check": "non-current artwork key rejected without image data",
+          "passed": true
+        },
+        {
+          "check": "fresh artwork recovery and selected paused state/volume retained",
+          "passed": true
+        }
+      ],
+      "phase": "complete",
+      "operation": "GET_STATE",
+      "bondBefore": {
+        "paired": true,
+        "protection": "ENCRYPTION_AND_AUTHENTICATION"
+      },
+      "bondAfter": {
+        "paired": true,
+        "protection": "ENCRYPTION_AND_AUTHENTICATION"
+      },
+      "negotiatedAttMtu": 517,
+      "framesWritten": 162,
+      "framesReceived": 192,
+      "unsolicitedStatesIgnored": 2,
+      "clientCleanupCompleted": true,
+      "artworkSummary": {
+        "source": "com.apple.android.music",
+        "decodedBytes": 20288,
+        "sha256": "4b4ee65cccb7054915702bdcc601923eaf4f6fdb1ac70e29e3c33af718de3865",
+        "replyBytes": 27675,
+        "receivedFrames": 58,
+        "elapsedMs": 14346.982,
+        "scope": "PC BLE public artwork integrity; JPEG markers are not full image decoding, phone caching or control-priority latency acceptance"
+      },
+      "exchangeTraces": [
+        {
+          "operation": "HELLO",
+          "writesCompletedMs": 663.687,
+          "firstAnyFrameMs": 664.146,
+          "lastFrame": {
+            "bytes": 226,
+            "index": 0,
+            "count": 1
+          },
+          "outcome": "HELLO",
+          "elapsedMs": 664.377,
+          "framesWritten": 7,
+          "framesReceived": 1
+        },
+        {
+          "operation": "AUTHORIZE",
+          "firstAnyFrameMs": 1056.856,
+          "lastFrame": {
+            "bytes": 258,
+            "index": 6,
+            "count": 7
+          },
+          "writesCompletedMs": 1057.056,
+          "outcome": "RESULT",
+          "elapsedMs": 2600.442,
+          "framesWritten": 11,
+          "framesReceived": 7
+        },
+        {
+          "operation": "GET_STATE",
+          "writesCompletedMs": 1380.803,
+          "firstAnyFrameMs": 1562.285,
+          "lastFrame": {
+            "bytes": 317,
+            "index": 2,
+            "count": 3
+          },
+          "outcome": "RESULT",
+          "elapsedMs": 1982.737,
+          "framesWritten": 11,
+          "framesReceived": 3
+        },
+        {
+          "operation": "GET_STATE",
+          "firstAnyFrameMs": 250.522,
+          "lastFrame": {
+            "bytes": 317,
+            "index": 2,
+            "count": 3
+          },
+          "writesCompletedMs": 1979.784,
+          "outcome": "RESULT",
+          "elapsedMs": 2696.588,
+          "framesWritten": 11,
+          "framesReceived": 6
+        },
+        {
+          "operation": "GET_STATE",
+          "writesCompletedMs": 2714.604,
+          "firstAnyFrameMs": 2881.144,
+          "lastFrame": {
+            "bytes": 317,
+            "index": 2,
+            "count": 3
+          },
+          "outcome": "RESULT",
+          "elapsedMs": 3301.146,
+          "framesWritten": 11,
+          "framesReceived": 3
+        },
+        {
+          "operation": "GET_ARTWORK",
+          "firstAnyFrameMs": 243.373,
+          "lastFrame": {
+            "bytes": 467,
+            "index": 54,
+            "count": 55
+          },
+          "writesCompletedMs": 3539.421,
+          "outcome": "RESULT",
+          "elapsedMs": 14346.599,
+          "framesWritten": 25,
+          "framesReceived": 58
+        },
+        {
+          "operation": "GET_ARTWORK",
+          "writesCompletedMs": 3173.318,
+          "firstAnyFrameMs": 3355.411,
+          "lastFrame": {
+            "bytes": 467,
+            "index": 54,
+            "count": 55
+          },
+          "outcome": "RESULT",
+          "elapsedMs": 14275.788,
+          "framesWritten": 25,
+          "framesReceived": 55
+        },
+        {
+          "operation": "GET_ARTWORK",
+          "writesCompletedMs": 3177.832,
+          "firstAnyFrameMs": 3240.051,
+          "lastFrame": {
+            "bytes": 156,
+            "index": 0,
+            "count": 1
+          },
+          "outcome": "ERROR",
+          "elapsedMs": 3240.434,
+          "framesWritten": 25,
+          "framesReceived": 1
+        },
+        {
+          "operation": "GET_ARTWORK",
+          "writesCompletedMs": 3235.847,
+          "firstAnyFrameMs": 3306.866,
+          "lastFrame": {
+            "bytes": 467,
+            "index": 54,
+            "count": 55
+          },
+          "outcome": "RESULT",
+          "elapsedMs": 15189.08,
+          "framesWritten": 25,
+          "framesReceived": 55
+        },
+        {
+          "operation": "GET_STATE",
+          "writesCompletedMs": 1367.688,
+          "firstAnyFrameMs": 1551.11,
+          "lastFrame": {
+            "bytes": 317,
+            "index": 2,
+            "count": 3
+          },
+          "outcome": "RESULT",
+          "elapsedMs": 1978.447,
+          "framesWritten": 11,
+          "framesReceived": 3
+        }
+      ],
+      "playbackCommandsSent": 0,
+      "pairingRequested": false,
+      "scope": "PC development diagnostic; not physical phone or audio acceptance"
+    }
+  ],
+  "source": "ad446107e854f6ac83c68dd04f6fe44a9800b0a0",
+  "postflight": {
+    "nativeAlbumRows": 22,
+    "allFourPreferencesUnchanged": true,
+    "bothSourcesPaused": true,
+    "volume": 37,
+    "volumeVerified": false,
+    "selectedSource": "com.ibasso.music",
+    "hostForeground": true,
+    "pcClients": "All four terminal/cleanup true; saved JIMMYAH grant retained, no pairing/revocation",
+    "audio": "No playback or volume commands; availability unanswered",
+    "phoneScope": "DX340-only launch/four tabs/screenshot inspected; not separate phone BLE"
+  },
+  "software": {
+    "windows": 41,
+    "native": 150,
+    "flutter": 46,
+    "swift": 8,
+    "legacyRegressionFailuresExpected": 2
+  },
+  "hostedNative": {
+    "run": 41058233785,
+    "job": 124071074172,
+    "result": "success",
+    "artifactId": 12976948661,
+    "artifactSha256": "9ee31f80762ace355353e8083d91db004c6f86c80712d6917bad4f5ded2343a7",
+    "swiftTests": 8,
+    "scope": "Native simulator build/launch and capture checks; no signed physical iPhone/BLE/audio",
+    "simulator": "iPhone Air/iOS26.5",
+    "ordinaryScreenshotInspected": true
+  },
+  "sharedIos": {
+    "run": 41058233830,
+    "job": 124071074449,
+    "status": "in_progress",
+    "lastAuthoritativePollUtc": "2026-10-30T13:04:07Z",
+    "sourceCommit": "ad446107e854f6ac83c68dd04f6fe44a9800b0a0",
+    "scope": "Terminal result pending; do not infer build/launch success from native reference or Android checks"
+  },
+  "installedPhoneSha256": "14d08e149209467566ffc769829074acc7f70f8c9e6b9e1dc262e16478f804ee",
+  "scope": "JPEG/base64 markers and hash, not full image decode or phone cache/control latency acceptance"
+}
