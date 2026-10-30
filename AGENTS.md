@@ -14,9 +14,13 @@ Use meaningful tests for framing, duplicate commands, routing, stale IDs, reconn
 
 ## Evidence and continuity
 
-On 30 October 2026 the user explicitly chose to switch development to **another Windows PC**, superseding the 29 October stay-on-this-PC instruction. The exporting checkout is `C:\GitHub\DX340Remote`; verify the portable checkpoint and inventory the next PC's actual workspace/toolchain rather than assuming the same paths. Read `docs/device-continuation.md` for transfer/resume and `docs/windows-continuation.md` for the prior local build workflow. Mac/Xcode remains the separate iPhone build/validation host.
+On 30 October 2026 the user explicitly chose to switch development to **another Windows PC**, superseding the 29 October stay-on-this-PC instruction. The exporting checkout is `C:\GitHub\DX340Remote`; verify the portable checkpoint and inventory the next PC's actual workspace/toolchain rather than assuming the same paths. Read `docs/device-switch-handoff.md` for the standing handoff procedure and `docs/device-continuation.md` for this Windows transfer/resume and `docs/windows-continuation.md` for the prior local build workflow. Mac/Xcode remains the separate iPhone build/validation host.
 
-Update `docs/status.md` with completed work, commands/results, unresolved facts and next actions. Store device inventory, capability findings and physical test results under `docs/`. Label each result as verified, failed, blocked or not tested, identifying device, OS, app versions and evidence.
+### Standing instruction: stopping to switch devices
+
+Whenever the user says to stop development because they are switching devices, perform the handoff automatically without asking for confirmation. This applies to iPhone, Android, Windows and Mac destinations. The user authorizes checkpoint commits and pushes to the existing `JimmyLeung-GNS/DX340Remote` GitHub repository for this purpose.
+
+Stop feature implementation; safely finish or stop any running work and preserve its outcome. Update `docs/status.md` with completed work, commands/results, unresolved facts and next actions. Store device inventory, capability findings and physical test results under `docs/`. Label each result as verified, failed, blocked or not tested, identifying device, OS, app versions and evidence.
 
 Do not reduce full browsing to play/pause or queue skipping. Full Apple Music browsing requires selecting a downloaded song outside the current queue while offline. Full Mango integration requires selecting a local file that actually plays through Mango. Accessibility-based browsing and replacement playback engines are separate decisions with stated tradeoffs.
 

@@ -2,6 +2,17 @@
 
 On30 October2026 the user explicitly chose **another Windows PC** and requested the latest checkpoint be pushed to GitHub. Read device-continuation.md first. The paths/tools below describe the exporting DESKTOP-T9ICUE4 checkout at `C:\GitHub\DX340Remote`; inventory the new PC and substitute its actual paths. Branch: `codex/source-recovery-checkpoint`. Earlier29 October stay-on-this-PC wording is superseded.
 
+For a new checkout, use the published handoff branch and compare HEAD with the outgoing prompt:
+
+```powershell
+git clone --branch codex/source-recovery-checkpoint https://github.com/JimmyLeung-GNS/DX340Remote.git DX340Remote
+Set-Location DX340Remote
+git rev-parse HEAD
+git status --short
+```
+
+Preserve local changes before updating an existing checkout. General automatic handoff rules are in device-switch-handoff.md; this guide and device-continuation.md describe the current platform-specific workflow.
+
 ## Resume the existing checkout
 
 Use PowerShell 7 (7.6.5 was verified here). Read AGENTS.md, development-handoff.md, implementation-plan.md and status.md. Check the local branch/checkpoint:

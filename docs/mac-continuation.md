@@ -2,6 +2,17 @@
 
 30 October2026: the primary development checkout is moving to another Windows PC. Read device-continuation.md for the GitHub/portable source checkpoint, signing-key boundary and exact new-session prompt. The Mac remains the Xcode/signing/physical-iPhone execution host.
 
+For a new checkout, use the published handoff branch and compare HEAD with the outgoing prompt:
+
+```sh
+git clone --branch codex/source-recovery-checkpoint https://github.com/JimmyLeung-GNS/DX340Remote.git DX340Remote
+cd DX340Remote
+git rev-parse HEAD
+git status --short
+```
+
+Preserve local changes before updating an existing checkout. General automatic handoff rules are in device-switch-handoff.md; this guide and device-continuation.md describe the current platform-specific workflow.
+
 The complete staged commands are in mac-iphone-quickstart.md. Start with:
 
 ```sh
