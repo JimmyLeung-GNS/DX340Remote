@@ -1,0 +1,70 @@
+name: Mac runner and staged iPhone preparation
+on:
+  push:
+    paths: ['scripts/mac-iphone-tests.py', 'scripts/test_mac_iphone*.py', 'scripts/verify-device-checkpoint.py', 'scripts/test_device_checkpoint.py', '.github/workflows/apple-preparation.yml']
+  pull_request:
+    paths: ['scripts/mac-iphone-tests.py', 'scripts/test_mac_iphone*.py', 'scripts/verify-device-checkpoint.py', 'scripts/test_device_checkpoint.py', '.github/workflows/apple-preparation.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: apple-preparation-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  simulator-preparation:
+    if: github.event.repository.private == false
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Exercise provenance and checkpoint guards on macOS
+        run: |
+          mkdir -p artifacts
+          python3 - <<'PY' > artifacts/mac-preparation-tests.txt 2>&1
+          import unittest
+          loader = unittest.TestLoader()
+          suite = unittest.TestSuite([
+              loader.discover('scripts', pattern='test_mac_iphone*.py'),
+              loader.discover('scripts', pattern='test_device_checkpoint.py'),
+          ])
+          result = unittest.TextTestRunner(verbosity=2).run(suite)
+          if not result.wasSuccessful() or result.skipped or result.testsRun < 17:
+              raise SystemExit('All provenance/symlink/checkpoint guards must execute on macOS')
+          PY
+      - name: Install the pinned Flutter SDK
+        run: |
+          git clone --depth 1 --branch 3.41.4 https://github.com/flutter/flutter.git "$RUNNER_TEMP/flutter"
+          test "$(git -C "$RUNNER_TEMP/flutter" rev-parse HEAD)" = ff37bef603469fb030f2b72995ab929ccfc227f0
+          echo "$RUNNER_TEMP/flutter/bin" >> "$GITHUB_PATH"
+      - name: Inventory the actual hosted Mac
+        run: python3 scripts/mac-iphone-tests.py preflight
+      - name: Select a simulator from the recorded CI inventory
+        id: simulator
+        run: |
+          python3 - <<'PY'
+          import json, os, re
+          from pathlib import Path
+          reports = sorted(Path('artifacts/mac-iphone-tests').glob('*/summary.json'))
+          report = json.loads(reports[-1].read_text())
+          assert report['status'] == 'TOOLCHAIN_INVENTORIED'
+          selected = max(report['simulators'], key=lambda item: (
+              tuple(map(int, re.findall(r'\d+', item['runtime']))), item['name']))
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write('udid=' + selected['udid'] + '\n')
+          print('CI simulator:', selected['name'], selected['runtime'], selected['udid'])
+          PY
+      - name: Run native and shared simulator checks through the staged runner
+        run: python3 scripts/mac-iphone-tests.py simulator --simulator '${{ steps.simulator.outputs.udid }}'
+      - name: Preserve results without signing material or app binaries
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: mac-iphone-preparation-evidence
+          path: |
+            artifacts/mac-preparation-tests.txt
+            artifacts/mac-iphone-tests/**/*.json
+            artifacts/mac-iphone-tests/**/*.txt
+            artifacts/mac-iphone-tests/**/*.png
+          retention-days: 7

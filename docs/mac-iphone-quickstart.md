@@ -44,6 +44,8 @@ This analyzes/tests the shared app, builds lib/main.dart for iphoneos, then sign
 
 Successful output is labelled SIGNED_ORDINARY_DEVICE_BUILD_PASSED. Signature/team, actual iphoneos platform, app identity and ordinary Flutter target are checked. A simulator or synthetic capture app is rejected before installation.
 
+The successful build also records a deterministic content-tree receipt for the final signed app (file bytes, executable flags, directory names and internal symlink targets) and the actual build worktree commit/diff/status fingerprints. The receipt is provenance evidence, alongside the existing signing checks. Build-generated changes are recorded explicitly; a signature from the same team is not treated as proof of an identical build. Unreadable entries, external or broken symlinks fail the inventory.
+
 ## 4. Explicit installation and launch
 
 Use the successful build run directory from step3:
@@ -53,6 +55,10 @@ python3 scripts/mac-iphone-tests.py device-install --device YOUR_DEVICE_ID --run
 ```
 
 The source, app path, selected device, signature/team, bundle ID and ordinary target are rechecked. Install/launch uses Apple's [Xcode command-line tools](https://developer.apple.com/documentation/xcode/xcode-command-line-tool-reference). Success means the commands succeeded; inspect the iPhone screen and handle Bluetooth permission manually before calling the app usable.
+
+Installation now requires the recorded app/worktree receipts to match, including a second check after the read-only signing commands. A modified or replaced app, changed worktree, or older build report without these receipts is refused before any device install/launch. Create a new device-build with the current runner rather than editing the report to bypass this check. This does not make the report a trusted distribution signature or prove physical playback. The unsigned simulator route remains separate.
+
+The `Mac runner and staged iPhone preparation` GitHub workflow exercises the Python guards on an actual hosted Mac (including symlinks), inventories that runner, and runs both native/shared simulator builds through mac-iphone-tests.py in an isolated worktree. Its CI-selected simulator is only a hosted test target; personal Mac device selection and signing remain explicit. Inspect the actual workflow result and artifact summaries before calling that runner verified. No physical iPhone, signing credentials or Bluetooth/audio pass is supplied by the job.
 
 ## 5. Physical acceptance, recorded separately
 

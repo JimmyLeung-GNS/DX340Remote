@@ -2,6 +2,7 @@
 """Mac-only inventory/build/install runner. Physical BLE/audio acceptance stays explicit."""
 import argparse
 from datetime import datetime, timezone
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -9,6 +10,7 @@ import platform
 import plistlib
 import re
 import signal
+import stat
 import shutil
 import subprocess
 import sys
@@ -53,6 +55,76 @@ def validate_device_app(app, expected_bundle):
     if info.get('DTPlatformName') != 'iphoneos' or 'iPhoneOS' not in info.get('CFBundleSupportedPlatforms', []):
         raise ValueError('A simulator app cannot be installed as a physical-iPhone test build.')
     return {key: info.get(key) for key in ('CFBundleIdentifier', 'CFBundleShortVersionString', 'CFBundleVersion', 'DTPlatformVersion')}
+
+
+def app_contents_receipt(app):
+    """Bind the final signed bundle's bytes and links, independently of its path.
+
+    This records build provenance; it does not replace codesign or device tests.
+    Never follow a framework symlink outside the recorded bundle.
+    """
+    root = app.resolve(strict=True)
+    if not root.is_dir():
+        raise ValueError('Recorded app is not a directory.')
+    entries = []
+    total_bytes = 0
+    def unreadable(error):
+        raise error
+    for folder, directories, files in os.walk(root, followlinks=False, onerror=unreadable):
+        for name in sorted(directories + files):
+            path = Path(folder) / name
+            relative = path.relative_to(root).as_posix()
+            mode = path.lstat().st_mode
+            if stat.S_ISLNK(mode):
+                try:
+                    destination = path.resolve(strict=True)
+                except (OSError, RuntimeError) as error:
+                    raise ValueError('Broken or cyclic app symlink: ' + relative) from error
+                if not destination.is_relative_to(root):
+                    raise ValueError('App symlink escapes its bundle: ' + relative)
+                entries.append({'path': relative, 'type': 'link', 'target': os.readlink(path)})
+            elif stat.S_ISDIR(mode):
+                entries.append({'path': relative, 'type': 'directory'})
+            elif stat.S_ISREG(mode):
+                digest = hashlib.sha256()
+                size = 0
+                with path.open('rb') as file:
+                    for chunk in iter(lambda: file.read(1024 * 1024), b''):
+                        digest.update(chunk)
+                        size += len(chunk)
+                total_bytes += size
+                entries.append({'path': relative, 'type': 'file', 'size': size,
+                                'sha256': digest.hexdigest(), 'executable': bool(mode & 0o111)})
+            else:
+                raise ValueError('Unsupported app bundle entry: ' + relative)
+    encoded = json.dumps(sorted(entries, key=lambda entry: entry['path']),
+                         sort_keys=True, separators=(',', ':'), ensure_ascii=True).encode('utf-8')
+    return {'formatVersion': 1, 'contentTreeSha256': hashlib.sha256(encoded).hexdigest(),
+            'entries': len(entries), 'bytes': total_bytes}
+
+
+def worktree_receipt(tree, expected_commit):
+    """Keep generated/signing edits observable without publishing their contents."""
+    def git(*args):
+        return subprocess.check_output(['git', '-C', str(tree), *args], timeout=30)
+    root = Path(os.fsdecode(git('rev-parse', '--show-toplevel')).strip()).resolve()
+    commit = git('rev-parse', 'HEAD').decode('ascii').strip()
+    if root != tree.resolve() or commit != expected_commit:
+        raise ValueError('Recorded source worktree/commit changed; create a fresh device build.')
+    patch = git('diff', '--no-ext-diff', '--no-textconv', '--binary', 'HEAD', '--')
+    status = git('status', '--porcelain', '--untracked-files=normal')
+    return {'formatVersion': 1, 'sourceCommit': commit,
+            'trackedDiffSha256': hashlib.sha256(patch).hexdigest(),
+            'statusSha256': hashlib.sha256(status).hexdigest(), 'hasSourceChanges': bool(status)}
+
+
+def verify_install_receipt(app, tree, prior):
+    if not isinstance(prior.get('signedAppContents'), dict) or not isinstance(prior.get('buildWorktree'), dict):
+        raise ValueError('Build receipt has no app/source binding; rebuild with the current runner.')
+    if worktree_receipt(tree, prior['sourceCommit']) != prior['buildWorktree']:
+        raise ValueError('Source worktree changed after signing; create a fresh device build.')
+    if app_contents_receipt(app) != prior['signedAppContents']:
+        raise ValueError('Signed app contents changed after the recorded build; rebuild before installing.')
 
 
 class Session:
@@ -205,6 +277,8 @@ def run(args):
             _, signature = session.call('signature-details', ['codesign', '-dv', '--verbose=4', app], include_stderr=True)
             if ('TeamIdentifier=' + args.team) not in signature.splitlines():
                 raise ValueError('Signed app team does not match the explicitly selected team.')
+            session.report['buildWorktree'] = worktree_receipt(session.tree, session.report['sourceCommit'])
+            session.report['signedAppContents'] = app_contents_receipt(app)
             session.report.update({'appPath': str(app), 'status': 'SIGNED_ORDINARY_DEVICE_BUILD_PASSED', 'installation': 'NOT REQUESTED'})
         elif args.mode == 'device-install':
             prior_path = Path(args.run).resolve()
@@ -214,12 +288,16 @@ def run(args):
             app = Path(prior['appPath']).resolve()
             if not app.is_relative_to(prior_path) or prior.get('sourceCommit') != session.report['sourceCommit']:
                 raise ValueError('App path/source does not match this recorded build.')
-            ordinary_target(Path(prior['sourceWorktree']) / 'phone/ios/Flutter/Generated.xcconfig', Path(prior['sourceWorktree']) / 'phone')
+            tree = Path(prior['sourceWorktree']).resolve()
+            ordinary_target(tree / 'phone/ios/Flutter/Generated.xcconfig', tree / 'phone')
             session.report['app'] = validate_device_app(app, prior['bundleId'])
+            verify_install_receipt(app, tree, prior)
             session.call('signature-verification', ['codesign', '--verify', '--deep', '--strict', app])
             _, signature = session.call('signature-details', ['codesign', '-dv', '--verbose=4', app], include_stderr=True)
             if ('TeamIdentifier=' + prior['team']) not in signature.splitlines():
                 raise ValueError('Install app team differs from its recorded signed build.')
+            # Recheck after read-only signing commands, immediately before mutation.
+            verify_install_receipt(app, tree, prior)
             session.call('install-ordinary-device-app', ['xcrun', 'devicectl', 'device', 'install', 'app', '--device', args.device, app], timeout=180)
             session.call('launch-ordinary-device-app', ['xcrun', 'devicectl', 'device', 'process', 'launch', '--device', args.device, prior['bundleId']], timeout=90)
             session.report.update({'status': 'INSTALL_LAUNCH_COMMANDS_SUCCEEDED', 'installedBuild': str(prior_path), 'onScreenReview': 'PENDING; inspect app/permission prompts on the iPhone'})
