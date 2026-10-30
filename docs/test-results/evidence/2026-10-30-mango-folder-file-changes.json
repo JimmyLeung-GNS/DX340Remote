@@ -1,0 +1,185 @@
+{
+  "kind": "sanitized-physical-source-local-folder-file-change-validation-only",
+  "date": "2026-10-30",
+  "device": {
+    "model": "DX340",
+    "android": "13/API33",
+    "mango": "4.1.37/code240",
+    "appleMusic": "6.5.3/code1599"
+  },
+  "finalCompanionSha256": "96a669ebdb94090d68653d9b70dc7fd7d6a7a0495c6db57783fee8e9bd5f376b",
+  "finalApplicationSource": "7e95900bb0b4c6c5d73d0b0b38a25fce635711a6",
+  "cachedViewFailure": {
+    "package": "34f5c7b4d64484f636c941995775a55337375d20eac9dbfd0c49abd43afb291a",
+    "source": "1da0566",
+    "actualRename": "probe-A.wav to probe-B.wav",
+    "visibleLabel": "probe-A.wav",
+    "firstStageAccepted": true,
+    "manualReopenExposed": "probe-B.wav",
+    "oldTokenAfterReopen": "STALE_LIBRARY",
+    "playbackDispatched": false
+  },
+  "validationRuns": [
+    {
+      "kind": "source-local-production-folder-refresh-validation-only-no-playback-no-BLE",
+      "sourceCommit": "b4620c499dc338abd37a87fbaa8292e0983c4f18",
+      "sourceTreeDirty": true,
+      "pageSha256": "91cb70c65d3ee633743ff39b07343b512a36258456e04dc7963c32a7f5e94480",
+      "fileName": "probe-B.wav",
+      "expected": "PASS",
+      "expectedCompanionSha256": "3ab76447c89cdf8f19f5d1c730201f4128772140846a25b676da60a4222d2f28",
+      "status": "PASS_WITHIN_VALIDATION_ONLY_SCOPE",
+      "observedError": null,
+      "elapsedMs": 4439,
+      "completedUtc": "2026-10-30T11:25:29.686261Z"
+    },
+    {
+      "kind": "source-local-production-folder-refresh-validation-only-no-playback-no-BLE",
+      "sourceCommit": "b4620c499dc338abd37a87fbaa8292e0983c4f18",
+      "sourceTreeDirty": true,
+      "pageSha256": "d7af2b94ad706f76c8f0cd210dc507b854803ca770ad4ef666faf2445271934c",
+      "fileName": "probe-B.wav",
+      "expected": "STALE_LIBRARY",
+      "expectedCompanionSha256": "3ab76447c89cdf8f19f5d1c730201f4128772140846a25b676da60a4222d2f28",
+      "status": "PASS_WITHIN_VALIDATION_ONLY_SCOPE",
+      "observedError": "STALE_LIBRARY",
+      "elapsedMs": 4137,
+      "completedUtc": "2026-10-30T11:26:12.7951768Z"
+    },
+    {
+      "kind": "source-local-production-folder-refresh-validation-only-no-playback-no-BLE",
+      "sourceCommit": "d19d47131e77c3dae5b17b34ae97e0658fdea746",
+      "sourceTreeDirty": true,
+      "pageSha256": "c94a43a3ffb944ea572daac3ee8cdea42c6af9485feb749dd9f4b28263996a43",
+      "fileName": "probe-A.wav",
+      "expected": "STALE_LIBRARY",
+      "expectedCompanionSha256": "3ab76447c89cdf8f19f5d1c730201f4128772140846a25b676da60a4222d2f28",
+      "status": "PASS_WITHIN_VALIDATION_ONLY_SCOPE",
+      "observedError": "STALE_LIBRARY",
+      "elapsedMs": 4488,
+      "completedUtc": "2026-10-30T11:30:09.9438525Z"
+    },
+    {
+      "kind": "source-local-production-folder-refresh-validation-only-no-playback-no-BLE",
+      "sourceCommit": "8769691af9a0d0b87347aacafc379447be14452f",
+      "sourceTreeDirty": true,
+      "pageSha256": "8ea076c7e1759292ef418d4891cf475c1af65414ac932d1e30c31b1d7d8e5415",
+      "fileName": "01. Starting.flac",
+      "expected": "PASS",
+      "expectedCompanionSha256": "83553f89603478b081ba26faa6c4cfed70b667d645f48fce9672d673ccae3db9",
+      "status": "PASS_WITHIN_VALIDATION_ONLY_SCOPE",
+      "observedError": null,
+      "elapsedMs": 4713,
+      "completedUtc": "2026-10-30T11:41:14.1116207Z"
+    },
+    {
+      "kind": "source-local-production-folder-refresh-validation-only-no-playback-no-BLE",
+      "sourceCommit": "8769691af9a0d0b87347aacafc379447be14452f",
+      "sourceTreeDirty": true,
+      "pageSha256": "2a0224f55f5776b551890a32ea4c75c4cca6c04624d60fa15d824f38c60f1a73",
+      "fileName": "30. 旅ダチノウタ.flac",
+      "expected": "PASS",
+      "expectedCompanionSha256": "83553f89603478b081ba26faa6c4cfed70b667d645f48fce9672d673ccae3db9",
+      "status": "FAILED_OR_INTERRUPTED",
+      "observedError": "DEBUG_PROBE_TIMEOUT",
+      "elapsedMs": 9688,
+      "completedUtc": "2026-10-30T11:41:46.0503953Z"
+    },
+    {
+      "kind": "source-local-production-folder-refresh-validation-only-no-playback-no-BLE",
+      "sourceCommit": "e142d6e01c51324e62b6123543827a2d36392cda",
+      "sourceTreeDirty": true,
+      "pageSha256": "66efeb06397699170b9ae1d5e82981c4a374adfd0c9aee3daa5e7116cce16418",
+      "fileName": "30. 旅ダチノウタ.flac",
+      "expected": "PASS",
+      "expectedCompanionSha256": "21554ba24bc6bc1178dc4d6a7764d6b5f3a65d5abc0fec6265ca7ffd5f4fbaee",
+      "status": "PASS_WITHIN_VALIDATION_ONLY_SCOPE",
+      "observedError": null,
+      "elapsedMs": 12682,
+      "completedUtc": "2026-10-30T11:46:55.8599775Z"
+    },
+    {
+      "kind": "source-local-production-folder-refresh-validation-only-no-playback-no-BLE",
+      "sourceCommit": "7e95900bb0b4c6c5d73d0b0b38a25fce635711a6",
+      "sourceTreeDirty": true,
+      "pageSha256": "b47d643a141fdeaf5b58aa44494e4e61bb3919c47d2aafa22aaf9e4b67bb956d",
+      "fileName": "30. 旅ダチノウタ.flac",
+      "expected": "PASS",
+      "expectedCompanionSha256": "96a669ebdb94090d68653d9b70dc7fd7d6a7a0495c6db57783fee8e9bd5f376b",
+      "status": "PASS_WITHIN_VALIDATION_ONLY_SCOPE",
+      "helperSha256": "c9e3a7e8e8a201a0df2def42c6a84b9ac9ad3e12a22d8537f1dd91ab6f9aa348",
+      "reportTag": "file_validation_d92081bcccc7",
+      "observationFailures": 0,
+      "observedError": null,
+      "elapsedMs": 12551,
+      "completedUtc": "2026-10-30T11:55:56.0887895Z"
+    }
+  ],
+  "fixture": {
+    "kind": "generated-silent-library-change-fixture-not-audio-acceptance",
+    "identity": "64b9acaeaf2b4005bfbf5f57fefa9590",
+    "deviceDirectory": "/sdcard/Music/DX340RemoteVerification-64b9acaeaf2b4005bfbf5f57fefa9590",
+    "initialName": "probe-A.wav",
+    "renamedName": "probe-B.wav",
+    "markerName": "ownership.txt",
+    "files": {
+      "probe-A.wav": "d7264d809422869548bde66158cec79e7010b01423a4f5fb94826b5bbd3c7749",
+      "ownership.txt": "e5f2054c72d5b4db486d2374b929dbe44dd2091c29de6757f1ea836a8289f3fa"
+    },
+    "format": {
+      "sampleRate": 48000,
+      "channels": 2,
+      "bits": 24,
+      "frames": 48000,
+      "signal": "silence"
+    },
+    "state": "REMOVED_OWNED_ROOT_WAV_MARKER_AND_EMPTY_FOLDER_NO_FIXTURE_REMAINS",
+    "cleanup": "Verify ownership marker/hash, remove only listed owned files, then rmdir the empty exact directory. Never recursively delete or touch other music.",
+    "rootFile": "/sdcard/DX340RemoteVerification-64b9acaeaf2b4005bfbf5f57fefa9590.wav",
+    "cleanupUtc": "2026-10-30T11:38:49.5040613Z"
+  },
+  "postflight": {
+    "nativeAlbumRows": 22,
+    "preferencesUnchanged": 4,
+    "fontScale": "1.0",
+    "health": {
+      "MangoBound": true,
+      "AppleBound": true,
+      "Foreground": true,
+      "NoCrashedServices": true,
+      "NoPendingBindings": true
+    },
+    "bothFixturesAbsent": true
+  },
+  "software": {
+    "aggregateJvmTests": 147,
+    "newPureModelTests": 0,
+    "orchestrationEvidence": "Actual validation-only DX340 probes; existing JVM tests do not cover navigation",
+    "assemblyAndLint": "PASS"
+  },
+  "rootExperiment": {
+    "onDiskHashVerified": true,
+    "exposedByMango": false,
+    "cacheCause": "Not established",
+    "extraNavigationChange": "Removed",
+    "rootFilePlayback": "Not tested"
+  },
+  "zeroPlaybackVolumeAndRadioCommands": true,
+  "finalState": {
+    "bothSourcesPaused": true,
+    "volume": 37,
+    "volumeVerified": false,
+    "wifiOff": true,
+    "activeNetwork": "none",
+    "pcApproval": "JIMMYAH retained without bond/revoke operations",
+    "noFixtureRemains": true
+  },
+  "notVerified": [
+    "Final-build rename/removal/cutoff/cancellation negatives",
+    "Playback/audio on new preparation path",
+    "Native/playlist rescan and SD cases",
+    "Storage-root files and same-name replacement",
+    "Phone Bluetooth/signing/reliability/Watch",
+    "Responsiveness target"
+  ]
+}

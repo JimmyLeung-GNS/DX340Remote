@@ -184,3 +184,5 @@ This is the separately accepted screen-on/unlocked mode for Mango4.1.37/code240.
 5. If the screen changes or an item expires, dismiss any Mango popup, then use **Retry library** / root refresh. If the device sleeps, wake/unlock it first. Turn the mode off with **Disable optional Mango browsing**; the separate Android Accessibility permission can also be revoked. An app update requires adapter revalidation.
 
 This mode uses Mango's semantic UI, not a replacement audio engine. It does not enable seeking or output-volume control; those remain separately capability gated.
+
+Folder playback now leaves/reopens the folder to reject cached filenames after external changes, then revalidates the held viewport and selected row. This can take several seconds: one later-page preparation measured12.551s and misses the response target. The new path has validation-only device checks; its current audio/phone/rescan/SD acceptance is pending. See `test-results/2026-10-30-mango-folder-file-changes.md`. Native album controls retain their separate path.
