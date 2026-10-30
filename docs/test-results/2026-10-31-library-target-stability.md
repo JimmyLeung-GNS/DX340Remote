@@ -49,3 +49,7 @@ After the update, one fresh Find/Connect with a visible companion pairing window
 4. Both earlier background observations remain INCOMPLETE, including the1779.414-second run. No new30-minute, iPhone, SD/rescan, audio-quality, volume, walking/battery or Watch acceptance is supplied here.
 
 Private raw evidence is under ignored `artifacts/library-selection-20261031/`: original device logs/diagnostics/bluetooth dumps and APKs, expected failing geometry, final software/build/lint/signing logs, installed-byte/preference comparison, four screenshots and workflow handle. Addresses, serials, signing material and raw private logs are not published. The adjacent JSON contains the sanitized summary.
+
+## Terminal follow-up
+
+Job41107018018 subsequently completed SUCCESS at42b68ab with51 Flutter tests/build/captures/ordinary restoration. Artifact13002927005 SHA256673b4d4f6aaad4c2a5af47e829fc5a583779f0c34beeb2cc0d42e83027011989 was downloaded and verified. Pixel approval was later restored by its owner. The newer installed765…/f5f5a03 correction, separate three listening scopes, no-SIM offline subset and final cleanup are in [the next report](2026-10-31-mango-phone-selection.md); this report's initial pending/failed observations remain historical evidence.

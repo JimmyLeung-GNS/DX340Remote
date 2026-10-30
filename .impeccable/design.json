@@ -88,6 +88,27 @@
       "third_party/FLUTTER_LICENSE"
     ],
     "verification": {
+      "browsingScrollFollowupF5f5a03": {
+        "sourceRevision": "f5f5a03b04ea46d1631328e44097a4caf9512215",
+        "status": "verified for seven supplied appearances only; functional checks recorded separately",
+        "captures": [
+          "artifacts/mango-phone-selection-20261031/mode-restoration-phone.png",
+          "artifacts/mango-phone-selection-20261031/connected-queue.png",
+          "artifacts/mango-phone-selection-20261031/ci-41111847393/flutter-synthetic-browsing-library-light.png",
+          "artifacts/mango-phone-selection-20261031/ci-41111847393/flutter-synthetic-browsing-large-dark.png",
+          "artifacts/mango-phone-selection-20261031/ci-41111847393/flutter-synthetic-browsing-queue-light.png",
+          "artifacts/mango-phone-selection-20261031/ci-41111847393/flutter-library-light.png",
+          "artifacts/mango-phone-selection-20261031/ci-41111847393/flutter-restored-player-light.png"
+        ],
+        "captureScope": "Two actual Pixel 9a/Android 16 views; five iPhone Air/iOS 26.5 simulator views, including three synthetic browsing fixtures without Bluetooth, ordinary disconnected Library and restored ordinary Player. Largest text is an initial viewport.",
+        "review": {
+          "disposition": "ship",
+          "limit": "Only these seven static appearances. Audio, target stability, independent long-status/list scrolling, complete large-text reachability, TalkBack/VoiceOver and actual iPhone BLE/interaction remain outside this verdict. No UX-01/icons or whole-surface completion."
+        },
+        "software": "Two regression tests reproduced an inherited approximately 330-logical-pixel folder offset, then passed. Local analysis/53 Flutter tests, 162 aggregate JVM tests and Android builds/lint pass. Hosted native iOS 41111847167 passes 12 Swift tests; shared iOS 41111847393 passes 53 Flutter tests, builds/captures and ordinary-target restoration. Hash-verified artifacts extracted under artifacts/mango-phone-selection-20261031/ci-41111847167/ and ci-41111847393/.",
+        "separateFunctionalEvidence": "Original-signer ordinary Pixel phone 76554f3f… installed with unchanged companion 58314b84…. Owner-approved saved-grant reconnect remained usable for over seven minutes of active reads/control after the 60-second bound. OPENING VTR and CALL folder selections at f5f5a03 were separately owner-confirmed audible; earlier Intro belongs to phone build 208…. These records are separate from visual review and do not establish general target stability or full BLE/audio acceptance.",
+        "unchanged": "Incumbent native world, status viewport tokens and retained reference architecture. Earlier review/check records keep their historical scope."
+      },
       "libraryStatusLayout20261031": {
         "status": "verified for supplied disconnected Library capture scope",
         "device": "Actual Pixel 9a / Android 16",
@@ -103,7 +124,7 @@
           "limit": "Only the four supplied Library appearances; no Queue, connected selection, BLE/audio, physical accessibility or whole-surface/UX-01 acceptance."
         },
         "software": "artifacts/library-selection-20261031/flutter-analyze-final.txt: no issues; flutter-tests-final.txt: 51 Flutter tests passed, including layout/selection guards.",
-        "notTested": "No new actual iOS build/capture or connected BLE/audio pass for this correction. Native appearance and bridge/reference architecture unchanged."
+        "notTested": "At this initial four-capture review, new iOS build/capture and connected BLE/audio evidence were outside its supplied scope. Later results are recorded separately. Native appearance and bridge/reference architecture unchanged."
       },
       "scope": "Earlier phone reviewers returned ship only for their supplied disconnected states. A separate Mango host reviewer returned ship only for nine dark/default-font DX340 captures. Full system active/incomplete; physical Flutter parity and connection stability remain open.",
       "sourceRevision": "5f31f5d",
@@ -257,7 +278,9 @@
     {
       "name": "Library and queue row",
       "kind": "custom",
-      "description": "Material ListTile or CupertinoButton row with folder/music icon, wrapping title/subtitle and folder chevron. Row identity includes destination, source scope, rendered revision and item ID. Library playback checks rendered revision/scope and current playable ID/title membership; queue playback checks rendered revision and current ID/title membership. Parent/page/assisted navigation remain distinct."
+      "description": "Material ListTile or CupertinoButton row with folder/music icon, wrapping title/subtitle and folder chevron. Row identity includes destination, source scope, rendered revision and item ID. Library playback checks rendered revision/scope and current playable ID/title membership; queue playback checks rendered revision and current ID/title membership. Parent/page/assisted navigation remain distinct.",
+      "pageScrollRestoration": "At f5f5a03, Library PageStorageKey includes source scope, revision, current/returned parent, page and loading state; Queue includes source scope, revision and offset. Status/error/busy do not change list identity. Same-location offsets can restore without another folder/page/revision inheriting them.",
+      "followupVerificationRef": "extensions.verification.browsingScrollFollowupF5f5a03"
     },
     {
       "name": "Scrollable connection and recovery",

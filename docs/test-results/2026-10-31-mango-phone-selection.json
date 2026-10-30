@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-31",
+  "applicationSource": "f5f5a03b04ea46d1631328e44097a4caf9512215",
+  "scope": "Physical Pixel assisted-folder selection/recovery and software setup/scroll correction; full goal incomplete",
+  "companionSha256": "58314b84cd45447fd866c1ea9a48922c39edd9584f14100c47cd3cb8c91ee97e",
+  "installedPixelSha256": "76554f3fb07fa6abfab9180d5b017cc007bdb5036a70c63206a3780239436295",
+  "previousPixelSha256": "208a797e778b6af181341bc7b9d860670d996fb105eadd00101aa239536c17bc",
+  "software": {
+    "jvm": {"protocol":44,"cache":7,"adapters":111,"total":162,"failures":0,"errors":0},
+    "flutterTests":53,
+    "androidBuildLintAnalyze":"PASS",
+    "swiftTests":12,
+    "nativeIosRun":41111847167,
+    "sharedIosRun":41111847393,
+    "bothIosRuns":"SUCCESS; simulator only; archives hash-verified",
+    "nativeArtifactSha256":"b9f47df123312dd28e5ec7100fa9358673dbf9324c9da67ca9ada90dd3b3f962",
+    "sharedArtifactSha256":"86146d94dcc46eebda371afc310b4e3734deb831001202866f48cc2c512df076",
+    "sharedSetupFixtureScenarios":6,
+    "setupExpirationOnUnapprovedCurrentPixel":"NOT TESTED; grants retained",
+    "physicalIosSetupTimeout":"NOT TESTED"
+  },
+  "scroll": {
+    "previousOffsetReproductionLogicalPixels":330,
+    "perSourceParentRevisionWindowKeys":"IMPLEMENTED",
+    "openingFirstRowBeforeAndAfterTabReturn":"[53,1457][1028,1648]",
+    "allThreeSelectedRowBoundsBeforeAndPendingEqual":true,
+    "manualFingerAndScreenReaderAcceptance":"NOT TESTED"
+  },
+  "audioSelections":[
+    {"file":"01. Intro -GOLD SYMPHONY-.flac","album":"Gold Symphony","phone":"208a797e","phoneSource":"42b68ab","ownerConfirmedExpectedAudio":true,"playTaps":1},
+    {"file":"01. OPENING VTR.flac","album":"WAY OF GLORY","phone":"76554f3f","phoneSource":"f5f5a03","ownerConfirmedExpectedAudio":true,"playTaps":1},
+    {"file":"02. CALL.flac","album":"Gold Symphony","phone":"76554f3f","phoneSource":"f5f5a03","previousSourceState":"MAGIC playing; reason for intervening advance not independently measured","ownerConfirmedExpectedAudio":true,"playTaps":1}
+  ],
+  "physical": {
+    "savedGrantReconnectAfterUpgrade":true,
+    "approvedSessionUsableBeyondSevenMinutes":true,
+    "assistedModeInvalidationMessageAndPageClear":true,
+    "nativeQueueAfterModeOff":"1-24 of24; read only; unsupported selection disabled",
+    "staleBackFailure":"STALE_LIBRARY retained; explicit fresh-root recovery succeeded",
+    "metadataLag":"Previous title initially retained; CALL matched at script elapsed12.000s including UI automation overhead",
+    "strictOfflineAcceptance":false,
+    "networkPolicyRejection":"Combined command including mobile-data disable rejected: blocked by policy. No changes from that command; no alternate radio-changing route",
+    "pixelNetworkPreflightAndFinal":{"wifi_on":0,"mobile_data":1,"bluetooth_on":1}
+  },
+  "cleanup": {
+    "bothSources":"paused2",
+    "musicVolume":37,
+    "volumeProofVerified":false,
+    "route":"headset(4)",
+    "ordinaryPixelDisconnectVerified":true,
+    "savedApprovals":["Pixel","JIMMYAH"],
+    "controllerPreferencesEqualToPreUpgradeRestoredGrantSnapshot":true,
+    "mangoOptionalMode":false,
+    "mangoAccessibilityEnabled":false,
+    "appleOptionalMode":true,
+    "appleAccessibilityEnabled":true,
+    "installedApkBytesReverified":true,
+    "revokeOrUnpairTest":false
+  },
+  "separateOfflineFollowup": {
+    "result":"PASS physical Android no-SIM/no-default-network connection and basic-control subset only",
+    "genericMobileDataFlag":1,
+    "defaultAndActiveDataSubscriptionId":-1,
+    "availableAndSelectableSubscriptions":[],
+    "simState":"ABSENT,NOT_READY",
+    "bothNativeWifiStatus":"Wifi is disabled",
+    "pixelDefaultNetworkBefore":"none",
+    "bothDefaultNetworksAfter":"none",
+    "savedGrantReconnect":true,
+    "singlePlay":"Mango3/CALL; Apple2",
+    "singlePause":"Mango2; Apple2",
+    "newHumanAudioConfirmation":false,
+    "ordinaryDisconnectAfterward":true,
+    "notVerified":"SIM-installed cellular-user-toggle variant, full both-phone T01/Gate A, latency or background",
+    "rawEvidence":"Ignored artifacts/android-offline-20261031/"
+  },
+  "review":"SHIP only seven supplied Pixel/simulator renders; independent long-status scrolling, full large-text reachability and TalkBack/VoiceOver remain open",
+  "priorBackgroundTests":"Remain INCOMPLETE; no30-minute/background pass supplied",
+  "fullGoal":"ACTIVE/incomplete; broader UX-01/icons, source/phone/reliability/iPhone/signing/SD/audio-quality/Watch requirements open"
+}

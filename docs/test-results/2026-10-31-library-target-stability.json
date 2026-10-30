@@ -20,6 +20,11 @@
     "sharedIosRun": 41107018018,
     "sharedIosLastObserved": "in_progress; not a result"
   },
+  "terminalFollowup": {
+    "sharedIosRun41107018018":"SUCCESS at42b68ab;51 tests/build/captures/ordinary restoration",
+    "artifactSha256":"673b4d4f6aaad4c2a5af47e829fc5a583779f0c34beeb2cc0d42e83027011989",
+    "nextReport":"2026-10-31-mango-phone-selection.md; newer765.../f5f5a03 package and restored Pixel grant"
+  },
   "visual": {
     "reviewDisposition": "ship",
     "scope": "Four actual disconnected Pixel Library captures light/dark font1.0/2.0 only",
