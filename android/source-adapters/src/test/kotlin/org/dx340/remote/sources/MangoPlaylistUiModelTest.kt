@@ -75,4 +75,21 @@ class MangoPlaylistUiModelTest {
         assertTrue(scrolling.scroll!!.endsWith(".2")); assertNotEquals(parsed.fingerprint, scrolling.fingerprint)
         // This is a simulated continuation capability, not a physical long-playlist pass.
     }
+    @Test fun clippedBoundaryRowsAreNotActionsButCompleteMiddleRowsRemainReachable() {
+        val parsed = MangoPlaylistUiModel.parse(fixture("clipped"))
+        assertEquals(listOf("V.O.L", "唇からロマンチカ", "逢いたい理由", "Summer Revolution", "CALL"), parsed.rows.map { it.title })
+        assertNotNull(parsed.scroll)
+        assertTrue(parsed.rows.all { it.playable && !it.browsable })
+    }
+    @Test fun partialBoundaryLabelsStillBindTheSnapshot() {
+        val nodes = fixture("clipped")
+        val changed = nodes.map { if (it.id == p + "music_item_position" && it.text == "6") it.copy(text = "5") else it }
+        assertNotEquals(MangoPlaylistUiModel.parse(nodes).fingerprint, MangoPlaylistUiModel.parse(changed).fingerprint)
+    }
+    @Test fun incompleteInteriorRowOrAmbiguousBoundaryMetadataFailsClosed() {
+        val nodes = fixture("clipped")
+        assertThrows(RuntimeException::class.java) { MangoPlaylistUiModel.parse(nodes.filterNot { it.id == p + "music_item_title" && it.text == "逢いたい理由" }) }
+        val first = nodes.first { it.id == p + "music_item_position" }
+        assertThrows(RuntimeException::class.java) { MangoPlaylistUiModel.parse(nodes + first.copy(path = first.path + ".99")) }
+    }
 }

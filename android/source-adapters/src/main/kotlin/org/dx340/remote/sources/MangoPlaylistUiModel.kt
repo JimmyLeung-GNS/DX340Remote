@@ -48,26 +48,48 @@ object MangoPlaylistUiModel {
         require(title.isNotBlank() && title.length <= 512 && '\u0000' !in title) { "UI_UNEXPECTED_SCREEN" }
         val titleId = P + if (detail) "music_item_title" else "playlist_name"
         val positionId = P + if (detail) "music_item_position" else "playlist_item_position"
-        val indexed = nodes.filter { under(it, list.path) && it.id == titleId }.map { name ->
-            require(name.enabled && name.text.isNotBlank() && name.text.length <= 512 && '\u0000' !in name.text) { "UI_UNEXPECTED_SCREEN" }
-            val row = MangoUiModel.clickable(nodes, name, list.path) ?: error("UI_ACTION_FAILED")
-            // Require the whole direct list row; an inner menu/title button is never a track action.
-            require(row.parent == list.path && row.className == "android.widget.RelativeLayout") { "UI_UNEXPECTED_SCREEN" }
+        val visibleRows = nodes.filter { it.parent == list.path }.sortedBy { it.path.substringAfterLast('.').toIntOrNull() ?: error("UI_UNEXPECTED_SCREEN") }
+        require(visibleRows.size <= 50) { "UI_TREE_LIMIT" }
+        val partialProofs = mutableListOf<String>()
+        val observedPositions = mutableListOf<Int>()
+        val indexed = visibleRows.mapIndexedNotNull { edgeIndex, row ->
+            require(row.className == "android.widget.RelativeLayout" && row.enabled && row.clickable) { "UI_UNEXPECTED_SCREEN" }
             val children = nodes.filter { under(it, row.path) }
-            require(children.count { it.id == titleId } == 1) { "UI_UNEXPECTED_SCREEN" }
-            val position = children.singleOrNull { it.id == positionId }?.text?.toIntOrNull() ?: error("UI_UNEXPECTED_SCREEN")
-            require(position > 0 && (total == null || position <= total)) { "UI_UNEXPECTED_SCREEN" }
-            val artist = if (detail) children.singleOrNull { it.id == P + "music_item_artist" }?.text ?: error("UI_UNEXPECTED_SCREEN") else "Existing playlist"
+            val names = children.filter { it.id == titleId }
+            val positions = children.filter { it.id == positionId }
+            val artists = children.filter { it.id == P + "music_item_artist" }
+            require(names.size <= 1 && positions.size <= 1 && artists.size <= 1) { "UI_UNEXPECTED_SCREEN" }
+            val position = positions.singleOrNull()?.let { it.text.toIntOrNull() ?: error("UI_UNEXPECTED_SCREEN") }
+            if (position != null) {
+                require(position > 0 && (total == null || position <= total)) { "UI_UNEXPECTED_SCREEN" }
+                observedPositions.add(position)
+            }
+            // Accessibility clips labels independently at RecyclerView edges. Bind their
+            // available identity, but expose no action until the whole row is readable.
+            if (names.isEmpty() || position == null || detail && artists.isEmpty()) {
+                require((edgeIndex == 0 || edgeIndex == visibleRows.lastIndex) && (names.isNotEmpty() || positions.isNotEmpty())) { "UI_UNEXPECTED_SCREEN" }
+                partialProofs.add(row.path)
+                children.filter { it.id in setOf(titleId, positionId, P + "music_item_artist") }.sortedBy { it.path }.forEach {
+                    partialProofs.addAll(listOf(it.path, it.id, it.text, it.enabled.toString()))
+                }
+                return@mapIndexedNotNull null
+            }
+            val name = names.single()
+            require(name.enabled && name.text.isNotBlank() && name.text.length <= 512 && '\u0000' !in name.text) { "UI_UNEXPECTED_SCREEN" }
+            val action = MangoUiModel.clickable(nodes, name, list.path) ?: error("UI_ACTION_FAILED")
+            // Require the whole direct list row; an inner menu/title button is never a track action.
+            require(action.path == row.path) { "UI_UNEXPECTED_SCREEN" }
+            val artist = if (detail) artists.single().text else "Existing playlist"
             position to UiRow(row.path, name.text, artist, playable = detail, browsable = !detail)
         }.sortedBy { it.first }
         require(indexed.size <= 50 && indexed.map { it.first }.distinct().size == indexed.size && indexed.map { it.second.path }.distinct().size == indexed.size) { "UI_UNEXPECTED_SCREEN" }
-        require(nodes.count { it.parent == list.path } == indexed.size) { "UI_UNEXPECTED_SCREEN" }
+        require(observedPositions.distinct().size == observedPositions.size && (visibleRows.isEmpty() || indexed.isNotEmpty())) { "UI_UNEXPECTED_SCREEN" }
         require(indexed.isNotEmpty() || total == null || total == 0) { "UI_UNEXPECTED_SCREEN" }
         val scroll = list.takeIf { it.forward }?.path
         // Frame semantic page identity with lengths; exclude the independent mini-player clock.
         val bytes = ByteArrayOutputStream()
         DataOutputStream(bytes).use { out ->
-            listOf("mango-playlist-v1", title, total.toString(), list.path, back.path, scroll.orEmpty()).forEach {
+            (listOf("mango-playlist-v2", title, total.toString(), list.path, back.path, scroll.orEmpty()) + partialProofs).forEach {
                 val data = it.toByteArray(Charsets.UTF_8); out.writeInt(data.size); out.write(data)
             }
             indexed.forEach { (position, row) ->
