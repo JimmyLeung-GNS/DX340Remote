@@ -168,10 +168,68 @@ class MangoAccessibilityService : AccessibilityService() {
         check(live.performAction(if (action.kind == "scroll") AccessibilityNodeInfo.ACTION_SCROLL_FORWARD else AccessibilityNodeInfo.ACTION_CLICK)) { "UI_ACTION_FAILED" }
     }
     fun validatePlayable(item: String, revision: String): String? = try { validate(item, revision, "play"); null } catch (e: Exception) { e.message ?: "UI_UNEXPECTED_SCREEN" }
+    /** Reload folder listings through Mango before file dispatch; its visible list can be cached after USB changes. */
+    private fun prepareFreshPlay(item: String, revision: String, allowed: () -> Boolean, done: (Tree?, Action?, String?) -> Unit) {
+        if (busy) { done(null, null, "UI_BUSY"); return }
+        val deadline = android.os.SystemClock.elapsedRealtime() + 20000
+        val guarded = { allowed() && android.os.SystemClock.elapsedRealtime() <= deadline }
+        fun fail(issue: String) { last = null; done(null, null, if (android.os.SystemClock.elapsedRealtime() > deadline) "UI_ACTION_TIMEOUT" else issue) }
+        try {
+            require(guarded()) { "AUTHORIZATION_DENIED" }
+            val (current, original) = validate(item, revision, "play")
+            val frame = last!!; val parsed = frame.parsed!!
+            if (parsed.storage == MangoPlaylistUiModel.CONTEXT) { done(current, original, null); return }
+            fun checked(value: JSONObject?, issue: String?) {
+                if (issue != null || value == null) { fail(issue ?: "UI_UNEXPECTED_SCREEN"); return }
+                try {
+                    require(guarded()) { "AUTHORIZATION_DENIED" }
+                    val fresh = last ?: error("STALE_LIBRARY")
+                    require(fresh.window == frame.window && fresh.parsed?.fingerprint == parsed.fingerprint) { "STALE_LIBRARY" }
+                    val matches = fresh.actions.filterValues { it.kind == "play" && it.title == original.title }
+                    require(matches.size == 1) { "STALE_LIBRARY" }
+                    val (tree, action) = validate(matches.keys.single(), fresh.revision, "play")
+                    done(tree, action, null)
+                } catch (e: Exception) { fail(e.message ?: "UI_UNEXPECTED_SCREEN") }
+            }
+            if (parsed.back == null) {
+                // A storage-root refresh needs leaving/re-entering that storage via the observed Music drawer.
+                val arrow = MangoUiModel.node(current!!.nodes, "nav_bar_back_iv") ?: error("UI_UNEXPECTED_SCREEN")
+                val menu = MangoUiModel.clickable(current.nodes, arrow) ?: error("UI_ACTION_FAILED")
+                perform(current, Action(menu.path, "menu"), guarded)
+                val choices = home()
+                val storage = last!!.actions.entries.single { it.value.kind == "storage" && it.value.storage == parsed.storage }
+                browse(storage.key, 0, choices.getString("revision"), guarded, ::checked)
+            } else {
+                val parentTitle = parsed.title.substringBeforeLast(" / ", "")
+                val folderTitle = parsed.title.substringAfterLast(" / ")
+                val back = frame.actions.entries.single { it.value.kind == "back" }
+                fun openFolder(parent: JSONObject?, issue: String?) {
+                    if (issue != null || parent == null) { fail(issue ?: "UI_UNEXPECTED_SCREEN"); return }
+                    try {
+                        require(guarded()) { "AUTHORIZATION_DENIED" }
+                        require(last?.parsed?.title == parentTitle && last?.parsed?.storage == parsed.storage) { "STALE_LIBRARY" }
+                        val folders = last!!.actions.filterValues { it.kind == "folder" && it.title == folderTitle }
+                        require(folders.size <= 1) { "STALE_LIBRARY" }
+                        if (folders.isNotEmpty()) browse(folders.keys.single(), 0, last!!.revision, guarded, ::checked)
+                        else {
+                            require(!parent.isNull("nextPage")) { "STALE_LIBRARY" }
+                            browse(parent.getString("parent"), parent.getInt("nextPage"), last!!.revision, guarded, ::openFolder)
+                        }
+                    } catch (e: Exception) { fail(e.message ?: "UI_UNEXPECTED_SCREEN") }
+                }
+                browse(back.key, 0, revision, guarded, ::openFolder)
+            }
+        } catch (e: Exception) { fail(e.message ?: "UI_UNEXPECTED_SCREEN") }
+    }
+    fun validateFreshPlayable(item: String, revision: String, stillAuthorized: () -> Boolean, done: (String?) -> Unit) {
+        prepareFreshPlay(item, revision, stillAuthorized) { _, _, issue -> done(issue) }
+    }
     fun play(item: String, revision: String, stillAuthorized: () -> Boolean, done: (String?) -> Unit) {
-        if (busy) { done("UI_BUSY"); return }
-        try { val (current, action) = validate(item, revision, "play"); perform(current!!, action, stillAuthorized); last = null; done(null) }
-        catch (e: Exception) { done(e.message ?: "UI_ACTION_FAILED") }
+        prepareFreshPlay(item, revision, stillAuthorized) { current, action, issue ->
+            if (issue != null) done(issue)
+            else try { perform(current!!, action!!, stillAuthorized); last = null; done(null) }
+            catch (e: Exception) { done(e.message ?: "UI_ACTION_FAILED") }
+        }
     }
     fun browse(parent: String?, page: Int, revision: String?, stillAuthorized: () -> Boolean, done: (JSONObject?, String?) -> Unit) {
         if (busy) { done(null, "UI_BUSY"); return }; busy = true

@@ -95,6 +95,15 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
                 sources.externalStateChanged(); finish(JSONObject().put("enabled", enabled), null)
             } else if (operation == "DESCRIBE_ITEM") {
                 finish(sources.nativeItemEvidence(intent.getStringExtra("item") ?: ""), null)
+            } else if (operation == "VALIDATE_MANGO_UI_ITEM_FRESH") {
+                require(sources.selected == "com.ibasso.music") { "INVALID_SOURCE" }
+                val item = intent.getStringExtra("item") ?: error("INVALID_ARGUMENT")
+                val revision = intent.getStringExtra("revision") ?: error("INVALID_ARGUMENT")
+                require(item.startsWith("mango-ui:") && revision.isNotBlank()) { "INVALID_ARGUMENT" }
+                val service = MangoAccessibilityService.instance ?: return finish(null, "UI_PERMISSION_REQUIRED")
+                service.validateFreshPlayable(item, revision, { !finished }) { issue ->
+                    finish(JSONObject().put("validationOnly", true).put("dispatchedPlayback", false), issue)
+                }
             } else if (operation == "VALIDATE_MANGO_UI_ITEM") {
                 require(sources.selected == "com.ibasso.music") { "INVALID_SOURCE" }
                 val item = intent.getStringExtra("item") ?: error("INVALID_ARGUMENT")
