@@ -672,8 +672,23 @@ class _PhoneShellState extends State<PhoneShell>
     animation: remote,
     builder: (context, child) {
       final browsing = {1, 2}.contains(_tab.value);
+      // A tab alone is not a browse location. Inheriting another folder's saved
+      // offset can put a different song under a finger when a fast page arrives.
+      final Object scrollContext = switch (_tab.value) {
+        1 => (
+          'library',
+          remote.scope,
+          textValue(remote.library['revision']),
+          remote.currentParent,
+          textValue(remote.library['parent']),
+          remote.page,
+          remote.libraryLoading,
+        ),
+        2 => ('queue', remote.scope, remote.queueRevision, remote.queueOffset),
+        _ => ('tab', _tab.value),
+      };
       final content = ListView(
-        key: PageStorageKey(_tab.value),
+        key: PageStorageKey(scrollContext),
         padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
         children: [
           if (!browsing) ...[statusContent(), const SizedBox(height: 20)],

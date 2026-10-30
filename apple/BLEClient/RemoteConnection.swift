@@ -39,6 +39,14 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     private var reconnectAttempts = 0
     private var connectionTimeout: Task<Void, Never>?
     private var connectionGeneration = 0
+    private var setupDeadline = ConnectionSetupDeadline()
+    private var setupTimeout: Task<Void, Never>?
+    private let setupClockOrigin = ContinuousClock.now
+    private var setupExpiryNotice: String?
+    private var setupNowMs: Int64 {
+        let elapsed = setupClockOrigin.duration(to: ContinuousClock.now).components
+        return elapsed.seconds * 1000 + elapsed.attoseconds / 1_000_000_000_000_000
+    }
     private var writeTimeout: Task<Void, Never>?
     private var pending: [String: String] = [:]
     private let mutations: Set<String> = ["SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "SELECT_SOURCE", "PLAY_ITEM", "PLAY_QUEUE_ITEM", "ADJUST_VOLUME"]
@@ -89,7 +97,22 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         if let p = peripheral { manager.cancelPeripheralConnection(p) }
         clearConnection(); status = "Disconnected. Cached lists may be stale."
     }
-    private func clearConnection() { connectionGeneration += 1; connectionTimeout?.cancel(); connectionTimeout = nil; writeTimeout?.cancel(); writeTimeout = nil; authorized = false; controlProposal.clear(); rx = nil; tx = nil; writing = false; writes = []; pending = [:]; browseLocations = [:]; queueLocations = [:]; activeBrowseId = nil; activeQueueId = nil; hostEpoch = ""; assembler.clear() }
+    private func clearConnection() { cancelSetupDeadline(); setupExpiryNotice = nil; connectionGeneration += 1; connectionTimeout?.cancel(); connectionTimeout = nil; writeTimeout?.cancel(); writeTimeout = nil; authorized = false; controlProposal.clear(); rx = nil; tx = nil; writing = false; writes = []; pending = [:]; browseLocations = [:]; queueLocations = [:]; activeBrowseId = nil; activeQueueId = nil; hostEpoch = ""; assembler.clear() }
+    private func cancelSetupDeadline() { setupTimeout?.cancel(); setupTimeout = nil; setupDeadline.clear() }
+    private func beginSetupDeadline() {
+        guard !setupDeadline.active else { return }
+        let ticket = setupDeadline.begin(at: setupNowMs)
+        setupTimeout = Task {
+            try? await Task.sleep(until: .now + .milliseconds(ConnectionSetupDeadline.timeoutMs), clock: .continuous)
+            guard !Task.isCancelled else { return }
+            expireSetupIfNeeded(ticket: ticket)
+        }
+    }
+    @discardableResult private func expireSetupIfNeeded(ticket: UInt64? = nil) -> Bool {
+        guard !authorized, setupDeadline.expired(at: setupNowMs, ticket: ticket) else { return false }
+        disconnect(); setupExpiryNotice = ConnectionSetupDeadline.message; status = ConnectionSetupDeadline.message
+        return true
+    }
     private func beginConnection(_ device: CBPeripheral) {
         guard wantsConnection, manager.state == .poweredOn else { return }
         status = "Connecting…"; armConnectionTimeout(device); manager.connect(device)
@@ -118,7 +141,8 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     }
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         guard peripheral == self.peripheral else { return }
-        clearConnection(); status = wantsConnection ? "Disconnected; pending commands discarded. Reconnecting…" : "Disconnected. Cached lists may be stale."
+        let expiryNotice = setupExpiryNotice
+        clearConnection(); status = expiryNotice ?? (wantsConnection ? "Disconnected; pending commands discarded. Reconnecting…" : "Disconnected. Cached lists may be stale.")
         if wantsConnection && central.state == .poweredOn && reconnectAttempts < 5 {
             let delay = min(15, 1 << reconnectAttempts); reconnectAttempts += 1
             let generation = connectionGeneration
@@ -132,6 +156,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         if restored.state == .connected { armConnectionTimeout(restored); restored.discoverServices([CBUUID(string: Wire.service)]) }
     }
     func refreshOnForeground() {
+        if expireSetupIfNeeded() { return }
         guard let p = peripheral, p.state == .connected, rx != nil else { return }
         if authorized { send("GET_STATE") } else { send("HELLO", bootstrap: true) }
     }
@@ -153,9 +178,11 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         guard peripheral == self.peripheral, characteristic == tx else { return }
         guard error == nil, characteristic.isNotifying else { status = "Pairing failed. Open pairing on DX340, accept the system prompt, then retry."; return }
         connectionTimeout?.cancel(); connectionTimeout = nil; reconnectAttempts = 0
+        beginSetupDeadline()
         send("HELLO", bootstrap: true)
     }
     func send(_ type: String, args: [String: Any] = [:], bootstrap: Bool = false) {
+        if expireSetupIfNeeded() { return }
         guard let p = peripheral, let _ = rx, p.state == .connected, bootstrap || authorized else { status = "Connect and authorize before controlling playback."; return }
         guard pending.count < 8 else { status = "Wait for pending replies."; return }
         guard !mutations.contains(type) || !mutationPending else { status = "Wait for the current playback action to finish."; return }
@@ -207,6 +234,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         send("BROWSE", args: ["parent": parent.map { $0 as Any } ?? NSNull(), "page": page, "revision": parent == nil ? NSNull() : (library["revision"] ?? state["sourceEpoch"] ?? "")])
     }
     private func receive(_ value: Data) throws {
+        if expireSetupIfNeeded() { return }
         guard let reply = try JSONSerialization.jsonObject(with: value) as? [String: Any], reply["v"] as? Int == 1,
               let type = reply["type"] as? String, let data = reply["data"] as? [String: Any] else { throw WireError.malformed }
         let id = reply["id"] as? String ?? "", operation = pending[id], location = browseLocations[id]
@@ -225,12 +253,15 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
             if data["code"] as? String == "CONTROLLER_BUSY" {
                 wantsConnection = false
                 controlProposal.observeBusy(replyHost: reply["hostEpoch"] as? String ?? "", expectedHost: hostEpoch, value: data["ownershipRevision"] as? String ?? "")
-            } else { controlProposal.clear() }
+            } else {
+                controlProposal.clear()
+                if data["code"] as? String == "LOCAL_APPROVAL_REQUIRED" { wantsConnection = false }
+            }
         }
         if type == "ERROR" { if reply["hostEpoch"] as? String == hostEpoch, let fresh = data["state"] as? [String: Any] { applyState(fresh, notifyLibraryChange: false) }; browseLocations[id] = nil; if id == activeBrowseId { library = [:] }; if id == activeQueueId { queue = []; queueRevision = ""; queuePage = [:] }; status = errorMessage(data["code"] as? String ?? "Source error"); return }
         if type == "ACCEPTED" { status = "Waiting for source…"; return }
         guard reply["hostEpoch"] as? String == hostEpoch else { disconnect(); return }
-        if ["AUTHORIZE", "REQUEST_CONTROL"].contains(operation ?? ""), data["authorized"] as? Bool == true { controlProposal.clear(); authorized = true; wantsConnection = true; status = "Connected to DX340" }
+        if ["AUTHORIZE", "REQUEST_CONTROL"].contains(operation ?? ""), data["authorized"] as? Bool == true { controlProposal.clear(); authorized = true; cancelSetupDeadline(); wantsConnection = true; status = "Connected to DX340" }
         if let new = data["state"] as? [String: Any] { applyState(new, notifyLibraryChange: !["AUTHORIZE", "REQUEST_CONTROL"].contains(operation ?? "")) }
         if type == "STATE_CHANGED" { applyState(data) }
         if let list = data["sources"] as? [[String: Any]] { sources = list }

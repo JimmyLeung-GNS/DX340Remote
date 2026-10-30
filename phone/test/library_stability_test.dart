@@ -58,6 +58,78 @@ void main() {
   );
   for (final platform in [TargetPlatform.android, TargetPlatform.iOS]) {
     testWidgets(
+      '$platform a previous folder offset cannot return in a new album',
+      (tester) async {
+        debugDefaultTargetPlatformOverride = platform;
+        addTearDown(() => debugDefaultTargetPlatformOverride = null);
+        tester.view.physicalSize = const Size(400, 1000);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+        final remote = Remote(FakeBridge());
+        await tester.pumpWidget(DX340App(remote: remote));
+        await tester.pumpAndSettle();
+        final folders = librarySnapshot();
+        (folders['library'] as Json)['requestedParent'] = 'previous-folder';
+        (folders['library'] as Json)['items'] = [
+          for (var i = 0; i < 30; i++)
+            {
+              'id': 'folder-$i',
+              'title': 'Previous folder row $i',
+              'browsable': true,
+            },
+        ];
+        remote.accept(folders);
+        await tester.tap(find.text('Library').last);
+        await tester.pumpAndSettle();
+        await tester.drag(find.byType(ListView), const Offset(0, -350));
+        await tester.pumpAndSettle();
+        expect(
+          tester
+              .state<ScrollableState>(
+                find.descendant(
+                  of: find.byType(ListView),
+                  matching: find.byType(Scrollable),
+                ),
+              )
+              .position
+              .pixels,
+          greaterThan(100),
+        );
+        remote.accept(snapshot(library: {'loading': true}));
+        // A cached reply can arrive before Flutter renders the loading frame.
+        final album = librarySnapshot();
+        (album['library'] as Json)['requestedParent'] = 'new-album';
+        (album['library'] as Json)['items'] = [
+          for (var i = 1; i <= 30; i++)
+            {'id': 'song-$i', 'title': 'Song $i', 'playable': true},
+        ];
+        remote.accept(album);
+        await tester.pumpAndSettle();
+        expect(
+          tester
+              .state<ScrollableState>(
+                find.descendant(
+                  of: find.byType(ListView),
+                  matching: find.byType(Scrollable),
+                ),
+              )
+              .position
+              .pixels,
+          0,
+        );
+        final beforeLeaving = tester.getTopLeft(find.text('Song 1'));
+        await tester.tap(find.text('Player').last);
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('Library').last);
+        await tester.pumpAndSettle();
+        expect(tester.getTopLeft(find.text('Song 1')), beforeLeaving);
+        expect(tester.takeException(), isNull);
+        await tester.pumpWidget(const SizedBox());
+        debugDefaultTargetPlatformOverride = null;
+      },
+    );
+    testWidgets(
       '$platform status and pending changes do not move library rows',
       (tester) async {
         debugDefaultTargetPlatformOverride = platform;

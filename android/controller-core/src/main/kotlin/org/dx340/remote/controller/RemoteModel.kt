@@ -15,6 +15,7 @@ import org.dx340.remote.protocol.ReplyBudget
 import org.dx340.remote.protocol.BrowseContext
 import org.dx340.remote.protocol.BrowseContextTransition
 import org.dx340.remote.protocol.BrowseReset
+import org.dx340.remote.protocol.ConnectionSetupDeadline
 
 @SuppressLint("MissingPermission")
 class RemoteModel(context: Context) {
@@ -50,8 +51,11 @@ class RemoteModel(context: Context) {
     private val queueLocations = mutableMapOf<String, QueueLocation>()
     private var activeQueueId: String? = null
     private val devices = linkedMapOf<String, BluetoothDevice>()
+    private val setupDeadline = ConnectionSetupDeadline()
+    private var setupTimeout: Runnable? = null
     val found get() = devices.values.toList()
-    private val ble = BleCentral(context, { status = it; update() }, { devices[it.address] = it; update() }, { send("HELLO", bootstrap = true) }, ::receive) {
+    private val ble: BleCentral = BleCentral(context, { status = it; update() }, { devices[it.address] = it; update() }, { beginSetupDeadline(); send("HELLO", bootstrap = true) }, ::receive) {
+        cancelSetupDeadline()
         session.lost(); controlProposal.clear(); browseLocations.clear(); queueLocations.clear(); activeBrowseId = null; activeQueueId = null; status = "Disconnected. Cached lists may be stale; reconnect to control."; update()
     }
     init {
@@ -66,9 +70,23 @@ class RemoteModel(context: Context) {
     fun scan() { devices.clear(); runCatching { ble.scan() }.onFailure { status = it.message ?: "Bluetooth unavailable" }; update() }
     fun connect(device: BluetoothDevice) = ble.connect(device)
     fun disconnect() { session.lost(); controlProposal.clear(); browseLocations.clear(); queueLocations.clear(); activeBrowseId = null; activeQueueId = null; ble.disconnect(); status = "Disconnected. Cached lists may be stale; reconnect to control."; update() }
-    fun refreshOnForeground() { if (authorized) send("GET_STATE") else update() }
+    fun refreshOnForeground() { if (expireSetupIfNeeded()) return; if (authorized) send("GET_STATE") else update() }
     fun close() { ble.stopScan(); ble.disconnect(); main.removeCallbacksAndMessages(null) }
     fun authorize() = send("AUTHORIZE", bootstrap = true)
+    private fun cancelSetupDeadline() {
+        setupTimeout?.let(main::removeCallbacks); setupTimeout = null; setupDeadline.clear()
+    }
+    private fun beginSetupDeadline() {
+        if (setupDeadline.active) return
+        val ticket = setupDeadline.begin(android.os.SystemClock.elapsedRealtime())
+        setupTimeout = Runnable { expireSetupIfNeeded(ticket) }.also { main.postDelayed(it, ConnectionSetupDeadline.TIMEOUT_MS) }
+    }
+    private fun expireSetupIfNeeded(ticket: Long? = null): Boolean {
+        if (authorized || !setupDeadline.expired(android.os.SystemClock.elapsedRealtime(), ticket)) return false
+        // Close unfinished setup without changing saved approvals or replaying a command.
+        ble.disconnect(); status = ConnectionSetupDeadline.MESSAGE; update()
+        return true
+    }
     fun requestControl() {
         if (!canRequestControl) return
         val revision = controlProposal.consume() ?: return
@@ -76,6 +94,7 @@ class RemoteModel(context: Context) {
         send("REQUEST_CONTROL", JSONObject().put("ownershipRevision", revision), bootstrap = true)
     }
     fun send(type: String, args: JSONObject = JSONObject(), bootstrap: Boolean = false) {
+        if (expireSetupIfNeeded()) return
         if (!bootstrap && !authorized) { status = "Reconnect and authorize before controlling playback."; update(); return }
         if (type in mutations && mutationPending) { status = "Wait for the current playback action to finish."; update(); return }
         if (pending.size >= 8) { status = "Wait for pending commands."; update(); return }
@@ -105,6 +124,7 @@ class RemoteModel(context: Context) {
     fun readQueue(offset: Int = 0) = send("GET_QUEUE", JSONObject().put("offset", offset)
         .put("revision", if (offset == 0) JSONObject.NULL else queueRevision))
     private fun receive(bytes: ByteArray) {
+        if (expireSetupIfNeeded()) return
         try {
             val reply = JSONObject(String(bytes, Charsets.UTF_8)); require(reply.getInt("v") == 1)
             val id = reply.optString("id"); val type = reply.getString("type"); val data = reply.getJSONObject("data")
@@ -125,11 +145,14 @@ class RemoteModel(context: Context) {
                 if (data.optString("code") == "CONTROLLER_BUSY") {
                     ble.pauseReconnection()
                     controlProposal.observeBusy(reply.optString("hostEpoch"), epoch, data.optString("ownershipRevision"))
-                } else controlProposal.clear()
+                } else {
+                    controlProposal.clear()
+                    if (data.optString("code") == "LOCAL_APPROVAL_REQUIRED") ble.pauseReconnection()
+                }
             }
             if (type == "ERROR") { data.optJSONObject("state")?.takeIf { reply.optString("hostEpoch") == epoch }?.let { applyState(it, false) }; browseLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); if (id == activeQueueId) { queue = JSONArray(); queueRevision = ""; queuePage = JSONObject() }; status = errorMessage(data.optString("code", "Unknown source error")); update(); return }
             if (type == "ACCEPTED") { status = "Waiting for source…"; update(); return }
-            if (operation in listOf("AUTHORIZE", "REQUEST_CONTROL") && data.optBoolean("authorized")) { controlProposal.clear(); session.approve(reply.getString("hostEpoch")); ble.resumeReconnection(); status = "Connected to DX340" }
+            if (operation in listOf("AUTHORIZE", "REQUEST_CONTROL") && data.optBoolean("authorized")) { controlProposal.clear(); session.approve(reply.getString("hostEpoch")); cancelSetupDeadline(); ble.resumeReconnection(); status = "Connected to DX340" }
             if (reply.optString("hostEpoch") != epoch) { disconnect(); return }
             data.optJSONObject("state")?.let { applyState(it, operation !in listOf("AUTHORIZE", "REQUEST_CONTROL")) }
             if (type == "STATE_CHANGED") applyState(data)

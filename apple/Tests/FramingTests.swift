@@ -2,6 +2,32 @@ import XCTest
 @testable import DXProtocol
 
 final class FramingTests: XCTestCase {
+    func testSharedConnectionSetupDeadlineRetiresOnlyCurrentUnfinishedAttempt() throws {
+        let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        let fixture = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("protocol/fixtures/connection-setup-deadline.json"))) as! [String: Any]
+        XCTAssertEqual(ConnectionSetupDeadline.timeoutMs, (fixture["timeoutMs"] as! NSNumber).int64Value)
+        XCTAssertEqual(ConnectionSetupDeadline.message, fixture["message"] as! String)
+        for item in fixture["cases"] as! [[String: Any]] {
+            var deadline = ConnectionSetupDeadline(), tickets: [String: UInt64] = [:]
+            for (index, step) in (item["steps"] as! [[String: Any]]).enumerated() {
+                switch step["action"] as! String {
+                case "begin": tickets[step["ticket"] as! String] = deadline.begin(at: (step["at"] as! NSNumber).int64Value)
+                case "clear": deadline.clear()
+                case "check":
+                    let ticket = (step["ticket"] as? String).map { tickets[$0]! }
+                    XCTAssertEqual(deadline.expired(at: (step["at"] as! NSNumber).int64Value, ticket: ticket), step["expired"] as! Bool, "\(item["name"]!):\(index)")
+                default: XCTFail("Unknown fixture action")
+                }
+            }
+        }
+    }
+    func testConnectionSetupDeadlineAvoidsOverflowAndClearsAfterApproval() {
+        var deadline = ConnectionSetupDeadline()
+        let ticket = deadline.begin(at: Int64.max - ConnectionSetupDeadline.timeoutMs)
+        XCTAssertFalse(deadline.expired(at: Int64.max - 1, ticket: ticket))
+        XCTAssertTrue(deadline.expired(at: Int64.max, ticket: ticket))
+        deadline.clear(); XCTAssertFalse(deadline.expired(at: Int64.max, ticket: ticket)); XCTAssertFalse(deadline.active)
+    }
     func testSharedBrowseContextTransitionsKeepNativePagesAndAuthorizationStatus() throws {
         let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
         let cases = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("protocol/fixtures/browse-invalidation.json"))) as! [[String: Any]]

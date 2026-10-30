@@ -29,6 +29,25 @@ public enum BrowseContextTransition {
 }
 
 public enum WireError: Error { case malformed, incompatible, outOfOrder, limit }
+/// Client recovery only. This never extends the host's pairing/authorization windows.
+public struct ConnectionSetupDeadline {
+    public static let timeoutMs: Int64 = 60000
+    public static let message = "Connection setup expired. In Setup, find and connect to DX340 again. Open pairing on DX340 if approval is needed."
+    private var generation: UInt64 = 0
+    private var startedAt: Int64?
+    public init() {}
+    public var active: Bool { startedAt != nil }
+    public mutating func begin(at nowMs: Int64) -> UInt64 {
+        precondition(nowMs >= 0)
+        generation &+= 1; startedAt = nowMs
+        return generation
+    }
+    public mutating func clear() { generation &+= 1; startedAt = nil }
+    public func expired(at nowMs: Int64, ticket: UInt64? = nil) -> Bool {
+        guard let start = startedAt, ticket == nil || ticket == generation else { return false }
+        return nowMs < start || nowMs - start >= Self.timeoutMs
+    }
+}
 /// Pending observation only; host authorization, source deadlines and no-replay rules stay separate.
 public enum ReplyBudget {
     public static func milliseconds(_ operation: String, item: String? = nil) -> Int64 {

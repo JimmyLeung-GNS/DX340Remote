@@ -1,0 +1,40 @@
+{
+  "timeoutMs": 60000,
+  "message": "Connection setup expired. In Setup, find and connect to DX340 again. Open pairing on DX340 if approval is needed.",
+  "cases": [
+    {"name":"exact-boundary", "steps":[
+      {"action":"begin","at":0,"ticket":"first"},
+      {"action":"check","at":59999,"ticket":"first","expired":false},
+      {"action":"check","at":60000,"ticket":"first","expired":true}
+    ]},
+    {"name":"authorization-completes-before-timer", "steps":[
+      {"action":"begin","at":100,"ticket":"first"},
+      {"action":"clear"},
+      {"action":"check","at":60100,"ticket":"first","expired":false}
+    ]},
+    {"name":"old-timer-cannot-expire-new-connection", "steps":[
+      {"action":"begin","at":0,"ticket":"old"},
+      {"action":"clear"},
+      {"action":"begin","at":50000,"ticket":"new"},
+      {"action":"check","at":60000,"ticket":"old","expired":false},
+      {"action":"check","at":109999,"ticket":"new","expired":false},
+      {"action":"check","at":110000,"ticket":"new","expired":true}
+    ]},
+    {"name":"foreground-after-suspension", "steps":[
+      {"action":"begin","at":1000,"ticket":"first"},
+      {"action":"check","at":90000,"expired":true}
+    ]},
+    {"name":"clock-rollback-retires-setup", "steps":[
+      {"action":"begin","at":1000,"ticket":"first"},
+      {"action":"check","at":999,"ticket":"first","expired":true}
+    ]},
+    {"name":"disconnect-and-approval-invalidate-all-late-timers", "steps":[
+      {"action":"begin","at":0,"ticket":"old"},
+      {"action":"begin","at":0,"ticket":"new"},
+      {"action":"check","at":60000,"ticket":"old","expired":false},
+      {"action":"clear"},
+      {"action":"check","at":60000,"ticket":"new","expired":false},
+      {"action":"check","at":90000,"expired":false}
+    ]}
+  ]
+}
