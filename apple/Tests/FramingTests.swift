@@ -2,6 +2,19 @@ import XCTest
 @testable import DXProtocol
 
 final class FramingTests: XCTestCase {
+    func testReplyBudgetsMatchSharedContractAndRetainObservedAssistedSelection() throws {
+        let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        let cases = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("protocol/fixtures/reply-budgets.json"))) as! [[String: Any]]
+        for item in cases {
+            let budget = ReplyBudget.milliseconds(item["operation"] as! String, item: item["item"] as? String)
+            XCTAssertEqual(budget, (item["milliseconds"] as! NSNumber).int64Value)
+            if let observed = item["observedPreparationMs"] as? NSNumber {
+                XCTAssertGreaterThan(observed.int64Value, 12000)
+                XCTAssertGreaterThan(budget, observed.int64Value)
+                XCTAssertGreaterThan(budget, 20000 + 3500)
+            }
+        }
+    }
     func testControlProposalNeedsCurrentHostAndExplicitSingleConsumption() {
         var proposal = ControlProposal()
         proposal.observeBusy(replyHost: "other-host", expectedHost: "host-A", value: "revision-1")

@@ -1,6 +1,14 @@
 import Foundation
 
 public enum WireError: Error { case malformed, incompatible, outOfOrder, limit }
+/// Pending observation only; host authorization, source deadlines and no-replay rules stay separate.
+public enum ReplyBudget {
+    public static func milliseconds(_ operation: String, item: String? = nil) -> Int64 {
+        if operation == "GET_ARTWORK" { return 75000 }
+        if operation == "PLAY_ITEM", item?.hasPrefix("mango-ui:") == true { return 30000 }
+        return 12000
+    }
+}
 public enum Wire {
     public static let service = "e7e01000-4a76-4b53-9c8f-c7a12b00d340"
     public static let info = "e7e01001-4a76-4b53-9c8f-c7a12b00d340"

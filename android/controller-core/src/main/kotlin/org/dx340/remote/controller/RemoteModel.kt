@@ -11,6 +11,7 @@ import org.json.JSONObject
 import java.util.UUID
 import org.dx340.remote.protocol.ControllerSession
 import org.dx340.remote.protocol.ControlProposal
+import org.dx340.remote.protocol.ReplyBudget
 
 @SuppressLint("MissingPermission")
 class RemoteModel(context: Context) {
@@ -90,7 +91,7 @@ class RemoteModel(context: Context) {
         update()
         try { ble.send(request.toString().toByteArray()) }
         catch (e: Exception) { pending.remove(id); browseLocations.remove(id); queueLocations.remove(id); status = e.message ?: "Send failed"; update(); return }
-        main.postDelayed({ if (pending.remove(id) != null) { browseLocations.remove(id); queueLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); status = "Reply timed out; outcome unknown. Refresh state before retrying."; update() } }, if (type == "GET_ARTWORK") 75000 else 12000)
+        main.postDelayed({ if (pending.remove(id) != null) { browseLocations.remove(id); queueLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); status = "Reply timed out; outcome unknown. Refresh state before retrying."; update() } }, ReplyBudget.milliseconds(type, args.optString("item")))
     }
     fun browse(parent: String? = null, page: Int = 0) = send("BROWSE", JSONObject().put("parent", parent ?: JSONObject.NULL).put("page", page)
         .put("revision", if (parent == null) JSONObject.NULL else library.optString("revision", state.optString("sourceEpoch"))))

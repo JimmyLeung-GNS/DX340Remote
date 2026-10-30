@@ -172,7 +172,8 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
                 activeBrowseId = id; library = ["loading": true]; status = "Loading library…"
             }
             writes.append(contentsOf: frames); pump()
-            Task { try? await Task.sleep(for: .seconds(type == "GET_ARTWORK" ? 75 : 12)); if pending.removeValue(forKey: id) != nil { browseLocations[id] = nil; queueLocations[id] = nil; if id == activeBrowseId { library = [:] }; status = "Reply timed out; outcome unknown. Refresh before retrying." } }
+            let replyBudget = ReplyBudget.milliseconds(type, item: args["item"] as? String)
+            Task { try? await Task.sleep(for: .milliseconds(replyBudget)); if pending.removeValue(forKey: id) != nil { browseLocations[id] = nil; queueLocations[id] = nil; if id == activeBrowseId { library = [:] }; status = "Reply timed out; outcome unknown. Refresh before retrying." } }
         } catch { status = "Cannot encode Bluetooth message." }
     }
     private func pump() {

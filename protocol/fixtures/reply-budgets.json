@@ -1,0 +1,15 @@
+[
+  {"operation":"PLAY_ITEM","item":"mango-ui:session:12:3","milliseconds":30000,"observedPreparationMs":12709},
+  {"operation":"PLAY_ITEM","item":"mango-ui:session:playlist:4","milliseconds":30000},
+  {"operation":"PLAY_ITEM","item":"/Album/2/3","milliseconds":12000},
+  {"operation":"PLAY_ITEM","item":"apple-ui:session:1:3","milliseconds":12000},
+  {"operation":"PLAY_ITEM","item":"prefix-mango-ui:session:1","milliseconds":12000},
+  {"operation":"PLAY_ITEM","item":"MANGO-UI:session:1","milliseconds":12000},
+  {"operation":"PLAY_ITEM","item":null,"milliseconds":12000},
+  {"operation":"PLAY_QUEUE_ITEM","item":"mango-ui:session:1:3","milliseconds":12000},
+  {"operation":"SET_PLAYING","item":"mango-ui:session:1:3","milliseconds":12000},
+  {"operation":"ADJUST_VOLUME","item":null,"milliseconds":12000},
+  {"operation":"NEXT","item":null,"milliseconds":12000},
+  {"operation":"BROWSE","item":null,"milliseconds":12000},
+  {"operation":"GET_ARTWORK","item":null,"milliseconds":75000}
+]
