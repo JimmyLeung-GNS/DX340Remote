@@ -1,5 +1,7 @@
 # Mango folder file changes, 30 October 2026
 
+Follow-up: [final-package paused matrix and debug lifecycle upgrade](2026-10-30-mango-refresh-final-paused.md) records final96 rename/removal/interruption results and subsequent7aee0f7e... preparation. Pending statements below describe the preceding checkpoint; audio/root/native/SD/full phone gates remain open.
+
 This is a physical DX340 **validation-only subset of T11**, using generated silent test data. No PLAY_ITEM, transport play/pause, volume, Bluetooth pairing, approval/revocation or OS bond command was sent. Native rescan/SD, playlist file changes, audio and real-phone acceptance remain separate.
 
 Environment: JIMMYAH Windows11/build26300; DX340 `d`, Android13/API33/build `DX340-userdebug 13 TKQ1.221013.002 eng.iBasso.20260812.181952 release-keys`; Mango4.1.37/code240, Apple Music6.5.3/code1599. Both source sessions were paused37, Wi-Fi off/no active default network. The original external Android signer was checked before every in-place APK upgrade. Shared phone23c536e7... was unchanged.

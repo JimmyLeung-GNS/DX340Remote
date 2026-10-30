@@ -1,5 +1,7 @@
 # Build, installation and first use
 
+Current30 October installed companion7aee0f7eb54345d213c0969471f78ca0c252e3f1e61ae14cfe553569ee72bab6/source7b50383 retains the original signer. Debug PLAY_ITEM uses a unique reportTag and an asynchronous30s receipt; the updated Mango/Apple listening helpers poll that receipt without resending playback. Use current helpers, retain failed/unknown attempts and never infer audible success from FINISHED. Physical paused later-page preparation passes12.709s, so responsiveness and actual final-path audio remain pending. See [the final paused report](test-results/2026-10-30-mango-refresh-final-paused.md). Shared phone23c536e7... is unchanged and has no physical phone BLE acceptance.
+
 This is a diagnostic beta, not an accepted full remote system. Mango stays the local playback engine. Product Android manifests request no INTERNET or Wi-Fi permissions. Flutter debug/profile tooling adds INTERNET for development; use the release-mode development package for everyday offline trials. Build/download/signing setup may use the development computer's internet; everyday app transport is BLE only.
 
 ## Shared Android/iPhone interface

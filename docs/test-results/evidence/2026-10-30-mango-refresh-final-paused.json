@@ -1,0 +1,283 @@
+{
+  "kind": "physical-paused-folder-preparation-and-PC-BLE-separate-scopes",
+  "installedCompanionSha256": "96a669ebdb94090d68653d9b70dc7fd7d6a7a0495c6db57783fee8e9bd5f376b",
+  "applicationSource": "7e95900bb0b4c6c5d73d0b0b38a25fce635711a6",
+  "validationCases": [
+    {
+      "receipt": "20261030-120411-f807f4",
+      "kind": "source-local-production-folder-refresh-validation-only-no-playback-no-BLE",
+      "sourceCommit": "67b928318aeb77f86f6db71e5a875101d24836ed",
+      "sourceTreeDirty": false,
+      "pageSha256": "2075dbe66247462b80238024e22eb46b33b67a9ff547f71241efd4634310ef10",
+      "fileName": "probe-A.wav",
+      "expected": "PASS",
+      "expectedCompanionSha256": "96a669ebdb94090d68653d9b70dc7fd7d6a7a0495c6db57783fee8e9bd5f376b",
+      "status": "PASS_WITHIN_VALIDATION_ONLY_SCOPE",
+      "helperSha256": "c9e3a7e8e8a201a0df2def42c6a84b9ac9ad3e12a22d8537f1dd91ab6f9aa348",
+      "observationFailures": 0,
+      "observedError": null,
+      "elapsedMs": 4794,
+      "completedUtc": "2026-10-30T12:04:18.1083818Z"
+    },
+    {
+      "receipt": "20261030-120427-b9b2e2",
+      "kind": "source-local-production-folder-refresh-validation-only-no-playback-no-BLE",
+      "sourceCommit": "67b928318aeb77f86f6db71e5a875101d24836ed",
+      "sourceTreeDirty": false,
+      "pageSha256": "c2530eface3c44baf88fd35ef51792b79d50409c5a8bb06f828744a7ea1b44b3",
+      "fileName": "probe-A.wav",
+      "expected": "STALE_LIBRARY",
+      "expectedCompanionSha256": "96a669ebdb94090d68653d9b70dc7fd7d6a7a0495c6db57783fee8e9bd5f376b",
+      "status": "PASS_WITHIN_VALIDATION_ONLY_SCOPE",
+      "helperSha256": "c9e3a7e8e8a201a0df2def42c6a84b9ac9ad3e12a22d8537f1dd91ab6f9aa348",
+      "observationFailures": 0,
+      "observedError": "STALE_LIBRARY",
+      "elapsedMs": 4680,
+      "completedUtc": "2026-10-30T12:04:34.1027324Z"
+    },
+    {
+      "receipt": "20261030-120442-03ab7a",
+      "kind": "source-local-production-folder-refresh-validation-only-no-playback-no-BLE",
+      "sourceCommit": "67b928318aeb77f86f6db71e5a875101d24836ed",
+      "sourceTreeDirty": true,
+      "pageSha256": "e6a7be5961949d34db91e07a128e0e159141bdda08cca132506bff5f918e75af",
+      "fileName": "probe-B.wav",
+      "expected": "STALE_LIBRARY",
+      "expectedCompanionSha256": "96a669ebdb94090d68653d9b70dc7fd7d6a7a0495c6db57783fee8e9bd5f376b",
+      "status": "PASS_WITHIN_VALIDATION_ONLY_SCOPE",
+      "helperSha256": "c9e3a7e8e8a201a0df2def42c6a84b9ac9ad3e12a22d8537f1dd91ab6f9aa348",
+      "observationFailures": 0,
+      "observedError": "STALE_LIBRARY",
+      "elapsedMs": 4121,
+      "completedUtc": "2026-10-30T12:04:49.4036902Z"
+    },
+    {
+      "receipt": "20261030-120637-db4a4a",
+      "kind": "source-local-production-folder-refresh-validation-only-no-playback-no-BLE",
+      "sourceCommit": "6f0ef674d6f81c714010ce2296a978d89f60203e",
+      "sourceTreeDirty": true,
+      "pageSha256": "293266c52bee4b50e90f27d6a60625bc3e1b5f7970c7611e72173d1d66927608",
+      "fileName": "30. 旅ダチノウタ.flac",
+      "expected": "SAFE_HOME_INTERRUPTION",
+      "expectedCompanionSha256": "96a669ebdb94090d68653d9b70dc7fd7d6a7a0495c6db57783fee8e9bd5f376b",
+      "status": "PASS_WITHIN_VALIDATION_ONLY_SCOPE",
+      "helperSha256": "33de767dd7d300fa89f925e942d17ca28bf11c1ac278ef94937ade9d4f607a13",
+      "interruption": "Home",
+      "observationFailures": 0,
+      "observedError": "UI_FOREGROUND_REQUIRED",
+      "elapsedMs": 937,
+      "completedUtc": "2026-10-30T12:06:40.7254634Z"
+    },
+    {
+      "receipt": "20261030-120806-f7c249",
+      "kind": "source-local-production-folder-refresh-validation-only-no-playback-no-BLE",
+      "sourceCommit": "6f0ef674d6f81c714010ce2296a978d89f60203e",
+      "sourceTreeDirty": true,
+      "pageSha256": "99336f3d9658aa3db3c301d84194bf6733c28f60b9b5eddf8e834aef1ef95449",
+      "fileName": "30. 旅ダチノウタ.flac",
+      "expected": "AUTHORIZATION_DENIED",
+      "expectedCompanionSha256": "96a669ebdb94090d68653d9b70dc7fd7d6a7a0495c6db57783fee8e9bd5f376b",
+      "status": "PASS_WITHIN_VALIDATION_ONLY_SCOPE",
+      "helperSha256": "33de767dd7d300fa89f925e942d17ca28bf11c1ac278ef94937ade9d4f607a13",
+      "interruption": "SourceChange",
+      "observationFailures": 0,
+      "observedError": "AUTHORIZATION_DENIED",
+      "elapsedMs": 680,
+      "completedUtc": "2026-10-30T12:08:09.3147156Z"
+    },
+    {
+      "receipt": "20261030-121548-429252",
+      "kind": "source-local-production-folder-refresh-validation-only-no-playback-no-BLE",
+      "sourceCommit": "6f0ef674d6f81c714010ce2296a978d89f60203e",
+      "sourceTreeDirty": true,
+      "pageSha256": "5d3d29d8ec55f8b934da00eea76be9dceb9d37da2c56b8f0d04a561cd283b3ce",
+      "fileName": "30. 旅ダチノウタ.flac",
+      "expected": "PASS",
+      "expectedCompanionSha256": "96a669ebdb94090d68653d9b70dc7fd7d6a7a0495c6db57783fee8e9bd5f376b",
+      "status": "PASS_WITHIN_VALIDATION_ONLY_SCOPE",
+      "helperSha256": "33de767dd7d300fa89f925e942d17ca28bf11c1ac278ef94937ade9d4f607a13",
+      "interruption": "None",
+      "observationFailures": 0,
+      "observedError": null,
+      "elapsedMs": 12298,
+      "completedUtc": "2026-10-30T12:16:02.5576480Z"
+    }
+  ],
+  "fixture": {
+    "kind": "final-package-physical-folder-rename-removal-validation-no-playback-no-BLE",
+    "sourceCommit": "67b928318aeb77f86f6db71e5a875101d24836ed",
+    "sourceTreeDirty": false,
+    "helperSha256": "d290e3992677c2716c4f8f9b9ae3cbe28bc9cb100b160de51606c05d9ece02df",
+    "expectedCompanionSha256": "96a669ebdb94090d68653d9b70dc7fd7d6a7a0495c6db57783fee8e9bd5f376b",
+    "checks": [
+      "unchanged generated WAV preparation PASS",
+      "actual rename rejects held A token after source refresh",
+      "actual removal rejects held B token after source refresh"
+    ],
+    "status": "ALL_THREE_FINAL_PACKAGE_VALIDATION_CASES_PASS",
+    "cleanup": "VERIFIED_ABSENT",
+    "completedUtc": "2026-10-30T12:04:50.7066786Z"
+  },
+  "pcBle": [
+    {
+      "label": "final-folder-refresh-96-saved-read",
+      "kind": "Windows-BLE-read-only-protocol-diagnostic",
+      "mode": "authorized-state",
+      "createdUtc": "2026-10-30T12:10:14.477026+00:00",
+      "windows": "Windows-11-10.0.26300-SP0",
+      "python": "3.14.0",
+      "bleak": "3.0.2",
+      "gattConnectionAttempted": true,
+      "framesWritten": 40,
+      "framesReceived": 17,
+      "allChecksPassed": true,
+      "checks": [
+        {
+          "check": "protected INFO read and indication subscription",
+          "passed": true
+        },
+        {
+          "check": "correlated HELLO with host epoch",
+          "passed": true
+        },
+        {
+          "check": "AUTHORIZE succeeds after local approval",
+          "passed": true
+        },
+        {
+          "check": "GET_STATE returns current source identity/state",
+          "passed": true
+        },
+        {
+          "check": "duplicate read ID returns identical cached result",
+          "passed": true
+        }
+      ],
+      "playbackCommandsSent": 0,
+      "pairingRequested": false,
+      "scope": "PC development diagnostic; not physical phone or audio acceptance",
+      "phase": "complete",
+      "bondBefore": {
+        "paired": true,
+        "protection": "ENCRYPTION_AND_AUTHENTICATION"
+      },
+      "bondAfter": {
+        "paired": true,
+        "protection": "ENCRYPTION_AND_AUTHENTICATION"
+      },
+      "negotiatedAttMtu": 517,
+      "clientCleanupCompleted": true
+    },
+    {
+      "label": "final-96-ui-concurrent-read",
+      "kind": "Windows-BLE-read-only-protocol-diagnostic",
+      "mode": "authorized-state",
+      "createdUtc": "2026-10-30T12:15:48.480227+00:00",
+      "windows": "Windows-11-10.0.26300-SP0",
+      "python": "3.14.0",
+      "bleak": "3.0.2",
+      "gattConnectionAttempted": true,
+      "framesWritten": 40,
+      "framesReceived": 20,
+      "allChecksPassed": true,
+      "checks": [
+        {
+          "check": "protected INFO read and indication subscription",
+          "passed": true
+        },
+        {
+          "check": "correlated HELLO with host epoch",
+          "passed": true
+        },
+        {
+          "check": "AUTHORIZE succeeds after local approval",
+          "passed": true
+        },
+        {
+          "check": "GET_STATE returns current source identity/state",
+          "passed": true
+        },
+        {
+          "check": "duplicate read ID returns identical cached result",
+          "passed": true
+        }
+      ],
+      "playbackCommandsSent": 0,
+      "pairingRequested": false,
+      "scope": "PC development diagnostic; not physical phone or audio acceptance",
+      "phase": "complete",
+      "bondBefore": {
+        "paired": true,
+        "protection": "ENCRYPTION_AND_AUTHENTICATION"
+      },
+      "bondAfter": {
+        "paired": true,
+        "protection": "ENCRYPTION_AND_AUTHENTICATION"
+      },
+      "negotiatedAttMtu": 517,
+      "clientCleanupCompleted": true
+    }
+  ],
+  "concurrentTiming": {
+    "startedUtc": "2026-10-30T12:15:48.1998581Z",
+    "completedUtc": "2026-10-30T12:16:08.6275492Z",
+    "exitCode": 0
+  },
+  "concurrentScope": "Concurrent launches completed, but no per-request BLE phase timestamps: does not prove GET_STATE completed while UI busy or meet latency targets.",
+  "postflight": {
+    "nativeAlbumRows": 22,
+    "allFourPreferencesUnchanged": true,
+    "bothSourcesPaused": true,
+    "volume": 37,
+    "volumeVerified": false,
+    "health": {
+      "MangoBound": true,
+      "AppleBound": true,
+      "Foreground": true,
+      "NoCrashedServices": true,
+      "NoPendingBindings": true
+    },
+    "fixtureAbsent": true,
+    "pcAccess": "Saved JIMMYAH approval retained; both BLE clients cleaned up, no revoke/pairing operations",
+    "audioAvailability": "Question pending; no playback dispatched"
+  },
+  "unverified": [
+    "No new file playback/audio",
+    "No physical Android/iPhone Bluetooth",
+    "No actual timeout-cutoff playback test",
+    "No full native/rescan/SD or playlist file-change test",
+    "No production BLE lease-revocation test",
+    "Preparation misses response targets"
+  ],
+  "debugLifecycleUpgrade": {
+    "sourceCommit": "7b5038329ddaa57b81d9d8111cc36700b264bbb5",
+    "installedSha256": "7aee0f7eb54345d213c0969471f78ca0c252e3f1e61ae14cfe553569ee72bab6",
+    "signerMatchesPrevious": true,
+    "nativeBuildLintTests": 147,
+    "softwareReceiptTests": 5,
+    "productionAdapterChangedInUpgrade": false,
+    "validation": {
+      "status": "PASS_WITHIN_VALIDATION_ONLY_SCOPE",
+      "expectedCompanionSha256": "7aee0f7eb54345d213c0969471f78ca0c252e3f1e61ae14cfe553569ee72bab6",
+      "sourceCommit": "7b5038329ddaa57b81d9d8111cc36700b264bbb5",
+      "sourceTreeDirty": true,
+      "elapsedMs": 12709,
+      "observedError": null,
+      "observationFailures": 0,
+      "completedUtc": "2026-10-30T12:32:34.7295679Z"
+    },
+    "postflight": {
+      "companionSha256": "7aee0f7eb54345d213c0969471f78ca0c252e3f1e61ae14cfe553569ee72bab6",
+      "nativeAlbumRows": 22,
+      "allFourPreferencesUnchanged": true,
+      "bothSourcesPaused": true,
+      "volume": 37,
+      "volumeVerified": false,
+      "hostForeground": true,
+      "bothAccessibilityServicesListed": true,
+      "pcGrant": "Preserved without new BLE session on this debug-only upgrade",
+      "audio": "Availability unanswered; no playback dispatched"
+    },
+    "scope": "No playback, no new audio or radio acceptance, no actual timeout-cutoff test"
+  }
+}
