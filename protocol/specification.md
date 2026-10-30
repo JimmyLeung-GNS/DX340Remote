@@ -113,3 +113,8 @@ Controllers may advance a labelled estimate locally between source events withou
 ## Native browse cancellation and session access
 
 Native page requests bind authorization, source epoch and browser instance through completion. After timeout/cancellation, callbacks may not alter cached item/proof/revision data. Detected notification-access loss cancels pending native pages, invalidates source callbacks and item IDs, advances source epochs and disables advertised capabilities. Restoring access requires fresh discovery/observer registration and source state; old requests remain terminal. GET_STATE/SUBSCRIBE_STATE explicitly refreshes that discovery without playback or restarting the companion. These are implementation rules, with physical permission/BLE delivery still subject to acceptance tests.
+
+
+### Pinned Mango native playback-ID translation
+
+Mango4.1.37/code240's public browser emits one-based row suffixes while its playback callback consumes the suffix as a zero-based list index. The host validates the original native ID/parent/title proof and both fresh source reads, then translates only the final dispatch ordinal to ordinal−1 for the known All Music/Now Playing/nested Album ID shapes. Client-visible IDs/revisions are unchanged; clients must not translate them. Unknown versions/formats, mismatched parent/display ordinal and overflow fail before dispatch. Raw-ID listening approval does not verify this corrected scheme; a fresh owner confirmation is required and invalidates the old source revision. One corrected native-album title has local experiment and production audio confirmation; this is not full native-category/phone acceptance. See docs/test-results/2026-10-30-mango-native-id-correction.md.

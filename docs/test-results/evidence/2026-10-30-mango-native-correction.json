@@ -1,0 +1,77 @@
+{
+  "kind": "actual-DX340-native-Mango-ID-correction",
+  "sourceCommit": "0164a763dd0c5d69920471313be41edbd3c5c0c2",
+  "buildAndLint": "passed",
+  "nativeJvmTests": 126,
+  "newMappingTests": 6,
+  "sourceApp": {
+    "package": "com.ibasso.music",
+    "version": "4.1.37",
+    "versionCode": 240,
+    "installedApkSha256": "70ddf145561e270a013cb1c75f32d7792ef123aa0bdca568c466608926a0f961"
+  },
+  "rawIdAttempt": {
+    "companionSha256": "04846d60bc4e65065028d510286b56cba91577840a994d351146c55dff418fa2",
+    "requestedId": "__MUSIC__0_0_1_2",
+    "displayTitle": "白日夢 2",
+    "expectedTitle": "白日夢",
+    "observedTitle": "風のたより",
+    "outcome": "FAILED_NATIVE_SELECTED_TRACK_MISMATCH_PAUSED",
+    "humanAudio": null
+  },
+  "correctedExperiment": {
+    "companionSha256": "7129c3073935faf5f1c7744623e254891ab7048d79f1e90eab83176fe4b49d3b",
+    "requestedId": "__MUSIC__0_0_1_2",
+    "dispatchId": "__MUSIC__0_0_1_1",
+    "settledObservedTitle": "白日夢",
+    "humanAudio": "Yes, the correct song is audible",
+    "recordedThroughExistingCompanionControl": true,
+    "immediateStaleMetadataRetained": true
+  },
+  "productionSelection": {
+    "companionSha256": "7129c3073935faf5f1c7744623e254891ab7048d79f1e90eab83176fe4b49d3b",
+    "requestedId": "__MUSIC__0_0_1_2",
+    "title": "白日夢",
+    "artist": "tayori",
+    "album": "1st Live “春を待つ” 追加公演  [BD]",
+    "positionMs": 1612,
+    "playing": true,
+    "humanAudio": "Yes, the production selection is correct and audible",
+    "confirmedUtc": "2026-10-30T09:22:25.0130818Z",
+    "scope": "Source-local production adapter, not a phone Bluetooth selection"
+  },
+  "postflight": {
+    "bothPaused": true,
+    "volume": 37,
+    "volumeVerified": false,
+    "nativeCanPlay": true,
+    "installedCompanionSha256": "7129c3073935faf5f1c7744623e254891ab7048d79f1e90eab83176fe4b49d3b",
+    "applicationSource": "0164a76",
+    "productionHumanConfirmation": "Yes, the production selection is correct and audible",
+    "PCGrant": "saved, no revocation; fresh authorized-state passed"
+  },
+  "oldRevisionRejected": "STALE_LIBRARY",
+  "preferences": "All four unchanged during install; controller/Apple UI/Mango UI remain unchanged after explicit source-verification confirmation",
+  "services": {
+    "hostForeground": true,
+    "mangoAccessibilityBound": true,
+    "appleAccessibilityBound": true,
+    "noneCrashed": true
+  },
+  "pcFirstAttempt": {
+    "allChecksPassed": false,
+    "phase": "connect-and-enumerate",
+    "framesWritten": 0,
+    "errorType": "FileNotFoundError",
+    "winerror": -2147024894,
+    "clientCleanupCompleted": true
+  },
+  "pcFreshAttempt": {
+    "allChecksPassed": true,
+    "framesWritten": 40,
+    "framesReceived": 17,
+    "negotiatedAttMtu": 517,
+    "clientCleanupCompleted": true
+  },
+  "limits": "One distinct native album title through two corrected local paths; earlier20 assisted files remain on the old companion. No full T08/native BLE album walk/phone/signing/latency/reliability/two-central/Watch acceptance."
+}
