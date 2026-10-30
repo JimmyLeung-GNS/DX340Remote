@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-31",
+  "applicationSource": "42b68abe0a1bb6e988a5f700daa4d8e3100b12b4",
+  "scope": "Reproduced/fixed shared UI target movement; original playback/disconnect cause unresolved",
+  "host": "Windows 11 Pro 10.0.26300; DESKTOP-T9ICUE4",
+  "devices": ["DX340 Android13/API33", "Pixel9a Android16"],
+  "companionSha256": "58314b84cd45447fd866c1ea9a48922c39edd9584f14100c47cd3cb8c91ee97e",
+  "phoneBeforeSha256": "2dce4f99b502d31529dc944e504f441313ae46e05f7903c6ef40d673768150e0",
+  "phoneInstalledSha256": "208a797e778b6af181341bc7b9d860670d996fb105eadd00101aa239536c17bc",
+  "signing": "Original certificate matched; in-place upgrade; installed bytes pulled/verified",
+  "software": {
+    "expectedRegressionFailures": 2,
+    "rowMovementLogicalPixels": 192,
+    "flutterTests": 51,
+    "newTests": 5,
+    "analysis": "PASS",
+    "androidRelease": "PASS",
+    "androidLint": "PASS after local generated-path correction and forced lint; prior failures retained",
+    "nativeChanges": false,
+    "sharedIosRun": 41107018018,
+    "sharedIosLastObserved": "in_progress; not a result"
+  },
+  "visual": {
+    "reviewDisposition": "ship",
+    "scope": "Four actual disconnected Pixel Library captures light/dark font1.0/2.0 only",
+    "displayRestored": "font1.0; night mode no",
+    "notVerified": ["connected Library/Queue", "long combined error/pending scrolling", "TalkBack/VoiceOver", "actual iPhone rendering"]
+  },
+  "connection": {
+    "initialPixelStatus": "Encrypted pairing failed (133)",
+    "originalFailureCommandTrace": "Not retained",
+    "hostHistoricalBondRemovedEvents": ["01:15:41", "01:15:57"],
+    "pixelHistoricalGattResponseTimeout": "01:51:10",
+    "savedApprovalOnArrival": "JIMMYAH only; prior Pixel approval absent",
+    "ordinaryDisconnect": "VERIFIED",
+    "pixelWifiRestored": 1,
+    "freshAttempt": "Protected subscription/authorization bootstrap reached LOCAL_APPROVAL_REQUIRED, then BOOTSTRAP_TIMEOUT without approval",
+    "ownerApprovalAndRetry": "PENDING; fresh Find/Connect needed after timeout and ordinary Disconnect",
+    "timeoutUi": "Pixel retained earlier approval guidance in observed screen; closure propagation/recovery guidance needs further checking",
+    "finalCleanup": "Ordinary Pixel Disconnect verified; both sources paused; Pixel Wi-Fi1; controller preferences unchanged",
+    "authorizedBrowsePlaybackOnNewApk": "NOT TESTED",
+    "bondsRemovedByThisWork": false,
+    "controllerRevocationTest": false,
+    "fourHostPreferencesUnchangedAtPostUpgradeCheck": true
+  },
+  "ownerReportedPlaybackAndDisconnect": "Unresolved; no root cause or audio pass claimed",
+  "priorBackgroundRuns": "Remain INCOMPLETE",
+  "ux01": "Connection/setup clarity selected; bug correction implemented; broader setup/design/icons pending",
+  "fullGoal": "ACTIVE/incomplete"
+}

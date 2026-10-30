@@ -1,6 +1,8 @@
 # Pending task UX-01: app UI and logo design
 
-Requested31 October2026 during the device-switch handoff. **PENDING — design and implementation have not started.**
+Requested31 October2026 during the device-switch handoff. **IN PROGRESS — connection/setup clarity selected by the owner.** Original logos/icons and the broader setup/Companion redesign remain pending.
+
+The owner then reported Library rows jumping under a finger, failed subsequent playback and a lost connection. Prioritize that defect before the broader layout work. Source42b68ab isolates changing Library/Queue status from row geometry, keys row identity and rejects stale selections;51 Flutter tests and Android release/lint pass. Updated ordinary Pixel app208a797e… is installed with the original signer. Four disconnected Pixel light/dark/default/large captures have a narrow ship review. Connection/local approval and original playback failures remain separate unfinished physical work. See [incident and correction](test-results/2026-10-31-library-target-stability.md). No full UX-01 or actual iPhone acceptance follows from this fix.
 
 Improve the DX340 Companion and shared Android/iPhone Remote interface and create a coherent, original app-icon family. Preserve the user's existing choice: one shared Flutter phone interface with native system appearance, Kotlin/Swift Bluetooth underneath, and Kotlin companion/source adapters. Keep Mango playback and Apple-managed downloads.
 
