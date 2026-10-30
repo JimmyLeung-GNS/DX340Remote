@@ -1,5 +1,9 @@
 # Continue on the next Windows PC
 
+Latest per-identity update: on30 October JIMMYAH was manually approved and a separate saved-grant BLE state/duplicate-read connection passed; it remains approved and disconnected. This does not approve DESKTOP-T9ICUE4 or another radio. Preserve the earlier export's recorded revoked state as history, then read development-handoff.md and test-results/2026-10-30-resumed-mac-provenance.md for the actual current identity/state. The exporter now uses an explicitly selectable Python3.9+ executable and carries per-identity evidence from its local manifest instead of hardcoding that every PC is revoked. Build outputs that match installed bytes are labelled accordingly.
+
+On JIMMYAH, the matching original Android key is at C:\Users\JimmyLeung\.android\debug.keystore, outside Git. The C:\Users\user path below belongs to the previous exporting PC. The public certificate is the same24f48aa3... identity; inspect the actual destination instead of copying either path blindly. The key is never included in an export.
+
 30 October2026: the user is moving development to **another Windows PC**. This supersedes the earlier instruction to stay on DESKTOP-T9ICUE4. The source checkout being exported is `C:\GitHub\DX340Remote`, branch `codex/source-recovery-checkpoint`. The new PC's path/user/toolchain must be inventoried rather than copied from these old paths.
 
 The ZIP contains a Git source bundle, integrity manifest/verifier, exact installed companion/controller APK backups and separately labelled uninstalled candidates. `checkpoint.json` identifies the exact source commit and every package hash/build scope. The source bundle excludes signing keys, SDKs, ignored logs and build caches. Earlier physical evidence stays in the dated tracked reports; missing raw artifacts are not recreated as proof.

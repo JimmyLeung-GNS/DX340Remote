@@ -1,10 +1,16 @@
-param([string]$Serial='d', [string]$Adb='')
+param([string]$Serial='d', [string]$Adb='', [string]$Python='')
 $ErrorActionPreference='Stop'
 $repo=Split-Path $PSScriptRoot -Parent
 Set-Location $repo
+if (!$Python) { $Python=(Get-Command python -ErrorAction SilentlyContinue).Source }
+if (!$Python) { $Python=(Get-Command python3 -ErrorAction SilentlyContinue).Source }
+if (!$Python) { throw 'Python3.9+ is required; pass its actual path with -Python' }
+& $Python -c 'import sys; assert sys.version_info >= (3, 9), "Python3.9+ required"'
+if ($LASTEXITCODE) { throw 'Selected Python is unavailable or older than3.9' }
 if ((& git status --porcelain)) { throw 'Commit the source/docs first; checkpoint must be reviewable and clean' }
 $head=(& git rev-parse HEAD).Trim()
 $branch=(& git branch --show-current).Trim()
+$previous=Get-Content (Join-Path $repo 'artifacts/checkpoint-manifest.json') -Raw | ConvertFrom-Json
 if ($branch -ne 'codex/source-recovery-checkpoint') { throw 'Unexpected checkpoint branch' }
 $out=Join-Path $repo ('artifacts/device-checkpoint-'+[DateTime]::UtcNow.ToString('yyyyMMdd-HHmmss')+'-'+$head.Substring(0,7))
 if (Test-Path $out) { throw 'Checkpoint directory exists; do not overwrite' }
@@ -33,20 +39,19 @@ foreach ($role in @(@('installed-companion','org.dx340.remote.host'),@('installe
     $packages += [ordered]@{role=$role[0];file=$file;sha256=(Get-FileHash "$out/$file").Hash.ToLowerInvariant();scope=$scope}
 }
 foreach ($file in @('dx340-companion-0.1.0-debug.apk','dx340-phone-0.2.0-development.apk')) {
-    $previous=Get-Content (Join-Path $repo 'artifacts/checkpoint-manifest.json') -Raw | ConvertFrom-Json
     $record=@($previous.candidatePackages | Where-Object { $_.file -eq $file })
     $digest=(Get-FileHash (Join-Path $repo "artifacts/$file")).Hash.ToLowerInvariant()
     if ($record.Count -ne 1 -or $record[0].sha256 -ne $digest) { throw 'Candidate package differs from the prior build record' }
     Copy-Item (Join-Path $repo "artifacts/$file") (Join-Path $out ('candidate-'+$file))
-    $packages += [ordered]@{role='uninstalled-candidate';file='candidate-'+$file;sha256=$digest;buildSourceCommit=$record[0].sourceCommit;scope='Existing local build candidate, not installed; match prior build-source record before testing'}
+    $matchesInstalled=@($packages | Where-Object { $_.role -like 'installed-*' -and $_.sha256 -eq $digest }).Count -gt 0
+    $packages += [ordered]@{role=if($matchesInstalled){'build-output-matches-installed'}else{'uninstalled-candidate'};file='candidate-'+$file;sha256=$digest;buildSourceCommit=$record[0].sourceCommit;matchesInstalledPackage=$matchesInstalled;scope=if($matchesInstalled){'Build output matches preserved installed bytes; earlier evidence keeps its original scope'}else{'Existing build candidate not installed by this export; match prior source/evidence before testing'}}
 }
 $tracked=& git ls-files
 if (@($tracked | Where-Object { $_ -match '(?i)\.(keystore|jks|p12|pfx|mobileprovision|apk)$' }).Count) { throw 'Signing/package file unexpectedly tracked; do not package' }
 $files=@(Get-ChildItem $out -File | Sort-Object Name | ForEach-Object { [ordered]@{file=$_.Name;sha256=(Get-FileHash $_.FullName).Hash.ToLowerInvariant()} })
-[ordered]@{formatVersion=1;createdUtc=[DateTime]::UtcNow.ToString('o');sourceCommit=$head;sourceBranch=$branch;files=$files;packages=$packages;pcAccess='Latest user requests keeping PC controller access. OS bond retained; companion grant was last verified revoked, restoration not yet verified.';physicalTests='iPhone/Android-phone/Mac signing/background/handoff/Watch acceptance pending; Mac runner preparation is not a passed Mac build';signing='Private Android key remains outside this archive; public certificate24f48aa3... matches installed packages. Apple signing is separate.';github='This is a portable local checkpoint; no push/publication performed'} | ConvertTo-Json -Depth 8 | Set-Content "$out/checkpoint.json"
-$python=Join-Path $repo 'work/ble-diagnostic/Scripts/python.exe'
+[ordered]@{formatVersion=1;createdUtc=[DateTime]::UtcNow.ToString('o');sourceCommit=$head;sourceBranch=$branch;files=$files;packages=$packages;pcAccess=[ordered]@{preference='Keep PC development access; no revocation tests unless requested';perIdentityEvidence=$previous.pcDevelopmentAccess;note='A saved grant belongs to that specific radio identity. Inspect current handoff evidence and verify/enroll another PC separately.'};physicalTests='Physical phone/signing/background/handoff/Watch acceptance remains pending; read current reports for hosted Mac results';signing='Private Android key remains outside this archive; public certificate24f48aa3... matches installed packages. Apple signing is separate.';github='This is a portable local checkpoint; no push/publication performed'} | ConvertTo-Json -Depth 8 | Set-Content "$out/checkpoint.json"
 $clone=Join-Path $repo ('work/device-checkpoint-verify-'+[guid]::NewGuid().ToString('N').Substring(0,8))
-& $python "$out/verify-checkpoint.py" --folder $out --clone-to $clone > "$out/verification.txt"
+& $Python "$out/verify-checkpoint.py" --folder $out --clone-to $clone > "$out/verification.txt"
 if ($LASTEXITCODE) { throw 'Portable checkpoint verification failed' }
 $zip=$out+'.zip'
 Compress-Archive -Path "$out/*" -DestinationPath $zip -CompressionLevel Optimal
