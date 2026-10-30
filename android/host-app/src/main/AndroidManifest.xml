@@ -15,7 +15,7 @@
             <intent-filter><action android:name="android.accessibilityservice.AccessibilityService" /></intent-filter>
             <meta-data android:name="android.accessibilityservice" android:resource="@xml/apple_music_accessibility" />
         </service>
-        <service android:name=".MangoAccessibilityService" android:exported="true" android:label="DX340 Mango folder browsing" android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+        <service android:name=".MangoAccessibilityService" android:exported="true" android:label="DX340 Mango browsing" android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter><action android:name="android.accessibilityservice.AccessibilityService" /></intent-filter>
             <meta-data android:name="android.accessibilityservice" android:resource="@xml/mango_accessibility" />
         </service>

@@ -35,14 +35,14 @@ class MainActivity : Activity() {
             if (enable) startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
         }
         button("Open Apple Music on this DX340") { packageManager.getLaunchIntentForPackage("com.apple.android.music")?.let { startActivity(it) } }
-        mangoMode = button("Enable optional Mango folders") {
+        mangoMode = button("Enable optional Mango browsing") {
             val prefs = getSharedPreferences("mango-ui", MODE_PRIVATE)
             val enable = !prefs.getBoolean("enabled", false)
             prefs.edit().putBoolean("enabled", enable).apply()
             HostService.instance?.sources?.externalStateChanged(); refresh()
             if (enable) startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
         }
-        content.addView(TextView(this).apply { text = "Optional folder mode keeps playback in Mango. It needs DX340 awake/unlocked and Accessibility access; Mango updates require revalidation. Native albums and controls remain available."; textSize = 18f })
+        content.addView(TextView(this).apply { text = "Optional browsing opens folders and existing playlists through Mango. It needs DX340 awake/unlocked and Accessibility access; Mango updates require revalidation. Native albums and controls remain available."; textSize = 18f })
         button("Grant Bluetooth permissions") { requestPermissions(permissions, 340) }
         button("Enable playback session access") { startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)) }
         button("Open pairing for 60 seconds") { start("PAIR") }
@@ -72,7 +72,7 @@ class MainActivity : Activity() {
     private fun attach() { HostService.instance?.observer = { runOnUiThread { refresh() } } }
     private fun refresh() {
         if (::appleMode.isInitialized) appleMode.text = if (getSharedPreferences("apple-ui", MODE_PRIVATE).getBoolean("enabled", false)) "Disable optional Apple Music browsing" else "Enable optional Apple Music browsing"
-        if (::mangoMode.isInitialized) mangoMode.text = if (getSharedPreferences("mango-ui", MODE_PRIVATE).getBoolean("enabled", false)) "Disable optional Mango folders" else "Enable optional Mango folders"
+        if (::mangoMode.isInitialized) mangoMode.text = if (getSharedPreferences("mango-ui", MODE_PRIVATE).getBoolean("enabled", false)) "Disable optional Mango browsing" else "Enable optional Mango browsing"
         val service = HostService.instance
         if (::controllers.isInitialized) controllers.render(service)
         content.removeCallbacks(pairingExpiry)

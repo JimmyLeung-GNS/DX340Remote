@@ -9,9 +9,9 @@ class MangoUiAdapterProvider(private val context: Context) : UiLibraryAdapter {
     private val service get() = MangoAccessibilityService.instance
     override val ready get() = enabled && service != null && service?.readiness() == null
     override val explanation get() = when {
-        !enabled -> "Optional Mango folder browsing is off."
-        service == null -> "Enable DX340 Mango folder browsing in Accessibility settings on DX340."
-        else -> "Mango folders require DX340 awake/unlocked and Mango4.1.37/code240. App updates require revalidation. Native browsing and playback remain separate."
+        !enabled -> "Optional Mango browsing is off."
+        service == null -> "Enable DX340 Mango browsing in Accessibility settings on DX340."
+        else -> "Folders and existing playlists require DX340 awake/unlocked and Mango4.1.37/code240. App updates require revalidation. Native browsing and playback remain separate."
     }
     override fun browse(parent: String?, page: Int, revision: String?, stillAuthorized: () -> Boolean, done: (JSONObject?, String?) -> Unit) {
         if (!enabled) done(null, "UI_MODE_DISABLED") else if (service == null) done(null, "UI_PERMISSION_REQUIRED") else service!!.browse(parent, page, revision, stillAuthorized, done)

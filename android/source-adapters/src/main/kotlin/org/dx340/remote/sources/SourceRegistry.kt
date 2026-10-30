@@ -22,6 +22,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     companion object {
         val PACKAGES = listOf("com.ibasso.music", "com.apple.android.music")
         const val MANGO_UI_ROOT = "mango-ui:root"
+        const val MANGO_PLAYLIST_UI_ROOT = "mango-ui:playlists"
         const val MANGO_NATIVE_ROOT = "mango-native:root"
     }
     private val main = Handler(Looper.getMainLooper())
@@ -501,6 +502,8 @@ class SourceRegistry(private val context: Context, private val listener: Compone
             val nativeSelection = nativeSelectionSupported(pkg)
             if (pkg == PACKAGES[0] && target == browser.root && page == 0 && mangoUiLibrary?.enabled == true) {
                 result.put(JSONObject().put("id", MANGO_UI_ROOT).put("title", "Local folders · assisted")
+                    .put("subtitle", mangoUiLibrary.explanation).put("browsable", mangoUiLibrary.ready).put("playable", false).put("uiAssisted", true))
+                result.put(JSONObject().put("id", MANGO_PLAYLIST_UI_ROOT).put("title", "Playlists · assisted")
                     .put("subtitle", mangoUiLibrary.explanation).put("browsable", mangoUiLibrary.ready).put("playable", false).put("uiAssisted", true))
             }
             rows.forEach { row ->

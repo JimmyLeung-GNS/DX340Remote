@@ -10,6 +10,7 @@ import android.os.PowerManager
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import org.dx340.remote.sources.MangoUiModel
+import org.dx340.remote.sources.MangoPlaylistUiModel
 import org.dx340.remote.sources.ParsedMangoUi
 import org.dx340.remote.sources.SourceRegistry
 import org.dx340.remote.sources.UiNode
@@ -18,7 +19,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.util.UUID
 
-/** Opt-in local-folder actions for Mango4.1.37/code240. No gestures, network or file access. */
+/** Opt-in local-folder/existing-playlist actions for Mango4.1.37/code240. No gestures, network or file access. */
 class MangoAccessibilityService : AccessibilityService() {
     companion object {
         var instance: MangoAccessibilityService? = null; private set
@@ -100,7 +101,7 @@ class MangoAccessibilityService : AccessibilityService() {
                 .put("subtitle", "DX340 must stay awake and unlocked").put("browsable", true).put("playable", false)) } })
     }
     private fun result(current: Tree, storage: String, page: Int, end: Boolean = false): JSONObject {
-        val parsed = MangoUiModel.parse(current.nodes, storage)
+        val parsed = parse(current.nodes, storage)
         val revision = "$session:${current.window}:${++sequence}:${parsed.fingerprint}"
         val actions = linkedMapOf<String, Action>()
         parsed.rows.forEachIndexed { i, row -> actions["mango-ui:$session:$sequence:$i"] = Action(row.path, if (row.playable) "play" else if (row.browsable) "folder" else "disabled", row.title, storage) }
@@ -111,10 +112,13 @@ class MangoAccessibilityService : AccessibilityService() {
         if (scrollId != null) actions[scrollId] = Action(parsed.scroll!!, "scroll", storage = storage)
         last = Frame(revision, current.window, parsed, actions)
         return JSONObject().put("uiAssisted", true).put("title", parsed.title).put("revision", revision).put("page", page)
-            .put("parent", scrollId ?: SourceRegistry.MANGO_UI_ROOT).put("backId", backId).put("nextPage", if (!end && scrollId != null) page + 1 else JSONObject.NULL)
+            .put("parent", scrollId ?: if (storage == MangoPlaylistUiModel.CONTEXT) SourceRegistry.MANGO_PLAYLIST_UI_ROOT else SourceRegistry.MANGO_UI_ROOT)
+            .put("backId", if (storage == MangoPlaylistUiModel.CONTEXT && parsed.back == null) SourceRegistry.MANGO_NATIVE_ROOT else backId)
+            .put("nextPage", if (!end && scrollId != null) page + 1 else JSONObject.NULL)
             .put("items", JSONArray().apply { if (!end) parsed.rows.forEachIndexed { i, row -> put(JSONObject().put("id", "mango-ui:$session:$sequence:$i")
                 .put("title", row.title).put("subtitle", row.subtitle).put("playable", row.playable).put("browsable", row.browsable)) } })
     }
+    private fun parse(nodes: List<UiNode>, storage: String) = if (storage == MangoPlaylistUiModel.CONTEXT) MangoPlaylistUiModel.parse(nodes) else MangoUiModel.parse(nodes, storage)
     private fun validate(item: String, revision: String, kind: String? = null): Pair<Tree?, Action> {
         readiness()?.let { error(it) }
         val previous = last ?: error("STALE_LIBRARY")
@@ -122,7 +126,7 @@ class MangoAccessibilityService : AccessibilityService() {
         val action = previous.actions[item] ?: error("EXPIRED_ITEM")
         require(kind == null || action.kind == kind) { "UNSUPPORTED_CAPABILITY" }
         if (previous.parsed == null) { require(action.kind == "storage") { "UNSUPPORTED_CAPABILITY" }; return null to action }
-        val current = tree(); val parsed = MangoUiModel.parse(current.nodes, previous.parsed.storage)
+        val current = tree(); val parsed = parse(current.nodes, previous.parsed.storage)
         require(current.window == previous.window && parsed.fingerprint == previous.parsed.fingerprint) { "STALE_LIBRARY" }
         return current to action
     }
@@ -139,7 +143,7 @@ class MangoAccessibilityService : AccessibilityService() {
             while (descendants.isNotEmpty()) {
                 require(count++ < 60) { "UI_TREE_LIMIT" }; val node = descendants.removeFirst()
                 if (node.isPassword || node.isEditable || !node.isVisibleToUser) continue
-                if (node.viewIdResourceName?.endsWith("/file_name_tv") == true || node.viewIdResourceName?.endsWith("/tv_content") == true || action.kind == "storage") node.text?.toString()?.takeIf { it.isNotBlank() }?.let(labels::add)
+                if (node.viewIdResourceName?.substringAfterLast('/') in setOf("file_name_tv", "tv_content", "playlist_name", "music_item_title") || action.kind == "storage") node.text?.toString()?.takeIf { it.isNotBlank() }?.let(labels::add)
                 require(node.childCount <= 30) { "UI_TREE_LIMIT" }
                 for (i in 0 until node.childCount) node.getChild(i)?.let(descendants::add)
             }
@@ -183,9 +187,10 @@ class MangoAccessibilityService : AccessibilityService() {
                     MangoUiModel.node(current.nodes, "entry_title_tv")?.text == it.value
                 }?.key ?: storage
                 val parsed = runCatching { MangoUiModel.parse(current.nodes, shownStorage) }.getOrNull()
+                val playlist = runCatching { MangoPlaylistUiModel.parse(current.nodes) }.getOrNull()
                 val menu = MangoUiModel.menuVisible(current.nodes)
                 // Playback time text must not prevent a folder from settling.
-                val signature = parsed?.fingerprint ?: current.nodes.filter {
+                val signature = playlist?.fingerprint ?: parsed?.fingerprint ?: current.nodes.filter {
                     it.id.endsWith("/internalStorgeLayout") || it.id.endsWith("/sdcardLayout") || it.id.endsWith("/main_list_iv") || it.id.endsWith("/nav_bar_back_iv") ||
                         it.id.endsWith("/entry_title_tv") || it.id.endsWith("/playlist_view")
                 }.joinToString(";") { "${it.path}:${it.id}:${it.text}" }
@@ -199,12 +204,28 @@ class MangoAccessibilityService : AccessibilityService() {
                 // One complete 450ms settling interval for a final folder. Previously the
                 // 300ms navigation wait was followed by a separate 450ms wait on that same
                 // fingerprint. Intermediate menus still settle for 300ms before any action.
-                val finalFolder = parsed?.storage == storage && parsed.root == null
+                val finalFolder = parsed?.storage == storage && parsed.root == null || storage == MangoPlaylistUiModel.CONTEXT && playlist?.root == null && playlist != null
                 if (stableMs < if (finalFolder) 450 else 300) { main.postDelayed({ openStorage(storage) }, 180); return }
                 if (menu) {
-                    if (!storageClicked) { val node = MangoUiModel.storageAction(current.nodes, storage); perform(current, Action(node.path, "storage", MangoUiModel.storages.getValue(storage)), stillAuthorized); storageClicked = true; trace("storage-click") }
+                    if (!storageClicked) {
+                        val node = if (storage == MangoPlaylistUiModel.CONTEXT) MangoPlaylistUiModel.menuAction(current.nodes) else MangoUiModel.storageAction(current.nodes, storage)
+                        perform(current, Action(node.path, "storage", if (storage == MangoPlaylistUiModel.CONTEXT) "Playlist" else MangoUiModel.storages.getValue(storage)), stillAuthorized)
+                        storageClicked = true; trace("storage-click")
+                    }
                 } else {
-                    if (parsed != null) {
+                    if (playlist != null) {
+                        val playlistBack = playlist.root
+                        if (playlistBack != null) {
+                            if (resetFingerprint != playlist.fingerprint) {
+                                perform(current, Action(playlistBack, "back"), stillAuthorized); resetFingerprint = playlist.fingerprint
+                            }
+                        } else if (storage == MangoPlaylistUiModel.CONTEXT) {
+                            guard(); finish(result(current, storage, 0), null); return
+                        } else if (!menuClicked) {
+                            val node = MangoUiModel.playlistMenuAction(current.nodes) ?: error("UI_UNEXPECTED_SCREEN")
+                            perform(current, Action(node.path, "menu"), stillAuthorized); menuClicked = true
+                        }
+                    } else if (parsed != null) {
                         val rootPath = parsed.root
                         if (rootPath != null) {
                             // Mango may pop only one cached page even for the storage crumb.
@@ -257,7 +278,7 @@ class MangoAccessibilityService : AccessibilityService() {
         fun waitChanged(storage: String, before: String, endAllowed: Boolean) {
             if (finished) return
             try {
-                guard(); val current = tree(); val parsed = MangoUiModel.parse(current.nodes, storage)
+                guard(); val current = tree(); val parsed = parse(current.nodes, storage)
                 if (parsed.fingerprint != before) {
                     val now = android.os.SystemClock.elapsedRealtime()
                     if (settled != parsed.fingerprint) { settled = parsed.fingerprint; since = now }
@@ -274,6 +295,7 @@ class MangoAccessibilityService : AccessibilityService() {
         try {
             guard()
             if (parent == null) { finish(home(), null); return }
+            if (parent == SourceRegistry.MANGO_PLAYLIST_UI_ROOT) { require(page == 0) { "INVALID_ARGUMENT" }; openStorage(MangoPlaylistUiModel.CONTEXT); return }
             val (current, action) = validate(parent, revision ?: "")
             when (action.kind) {
                 "storage" -> openStorage(action.storage)

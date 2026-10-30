@@ -1,0 +1,322 @@
+[
+  {
+    "path": "0",
+    "id": "",
+    "text": "",
+    "description": "",
+    "class": "android.widget.FrameLayout",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 0
+  },
+  {
+    "path": "0.0",
+    "id": "",
+    "text": "",
+    "description": "",
+    "class": "android.widget.FrameLayout",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 1
+  },
+  {
+    "path": "0.0.0",
+    "id": "",
+    "text": "",
+    "description": "",
+    "class": "android.widget.LinearLayout",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 1
+  },
+  {
+    "path": "0.0.0.0",
+    "id": "",
+    "text": "",
+    "description": "",
+    "class": "android.widget.FrameLayout",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 2
+  },
+  {
+    "path": "0.0.0.0.0",
+    "id": "com.ibasso.music:id/action_bar_root",
+    "text": "",
+    "description": "",
+    "class": "android.widget.LinearLayout",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 1
+  },
+  {
+    "path": "0.0.0.0.0.0",
+    "id": "android:id/content",
+    "text": "",
+    "description": "",
+    "class": "android.widget.FrameLayout",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 2
+  },
+  {
+    "path": "0.0.0.0.0.0.0",
+    "id": "com.ibasso.music:id/root_container",
+    "text": "",
+    "description": "",
+    "class": "android.widget.FrameLayout",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 1
+  },
+  {
+    "path": "0.0.0.0.0.0.0.0",
+    "id": "com.ibasso.music:id/mainDrawerLayout",
+    "text": "",
+    "description": "",
+    "class": "com.ibasso.music.widgets.DrawerLayout",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 1
+  },
+  {
+    "path": "0.0.0.0.0.0.0.1",
+    "id": "com.ibasso.music:id/status_bar_layout",
+    "text": "",
+    "description": "",
+    "class": "android.widget.RelativeLayout",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 3
+  },
+  {
+    "path": "0.0.0.0.0.0.0.2",
+    "id": "com.ibasso.music:id/music_menu_open_tips_view",
+    "text": "",
+    "description": "",
+    "class": "android.view.View",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 2
+  },
+  {
+    "path": "0.0.0.0.0.0.0.0.1",
+    "id": "com.ibasso.music:id/main_content",
+    "text": "",
+    "description": "",
+    "class": "android.widget.FrameLayout",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 1
+  },
+  {
+    "path": "0.0.0.0.0.0.0.1.0",
+    "id": "com.ibasso.music:id/volume_value_view",
+    "text": "37",
+    "description": "",
+    "class": "android.widget.TextView",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 3
+  },
+  {
+    "path": "0.0.0.0.0.0.0.1.1",
+    "id": "com.ibasso.music:id/digital_filter_status_view",
+    "text": "H1",
+    "description": "",
+    "class": "android.widget.TextView",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 7
+  },
+  {
+    "path": "0.0.0.0.0.0.0.1.2",
+    "id": "com.ibasso.music:id/status_bar_bypass_iv",
+    "text": "",
+    "description": "",
+    "class": "android.widget.ImageView",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 12
+  },
+  {
+    "path": "0.0.0.0.0.0.0.1.3",
+    "id": "com.ibasso.music:id/battery_iv",
+    "text": "",
+    "description": "",
+    "class": "android.view.View",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 14
+  },
+  {
+    "path": "0.0.0.0.0.0.0.0.1.0",
+    "id": "",
+    "text": "",
+    "description": "",
+    "class": "android.widget.FrameLayout",
+    "clickable": true,
+    "forward": false,
+    "drawingOrder": 67
+  },
+  {
+    "path": "0.0.0.0.0.0.0.0.1.0.0",
+    "id": "",
+    "text": "",
+    "description": "",
+    "class": "android.widget.RelativeLayout",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 1
+  },
+  {
+    "path": "0.0.0.0.0.0.0.0.1.0.0.0",
+    "id": "com.ibasso.music:id/nav_bar",
+    "text": "",
+    "description": "",
+    "class": "android.widget.RelativeLayout",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 1
+  },
+  {
+    "path": "0.0.0.0.0.0.0.0.1.0.0.1",
+    "id": "",
+    "text": "",
+    "description": "",
+    "class": "android.widget.ImageView",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 2
+  },
+  {
+    "path": "0.0.0.0.0.0.0.0.1.0.0.2",
+    "id": "com.ibasso.music:id/add_new_playlist_view",
+    "text": "",
+    "description": "",
+    "class": "android.widget.RelativeLayout",
+    "clickable": true,
+    "forward": false,
+    "drawingOrder": 3
+  },
+  {
+    "path": "0.0.0.0.0.0.0.0.1.0.0.3",
+    "id": "com.ibasso.music:id/playlist_view",
+    "text": "",
+    "description": "",
+    "class": "androidx.recyclerview.widget.RecyclerView",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 4
+  },
+  {
+    "path": "0.0.0.0.0.0.0.0.1.0.0.4",
+    "id": "",
+    "text": "",
+    "description": "",
+    "class": "android.view.View",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 5
+  },
+  {
+    "path": "0.0.0.0.0.0.0.0.1.0.0.0.0",
+    "id": "com.ibasso.music:id/header_divide_view",
+    "text": "",
+    "description": "",
+    "class": "android.widget.ImageView",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 4
+  },
+  {
+    "path": "0.0.0.0.0.0.0.0.1.0.0.0.1",
+    "id": "com.ibasso.music:id/nav_bar_back_iv",
+    "text": "",
+    "description": "",
+    "class": "android.widget.ImageView",
+    "clickable": true,
+    "forward": false,
+    "drawingOrder": 1
+  },
+  {
+    "path": "0.0.0.0.0.0.0.0.1.0.0.0.2",
+    "id": "com.ibasso.music:id/entry_title_tv",
+    "text": "Add To Playlist",
+    "description": "",
+    "class": "android.widget.TextView",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 2
+  },
+  {
+    "path": "0.0.0.0.0.0.0.0.1.0.0.2.0",
+    "id": "",
+    "text": "New Playlist",
+    "description": "",
+    "class": "android.widget.TextView",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 1
+  },
+  {
+    "path": "0.0.0.0.0.0.0.0.1.0.0.2.1",
+    "id": "",
+    "text": "",
+    "description": "",
+    "class": "android.widget.ImageView",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 2
+  },
+  {
+    "path": "0.0.0.0.0.0.0.0.1.0.0.3.0",
+    "id": "",
+    "text": "",
+    "description": "",
+    "class": "android.widget.RelativeLayout",
+    "clickable": true,
+    "forward": false,
+    "drawingOrder": 1
+  },
+  {
+    "path": "0.0.0.0.0.0.0.0.1.0.0.3.0.0",
+    "id": "com.ibasso.music:id/playlist_item_position",
+    "text": "1",
+    "description": "",
+    "class": "android.widget.TextView",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 1
+  },
+  {
+    "path": "0.0.0.0.0.0.0.0.1.0.0.3.0.1",
+    "id": "",
+    "text": "",
+    "description": "",
+    "class": "android.view.View",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 3
+  },
+  {
+    "path": "0.0.0.0.0.0.0.0.1.0.0.3.0.2",
+    "id": "",
+    "text": "",
+    "description": "",
+    "class": "android.widget.LinearLayout",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 2
+  },
+  {
+    "path": "0.0.0.0.0.0.0.0.1.0.0.3.0.2.0",
+    "id": "com.ibasso.music:id/playlist_name",
+    "text": "DX340 Remote verification",
+    "description": "",
+    "class": "android.widget.TextView",
+    "clickable": false,
+    "forward": false,
+    "drawingOrder": 1
+  }
+]

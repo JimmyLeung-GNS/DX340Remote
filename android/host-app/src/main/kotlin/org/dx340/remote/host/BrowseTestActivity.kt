@@ -46,10 +46,10 @@ class BrowseTestActivity : Activity() {
         if (requestRunning) return
         val service = MangoAccessibilityService.instance
         val issue = service?.readiness() ?: if (service == null) "UI_PERMISSION_REQUIRED" else null
-        if (issue != null) { status.text = "Mango folders unavailable: $issue. Check optional folder mode and Accessibility access."; return }
+        if (issue != null) { status.text = "Mango browsing unavailable: $issue. Check optional browsing mode and Accessibility access."; return }
         val launch = packageManager.getLaunchIntentForPackage("com.ibasso.music") ?: return
         requestRunning = true
-        status.text = "Opening Mango to inspect its current folder…"
+        status.text = "Opening Mango to inspect its library…"
         startActivity(launch)
         val deadline = android.os.SystemClock.elapsedRealtime() + 2000
         var visibleSince = 0L
@@ -77,9 +77,9 @@ class BrowseTestActivity : Activity() {
             if (isFinishing || isDestroyed) return@browse
             if (error != null || data == null) { status.text = "Mango returned ${error ?: "no library"}. Open Mango once, return here and retry."; return@browse }
             page = data
-            status.text = if (data.optBoolean("uiAssisted")) "${data.optString("title", "Mango folders")}\nOptional folder mode needs DX340 awake/unlocked. Choose a folder or file to test." else "Choose a folder or a track to test."
+            status.text = if (data.optBoolean("uiAssisted")) "${data.optString("title", "Mango library")}\nOptional browsing needs DX340 awake/unlocked. Choose a folder, playlist or track to test." else "Choose a folder or a track to test."
             val items = data.getJSONArray("items")
-            if (data.optBoolean("uiAssisted") && items.length() == 0) status.append("\nNo local items are shown here. Use Back to choose another folder.")
+            if (data.optBoolean("uiAssisted") && items.length() == 0) status.append("\nNo items are shown here. Use Back to choose another location.")
             for (i in 0 until items.length()) {
                 val item = items.getJSONObject(i)
                 addButton(rows, item.optString("title")) {
@@ -101,7 +101,7 @@ class BrowseTestActivity : Activity() {
                     withMangoVisible { source.playItem(JSONObject().put("item", item.getString("id")).put("revision", page.getString("revision")), { !isFinishing && !isDestroyed }) { error ->
                         returnFromMango()
                         if (isFinishing || isDestroyed) return@playItem
-                        if (error != null) { status.text = "Mango folder test failed: $error"; return@playItem }
+                        if (error != null) { status.text = "Mango browsing test failed: $error"; return@playItem }
                         selectedItem = JSONObject(item.toString()).put("testRoute", "ui-assisted"); selectedRevision = epoch
                         pendingFile.writeText(JSONObject().put("item", selectedItem).put("revision", epoch).put("page", page).put("parents", org.json.JSONArray(parents)).toString())
                         showPendingActions()
@@ -154,7 +154,7 @@ class BrowseTestActivity : Activity() {
         if (!assisted) source.confirmMangoPlayItem(success)
         pendingFile.delete()
         selectedItem = null; selectedRevision = null
-        status.text = if (assisted) "${if (success) "Audible file selection" else "Failed file selection"} recorded for optional Mango folder mode. This does not enable or validate native play-by-ID, phone Bluetooth or the full format matrix." else if (success) "Audible success recorded for this Mango version. Play-by-ID is now enabled for remote tests; full 20-track acceptance remains outstanding." else "Failure recorded. Mango remains the playback engine; arbitrary remote selection is still unverified."
+        status.text = if (assisted) "${if (success) "Audible track selection" else "Failed track selection"} recorded for optional Mango browsing. This does not enable or validate native play-by-ID, phone Bluetooth or the full format matrix." else if (success) "Audible success recorded for this Mango version. Play-by-ID is now enabled for remote tests; full 20-track acceptance remains outstanding." else "Failure recorded. Mango remains the playback engine; arbitrary remote selection is still unverified."
         testActions.removeAllViews()
         } catch (_: Exception) { status.text = "Could not save the result or source verification. Free storage and retry recording; no success has been confirmed on this screen." }
     }
