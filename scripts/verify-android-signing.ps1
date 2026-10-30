@@ -31,13 +31,29 @@ function Read-Signers([string]$Path) {
 }
 $candidateSigners = Read-Signers $candidate
 $paths = & $Adb -s $Serial shell pm path $Package 2>&1
-if ($LASTEXITCODE -ne 0) { throw 'Unable to inspect installed app; verify the selected ADB device.' }
+$pathExitCode = $LASTEXITCODE
 $base = @($paths | Where-Object { $_ -match '^package:/data/app/.+/base\.apk$' })
 if (!$base.Count) {
     if (($paths -join '').Trim()) { throw 'Unrecognized installed-package path; inspect manually.' }
+    # Android16 returns1 with empty output for an absent package. Confirm the
+    # device/package manager is responding before calling this a new install.
+    if ($pathExitCode -notin @(0,1)) { throw 'Unable to inspect installed app; verify the selected ADB device.' }
+    $listed = & $Adb -s $Serial shell pm list packages $Package 2>&1
+    if ($LASTEXITCODE -ne 0 -or ($listed -join '').Trim()) { throw 'Package absence was not verified; inspect the selected device before installing.' }
+    New-Item -ItemType Directory -Force "$repo/artifacts" | Out-Null
+    [ordered]@{
+        package = $Package
+        installed = $false
+        candidateSha256 = (Get-FileHash -LiteralPath $candidate -Algorithm SHA256).Hash.ToLowerInvariant()
+        installedSignerSha256 = $null
+        candidateSignerSha256 = $candidateSigners
+        sameSigner = $null
+        note = 'Package absence confirmed by a successful package-manager query; candidate signature verified. No install, data reset or signing-key migration.'
+    } | ConvertTo-Json | Set-Content "$repo/artifacts/android-upgrade-signing.json"
     Write-Output "No installed $Package; candidate signature verified for a new install."
     return
 }
+if ($pathExitCode -ne 0) { throw 'Unable to inspect installed app; verify the selected ADB device.' }
 if ($base.Count -ne 1) { throw 'Ambiguous installed base APK; inspect manually.' }
 New-Item -ItemType Directory -Force "$repo/artifacts" | Out-Null
 $installed = "$repo/artifacts/upgrade-installed-$Package.apk"

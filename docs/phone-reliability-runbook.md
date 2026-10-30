@@ -2,7 +2,9 @@
 
 Explicit approved-controller handoff has a separate [two-controller acceptance sequence](controller-handoff-runbook.md). It is beta until both physical phones pass; source-local20-track Mango/Apple evidence does not establish phone or ownership-transfer behavior. Updated Setup offers **Take control on this phone** only after a busy response for an already approved identity. Enroll new controllers separately with all existing transports disconnected.
 
-Status: NOT TESTED on separate physical phones. Flutter UI tests, DX340-only launch and iPhone simulator checks do not pass these steps. Use this with compatibility-matrix.md/T01–T18; keep Android and iPhone results separate.
+Status: PARTIAL on Pixel9a/Android16; [first phone report](test-results/2026-10-30-pixel-first-bluetooth.md). One native Mango audible selection/reconnect/Pause and read-only browsing do not pass the full sequence. Physical iPhone remains NOT TESTED. Use this with compatibility-matrix.md/T01–T18; keep Android and iPhone results separate.
+
+For first Pixel enrollment, the owner should do the short sequence directly: DX340 Open pairing60s → Pixel Find/Connect → immediately approve the identified Pixel under DX340 Controller access → Pixel Retry authorization. A request expires; old phone approval text does not prove it is live. After expiry explicitly Disconnect before a fresh attempt. Android16 may post expiring system-pairing notifications; standard Bluetooth Settings with temporary owner-allowed DX340 discoverability is the fallback, with physical code comparison. Never trust display names alone, auto-approve for the owner, remove existing grants/bonds or weaken protected characteristics. The sampled approved reconnect needs no new pairing window. Record failures alongside successes.
 
 Record phone model, exact OS/build, app version/commit, DX340 firmware/build, Mango/Apple versions, AMP15 output and APK/signing identity. Do not change volume during connection testing. Start with the verified source already playing at the user's comfortable level.
 

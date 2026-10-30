@@ -1,0 +1,17 @@
+{
+  "kind": "physical-Pixel-to-DX340-BLE-partial-acceptance",
+  "date": "2026-10-30",
+  "controller": {"model": "Google Pixel 9a", "android": "16", "api": 36, "build": "CP1A.260405.005", "securityPatch": "2026-04-05", "appVersion": "0.2.0/code2", "source": "587ea78", "apkSha256": "111a29f854a8038613c3818ace5948020f8516842b7b57ba5df22e6baeaa0c6d"},
+  "host": {"model": "iBasso DX340", "android": "13/API33", "source": "ad44610", "apkSha256": "6c390636fa8fb64c86f1153d93b0d459f4d623b3eea725bd97848fad7cfeb85a", "Mango": "4.1.37/code240", "AppleMusic": "6.5.3/code1599"},
+  "mtu": 517,
+  "authorization": {"localApprovalRequiredObserved": true, "PixelApprovedByOwner": true, "finalApprovedCount": 2, "PCApprovalRetained": true, "revocationTest": "NOT TESTED", "exactManualOSCodeComparison": "NOT CAPTURED"},
+  "networkDuringTests": {"bothWifiSettings": 0, "bothActiveDefaultNetworks": "none", "PixelSim": "ABSENT,NOT_READY", "PixelLegacyMobileDataSetting": 1, "dataDisableCommandCompleted": true, "strictCellularOffSettings": "NOT VERIFIED", "T01": "PARTIAL"},
+  "reads": {"MangoMetadataArtworkNativeAlbumTracks": "VERIFIED", "MangoQueueRange": "1-33 of33", "MangoAssistedFoldersFlacRows": "VERIFIED read-only", "MangoExistingPlaylists": "VERIFIED empty", "AppleDownloadedAlbumsTracks": "VERIFIED read-only", "AppleQueueRanges": ["1-50 of101", "51-100 of101", "101-101 of101", "1-50 of101"], "allQueueItemsCompared": false},
+  "selection": {"route": "Pixel shared UI/native BLE -> companion native Mango album adapter", "at": "2026-10-30T23:00:35+08:00", "title": "白日夢", "artist": "tayori", "deliberatePlayItemActions": 1, "automaticPlaybackRetries": 0, "MangoState": 3, "AppleState": 2, "ownerAnswer": "Yes, the correct song is audible", "output": "AMP15 phone out", "volume": 37, "qualifiedFormatMatrix": "NOT TESTED by this sample"},
+  "savedGrantReconnect": {"completedTrials": 1, "sameSourceTitleStillPlayingDuringDisconnect": true, "newLocalApprovalNeeded": false, "reconnectedEstimatedElapsed": "2:26", "longSleepRangeAcceptance": false},
+  "pause": {"route": "Pixel BLE", "deliberateActions": 1, "sourceConfirmed": true, "MangoState": 2, "MangoPositionMs": 150242, "AppleState": 2},
+  "final": {"bothSourcesPaused": true, "volume": 37, "volumeVerified": false, "phoneVolumeEnabled": false, "selectedSource": "Mango", "phoneDisconnected": true, "hostAdvertising": true, "PixelAndPCApprovalsRetained": true, "phoneOriginalNetworkSettingsRestoredAfterDisconnect": true, "phoneWifiMobileDataBluetoothSettings": [1, 1, 1]},
+  "signingHelper": {"Android16AbsentPackageHandling": "FIXED", "actualFreshInstall": "PASS", "bothInstalledHashSignerComparisons": "PASS", "unavailableDeviceAndWrongPackageRejections": "PASS", "PowerShellSyntax": "PASS", "applicationCodeOrBuildChanged": false},
+  "remaining": ["strict cellular-off state", "ten discovery trials", "full phone format/browsing/audio/control matrices", "Apple phone outside-queue selection", "background/lock/range", "latency", "phone volume/output", "phone revocation/faults/upgrades", "SD/rescan", "physical iPhone/signing", "battery/walking", "two-controller handoff", "Watch"],
+  "fullGoal": "ACTIVE/incomplete"
+}
