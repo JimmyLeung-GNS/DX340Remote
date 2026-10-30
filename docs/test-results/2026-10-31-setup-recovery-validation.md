@@ -21,6 +21,8 @@ The first15-frame cross-platform review returned **fix** for one material findin
 
 The correction retains Cupertino controls and semantic system-blue variants, scoped to Setup. Light actions use the system's stronger blue with white filled labels; dark actions use adaptive blue with black filled labels. Other destinations retain their incumbent appearance. Four new widget cases verify both action/background contrast pairs in light/dark and normal/high-contrast environments, then verify the Player tint is unchanged. The iOS large-layout case now uses text scale3.2; Android remains font2. **67 Flutter tests/analyze/ordinary Android release/lint PASS**. New iOS rendered confirmation is pending; do not call the reviewed cde1aa8 pixels corrected.
 
+Correction source **c8ff4b7b9fd8472e09bf13707ba61068cf1ab56a**; [shared confirmation41138111275](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/41138111275) is **IN PROGRESS**. Inspect its terminal status/archive and score only the existing material finding after the new captures arrive; no additional polishing loop is requested.
+
 ## Ordinary Android emulator recovery
 
 The ordinary release-mode development package was installed separately from the no-BLE fixture, with matching original signer. Actual system Nearby Devices denial leaves controls unauthorized and does not start a foreground service; the public app-details route opens the correct application's settings and returns to Setup. With Nearby Devices granted and virtual Bluetooth off, the public Bluetooth-settings route opens Connected devices and the app presents Turn on Bluetooth. These are emulator software/UI results, not physical radio acceptance.

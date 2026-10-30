@@ -65,5 +65,11 @@
     "bluetooth_on": "1",
     "night": "Night mode: yes"
   },
-  "freshBackgroundReadiness": "Pending owner response; no active observer"
+  "freshBackgroundReadiness": "Pending owner response; no active observer",
+  "sharedConfirmation": {
+    "source": "c8ff4b7b9fd8472e09bf13707ba61068cf1ab56a",
+    "run": 41138111275,
+    "lastObserved": "IN PROGRESS",
+    "review": "F1 contrast confirmation pending; prior disposition fix"
+  }
 }
