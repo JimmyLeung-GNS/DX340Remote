@@ -1,6 +1,21 @@
 # Windows build workflow and device-switch checkpoint
 
-On30 October2026 the user explicitly chose **another Windows PC** and requested the latest checkpoint be pushed to GitHub. Read device-continuation.md first. The paths/tools below describe the exporting DESKTOP-T9ICUE4 checkout at `C:\GitHub\DX340Remote`; inventory the new PC and substitute its actual paths. Branch: `codex/source-recovery-checkpoint`. Earlier29 October stay-on-this-PC wording is superseded.
+Current execution host,30 October: **JIMMYAH**, Windows11 build26300/PowerShell7.6.5. Work in C:\GitHub\DX340Remote on codex/source-recovery-checkpoint. c4fb607 was cleanly fast-forwarded; native build/lint120, shared Flutter analysis46/release/lint and diagnostic23 tests pass. Owner approval and a fresh saved-grant BLE read reconnect pass on unchanged installed04846d60.../23c536e7.... Keep this PC approved and disconnected; do not run revocation tests. The two initial setup/INFO failures remain unresolved. Only DX340 d is attached. Older DESKTOP-T9ICUE4 paths/results below are historical, not this host's settings. See test-results/2026-10-30-resumed-mac-provenance.md.
+
+Use these verified paths only on JIMMYAH; scope environment changes to the current build process and restore any prior values when finished:
+
+```powershell
+$env:JAVA_HOME = 'C:/Program Files/Microsoft/jdk-21.0.9.10-hotspot'
+$env:ANDROID_HOME = 'C:/Users/JimmyLeung/AppData/Local/Android/Sdk'
+$env:DX340_DEBUG_KEYSTORE = 'C:/Users/JimmyLeung/.android/debug.keystore'
+$env:PATH = 'C:/Users/JimmyLeung/AppData/Local/Flutter/bin;' + $env:PATH
+./scripts/build-android.ps1
+./scripts/build-phone.ps1
+```
+
+Actual Python is C:/Python314/python.exe; the BLE diagnostic venv remains work/ble-diagnostic/Scripts/python.exe. The portable exporter accepts -Python C:/Python314/python.exe and no longer requires that venv. The original key's public SHA256 is24f48aa3566dcf7b65774ee12585191a8a0df9eeff9cc49e9e72c22bacca6e8d; keep the key outside Git. A different PC must inventory its own tools and enroll its own radio identity.
+
+On30 October2026 the user explicitly chose **another Windows PC** and requested the latest checkpoint be pushed to GitHub. Read device-continuation.md first. The older paths/tools below describe the exporting DESKTOP-T9ICUE4 checkout at `C:\GitHub\DX340Remote`; inventory the new PC and substitute its actual paths. Branch: `codex/source-recovery-checkpoint`. Earlier29 October stay-on-this-PC wording is superseded.
 
 For a new checkout, use the published handoff branch and compare HEAD with the outgoing prompt:
 
@@ -37,7 +52,7 @@ Mango listening continuation:20 local WAV/FLAC samples are confirmed across five
 
 Read-only Mango native coverage can be repeated with `scripts/verify-mango-native-inventory.ps1 -Serial d -Adb (Get-Command adb).Source` while both players are paused37/offline. Current22 Album rows expose635 entries; All Music exposes500, independently confirmed at Mango's public browser boundary. This is metadata coverage, not native Album playback or phone T08. See test-results/2026-10-29-mango-native-inventory.md. Its Android instrumentation probe restarts the host/bindings and is separate from the ordinary read-only script; use the documented backup/restoration sequence if rerunning it.
 
-Current resumption host is DESKTOP-T9ICUE4. GitHub checkpoint096601a was fetched and fast-forwarded here; its preceding build/audio/handoff reports include work on JIMMYAH. Those results retain their original host/package scope. The paths below were verified for this session:
+Historical resumption host was DESKTOP-T9ICUE4. GitHub checkpoint096601a was fetched and fast-forwarded here; its preceding build/audio/handoff reports include work on JIMMYAH. Those results retain their original host/package scope. The paths below were verified for this session:
 
 | Purpose | Local path/version |
 |---|---|
