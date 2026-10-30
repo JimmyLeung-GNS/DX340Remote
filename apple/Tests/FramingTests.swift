@@ -2,6 +2,30 @@ import XCTest
 @testable import DXProtocol
 
 final class FramingTests: XCTestCase {
+    func testDiscoveryNeverSubstitutesAnotherPlayerForTheRememberedIdentity() throws {
+        let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        let cases = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("protocol/fixtures/player-discovery.json"))) as! [[String: Any]]
+        for item in cases {
+            let result = PlayerDiscovery.finish(found: item["found"] as! [String], remembered: item["remembered"] as? String)
+            XCTAssertEqual(result.target, item["target"] as? String, item["name"] as! String)
+            XCTAssertEqual(result.choose, item["choose"] as! Bool, item["name"] as! String)
+        }
+    }
+    func testApprovalObservationStopsAtAuthorizationDeadlineCancelAndNewAttempt() throws {
+        let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        let steps = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("protocol/fixtures/approval-retry.json"))) as! [[String: Any]]
+        var retry = ApprovalRetry(), tickets: [String: UInt64] = [:]
+        for (index, step) in steps.enumerated() {
+            switch step["action"] as! String {
+            case "begin": tickets[step["ticket"] as! String] = retry.begin()
+            case "clear": retry.clear()
+            case "check": XCTAssertEqual(retry.mayCheck(ticket: tickets[step["ticket"] as! String]!, setupActive: step["setup"] as! Bool, authorized: step["authorized"] as! Bool, requestPending: step["pending"] as! Bool), step["allowed"] as! Bool, "step\(index)")
+            default: XCTFail("Unknown fixture action")
+            }
+        }
+        let current = retry.begin(); XCTAssertEqual(current, retry.begin())
+        retry.clear(); XCTAssertFalse(retry.current(current))
+    }
     func testOnlyActualMangoAssistedSelectionsConsumeThePage() throws {
         let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
         let cases = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("protocol/fixtures/assisted-selection-eligibility.json"))) as! [[String: Any]]

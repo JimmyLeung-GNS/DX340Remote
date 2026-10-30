@@ -32,6 +32,7 @@ class MainActivity : Activity() {
     private var showBrowsing = false
     private var showAdvanced = false
     private var showDiagnostics = false
+    private var permissionAction: String? = null
     private val pairingExpiry = Runnable { refresh() }
     private val permissions get() = mutableListOf(Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.BLUETOOTH_ADVERTISE).apply { if (android.os.Build.VERSION.SDK_INT >= 33) add(Manifest.permission.POST_NOTIFICATIONS) }.toTypedArray()
     private fun dp(value: Int) = (value * resources.displayMetrics.density).toInt()
@@ -41,17 +42,17 @@ class MainActivity : Activity() {
         showBrowsing = savedInstanceState?.getBoolean("showBrowsing") ?: false
         showAdvanced = savedInstanceState?.getBoolean("showAdvanced") ?: false
         showDiagnostics = savedInstanceState?.getBoolean("showDiagnostics") ?: false
+        permissionAction = savedInstanceState?.getString("permissionAction")
         content = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(20), dp(16), dp(20), dp(24)) }
         setContentView(ScrollView(this).apply { addView(content); setOnApplyWindowInsetsListener { view, insets -> val bars = insets.getInsets(android.view.WindowInsets.Type.systemBars()); view.setPadding(bars.left, bars.top, bars.right, bars.bottom); insets } })
         label("DX340 Companion", 28f, true)
         label("Music plays here. Your phone controls it over Bluetooth.")
         section("Connection")
         connection = label("").apply { minLines = 2; accessibilityLiveRegion = View.ACCESSIBILITY_LIVE_REGION_POLITE }
-        remoteAction = button("Start Bluetooth remote") {
-            if (HostService.instance == null) start("START")
-            else { stopService(Intent(this, HostService::class.java)); content.postDelayed({ attach(); refresh() }, 500) }
+        remoteAction = button("Enable phone control") {
+            start(if (ControllerApprovalStore(this).identities().isEmpty()) "PAIR" else "START")
         }
-        pairing = button("Open pairing for 60 seconds") { start("PAIR") }
+        pairing = button("Set up a new phone") { start("PAIR") }
         controllers = ControllerManagementPanel(this, ::refresh)
         content.addView(controllers, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(16) })
 
@@ -87,6 +88,7 @@ class MainActivity : Activity() {
         lateinit var advanced: LinearLayout
         val advancedToggle = button("Show advanced controls") { showAdvanced = !showAdvanced; advanced.visibility = if (showAdvanced) View.VISIBLE else View.GONE; (it as Button).text = if (showAdvanced) "Hide advanced controls" else "Show advanced controls" }
         advanced = group()
+        button("Stop Bluetooth remote", advanced) { stopService(Intent(this, HostService::class.java)); content.postDelayed({ attach(); refresh() }, 500) }
         button("Probe source capabilities", advanced) { start("PROBE") }
         button("Show / hide technical diagnostics", advanced) { showDiagnostics = !showDiagnostics; refresh() }
         button("Export diagnostics", advanced) {
@@ -121,7 +123,7 @@ class MainActivity : Activity() {
         if (enable) startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
     }
     private fun start(action: String) {
-        if (permissions.take(2).any { checkSelfPermission(it) != PackageManager.PERMISSION_GRANTED }) { requestPermissions(permissions, 340); return }
+        if (permissions.take(2).any { checkSelfPermission(it) != PackageManager.PERMISSION_GRANTED }) { permissionAction = action; requestPermissions(permissions, 340); return }
         startForegroundService(Intent(this, HostService::class.java).setAction(action))
         content.postDelayed({ attach(); refresh() }, 500)
     }
@@ -137,17 +139,19 @@ class MainActivity : Activity() {
         connection.text = when {
             !bluetoothAccess -> "Allow Bluetooth access below, then start the remote."
             !bluetoothOn -> "Bluetooth is off. Open Bluetooth settings below to enable it."
-            service == null -> "Remote stopped. Start it to connect your phone."
+            service == null -> "Enable phone control here, then tap Connect on your phone."
             service.activeControllerAddress != null -> "Controller connected. Music stays on DX340."
             service.status.startsWith("BLE_START_FAILED") || service.status.startsWith("ADVERTISING_FAILED") || service.status.startsWith("GATT_SERVICE_FAILED") || service.status.startsWith("BLE_REPLY_TIMEOUT") -> "Bluetooth setup failed. Stop and start the remote, then reconnect your phone."
             service.pending != null -> "A phone is requesting access. Review it below."
-            remaining > 0 -> "Pairing is open. Find DX340 from your phone's Setup screen."
-            else -> "Remote service running. Saved phones can reconnect from Setup."
+            remaining > 0 -> "On your phone, tap Connect. Confirm matching system codes on both devices, then approve the phone below."
+            else -> "Ready for your phone. Tap Connect in the phone app; approved phones need no new pairing."
         }
-        remoteAction.text = if (service == null) "Start Bluetooth remote" else "Stop Bluetooth remote"
-        remoteAction.isEnabled = service != null || !bluetoothAccess || bluetoothOn
-        pairing.isEnabled = bluetoothAccess && bluetoothOn
-        pairing.text = if (remaining > 0) "Pairing open · ${(remaining + 999) / 1000} seconds left" else "Open pairing for 60 seconds"
+        remoteAction.visibility = if (service == null) View.VISIBLE else View.GONE
+        remoteAction.text = if (ControllerApprovalStore(this).identities().isEmpty()) "Set up first phone" else "Enable phone control"
+        remoteAction.isEnabled = !bluetoothAccess || bluetoothOn
+        pairing.visibility = if (service != null) View.VISIBLE else View.GONE
+        pairing.isEnabled = bluetoothAccess && bluetoothOn && remaining <= 0
+        pairing.text = if (remaining > 0) "New phone setup open · ${(remaining + 999) / 1000}s" else "Set up a new phone"
         setupSummary.text = "Bluetooth: ${if (bluetoothAccess) "allowed" else "access needed"} · Playback access: ${if (playbackAccess) "on" else "needed"}\nService notifications: ${if (notifications) "on" else "off"}"
         setupActions.visibility = if (showSetup) View.VISIBLE else View.GONE
         setupToggle.text = if (showSetup) "Hide permissions and access" else "Review permissions and access"
@@ -176,11 +180,17 @@ class MainActivity : Activity() {
     override fun onPause() { HostService.instance?.observer = null; content.removeCallbacks(pairingExpiry); super.onPause() }
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putBoolean("showSetup", showSetup); outState.putBoolean("showBrowsing", showBrowsing); outState.putBoolean("showAdvanced", showAdvanced); outState.putBoolean("showDiagnostics", showDiagnostics)
+        outState.putString("permissionAction", permissionAction)
         super.onSaveInstanceState(outState)
     }
     @Deprecated("Activity permission result callback for the dependency-free companion")
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults); refresh()
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 340) {
+            val action = permissionAction; permissionAction = null
+            if (action != null && this.permissions.take(2).all { checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }) start(action)
+        }
+        refresh()
     }
     @Deprecated("Activity result API for dependency-free diagnostic app")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

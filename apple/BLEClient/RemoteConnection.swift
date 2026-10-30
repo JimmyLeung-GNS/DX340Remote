@@ -39,6 +39,12 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     private var reconnectAttempts = 0
     private var connectionTimeout: Task<Void, Never>?
     private var connectionGeneration = 0
+    private var connectionPhase = "idle"
+    private var pendingQuickConnect = false
+    private var discoveryGeneration = 0
+    private var discoveryTimeout: Task<Void, Never>?
+    private var approvalRetry = ApprovalRetry()
+    private var approvalCheck: Task<Void, Never>?
     private var setupDeadline = ConnectionSetupDeadline()
     private var assistedPageUse = AssistedPageUse()
     private var setupTimeout: Task<Void, Never>?
@@ -77,28 +83,98 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     var title: String { state["title"] as? String ?? "No track connected" }
     var artist: String { state["artist"] as? String ?? "" }
     func can(_ name: String) -> Bool { authorized && (state["capabilities"] as? [String: Any])?[name] as? Bool == true }
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        if central.state == .poweredOn { status = "Bluetooth ready. Open pairing on DX340 for a new controller."; if wantsConnection, let peripheral, peripheral.state == .disconnected { beginConnection(peripheral) } }
-        else { clearConnection(); status = central.state == .unauthorized ? "Allow Bluetooth access in Settings." : "Bluetooth unavailable. Enable Bluetooth to reconnect." }
+    var connectionSetup: [String: Any] {
+        let phase: String
+        if CBManager.authorization == .denied || CBManager.authorization == .restricted { phase = "permission" }
+        else if manager?.state == .poweredOff { phase = "bluetoothOff" }
+        else if authorized { phase = "connected" }
+        else if canRequestControl { phase = "busy" }
+        else { phase = connectionPhase }
+        return ["phase": phase, "savedName": UserDefaults.standard.string(forKey: "approvedPlayerName") ?? "Player",
+                "hasSavedPlayer": UserDefaults.standard.string(forKey: "approvedPlayerId") != nil]
     }
-    func scan() {
-        guard manager.state == .poweredOn else { status = "Enable Bluetooth and allow access in Settings."; return }
-        devices = []; status = "Searching for DX340…"
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        if central.state == .poweredOn {
+            if !authorized && ["bluetoothOff", "permission", "preparing"].contains(connectionPhase) { connectionPhase = "idle" }
+            if pendingQuickConnect { pendingQuickConnect = false; connectPlayer(); return }
+            status = "Bluetooth ready. Connect to your player."
+            if wantsConnection, let peripheral, peripheral.state == .disconnected { beginConnection(peripheral) }
+        } else {
+            clearConnection()
+            if central.state == .unauthorized { pendingQuickConnect = false; connectionPhase = "permission"; status = "Allow Bluetooth access in iPhone Settings." }
+            else if central.state == .poweredOff { pendingQuickConnect = false; connectionPhase = "bluetoothOff"; status = "Turn on Bluetooth to connect." }
+            else { connectionPhase = "preparing"; status = "Preparing Bluetooth…" }
+        }
+    }
+    private func stopDiscovery() {
+        discoveryGeneration += 1; discoveryTimeout?.cancel(); discoveryTimeout = nil; manager?.stopScan()
+    }
+    func scan() { discoverPlayers(automatic: false) }
+    func searchPlayers() { disconnect(); discoverPlayers(automatic: false) }
+    func connectPlayer() {
+        guard !authorized, !["searching", "connecting", "approval"].contains(connectionPhase) else { return }
+        guard manager.state == .poweredOn else {
+            pendingQuickConnect = manager.state == .unknown || manager.state == .resetting
+            connectionPhase = pendingQuickConnect ? "preparing" : (manager.state == .unauthorized ? "permission" : "bluetoothOff")
+            status = "Allow Bluetooth access and turn on Bluetooth to connect."; return
+        }
+        disconnect()
+        if let text = UserDefaults.standard.string(forKey: "approvedPlayerId"), let id = UUID(uuidString: text),
+           let device = manager.retrievePeripherals(withIdentifiers: [id]).first {
+            devices = [device]; connect(device)
+        } else { discoverPlayers(automatic: true) }
+    }
+    private func discoverPlayers(automatic: Bool) {
+        stopDiscovery(); cancelApprovalCheck()
+        guard manager.state == .poweredOn else { status = "Enable Bluetooth and allow access to connect."; return }
+        let generation = discoveryGeneration
+        devices = []; connectionPhase = "searching"; status = "Searching for compatible players…"
         manager.scanForPeripherals(withServices: [CBUUID(string: Wire.service)], options: nil)
-        Task { try? await Task.sleep(for: .seconds(10)); manager.stopScan() }
+        discoveryTimeout = Task {
+            try? await Task.sleep(for: .seconds(10))
+            guard !Task.isCancelled, discoveryGeneration == generation else { return }
+            manager.stopScan(); discoveryTimeout = nil
+            let choice = PlayerDiscovery.finish(found: devices.map { $0.identifier.uuidString }, remembered: UserDefaults.standard.string(forKey: "approvedPlayerId"))
+            if automatic, let target = choice.target, let device = devices.first(where: { $0.identifier.uuidString == target }) { connect(device) }
+            else {
+                connectionPhase = devices.isEmpty ? "failed" : "choosing"
+                status = devices.isEmpty ? "No compatible player found. Start Companion on your player, keep it nearby, then try again." : "Choose the player you want to control."
+            }
+        }
+    }
+    private func rememberApprovedPlayer() {
+        guard let peripheral else { return }
+        let name = (peripheral.name ?? "Player").unicodeScalars.filter { !CharacterSet.controlCharacters.contains($0) && !(0x202A...0x202E).contains($0.value) && !(0x2066...0x2069).contains($0.value) }
+        UserDefaults.standard.set(peripheral.identifier.uuidString, forKey: "approvedPlayerId")
+        let label = String(String.UnicodeScalarView(name)).trimmingCharacters(in: .whitespacesAndNewlines)
+        UserDefaults.standard.set(label.isEmpty ? "Player" : String(label.prefix(60)), forKey: "approvedPlayerName")
+    }
+    private func cancelApprovalCheck() {
+        approvalRetry.clear(); approvalCheck?.cancel(); approvalCheck = nil
+    }
+    private func awaitLocalApproval() {
+        let ticket = approvalRetry.begin()
+        guard approvalCheck == nil else { return }
+        approvalCheck = Task {
+            while !Task.isCancelled && approvalRetry.current(ticket) {
+                try? await Task.sleep(for: .milliseconds(1500), clock: .continuous)
+                guard !Task.isCancelled, approvalRetry.current(ticket) else { return }
+                if approvalRetry.mayCheck(ticket: ticket, setupActive: setupDeadline.active, authorized: authorized, requestPending: pending.values.contains("AUTHORIZE")) { authorize() }
+            }
+        }
     }
     func connect(_ device: CBPeripheral) {
-        manager.stopScan()
+        stopDiscovery(); cancelApprovalCheck(); pendingQuickConnect = false
         if let previous = peripheral, previous.identifier != device.identifier { manager.cancelPeripheralConnection(previous) }
         clearConnection(); peripheral = device; device.delegate = self; wantsConnection = true; reconnectAttempts = 0; status = "Connecting…"
         beginConnection(device)
     }
     func disconnect() {
-        wantsConnection = false
+        pendingQuickConnect = false; stopDiscovery(); cancelApprovalCheck(); wantsConnection = false
         if let p = peripheral { manager.cancelPeripheralConnection(p) }
         clearConnection(); status = "Disconnected. Cached lists may be stale."
     }
-    private func clearConnection() { abandonAssistedPage(); cancelSetupDeadline(); setupExpiryNotice = nil; connectionGeneration += 1; connectionTimeout?.cancel(); connectionTimeout = nil; writeTimeout?.cancel(); writeTimeout = nil; authorized = false; controlProposal.clear(); assistedPageUse.clear(); rx = nil; tx = nil; writing = false; writes = []; pending = [:]; browseLocations = [:]; queueLocations = [:]; activeBrowseId = nil; activeQueueId = nil; hostEpoch = ""; assembler.clear() }
+    private func clearConnection() { stopDiscovery(); cancelApprovalCheck(); connectionPhase = "idle"; abandonAssistedPage(); cancelSetupDeadline(); setupExpiryNotice = nil; connectionGeneration += 1; connectionTimeout?.cancel(); connectionTimeout = nil; writeTimeout?.cancel(); writeTimeout = nil; authorized = false; controlProposal.clear(); assistedPageUse.clear(); rx = nil; tx = nil; writing = false; writes = []; pending = [:]; browseLocations = [:]; queueLocations = [:]; activeBrowseId = nil; activeQueueId = nil; hostEpoch = ""; assembler.clear() }
     private func cancelSetupDeadline() { setupTimeout?.cancel(); setupTimeout = nil; setupDeadline.clear() }
     private func beginSetupDeadline() {
         guard !setupDeadline.active else { return }
@@ -111,12 +187,14 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     }
     @discardableResult private func expireSetupIfNeeded(ticket: UInt64? = nil) -> Bool {
         guard !authorized, setupDeadline.expired(at: setupNowMs, ticket: ticket) else { return false }
-        disconnect(); setupExpiryNotice = ConnectionSetupDeadline.message; status = ConnectionSetupDeadline.message
+        disconnect(); connectionPhase = "failed"; setupExpiryNotice = ConnectionSetupDeadline.message; status = ConnectionSetupDeadline.message
         return true
     }
     private func beginConnection(_ device: CBPeripheral) {
         guard wantsConnection, manager.state == .poweredOn else { return }
-        status = "Connecting…"; armConnectionTimeout(device); manager.connect(device)
+        connectionPhase = "connecting"; status = "Connecting…"; armConnectionTimeout(device)
+        if device.state == .connected { device.discoverServices([CBUUID(string: Wire.service)]) }
+        else if device.state != .disconnecting { manager.connect(device) }
     }
     private func armConnectionTimeout(_ device: CBPeripheral) {
         connectionTimeout?.cancel(); connectionGeneration += 1
@@ -124,27 +202,29 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         connectionTimeout = Task {
             try? await Task.sleep(for: .seconds(30))
             guard !Task.isCancelled, connectionGeneration == generation, self.peripheral == device, tx?.isNotifying != true else { return }
-            clearConnection(); status = "Connection setup timed out. Open pairing on DX340 and retry in Setup."
+            clearConnection(); connectionPhase = "failed"; status = "Connection setup timed out. Try connecting again."
             manager.cancelPeripheralConnection(device)
         }
     }
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi RSSI: NSNumber) {
+        guard manager.isScanning, connectionPhase == "searching" else { return }
         if !devices.contains(where: { $0.identifier == peripheral.identifier }) { devices.append(peripheral) }
     }
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         guard peripheral == self.peripheral else { return }
         status = "Discovering DX340 service…"; peripheral.delegate = self; peripheral.discoverServices([CBUUID(string: Wire.service)])
-        UserDefaults.standard.set(peripheral.identifier.uuidString, forKey: "lastPeripheral")
+        // Remember only after the host confirms authorization, not merely a radio connection.
     }
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         guard peripheral == self.peripheral else { return }
-        clearConnection(); status = "Connection failed. Return to Setup and retry."
+        clearConnection(); connectionPhase = "failed"; status = "Connection failed. Try connecting again."
     }
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         guard peripheral == self.peripheral else { return }
         let expiryNotice = setupExpiryNotice
         clearConnection(); status = expiryNotice ?? (wantsConnection ? "Disconnected; pending commands discarded. Reconnecting…" : "Disconnected. Cached lists may be stale.")
         if wantsConnection && central.state == .poweredOn && reconnectAttempts < 5 {
+            connectionPhase = "connecting"
             let delay = min(15, 1 << reconnectAttempts); reconnectAttempts += 1
             let generation = connectionGeneration
             Task { try? await Task.sleep(for: .seconds(delay)); if connectionGeneration == generation && wantsConnection && self.peripheral == peripheral && peripheral.state == .disconnected { beginConnection(peripheral) } }
@@ -159,7 +239,8 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     func refreshOnForeground() {
         if expireSetupIfNeeded() { return }
         guard let p = peripheral, p.state == .connected, rx != nil else { return }
-        if authorized { send("GET_STATE") } else { send("HELLO", bootstrap: true) }
+        if authorized { send("GET_STATE") }
+        else if connectionPhase != "approval" && connectionPhase != "busy" && !pending.values.contains(where: { $0 == "HELLO" || $0 == "AUTHORIZE" }) { send("HELLO", bootstrap: true) }
     }
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard peripheral == self.peripheral, peripheral.state == .connected else { return }
@@ -210,7 +291,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
             }
             writes.append(contentsOf: frames); pump()
             let replyBudget = ReplyBudget.milliseconds(type, item: args["item"] as? String)
-            Task { try? await Task.sleep(for: .milliseconds(replyBudget)); if pending.removeValue(forKey: id) != nil { retireAssistedPage(id); browseLocations[id] = nil; queueLocations[id] = nil; if id == activeBrowseId { library = [:] }; status = "Reply timed out; outcome unknown. Refresh before retrying." } }
+            Task { try? await Task.sleep(for: .milliseconds(replyBudget)); if pending.removeValue(forKey: id) != nil { if type == "AUTHORIZE" { cancelApprovalCheck(); connectionPhase = "failed" }; retireAssistedPage(id); browseLocations[id] = nil; queueLocations[id] = nil; if id == activeBrowseId { library = [:] }; status = "Reply timed out; outcome unknown. Refresh before retrying." } }
         } catch { status = "Cannot encode Bluetooth message." }
     }
     private func pump() {
@@ -272,17 +353,18 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         if type == "HELLO" { controlProposal.clear(); hostEpoch = reply["hostEpoch"] as? String ?? ""; authorize(); return }
         if type == "ERROR", reply["hostEpoch"] as? String == hostEpoch, operation == "AUTHORIZE", !authorized {
             if data["code"] as? String == "CONTROLLER_BUSY" {
-                wantsConnection = false
+                wantsConnection = false; cancelApprovalCheck(); connectionPhase = "busy"
                 controlProposal.observeBusy(replyHost: reply["hostEpoch"] as? String ?? "", expectedHost: hostEpoch, value: data["ownershipRevision"] as? String ?? "")
             } else {
                 controlProposal.clear()
-                if data["code"] as? String == "LOCAL_APPROVAL_REQUIRED" { wantsConnection = false }
+                if data["code"] as? String == "LOCAL_APPROVAL_REQUIRED" { wantsConnection = false; connectionPhase = "approval"; awaitLocalApproval() }
+                else { cancelApprovalCheck(); connectionPhase = "failed" }
             }
         }
         if type == "ERROR" { if reply["hostEpoch"] as? String == hostEpoch, let fresh = data["state"] as? [String: Any] { applyState(fresh, notifyLibraryChange: false) }; browseLocations[id] = nil; if id == activeBrowseId { library = [:] }; if id == activeQueueId { queue = []; queueRevision = ""; queuePage = [:] }; status = errorMessage(data["code"] as? String ?? "Source error"); return }
         if type == "ACCEPTED" { status = "Waiting for source…"; return }
         guard reply["hostEpoch"] as? String == hostEpoch else { disconnect(); return }
-        if ["AUTHORIZE", "REQUEST_CONTROL"].contains(operation ?? ""), data["authorized"] as? Bool == true { controlProposal.clear(); authorized = true; cancelSetupDeadline(); wantsConnection = true; status = "Connected to DX340" }
+        if ["AUTHORIZE", "REQUEST_CONTROL"].contains(operation ?? ""), data["authorized"] as? Bool == true { controlProposal.clear(); authorized = true; cancelSetupDeadline(); cancelApprovalCheck(); rememberApprovedPlayer(); connectionPhase = "connected"; wantsConnection = true; status = "Connected to player" }
         if let new = data["state"] as? [String: Any] { applyState(new, notifyLibraryChange: !["AUTHORIZE", "REQUEST_CONTROL"].contains(operation ?? "")) }
         if type == "STATE_CHANGED" { applyState(data) }
         if let list = data["sources"] as? [[String: Any]] { sources = list }
@@ -357,7 +439,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         case "UI_MODE_DISABLED": return "On DX340, enable the selected player's optional browsing mode."
         case "STALE_LIBRARY", "EXPIRED_ITEM": return "The library changed. Refresh before selecting a track."
         case "UI_BUSY", "SOURCE_BUSY": return "Wait for the current action to finish."
-        case "LOCAL_APPROVAL_REQUIRED": return "Approve this controller on DX340, then retry authorization."
+        case "LOCAL_APPROVAL_REQUIRED": return "On the player, open pairing and approve this phone. Connection will finish automatically."
         default: return "Action failed (\(code)). Refresh the player to check its state."
         }
     }

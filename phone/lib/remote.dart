@@ -39,6 +39,28 @@ class Remote extends ChangeNotifier {
   bool mutationPending = false;
   bool controlRequestAvailable = false;
   bool _dispatchingControl = false;
+  Json connectionSetup = {};
+  bool _dispatchingConnection = false;
+  int _connectionGeneration = 0;
+  String get connectionPhase => authorized
+      ? 'connected'
+      : controlRequestAvailable
+      ? 'busy'
+      : _dispatchingConnection
+      ? 'preparing'
+      : textValue(connectionSetup['phase']).isEmpty
+      ? 'idle'
+      : textValue(connectionSetup['phase']);
+  bool get connectionInProgress => {
+    'preparing',
+    'searching',
+    'connecting',
+    'approval',
+  }.contains(connectionPhase);
+  bool get hasSavedPlayer => connectionSetup['hasSavedPlayer'] == true;
+  String get savedPlayerName => textValue(connectionSetup['savedName']).isEmpty
+      ? 'player'
+      : textValue(connectionSetup['savedName']);
   bool get canRequestControl =>
       controlRequestAvailable && !authorized && !busy && !_dispatchingControl;
   bool _dispatchingMutation = false;
@@ -138,6 +160,7 @@ class Remote extends ChangeNotifier {
       state = object(data['state']);
       authorized = data['authorized'] == true;
       controlRequestAvailable = data['controlRequestAvailable'] == true;
+      connectionSetup = object(data['connectionSetup']);
       mutationPending = data['mutationPending'] == true;
       status = data['status'];
       sources = objects(data['sources']);
@@ -171,6 +194,9 @@ class Remote extends ChangeNotifier {
     if (_disposed) return;
     authorized = false;
     controlRequestAvailable = false;
+    _connectionGeneration++;
+    _dispatchingConnection = false;
+    connectionSetup = {...connectionSetup, 'phase': 'failed'};
     progress.invalidate();
     mutationPending = false;
     _nativeQueueLoading = false;
@@ -238,6 +264,50 @@ class Remote extends ChangeNotifier {
         notifyListeners();
       }
     }
+  }
+
+  Future<void> connectPlayer({required bool apple, bool choose = false}) async {
+    if (_disposed ||
+        _dispatchingConnection ||
+        connectionInProgress ||
+        (authorized && !choose)) {
+      return;
+    }
+    final ticket = ++_connectionGeneration;
+    _dispatchingConnection = true;
+    error = null;
+    notifyListeners();
+    try {
+      final granted = await bridge.call('permissions');
+      if (_disposed || ticket != _connectionGeneration) return;
+      if (granted != true) {
+        connectionSetup = {...connectionSetup, 'phase': 'permission'};
+        error = apple
+            ? 'Allow Bluetooth access in Settings, then tap Connect.'
+            : 'Allow Nearby Devices access in Settings, then tap Connect.';
+        return;
+      }
+      await bridge.call(choose ? 'searchPlayers' : 'connectPlayer');
+    } catch (issue) {
+      if (!_disposed && ticket == _connectionGeneration) {
+        connectionSetup = {...connectionSetup, 'phase': 'failed'};
+        error = issue is PlatformException
+            ? issue.message
+            : 'Connection interrupted. Tap Connect to try again.';
+      }
+    } finally {
+      if (!_disposed && ticket == _connectionGeneration) {
+        _dispatchingConnection = false;
+        notifyListeners();
+      }
+    }
+  }
+
+  Future<void> cancelConnection() async {
+    _connectionGeneration++;
+    _dispatchingConnection = false;
+    connectionSetup = {...connectionSetup, 'phase': 'idle'};
+    await invoke('disconnect');
   }
 
   Future<bool> command(

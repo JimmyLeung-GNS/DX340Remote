@@ -1,0 +1,74 @@
+[
+  {
+    "name": "none",
+    "found": [],
+    "remembered": null,
+    "target": null,
+    "choose": false
+  },
+  {
+    "name": "single-first-player",
+    "found": [
+      "player-a"
+    ],
+    "remembered": null,
+    "target": "player-a",
+    "choose": false
+  },
+  {
+    "name": "duplicate-advertisements",
+    "found": [
+      "player-a",
+      "player-a",
+      ""
+    ],
+    "remembered": null,
+    "target": "player-a",
+    "choose": false
+  },
+  {
+    "name": "multiple-require-choice",
+    "found": [
+      "player-b",
+      "player-a"
+    ],
+    "remembered": null,
+    "target": null,
+    "choose": true
+  },
+  {
+    "name": "remembered-player-among-others",
+    "found": [
+      "player-b",
+      "player-a"
+    ],
+    "remembered": "player-a",
+    "target": "player-a",
+    "choose": false
+  },
+  {
+    "name": "never-substitute-another-player-for-remembered",
+    "found": [
+      "player-b"
+    ],
+    "remembered": "player-a",
+    "target": null,
+    "choose": true
+  },
+  {
+    "name": "remembered-missing",
+    "found": [],
+    "remembered": "player-a",
+    "target": null,
+    "choose": false
+  },
+  {
+    "name": "blank-remembered-not-an-identity",
+    "found": [
+      "player-a"
+    ],
+    "remembered": "",
+    "target": "player-a",
+    "choose": false
+  }
+]

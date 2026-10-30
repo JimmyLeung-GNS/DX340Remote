@@ -34,6 +34,7 @@ class PhoneShell extends StatefulWidget {
 class _PhoneShellState extends State<PhoneShell>
     with WidgetsBindingObserver, RestorationMixin {
   final _tab = RestorableInt(0);
+  bool _connectionHelp = false;
   Remote get remote => widget.remote;
   bool get apple => Theme.of(context).platform == TargetPlatform.iOS;
   static const _tabs = ['Player', 'Library', 'Queue', 'Setup'];
@@ -574,49 +575,143 @@ class _PhoneShellState extends State<PhoneShell>
         ),
       ),
   ];
-  List<Widget> setupView() => [
-    if (remote.controlRequestAvailable) ...[
-      action(
-        'Take control on this phone',
-        perform(remote.canRequestControl, remote.requestControl),
-      ),
-      label(
-        'Taking control here disconnects the other approved controller. Music keeps playing on DX340.',
-      ),
-    ],
-    label(
-      'Music plays on DX340. This phone sends controls directly over Bluetooth.',
-    ),
-    label(
-      'Start the companion on DX340 and open pairing for a new phone. Accept the system pairing request, then approve this phone on DX340.',
-    ),
-    action(
-      apple ? 'Check Bluetooth access' : 'Allow Nearby Devices access',
-      perform(true, () => remote.requestPermissions(apple: apple)),
-      icon: Icons.bluetooth,
-    ),
-    action(
-      'Find DX340',
-      perform(true, () => remote.invoke('scan')),
-      icon: Icons.search,
-    ),
-    for (final device in remote.devices)
-      action(
-        'Connect to ${textValue(device['name'])} · ${textValue(device['id']).split('-').last.substring(0, textValue(device['id']).split('-').last.length.clamp(0, 5))}',
-        perform(true, () => remote.invoke('connect', {'id': device['id']})),
-      ),
-    action(
-      'Retry authorization after approval',
-      perform(true, () => remote.invoke('authorize')),
-    ),
-    action('Disconnect', perform(true, () => remote.invoke('disconnect'))),
-    label(
-      'Disconnecting leaves music playing on DX340. Cached titles and lists may be stale until this phone reconnects.',
-    ),
-    label(
-      'Optional assisted browsing needs DX340 awake and unlocked. Enable it in the companion only when you want that mode.',
-    ),
-  ];
+  Widget primaryAction(String title, VoidCallback? callback) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8),
+    child: apple
+        ? CupertinoButton.filled(
+            onPressed: callback,
+            child: Text(title, textAlign: TextAlign.center),
+          )
+        : FilledButton(
+            onPressed: callback,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Text(title, textAlign: TextAlign.center),
+            ),
+          ),
+  );
+  List<Widget> setupView() {
+    final phase = remote.connectionPhase;
+    final waiting = remote.connectionInProgress;
+    final heading = switch (phase) {
+      'connected' => 'Connected to ${remote.savedPlayerName}',
+      'searching' => 'Finding your player…',
+      'connecting' => 'Connecting to your player…',
+      'preparing' => 'Preparing Bluetooth…',
+      'approval' => 'Approve this phone on your player',
+      'choosing' => 'Choose your player',
+      'bluetoothOff' => 'Turn on Bluetooth',
+      'permission' => 'Allow Bluetooth access',
+      'busy' => 'Another controller is connected',
+      'failed' => 'Connection needs another try',
+      _ => 'Connect your player',
+    };
+    return [
+      Semantics(liveRegion: true, child: label(heading, heading: true)),
+      label(switch (phase) {
+        'connected' => 'Ready to control music. Audio stays on your player.',
+        'searching' =>
+          'Looking nearby for players running Companion. This takes about 10 seconds.',
+        'connecting' => 'Establishing a protected Bluetooth connection.',
+        'preparing' => 'Allow the system permission request if it appears.',
+        'approval' =>
+          'On your player, open Companion, choose Set up a new phone, then approve this phone. Confirm matching system pairing codes if prompted. Connection finishes automatically after approval.',
+        'choosing' =>
+          'Select the player you recognize. A different player is never substituted for your saved player automatically.',
+        'bluetoothOff' =>
+          apple
+              ? 'Turn Bluetooth on in Control Center or Settings, then return here and tap Connect.'
+              : 'Turn Bluetooth on in Android Settings, then return here and tap Connect.',
+        'permission' =>
+          apple
+              ? 'Bluetooth access connects directly to your player. Allow it in Settings, then tap Connect.'
+              : 'Nearby Devices access finds and connects to your player. Allow it when prompted.',
+        'busy' =>
+          'You can switch control to this phone. Music will keep playing.',
+        'failed' => remote.status,
+        _ =>
+          remote.hasSavedPlayer
+              ? 'Your approved player is remembered. Keep it nearby with Companion running.'
+              : 'Open Companion on your player and enable phone control. Then tap Connect. Wi-Fi and internet are not needed.',
+      }),
+      if (remote.error != null) label(remote.error!),
+      if (waiting) ...[
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 12),
+          child: Center(child: CircularProgressIndicator.adaptive()),
+        ),
+        action('Cancel connection', perform(true, remote.cancelConnection)),
+      ],
+      if (remote.controlRequestAvailable) ...[
+        primaryAction(
+          'Take control on this phone',
+          perform(remote.canRequestControl, remote.requestControl),
+        ),
+        label(
+          'Taking control here disconnects the other approved controller. Music keeps playing on DX340.',
+        ),
+        action('Cancel connection', perform(true, remote.cancelConnection)),
+      ],
+      if (phase == 'choosing') ...[
+        for (final device in remote.devices)
+          action(
+            'Connect to ${textValue(device['name'])} · ${textValue(device['id']).split('-').last.substring(0, textValue(device['id']).split('-').last.length.clamp(0, 5))}',
+            perform(true, () => remote.invoke('connect', {'id': device['id']})),
+          ),
+        action(
+          'Search again',
+          perform(true, () => remote.connectPlayer(apple: apple, choose: true)),
+        ),
+        action('Cancel connection', perform(true, remote.cancelConnection)),
+      ],
+      if (!waiting && !{'connected', 'choosing', 'busy'}.contains(phase))
+        primaryAction(
+          remote.hasSavedPlayer
+              ? 'Connect to ${remote.savedPlayerName}'
+              : 'Connect',
+          perform(true, () => remote.connectPlayer(apple: apple)),
+        ),
+      if (phase == 'bluetoothOff' && !apple)
+        action(
+          'Open Bluetooth settings',
+          perform(true, () => remote.invoke('bluetoothSettings')),
+        ),
+      if (phase == 'permission')
+        action(
+          'Open app settings',
+          perform(true, () => remote.invoke('appSettings')),
+        ),
+      if (phase == 'connected') ...[
+        primaryAction('Open Player', () => setState(() => _tab.value = 0)),
+        action('Disconnect', perform(true, remote.cancelConnection)),
+        label(
+          'Disconnecting leaves music playing. Cached lists may be stale until you reconnect.',
+        ),
+      ],
+      if (!waiting && phase != 'busy') ...[
+        action(
+          _connectionHelp ? 'Hide connection help' : 'Connection help',
+          () => setState(() => _connectionHelp = !_connectionHelp),
+        ),
+        if (_connectionHelp) ...[
+          label(
+            'For a new phone, choose Set up a new phone in Companion. Confirm matching system codes on both devices, then approve the identified phone on your player. Previously approved phones reconnect without opening pairing.',
+          ),
+          action(
+            'Choose another player',
+            perform(
+              true,
+              () => remote.connectPlayer(apple: apple, choose: true),
+            ),
+          ),
+          label(
+            'Only players running a compatible Companion can appear. Supported music controls depend on the player and source app. Optional assisted browsing needs the player awake and unlocked.',
+          ),
+        ],
+      ],
+    ];
+  }
+
   Widget statusContent() => Semantics(
     liveRegion: true,
     child: Column(
@@ -701,13 +796,17 @@ class _PhoneShellState extends State<PhoneShell>
           remote.libraryLoading,
         ),
         2 => ('queue', remote.scope, remote.queueRevision, remote.queueOffset),
+        3 => ('setup', remote.connectionPhase),
         _ => ('tab', _tab.value),
       };
       final content = ListView(
         key: PageStorageKey(scrollContext),
         padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
         children: [
-          if (!browsing) ...[statusContent(), const SizedBox(height: 20)],
+          if (!browsing && _tab.value != 3) ...[
+            statusContent(),
+            const SizedBox(height: 20),
+          ],
           ...switch (_tab.value) {
             1 => library(),
             2 => queueView(),

@@ -1,5 +1,33 @@
 import Foundation
 
+public struct PlayerChoice: Equatable {
+    public let target: String?
+    public let choose: Bool
+}
+public enum PlayerDiscovery {
+    public static func finish(found: [String], remembered: String?) -> PlayerChoice {
+        let ids = Array(Set(found.filter { !$0.isEmpty }))
+        let saved = remembered.flatMap { $0.isEmpty ? nil : $0 }
+        if let saved, ids.contains(saved) { return PlayerChoice(target: saved, choose: false) }
+        if saved == nil, ids.count == 1 { return PlayerChoice(target: ids[0], choose: false) }
+        return PlayerChoice(target: nil, choose: !ids.isEmpty)
+    }
+}
+/// This gate never extends the host/client setup deadline or replays a source command.
+public struct ApprovalRetry {
+    private var generation: UInt64 = 0
+    public private(set) var active = false
+    public init() {}
+    public mutating func begin() -> UInt64 {
+        if !active { generation &+= 1; active = true }; return generation
+    }
+    public mutating func clear() { generation &+= 1; active = false }
+    public func current(_ ticket: UInt64) -> Bool { active && ticket == generation }
+    public func mayCheck(ticket: UInt64, setupActive: Bool, authorized: Bool, requestPending: Bool) -> Bool {
+        current(ticket) && setupActive && !authorized && !requestPending
+    }
+}
+
 /// An assisted selection consumes source UI action IDs, not the controller grant.
 public struct AssistedPageUse {
     public static func tracks(source: String, item: String, assisted: Bool, requestedRevision: String, pageRevision: String) -> Bool {

@@ -1,6 +1,12 @@
 package org.dx340.remote.controller
 
 import android.annotation.SuppressLint
+import android.Manifest
+import android.bluetooth.BluetoothManager
+import android.content.pm.PackageManager
+import org.dx340.remote.ble.CentralPhase
+import org.dx340.remote.protocol.PlayerDiscovery
+import org.dx340.remote.protocol.ApprovalRetry
 import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.os.Handler
@@ -19,7 +25,7 @@ import org.dx340.remote.protocol.ConnectionSetupDeadline
 import org.dx340.remote.protocol.AssistedPageUse
 
 @SuppressLint("MissingPermission")
-class RemoteModel(context: Context) {
+class RemoteModel(private val context: Context) {
     var observer: (() -> Unit)? = null
     private fun update() { observer?.invoke() }
     private val cacheDir = java.io.File(context.cacheDir, "dx340").apply { mkdirs() }
@@ -28,7 +34,7 @@ class RemoteModel(context: Context) {
     private val session = ControllerSession()
     private val controlProposal = ControlProposal()
     val canRequestControl get() = !authorized && controlProposal.available && pending.values.none { it == "REQUEST_CONTROL" }
-    val authorized get() = session.authorized
+    val authorized get() = session.authorized && bluetoothAccess() && bluetoothOn()
     var state = JSONObject(); private set
     var stateSampleId = ""; private set
     private var stateReceivedAt: Long? = null
@@ -52,12 +58,17 @@ class RemoteModel(context: Context) {
     private val queueLocations = mutableMapOf<String, QueueLocation>()
     private var activeQueueId: String? = null
     private val devices = linkedMapOf<String, BluetoothDevice>()
+    private val connectionPreferences = context.getSharedPreferences("approved-player", Context.MODE_PRIVATE)
+    private var connectionPhase = "idle"
+    private var discoveryGeneration = 0L
+    private val approvalRetry = ApprovalRetry()
+    private var approvalCheck: Runnable? = null
     private val setupDeadline = ConnectionSetupDeadline()
     private val assistedPageUse = AssistedPageUse()
     private var setupTimeout: Runnable? = null
     val found get() = devices.values.toList()
-    private val ble: BleCentral = BleCentral(context, { status = it; update() }, { devices[it.address] = it; update() }, { beginSetupDeadline(); send("HELLO", bootstrap = true) }, ::receive) {
-        cancelSetupDeadline()
+    private val ble: BleCentral = BleCentral(context, { status = it; update() }, { devices[it.address] = it; update() }, { beginSetupDeadline(); send("HELLO", bootstrap = true) }, ::receive, phase = ::centralPhaseChanged) {
+        cancelSetupDeadline(); cancelApprovalCheck()
         abandonAssistedPage(); session.lost(); controlProposal.clear(); browseLocations.clear(); queueLocations.clear(); activeBrowseId = null; activeQueueId = null; status = "Disconnected. Cached lists may be stale; reconnect to control."; update()
     }
     init {
@@ -69,10 +80,79 @@ class RemoteModel(context: Context) {
             }
         }
     }
-    fun scan() { devices.clear(); runCatching { ble.scan() }.onFailure { status = it.message ?: "Bluetooth unavailable" }; update() }
-    fun connect(device: BluetoothDevice) = ble.connect(device)
-    fun disconnect() { abandonAssistedPage(); session.lost(); controlProposal.clear(); browseLocations.clear(); queueLocations.clear(); activeBrowseId = null; activeQueueId = null; ble.disconnect(); status = "Disconnected. Cached lists may be stale; reconnect to control."; update() }
-    fun refreshOnForeground() { if (expireSetupIfNeeded()) return; if (authorized) send("GET_STATE") else update() }
+    private fun bluetoothAccess() = listOf(Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT).all { context.checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }
+    private fun bluetoothOn() = bluetoothAccess() && runCatching { context.getSystemService(BluetoothManager::class.java).adapter?.isEnabled == true }.getOrDefault(false)
+    val connectionSetup: JSONObject get() = JSONObject()
+        .put("phase", when { !bluetoothAccess() -> "permission"; !bluetoothOn() -> "bluetoothOff"; authorized -> "connected"; canRequestControl -> "busy"; else -> connectionPhase })
+        .put("savedName", connectionPreferences.getString("name", "Player"))
+        .put("hasSavedPlayer", !connectionPreferences.getString("id", null).isNullOrEmpty())
+    private fun centralPhaseChanged(value: CentralPhase) {
+        connectionPhase = when (value) {
+            CentralPhase.SEARCHING -> "searching"
+            CentralPhase.CONNECTING, CentralPhase.CHECKING, CentralPhase.RETRYING -> "connecting"
+            CentralPhase.FAILED -> "failed"
+            CentralPhase.IDLE -> "idle"
+        }
+        update()
+    }
+    fun scan() = discoverPlayers(automatic = false)
+    fun searchPlayers() { disconnect(); discoverPlayers(automatic = false) }
+    fun connectPlayer() {
+        if (authorized || connectionPhase in setOf("searching", "connecting", "approval")) return
+        disconnect()
+        if (!bluetoothOn()) { status = "Enable Bluetooth and allow Nearby Devices access to connect."; update(); return }
+        val id = connectionPreferences.getString("id", null)
+        val remembered = id?.let { runCatching { context.getSystemService(BluetoothManager::class.java).adapter?.getRemoteDevice(it) }.getOrNull() }
+        if (remembered?.bondState == BluetoothDevice.BOND_BONDED) {
+            devices[remembered.address] = remembered; connect(remembered)
+        } else discoverPlayers(automatic = true)
+    }
+    private fun discoverPlayers(automatic: Boolean) {
+        cancelApprovalCheck(); val generation = ++discoveryGeneration
+        devices.clear()
+        runCatching {
+            ble.scan { success ->
+                if (generation != discoveryGeneration) return@scan
+                if (!success) { connectionPhase = "failed"; update(); return@scan }
+                val choice = PlayerDiscovery.finish(devices.keys, connectionPreferences.getString("id", null))
+                val target = choice.target
+                if (automatic && target != null) connect(devices.getValue(target))
+                else {
+                    connectionPhase = if (devices.isEmpty()) "failed" else "choosing"
+                    status = if (devices.isEmpty()) "No compatible player found. Start Companion on your player, keep it nearby, then try again."
+                        else "Choose the player you want to control."
+                    update()
+                }
+            }
+        }.onFailure { connectionPhase = "failed"; status = it.message ?: "Bluetooth unavailable" }
+        update()
+    }
+    fun connect(device: BluetoothDevice) {
+        discoveryGeneration++; ble.stopScan(); cancelApprovalCheck(); ble.connect(device)
+    }
+    private fun rememberApprovedPlayer() {
+        val device = ble.connectedDevice ?: return
+        val name = runCatching { device.name }.getOrNull()?.replace(Regex("[\\p{Cntrl}\u202A-\u202E\u2066-\u2069]"), "")?.trim()?.take(60)?.takeIf { it.isNotEmpty() } ?: "Player"
+        connectionPreferences.edit().putString("id", device.address).putString("name", name).apply()
+    }
+    private fun cancelApprovalCheck() {
+        approvalCheck?.let(main::removeCallbacks); approvalCheck = null; approvalRetry.clear()
+    }
+    private fun awaitLocalApproval() {
+        val ticket = approvalRetry.begin()
+        if (approvalCheck != null) return
+        fun schedule() {
+            approvalCheck = Runnable {
+                approvalCheck = null
+                if (!approvalRetry.current(ticket)) return@Runnable
+                if (approvalRetry.mayCheck(ticket, setupDeadline.active, authorized, pending.values.any { it == "AUTHORIZE" })) authorize()
+                if (approvalRetry.current(ticket)) schedule()
+            }.also { main.postDelayed(it, 1500) }
+        }
+        schedule()
+    }
+    fun disconnect() { discoveryGeneration++; ble.stopScan(); cancelApprovalCheck(); abandonAssistedPage(); session.lost(); controlProposal.clear(); browseLocations.clear(); queueLocations.clear(); activeBrowseId = null; activeQueueId = null; ble.disconnect(); status = "Disconnected. Cached lists may be stale; reconnect to control."; update() }
+    fun refreshOnForeground() { if (!bluetoothAccess() || !bluetoothOn()) { disconnect(); status = "Enable Bluetooth and allow access to connect."; update(); return }; if (expireSetupIfNeeded()) return; if (authorized) send("GET_STATE") else update() }
     fun close() { ble.stopScan(); ble.disconnect(); main.removeCallbacksAndMessages(null) }
     fun authorize() = send("AUTHORIZE", bootstrap = true)
     private fun cancelSetupDeadline() {
@@ -86,7 +166,7 @@ class RemoteModel(context: Context) {
     private fun expireSetupIfNeeded(ticket: Long? = null): Boolean {
         if (authorized || !setupDeadline.expired(android.os.SystemClock.elapsedRealtime(), ticket)) return false
         // Close unfinished setup without changing saved approvals or replaying a command.
-        ble.disconnect(); status = ConnectionSetupDeadline.MESSAGE; update()
+        ble.disconnect(); connectionPhase = "failed"; status = ConnectionSetupDeadline.MESSAGE; update()
         return true
     }
     fun requestControl() {
@@ -125,7 +205,7 @@ class RemoteModel(context: Context) {
             android.util.Log.i("DX340RemoteClient", "QUEUED:$type")
         }
         catch (e: Exception) { pending.remove(id); retireAssistedPage(id); browseLocations.remove(id); queueLocations.remove(id); status = e.message ?: "Send failed"; update(); return }
-        main.postDelayed({ if (pending.remove(id) != null) { retireAssistedPage(id); browseLocations.remove(id); queueLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); status = "Reply timed out; outcome unknown. Refresh state before retrying."; update() } }, ReplyBudget.milliseconds(type, args.optString("item")))
+        main.postDelayed({ if (pending.remove(id) != null) { if (type == "AUTHORIZE") { cancelApprovalCheck(); connectionPhase = "failed" }; retireAssistedPage(id); browseLocations.remove(id); queueLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); status = "Reply timed out; outcome unknown. Refresh state before retrying."; update() } }, ReplyBudget.milliseconds(type, args.optString("item")))
     }
     fun browse(parent: String? = null, page: Int = 0) = send("BROWSE", JSONObject().put("parent", parent ?: JSONObject.NULL).put("page", page)
         .put("revision", if (parent == null) JSONObject.NULL else library.optString("revision", state.optString("sourceEpoch"))))
@@ -163,16 +243,18 @@ class RemoteModel(context: Context) {
             if (type == "HELLO") { controlProposal.clear(); session.hello(reply.getString("hostEpoch")); authorize(); return }
             if (type == "ERROR" && reply.optString("hostEpoch") == epoch && operation == "AUTHORIZE" && !authorized) {
                 if (data.optString("code") == "CONTROLLER_BUSY") {
-                    ble.pauseReconnection()
+                    ble.pauseReconnection(); cancelApprovalCheck(); connectionPhase = "busy"
                     controlProposal.observeBusy(reply.optString("hostEpoch"), epoch, data.optString("ownershipRevision"))
                 } else {
                     controlProposal.clear()
-                    if (data.optString("code") == "LOCAL_APPROVAL_REQUIRED") ble.pauseReconnection()
+                    if (data.optString("code") == "LOCAL_APPROVAL_REQUIRED") {
+                        ble.pauseReconnection(); connectionPhase = "approval"; awaitLocalApproval()
+                    } else { cancelApprovalCheck(); connectionPhase = "failed" }
                 }
             }
             if (type == "ERROR") { data.optJSONObject("state")?.takeIf { reply.optString("hostEpoch") == epoch }?.let { applyState(it, false) }; browseLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); if (id == activeQueueId) { queue = JSONArray(); queueRevision = ""; queuePage = JSONObject() }; status = errorMessage(data.optString("code", "Unknown source error")); update(); return }
             if (type == "ACCEPTED") { status = "Waiting for source…"; update(); return }
-            if (operation in listOf("AUTHORIZE", "REQUEST_CONTROL") && data.optBoolean("authorized")) { controlProposal.clear(); session.approve(reply.getString("hostEpoch")); cancelSetupDeadline(); ble.resumeReconnection(); status = "Connected to DX340" }
+            if (operation in listOf("AUTHORIZE", "REQUEST_CONTROL") && data.optBoolean("authorized")) { controlProposal.clear(); session.approve(reply.getString("hostEpoch")); cancelSetupDeadline(); cancelApprovalCheck(); rememberApprovedPlayer(); connectionPhase = "connected"; ble.resumeReconnection(); status = "Connected to player" }
             if (reply.optString("hostEpoch") != epoch) { disconnect(); return }
             data.optJSONObject("state")?.let { applyState(it, operation !in listOf("AUTHORIZE", "REQUEST_CONTROL")) }
             if (type == "STATE_CHANGED") applyState(data)
@@ -255,7 +337,7 @@ class RemoteModel(context: Context) {
         "UI_MODE_DISABLED" -> "On DX340, enable the selected player's optional browsing mode."
         "STALE_LIBRARY", "EXPIRED_ITEM" -> "The library changed. Refresh before selecting a track."
         "UI_BUSY", "SOURCE_BUSY" -> "Wait for the current action to finish."
-        "LOCAL_APPROVAL_REQUIRED" -> "Approve this controller on DX340, then retry authorization."
+        "LOCAL_APPROVAL_REQUIRED" -> "On the player, open pairing and approve this phone. Connection will finish automatically."
         else -> "Action failed ($code). Refresh the player to check its state."
     }
 }

@@ -57,7 +57,7 @@ class ControllerManagementPanel(context: Context, private val changed: () -> Uni
     internal fun renderSnapshot(state: ControllerAccessState) {
         val oldPending = previous?.pending
         if (oldPending != null && state.pending == null) requestNotice =
-            if (state.approved.any { it.address == oldPending.address }) "Phone approved. On that phone, retry authorization."
+            if (state.approved.any { it.address == oldPending.address }) "Phone approved. The updated phone app finishes connecting automatically. Older apps may need Retry authorization."
             else "The previous request is no longer waiting. Find and connect to DX340 again from the phone."
         if (state.pending != null || state.approved.any { it.connection == "Current controller" }) requestNotice = null
         previous = state
@@ -67,8 +67,8 @@ class ControllerManagementPanel(context: Context, private val changed: () -> Uni
         caption("Controller access", true)
         val pending = state.pending
         if (pending == null) caption(requestNotice ?: if (state.windowOpen)
-            "Pairing is open. Find DX340 on your phone and confirm the system pairing prompts. A request appears here afterward."
-            else "No new phone waiting. Saved controllers can reconnect from their Setup screen.")
+            "New phone setup is open. Tap Connect on your phone and confirm matching system codes. A request appears here afterward."
+            else "No new phone waiting. Approved phones can tap Connect without opening new phone setup.")
         else {
             caption("Requesting access: ${pending.label}")
             if (!pending.bonded) caption("Complete Bluetooth pairing on both devices first.")

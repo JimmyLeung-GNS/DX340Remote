@@ -50,9 +50,17 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler {
                 val remote = model ?: error("Bluetooth service is starting. Try again in a moment.")
                 when (call.method) {
                     "scan" -> { requireBluetoothPermission(); remote.scan() }
+                    "connectPlayer" -> {
+                        requireBluetoothPermission()
+                        startForegroundService(Intent(this, RemoteService::class.java))
+                        remote.connectPlayer()
+                    }
+                    "searchPlayers" -> { requireBluetoothPermission(); remote.searchPlayers() }
+                    "bluetoothSettings" -> startActivity(Intent(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS))
+                    "appSettings" -> startActivity(Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, android.net.Uri.parse("package:$packageName")))
                     "connect" -> {
                         requireBluetoothPermission()
-                        val device = remote.found.firstOrNull { it.address == call.argument<String>("id") } ?: error("Find DX340 again before connecting.")
+                        val device = remote.found.firstOrNull { it.address == call.argument<String>("id") } ?: error("Search for your player again before connecting.")
                         startForegroundService(Intent(this, RemoteService::class.java))
                         remote.connect(device)
                     }
@@ -97,6 +105,7 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler {
         return JSONObject().put("bridgeVersion", 1).put("status", remote?.status ?: "Preparing Bluetooth remote…")
             .put("authorized", remote?.authorized ?: false).put("mutationPending", remote?.mutationPending ?: false)
             .put("controlRequestAvailable", remote?.canRequestControl ?: false)
+            .put("connectionSetup", remote?.connectionSetup ?: JSONObject().put("phase", "preparing"))
             .put("state", remote?.state ?: JSONObject()).put("sources", remote?.sources ?: JSONArray())
             .put("stateSampleId", remote?.stateSampleId ?: "").put("stateAgeMs", remote?.stateAgeMs ?: JSONObject.NULL)
             .put("library", remote?.library ?: JSONObject()).put("queue", remote?.queue ?: JSONArray())

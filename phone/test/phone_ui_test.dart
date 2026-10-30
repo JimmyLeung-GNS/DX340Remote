@@ -341,7 +341,7 @@ void main() {
         expect(find.text('Open Setup'), findsOneWidget);
         await tester.tap(find.text('Open Setup'));
         await tester.pumpAndSettle();
-        expect(find.text('Find DX340'), findsOneWidget);
+        expect(find.text('Connect'), findsOneWidget);
         tester.platformDispatcher.textScaleFactorTestValue = 2.5;
         addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
         await tester.tap(find.text('Player').last);

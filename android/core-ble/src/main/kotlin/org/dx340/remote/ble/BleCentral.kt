@@ -12,9 +12,12 @@ import org.dx340.remote.protocol.Reassembler
 import org.dx340.remote.protocol.Wire
 import java.util.UUID
 
+enum class CentralPhase { SEARCHING, CONNECTING, CHECKING, RETRYING, FAILED, IDLE }
+
 @SuppressLint("MissingPermission")
 class BleCentral(private val context: Context, private val status: (String) -> Unit, private val discovered: (BluetoothDevice) -> Unit,
-                 private val ready: () -> Unit, private val message: (ByteArray) -> Unit, private val lost: () -> Unit) {
+                 private val ready: () -> Unit, private val message: (ByteArray) -> Unit,
+                 private val phase: (CentralPhase) -> Unit = {}, private val lost: () -> Unit) {
     private val main = Handler(Looper.getMainLooper())
     private val adapter get() = context.getSystemService(BluetoothManager::class.java).adapter
     private var gatt: BluetoothGatt? = null
@@ -30,15 +33,14 @@ class BleCentral(private val context: Context, private val status: (String) -> U
     private var reconnect: Runnable? = null
     private var writeGeneration = 0L
     private val assembler = Reassembler(android.os.SystemClock::elapsedRealtime)
-    private val scan = object : ScanCallback() {
-        override fun onScanResult(callbackType: Int, result: ScanResult) { main.post { discovered(result.device) } }
-        override fun onScanFailed(errorCode: Int) { main.post { status("Scan failed ($errorCode). Retry from Setup.") } }
-    }
+    private var activeScan: ScanCallback? = null
+    private var scanExpiry: Runnable? = null
+    val connectedDevice get() = gatt?.device
     private val cb = object : BluetoothGattCallback() {
         override fun onConnectionStateChange(g: BluetoothGatt, code: Int, newState: Int) { main.post {
             if (g != gatt) { g.close(); return@post }
             if (code == 0 && newState == BluetoothProfile.STATE_CONNECTED) {
-                status("Discovering service…"); if (!g.discoverServices()) fail("Service discovery could not start")
+                phase(CentralPhase.CHECKING); status("Discovering service…"); if (!g.discoverServices()) fail("Service discovery could not start")
             } else { fail("Disconnected ($code). Commands cleared; reconnect to refresh.") }
         } }
         override fun onServicesDiscovered(g: BluetoothGatt, code: Int) { main.post {
@@ -56,7 +58,7 @@ class BleCentral(private val context: Context, private val status: (String) -> U
         override fun onDescriptorWrite(g: BluetoothGatt, d: BluetoothGattDescriptor, code: Int) { main.post {
             if (g != gatt) return@post
             if (code != 0) { desired = null; fail("Encrypted pairing failed ($code). Open pairing on DX340 and retry."); return@post }
-            established = true; retries = 0; status("Connected; checking authorization…"); ready()
+            established = true; phase(CentralPhase.CHECKING); retries = 0; status("Connected; checking authorization…"); ready()
         } }
         override fun onCharacteristicWrite(g: BluetoothGatt, c: BluetoothGattCharacteristic, code: Int) { main.post {
             if (g != gatt) return@post
@@ -78,17 +80,34 @@ class BleCentral(private val context: Context, private val status: (String) -> U
         else { d.value = BluetoothGattDescriptor.ENABLE_INDICATION_VALUE; if (g.writeDescriptor(d)) 0 else -1 }
         if (result != 0) fail("Cannot start secure subscription ($result)")
     }
-    fun scan() {
+    fun scan(completed: ((Boolean) -> Unit)? = null) {
         stopScan(); check(adapter?.isEnabled == true) { "Enable Bluetooth first" }
-        adapter.bluetoothLeScanner.startScan(listOf(ScanFilter.Builder().setServiceUuid(ParcelUuid(UUID.fromString(Wire.SERVICE))).build()), ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build(), scan)
-        status("Searching for DX340…"); main.postDelayed({ stopScan() }, 10000)
+        val callback = object : ScanCallback() {
+            override fun onScanResult(callbackType: Int, result: ScanResult) { main.post { if (activeScan === this) discovered(result.device) } }
+            override fun onScanFailed(errorCode: Int) { main.post {
+                if (activeScan !== this) return@post
+                stopScan(); phase(CentralPhase.FAILED); status("Search failed ($errorCode). Try connecting again."); completed?.invoke(false)
+            } }
+        }
+        activeScan = callback
+        try {
+            adapter.bluetoothLeScanner.startScan(listOf(ScanFilter.Builder().setServiceUuid(ParcelUuid(UUID.fromString(Wire.SERVICE))).build()), ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build(), callback)
+        } catch (error: Exception) { stopScan(); throw error }
+        phase(CentralPhase.SEARCHING); status("Searching for compatible players…")
+        scanExpiry = Runnable {
+            if (activeScan === callback) { stopScan(); completed?.invoke(true) }
+        }.also { main.postDelayed(it, 10000) }
     }
-    fun stopScan() { runCatching { adapter?.bluetoothLeScanner?.stopScan(scan) } }
+    fun stopScan() {
+        scanExpiry?.let(main::removeCallbacks); scanExpiry = null
+        val callback = activeScan; activeScan = null
+        if (callback != null) runCatching { adapter?.bluetoothLeScanner?.stopScan(callback) }
+    }
     fun connect(device: BluetoothDevice) {
         stopScan(); disconnect(); desired = device; retries = 0; connectAttempt(device)
     }
     private fun connectAttempt(device: BluetoothDevice) {
-        status("Connecting…")
+        phase(CentralPhase.CONNECTING); status("Connecting…")
         gatt = device.connectGatt(context, false, cb, BluetoothDevice.TRANSPORT_LE)
         val current = gatt
         main.postDelayed({ if (gatt == current && !established) fail("Connection timed out; open pairing on DX340 and retry") }, 30000)
@@ -113,15 +132,16 @@ class BleCentral(private val context: Context, private val status: (String) -> U
         clearLink(); status(reason)
         val device = desired
         if (device != null && retries < 5 && adapter?.isEnabled == true) {
+            phase(CentralPhase.RETRYING)
             val delay = minOf(15000L, 1000L shl retries++)
             reconnect?.let { main.removeCallbacks(it) }
             reconnect = Runnable { if (desired == device && gatt == null) connectAttempt(device) }.also { main.postDelayed(it, delay) }
-        }
+        } else phase(CentralPhase.FAILED)
     }
     fun pauseReconnection() { desired = null; retries = 0; reconnect?.let { main.removeCallbacks(it) }; reconnect = null }
     fun resumeReconnection() { if (established) { desired = gatt?.device; retries = 0 } }
     fun disconnect() {
-        desired = null; retries = 0; reconnect?.let { main.removeCallbacks(it) }; reconnect = null; clearLink()
+        desired = null; retries = 0; reconnect?.let { main.removeCallbacks(it) }; reconnect = null; clearLink(); phase(CentralPhase.IDLE)
     }
     private fun clearLink() {
         val old = gatt; gatt = null; rx = null; tx = null; established = false; busy = false; capacity = 20; writeGeneration++

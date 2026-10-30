@@ -151,3 +151,23 @@ xcrun simctl terminate "$simulator" org.dx340.remote.ios
 xcrun simctl ui "$simulator" content_size accessibility-extra-extra-extra-large
 xcrun simctl launch "$simulator" org.dx340.remote.ios --capture-tab=handoff-ready >> artifacts/flutter-handoff-fixture-launch.txt 2>&1
 capture Setup artifacts/flutter-synthetic-handoff-large-dark.png
+
+# Guided setup states are synthetic UI only. The EXIT trap restores the ordinary
+# native bridge target even if this capture stage fails.
+cd "$repo/phone"
+flutter build ios --simulator --debug --no-codesign --target test_support/setup_capture.dart > ../artifacts/flutter-ios-setup-fixture-build.txt 2>&1
+cd "$repo"
+xcrun simctl terminate "$simulator" org.dx340.remote.ios 2>/dev/null || true
+xcrun simctl install "$simulator" phone/build/ios/iphonesimulator/Runner.app
+xcrun simctl ui "$simulator" content_size large
+xcrun simctl ui "$simulator" appearance light
+for mode in idle approval choosing connected; do
+    xcrun simctl terminate "$simulator" org.dx340.remote.ios 2>/dev/null || true
+    xcrun simctl launch "$simulator" org.dx340.remote.ios "--capture-tab=setup-$mode" >> artifacts/flutter-setup-fixture-launch.txt 2>&1
+    capture Setup "artifacts/flutter-synthetic-setup-$mode-light.png"
+done
+xcrun simctl terminate "$simulator" org.dx340.remote.ios
+xcrun simctl ui "$simulator" appearance dark
+xcrun simctl ui "$simulator" content_size accessibility-extra-extra-extra-large
+xcrun simctl launch "$simulator" org.dx340.remote.ios --capture-tab=setup-approval >> artifacts/flutter-setup-fixture-launch.txt 2>&1
+capture Setup artifacts/flutter-synthetic-setup-approval-large-dark.png

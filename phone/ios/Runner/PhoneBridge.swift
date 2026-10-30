@@ -25,6 +25,7 @@ import CoreBluetooth
             "bridgeVersion": 1, "status": remote.status, "authorized": remote.authorized,
             "mutationPending": remote.mutationPending, "state": remote.state,
             "controlRequestAvailable": remote.canRequestControl,
+            "connectionSetup": remote.connectionSetup,
             "stateSampleId": remote.stateSampleId, "stateAgeMs": remote.stateAgeMs as Any? ?? NSNull(),
             "sources": remote.sources, "library": remote.library, "queue": remote.queue,
             "queueRevision": remote.queueRevision, "queuePage": remote.queuePage, "queueLoading": remote.queueLoading,
@@ -56,7 +57,7 @@ import CoreBluetooth
         case "snapshot": result(snapshot()); return
         case "permissions":
             // CBCentralManager initialization invokes Apple's own permission flow.
-            result(CBManager.authorization == .allowedAlways); return
+            result(CBManager.authorization == .allowedAlways || CBManager.authorization == .notDetermined); return
         case "captureTab":
             #if DEBUG
             result(ProcessInfo.processInfo.arguments.first { $0.hasPrefix("--capture-tab=") }?.components(separatedBy: "=").last)
@@ -65,6 +66,10 @@ import CoreBluetooth
             #endif
             return
         case "scan": remote.scan()
+        case "connectPlayer": remote.connectPlayer()
+        case "searchPlayers": remote.searchPlayers()
+        case "bluetoothSettings", "appSettings":
+            if let url = URL(string: UIApplication.openSettingsURLString) { UIApplication.shared.open(url) }
         case "connect":
             guard let id = args["id"] as? String, let device = remote.devices.first(where: { $0.identifier.uuidString == id }) else {
                 result(FlutterError(code: "DEVICE_EXPIRED", message: "Find DX340 again before connecting.", details: nil)); return
