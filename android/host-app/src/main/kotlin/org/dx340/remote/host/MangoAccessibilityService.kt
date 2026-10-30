@@ -39,7 +39,7 @@ class MangoAccessibilityService : AccessibilityService() {
     private var navigationTrace = JSONObject()
     private data class Tree(val window: Int, val nodes: List<UiNode>)
     private data class Action(val path: String, val kind: String, val title: String = "", val storage: String = "")
-    private data class Frame(val revision: String, val window: Int, val parsed: ParsedMangoUi?, val actions: Map<String, Action>)
+    private data class Frame(val revision: String, val window: Int, val parsed: ParsedMangoUi?, val actions: Map<String, Action>, val page: Int = 0)
     override fun onServiceConnected() { instance = this; notifyHost(true) }
     override fun onUnbind(intent: Intent?): Boolean { instance = null; cancelBrowse?.invoke("UI_PERMISSION_REQUIRED"); main.removeCallbacksAndMessages(null); last = null; notifyHost(true); return super.onUnbind(intent) }
     override fun onInterrupt() { last = null; cancelBrowse?.invoke("UI_ACTION_INTERRUPTED"); notifyHost(true) }
@@ -123,7 +123,7 @@ class MangoAccessibilityService : AccessibilityService() {
         actions[backId] = parsed.back?.let { Action(it, "back", labelAt(it), storage) } ?: Action("", "home")
         val scrollId = parsed.scroll?.let { "mango-ui:$session:$sequence:scroll" }
         if (scrollId != null) actions[scrollId] = Action(parsed.scroll!!, "scroll", storage = storage)
-        last = Frame(revision, current.window, parsed, actions)
+        last = Frame(revision, current.window, parsed, actions, page)
         return JSONObject().put("uiAssisted", true).put("title", parsed.title).put("revision", revision).put("page", page)
             .put("parent", scrollId ?: if (storage == MangoPlaylistUiModel.CONTEXT) SourceRegistry.MANGO_PLAYLIST_UI_ROOT else SourceRegistry.MANGO_UI_ROOT)
             .put("backId", if (storage == MangoPlaylistUiModel.CONTEXT && parsed.back == null) SourceRegistry.MANGO_NATIVE_ROOT else backId)
@@ -183,6 +183,14 @@ class MangoAccessibilityService : AccessibilityService() {
                 if (issue != null || value == null) { fail(issue ?: "UI_UNEXPECTED_SCREEN"); return }
                 try {
                     require(guarded()) { "AUTHORIZATION_DENIED" }
+                    // Re-entering a folder starts at its first page. Restore the exact
+                    // source-visible page before comparing a later-page selection proof.
+                    if (value.getInt("page") < frame.page) {
+                        require(!value.isNull("nextPage")) { "STALE_LIBRARY" }
+                        browse(value.getString("parent"), value.getInt("nextPage"), last!!.revision, guarded, ::checked)
+                        return
+                    }
+                    require(value.getInt("page") == frame.page) { "STALE_LIBRARY" }
                     val fresh = last ?: error("STALE_LIBRARY")
                     require(fresh.window == frame.window && fresh.parsed?.fingerprint == parsed.fingerprint) { "STALE_LIBRARY" }
                     val matches = fresh.actions.filterValues { it.kind == "play" && it.title == original.title }
