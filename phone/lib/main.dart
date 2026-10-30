@@ -824,7 +824,28 @@ class _PhoneShellState extends State<PhoneShell>
       final playbackBar = browsingPlaybackBar();
       if (apple) {
         return CupertinoTheme(
-          data: CupertinoThemeData(brightness: Theme.of(context).brightness),
+          data: CupertinoThemeData(
+            brightness: Theme.of(context).brightness,
+            // Setup's normal-size action labels need a contrast-safe system
+            // blue. Retain semantic variants and native controls; other tabs
+            // keep their incumbent appearance.
+            primaryColor: _tab.value == 3
+                ? CupertinoDynamicColor.withBrightnessAndContrast(
+                    color: CupertinoColors.systemBlue.highContrastColor,
+                    darkColor: CupertinoColors.systemBlue.darkColor,
+                    highContrastColor:
+                        CupertinoColors.systemBlue.highContrastColor,
+                    darkHighContrastColor:
+                        CupertinoColors.systemBlue.darkHighContrastColor,
+                  )
+                : null,
+            primaryContrastingColor: _tab.value == 3
+                ? const CupertinoDynamicColor.withBrightness(
+                    color: CupertinoColors.white,
+                    darkColor: CupertinoColors.black,
+                  )
+                : null,
+          ),
           child: CupertinoPageScaffold(
             navigationBar: CupertinoNavigationBar(
               middle: Text(_tab.value == 0 ? 'DX340' : _tabs[_tab.value]),

@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-31",
+  "fullGoal": "ACTIVE/incomplete",
+  "companionSha256": "b0e1f582cfc1f1edfdf5ca98630c359ba8a3dad8f0a664e4a849332119d57301",
+  "phoneSha256": "4449ee74a3545f29e5cb261aeb4f60159be23521ffc145eaf0f4a09bf5b6db84",
+  "phoneInstalledBytesVerified": true,
+  "originalSignerRetained": true,
+  "hostPreferencesPreserved": {
+    "controllers": true,
+    "mango-ui": true,
+    "apple-ui": true,
+    "source-verification": true
+  },
+  "sourceStates": {
+    "com.ibasso.music": 2,
+    "com.apple.android.music": 2
+  },
+  "pixelReadOnlyConnectGetStateDisconnect": "VERIFIED",
+  "pixelForegroundFlagAfterDisconnect": false,
+  "pixelServiceStartRequestedAfterDisconnect": false,
+  "newAudioProof": false,
+  "sourceVolumeCommandsSent": 0,
+  "emulatorFunctional": {
+    "apkSha256": "4449ee74a3545f29e5cb261aeb4f60159be23521ffc145eaf0f4a09bf5b6db84",
+    "kind": "ordinary app on emulator; NO physical BLE proof",
+    "deniedNearbyNoForegroundStart": "verified earlier B415 ordinary build",
+    "appSettingsAndBluetoothSettingsRoutes": "verified earlier ordinary build",
+    "offNoForegroundStart": "PASS",
+    "scanCancelCycles": 2,
+    "cancelClearsForegroundAndStartRequested": "PASS",
+    "boundProcessPreserved": "PASS",
+    "bluetoothRestored": 1
+  },
+  "software": {
+    "flutterTests": 67,
+    "nativeBuildLint": "PASS",
+    "sharedAnalyzeReleaseLint": "PASS",
+    "protocolCacheAdapterTestsUnchangedPriorPass": 166,
+    "nativeAppleTestsAtCde1aa8": 16,
+    "sharedAppleTestsAtCde1aa8": 63,
+    "newSharedCaptureConfirmation": "PENDING"
+  },
+  "background": {
+    "status": "ABORTED; background precondition contradicted",
+    "reason": "Mid-run ActivityTaskManager showed Remote MainActivity foreground. Home/Sleep did not keep it background. Operator stopped observer; no background pass. Setup complete1/provisioned1/lockTaskNONE, exact foreground-return cause unconfirmed.",
+    "samples": 27,
+    "lastSampleElapsedSeconds": 853.066,
+    "sourceStatesAllPaused": true,
+    "outputAll37Headset": true,
+    "summaryMissing": "Ctrl-C terminated the observer before its finally summary was written; original samples retained",
+    "hardware": "Pixel e309eccf / Companion b0e1f582",
+    "mutations": "No playback/volume commands during observation. One read-only GET_STATE logged after foreground return."
+  },
+  "phoneSettings": {
+    "font_scale": "1.0",
+    "wifi_on": "0",
+    "mobile_data": "1",
+    "bluetooth_on": "1",
+    "night": "Night mode: no"
+  },
+  "hostSettings": {
+    "font_scale": "1.0",
+    "wifi_on": "0",
+    "mobile_data": "0",
+    "bluetooth_on": "1",
+    "night": "Night mode: yes"
+  },
+  "freshBackgroundReadiness": "Pending owner response; no active observer"
+}

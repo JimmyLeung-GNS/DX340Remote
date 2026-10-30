@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dx340_phone/main.dart';
 import 'package:dx340_phone/remote.dart';
@@ -30,6 +30,62 @@ Json setupSnapshot(String phase) => snapshot(authorized: phase == 'connected')
   };
 
 void main() {
+  for (final brightness in Brightness.values) {
+    for (final highContrast in [false, true]) {
+      testWidgets(
+        'iPhone Setup action contrast $brightness highContrast=$highContrast stays scoped',
+        (tester) async {
+          debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+          addTearDown(() => debugDefaultTargetPlatformOverride = null);
+          tester.view.physicalSize = const Size(390, 844);
+          tester.view.devicePixelRatio = 1;
+          tester.platformDispatcher.platformBrightnessTestValue = brightness;
+          tester.platformDispatcher.accessibilityFeaturesTestValue =
+              FakeAccessibilityFeatures(highContrast: highContrast);
+          addTearDown(tester.view.resetPhysicalSize);
+          addTearDown(tester.view.resetDevicePixelRatio);
+          addTearDown(
+            tester.platformDispatcher.clearPlatformBrightnessTestValue,
+          );
+          addTearDown(
+            tester.platformDispatcher.clearAccessibilityFeaturesTestValue,
+          );
+          await tester.pumpWidget(DX340App(remote: Remote(ConnectionBridge())));
+          await tester.pumpAndSettle();
+          final original = CupertinoTheme.of(
+            tester.element(find.text('Open Setup')),
+          ).primaryColor;
+          await tester.tap(find.text('Setup').last);
+          await tester.pumpAndSettle();
+          final theme = CupertinoTheme.of(tester.element(find.text('Connect')));
+          double contrast(Color a, Color b) {
+            final x = a.computeLuminance(), y = b.computeLuminance();
+            return x > y ? (x + .05) / (y + .05) : (y + .05) / (x + .05);
+          }
+
+          expect(
+            contrast(theme.primaryColor, theme.primaryContrastingColor),
+            greaterThanOrEqualTo(4.5),
+          );
+          expect(
+            contrast(theme.primaryColor, theme.scaffoldBackgroundColor),
+            greaterThanOrEqualTo(4.5),
+          );
+          await tester.tap(find.text('Player').last);
+          await tester.pumpAndSettle();
+          expect(
+            CupertinoTheme.of(
+              tester.element(find.text('Open Setup')),
+            ).primaryColor,
+            original,
+          );
+          await tester.pumpWidget(const SizedBox.shrink());
+          debugDefaultTargetPlatformOverride = null;
+        },
+      );
+    }
+  }
+
   test(
     'one Connect requests permission and connects once; never sends playback',
     () async {
@@ -99,9 +155,12 @@ void main() {
     ) async {
       debugDefaultTargetPlatformOverride = platform;
       addTearDown(() => debugDefaultTargetPlatformOverride = null);
-      tester.view.physicalSize = const Size(320, 720);
+      tester.view.physicalSize = platform == TargetPlatform.iOS
+          ? const Size(420, 912)
+          : const Size(320, 720);
       tester.view.devicePixelRatio = 1;
-      tester.platformDispatcher.textScaleFactorTestValue = 2;
+      tester.platformDispatcher.textScaleFactorTestValue =
+          platform == TargetPlatform.iOS ? 3.2 : 2;
       addTearDown(tester.view.resetPhysicalSize);
       addTearDown(tester.view.resetDevicePixelRatio);
       addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);

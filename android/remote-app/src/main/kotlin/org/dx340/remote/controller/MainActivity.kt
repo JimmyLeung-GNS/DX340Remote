@@ -16,12 +16,14 @@ class MainActivity : Activity() {
     private lateinit var model: RemoteModel
     private var tab = "Player"
     private var bound = false
+    private var connectionService: RemoteService? = null
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName, binder: IBinder) {
-            model = (binder as RemoteService.LocalBinder).service.model
+            connectionService = (binder as RemoteService.LocalBinder).service
+            model = checkNotNull(connectionService).model
             model.observer = { if (::body.isInitialized) render() }; render()
         }
-        override fun onServiceDisconnected(name: ComponentName) { connection.text = "Connection service stopped. Reopen the remote." }
+        override fun onServiceDisconnected(name: ComponentName) { connectionService = null; connection.text = "Connection service stopped. Reopen the remote." }
     }
     private val parents = mutableListOf<String?>()
     private var navigationScope = ""
@@ -54,13 +56,13 @@ class MainActivity : Activity() {
                 label("Music plays on DX340. Open pairing on the companion before connecting.")
                 button("Grant Nearby Devices access") { requestPermissions(if (android.os.Build.VERSION.SDK_INT >= 33) arrayOf(Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.POST_NOTIFICATIONS) else arrayOf(Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.BLUETOOTH_SCAN), 340) }
                 button("Find DX340") { model.scan() }
-                model.found.forEach { device -> button("Connect to DX340 ${device.address.takeLast(5)}") { startForegroundService(Intent(this, RemoteService::class.java)); model.connect(device) } }
+                model.found.forEach { device -> button("Connect to DX340 ${device.address.takeLast(5)}") { if (model.bluetoothReady) { startForegroundService(Intent(this, RemoteService::class.java)); model.connect(device) } else model.refreshOnForeground() } }
                 button("Retry authorization after approval") { model.authorize() }
                 if (model.canRequestControl) {
                     label("Taking control here disconnects the other approved controller. Music keeps playing on DX340.")
                     button("Take control on this phone") { model.requestControl() }
                 }
-                button("Disconnect") { model.disconnect(); stopService(Intent(this, RemoteService::class.java)) }
+                button("Disconnect") { connectionService?.stopConnection() ?: model.disconnect() }
             }
             "Player" -> {
                 model.artworkBytes?.let { art -> body.addView(ImageView(this).apply { setImageBitmap(android.graphics.BitmapFactory.decodeByteArray(art, 0, art.size)); contentDescription = "Album artwork"; adjustViewBounds = true; maxHeight = 240.dp() }) }

@@ -3,7 +3,8 @@ param(
     [string]$DxSerial='d',
     [string]$Adb="$env:LOCALAPPDATA/Android/Sdk/platform-tools/adb.exe",
     [ValidateRange(1800,7200)][int]$DurationSeconds=1800,
-    [ValidateRange(15,60)][int]$SampleSeconds=30
+    [ValidateRange(15,60)][int]$SampleSeconds=30,
+    [string]$StopFile
 )
 # Read-only USB-powered observation. Connect/authorize the ordinary phone app,
 # put it in the background and set the intended screen state before running.
@@ -22,7 +23,7 @@ $hostPid=Read-Adb $DxSerial @('shell','pidof','org.dx340.remote.host')
 if(!$phonePid-or!$hostPid){throw 'Both existing app processes are required'}
 $clock=[Diagnostics.Stopwatch]::StartNew()
 $seen=[Collections.Generic.HashSet[string]]::new()
-$samples=@();$failure=$null
+$samples=@();$failure=$null;$operatorStopped=$false
 $startingVolume=$null;$startingRoute=$null
 function Sample {
     $i=$script:samples.Count
@@ -31,10 +32,15 @@ function Sample {
     $hostServiceSnapshot=Read-Adb $DxSerial @('shell','dumpsys','activity','services','org.dx340.remote.host')
     $media=Read-Adb $DxSerial @('shell','dumpsys','media_session')
     $power=Read-Adb $DxSerial @('shell','dumpsys','power')
+    $phonePower=Read-Adb $PhoneSerial @('shell','dumpsys','power')
+    $phoneActivities=Read-Adb $PhoneSerial @('shell','dumpsys','activity','activities')
     $audio=Read-Adb $DxSerial @('shell','dumpsys','audio')
     $gatt=Read-Adb $PhoneSerial @('logcat','-d','-v','threadtime','BluetoothGatt:D','DX340RemoteClient:I','*:S')
+    $hostEvents=Read-Adb $DxSerial @('logcat','-d','-v','threadtime','DX340Remote:I','*:S')
     $phone|Set-Content "$out/$tag-phone-service.txt";$hostServiceSnapshot|Set-Content "$out/$tag-host-service.txt"
     $media|Set-Content "$out/$tag-media.txt";$power|Set-Content "$out/$tag-dx-power.txt"
+    $phonePower|Set-Content "$out/$tag-phone-power.txt";$hostEvents|Set-Content "$out/$tag-host-events.txt"
+    $phoneActivities|Set-Content "$out/$tag-phone-activities.txt"
     $audio|Set-Content "$out/$tag-dx-audio.txt"
     $gatt|Set-Content "$out/$tag-phone-gatt.txt"
     foreach($line in ($gatt-split"`n")){if($seen.Add($line)){$line|Add-Content "$out/unique-gatt-lines.txt"}}
@@ -49,19 +55,25 @@ function Sample {
     $route=[regex]::Match($audio,'(?s)- STREAM_MUSIC:.*?Devices: ([^\r\n]+)')
     if(!$volume.Success-or!$route.Success){throw 'Music output observation unavailable'}
     $level=[int]$volume.Groups[1].Value;$output=$route.Groups[1].Value.Trim()
+    $phoneWakefulness=[regex]::Match($phonePower,'mWakefulness=(\w+)').Groups[1].Value
+    $resumed=[regex]::Match($phoneActivities,'(?m)^\s*(?:topResumedActivity|mResumedActivity)=(.+)$').Groups[1].Value
+    $phoneTop=[regex]::Match($resumed,'u\d+\s+([A-Za-z0-9_.$]+/[A-Za-z0-9_.$]+)').Groups[1].Value
+    $phoneAppBackground=if($phoneTop){!$phoneTop.StartsWith('org.dx340.remote.controller/')}else{$phoneWakefulness-in@('Asleep','Dozing')}
     if($null-eq$script:startingVolume){$script:startingVolume=$level;$script:startingRoute=$output}
     $row=[ordered]@{at=(Get-Date -Format o);elapsedSeconds=[math]::Round($clock.Elapsed.TotalSeconds,3);
         phoneProcessUnchanged=($pNow-ceq$phonePid);hostProcessUnchanged=($hNow-ceq$hostPid);
         phoneForegroundService=($phone-match'isForeground=true');hostForegroundService=($hostServiceSnapshot-match'isForeground=true');
         sourceStates=$states;musicVolume=$level;musicRoute=$output;outputUnchanged=($level-eq$script:startingVolume-and$output-ceq$script:startingRoute);
-        dxWakefulness=([regex]::Match($power,'mWakefulness=(\w+)').Groups[1].Value)}
+        dxWakefulness=([regex]::Match($power,'mWakefulness=(\w+)').Groups[1].Value);
+        phoneWakefulness=$phoneWakefulness;phoneTopActivity=$phoneTop;phoneAppBackground=$phoneAppBackground}
     $script:samples+=,$row
     $row|ConvertTo-Json -Compress|Add-Content "$out/samples.jsonl"
     $row|ConvertTo-Json -Compress|Write-Output
-    if(!$row.phoneProcessUnchanged-or!$row.hostProcessUnchanged-or!$row.phoneForegroundService-or!$row.hostForegroundService-or!$row.outputUnchanged-or@($states|Where-Object {$_-ne2}).Count){throw 'Observed process/service/source/output state changed; inspect this run, do not infer a continuous pass'}
+    if(!$row.phoneAppBackground-or!$row.phoneProcessUnchanged-or!$row.hostProcessUnchanged-or!$row.phoneForegroundService-or!$row.hostForegroundService-or!$row.outputUnchanged-or@($states|Where-Object {$_-ne2}).Count){throw 'Observed background/process/service/source/output condition failed; inspect this run, do not infer a continuous pass'}
 }
 try {
     do {
+        if($StopFile-and(Test-Path -LiteralPath $StopFile)){$operatorStopped=$true;$failure='Stopped by operator; no completed observation claim';break}
         Sample
         $remaining=$DurationSeconds-$clock.Elapsed.TotalSeconds
         if($remaining-le0){break}
@@ -71,7 +83,7 @@ try {
 finally {
     [ordered]@{kind='physical-USB-powered-Android-background-observation-no-BLE-commands';
         requestedSeconds=$DurationSeconds;elapsedSeconds=[math]::Round($clock.Elapsed.TotalSeconds,3);samples=$samples.Count;
-        observationComplete=($null-eq$failure-and$clock.Elapsed.TotalSeconds-ge$DurationSeconds);failure=$failure;
+        observationComplete=(!$operatorStopped-and$null-eq$failure-and$clock.Elapsed.TotalSeconds-ge$DurationSeconds);failure=$failure;operatorStopped=$operatorStopped;
         postReturnBluetoothRead='NOT TESTED; foreground the ordinary app and verify fresh reads separately';
         limits='No audio, unlocked/unplugged reliability, range, battery, radio continuity or full Gate A/T05 pass follows from service/process observations alone';
         rawEvidence=$out}|ConvertTo-Json -Depth 5|Set-Content "$out/summary.json"

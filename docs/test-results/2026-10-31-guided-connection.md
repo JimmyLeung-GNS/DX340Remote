@@ -1,5 +1,7 @@
 # Guided connection —31 October2026
 
+31 October follow-up: current Pixel4449ee74… corrects Android foreground-service cleanup, with actual Pixel read-only reconnect/Disconnect and67 Flutter checks. Companionb0e1f582… unchanged. Cde1aa8 native16/shared63 Apple jobs both succeeded and archives verified; newer iOS Setup contrast confirmation is pending. The background attempt was aborted after phone-foreground evidence, not passed. See [new recovery validation](2026-10-31-setup-recovery-validation.md). Earlier package/pending entries retain historical scope.
+
 Scope: implement the owner's simpler connection mechanism and UI request on the existing Flutter phones/native bridges and Kotlin Companion. Preserve Bluetooth-only control, local approval, remembered-controller access and source playback. Full project remains ACTIVE/incomplete.
 
 ## Final Android status correction

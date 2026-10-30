@@ -17,18 +17,20 @@ import org.json.JSONObject
 /** UI bridge only: the bound native service owns the connection, epochs and retries. */
 class MainActivity : FlutterActivity(), EventChannel.StreamHandler {
     private var model: RemoteModel? = null
+    private var connectionService: RemoteService? = null
     private var sink: EventChannel.EventSink? = null
     private var bound = false
     private var permissionReply: MethodChannel.Result? = null
     private val operations = setOf("GET_STATE", "GET_QUEUE", "SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "SELECT_SOURCE", "PLAY_ITEM", "PLAY_QUEUE_ITEM", "ADJUST_VOLUME")
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName, binder: IBinder) {
-            model = (binder as RemoteService.LocalBinder).service.model
+            connectionService = (binder as RemoteService.LocalBinder).service
+            model = connectionService?.model
             model?.observer = ::emit
             emit()
         }
         override fun onServiceDisconnected(name: ComponentName) {
-            model?.observer = null; model = null
+            model?.observer = null; model = null; connectionService = null
             sink?.error("SERVICE_LOST", "Connection service stopped. Reopen the remote.", null)
         }
     }
@@ -52,7 +54,7 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler {
                     "scan" -> { requireBluetoothPermission(); remote.scan() }
                     "connectPlayer" -> {
                         requireBluetoothPermission()
-                        startForegroundService(Intent(this, RemoteService::class.java))
+                        if (remote.bluetoothReady) startForegroundService(Intent(this, RemoteService::class.java))
                         remote.connectPlayer()
                     }
                     "searchPlayers" -> { requireBluetoothPermission(); remote.searchPlayers() }
@@ -60,11 +62,12 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler {
                     "appSettings" -> startActivity(Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, android.net.Uri.parse("package:$packageName")))
                     "connect" -> {
                         requireBluetoothPermission()
+                        require(remote.bluetoothReady) { "Turn on Bluetooth before connecting." }
                         val device = remote.found.firstOrNull { it.address == call.argument<String>("id") } ?: error("Search for your player again before connecting.")
                         startForegroundService(Intent(this, RemoteService::class.java))
                         remote.connect(device)
                     }
-                    "disconnect" -> { remote.disconnect(); stopService(Intent(this, RemoteService::class.java)) }
+                    "disconnect" -> checkNotNull(connectionService) { "Connection service is not available." }.stopConnection()
                     "authorize" -> { requireBluetoothPermission(); remote.authorize() }
                     "requestControl" -> { requireBluetoothPermission(); remote.requestControl() }
                     "resume" -> remote.refreshOnForeground()

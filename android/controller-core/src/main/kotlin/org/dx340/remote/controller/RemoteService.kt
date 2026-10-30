@@ -11,6 +11,12 @@ class RemoteService : Service() {
     inner class LocalBinder : Binder() { val service get() = this@RemoteService }
     override fun onCreate() { super.onCreate(); model = RemoteModel(applicationContext) }
     override fun onBind(intent: Intent): IBinder = LocalBinder()
+    /** Explicit owner disconnect also removes foreground state while UI remains bound. */
+    fun stopConnection() {
+        model.disconnect()
+        stopForeground(STOP_FOREGROUND_REMOVE)
+        stopSelf()
+    }
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val manager = getSystemService(NotificationManager::class.java)
         manager.createNotificationChannel(NotificationChannel("remote", "DX340 connection", NotificationManager.IMPORTANCE_LOW))

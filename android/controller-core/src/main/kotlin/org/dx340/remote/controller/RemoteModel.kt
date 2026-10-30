@@ -82,6 +82,7 @@ class RemoteModel(private val context: Context) {
     }
     private fun bluetoothAccess() = listOf(Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT).all { context.checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }
     private fun bluetoothOn() = bluetoothAccess() && runCatching { context.getSystemService(BluetoothManager::class.java).adapter?.isEnabled == true }.getOrDefault(false)
+    val bluetoothReady get() = bluetoothOn()
     val connectionSetup: JSONObject get() = JSONObject()
         .put("phase", when { !bluetoothAccess() -> "permission"; !bluetoothOn() -> "bluetoothOff"; authorized -> "connected"; canRequestControl -> "busy"; else -> connectionPhase })
         .put("savedName", connectionPreferences.getString("name", "Player"))
