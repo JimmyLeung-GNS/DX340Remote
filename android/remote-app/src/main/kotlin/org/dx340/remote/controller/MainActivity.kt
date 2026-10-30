@@ -81,22 +81,24 @@ class MainActivity : Activity() {
             "Library" -> {
                 label("Library", 24f)
                 val assisted = model.assistedBrowsing
+                val expired = model.library.optBoolean("invalidated")
+                if (expired) label("This page expired after a song selection. Browse source library again.")
                 if (assisted) label(model.state.optJSONObject("capabilities")?.optString("reason") ?: "Apple Music needs DX340 awake and unlocked.")
                 if (!cap("canBrowse") && !assisted) label("This source has not exposed a usable browse connection. Open the source on DX340 and refresh.")
                 button("Browse source library", cap("canBrowse")) { parents.clear(); model.browse() }
-                if (assisted && !model.library.isNull("backId")) button("Back", cap("canBrowse") && model.assistedReady) { model.browse(model.library.getString("backId")) }
+                if (assisted && !model.library.isNull("backId")) button("Back", cap("canBrowse") && model.assistedReady && !expired) { model.browse(model.library.getString("backId")) }
                 if (!assisted && parents.isNotEmpty()) button("Back to parent") { parents.removeAt(parents.lastIndex); model.browse(parents.lastOrNull()) }
                 if (model.library.optString("title").isNotEmpty()) label(model.library.optString("title"))
                 val items = model.library.optJSONArray("items")
                 if (items != null) for (i in 0 until items.length()) {
                     val item = items.getJSONObject(i)
-                    button(item.optString("title"), model.authorized && (!(assisted || item.optBoolean("uiAssisted")) || model.assistedReady) && ((item.optBoolean("browsable") && cap("canBrowse")) || (item.optBoolean("playable") && cap("canPlayItem")))) {
+                    button(item.optString("title"), model.authorized && !expired && (!(assisted || item.optBoolean("uiAssisted")) || model.assistedReady) && ((item.optBoolean("browsable") && cap("canBrowse")) || (item.optBoolean("playable") && cap("canPlayItem")))) {
                         val id = item.getString("id")
                         if (item.optBoolean("browsable")) { if (!assisted) parents.add(id); model.browse(id) }
                         else if (item.optBoolean("playable")) model.send("PLAY_ITEM", JSONObject().put("item", id).put("revision", model.library.getString("revision")))
                     }
                 }
-                if (!model.library.isNull("nextPage")) button("Next page", cap("canBrowse") && (!assisted || model.assistedReady)) { model.browse(model.library.optString("parent"), model.library.getInt("nextPage")) }
+                if (!model.library.isNull("nextPage")) button("Next page", cap("canBrowse") && !expired && (!assisted || model.assistedReady)) { model.browse(model.library.optString("parent"), model.library.getInt("nextPage")) }
             }
             "Queue" -> {
                 label("Queue", 24f)

@@ -406,6 +406,7 @@ class _PhoneShellState extends State<PhoneShell>
         perform(
           remote.can('canBrowse') &&
               !remote.libraryLoading &&
+              !remote.libraryInvalidated &&
               !remote.busy &&
               (!remote.assisted || remote.assistedReady),
           remote.back,
@@ -424,7 +425,10 @@ class _PhoneShellState extends State<PhoneShell>
       action(
         'Previous page',
         perform(
-          remote.can('canBrowse') && !remote.libraryLoading && !remote.busy,
+          remote.can('canBrowse') &&
+              !remote.libraryLoading &&
+              !remote.libraryInvalidated &&
+              !remote.busy,
           () => remote.more(remote.page - 1),
         ),
       ),
@@ -434,6 +438,7 @@ class _PhoneShellState extends State<PhoneShell>
         perform(
           remote.can('canBrowse') &&
               !remote.libraryLoading &&
+              !remote.libraryInvalidated &&
               !remote.busy &&
               (!remote.assisted || remote.assistedReady),
           () => remote.more(remote.nextPage!),
@@ -447,6 +452,7 @@ class _PhoneShellState extends State<PhoneShell>
     final browsable = !queue && item['browsable'] == true;
     final enabled =
         !remote.busy &&
+        (queue || !remote.libraryInvalidated) &&
         (queue ||
             (!(remote.assisted || item['uiAssisted'] == true) ||
                 remote.assistedReady)) &&
@@ -616,6 +622,11 @@ class _PhoneShellState extends State<PhoneShell>
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        if (_tab.value == 1 && remote.libraryInvalidated)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Text(remote.libraryRecovery),
+          ),
         Text(remote.status, style: Theme.of(context).textTheme.bodyMedium),
         if (remote.error != null)
           Padding(
@@ -656,7 +667,12 @@ class _PhoneShellState extends State<PhoneShell>
           SizedBox(
             height: height,
             child: SingleChildScrollView(
-              key: ValueKey((remote.status, remote.error, remote.busy)),
+              key: ValueKey((
+                remote.status,
+                remote.error,
+                remote.busy,
+                remote.libraryInvalidated,
+              )),
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               child: statusContent(),
             ),

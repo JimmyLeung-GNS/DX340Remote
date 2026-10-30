@@ -2,6 +2,30 @@ import XCTest
 @testable import DXProtocol
 
 final class FramingTests: XCTestCase {
+    func testOnlyActualMangoAssistedSelectionsConsumeThePage() throws {
+        let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        let cases = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("protocol/fixtures/assisted-selection-eligibility.json"))) as! [[String: Any]]
+        for item in cases {
+            XCTAssertEqual(AssistedPageUse.tracks(source: item["source"] as! String, item: item["item"] as! String, assisted: item["assisted"] as! Bool,
+                requestedRevision: item["requestedRevision"] as! String, pageRevision: item["pageRevision"] as! String), item["tracks"] as! Bool, item["name"] as! String)
+        }
+    }
+    func testSharedSelectionCompletionRetiresOnlyItsCurrentAssistedPage() throws {
+        let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        let cases = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("protocol/fixtures/assisted-page-use.json"))) as! [[String: Any]]
+        for item in cases {
+            var use = AssistedPageUse()
+            for (index, step) in (item["steps"] as! [[String: Any]]).enumerated() {
+                switch step["action"] as! String {
+                case "begin": use.begin(id: step["id"] as! String, source: step["source"] as! String, epoch: step["epoch"] as! String, revision: step["revision"] as! String, assisted: step["assisted"] as! Bool)
+                case "clear": use.clear()
+                case "abandon": XCTAssertEqual(use.abandon(source: step["source"] as! String, epoch: step["epoch"] as! String, revision: step["revision"] as! String), step["retire"] as! Bool, item["name"] as! String)
+                case "finish": XCTAssertEqual(use.finish(id: step["id"] as! String, source: step["source"] as! String, epoch: step["epoch"] as! String, revision: step["revision"] as! String), step["retire"] as! Bool, "\(item["name"]!):\(index)")
+                default: XCTFail("Unknown fixture action")
+                }
+            }
+        }
+    }
     func testSharedConnectionSetupDeadlineRetiresOnlyCurrentUnfinishedAttempt() throws {
         let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
         let fixture = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("protocol/fixtures/connection-setup-deadline.json"))) as! [String: Any]

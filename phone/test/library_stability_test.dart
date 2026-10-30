@@ -22,6 +22,50 @@ Json librarySnapshot({
 
 void main() {
   test(
+    'an expired assisted page allows fresh browsing but no stale action',
+    () async {
+      final bridge = FakeBridge();
+      final remote = Remote(bridge);
+      final expired = librarySnapshot();
+      (expired['state'] as Json)['capabilities'] = {
+        'canBrowse': true,
+        'canBrowseFolders': true,
+        'canPlayItem': true,
+        'canReadQueue': true,
+        'canPause': true,
+      };
+      (expired['library'] as Json).addAll({
+        'invalidated': true,
+        'uiAssisted': true,
+        'backId': 'old-back',
+        'nextPage': 1,
+      });
+      remote.accept(expired);
+      await remote.back();
+      await remote.more(1);
+      await remote.open({'id': 'old-folder', 'browsable': true});
+      await remote.playItem(
+        objects(remote.library['items']).first,
+        revision: 'album-a',
+        sourceScope: remote.scope,
+      );
+      expect(bridge.calls, isEmpty);
+      // Only the retired page is blocked; playback and fresh root browsing remain usable.
+      await remote.command('SET_PLAYING', {'playing': false}, 'canPause');
+      await remote.root();
+      expect(bridge.calls.map((call) => call.$1), ['send', 'browse']);
+      remote.accept(librarySnapshot());
+      expect(remote.libraryInvalidated, false);
+      await remote.playItem(
+        objects(remote.library['items']).first,
+        revision: 'album-a',
+        sourceScope: remote.scope,
+      );
+      expect(bridge.calls.last.$2['type'], 'PLAY_ITEM');
+      remote.dispose();
+    },
+  );
+  test(
     'a retained library row cannot borrow a new revision, page or source',
     () async {
       final bridge = FakeBridge();
@@ -57,6 +101,56 @@ void main() {
     },
   );
   for (final platform in [TargetPlatform.android, TargetPlatform.iOS]) {
+    testWidgets(
+      '$platform retiring a page keeps rows fixed and cancels a held tap',
+      (tester) async {
+        debugDefaultTargetPlatformOverride = platform;
+        addTearDown(() => debugDefaultTargetPlatformOverride = null);
+        tester.view.physicalSize = const Size(400, 1000);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+        final bridge = FakeBridge();
+        final remote = Remote(bridge);
+        await tester.pumpWidget(DX340App(remote: remote));
+        await tester.pumpAndSettle();
+        final current = librarySnapshot();
+        (current['state'] as Json)['capabilities'] = {
+          'canBrowse': true,
+          'canBrowseFolders': true,
+          'canPlayItem': true,
+        };
+        (current['library'] as Json).addAll({
+          'uiAssisted': true,
+          'backId': 'old-back',
+        });
+        remote.accept(current);
+        await tester.tap(find.text('Library').last);
+        await tester.pumpAndSettle();
+        bridge.calls.clear();
+        final initial = tester.getTopLeft(find.text('Song 1'));
+        final finger = await tester.startGesture(
+          tester.getCenter(find.text('Song 1')),
+        );
+        (current['library'] as Json)['invalidated'] = true;
+        remote.accept(current);
+        await tester.pump();
+        expect(tester.getTopLeft(find.text('Song 1')), initial);
+        expect(find.text(remote.libraryRecovery), findsOneWidget);
+        await finger.up();
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('Back to parent'));
+        await tester.pumpAndSettle();
+        expect(bridge.calls, isEmpty);
+        await tester.tap(find.text('Browse source library'));
+        await tester.pumpAndSettle();
+        expect(bridge.calls.single.$1, 'browse');
+        expect(bridge.calls.single.$2, isEmpty);
+        expect(tester.takeException(), isNull);
+        await tester.pumpWidget(const SizedBox());
+        debugDefaultTargetPlatformOverride = null;
+      },
+    );
     testWidgets(
       '$platform a previous folder offset cannot return in a new album',
       (tester) async {

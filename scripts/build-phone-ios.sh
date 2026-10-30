@@ -119,6 +119,16 @@ xcrun simctl ui "$simulator" content_size accessibility-extra-extra-extra-large
 xcrun simctl launch "$simulator" org.dx340.remote.ios --capture-tab=browsing-library >> artifacts/flutter-browsing-fixture-launch.txt 2>&1
 capture Library artifacts/flutter-synthetic-browsing-large-dark.png
 
+# Expired assisted page keeps its rows in place while recovery is independently scrollable.
+xcrun simctl terminate "$simulator" org.dx340.remote.ios
+xcrun simctl launch "$simulator" org.dx340.remote.ios --capture-tab=browsing-expired >> artifacts/flutter-browsing-fixture-launch.txt 2>&1
+capture Library artifacts/flutter-synthetic-browsing-expired-large-dark.png
+xcrun simctl terminate "$simulator" org.dx340.remote.ios
+xcrun simctl ui "$simulator" content_size large
+xcrun simctl ui "$simulator" appearance light
+xcrun simctl launch "$simulator" org.dx340.remote.ios --capture-tab=browsing-expired >> artifacts/flutter-browsing-fixture-launch.txt 2>&1
+capture Library artifacts/flutter-synthetic-browsing-expired-light.png
+
 # Explicit ownership action, pending and control-loss presentation. The native
 # proposal/lease is tested separately; these labeled fixtures have no BLE path.
 cd "$repo/phone"

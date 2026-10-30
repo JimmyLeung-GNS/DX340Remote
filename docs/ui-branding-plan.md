@@ -1,5 +1,8 @@
 # Pending task UX-01: app UI and logo design
 
+31 October follow-up: Mango post-selection page recovery is implemented in Kotlin/Swift/shared Flutter. Host code deliberately discards assisted action IDs after play; matching terminal/timeout/loss now retires that displayed page without moving its rows or replaying playback.56 Flutter/164 JVM and Android release/lint pass; confirmation captures, physical recovery and new Apple CI are still pending. The owner now prefers Mango optional browsing kept enabled: app mode and Accessibility were enabled through visible UI, Apple remains on, grants/bonds retained. This supersedes earlier test-only restoration-off notes. Read docs/test-results/2026-10-31-assisted-page-recovery.md; full goal ACTIVE/incomplete.
+
+
 Requested31 October2026 during the device-switch handoff. **IN PROGRESS — connection/setup clarity selected by the owner.** Original logos/icons and the broader setup/Companion redesign remain pending.
 
 Latestf5f5a03: source-scoped page scroll restoration fixes the second inherited-offset defect;53 Flutter/162 JVM and hosted Swift12/shared53 builds pass. Current Pixel765… has two owner-audible assisted-folder selections, stable pending/tab-return bounds and saved-grant reconnect; earlier Intro is208… evidence. Seven-image follow-up review is scoped to supplied Pixel/simulator renders. Bounded native setup cleanup is implemented; unapproved current-Pixel/iPhone expiration and full accessibility remain untested. Stale Back after playback still requires fresh-root recovery; improve that guidance and approval visibility next. [Current evidence](test-results/2026-10-31-mango-phone-selection.md); no full UX-01/icon completion.

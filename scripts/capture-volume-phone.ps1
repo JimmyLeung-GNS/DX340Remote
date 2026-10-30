@@ -44,7 +44,9 @@ try {
     ) } elseif ($Scenario -eq 'browsing') { @(
         @{ name='synthetic-library-dark.png'; mode='browsing-library'; night='yes'; scale='1.0' },
         @{ name='synthetic-queue-light.png'; mode='browsing-queue'; night='no'; scale='1.0' },
-        @{ name='synthetic-library-large-dark.png'; mode='browsing-library'; night='yes'; scale='1.5' }
+        @{ name='synthetic-library-large-dark.png'; mode='browsing-library'; night='yes'; scale='1.5' },
+        @{ name='synthetic-expired-light.png'; mode='browsing-expired'; night='no'; scale='1.0' },
+        @{ name='synthetic-expired-large-dark.png'; mode='browsing-expired'; night='yes'; scale='2.0' }
     ) } else { @(
         @{ name='synthetic-handoff-dark.png'; mode='handoff-ready'; night='yes'; scale='1.0' },
         @{ name='synthetic-handoff-light.png'; mode='handoff-ready'; night='no'; scale='1.0' },
@@ -57,7 +59,7 @@ try {
         Invoke-CaptureAdb @('shell','settings','put','system','font_scale',$state.scale) | Out-Null
         Invoke-CaptureAdb @('shell','am','force-stop','org.dx340.remote.controller') | Out-Null
         Invoke-CaptureAdb @('shell','am','start','-W','-n','org.dx340.remote.controller/org.dx340.remote.dx340_phone.MainActivity','--es','captureTab',$state.mode) | Out-Null
-        # The fixture waits for its first frame before scrolling to the whole action.
+        # Allow the first frame to render. These are initial viewports, without automatic scrolling.
         Start-Sleep -Seconds 3
         Save-Capture $state.name
     }

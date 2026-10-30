@@ -40,6 +40,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     private var connectionTimeout: Task<Void, Never>?
     private var connectionGeneration = 0
     private var setupDeadline = ConnectionSetupDeadline()
+    private var assistedPageUse = AssistedPageUse()
     private var setupTimeout: Task<Void, Never>?
     private let setupClockOrigin = ContinuousClock.now
     private var setupExpiryNotice: String?
@@ -97,7 +98,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         if let p = peripheral { manager.cancelPeripheralConnection(p) }
         clearConnection(); status = "Disconnected. Cached lists may be stale."
     }
-    private func clearConnection() { cancelSetupDeadline(); setupExpiryNotice = nil; connectionGeneration += 1; connectionTimeout?.cancel(); connectionTimeout = nil; writeTimeout?.cancel(); writeTimeout = nil; authorized = false; controlProposal.clear(); rx = nil; tx = nil; writing = false; writes = []; pending = [:]; browseLocations = [:]; queueLocations = [:]; activeBrowseId = nil; activeQueueId = nil; hostEpoch = ""; assembler.clear() }
+    private func clearConnection() { abandonAssistedPage(); cancelSetupDeadline(); setupExpiryNotice = nil; connectionGeneration += 1; connectionTimeout?.cancel(); connectionTimeout = nil; writeTimeout?.cancel(); writeTimeout = nil; authorized = false; controlProposal.clear(); assistedPageUse.clear(); rx = nil; tx = nil; writing = false; writes = []; pending = [:]; browseLocations = [:]; queueLocations = [:]; activeBrowseId = nil; activeQueueId = nil; hostEpoch = ""; assembler.clear() }
     private func cancelSetupDeadline() { setupTimeout?.cancel(); setupTimeout = nil; setupDeadline.clear() }
     private func beginSetupDeadline() {
         guard !setupDeadline.active else { return }
@@ -184,6 +185,9 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     func send(_ type: String, args: [String: Any] = [:], bootstrap: Bool = false) {
         if expireSetupIfNeeded() { return }
         guard let p = peripheral, let _ = rx, p.state == .connected, bootstrap || authorized else { status = "Connect and authorize before controlling playback."; return }
+        if library["invalidated"] as? Bool == true, type == "PLAY_ITEM" || (type == "BROWSE" && args["parent"] is String) {
+            status = "This page expired after a song selection. Browse source library again."; return
+        }
         guard pending.count < 8 else { status = "Wait for pending replies."; return }
         guard !mutations.contains(type) || !mutationPending else { status = "Wait for the current playback action to finish."; return }
         let id = UUID().uuidString
@@ -193,6 +197,12 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
             let frames = try Wire.frames(data, capacity: min(512, p.maximumWriteValueLength(for: .withResponse)), id: serial)
             guard writes.count + frames.count <= 12000 else { status = "Too many queued messages."; return }
             serial &+= 1; pending[id] = type
+            if type == "PLAY_ITEM" {
+                assistedPageUse.begin(id: id, source: state["source"] as? String ?? "", epoch: state["sourceEpoch"] as? String ?? "",
+                                      revision: library["revision"] as? String ?? "",
+                                      assisted: AssistedPageUse.tracks(source: state["source"] as? String ?? "", item: args["item"] as? String ?? "",
+                                        assisted: assistedBrowsing, requestedRevision: args["revision"] as? String ?? "", pageRevision: library["revision"] as? String ?? ""))
+            }
             if type == "GET_QUEUE" { queueLocations[id] = QueueLocation(source: state["source"] as? String ?? "", epoch: state["sourceEpoch"] as? String ?? "", offset: args["offset"] as? Int ?? 0, revision: args["revision"] as? String); activeQueueId = id }
             if type == "BROWSE" {
                 browseLocations[id] = BrowseLocation(source: state["source"] as? String ?? "", epoch: state["sourceEpoch"] as? String ?? "", parent: args["parent"] as? String)
@@ -200,7 +210,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
             }
             writes.append(contentsOf: frames); pump()
             let replyBudget = ReplyBudget.milliseconds(type, item: args["item"] as? String)
-            Task { try? await Task.sleep(for: .milliseconds(replyBudget)); if pending.removeValue(forKey: id) != nil { browseLocations[id] = nil; queueLocations[id] = nil; if id == activeBrowseId { library = [:] }; status = "Reply timed out; outcome unknown. Refresh before retrying." } }
+            Task { try? await Task.sleep(for: .milliseconds(replyBudget)); if pending.removeValue(forKey: id) != nil { retireAssistedPage(id); browseLocations[id] = nil; queueLocations[id] = nil; if id == activeBrowseId { library = [:] }; status = "Reply timed out; outcome unknown. Refresh before retrying." } }
         } catch { status = "Cannot encode Bluetooth message." }
     }
     private func pump() {
@@ -233,6 +243,16 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     func browse(parent: String? = nil, page: Int = 0) {
         send("BROWSE", args: ["parent": parent.map { $0 as Any } ?? NSNull(), "page": page, "revision": parent == nil ? NSNull() : (library["revision"] ?? state["sourceEpoch"] ?? "")])
     }
+    private func abandonAssistedPage() {
+        if assistedPageUse.abandon(source: state["source"] as? String ?? "", epoch: state["sourceEpoch"] as? String ?? "", revision: library["revision"] as? String ?? "") {
+            library["invalidated"] = true
+        }
+    }
+    private func retireAssistedPage(_ id: String) {
+        if assistedPageUse.finish(id: id, source: state["source"] as? String ?? "", epoch: state["sourceEpoch"] as? String ?? "", revision: library["revision"] as? String ?? "") {
+            library["invalidated"] = true
+        }
+    }
     private func receive(_ value: Data) throws {
         if expireSetupIfNeeded() { return }
         guard let reply = try JSONSerialization.jsonObject(with: value) as? [String: Any], reply["v"] as? Int == 1,
@@ -248,6 +268,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         let queueLocation = queueLocations[id]
         if type != "ACCEPTED" { queueLocations[id] = nil }
         if type != "ACCEPTED" { pending[id] = nil }
+        if type != "ACCEPTED", reply["hostEpoch"] as? String == hostEpoch { retireAssistedPage(id) }
         if type == "HELLO" { controlProposal.clear(); hostEpoch = reply["hostEpoch"] as? String ?? ""; authorize(); return }
         if type == "ERROR", reply["hostEpoch"] as? String == hostEpoch, operation == "AUTHORIZE", !authorized {
             if data["code"] as? String == "CONTROLLER_BUSY" {

@@ -99,6 +99,10 @@ class Remote extends ChangeNotifier {
   String get browseExplanation =>
       textValue(caps['uiBrowseReason'] ?? caps['reason']);
   bool get libraryLoading => library['loading'] == true;
+  bool get libraryInvalidated => library['invalidated'] == true;
+  String get libraryRecovery => libraryInvalidated
+      ? 'Page expired after selection. Tap Browse source library.'
+      : '';
   String? get currentParent => textValue(library['requestedParent']).isEmpty
       ? null
       : textValue(library['requestedParent']);
@@ -267,6 +271,7 @@ class Remote extends ChangeNotifier {
   Future<void> open(Json item) async {
     if (!can('canBrowse') ||
         libraryLoading ||
+        libraryInvalidated ||
         busy ||
         item['browsable'] != true) {
       return;
@@ -284,6 +289,7 @@ class Remote extends ChangeNotifier {
     if (!canGoBack ||
         !can('canBrowse') ||
         libraryLoading ||
+        libraryInvalidated ||
         busy ||
         (assisted && !assistedReady)) {
       return;
@@ -297,6 +303,7 @@ class Remote extends ChangeNotifier {
   Future<void> more(int page) async {
     if (!can('canBrowse') ||
         libraryLoading ||
+        libraryInvalidated ||
         busy ||
         page < 0 ||
         (assisted && !assistedReady)) {
@@ -314,6 +321,7 @@ class Remote extends ChangeNotifier {
     required String sourceScope,
   }) async {
     if (libraryLoading ||
+        libraryInvalidated ||
         revision.isEmpty ||
         revision != textValue(library['revision']) ||
         sourceScope != scope ||

@@ -16,6 +16,7 @@ import org.dx340.remote.protocol.BrowseContext
 import org.dx340.remote.protocol.BrowseContextTransition
 import org.dx340.remote.protocol.BrowseReset
 import org.dx340.remote.protocol.ConnectionSetupDeadline
+import org.dx340.remote.protocol.AssistedPageUse
 
 @SuppressLint("MissingPermission")
 class RemoteModel(context: Context) {
@@ -52,11 +53,12 @@ class RemoteModel(context: Context) {
     private var activeQueueId: String? = null
     private val devices = linkedMapOf<String, BluetoothDevice>()
     private val setupDeadline = ConnectionSetupDeadline()
+    private val assistedPageUse = AssistedPageUse()
     private var setupTimeout: Runnable? = null
     val found get() = devices.values.toList()
     private val ble: BleCentral = BleCentral(context, { status = it; update() }, { devices[it.address] = it; update() }, { beginSetupDeadline(); send("HELLO", bootstrap = true) }, ::receive) {
         cancelSetupDeadline()
-        session.lost(); controlProposal.clear(); browseLocations.clear(); queueLocations.clear(); activeBrowseId = null; activeQueueId = null; status = "Disconnected. Cached lists may be stale; reconnect to control."; update()
+        abandonAssistedPage(); session.lost(); controlProposal.clear(); browseLocations.clear(); queueLocations.clear(); activeBrowseId = null; activeQueueId = null; status = "Disconnected. Cached lists may be stale; reconnect to control."; update()
     }
     init {
         runCatching {
@@ -69,7 +71,7 @@ class RemoteModel(context: Context) {
     }
     fun scan() { devices.clear(); runCatching { ble.scan() }.onFailure { status = it.message ?: "Bluetooth unavailable" }; update() }
     fun connect(device: BluetoothDevice) = ble.connect(device)
-    fun disconnect() { session.lost(); controlProposal.clear(); browseLocations.clear(); queueLocations.clear(); activeBrowseId = null; activeQueueId = null; ble.disconnect(); status = "Disconnected. Cached lists may be stale; reconnect to control."; update() }
+    fun disconnect() { abandonAssistedPage(); session.lost(); controlProposal.clear(); browseLocations.clear(); queueLocations.clear(); activeBrowseId = null; activeQueueId = null; ble.disconnect(); status = "Disconnected. Cached lists may be stale; reconnect to control."; update() }
     fun refreshOnForeground() { if (expireSetupIfNeeded()) return; if (authorized) send("GET_STATE") else update() }
     fun close() { ble.stopScan(); ble.disconnect(); main.removeCallbacksAndMessages(null) }
     fun authorize() = send("AUTHORIZE", bootstrap = true)
@@ -96,12 +98,18 @@ class RemoteModel(context: Context) {
     fun send(type: String, args: JSONObject = JSONObject(), bootstrap: Boolean = false) {
         if (expireSetupIfNeeded()) return
         if (!bootstrap && !authorized) { status = "Reconnect and authorize before controlling playback."; update(); return }
+        if (library.optBoolean("invalidated") && (type == "PLAY_ITEM" || type == "BROWSE" && !args.isNull("parent"))) {
+            status = "This page expired after a song selection. Browse source library again."; update(); return
+        }
         if (type in mutations && mutationPending) { status = "Wait for the current playback action to finish."; update(); return }
         if (pending.size >= 8) { status = "Wait for pending commands."; update(); return }
         val id = UUID.randomUUID().toString()
         val request = JSONObject().put("v", 1).put("id", id).put("type", type).put("hostEpoch", epoch)
             .put("source", state.optString("source")).put("sourceEpoch", state.optString("sourceEpoch")).put("args", args)
         session.register(id, type)
+        if (type == "PLAY_ITEM") assistedPageUse.begin(id, state.optString("source"), state.optString("sourceEpoch"),
+            library.optString("revision"), AssistedPageUse.tracks(state.optString("source"), args.optString("item"),
+                assistedBrowsing, args.optString("revision"), library.optString("revision")))
         if (type == "GET_QUEUE") {
             queueLocations[id] = QueueLocation(state.optString("source"), state.optString("sourceEpoch"), args.optInt("offset", 0), if (args.isNull("revision")) null else args.optString("revision"))
             activeQueueId = id
@@ -116,11 +124,22 @@ class RemoteModel(context: Context) {
             // Types only: no metadata, identities, arguments or credentials.
             android.util.Log.i("DX340RemoteClient", "QUEUED:$type")
         }
-        catch (e: Exception) { pending.remove(id); browseLocations.remove(id); queueLocations.remove(id); status = e.message ?: "Send failed"; update(); return }
-        main.postDelayed({ if (pending.remove(id) != null) { browseLocations.remove(id); queueLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); status = "Reply timed out; outcome unknown. Refresh state before retrying."; update() } }, ReplyBudget.milliseconds(type, args.optString("item")))
+        catch (e: Exception) { pending.remove(id); retireAssistedPage(id); browseLocations.remove(id); queueLocations.remove(id); status = e.message ?: "Send failed"; update(); return }
+        main.postDelayed({ if (pending.remove(id) != null) { retireAssistedPage(id); browseLocations.remove(id); queueLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); status = "Reply timed out; outcome unknown. Refresh state before retrying."; update() } }, ReplyBudget.milliseconds(type, args.optString("item")))
     }
     fun browse(parent: String? = null, page: Int = 0) = send("BROWSE", JSONObject().put("parent", parent ?: JSONObject.NULL).put("page", page)
         .put("revision", if (parent == null) JSONObject.NULL else library.optString("revision", state.optString("sourceEpoch"))))
+    private fun retireAssistedPage(id: String) {
+        if (assistedPageUse.finish(id, state.optString("source"), state.optString("sourceEpoch"), library.optString("revision"))) {
+            // Keep the rendered rows in place, but their one-use source action IDs are retired.
+            library.put("invalidated", true)
+        }
+    }
+    private fun abandonAssistedPage() {
+        if (assistedPageUse.abandon(state.optString("source"), state.optString("sourceEpoch"), library.optString("revision"))) {
+            library.put("invalidated", true)
+        }
+    }
     fun readQueue(offset: Int = 0) = send("GET_QUEUE", JSONObject().put("offset", offset)
         .put("revision", if (offset == 0) JSONObject.NULL else queueRevision))
     private fun receive(bytes: ByteArray) {
@@ -140,6 +159,7 @@ class RemoteModel(context: Context) {
             val queueLocation = queueLocations[id]
             if (type != "ACCEPTED") queueLocations.remove(id)
             if (type != "ACCEPTED" && id.isNotEmpty()) pending.remove(id)
+            if (type != "ACCEPTED" && reply.optString("hostEpoch") == epoch) retireAssistedPage(id)
             if (type == "HELLO") { controlProposal.clear(); session.hello(reply.getString("hostEpoch")); authorize(); return }
             if (type == "ERROR" && reply.optString("hostEpoch") == epoch && operation == "AUTHORIZE" && !authorized) {
                 if (data.optString("code") == "CONTROLLER_BUSY") {

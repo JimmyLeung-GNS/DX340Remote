@@ -1,5 +1,28 @@
 import Foundation
 
+/// An assisted selection consumes source UI action IDs, not the controller grant.
+public struct AssistedPageUse {
+    public static func tracks(source: String, item: String, assisted: Bool, requestedRevision: String, pageRevision: String) -> Bool {
+        source == "com.ibasso.music" && item.hasPrefix("mango-ui:") && assisted && !pageRevision.isEmpty && requestedRevision == pageRevision
+    }
+    private struct Use { let id: String, source: String, epoch: String, revision: String }
+    private var pending: Use?
+    public init() {}
+    public mutating func begin(id: String, source: String, epoch: String, revision: String, assisted: Bool) {
+        pending = assisted && !id.isEmpty && !revision.isEmpty ? Use(id: id, source: source, epoch: epoch, revision: revision) : nil
+    }
+    public mutating func clear() { pending = nil }
+    public mutating func abandon(source: String, epoch: String, revision: String) -> Bool {
+        guard let use = pending else { return false }
+        return finish(id: use.id, source: source, epoch: epoch, revision: revision)
+    }
+    public mutating func finish(id: String, source: String, epoch: String, revision: String) -> Bool {
+        guard let use = pending, id == use.id else { return false }
+        pending = nil
+        return source == use.source && epoch == use.epoch && revision == use.revision
+    }
+}
+
 public struct BrowseContext: Equatable {
     public let source: String
     public let epoch: String

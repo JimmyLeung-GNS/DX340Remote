@@ -1,0 +1,281 @@
+[
+  {
+    "name": "terminal-selection-and-duplicate",
+    "steps": [
+      {
+        "action": "begin",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "assisted": true
+      },
+      {
+        "action": "finish",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "retire": true
+      },
+      {
+        "action": "finish",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "retire": false
+      }
+    ]
+  },
+  {
+    "name": "unrelated-reply-cannot-consume-selection",
+    "steps": [
+      {
+        "action": "begin",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "assisted": true
+      },
+      {
+        "action": "finish",
+        "id": "read-state",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "retire": false
+      },
+      {
+        "action": "finish",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "retire": true
+      }
+    ]
+  },
+  {
+    "name": "new-page-kept",
+    "steps": [
+      {
+        "action": "begin",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "assisted": true
+      },
+      {
+        "action": "finish",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page2",
+        "retire": false
+      },
+      {
+        "action": "finish",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "retire": false
+      }
+    ]
+  },
+  {
+    "name": "changed-source-kept",
+    "steps": [
+      {
+        "action": "begin",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "assisted": true
+      },
+      {
+        "action": "finish",
+        "id": "selection1",
+        "source": "apple",
+        "epoch": "e1",
+        "revision": "page1",
+        "retire": false
+      }
+    ]
+  },
+  {
+    "name": "changed-epoch-kept",
+    "steps": [
+      {
+        "action": "begin",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "assisted": true
+      },
+      {
+        "action": "finish",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e2",
+        "revision": "page1",
+        "retire": false
+      }
+    ]
+  },
+  {
+    "name": "disconnect-clears",
+    "steps": [
+      {
+        "action": "begin",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "assisted": true
+      },
+      {
+        "action": "clear"
+      },
+      {
+        "action": "finish",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "retire": false
+      }
+    ]
+  },
+  {
+    "name": "native-or-apple-selection-keeps-page",
+    "steps": [
+      {
+        "action": "begin",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "assisted": false
+      },
+      {
+        "action": "finish",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "retire": false
+      }
+    ]
+  },
+  {
+    "name": "new-attempt-ignores-late-completion",
+    "steps": [
+      {
+        "action": "begin",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "assisted": true
+      },
+      {
+        "action": "begin",
+        "id": "selection2",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "assisted": true
+      },
+      {
+        "action": "finish",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "retire": false
+      },
+      {
+        "action": "finish",
+        "id": "selection2",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "retire": true
+      }
+    ]
+  },
+  {
+    "name": "missing-revision-not-armed",
+    "steps": [
+      {
+        "action": "begin",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "",
+        "assisted": true
+      },
+      {
+        "action": "finish",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "",
+        "retire": false
+      }
+    ]
+  },
+  {
+    "name": "connection-loss-retires-pending-page-once",
+    "steps": [
+      {
+        "action": "begin",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "assisted": true
+      },
+      {
+        "action": "abandon",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "retire": true
+      },
+      {
+        "action": "abandon",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "retire": false
+      }
+    ]
+  },
+  {
+    "name": "connection-loss-does-not-retire-newer-page",
+    "steps": [
+      {
+        "action": "begin",
+        "id": "selection1",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page1",
+        "assisted": true
+      },
+      {
+        "action": "abandon",
+        "source": "com.ibasso.music",
+        "epoch": "e1",
+        "revision": "page2",
+        "retire": false
+      }
+    ]
+  }
+]

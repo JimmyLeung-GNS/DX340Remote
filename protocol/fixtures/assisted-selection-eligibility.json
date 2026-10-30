@@ -1,0 +1,65 @@
+[
+  {
+    "name": "actual-Mango-folder",
+    "source": "com.ibasso.music",
+    "item": "mango-ui:session:1:file",
+    "assisted": true,
+    "requestedRevision": "page1",
+    "pageRevision": "page1",
+    "tracks": true
+  },
+  {
+    "name": "native-Mango-album",
+    "source": "com.ibasso.music",
+    "item": "__ALBUM__1",
+    "assisted": true,
+    "requestedRevision": "page1",
+    "pageRevision": "page1",
+    "tracks": false
+  },
+  {
+    "name": "Apple-page",
+    "source": "com.apple.android.music",
+    "item": "apple-ui:track",
+    "assisted": true,
+    "requestedRevision": "page1",
+    "pageRevision": "page1",
+    "tracks": false
+  },
+  {
+    "name": "fake-short-source-name",
+    "source": "mango",
+    "item": "mango-ui:session:1:file",
+    "assisted": true,
+    "requestedRevision": "page1",
+    "pageRevision": "page1",
+    "tracks": false
+  },
+  {
+    "name": "mode-unavailable",
+    "source": "com.ibasso.music",
+    "item": "mango-ui:session:1:file",
+    "assisted": false,
+    "requestedRevision": "page1",
+    "pageRevision": "page1",
+    "tracks": false
+  },
+  {
+    "name": "stale-revision",
+    "source": "com.ibasso.music",
+    "item": "mango-ui:session:1:file",
+    "assisted": true,
+    "requestedRevision": "old",
+    "pageRevision": "page1",
+    "tracks": false
+  },
+  {
+    "name": "missing-revision",
+    "source": "com.ibasso.music",
+    "item": "mango-ui:session:1:file",
+    "assisted": true,
+    "requestedRevision": "",
+    "pageRevision": "",
+    "tracks": false
+  }
+]

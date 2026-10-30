@@ -13,14 +13,20 @@ Future<void> main() async {
   final mode = textValue(await NativeBridge().call('captureTab'));
   runApp(
     DX340App(
-      remote: Remote(BrowsingCaptureBridge(queue: mode.contains('queue'))),
+      remote: Remote(
+        BrowsingCaptureBridge(
+          queue: mode.contains('queue'),
+          expired: mode.contains('expired'),
+        ),
+      ),
     ),
   );
 }
 
 class BrowsingCaptureBridge implements RemoteBridge {
-  BrowsingCaptureBridge({required this.queue});
+  BrowsingCaptureBridge({required this.queue, this.expired = false});
   final bool queue;
+  final bool expired;
   @override
   Stream<dynamic> get events => const Stream.empty();
   @override
@@ -49,6 +55,9 @@ class BrowsingCaptureBridge implements RemoteBridge {
         },
       },
       'library': {
+        if (expired) 'invalidated': true,
+        if (expired) 'uiAssisted': true,
+        if (expired) 'backId': 'expired-back',
         'title': 'Synthetic album',
         'revision': 'fixture',
         'scopeSource': 'synthetic-mango',
