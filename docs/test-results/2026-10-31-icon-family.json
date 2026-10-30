@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-31",
+  "sourceCommit": "7aba5207af3fea3fdcdd806e0f9700e5b28f776d",
+  "fullGoal": "ACTIVE/incomplete",
+  "kind": "original vector icon asset/build/emulator evidence; not physical Bluetooth/audio",
+  "software": {
+    "nativeBuildLint": "PASS",
+    "sharedAnalyzeReleaseLint": "PASS",
+    "runtimeTestsRerun": false,
+    "pillow": "12.2.0"
+  },
+  "originalApkSignerVerified": true,
+  "candidatePackages": {
+    "artifacts/dx340-phone-0.2.0-development.apk": "1a592c56b87b68aa0861ce0e955bc66c41ee8e13938a942d0180ee29a75b2e9b",
+    "artifacts/dx340-companion-0.1.0-debug.apk": "491dbbffabda8f7a20d64a2f591caa486427e036ba9e3821d831ccf6eff5934a"
+  },
+  "physicalPackagesUnchanged": {
+    "phone": "4449ee74a3545f29e5cb261aeb4f60159be23521ffc145eaf0f4a09bf5b6db84",
+    "companion": "b0e1f582cfc1f1edfdf5ca98630c359ba8a3dad8f0a664e4a849332119d57301"
+  },
+  "exports": {
+    "manifest": "assets/icons/exports.json",
+    "allHashes": "PASS",
+    "iosCatalogDimensions": "PASS",
+    "iosOpaqueRGB": "PASS",
+    "iosProvenance": "PASS",
+    "foregroundMaxRadii": {
+      "remote": 32.053,
+      "companion": 32.297
+    },
+    "safeRadius": 33
+  },
+  "review": {
+    "disposition": "ship",
+    "scope": [
+      "actual emulator Android circle launcher",
+      "labeled software mask/export preview"
+    ],
+    "materialFixes": []
+  },
+  "emulator": {
+    "avd": "Medium_Phone_API_36.1",
+    "version": "36.1.9",
+    "api": "36.1",
+    "build": "BP41.250822.007",
+    "ordinaryCandidatesInstalled": true,
+    "shutDown": true
+  },
+  "notTested": [
+    "iPhone catalog/native-reference build",
+    "actual iPhone launcher",
+    "actual Android monochrome/theme launcher",
+    "physical launcher",
+    "Apple layered Icon Composer"
+  ],
+  "captures": {
+    "android-all-apps.png": {
+      "kind": "actual emulator Pixel Launcher full viewport",
+      "sha256": "b8a363a09989eaf0af3a1778de8a6bae93254fabde053e25761bb25e4d81cb28",
+      "pixels": [
+        1080,
+        2400
+      ]
+    },
+    "family-preview.png": {
+      "kind": "software preview; not native iOS or actual theme render",
+      "sha256": "7f0ccec82c63f6012c092f9f9d7ff8b2d635413dd4ff2236b7c817ebbc7c6ad5",
+      "pixels": [
+        900,
+        500
+      ]
+    }
+  }
+}
