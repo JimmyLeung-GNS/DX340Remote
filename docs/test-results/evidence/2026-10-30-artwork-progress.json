@@ -669,11 +669,18 @@
   "sharedIos": {
     "run": 41058233830,
     "job": 124071074449,
-    "status": "in_progress",
+    "status": "completed",
     "lastAuthoritativePollUtc": "2026-10-30T13:04:07Z",
     "sourceCommit": "ad446107e854f6ac83c68dd04f6fe44a9800b0a0",
-    "scope": "Terminal result pending; do not infer build/launch success from native reference or Android checks"
+    "scope": "Hosted simulator only; no signed owner device/real BLE/audio",
+    "conclusion": "success",
+    "artifact": 12979036843,
+    "artifactSha256": "5577428fc4d830aaf3ee633ced1879c75ae15d47c05ea041825044b1319b3af1",
+    "flutterTests": 46,
+    "captureMatcherTests": 12,
+    "ordinaryRestoredScreenshotInspected": true
   },
   "installedPhoneSha256": "14d08e149209467566ffc769829074acc7f70f8c9e6b9e1dc262e16478f804ee",
-  "scope": "JPEG/base64 markers and hash, not full image decode or phone cache/control latency acceptance"
+  "scope": "JPEG/base64 markers and hash, not full image decode or phone cache/control latency acceptance",
+  "followUp": "2026-10-30-assisted-reply-budget.md: later one source-local audible check on6c, separate from earlier paused artwork phase"
 }
