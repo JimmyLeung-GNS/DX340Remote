@@ -46,6 +46,22 @@ If a bond already exists, it is retained and inspected. If the result is unknown
 
 ## Read-only protocol checks after pairing
 
+Current30 October: JIMMYAH has owner-restored approval and a fresh saved-grant state/duplicate-read pass; keep that approval and OS bond. Older unpaired/unverified statements below describe earlier preparation. Do not run approval-boundary against this approved identity or run await-disconnect/revocation unless explicitly requested. Current Windows diagnostic suite has30 software tests, including7 queue-mode tests; synthetic peers are not radio evidence.
+
+The explicit `authorized-queue` mode additionally reads the **currently selected, paused** source's queue. It sends only HELLO, AUTHORIZE, GET_STATE and GET_QUEUE. Other modes still reject GET_QUEUE; queue reads require saved authorization and validated source/epoch/offset/revision fields. It never sends SELECT_SOURCE, playback, volume, pairing or approval/revocation commands. Select the intended paused source locally before running it, and restore any temporary control-target change afterward.
+
+```powershell
+./work/ble-diagnostic/Scripts/python.exe scripts/verify-windows-protocol.py authorized-queue --label selected-source-queue
+```
+
+The mode walks returned nextOffset windows, requires a stable revision/total and unique IDs, checks the identical first-page duplicate, deliberate stale revision/missing-required-revision denial and fresh first-page recovery. It requires selected source/epoch/title/artist/paused state to remain unchanged. A200-page/10000-entry diagnostic limit and180-second whole-run deadline refuse incomplete coverage; they do not truncate a queue or change product limits. An empty/single-window queue can pass its available cases but does not establish positive continuation. Reports contain source package/counts/window sizes/bytes/timings, with music titles/IDs/revisions kept in memory. Conservative20-byte diagnostic writes and PC page timings do not establish phone/control latency.
+
+Software checks for both the original session and queue mode:
+
+```powershell
+./work/ble-diagnostic/Scripts/python.exe -m unittest discover -s scripts -p 'test_windows*.py' -v
+```
+
 The prepared scripts/verify-windows-protocol.py refuses an unpaired/unknown/weaker Windows bond before any explicit GATT connect/characteristic operation. It never requests pairing, approves/revokes a controller, changes source or sends playback/volume commands. Nineteen software conformance/failure checks pass; the actual authenticated exchange is NOT TESTED. A live preflight on29 October stopped with AUTHENTICATED_OS_BOND_REQUIRED, paired=false/protection=NONE, zero protocol frames.
 
 After native pairing is verified, reopen the companion's60second pairing window while this PC has no companion approval. Run:

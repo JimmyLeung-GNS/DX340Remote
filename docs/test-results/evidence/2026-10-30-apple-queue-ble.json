@@ -1,0 +1,122 @@
+{
+  "kind": "Windows-BLE-read-only-protocol-diagnostic",
+  "mode": "authorized-queue",
+  "createdUtc": "2026-10-30T08:56:09.486648+00:00",
+  "windows": "Windows-11-10.0.26300-SP0",
+  "python": "3.14.0",
+  "bleak": "3.0.2",
+  "gattConnectionAttempted": true,
+  "framesWritten": 219,
+  "allChecksPassed": true,
+  "checks": [
+    {
+      "check": "protected INFO read and indication subscription",
+      "passed": true
+    },
+    {
+      "check": "correlated HELLO with host epoch",
+      "passed": true
+    },
+    {
+      "check": "AUTHORIZE succeeds after local approval",
+      "passed": true
+    },
+    {
+      "check": "GET_STATE returns current source identity/state",
+      "passed": true
+    },
+    {
+      "check": "duplicate read ID returns identical cached result",
+      "passed": true
+    },
+    {
+      "check": "complete selected-source queue with stable revision and unique IDs",
+      "passed": true
+    },
+    {
+      "check": "duplicate first-page ID returns identical cached result",
+      "passed": true
+    },
+    {
+      "check": "stale or missing required queue revision rejects without metadata",
+      "passed": true,
+      "cases": 2
+    },
+    {
+      "check": "fresh first-page recovery and selected paused source state retained",
+      "passed": true
+    }
+  ],
+  "playbackCommandsSent": 0,
+  "pairingRequested": false,
+  "approvalWaitSeconds": null,
+  "scope": "PC development diagnostic; not physical phone or audio acceptance",
+  "phase": "complete",
+  "bondBefore": {
+    "paired": true,
+    "protection": "ENCRYPTION_AND_AUTHENTICATION"
+  },
+  "negotiatedAttMtu": 517,
+  "gattLayout": [
+    {
+      "uuid": "e7e01000-4a76-4b53-9c8f-c7a12b00d340",
+      "handle": 40,
+      "characteristics": [
+        {
+          "uuid": "e7e01001-4a76-4b53-9c8f-c7a12b00d340",
+          "handle": 41,
+          "properties": [
+            "read"
+          ]
+        },
+        {
+          "uuid": "e7e01002-4a76-4b53-9c8f-c7a12b00d340",
+          "handle": 43,
+          "properties": [
+            "write"
+          ]
+        },
+        {
+          "uuid": "e7e01003-4a76-4b53-9c8f-c7a12b00d340",
+          "handle": 45,
+          "properties": [
+            "indicate"
+          ]
+        }
+      ]
+    }
+  ],
+  "operation": "GET_STATE",
+  "queueSummary": {
+    "source": "com.apple.android.music",
+    "total": 101,
+    "pages": [
+      {
+        "offset": 0,
+        "rows": 50,
+        "replyBytes": 4533,
+        "elapsedMs": 6900.97
+      },
+      {
+        "offset": 50,
+        "rows": 50,
+        "replyBytes": 2560,
+        "elapsedMs": 5938.222
+      },
+      {
+        "offset": 100,
+        "rows": 1,
+        "replyBytes": 298,
+        "elapsedMs": 4138.672
+      }
+    ],
+    "scope": "PC BLE queue metadata; page timings are not phone control latency or playback evidence"
+  },
+  "bondAfter": {
+    "paired": true,
+    "protection": "ENCRYPTION_AND_AUTHENTICATION"
+  },
+  "framesReceived": 62,
+  "unsolicitedStatesIgnored": 2,
+  "clientCleanupCompleted": true
+}

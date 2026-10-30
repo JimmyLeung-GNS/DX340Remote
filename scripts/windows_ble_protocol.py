@@ -121,7 +121,7 @@ class ReadOnlySession:
     """One request at a time,20-byte writes, no automatic retry or reconnect."""
     ALLOWED = frozenset({'HELLO', 'AUTHORIZE', 'GET_STATE'})
 
-    def __init__(self, write, timeout=12, allow_authorized_metadata=False):
+    def __init__(self, write, timeout=12, allow_authorized_metadata=False, allow_queue_reads=False):
         self.write = write
         self.timeout = timeout
         self.assembler = Assembler()
@@ -131,10 +131,13 @@ class ReadOnlySession:
         self.request_id = None
         self.closed = False
         self.allow_authorized_metadata = allow_authorized_metadata
+        self.allow_queue_reads = allow_queue_reads
         self.authorized = False
         self.operation = None
         self.unsolicited_states = 0
         self.frames_written = 0
+        self.frames_received = 0
+        self.last_reply_bytes = 0
 
     def close(self, code='DISCONNECTED'):
         self.closed = True
@@ -146,6 +149,7 @@ class ReadOnlySession:
     def feed(self, frame):
         if self.closed:
             return
+        self.frames_received += 1
         try:
             data = self.assembler.accept(frame)
             if data is None:
@@ -177,13 +181,25 @@ class ReadOnlySession:
                 if self.operation != 'AUTHORIZE' or not self.allow_authorized_metadata or reply['data'].get('authorized') is not True or not isinstance(reply['data'].get('state'), dict) or not isinstance(reply['data'].get('sources'), list):
                     raise ValueError('UNEXPECTED_PREAUTH_METADATA')
                 self.authorized = True
+            self.last_reply_bytes = len(data)
             self.pending.set_result(reply)
         except (ValueError, UnicodeError, RecursionError):
             self.close('INVALID_OR_STALE_REPLY')
 
-    async def exchange(self, operation, request_id=None):
-        if operation not in self.ALLOWED:
+    async def exchange(self, operation, request_id=None, *, args=None, source=None, source_epoch=None):
+        if operation == 'GET_QUEUE':
+            if not self.allow_queue_reads or not self.allow_authorized_metadata or not self.authorized:
+                raise ValueError('AUTHORIZED_QUEUE_MODE_REQUIRED')
+            if (not isinstance(args, dict) or set(args) - {'offset', 'revision'} or
+                    type(args.get('offset', 0)) is not int or not 0 <= args.get('offset', 0) <= 10000 or
+                    ('revision' in args and (not isinstance(args['revision'], str) or not 1 <= len(args['revision']) <= 128)) or
+                    source not in {'com.ibasso.music', 'com.apple.android.music'} or
+                    not isinstance(source_epoch, str) or not 1 <= len(source_epoch) <= 128):
+                raise ValueError('INVALID_QUEUE_READ')
+        elif operation not in self.ALLOWED:
             raise ValueError('READ_ONLY_OPERATION_REQUIRED')
+        elif args is not None or source is not None or source_epoch is not None:
+            raise ValueError('UNEXPECTED_READ_ARGUMENTS')
         if self.closed or self.pending is not None:
             raise ValueError('SESSION_UNAVAILABLE')
         if (operation == 'HELLO') != (self.host_epoch is None):
@@ -191,7 +207,9 @@ class ReadOnlySession:
         request_id = request_id or str(uuid.uuid4())
         if not re.fullmatch(r'[A-Za-z0-9-]{1,64}', request_id):
             raise ValueError('INVALID_REQUEST_ID')
-        request = {'v': 1, 'id': request_id, 'type': operation, 'args': {}}
+        request = {'v': 1, 'id': request_id, 'type': operation, 'args': args if operation == 'GET_QUEUE' else {}}
+        if operation == 'GET_QUEUE':
+            request.update(source=source, sourceEpoch=source_epoch)
         if self.host_epoch is not None:
             request['hostEpoch'] = self.host_epoch
         data = json.dumps(request, ensure_ascii=False, separators=(',', ':')).encode('utf-8')
@@ -272,3 +290,87 @@ async def run_read_only_checks(session, mode, checks=None, approval_wait=45, app
             raise ValueError('READ_DUPLICATE_RESULT_CHANGED')
         checks.append({'check': 'duplicate read ID returns identical cached result', 'passed': True})
     return checks
+
+
+async def run_queue_checks(session, checks):
+    """Read the selected paused source only. Keep titles/IDs/revisions in memory.
+
+    The diagnostic caps its walk at200 pages and10000 items, refusing incomplete
+    coverage instead of truncating it. Session/outer timeouts still apply.
+    """
+    before = await session.exchange('GET_STATE')
+    state = before['data'].get('state')
+    if before['type'] != 'RESULT' or not isinstance(state, dict) or state.get('playing') is not False:
+        raise ValueError('PAUSED_SOURCE_REQUIRED')
+    source, epoch = state.get('source'), state.get('sourceEpoch')
+    rows, pages, revision, total, offset = [], [], None, None, 0
+    first_request_id = str(uuid.uuid4())
+    first = None
+
+    async def read(arguments, request_id=None):
+        return await session.exchange('GET_QUEUE', request_id, args=arguments, source=source, source_epoch=epoch)
+
+    for _ in range(200):
+        arguments = {'offset': offset}
+        if revision is not None:
+            arguments['revision'] = revision
+        started = time.monotonic()
+        reply = await read(arguments, first_request_id if offset == 0 else None)
+        elapsed_ms = round((time.monotonic() - started) * 1000, 3)
+        page = reply['data']
+        if reply['type'] != 'RESULT' or set(page) != {'revision', 'offset', 'total', 'items', 'nextOffset'}:
+            raise ValueError('QUEUE_PAGE_NOT_VERIFIED')
+        if len(json.dumps(page, ensure_ascii=False, separators=(',', ':')).encode('utf-8')) > 49152:
+            raise ValueError('QUEUE_PAGE_NOT_VERIFIED')
+        if (not isinstance(page['revision'], str) or not 1 <= len(page['revision']) <= 128 or
+                type(page['offset']) is not int or page['offset'] != offset or
+                type(page['total']) is not int or not 0 <= page['total'] <= 10000 or
+                (revision is not None and (page['revision'] != revision or page['total'] != total)) or
+                not isinstance(page['items'], list) or len(page['items']) > 50):
+            raise ValueError('QUEUE_PAGE_NOT_VERIFIED')
+        revision, total = page['revision'], page['total']
+        for item in page['items']:
+            if (not isinstance(item, dict) or set(item) != {'id', 'title'} or
+                    not isinstance(item['id'], str) or not item['id'] or not isinstance(item['title'], str)):
+                raise ValueError('QUEUE_ITEM_NOT_VERIFIED')
+        stop = offset + len(page['items'])
+        expected_next = stop if stop < total else None
+        if (stop > total or (not page['items'] and stop < total) or
+                page['nextOffset'] != expected_next or
+                (page['nextOffset'] is not None and type(page['nextOffset']) is not int)):
+            raise ValueError('QUEUE_CONTINUATION_NOT_VERIFIED')
+        rows.extend(page['items'])
+        pages.append({'offset': offset, 'rows': len(page['items']), 'replyBytes': session.last_reply_bytes,
+                      'elapsedMs': elapsed_ms})
+        if first is None:
+            first = reply
+        if expected_next is None:
+            break
+        offset = expected_next
+    else:
+        raise ValueError('DIAGNOSTIC_QUEUE_PAGE_LIMIT')
+    if len(rows) != total or len({item['id'] for item in rows}) != total:
+        raise ValueError('QUEUE_COVERAGE_NOT_VERIFIED')
+    checks.append({'check': 'complete selected-source queue with stable revision and unique IDs', 'passed': True})
+    if await read({'offset': 0}, first_request_id) != first:
+        raise ValueError('QUEUE_DUPLICATE_RESULT_CHANGED')
+    checks.append({'check': 'duplicate first-page ID returns identical cached result', 'passed': True})
+    negative_cases = [{'offset': 0, 'revision': 'diagnostic-stale-' + str(uuid.uuid4())}]
+    if total:
+        negative_cases.append({'offset': 1})
+    for arguments in negative_cases:
+        rejected = await read(arguments)
+        if rejected['type'] != 'ERROR' or rejected['data'] != {'code': 'STALE_LIBRARY'}:
+            raise ValueError('QUEUE_STALE_REVISION_NOT_REJECTED')
+    checks.append({'check': 'stale or missing required queue revision rejects without metadata', 'passed': True,
+                   'cases': len(negative_cases)})
+    refreshed = await read({'offset': 0})
+    if refreshed['type'] != 'RESULT' or refreshed['data'] != first['data']:
+        raise ValueError('QUEUE_FRESH_READ_CHANGED')
+    after = await session.exchange('GET_STATE')
+    current = after['data'].get('state')
+    if after['type'] != 'RESULT' or not isinstance(current, dict) or any(current.get(key) != state.get(key) for key in ('source', 'sourceEpoch', 'playing', 'title', 'artist')):
+        raise ValueError('SOURCE_STATE_CHANGED_DURING_QUEUE_READ')
+    checks.append({'check': 'fresh first-page recovery and selected paused source state retained', 'passed': True})
+    return {'source': source, 'total': total, 'pages': pages,
+            'scope': 'PC BLE queue metadata; page timings are not phone control latency or playback evidence'}
