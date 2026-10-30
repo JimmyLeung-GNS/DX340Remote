@@ -28,3 +28,11 @@ The helper requires both sources paused, Wi-Fi off/no default network, verified 
 Use Incorrect for a reported failure. The answer is persisted before cleanup; a pause failure cannot erase it. The helper rejects an already recorded or non-pending result. It also captures source state at confirmation, which may be later than the original observed state: short intros/endings can advance naturally before the reply. Keep that timing caveat visible. Do not fill a human answer from a source-state observation, timeout or elapsed time.
 
 Repeat with the next sequence only after the previous clip is paused and its actual outcome saved. Record all attempts, not just successes; independently count native locations, title/artist/album labels and failures without asserting unique physical files. Keep source-local, human, simulated and phone evidence separate. Full final-build20-song/format/playlist/SD/rescan, phone/offline/reliability and Watch acceptance remains required beyond this boundary matrix.
+
+Summarize only actual recorded attempts:
+
+```powershell
+python scripts/summarize-mango-native-matrix.py --plan artifacts/YOUR_NEW_NATIVE_PLAN.json --output artifacts/YOUR_NATIVE_SUMMARY.json
+```
+
+The summary matches exact planned candidates, excludes missing human answers, refuses duplicate sequence confirmations and reports mixed/missing package provenance without calling it a single-build run. It preserves pending sequences, failures, per-answer timestamps, post-confirmation pause state and whether the delayed confirmation snapshot still has the original title. Newly created attempts record plan/helper/common-helper SHA256; earlier attempts without those fields keep that limitation rather than receiving invented hashes later. A summary is evidence to audit, not proof that its underlying human/device observations occurred.

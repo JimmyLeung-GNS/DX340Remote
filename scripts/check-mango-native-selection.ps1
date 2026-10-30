@@ -18,6 +18,9 @@ $run=[DateTime]::UtcNow.ToString('yyyyMMdd-HHmmss')+'-'+[guid]::NewGuid().ToStri
 $out=Join-Path $repo "artifacts/mango-native-matrix/$('{0:D2}' -f $Sequence)-$run"
 $probe=New-MangoProbeContext $out $Serial $Adb $true $ExpectedVolume
 $summary=[ordered]@{kind='actual-offline-native-Mango-production-selection-no-BLE';sequence=$Sequence;candidate=$candidate;sourceCommit=(git -C $repo rev-parse HEAD).Trim();sourceTreeDirty=[bool](git -C $repo status --porcelain);startedUtc=[DateTime]::UtcNow.ToString('o');artifactDirectory=$out;selectionSent=$false;observedCorrectPlayingState=$false;humanAudio=$null;status='FAILED_OR_INTERRUPTED'}
+$summary.planSha256=(Get-FileHash -LiteralPath $PlanPath).Hash.ToLowerInvariant()
+$summary.helperSha256=(Get-FileHash -LiteralPath $PSCommandPath).Hash.ToLowerInvariant()
+$summary.commonHelperSha256=(Get-FileHash -LiteralPath (Join-Path $PSScriptRoot 'mango-listening-tools.ps1')).Hash.ToLowerInvariant()
 try {
     $installedPath=((& $Adb -s $Serial shell pm path org.dx340.remote.host) -join '').Trim() -replace '^package:',''
     if ($installedPath -notmatch '^/data/app/[A-Za-z0-9_~+./=-]+/base\.apk$') { throw 'Installed package identity missing' }

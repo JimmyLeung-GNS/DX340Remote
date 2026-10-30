@@ -6,6 +6,9 @@ import unittest
 spec = importlib.util.spec_from_file_location('native_plan', Path(__file__).with_name('prepare-mango-native-listening-plan.py'))
 plan = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(plan)
+summary_spec = importlib.util.spec_from_file_location('native_summary', Path(__file__).with_name('summarize-mango-native-matrix.py'))
+summary_module = importlib.util.module_from_spec(summary_spec)
+summary_spec.loader.exec_module(summary_module)
 
 
 def fixtures():
@@ -54,6 +57,39 @@ class NativePlanGuards(unittest.TestCase):
             albums, music = fixtures()
             music['items'][0].update(mutation)
             with self.assertRaises(ValueError): plan.build_plan(albums, music)
+
+
+class NativeSummaryGuards(unittest.TestCase):
+    def setUp(self):
+        self.plan = {'selections': plan.build_plan(*fixtures())}
+
+    def record(self, sequence=1):
+        return {'kind': 'actual-offline-native-Mango-production-selection-no-BLE', 'sequence': sequence,
+                'candidate': self.plan['selections'][sequence - 1], 'status': 'USER_CONFIRMED_AUDIBLE',
+                'humanResult': 'Correct', 'humanAudio': 'Synthetic test answer',
+                'observedCorrectPlayingState': True, 'installedCompanionSha256': 'c' * 64}
+
+    def test_no_human_answer_or_unmatched_candidate_cannot_count_as_a_confirmation(self):
+        no_answer = self.record()
+        no_answer['humanAudio'] = None
+        unknown = self.record()
+        unknown.update(sequence=999, candidate=None)
+        summary = summary_module.summarize(self.plan, [no_answer, unknown])
+        self.assertEqual(summary['confirmedNativeLocations'], 0)
+        self.assertEqual(summary['totalAttempts'], 1)
+        self.assertFalse(summary['allPlannedLocationsConfirmedOnOneBuild'])
+
+    def test_repeated_confirmation_needs_manual_audit(self):
+        with self.assertRaises(ValueError):
+            summary_module.summarize(self.plan, [self.record(), self.record()])
+
+    def test_twenty_results_with_missing_or_mixed_build_are_not_a_single_build_run(self):
+        records = [self.record(i) for i in range(1, 21)]
+        self.assertTrue(summary_module.summarize(self.plan, records)['allPlannedLocationsConfirmedOnOneBuild'])
+        records[0]['installedCompanionSha256'] = None
+        self.assertFalse(summary_module.summarize(self.plan, records)['allPlannedLocationsConfirmedOnOneBuild'])
+        records[0]['installedCompanionSha256'] = 'a' * 64
+        self.assertFalse(summary_module.summarize(self.plan, records)['allPlannedLocationsConfirmedOnOneBuild'])
 
 
 if __name__ == '__main__':
