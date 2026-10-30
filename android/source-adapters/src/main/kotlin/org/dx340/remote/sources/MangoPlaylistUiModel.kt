@@ -67,8 +67,8 @@ object MangoPlaylistUiModel {
             // Accessibility clips labels independently at RecyclerView edges. Bind their
             // available identity, but expose no action until the whole row is readable.
             if (names.isEmpty() || position == null || detail && artists.isEmpty()) {
-                require((edgeIndex == 0 || edgeIndex == visibleRows.lastIndex) && (names.isNotEmpty() || positions.isNotEmpty())) { "UI_UNEXPECTED_SCREEN" }
-                partialProofs.add(row.path)
+                require(edgeIndex == 0 || edgeIndex == visibleRows.lastIndex) { "UI_UNEXPECTED_SCREEN" }
+                partialProofs.addAll(listOf(row.path, row.className, row.clickable.toString(), row.enabled.toString()))
                 children.filter { it.id in setOf(titleId, positionId, P + "music_item_artist") }.sortedBy { it.path }.forEach {
                     partialProofs.addAll(listOf(it.path, it.id, it.text, it.enabled.toString()))
                 }
@@ -89,9 +89,11 @@ object MangoPlaylistUiModel {
         // Frame semantic page identity with lengths; exclude the independent mini-player clock.
         val bytes = ByteArrayOutputStream()
         DataOutputStream(bytes).use { out ->
-            (listOf("mango-playlist-v2", title, total.toString(), list.path, back.path, scroll.orEmpty()) + partialProofs).forEach {
-                val data = it.toByteArray(Charsets.UTF_8); out.writeInt(data.size); out.write(data)
-            }
+            fun field(value: String) { val data = value.toByteArray(Charsets.UTF_8); out.writeInt(data.size); out.write(data) }
+            listOf("mango-playlist-v2", title, total.toString(), list.path, back.path, scroll.orEmpty()).forEach(::field)
+            out.writeInt(partialProofs.size)
+            partialProofs.forEach(::field)
+            out.writeInt(indexed.size)
             indexed.forEach { (position, row) ->
                 out.writeInt(position)
                 listOf(row.path, row.title, row.subtitle).forEach { val data = it.toByteArray(Charsets.UTF_8); out.writeInt(data.size); out.write(data) }

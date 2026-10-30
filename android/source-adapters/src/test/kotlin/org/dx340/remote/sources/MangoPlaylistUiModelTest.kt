@@ -92,4 +92,13 @@ class MangoPlaylistUiModelTest {
         val first = nodes.first { it.id == p + "music_item_position" }
         assertThrows(RuntimeException::class.java) { MangoPlaylistUiModel.parse(nodes + first.copy(path = first.path + ".99")) }
     }
+    @Test fun fullyClippedFirstRowIsExcludedAndCannotHideAnInteriorFailure() {
+        val nodes = fixture("blank-edge")
+        val parsed = MangoPlaylistUiModel.parse(nodes)
+        assertEquals(6, parsed.rows.size)
+        assertEquals("ぼくの憂鬱と不機嫌な彼女", parsed.rows.first().title)
+        assertEquals("愛してるのに、愛せない", parsed.rows.last().title)
+        assertThrows(RuntimeException::class.java) { MangoPlaylistUiModel.parse(nodes.filterNot { it.id == p + "music_item_title" && it.text == "恋音と雨空" }) }
+        assertThrows(RuntimeException::class.java) { MangoPlaylistUiModel.parse(nodes.filterNot { it.id == p + "music_item_title" }) }
+    }
 }
