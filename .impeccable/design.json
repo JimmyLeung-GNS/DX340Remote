@@ -47,6 +47,8 @@
       }
     },
     "tokenScopes": {
+      "phone-setup-primary-android": "Setup-only Android filled next-action inner padding; resolves to components.phone-setup-primary-android in DESIGN.md frontmatter. Not a general phone-action or Cupertino padding token.",
+      "phone-setup-primary-outer": "Setup-only filled primary-action outer spacing on Android/iPhone; resolves to spacing.phone-setup-primary-outer in DESIGN.md frontmatter. Other phone actions retain phone-action-outer.",
       "companion-setup-*": "Revised native Companion Main/controller panel only. dp layout and minimum action height, scalable sp/system fonts. Historical android-* values remain for other companion/reference surfaces.",
       "phone-*": "Authored Flutter logical-pixel dimensions; phone-body is CSS order top/horizontal/bottom, corresponding to EdgeInsets.fromLTRB. Values are source intent, not physical accessibility acceptance.",
       "android-*": "Retained Kotlin companion/native phone reference tokens only. They do not set Flutter typography or navigation.",
@@ -99,6 +101,31 @@
       "third_party/FLUTTER_LICENSE"
     ],
     "verification": {
+      "guidedConnectionAndroid20261031": {
+        "report": "docs/test-results/2026-10-31-guided-connection.md",
+        "reviewReport": "artifacts/connection-flow-20261031/android-appearance-review.md",
+        "companionSha256": "b0e1f582cfc1f1edfdf5ca98630c359ba8a3dad8f0a664e4a849332119d57301",
+        "phoneSha256": "e309eccf9bdee05c77006609230fa0ffd1d816e2df85d6cac82036e5d6ddf35b",
+        "captures": [
+          "artifacts/connection-flow-20261031/phone-guided-idle.png",
+          "artifacts/connection-flow-20261031/phone-searching.png",
+          "artifacts/connection-flow-20261031/phone-verified-connected-clean.png",
+          "artifacts/connection-flow-20261031/phone-verified-idle.png",
+          "artifacts/connection-flow-20261031/host-corrected-stopped.png",
+          "artifacts/connection-flow-20261031/host-verified-connected.png",
+          "artifacts/connection-flow-20261031/host-verified-ready.png"
+        ],
+        "review": {
+          "disposition": "ship",
+          "scope": "Exactly seven default-size Android renders: Pixel 9a/Android16 light-phone and DX340/Android13 dark-DAP. Initial idle/search phone presentation unchanged by final host correction. New guided review, separate from prior Companion reorder; Player/Library/Queue not reopened.",
+          "exclusions": "host-connected.png and phone-remembered-connected.png excluded. Dimmer stopped-DAP frame reviewed for legible layout/copy only, not system-glyph contrast.",
+          "limit": "No material fix or further appearance round owed for these seven views. No iOS appearance/build/physical pass. Broader state matrix, touch/scroll/screen-reader, audio/Bluetooth reliability, full UX-01/icons/Watch acceptance remain open."
+        },
+        "separateChecks": "Original-signer host/phone installed and re-pulled byte-identical. Android166 JVM/63 Flutter tests, builds/analyze/lint and reported saved-grant reconnect/Cancel/Disconnect observations are separate software/physical evidence. No playback/volume command or new audio proof; earlier listening retains earlier binary scopes.",
+        "pendingApple": "New native41131663595/shared41131662763 iOS jobs at cde1aa8 in progress; no iOS build, appearance or physical pass for this refinement.",
+        "open": "New unapproved enrollment/automatic approval completion, multiple actual players, broader error/takeover/dark/large states, scrolling/screen readers, physical iPhone/audio/reliability, icons and Watch.",
+        "assets": "No shipping raster changed; incumbent native system world preserved."
+      },
       "companionSetup9578394c": {
         "report": "docs/test-results/2026-10-31-companion-setup.md",
         "reviewReport": "artifacts/companion-setup-20261031/appearance-review.md",
@@ -309,6 +336,21 @@
   },
   "components": [
     {
+      "name": "Guided phone connection",
+      "kind": "custom",
+      "description": "Setup presents one phase-specific Connect flow covering permissions, discovery or remembered-player reconnect and bounded local-approval observation. Each phase shows its next action or Cancel. Multiple/other players and controller handoff remain deliberate; help is secondary. Authorization remembers the player and updates Companion connected status.",
+      "primaryAction": "Material FilledButton with centered label and phone-setup-primary-android padding, or native CupertinoButton.filled; both use phone-setup-primary-outer spacing. Secondary actions retain existing outlined/native treatment. Cupertino source implementation awaits new iOS checks/review.",
+      "scrollIdentity": "Setup PageStorageKey includes connection phase; Library/Queue identities and geometry unchanged.",
+      "companionFlow": "Stopped: Set up first phone without approvals, otherwise Enable phone control. Running: Ready/tap Connect, separate Set up a new phone, Stop under Advanced. Approval observation completes automatically in updated phones, with older-app Retry wording. Confirmed authorization notifies the local status observer; no source-command replay.",
+      "verificationRef": "extensions.verification.guidedConnectionAndroid20261031"
+    },
+    {
+      "name": "Shared Android Setup primary action",
+      "kind": "button",
+      "refersTo": "phone-setup-primary-android",
+      "description": "Native FilledButton for the current Setup next action, with centered label and vertical outer spacing from phone-setup-primary-outer. Stock theme/enabled states; secondary help/actions remain outlined."
+    },
+    {
       "name": "Companion connection and approval setup",
       "kind": "custom",
       "refersTo": "companion-setup-action",
@@ -349,7 +391,7 @@
     {
       "name": "Scrollable connection and recovery",
       "kind": "custom",
-      "description": "Player/Setup retain live-region status, adaptive errors and pending explanation in the destination ListView. Library/Queue put those messages in the separate stable browsing status viewport; disconnected Open Setup recovery remains in destination content, with capability-specific guidance."
+      "description": "Player retains live-region status, adaptive errors and pending explanation in its ListView; guided Setup uses its own phase heading, guidance and errors in scrolling content. Library/Queue put status messages in the separate stable browsing status viewport; disconnected Open Setup recovery remains in destination content, with capability-specific guidance."
     },
     {
       "name": "Stable browsing status viewport",

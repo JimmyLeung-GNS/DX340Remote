@@ -12,6 +12,10 @@ Hosted jobs at ee98c1033a7be29f394eb16f3fbcca738b1645bf: [native Apple4113061083
 
 The follow-up also fixes iOS unsupported-Bluetooth presentation (failed/unavailable instead of indefinite Preparing), marks connected restoration as Connecting, and retains the failure phase after a setup-expiry disconnect callback. These are unverified native Apple changes until the follow-up hosted jobs finish. Their push supersedes the initial ee98c10 jobs; do not cite a superseded run as evidence for the new Swift code. Android/shared Dart binaries are unaffected by these Swift corrections.
 
+Current source **cde1aa8aadbae3eafc14353d500e0a7012cef1d8**, current jobs [native41131663595](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/41131663595) and [shared41131662763](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/41131662763), last observed **IN PROGRESS**. Both need terminal result/artifact inspection; do not restart merely because the API has not advanced yet.
+
+Android appearance review: **ship** only the exact seven supplied Android phone/DAP renders in `artifacts/connection-flow-20261031/android-appearance-review.md`: phone-guided-idle, phone-searching, phone-verified-connected-clean, phone-verified-idle, host-corrected-stopped, host-verified-connected and host-verified-ready PNGs. Phone light/default and DAP dark/default only. The stopped frame appears dimmer than final frames and is excluded from system-glyph contrast certification. No material presentation fix requested in these states. No new-phone approval, choice/error-state, dark/large phone, screen-reader, iOS, audio or reliability pass follows from this review.
+
 ## Implemented
 
 - Phone Setup has a phase-specific next action: Connect, progress/Cancel, approve on player, choose among discovered players, explicit controller handoff, connected/Open Player/Disconnect, and permission/radio recovery. Permissions, discovery and connection no longer require three manual buttons. Connection help is secondary. Setup scroll resets on a phase change; Library/Queue geometry handling is retained.

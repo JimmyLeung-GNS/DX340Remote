@@ -21,3 +21,16 @@ The new setup path discovers the project's Companion service rather than matchin
 The current Android companion and remote require Android12/API31 or newer. DX340 Android13 is the physically tested DAP; no other make/model has been verified. Older Android DAPs need a scoped compatibility investigation, and closed/non-Android operating systems need their own supported integration. Do not promise "most DAPs" or lower minSdk without testing permission, BLE hosting and lifecycle differences.
 
 For each future player profile record model/OS/firmware, installability, BLE peripheral support, background/sleep, output routing/volume, storage and each installed source app's transport/browse/play-selected-item evidence. Keep vendor/source adapters separate from transport and shared phone UI. Preserve existing engines and report unsupported capabilities; no firmware/root/private download extraction or identity spoofing.
+
+The current `SourceRegistry.PACKAGES` allowlist is only Mango (`com.ibasso.music`) and Apple Music (`com.apple.android.music`). It is not a generic adapter for all installed music apps. Local audible-playback verification is scoped to source version, OS build and device model; keep that isolation when adding profiles. Volume remains disabled until its actual output is locally verified. Vendor-player integration must precede any claim of full local-library support on another DAP.
+
+Illustrative research,31 October2026; no market-share claim, purchase recommendation or additional hardware pass:
+
+| Player | Established platform fact | Project status / next gate |
+| --- | --- | --- |
+| iBasso DX340 | Attached unit Android13/API33 | Partial physical evidence in the dated test reports; full acceptance incomplete |
+| HiBy R6III | Manufacturer manual specifies Android12 | Meets the stated OS floor only; BLE hosting, installed firmware, HiBy playback/browsing adapter and output all NOT TESTED. [HiBy manual](https://guide.hiby.com/en/docs/products/audio_player/hiby_r6iii/guide/) |
+| FiiO M23 | Manufacturer lists Android mode and Bluetooth audio/link features | Exact installed OS must be inventoried; audio/link features do not prove the project's custom GATT peripheral or iPhone path. No project adapter/hardware result. [FiiO specifications](https://fiio.com/m23_parameters) |
+| Shanling M5 Ultra | Manufacturer identifies its MTouch platform | Separate non-Android integration investigation; the current Android APK is not an established route. No vendor API or project hardware support verified. [Shanling introduction](https://newen.shanling.com/article-IntroM5Ultra.html) |
+
+Primary API references for the current connection work: [Android Bluetooth permissions](https://developer.android.com/develop/connectivity/bluetooth/bt-permissions), [Apple known-peripheral retrieval](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/retrieveperipherals(withidentifiers:)), [public iPhone app Settings URL](https://developer.apple.com/documentation/uikit/uiapplication/opensettingsurlstring). Retrieving a known ID does not establish reachability or authorization; connection and host approval still decide readiness.

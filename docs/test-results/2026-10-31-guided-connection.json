@@ -105,5 +105,18 @@
     "production signing and store upload",
     "Watch"
   ],
-  "privateEvidence": "artifacts/connection-flow-20261031/"
+  "privateEvidence": "artifacts/connection-flow-20261031/",
+  "appleCi": {
+    "source": "cde1aa8aadbae3eafc14353d500e0a7012cef1d8",
+    "nativeRun": 41131663595,
+    "sharedRun": 41131662763,
+    "lastObserved": "IN PROGRESS",
+    "physicalApple": "NOT TESTED"
+  },
+  "appearanceReview": {
+    "verdict": "ship",
+    "scope": "seven exact default-size Android captures only; phone light/DAP dark",
+    "privateReport": "artifacts/connection-flow-20261031/android-appearance-review.md",
+    "excluded": "stopped-DAP system glyph contrast; iOS, approval/error/choice, dark/large phone, screen readers, audio and reliability"
+  }
 }
