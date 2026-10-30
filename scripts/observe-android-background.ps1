@@ -23,6 +23,7 @@ if(!$phonePid-or!$hostPid){throw 'Both existing app processes are required'}
 $clock=[Diagnostics.Stopwatch]::StartNew()
 $seen=[Collections.Generic.HashSet[string]]::new()
 $samples=@();$failure=$null
+$startingVolume=$null;$startingRoute=$null
 function Sample {
     $i=$script:samples.Count
     $tag='{0:D3}'-f$i
@@ -30,9 +31,11 @@ function Sample {
     $hostServiceSnapshot=Read-Adb $DxSerial @('shell','dumpsys','activity','services','org.dx340.remote.host')
     $media=Read-Adb $DxSerial @('shell','dumpsys','media_session')
     $power=Read-Adb $DxSerial @('shell','dumpsys','power')
+    $audio=Read-Adb $DxSerial @('shell','dumpsys','audio')
     $gatt=Read-Adb $PhoneSerial @('logcat','-d','-v','threadtime','BluetoothGatt:D','DX340RemoteClient:I','*:S')
     $phone|Set-Content "$out/$tag-phone-service.txt";$hostServiceSnapshot|Set-Content "$out/$tag-host-service.txt"
     $media|Set-Content "$out/$tag-media.txt";$power|Set-Content "$out/$tag-dx-power.txt"
+    $audio|Set-Content "$out/$tag-dx-audio.txt"
     $gatt|Set-Content "$out/$tag-phone-gatt.txt"
     foreach($line in ($gatt-split"`n")){if($seen.Add($line)){$line|Add-Content "$out/unique-gatt-lines.txt"}}
     $pNow=Read-Adb $PhoneSerial @('shell','pidof','org.dx340.remote.controller')
@@ -42,14 +45,20 @@ function Sample {
         if(!$match.Success){throw 'Both source states must remain observable'}
         $states+=[int]$match.Groups[1].Value
     }
+    $volume=[regex]::Match($audio,'(?s)- STREAM_MUSIC:.*?streamVolume:(\d+)')
+    $route=[regex]::Match($audio,'(?s)- STREAM_MUSIC:.*?Devices: ([^\r\n]+)')
+    if(!$volume.Success-or!$route.Success){throw 'Music output observation unavailable'}
+    $level=[int]$volume.Groups[1].Value;$output=$route.Groups[1].Value.Trim()
+    if($null-eq$script:startingVolume){$script:startingVolume=$level;$script:startingRoute=$output}
     $row=[ordered]@{at=(Get-Date -Format o);elapsedSeconds=[math]::Round($clock.Elapsed.TotalSeconds,3);
         phoneProcessUnchanged=($pNow-ceq$phonePid);hostProcessUnchanged=($hNow-ceq$hostPid);
         phoneForegroundService=($phone-match'isForeground=true');hostForegroundService=($hostServiceSnapshot-match'isForeground=true');
-        sourceStates=$states;dxWakefulness=([regex]::Match($power,'mWakefulness=(\w+)').Groups[1].Value)}
+        sourceStates=$states;musicVolume=$level;musicRoute=$output;outputUnchanged=($level-eq$script:startingVolume-and$output-ceq$script:startingRoute);
+        dxWakefulness=([regex]::Match($power,'mWakefulness=(\w+)').Groups[1].Value)}
     $script:samples+=,$row
     $row|ConvertTo-Json -Compress|Add-Content "$out/samples.jsonl"
     $row|ConvertTo-Json -Compress|Write-Output
-    if(!$row.phoneProcessUnchanged-or!$row.hostProcessUnchanged-or!$row.phoneForegroundService-or!$row.hostForegroundService-or@($states|Where-Object {$_-ne2}).Count){throw 'Observed process/service/source state changed; inspect this run, do not infer a continuous pass'}
+    if(!$row.phoneProcessUnchanged-or!$row.hostProcessUnchanged-or!$row.phoneForegroundService-or!$row.hostForegroundService-or!$row.outputUnchanged-or@($states|Where-Object {$_-ne2}).Count){throw 'Observed process/service/source/output state changed; inspect this run, do not infer a continuous pass'}
 }
 try {
     do {
