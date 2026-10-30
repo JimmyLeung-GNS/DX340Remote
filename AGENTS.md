@@ -14,7 +14,7 @@ Use meaningful tests for framing, duplicate commands, routing, stale IDs, reconn
 
 ## Evidence and continuity
 
-Development location confirmed on 29 October 2026: continue in `C:\GitHub\DX340Remote` on the current Windows PC. Do not assume a move to another Windows PC. Use `docs/windows-continuation.md` for the local workflow; Mac/Xcode instructions cover the later iPhone build/validation work.
+On 30 October 2026 the user explicitly chose to switch development to **another Windows PC**, superseding the 29 October stay-on-this-PC instruction. The exporting checkout is `C:\GitHub\DX340Remote`; verify the portable checkpoint and inventory the next PC's actual workspace/toolchain rather than assuming the same paths. Read `docs/device-continuation.md` for transfer/resume and `docs/windows-continuation.md` for the prior local build workflow. Mac/Xcode remains the separate iPhone build/validation host.
 
 Update `docs/status.md` with completed work, commands/results, unresolved facts and next actions. Store device inventory, capability findings and physical test results under `docs/`. Label each result as verified, failed, blocked or not tested, identifying device, OS, app versions and evidence.
 

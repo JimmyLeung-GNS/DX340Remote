@@ -1,6 +1,6 @@
-# Continue development on this Windows PC
+# Windows build workflow and device-switch checkpoint
 
-Confirmed by the user on 29 October 2026: keep developing in `C:\GitHub\DX340Remote` on the current Windows PC. The working branch is `codex/source-recovery-checkpoint`. Continue this checkout rather than creating a second clone or assuming a move to another Windows PC.
+On30 October2026 the user explicitly chose **another Windows PC** and requested the latest checkpoint be pushed to GitHub. Read device-continuation.md first. The paths/tools below describe the exporting DESKTOP-T9ICUE4 checkout at `C:\GitHub\DX340Remote`; inventory the new PC and substitute its actual paths. Branch: `codex/source-recovery-checkpoint`. Earlier29 October stay-on-this-PC wording is superseded.
 
 ## Resume the existing checkout
 

@@ -1,68 +1,21 @@
-# Mac build and additional test-device workflow
+# Mac build and iPhone validation
 
-The user confirmed on 29 October 2026 that development remains on the current Windows PC in `C:\GitHub\DX340Remote`. Start with windows-continuation.md for everyday development. This guide covers the separate Mac/Xcode/iPhone validation and additional test devices; it does not require moving development to another Windows PC.
+30 October2026: the primary development checkout is moving to another Windows PC. Read device-continuation.md for the GitHub/portable source checkpoint, signing-key boundary and exact new-session prompt. The Mac remains the Xcode/signing/physical-iPhone execution host.
 
-The local branch codex/source-recovery-checkpoint has not been pushed or published. The generated source bundle artifacts/dx340-checkpoint.bundle contains that branch and reachable tracked history, including the current handoff. It excludes ignored APKs/logs/work tools and signing keys. artifacts/checkpoint-manifest.json records the exact source commit, bundle hash and APK hashes. Verify the manifest against the actual transferred files; do not assume older reports describe the latest packages.
-
-## Mac source/build
-
-Copy the bundle and manifest securely to the Mac. Replace the example path below with its actual location:
+The complete staged commands are in mac-iphone-quickstart.md. Start with:
 
 ```sh
-shasum -a 256 /path/to/dx340-checkpoint.bundle
-git clone --branch codex/source-recovery-checkpoint /path/to/dx340-checkpoint.bundle DX340Remote
-cd DX340Remote
-git bundle verify /path/to/dx340-checkpoint.bundle
-git rev-parse HEAD
-git status --short
-xcodebuild -version
-xcrun simctl list devices available
+python3 scripts/mac-iphone-tests.py preflight
 ```
 
-Confirm HEAD and the bundle SHA256 match checkpoint-manifest.json. Read AGENTS.md, docs/development-handoff.md and docs/status.md. Use the project pin Flutter3.41.4/revisionff37bef603469fb030f2b72995ab929ccfc227f0, with a compatible installed Xcode. To provision the pin inside this checkout without changing a global Flutter installation:
+The runner inventories actual Mac/Xcode/SDK/Flutter versions and device identifiers, then supports an explicitly selected simulator, signed ordinary shared-device build, and explicit install/launch. It creates committed-source worktrees and separate evidence folders, preserves previous output, checks simulator/fixture/identity/signature boundaries and uses bounded command lifetimes. It does not sign in, change global tooling, automatically provision accounts or pretend a simulator is a physical phone.
 
-```sh
-mkdir -p work
-git clone --depth 1 --branch 3.41.4 https://github.com/flutter/flutter.git work/flutter
-test "$(git -C work/flutter rev-parse HEAD)" = ff37bef603469fb030f2b72995ab929ccfc227f0 || exit 1
-export PATH="$PWD/work/flutter/bin:$PATH"
-flutter --version
-```
+Current preparation verification is Windows software scope: five runner guards and four checkpoint-integrity checks pass; running preflight on Windows refuses Apple execution with NEEDS_MACOS_XCODE. No current Mac build, signed iPhone installation or phone BLE acceptance is claimed. Historical hosted Apple workflows at04b04aa retain their unsigned simulator scope. The reported iPhone OS27.2 still needs exact model/build inventory and actual Xcode compatibility validation.
 
-If work/flutter already exists, verify its revision instead of overwriting it. Record the actual Mac/Xcode/iPhone model/OS/build/team; none is inferred from earlier hosted CI. Select a real available iPhone simulator UDID from the listing:
+Use the ordinary shared Flutter app for physical tests; the native reference remains in apple/. Both use the same bundle ID, so the simulator runner tests the reference first and shared ordinary app last. Native screenshot fixtures must not be installed as the physical remote. Complete phone-reliability-runbook.md/controller-handoff-runbook.md and record source observations separately from human audio confirmation.
 
-```sh
-sh scripts/build-phone-ios.sh '<available-iPhone-simulator-UDID>'
-```
+Installed DX340 baseline is04846d60.../ordinary phone23c536e7...; current Windows candidates5e1d6e0c.../2d42728f... remain uninstalled. Earlier twenty Mango folder confirmations, mixed-build Apple confirmations and native Album635/All Music500 metadata remain separately scoped. Current full-native build evidence is120 tests, Flutter46 and diagnostic23, not the older86/32/19 records. Native metadata caching is now wired into SourceRegistry; earlier standalone-index wording describes a preceding implementation.
 
-This must compile the current Swift bridges/client/reference changes, install/launch the shared UI and inspect its captures. Old CI results do not verify this revision. Fix actual compiler/runtime errors in place; retain the native apple/ reference client.
+Latest user preference is to keep PC controller access. Last verified state was an authenticated retained OS bond with companion approval revoked; restoration has not been verified after that preference changed. Keep any restored grant, disconnect its live transport during first iPhone enrollment on the installed single-controller host, and preserve each controller's separate identity. Do not make another PC or key-transfer request an unnecessary dependency for Mac/iPhone preparation. Android private keys remain outside Git/archive; Apple signing uses the selected Mac team separately.
 
-For physical iPhone installation, open phone/ios/Runner.xcworkspace in Xcode, choose the user's signing team/device and run Runner. Account/credential prompts are completed by the user; do not place credentials in chat or Git. Follow phone-reliability-runbook.md offline against the actual DX340. Simulator/rendering success does not prove Bluetooth, signing, background/range, authorization or audio. Record failures and actual commands/results under docs/test-results.
-
-## Separate Android phone
-
-Transfer artifacts/dx340-phone-0.2.0-development.apk and its manifest/hash to the test PC/phone. The companion is already installed on DX340. Identify the **separate phone's** ADB serial:
-
-```powershell
-adb devices -l
-$phoneSerial = '<separate-phone-serial>'
-./scripts/verify-android-signing.ps1 -Serial $phoneSerial -Apk artifacts/dx340-phone-0.2.0-development.apk
-adb -s $phoneSerial install -r artifacts/dx340-phone-0.2.0-development.apk
-adb -s $phoneSerial shell am start -W -n org.dx340.remote.controller/org.dx340.remote.dx340_phone.MainActivity
-```
-
-Do not select DX340 serial d as proof of this phone gate. Do not uninstall/reset an existing app to bypass a signer mismatch. The original Android debug keystore stays outside Git and is needed for later Android updates; it is intentionally absent from the source bundle. Existing signed APKs can be transferred without transferring the private key.
-
-Complete Setup/Nearby Devices/notification prompts on the phone, start the companion, open its pairing window, accept authenticated system bonding, approve the new controller on DX340 and retry authorization. Then run the full runbook with Wi-Fi/cellular off. Prior source-local reads/audible samples do not pass the phone matrix.
-
-## Acceptance still required
-
-Current companion40114ff8.../86-test build and source-local prefetch comparison are recorded in test-results/2026-10-29-mango-prefetch.md. Preceding isolated controller-management checks are recorded in test-results/2026-10-29-controller-management.md. Per-controller revocation and authorization-lifetime guards are implemented; authenticated physical revocation/reapproval remains unverified. The preceding same-device recovery and unresolved Playlist timing are recorded in test-results/2026-10-29-mango-folder-timing.md. Source-local Playlist recovery still exceeds3seconds after the settling improvement; measure actual arrival/rendering over each phone separately. The manifest identifies the current package independently of older report hashes.
-
-The full P0–P9/T01–T18 scope remains in implementation-plan.md/completion-audit.md. In particular: real BLE on both phones,30-minute sleep/range/security/fault tests,100 controls/source/phone, current Mac/iPhone builds/signing, source20-track/format matrices, Apple5 albums/2 playlists, Mango populated-playlist/SD/rescan proof, measured volume/audio/battery/walk and complete installation/upgrade acceptance. Mango's observed Playlist list is empty; no playlist was created. Do not invent collection or audio evidence. Approved-controller handoff needs measured connection-limit behavior before selecting/validating its mechanism. Watch follows stable phone acceptance.
-
-The plan's separate10,000-track synthetic metadata component fixture now passes on Windows; see test-results/2026-10-29-synthetic-metadata.md. LibraryIndex is standalone, not wired into the source adapter. Repeat its component check if useful, but actual cached/uncached page latency must still be measured over each phone/source path; the synthetic timings cannot fill that gate.
-
-Source-only navigation/inventory scripts and their scope are documented in test-results/2026-10-29-source-library-inventory.md. The generated artifacts/apple-listening-plan.json is excluded from the Git bundle; optionally transfer it separately for the pending20-selection matrix, or regenerate on the DX340 test PC. It contains candidate metadata, not audio or verified playback. Revalidate fresh IDs/revisions/source/offline/queue state for actual selections; current listening availability must be established first.
-
-This Windows PC also has a real diagnostic BLE central: see windows-ble-diagnostics.md, test-results/2026-10-29-windows-protocol-preparation.md and test-results/2026-10-29-windows-ble.md. Host advertising/GATT enumeration and unpaired denials are verified; authenticated pairing needs the operator's native consent and is not verified. Read-only approval/state diagnostics now have19 software checks and a live unpaired refusal, not authenticated protocol proof. The isolated Python environment/raw addresses/logs are excluded from the bundle; reproducible dependency pins/scripts are tracked. Windows radio scripts require Windows; pure test_windows_ble_protocol.py conformance checks use only Python3.11+ and can run on the Mac. This path is development evidence only and does not replace either phone test.
+Full P0-P9/T01-T18 acceptance, native Album/playlist/SD/rescan/volume/audio-quality/background/range/battery/walking/two-controller and later Watch remain open. The same checkpoint contains the Windows source/debug tools and runbooks; synthetic/build success cannot fill those physical rows.
