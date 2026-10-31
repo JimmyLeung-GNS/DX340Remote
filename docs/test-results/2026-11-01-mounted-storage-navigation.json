@@ -1,0 +1,802 @@
+{
+  "recordedAt": "2026-11-01T02:46:32.649588+08:00",
+  "status": "VERIFIED_MOUNTED_CARD_BROWSE_SUBSET",
+  "goal": "ACTIVE/incomplete",
+  "hostSource": "1e3c551de98dba20183c452ea0f0b9f08bed42c9",
+  "hostSha256": "dc53629d33cecb25fb381d464fe3e55656b35ca5575c32211da3971fbda7e775",
+  "host": "DX340 Android13/API33 eng.iBasso.20260812.181952; Companion0.1.0/code1; PID4334",
+  "phoneSource": "a5b3fc0ac1e558b0f4eba3daff6dcf3cb94bf532",
+  "phoneSha256": "4eea5c15a6c567efedba5329b2bb2256137caa3c964bbd5f818233827222212d",
+  "phone": "Pixel9a Android16/API36 CP1A.260405.005; Remote0.2.0/code2; PID17394",
+  "mango": "4.1.37/code240",
+  "appleMusic": "6.5.3/code1599",
+  "phoneJournal": {
+    "modelInstanceId": "69f72db0-331f-4f34-ad09-8e1421f93c67",
+    "oldCount": 31,
+    "newCount": 47,
+    "allPrior31Unchanged": true,
+    "evictions": 0,
+    "currentCaseRequests": 15,
+    "currentCaseOperations": {
+      "HELLO": 1,
+      "AUTHORIZE": 1,
+      "BROWSE": 13
+    },
+    "allCurrentAppliedAndWriteAcknowledged": true,
+    "olderBetweenExportsGetState": {
+      "id": "0595e9e6-a9a0-444f-a996-58379d1b9b95",
+      "operation": "GET_STATE",
+      "source": "mango",
+      "startedMs": 3445354,
+      "writeAcknowledgedAfterMs": 88,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 482,
+      "result": "result",
+      "terminalApplied": true,
+      "hostOutcome": "none",
+      "error": null
+    }
+  },
+  "cases": [
+    {
+      "case": "warm-internal",
+      "request": {
+        "id": "29330be0-c57e-4521-8823-e8cd01f89f24",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 4152426,
+        "writeAcknowledgedAfterMs": 149,
+        "accepted": true,
+        "acceptedAfterMs": 153,
+        "finishedAfterMs": 3467,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      }
+    },
+    {
+      "case": "warm-sd",
+      "request": {
+        "id": "a6040e63-cc25-43ac-89f9-4b1b51218428",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 4184527,
+        "writeAcknowledgedAfterMs": 125,
+        "accepted": true,
+        "acceptedAfterMs": 127,
+        "finishedAfterMs": 3979,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      }
+    },
+    {
+      "case": "foreground-cached-sd-to-internal",
+      "request": {
+        "id": "43d00eb0-18b0-45ad-be66-6e2466f4f7c7",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 4208968,
+        "writeAcknowledgedAfterMs": 156,
+        "accepted": true,
+        "acceptedAfterMs": 159,
+        "finishedAfterMs": 4802,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      }
+    },
+    {
+      "case": "second-sd",
+      "request": {
+        "id": "7ad47ea2-6455-4c76-8c97-26118713cd73",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 4296497,
+        "writeAcknowledgedAfterMs": 136,
+        "accepted": true,
+        "acceptedAfterMs": 138,
+        "finishedAfterMs": 4237,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      }
+    },
+    {
+      "case": "empty-sd-music-folder",
+      "request": {
+        "id": "3e2de8cb-7d57-4fde-9eca-91ff8a5262c0",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 4316536,
+        "writeAcknowledgedAfterMs": 135,
+        "accepted": true,
+        "acceptedAfterMs": 136,
+        "finishedAfterMs": 2387,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      }
+    },
+    {
+      "case": "foreground-nested-sd-to-internal",
+      "request": {
+        "id": "144c16a6-32a0-4d30-87e3-0bf197e7f7ed",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 4370056,
+        "writeAcknowledgedAfterMs": 143,
+        "accepted": true,
+        "acceptedAfterMs": 144,
+        "finishedAfterMs": 6628,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      }
+    }
+  ],
+  "rootForegroundSourceTraceMs": 4331,
+  "nestedForegroundSourceTraceMs": 5861,
+  "emptySdMusicPageMatchesPublicDirectoryListing": true,
+  "preserved": {
+    "fourPreferenceHashes": {
+      "controllers": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311",
+      "mango-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "apple-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "source-verification": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    "globalSettings": {
+      "host": {
+        "wifi_on": "0",
+        "mobile_data": "0",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      },
+      "phone": {
+        "wifi_on": "0",
+        "mobile_data": "1",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      }
+    },
+    "pids": {
+      "host": "4334",
+      "phone": "17394"
+    },
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "positions": {
+      "com.ibasso.music": "78991",
+      "com.apple.android.music": "99367"
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "cardMounted": true,
+    "hostForeground": true,
+    "phoneOrdinaryDisconnectHelpCollapsedForegroundServiceCleared": true,
+    "noPackageCodeMountScanPlaybackOrVolumeChange": true,
+    "controlTarget": "Mango"
+  },
+  "limits": [
+    "Mounted card only; original no-card cached-SD/Internal8412ms failure remains open",
+    "Both foreground paths exceed proposed3second page target; no performance acceptance",
+    "No selected-file playback, new listening, output-quality or fullT08/T11 evidence",
+    "One driver scroll request on a short empty page was refused before input; no source failure/retry",
+    "Three source-local same-target SNAPSHOT receipts record Accessibility navigation; not additional BLE operations",
+    "Pixel cellular1 keeps strictT01 open; no long observer/job; fresh hold readiness pending",
+    "Prior Apple jobs closed/simulator-only; fullT01\u2013T18, physical owner-iPhone/signing/Watch unfinished"
+  ],
+  "rawEvidence": [
+    {
+      "file": "artifacts/internal-navigation-20261101/after-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/after-controllers.xml",
+      "sha256": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/after-host-accessibility.txt",
+      "sha256": "7932b39b25ef8ef659885d943a6d76c666d4c8e14e64101a0af93e6de7692a9f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/after-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "7f9de59d1c823d05a33ff12a0601d6477f4d0d2a5a72215861d65a46fd79eaee"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/after-host-audio.txt",
+      "sha256": "3538280263755d598927da2f095fc2af3727ff5394300a10205383f210ed463e"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/after-host-bluetooth_manager.txt",
+      "sha256": "623f74c3afe05b259d34ca91cd031b0fb1400d4852f04bc2a45f5327c9546bbe"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/after-host-media_session.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/after-host-package-org.dx340.remote.host.txt",
+      "sha256": "7281225e0f4edb072e69da85e2f8016871f00a8960163deda235f559e00fe7c1"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/after-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/after-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "978b87d576fa0f6ae0e2290e4a0fa476067f1a53bf662c4724156b4d134429fc"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/after-phone-bluetooth_manager.txt",
+      "sha256": "cad1b24ab49c6aa1820d4bc2b8346b9c983a8c367b0d9972fdc1b63da0c13b99"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/after-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "d9d49df36dc8f8ca58ecf6d22a0eb603fbf92b4022e4c3159f0ee167a5659a42"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/after-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/after.json",
+      "sha256": "498b87af9080717acc5d53a7a38372d6a7e7c7b6ec51c5ea386b1f8c6b13f65a"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/before-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/before-controllers.xml",
+      "sha256": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/before-host-accessibility.txt",
+      "sha256": "27ff20d243e2759076c609c5e0ae75c42b3bdf59e946d3bbb3ae6319ed86a083"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/before-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "bfdd87a291415898a499454f5fc05c73220a33efdbcbb7ba93786e1ea10a9ffc"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/before-host-audio.txt",
+      "sha256": "681532d252dcfe6e75fff3c49170ab403ff56ad1bfd9f977f3983242c2328c0f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/before-host-bluetooth_manager.txt",
+      "sha256": "c7184ba6551ccbeb828e99687ea40719971e1035623d031a396dc9dc054a8b65"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/before-host-media_session.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/before-host-package-org.dx340.remote.host.txt",
+      "sha256": "ef2523387ed3b285a37da0fb22ece4e6670b1fa10cb4bee6d38f2986aac13eba"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/before-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/before-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "0b7c5684666a8a98607b5c6e6841f20398da1cd8063f69ecded2f28546eb90c5"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/before-phone-bluetooth_manager.txt",
+      "sha256": "e2a18757d4043f57bdb0c33772d3865cf67706cd68edcaad70342c536916cfa7"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/before-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "84740804e4e2c742de709608dc0a956bd3d1cc6e48965c529d2804c9973c2a70"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/before-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/before.json",
+      "sha256": "d78494a3d84ab74bd3f639ea5478abfe6fc5f288ae669875b24ffa983a8eec66"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/cached-sd-foreground-internal-after.xml",
+      "sha256": "924526ad5552f97d581faf1fe7e0def4cef6bef45f05e261cfafbf84d5c2e3a2"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/cached-sd-foreground-internal-before.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/cached-sd-foreground-internal-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/cached-sd-foreground-internal-wait-0.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/cached-sd-foreground-result-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/cached-sd-foreground-result.xml",
+      "sha256": "924526ad5552f97d581faf1fe7e0def4cef6bef45f05e261cfafbf84d5c2e3a2"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/cached-sd-foreground-terminal-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/cached-sd-foreground-terminal.png",
+      "sha256": "b1d04d1377472b0e1815657a6738ac5eef6e2af17484cd035eb2c35840387b05"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/cached-sd-foreground-terminal.xml",
+      "sha256": "54d10dffeed3dbd7c537ce8353c39477d293b18340cd3438dfd52471b353d489"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/cached-sd-parent-after.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/cached-sd-parent-before.xml",
+      "sha256": "1e7176727a6597cf29ea52bd363588031f41f3ed321ec1420ae9ae6cd2c4b85f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/cached-sd-parent-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/cached-sd-parent-wait-0.xml",
+      "sha256": "1e7176727a6597cf29ea52bd363588031f41f3ed321ec1420ae9ae6cd2c4b85f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/cached-sd-trace-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/cached-sd-trace.json",
+      "sha256": "a114feb1f917e0e7bb23f4913b1a77225933814eed5f6cb8cd7047482d142a6d"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/final-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/final-controllers.xml",
+      "sha256": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/final-host-accessibility.txt",
+      "sha256": "926896c1740ddc72f86c392f39ef7f812983ba63d250ccc9e3a221d11a9774bf"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/final-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "cde61546db8b95370b2b7ddee2e52afc79400ef3d86c85258c4c0b1088d30318"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/final-host-audio.txt",
+      "sha256": "46bc193f3e58233074d4410ba249550686f25204ba45db0999801f7a1b56b308"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/final-host-bluetooth_manager.txt",
+      "sha256": "df0b62246710bd2e7889228253be9e52cb8b4c37f45848bdddb54e747648a20f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/final-host-media_session.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/final-host-package-org.dx340.remote.host.txt",
+      "sha256": "1f4202395bc0a3094046b74a33cb1100322fadf0d82a39e006536d23b97afb47"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/final-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/final-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "d886062cb98b9f0c62172778b39c7c030f82a79489458d04984cc14a0dd33a80"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/final-phone-bluetooth_manager.txt",
+      "sha256": "b10209a12ffe9aa1b100636548455e106203fed3c82ba8b742a0749634106d85"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/final-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "3bcc6bd8b6020cff6d4f50131fd8d9015ce97a3780d3e747d7038eb66b8ebc4d"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/final-phone-setup-host-diagnostic.json",
+      "sha256": "382853a14860c7ab8976e2e409a35ff5fff86ec27f530857e46decd5dd0c7295"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/final-phone-setup.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/final-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/final.json",
+      "sha256": "e0ae7a95c518e54b3225bbc70ca2e1693f172c0f8a7e902d4bb01c3fd87eb6e5"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-cleanup-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-cleanup-setup-before.xml",
+      "sha256": "54d10dffeed3dbd7c537ce8353c39477d293b18340cd3438dfd52471b353d489"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-cleanup-setup-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-cleanup-setup-wait-0.xml",
+      "sha256": "54d10dffeed3dbd7c537ce8353c39477d293b18340cd3438dfd52471b353d489"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-connect-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-connect-wait-0.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-final-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-final-collapse-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-final-collapse-wait-0.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-final-disconnect-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-final-disconnect-before.xml",
+      "sha256": "2288e379b354ba1942955dc924a63171deb037e01d9178ed1201a2a1ebe8db01"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-final-disconnect-wait-0.xml",
+      "sha256": "2288e379b354ba1942955dc924a63171deb037e01d9178ed1201a2a1ebe8db01"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-final-export-after.xml",
+      "sha256": "2288e379b354ba1942955dc924a63171deb037e01d9178ed1201a2a1ebe8db01"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-final-export-before.xml",
+      "sha256": "4b95d9bc46a5c9aafae5a240323f8b2576fdf12a63f5f8c641781b0f70f30b3f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-final-export-wait-0.xml",
+      "sha256": "4b95d9bc46a5c9aafae5a240323f8b2576fdf12a63f5f8c641781b0f70f30b3f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-final-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-final-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-final-help-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-final-phone-report.json",
+      "sha256": "557930e7ec10a88f50e522c08137606f905b4d50aa027403c7266a3c742a2e12"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-final-scroll-after.xml",
+      "sha256": "4b95d9bc46a5c9aafae5a240323f8b2576fdf12a63f5f8c641781b0f70f30b3f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-final-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-final-setup.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-folders-after.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-folders-before.xml",
+      "sha256": "6edadd75b0ce2fc2c2a7fb95b115825d257d37fee6649e4bc863be05a162b438"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-folders-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-folders-wait-0.xml",
+      "sha256": "6edadd75b0ce2fc2c2a7fb95b115825d257d37fee6649e4bc863be05a162b438"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-library-after.xml",
+      "sha256": "00f059c207354f26d2a679ce2bf9e3b2162d4a1e4986dae04abc61cb5ebeb9ff"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-library-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-library-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-library-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-mounted-first-after.xml",
+      "sha256": "924526ad5552f97d581faf1fe7e0def4cef6bef45f05e261cfafbf84d5c2e3a2"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-mounted-first-before.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-mounted-first-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-mounted-first-result-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-mounted-first-result.xml",
+      "sha256": "54d10dffeed3dbd7c537ce8353c39477d293b18340cd3438dfd52471b353d489"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-mounted-first-wait-0.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-parent-after.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-parent-before.xml",
+      "sha256": "54d10dffeed3dbd7c537ce8353c39477d293b18340cd3438dfd52471b353d489"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-parent-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-parent-wait-0.xml",
+      "sha256": "54d10dffeed3dbd7c537ce8353c39477d293b18340cd3438dfd52471b353d489"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-root-after.xml",
+      "sha256": "6edadd75b0ce2fc2c2a7fb95b115825d257d37fee6649e4bc863be05a162b438"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-root-before.xml",
+      "sha256": "00f059c207354f26d2a679ce2bf9e3b2162d4a1e4986dae04abc61cb5ebeb9ff"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-root-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-root-wait-0.xml",
+      "sha256": "00f059c207354f26d2a679ce2bf9e3b2162d4a1e4986dae04abc61cb5ebeb9ff"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-to-sd-after.xml",
+      "sha256": "924526ad5552f97d581faf1fe7e0def4cef6bef45f05e261cfafbf84d5c2e3a2"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-to-sd-before.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-to-sd-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/internal-to-sd-wait-0.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-foreground-final-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-foreground-final.xml",
+      "sha256": "54d10dffeed3dbd7c537ce8353c39477d293b18340cd3438dfd52471b353d489"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-foreground-internal-after.xml",
+      "sha256": "924526ad5552f97d581faf1fe7e0def4cef6bef45f05e261cfafbf84d5c2e3a2"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-foreground-internal-before.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-foreground-internal-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-foreground-internal-wait-0.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-foreground-terminal-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-foreground-terminal.xml",
+      "sha256": "924526ad5552f97d581faf1fe7e0def4cef6bef45f05e261cfafbf84d5c2e3a2"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-fresh-root-after.xml",
+      "sha256": "6edadd75b0ce2fc2c2a7fb95b115825d257d37fee6649e4bc863be05a162b438"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-fresh-root-before.xml",
+      "sha256": "1e507e3824902c856f13f69cc0e8eca7c115feeabc5ea734507041800c3510ac"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-fresh-root-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-fresh-root-wait-0.xml",
+      "sha256": "1e507e3824902c856f13f69cc0e8eca7c115feeabc5ea734507041800c3510ac"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-music-after.xml",
+      "sha256": "924526ad5552f97d581faf1fe7e0def4cef6bef45f05e261cfafbf84d5c2e3a2"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-music-before.xml",
+      "sha256": "37270911a283e57d27bd4dfd6cdec58f87512e5b9e32bb1b1f9bf25de35c1f66"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-music-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-music-result-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-music-result.xml",
+      "sha256": "1e507e3824902c856f13f69cc0e8eca7c115feeabc5ea734507041800c3510ac"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-music-scrolltop-before.xml",
+      "sha256": "1e507e3824902c856f13f69cc0e8eca7c115feeabc5ea734507041800c3510ac"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-music-wait-0.xml",
+      "sha256": "37270911a283e57d27bd4dfd6cdec58f87512e5b9e32bb1b1f9bf25de35c1f66"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-parent-after.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-parent-before.xml",
+      "sha256": "54d10dffeed3dbd7c537ce8353c39477d293b18340cd3438dfd52471b353d489"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-parent-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-parent-wait-0.xml",
+      "sha256": "54d10dffeed3dbd7c537ce8353c39477d293b18340cd3438dfd52471b353d489"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-root-storages-after.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-root-storages-before.xml",
+      "sha256": "6edadd75b0ce2fc2c2a7fb95b115825d257d37fee6649e4bc863be05a162b438"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-root-storages-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-root-storages-wait-0.xml",
+      "sha256": "6edadd75b0ce2fc2c2a7fb95b115825d257d37fee6649e4bc863be05a162b438"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-sd-after.xml",
+      "sha256": "924526ad5552f97d581faf1fe7e0def4cef6bef45f05e261cfafbf84d5c2e3a2"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-sd-before.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-sd-final-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-sd-final.json",
+      "sha256": "63fb5c440a1d50650e44945bb33a02c97bfbcca9924936b61aceafe841e96619"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-sd-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-sd-scroll-after.xml",
+      "sha256": "37270911a283e57d27bd4dfd6cdec58f87512e5b9e32bb1b1f9bf25de35c1f66"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-sd-scroll-before.xml",
+      "sha256": "1e7176727a6597cf29ea52bd363588031f41f3ed321ec1420ae9ae6cd2c4b85f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-sd-trace-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-sd-trace.json",
+      "sha256": "04b394470f222d67eeb146640d065e436ba1945063359b885fe4bbcfdb845c1e"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/nested-sd-wait-0.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/sd-mounted-result-host-diagnostic.json",
+      "sha256": "a3d04c500cf39543cbe83e649adc551556e855246822217fb23d5964392b468f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/sd-mounted-result.xml",
+      "sha256": "1e7176727a6597cf29ea52bd363588031f41f3ed321ec1420ae9ae6cd2c4b85f"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/sd-music-after.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/internal-navigation-20261101/volumes-after.txt",
+      "sha256": "7f7be54d6ac662c6c253fefac52be59dce97549438b29993566e0dd53c4803a4"
+    }
+  ]
+}
