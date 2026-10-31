@@ -1,6 +1,19 @@
 # Implementation status
 
-## Current checkpoint —31 October2026,16:18 HKT
+## Current checkpoint —31 October2026,16:49 HKT
+
+Full goal **ACTIVE/incomplete**. App source5f2de32, observer toolingb356f5f. [Status correction and checks](test-results/2026-10-31-dispatched-status.md), [current permission recovery](test-results/2026-10-31-4318-permission-recovery.md).
+
+- **Status corrected on both native bridges:** dispatched says Playback request sent; a matched GET_STATE RESULT with state changes only that status to Player state refreshed. Error/library notices and observed outcomes remain distinct. No retry, playback replay, wire or source-routing change.
+- **Installed:** original-signer Pixel4318e6ad38ac775f8a635532b628be1cd3a93ab54647d6e6893169aaf88bc440, re-pulled exact; unchanged Companion00e5e50b/source7fbdec8. Actual one phone envision selection has dispatched3311ms/state read353ms/new message/four visible rows unchanged/observed pause485ms. Envision owner hearing confirmation remains pending; older b8053 audible results retain their APK scope.
+- **Permission subset verified:** current connected SCAN grant loss gives Nearby guidance and clears foreground work. Original SCAN/CONNECT/notification grants and flag sets restored exactly. New native model saved-approval reconnect and actual HELLO187/Auth502/GET_STATE267ms applied results pass; normal Disconnect clears foreground. No play/volume command in this case, not full T12.
+- **Checks:**178 JVM/native/reference build/lint and shared Android analyze/release/lint PASS. Both5f Apple jobs SUCCESS/archive verified: native41184412035/19Swift/12guards, artifact13035817739/SHA3f256433f0b015d946255be3284b62f87977177a030a1efc2f62ef4476462436; shared41184412049/72Flutter/12guards/actual native export sheet/ordinary restoration, artifact13036224709/SHA152e319cbdc459464d75ce508a24a9977772092b5e6a66decfab63a995b49b2e. No CI polling remains; physical iPhone still not tested.
+- **Screen-off preparation:** observer can require Asleep/Dozing for every sample and records the requirement. Syntax passes; a live Awake-required-Asleep negative preflight correctly stops after1 sample/2.578s. A fresh30-minute owner availability question remains unanswered; no long hold started. This is not T05 acceptance.
+- **Final:** both direct source sessions paused2 at37/headset(4)/proof false, four saved host preferences byte-hash unchanged/grants/browsingON retained. Phone normally disconnected/foreground cleared/help collapsed, both USB devices available. No observer, emulator, local build or Apple job running.
+
+Next: start the separately agreed screen-off hold only after fresh readiness, then collect return read/resume/listening separately. Continue full current-build two-phone source/offline/format/playlist/SD/output/100-command/latency/call/range/battery/walk/ownership matrix, owner Mac/Xcode/signing/iPhone and later Watch gates. No goal pause/device-switch request.
+
+## Prior checkpoint —31 October2026,16:18 HKT
 
 Full goal **ACTIVE/incomplete**. Installed b805e4ce phone/source3f4e862 and00e5e50b Companion/source7fbdec8 are unchanged. [New actual current-phone source/audio evidence](test-results/2026-10-31-current-phone-source-audio.md), [manifest/JSON](test-results/2026-10-31-current-phone-source-audio.json).
 

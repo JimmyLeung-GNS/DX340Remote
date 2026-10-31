@@ -1,0 +1,236 @@
+{
+  "recordedAt": "2026-10-31T16:51:02+08:00",
+  "goalStatus": "ACTIVE/incomplete",
+  "appSource": "5f2de32ca58952faf401d0d558755972d4e160ba",
+  "observerSource": "b356f5f31ed84f0355182a149b0d3e17c6d865d7",
+  "phoneApkSha256": "4318e6ad38ac775f8a635532b628be1cd3a93ab54647d6e6893169aaf88bc440",
+  "hostApkSha256": "00e5e50b19d13f3e626ac0c882386a26174adff283dc9b2c8926413ef258e7cb",
+  "versions": {
+    "phone": "Pixel9a Android16/API36 CP1A.260405.005/shared0.2.0 code2",
+    "dx340": "Android13 eng.iBasso.20260812.181952/Companion0.1.0 code1",
+    "mango": "4.1.37/code240",
+    "apple": "6.5.3/code1599"
+  },
+  "change": {
+    "dispatched": "Playback request sent.",
+    "matchedStateResult": "Player state refreshed.",
+    "observed": "Playback state confirmed by source.",
+    "guards": [
+      "matched current-host RESULT",
+      "GET_STATE operation",
+      "state payload present",
+      "current status still dispatched; preserve error/library notices"
+    ],
+    "transportOrPlaybackRetryChange": false
+  },
+  "physical": {
+    "status": "VERIFIED/message and state subset",
+    "selection": "01. envision.flac / tayori",
+    "selectionCount": 1,
+    "requests": 11,
+    "playTerminalMs": 3311,
+    "playHostOutcome": "dispatched",
+    "followupStateTerminalMs": 353,
+    "followupHostOutcome": "none",
+    "pauseTerminalMs": 485,
+    "pauseHostOutcome": "observed",
+    "oldWaitingMessageAbsent": true,
+    "refreshedMessageVisible": true,
+    "fourVisibleRowsUnchanged": true,
+    "ownerAudibleConfirmation": "PENDING; not inferred",
+    "final": {
+      "at": "2026-10-31T16:38:01+08:00",
+      "states": {
+        "com.ibasso.music": 2,
+        "com.apple.android.music": 2
+      },
+      "volume": 37,
+      "output": "headset(4)",
+      "preferences": [
+        {
+          "file": "controllers.xml",
+          "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd",
+          "unchanged": true
+        },
+        {
+          "file": "mango-ui.xml",
+          "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+          "unchanged": true
+        },
+        {
+          "file": "apple-ui.xml",
+          "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+          "unchanged": true
+        },
+        {
+          "file": "source-verification.xml",
+          "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f",
+          "unchanged": true
+        }
+      ],
+      "phoneForegroundCleared": true,
+      "screenOffHold": "NOT STARTED; fresh readiness reply pending",
+      "audio": "envision audible confirmation pending; no new audio pass inferred"
+    }
+  },
+  "checks": {
+    "nativeJvm": {
+      "core-protocol": {
+        "tests": 53,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "controller-core": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "library-cache": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "source-adapters": {
+        "tests": 115,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "nativeBuildLint": "PASS",
+    "sharedAnalyzeReleaseLint": "PASS",
+    "nativeApple": {
+      "id": 41184412035,
+      "status": "SUCCESS",
+      "swiftTests": 19,
+      "captureGuards": 12,
+      "artifactId": 13035817739,
+      "archiveSha256": "3f256433f0b015d946255be3284b62f87977177a030a1efc2f62ef4476462436",
+      "archiveVerified": true
+    },
+    "sharedApple": {
+      "id": 41184412049,
+      "status": "SUCCESS",
+      "flutterTests": 72,
+      "captureGuards": 12,
+      "artifactId": 13036224709,
+      "archiveSha256": "152e319cbdc459464d75ce508a24a9977772092b5e6a66decfab63a995b49b2e",
+      "archiveVerified": true,
+      "nativeExportSheet": "presented; zero request history; simulator scope",
+      "ordinaryAppRestored": true
+    }
+  },
+  "sleepObserver": {
+    "status": "PREPARED/not a completed trial",
+    "guardSyntax": "PASS",
+    "negativeLivePreflight": {
+      "kind": "negative live read-only preflight; not a started/completed 30-minute sleep trial",
+      "observed": "Awake",
+      "required": "Asleep",
+      "rejected": true,
+      "elapsedSeconds": 2.578,
+      "rawEvidence": "artifacts/android-background-hold/20261031-163421-441dc"
+    },
+    "readiness": "fresh 30-minute owner reply pending; no hold started"
+  },
+  "limits": [
+    "one physical status regression is not full source/audio acceptance",
+    "older b805 three audible selections retain their exact build scope",
+    "no latency/acoustic/GATT ACK/T04 pass",
+    "owner iPhone/Mac signing and full T01-T18 still required",
+    "no long sleep/background test started"
+  ],
+  "evidence": [
+    {
+      "file": "artifacts/dispatch-status-20261031/native-final-build.txt",
+      "sha256": "fd34d175cde485d78ecc5975ea8ffd732741a81ce3c40f67f1da63486838ff4e"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/shared-build.txt",
+      "sha256": "18a168ca0d78ec2b1ad8b134bc799b7bf7d528795e31f6cbca1a3719ef8a0be5"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/native-test-counts.json",
+      "sha256": "bef2409425a77c35aaf5b802346bae6ff408f99d5cee3f7c9ad05219de1bd144"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/signing-preflight.json",
+      "sha256": "ec347cc94ecacf7b83d81e6271335b8240aee107556ead60c9716c105d355420"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/phone-install.txt",
+      "sha256": "c4aa470acafcf8576c15b0f0b5ae7e852d1ec5413372d0e6a9272e788e1306d3"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/phone-launch.txt",
+      "sha256": "4dac7f7d28c37573087149b9bcc90df61c9273f01dbda9ccc5c4df3f53d1afa4"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/phone-status-report.json",
+      "sha256": "f9f738c245f0d705180fbdf0f3ee3c7f31af7086492b1858c5abe158e12279b6"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/row-geometry.json",
+      "sha256": "160cd79a69f3f5bbc0ab77fbaf3dcac2d9f22506ca287439a375295e6f51a209"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/fresh-magic-songs.xml",
+      "sha256": "d6f01fd9dfc41e7a2fd335f82656b181a18a7e5ed7c02b3b9bfff9cfd96471a8"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/play-envision-once-after.xml",
+      "sha256": "559299167e9fbb7d699c52f2c632e1acc7e255d31ba91eba38af6dabc199266b"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/after-envision-state.xml",
+      "sha256": "6fd7bc0034b418ab7dceffcfbf2a3593f13844ef43168008c6337b5e1751d5e6"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/pause-after-status-check-after.xml",
+      "sha256": "17bdd8327e4dde3c926c8e4312bdcfa75817fa6e915b903b6fa85da145167e30"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/final-preservation.json",
+      "sha256": "5453df5648c4827156a04ca384edaae8ebd50aa4799e646af4a930bbe70b2572"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/final-media.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/final-audio.txt",
+      "sha256": "7cf54ed6aa54b213492fca27d2ab3bae94bb5e3fbb778425779f916ca5b3d1df"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/final-phone-service.txt",
+      "sha256": "3d0a65b0b79a86e1d43420eff624821707588b4770aa8cb41c9a66c73354823a"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/final-host-service.txt",
+      "sha256": "119c015806f3e182a03fce9e69e1278ed491f9121bd0f0f4a883667b635d7253"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/final-accessibility.txt",
+      "sha256": "17c02ffe710c299d8d009979f7381f27f9536ec708cd31ab061f4beec711f5af"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/sleep-guard-negative-preflight.json",
+      "sha256": "da04fe4b316678ea1134716bce0aa83e350caec75f5c55a93a139cbdcbe8a4b5"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/sleep-guard-negative-preflight.txt",
+      "sha256": "2bc660f3b3dd9e544acd69028621704e5b9027789af00efa8c78e016aebf0ae0"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/ci-41184412035.zip",
+      "sha256": "3f256433f0b015d946255be3284b62f87977177a030a1efc2f62ef4476462436"
+    },
+    {
+      "file": "artifacts/dispatch-status-20261031/ci-41184412049.zip",
+      "sha256": "152e319cbdc459464d75ce508a24a9977772092b5e6a66decfab63a995b49b2e"
+    }
+  ]
+}

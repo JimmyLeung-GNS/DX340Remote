@@ -1,0 +1,198 @@
+{
+  "recordedAt": "2026-10-31T16:49:25+08:00",
+  "goalStatus": "ACTIVE/incomplete",
+  "appSource": "5f2de32ca58952faf401d0d558755972d4e160ba",
+  "phoneApkSha256": "4318e6ad38ac775f8a635532b628be1cd3a93ab54647d6e6893169aaf88bc440",
+  "hostApkSha256": "00e5e50b19d13f3e626ac0c882386a26174adff283dc9b2c8926413ef258e7cb",
+  "devices": {
+    "phone": "Pixel9a Android16/API36 CP1A.260405.005/shared0.2.0 code2",
+    "dx340": "Android13 eng.iBasso.20260812.181952/Companion0.1.0 code1/Mango4.1.37 code240/Apple6.5.3 code1599"
+  },
+  "status": "VERIFIED/one required scan-permission loss and restored-grant read-only recovery",
+  "revokedOnly": "android.permission.BLUETOOTH_SCAN",
+  "before": {
+    "android.permission.POST_NOTIFICATIONS": {
+      "granted": true,
+      "flags": [
+        "USER_SENSITIVE_WHEN_DENIED",
+        "USER_SENSITIVE_WHEN_GRANTED",
+        "USER_SET"
+      ]
+    },
+    "android.permission.BLUETOOTH_CONNECT": {
+      "granted": true,
+      "flags": [
+        "USER_SENSITIVE_WHEN_DENIED",
+        "USER_SENSITIVE_WHEN_GRANTED",
+        "USER_SET"
+      ]
+    },
+    "android.permission.BLUETOOTH_SCAN": {
+      "granted": true,
+      "flags": [
+        "USER_SENSITIVE_WHEN_DENIED",
+        "USER_SENSITIVE_WHEN_GRANTED",
+        "USER_SET"
+      ]
+    }
+  },
+  "deniedForegroundCleared": true,
+  "deniedLabels": [
+    "Setup",
+    "Allow Bluetooth access",
+    "Nearby Devices access finds and connects to your player. Allow it when prompted.",
+    "Connect to DX340",
+    "Open app settings",
+    "Connection help",
+    "Player\nTab 1 of 4",
+    "Library\nTab 2 of 4",
+    "Queue\nTab 3 of 4",
+    "Setup\nTab 4 of 4"
+  ],
+  "after": {
+    "android.permission.POST_NOTIFICATIONS": {
+      "granted": true,
+      "flags": [
+        "USER_SENSITIVE_WHEN_DENIED",
+        "USER_SENSITIVE_WHEN_GRANTED",
+        "USER_SET"
+      ]
+    },
+    "android.permission.BLUETOOTH_CONNECT": {
+      "granted": true,
+      "flags": [
+        "USER_SENSITIVE_WHEN_DENIED",
+        "USER_SENSITIVE_WHEN_GRANTED",
+        "USER_SET"
+      ]
+    },
+    "android.permission.BLUETOOTH_SCAN": {
+      "granted": true,
+      "flags": [
+        "USER_SENSITIVE_WHEN_DENIED",
+        "USER_SENSITIVE_WHEN_GRANTED",
+        "USER_SET"
+      ]
+    }
+  },
+  "permissionsAndFlagsRestored": true,
+  "recovery": {
+    "newModelSession": true,
+    "savedApprovalReconnect": true,
+    "requests": [
+      {
+        "operation": "HELLO",
+        "finishedMs": 187,
+        "applied": true
+      },
+      {
+        "operation": "AUTHORIZE",
+        "finishedMs": 502,
+        "applied": true
+      },
+      {
+        "operation": "GET_STATE",
+        "finishedMs": 267,
+        "applied": true
+      }
+    ],
+    "playbackOrVolumeCommandSent": false
+  },
+  "final": {
+    "at": "2026-10-31T16:49:25+08:00",
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "foregroundCleared": true,
+    "preferences": [
+      {
+        "file": "controllers.xml",
+        "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd",
+        "unchanged": true
+      },
+      {
+        "file": "mango-ui.xml",
+        "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+        "unchanged": true
+      },
+      {
+        "file": "apple-ui.xml",
+        "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+        "unchanged": true
+      },
+      {
+        "file": "source-verification.xml",
+        "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f",
+        "unchanged": true
+      }
+    ],
+    "longHold": "NOT STARTED; fresh readiness reply pending"
+  },
+  "limits": [
+    "not full T12; separate CONNECT/notification/accessibility/radio/call/in-flight cases remain",
+    "new native model session after revocation/relaunch; not same-process continuity and not merged with old request history",
+    "no playback/volume/audio test in this permission case",
+    "no 30-minute screen-off trial started; fresh owner readiness pending"
+  ],
+  "evidence": [
+    {
+      "file": "artifacts/4318-permission-20261031/package-before.txt",
+      "sha256": "864003da966bcbe3cbb912e2519905cee90df1390278063e9033197ed183caf8"
+    },
+    {
+      "file": "artifacts/4318-permission-20261031/connected-before-revoke.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/4318-permission-20261031/service-before-revoke.txt",
+      "sha256": "36875cb3d9585b6f1990f57d420dca4331576050a79b95b374f910f61ad0ec2b"
+    },
+    {
+      "file": "artifacts/4318-permission-20261031/package-scan-denied.txt",
+      "sha256": "3c12e41f8a53e8562c10a15a27e8dada1237715532abad5d308be2ba4a86a072"
+    },
+    {
+      "file": "artifacts/4318-permission-20261031/denied-relaunch.txt",
+      "sha256": "3e4450281a002c23627fe3bf73d4c23c490ab6d710f986361ed81b6b6dc8a007"
+    },
+    {
+      "file": "artifacts/4318-permission-20261031/scan-denied-guidance.xml",
+      "sha256": "1d90cf1cbfe8e0361fc540e889e1f2542893df788eecdeb8697abf92d478db2c"
+    },
+    {
+      "file": "artifacts/4318-permission-20261031/service-denied.txt",
+      "sha256": "f2e27fdfa312fb25cb8997470cc3423aefd0198e302f1918b8ba4a126d7c8eb4"
+    },
+    {
+      "file": "artifacts/4318-permission-20261031/package-after-restore.txt",
+      "sha256": "314e688effcc896cbfc8de693499052282bb7525d4360db5d359751670478ba7"
+    },
+    {
+      "file": "artifacts/4318-permission-20261031/recovered-report.json",
+      "sha256": "078de321ba0cdc7b6adb819456d9f71f2875cd878ccd46f326f3394437c87266"
+    },
+    {
+      "file": "artifacts/4318-permission-20261031/permission-case.json",
+      "sha256": "c20165c1bf3df18eb3087f56b41abc43b9bb2f3a84e5e864481d7690a621628f"
+    },
+    {
+      "file": "artifacts/4318-permission-20261031/media-before.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/4318-permission-20261031/media-final.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/4318-permission-20261031/audio-final.txt",
+      "sha256": "25f3ea97da9aa7f72dc392600d45c49546e3a3c7c39e1a583825deedf22c90ee"
+    },
+    {
+      "file": "artifacts/4318-permission-20261031/phone-service-final.txt",
+      "sha256": "a84f61f6f9b6a4454ade4de30ef3a4cdf783bed6e4154e458355cf7dcf40e52c"
+    }
+  ]
+}

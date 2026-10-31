@@ -1,6 +1,10 @@
 # Full-scope completion audit
 
-## Current full-scope audit —31 October2026,16:18 HKT
+## Current full-scope audit —31 October2026,16:49 HKT
+
+**NOT ACHIEVED; goal ACTIVE/incomplete.** [Current status fix](test-results/2026-10-31-dispatched-status.md) and [4318 permission recovery](test-results/2026-10-31-4318-permission-recovery.md) add verified current Android presentation, grant-loss cleanup/restore/reconnect and two closed Apple build archives. They do not complete P4/P5/P8 or full T12. One4318 source-state selection has no owner hearing confirmation yet; previous b8053 audible selections retain their exact binary scope. Fresh30-minute availability is pending and no sleep hold started. Full T01–T18/current source/albums/playlists/formats/commands/latency/sleep/range/SD/output/battery/walk/ownership and signed owner-iPhone/Mac evidence remain required; Watch stays gated on stable phones. No user pause/device switch.
+
+## Prior full-scope audit —31 October2026,16:18 HKT
 
 **NOT ACHIEVED; goal ACTIVE/incomplete.** [Current-phone evidence](test-results/2026-10-31-current-phone-source-audio.md) now proves one b805 Apple downloaded selection outside the full previous101-item queue and two b805 Mango WAV/FLAC selections across folders, all explicitly owner-audible.28 new decoded applied requests/normal pause-disconnect/preservation verified. This advances P1/P2/P4/P6/P7/P8; it does not complete any full gate. Current Android T07=1/20/T08=2/20; strict SIM-installed offline, albums/playlists/commands/latency/sleep/range/SD/output/battery/walk/ownership and signed owner-iPhone evidence remain open. Native status wording still needs honest dispatch-versus-observation reconciliation; Watch stays gated on stable phones. No new product build or job, no pause/device-switch request. Earlier audits retain their exact scopes.
 
