@@ -10,6 +10,7 @@ import android.os.Looper
 import android.os.ParcelUuid
 import org.dx340.remote.protocol.Reassembler
 import org.dx340.remote.protocol.AcknowledgedWriteQueue
+import org.dx340.remote.protocol.LinkRetirement
 import org.dx340.remote.protocol.Wire
 import java.util.UUID
 
@@ -20,6 +21,10 @@ class BleCentral(private val context: Context, private val status: (String) -> U
                  private val ready: () -> Unit, private val message: (ByteArray) -> Unit,
                  private val phase: (CentralPhase) -> Unit = {}, private val lost: () -> Unit) {
     private val main = Handler(Looper.getMainLooper())
+    private val retirement = LinkRetirement<BluetoothGatt> { delay, action ->
+        val task = Runnable { action() }; main.postDelayed(task, delay)
+        val cancel: () -> Unit = { main.removeCallbacks(task) }; cancel
+    }
     private val adapter get() = context.getSystemService(BluetoothManager::class.java).adapter
     private var gatt: BluetoothGatt? = null
     private var rx: BluetoothGattCharacteristic? = null
@@ -44,10 +49,14 @@ class BleCentral(private val context: Context, private val status: (String) -> U
             fail("Player service changed. Reconnecting without replay.")
         } }
         override fun onConnectionStateChange(g: BluetoothGatt, code: Int, newState: Int) { main.post {
+            if (retirement.contains(g)) {
+                if (newState == BluetoothProfile.STATE_DISCONNECTED) retirement.disconnected(g)
+                return@post
+            }
             if (g != gatt) { g.close(); return@post }
             if (code == 0 && newState == BluetoothProfile.STATE_CONNECTED) {
                 phase(CentralPhase.CHECKING); status("Discovering service…"); if (!g.discoverServices()) fail("Service discovery could not start")
-            } else { fail("Disconnected ($code). Commands cleared; reconnect to refresh.") }
+            } else { fail("Disconnected ($code). Commands cleared; reconnect to refresh.", newState == BluetoothProfile.STATE_DISCONNECTED) }
         } }
         override fun onServicesDiscovered(g: BluetoothGatt, code: Int) { main.post {
             if (g != gatt) return@post
@@ -114,6 +123,9 @@ class BleCentral(private val context: Context, private val status: (String) -> U
         stopScan(); disconnect(); desired = device; retries = 0; connectAttempt(device)
     }
     private fun connectAttempt(device: BluetoothDevice) {
+        retirement.whenIdle { if (desired == device && gatt == null) openLink(device) }
+    }
+    private fun openLink(device: BluetoothDevice) {
         phase(CentralPhase.CONNECTING); status("Connecting…")
         gatt = device.connectGatt(context, false, cb, BluetoothDevice.TRANSPORT_LE)
         val current = gatt
@@ -133,8 +145,8 @@ class BleCentral(private val context: Context, private val status: (String) -> U
         else { c.writeType = BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT; c.value = frame; if (g.writeCharacteristic(c)) 0 else -1 }
         if (result != 0) fail("Could not queue command; reconnect") else writes.submitted()?.invoke()
     }
-    private fun fail(reason: String) {
-        clearLink(); status(reason)
+    private fun fail(reason: String, alreadyDisconnected: Boolean = false) {
+        clearLink(alreadyDisconnected); status(reason)
         val device = desired
         if (device != null && retries < 5 && adapter?.isEnabled == true) {
             phase(CentralPhase.RETRYING)
@@ -143,13 +155,21 @@ class BleCentral(private val context: Context, private val status: (String) -> U
             reconnect = Runnable { if (desired == device && gatt == null) connectAttempt(device) }.also { main.postDelayed(it, delay) }
         } else phase(CentralPhase.FAILED)
     }
-    fun pauseReconnection() { desired = null; retries = 0; reconnect?.let { main.removeCallbacks(it) }; reconnect = null }
+    fun pauseReconnection() { desired = null; retries = 0; reconnect?.let { main.removeCallbacks(it) }; reconnect = null; retirement.cancelWaiting() }
     fun resumeReconnection() { if (established) { desired = gatt?.device; retries = 0 } }
     fun disconnect() {
-        desired = null; retries = 0; reconnect?.let { main.removeCallbacks(it) }; reconnect = null; clearLink(); phase(CentralPhase.IDLE)
+        desired = null; retries = 0; reconnect?.let { main.removeCallbacks(it) }; reconnect = null; retirement.cancelWaiting(); clearLink(); phase(CentralPhase.IDLE)
     }
-    private fun clearLink() {
+    private fun clearLink(alreadyDisconnected: Boolean = false) {
         val old = gatt; gatt = null; rx = null; tx = null; established = false; capacity = 20; writeGeneration++
-        writes.clear(); assembler.clear(); runCatching { old?.disconnect() }; runCatching { old?.close() }; lost()
+        writes.clear(); assembler.clear()
+        if (old != null) {
+            if (alreadyDisconnected) runCatching { old.close() }
+            else retirement.retire(old, { old.disconnect() }, { reason ->
+                runCatching { old.close() }
+                android.util.Log.i("DX340RemoteClient", "GATT_RETIRED:$reason")
+            })
+        }
+        lost()
     }
 }
