@@ -257,6 +257,7 @@ class MangoAccessibilityService : AccessibilityService() {
         val deadline = android.os.SystemClock.elapsedRealtime() + 8000
         fun guard() { require(stillAuthorized()) { "AUTHORIZATION_DENIED" }; readiness()?.let { error(it) }; check(android.os.SystemClock.elapsedRealtime() <= deadline) { "UI_ACTION_TIMEOUT" } }
         var storageClicked = false; var menuClicked = false; var libraryClicked = false; var resetFingerprint = ""
+        var reloadReturnStorage: String? = null
         val foregroundStartup = org.dx340.remote.sources.UiForegroundStartup()
         var settled = ""; var since = 0L
         var navigationStability = UiSnapshotStability()
@@ -291,6 +292,15 @@ class MangoAccessibilityService : AccessibilityService() {
                 // fingerprint. Intermediate menus still settle for 300ms before any action.
                 val finalFolder = parsed?.storage == storage && parsed.root == null || storage == MangoPlaylistUiModel.CONTEXT && playlist?.root == null && playlist != null
                 if (stableMs < if (finalFolder) 450 else 300) { main.postDelayed({ openStorage(storage) }, 180); return }
+                // Mango retains an obsolete SD directory list even when its SD menu
+                // entry is selected again. A deliberate root browse leaves that storage
+                // once before returning; it never retries the old folder/file action.
+                if (storage == "sd" && parsed?.storage == "sd" && parsed.root == null &&
+                    !storageClicked && !menuClicked && reloadReturnStorage == null) {
+                    reloadReturnStorage = storage
+                    trace("sd-reload-via-internal")
+                    openStorage("internal"); return
+                }
                 if (menu) {
                     if (!storageClicked) {
                         val node = if (storage == MangoPlaylistUiModel.CONTEXT) MangoPlaylistUiModel.menuAction(current.nodes) else MangoUiModel.storageAction(current.nodes, storage)
@@ -321,6 +331,14 @@ class MangoAccessibilityService : AccessibilityService() {
                             }
                         }
                         else if (parsed.storage == storage) {
+                            val returnStorage = reloadReturnStorage
+                            if (returnStorage != null) {
+                                reloadReturnStorage = null
+                                storageClicked = false; menuClicked = false; libraryClicked = false
+                                resetFingerprint = ""; navigationStability = UiSnapshotStability()
+                                trace("sd-reload-return")
+                                main.postDelayed({ openStorage(returnStorage) }, 180); return
+                            }
                             guard(); finish(result(current, storage, 0), null); return
                         } else if (!menuClicked) {
                             val node = MangoUiModel.node(current.nodes, "nav_bar_back_iv") ?: error("UI_UNEXPECTED_SCREEN")
