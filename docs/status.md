@@ -1,6 +1,18 @@
 # Implementation status
 
-## Current checkpoint —31 October2026,09:17 HKT
+## Current checkpoint —31 October2026,09:37 HKT
+
+Full goal **ACTIVE/incomplete**. Code-bearing source is `fb26152fa4ab79122bfc0f51981526c0f173b313`; one Android timeout message changed. Preserve newer work; the original4df objective snapshot is historical.
+
+- **Installed and byte-verified before USB loss:** original-signer Pixel0.2.0/code2 APK `0cf86c9cfead4b27b3b2c1dcf2135b98fbe78fb992bc755491a1549d79b2fdc0`, in-place and re-pulled; Companion0.1.0/code1 remains `491dbbffabda8f7a20d64a2f591caa486427e036ba9e3821d831ccf6eff5934a`. Pixel9a Android16 CP1A.260405.005 / DX340 Android13 eng.iBasso.20260812.181952. Last recorded source versions Mango4.1.37/240 and Apple6.5.3/1599; final refresh was unavailable after USB loss.
+- **Timeout guidance VERIFIED:** approved phones are told to check Companion phone control, then Connect again. Actual stopped-host retry reaches the corrected terminal message at observed128.656seconds including polling, foreground/started state clears and PID stays unchanged. Normal and200% text/actions fit without clipping/scrolling in one batched Pixel light/portrait inspection; font restored1.0. This is not a whole-UI/iPhone/theme/screen-reader verdict. [Report and JSON](test-results/2026-10-31-timeout-guidance.md).
+- **Prescribed recovery VERIFIED:** host Enable phone control plus phone Connect restores protected saved authorization without pairing/enrollment/approval. State-request UI remains authorized without timeout beyond its reply budget; normal Disconnect removes foreground/started state. No decoded terminal packet/ACK/p95 timing. Timers, retries, transport, approval, protocol, Dart/Swift/source/assets unchanged by the wording fix.
+- **Build/scope:** shared Android analyze/release/lint and native-reference assemble/lint pass; both compiled APKs contain corrected text. Native reference built, not installed over shared app. No test mirrors a string change; unchanged prior168 JVM/67 Flutter/17 Swift/source532 Apple archives retain scope. No new Apple workflow needed. Prior6b56-sample background/permission/radio/process results are not relabeled as0cf physical results.
+- **Last verified state09:33:** phone normally disconnected; host enabled. All4 host preferences, Pixel/JIMMYAH approvals, exposed bonds, grants/flags, radio/font/theme settings, browsingON/both bindings and source sessions paused37/headset(4)/proof disabled preserved. Original font restored; host Advanced hide/top-restoration inputs issued after a fresh view. No playback/volume or audio result. **Fresh ADB inventory09:36 is empty for both devices.** No active test, observer, emulator or build; inspect fresh device state before further physical work. USB removal alone does not establish a Bluetooth result.
+
+Owner Apple-listening availability is still unanswered; do not start audio from silence. Independent work remains on bounded native phone operation receipts/timing (plan §16/T04) and phone browse preparation when devices return. Full calls/in-flight/range/sleep/battery/walking, physical iPhone/Mac signing, source/format/SD/output/latency/two-controller/Watch remain open. Preserve grants/engines; no new PC revoke test. Follow automatic switch handoff only when explicitly requested.
+
+## Prior checkpoint —31 October2026,09:17 HKT
 
 Full goal **ACTIVE/incomplete**. Product code remains53229582; latest checkpoint documentation is on the current branch. Preserve newer work and keep the original4df objective snapshot historical.
 
