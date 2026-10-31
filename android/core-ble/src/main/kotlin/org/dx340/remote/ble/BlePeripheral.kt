@@ -13,6 +13,7 @@ import org.dx340.remote.protocol.Reassembler
 import org.dx340.remote.protocol.Wire
 import org.dx340.remote.protocol.PeerAdmission
 import org.dx340.remote.protocol.PeerIndicationQueue
+import org.dx340.remote.protocol.PeerWriteCapacity
 import java.util.UUID
 
 @SuppressLint("MissingPermission")
@@ -114,7 +115,17 @@ class BlePeripheral(
             var code = BluetoothGatt.GATT_SUCCESS
             var complete: ByteArray? = null
             if (link == null || !link.subscribed || device.bondState != BluetoothDevice.BOND_BONDED || characteristic.uuid.toString() != Wire.RX || preparedWrite || offset != 0 || !responseNeeded) code = BluetoothGatt.GATT_FAILURE
-            else try { complete = link.assembler.accept(value) } catch (_: IllegalArgumentException) { code = BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH }
+            else try {
+                complete = link.assembler.accept(value)
+                // A recreated server can attach to an already negotiated ACL
+                // without receiving onMtuChanged. A received ordinary write is
+                // a lower bound for the shared ATT payload, never an MTU guess.
+                val observed = PeerWriteCapacity.observe(link.capacity, value.size)
+                if (observed != link.capacity) {
+                    link.capacity = observed
+                    status("PAYLOAD_CAPACITY:$observed from received write")
+                }
+            } catch (_: IllegalArgumentException) { code = BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH }
             if (responseNeeded) server?.sendResponse(device, requestId, code, offset, null)
             if (code == BluetoothGatt.GATT_SUCCESS) complete?.let { message(device, it) }
         } }
