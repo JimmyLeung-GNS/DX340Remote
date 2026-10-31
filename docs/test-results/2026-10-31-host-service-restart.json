@@ -1,0 +1,136 @@
+{
+  "date": "2026-10-31",
+  "fullGoal": "ACTIVE/incomplete",
+  "sourceCommit": "53229582b5d4ad04a1c9ad739b38575c2f4aa9ed",
+  "phoneApk": "6b7e379da44edc9fdaad1d80f19599ca346f848d3f3126639ea541f906f059a4",
+  "companionApk": "491dbbffabda8f7a20d64a2f591caa486427e036ba9e3821d831ccf6eff5934a",
+  "devices": {
+    "phone": "Pixel9a Android16/API36 CP1A.260405.005 app0.2.0/code2",
+    "host": "DX340 Android13/API33 eng.iBasso.20260812.181952 Companion0.1.0/code1",
+    "mango": "4.1.37/code240",
+    "appleMusic": "6.5.3/code1599"
+  },
+  "failedPredecessor": {
+    "phoneApk": "04d4397e6cf4f6129691e6120725fb57fd88c964b51a118ac4502b24a93ae98d",
+    "result": "FAILED: service database invalidation retained stale Connected/Ready; manual Disconnect/Connect recovered"
+  },
+  "firstCorrectedAttempt": {
+    "result": "NOT a completed automatic-reconnect pass",
+    "detail": "Host remained stopped beyond bounded retry window during operator evidence handling; correct retry/terminal state observed; manual Connect after restore"
+  },
+  "briefRestart": {
+    "status": "VERIFIED",
+    "phoneConnectActionDuringRecovery": false,
+    "serviceChangeObserved": "08:25:35.695 phone log",
+    "oldGattClosed": true,
+    "recoveryDiscovery": "08:25:55.416 phone log",
+    "hello": "08:25:56.036 phone log",
+    "authorize": "08:25:56.227 phone log",
+    "hostControllerApproved": "08:25:57.884 host log",
+    "clockLimit": "Device timestamps are separate clocks, not synchronized transport latency measurements",
+    "preservedPhoneProcess": true,
+    "getStateAfterRecovery": true,
+    "normalDisconnectForegroundCleanup": true,
+    "playbackVolumeCommands": 0,
+    "noReplayEvidence": "Read-only physical interruption plus shared session trace; no in-flight physical mutation was attempted"
+  },
+  "preservation": {
+    "preferences": {
+      "controllers": true,
+      "mango-ui": true,
+      "apple-ui": true,
+      "source-verification": true
+    },
+    "settings": {
+      "host": true,
+      "phone": true
+    },
+    "hostWholeBondRowsEqual": true,
+    "phoneWholeBondRowsEqual": false,
+    "hostPausedStates": [
+      2,
+      2
+    ],
+    "phonePidUnchanged": true,
+    "hostBondIdentityTypeEqual": true,
+    "phoneBondIdentityTypeEqual": true,
+    "phoneBondRowDifference": "Before connected ACL LE:Y/encryption detail; after deliberate Disconnect ACL LE:N/encryption null. Identities/types match; no lost-bond claim."
+  },
+  "builds": {
+    "nativeJvm": {
+      "coreProtocol": 50,
+      "libraryCache": 7,
+      "sourceAdapters": 111,
+      "total": 168,
+      "failures": 0
+    },
+    "nativeReferenceBuildLint": "PASS",
+    "sharedAndroidAnalyzeReleaseLint": "PASS",
+    "nativeApple": {
+      "run": 41149354175,
+      "status": "SUCCESS",
+      "swiftTests": 17,
+      "captureGuards": 12,
+      "buildInstallLaunch": "PASS",
+      "artifact": 13022038804,
+      "archiveSha256": "02bdac3dbae0e25e23dcf2f9fff65b9436395ab1647a9f203e9ab56ab72a12de"
+    },
+    "sharedApple": {
+      "run": 41149354150,
+      "status": "SUCCESS",
+      "flutterTests": 67,
+      "analyze": "PASS",
+      "captureGuards": 12,
+      "ordinaryAndFixturesBuild": "PASS",
+      "ordinaryRestoration": "PASS; actual restored simulator frame shows Bluetooth unavailable/no connected fixture",
+      "artifact": 13022627865,
+      "archiveSha256": "829cb363a59dbff005a32771a563c76a8f8031241eb0d2171167f58ce6b2c714"
+    }
+  },
+  "background": {
+    "status": "VERIFIED scoped controlled observation",
+    "report": "2026-10-31-controlled-background.md/.json",
+    "elapsedSeconds": 1802.562,
+    "samples": 56,
+    "postReturnReadRoute": "VERIFIED; no observed timeout beyond full budget, decoded packet not captured",
+    "normalDisconnectForegroundCleared": true,
+    "limits": "USB-powered/Awake/paused; not full T05/radio/audio proof"
+  },
+  "remaining": [
+    "current-build permission loss",
+    "physical iPhone service invalidation/reply epoch recovery",
+    "in-flight physical interruption/mutation no-replay",
+    "range recovery",
+    "full T12",
+    "source/audio/formats/SD",
+    "signing/Watch"
+  ],
+  "rawEvidenceHashes": {
+    "fixed-first-attempt-review.json": "03a9af5db4b1635462946aad75e6cc489165db1b2cac77854d210b9a556f2f1f",
+    "fixed-host-stopped-services.txt": "17fc4e56c5f4569872662a6d195db09d0c36df4dbb96ea3e38cafd690f98901d",
+    "fixed-phone-before-pid.txt": "3f0b9fca42cafa567d724c1d533d6dc8789f2c2a0e6d5f0bfb3a28800fbcca11",
+    "fixed-phone-before-stop-service.txt": "e437e7c35278e7c49a4c91cd5732d7019f12e81ba417d18fc6688c0ab72e599c",
+    "fixed-phone-retrying-service.txt": "07544e4c6041fed9861d2edc8a6d5da5dc1acc3a6f10369be19973f64c04f17e",
+    "fixed-phone-stop-events.txt": "d094722a96bb9aaff9bd9c2ebdf8230970ea0c62fe228f7f4fc48cdbb58fb4da",
+    "fixed-start.json": "3ba2df409c8a2f449ad3bd6837e23b1e0b0dd0f40ed614ae944c3e626524ac60",
+    "host-stopped-events.txt": "5203c8dbd38a4d7bdd0dc4f1bd90f4cd729c3ac385d5c5b213638af02f24c333",
+    "host-stopped-services.txt": "45f206d6eb7f5f5b6d8f41217e03cf9713abaf02407c6efe9be50057ffac69ae",
+    "phone-after-host-enable-events.txt": "c0587b4b842cfb9152bf112edfd6654ae7d7e75efd3bfc2ca915571b19f1460c",
+    "phone-before-pid.txt": "aa4fa8088a4551aa5ba5a1ddbebefe0928edde6ef5dc808eb5247b8912717818",
+    "phone-before-stop-service.txt": "1e2091e311923bbfe636b976b48aa0a859b38667fe016ab4b8f3276a3690881d",
+    "phone-during-stop-service.txt": "affce9b3717d0217528396a102e4bd3e511fd5e15ed29627e140121ad5de7d46",
+    "phone-stopped-events.txt": "6fea93650fee476170c283aacf832e6b4e3364929833d121cd981d7621c63b75",
+    "repeat-after-pid.txt": "3f0b9fca42cafa567d724c1d533d6dc8789f2c2a0e6d5f0bfb3a28800fbcca11",
+    "repeat-before-pid.txt": "3f0b9fca42cafa567d724c1d533d6dc8789f2c2a0e6d5f0bfb3a28800fbcca11",
+    "repeat-enable-time.json": "0b8eb5b2a7253c1e1930f0e4239062f6ec068b93cf869d46d99095569157ec49",
+    "repeat-final-host-events.txt": "df88e77d9168f818403e6388cf2babf70d01911f9415af14d4fc3fdca70befbd",
+    "repeat-final-phone-events.txt": "0fe124707d682f16532847e2f838ae297002c0490e2c143e89fbef7a93337bc5",
+    "repeat-host-events.txt": "a647b275a7eb5a055827a3a9912b033d4a9bba6ef96d879744f8a2e9cf6398e6",
+    "repeat-host-services.txt": "16d7522205003f29d48a9d45a02165634d99f3364e643a0fb206e04eebf5eaa3",
+    "repeat-host-stopped.txt": "bb7614be6ce928e3d42246ced6e58aa41379a483be43537801de54f138c7a250",
+    "repeat-phone-events.txt": "3b1531a74777083b730481e56fe22dbd0e0b265886ab8dc5bb7b5dd824895c85",
+    "repeat-phone-services.txt": "d484786a196661148204a23f4f659892a74e129128910684ce978e5bdd896e1d",
+    "repeat-start.json": "46a87ed0777d27b306379d57f5799f928d10906884de9c60c515da35524c9a92",
+    "start.json": "ac0f703617dd225f9077e3bceaa4bf71ac9098bc2f59f76ad2e99e2959842d18"
+  }
+}
