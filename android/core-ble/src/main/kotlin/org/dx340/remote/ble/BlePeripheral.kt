@@ -14,6 +14,7 @@ import org.dx340.remote.protocol.Wire
 import org.dx340.remote.protocol.PeerAdmission
 import org.dx340.remote.protocol.PeerIndicationQueue
 import org.dx340.remote.protocol.PeerWriteCapacity
+import org.dx340.remote.protocol.InputWriteReply
 import java.util.UUID
 
 @SuppressLint("MissingPermission")
@@ -144,8 +145,15 @@ class BlePeripheral(
                     return@post
                 }
             }
-            if (responseNeeded) server?.sendResponse(device, requestId, code, offset, null)
-            if (code == BluetoothGatt.GATT_SUCCESS) complete?.let { message(device, it) }
+            val responseServer = server ?: return@post
+            InputWriteReply.deliver(responseNeeded, code == BluetoothGatt.GATT_SUCCESS, complete,
+                respond = { responseServer.sendResponse(device, requestId, code, offset, null) },
+                failed = {
+                    if (server === responseServer) {
+                        stop()
+                        status("BLE_INPUT_RESPONSE_FAILED: response submission failed; input discarded, playback unchanged")
+                    }
+                }, dispatch = { message(device, it) })
         } }
         override fun onNotificationSent(device: BluetoothDevice, code: Int) { main.post {
             val submitted = outgoing.inFlightPeer?.takeIf { it.device == device } ?: return@post

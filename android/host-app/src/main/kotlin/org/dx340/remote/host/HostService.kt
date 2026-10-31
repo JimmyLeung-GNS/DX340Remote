@@ -88,7 +88,8 @@ class HostService : Service() {
         return BlePeripheral(this, { text ->
             if (generation == peripheralGeneration && instance === this) {
                 record(text)
-                if (text.startsWith("BLE_REPLY_TIMEOUT")) recoverClosedTransport(generation)
+                if (text.startsWith("BLE_REPLY_TIMEOUT") || text.startsWith("BLE_INPUT_RESPONSE_FAILED"))
+                    recoverClosedTransport(generation)
             }
         }, { approved.contains(it.address) }, { device ->
             transportFaults.clear()
