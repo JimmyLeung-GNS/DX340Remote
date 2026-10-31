@@ -7,6 +7,7 @@ import CryptoKit
 // CoreBluetooth delivers these delegates on the explicitly configured .main queue.
 // Check that legacy protocol assumption at runtime rather than ignoring actor isolation.
 final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate, @preconcurrency CBPeripheralDelegate {
+    private static let dispatchedStatus = "Playback request sent."
     var status = "Find your DX340 to connect directly over Bluetooth."
     var devices: [CBPeripheral] = []
     var authorized = false
@@ -402,6 +403,10 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         if ["AUTHORIZE", "REQUEST_CONTROL"].contains(operation ?? ""), data["authorized"] as? Bool == true { controlProposal.clear(); authorized = true; cancelSetupDeadline(); cancelApprovalCheck(); rememberApprovedPlayer(); connectionPhase = "connected"; wantsConnection = true; status = "Connected to player" }
         if let new = data["state"] as? [String: Any] { applyState(new, notifyLibraryChange: !["AUTHORIZE", "REQUEST_CONTROL"].contains(operation ?? "")) }
         if type == "STATE_CHANGED" { applyState(data) }
+        if type == "RESULT", operation == "GET_STATE", data["state"] is [String: Any], status == Self.dispatchedStatus {
+            // This confirms a state refresh, not that the earlier command took effect.
+            status = "Player state refreshed."
+        }
         if let list = data["sources"] as? [[String: Any]] { sources = list }
         if operation == "BROWSE" {
             browseLocations[id] = nil
@@ -435,7 +440,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
                 Task { try? await Task.sleep(for: .milliseconds(300)); if authorized && pending.isEmpty && state["artworkKey"] as? String == key { send("GET_ARTWORK", args: ["key": key]) } }
             }
         } else if state["artworkKey"] is NSNull { artwork = nil }
-        if data["outcome"] as? String == "dispatched" { status = "Sent to player; waiting for observed playback."; send("GET_STATE") }
+        if data["outcome"] as? String == "dispatched" { status = Self.dispatchedStatus; send("GET_STATE") }
         if data["outcome"] as? String == "observed" { status = "Playback state confirmed by source." }
         if let snapshot = try? JSONSerialization.data(withJSONObject: ["state": state, "sources": sources, "library": library]), snapshot.count <= 262144 { try? snapshot.write(to: snapshotURL(), options: .atomic) }
         journal.markTerminalApplied(id: id)

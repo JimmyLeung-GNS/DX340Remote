@@ -27,6 +27,8 @@ import org.dx340.remote.protocol.AssistedPageUse
 import org.dx340.remote.protocol.HostReplyGate
 import org.dx340.remote.protocol.HostReplyDecision
 
+private const val DISPATCHED_STATUS = "Playback request sent."
+
 @SuppressLint("MissingPermission")
 class RemoteModel(private val context: Context) {
     var observer: (() -> Unit)? = null
@@ -283,6 +285,10 @@ class RemoteModel(private val context: Context) {
             if (reply.optString("hostEpoch") != epoch) { disconnect(); return }
             data.optJSONObject("state")?.let { applyState(it, operation !in listOf("AUTHORIZE", "REQUEST_CONTROL")) }
             if (type == "STATE_CHANGED") applyState(data)
+            if (type == "RESULT" && operation == "GET_STATE" && data.optJSONObject("state") != null && status == DISPATCHED_STATUS) {
+                // This confirms a state refresh, not that the earlier command took effect.
+                status = "Player state refreshed."
+            }
             data.optJSONArray("sources")?.let { sources = it }
             if (operation == "BROWSE") {
                 browseLocations.remove(id)
@@ -316,7 +322,7 @@ class RemoteModel(private val context: Context) {
                 if (cached.isFile) artworkBytes = cached.readBytes()
                 else { artworkBytes = null; main.postDelayed({ if (authorized && pending.isEmpty() && artKey == state.optString("artworkKey")) send("GET_ARTWORK", JSONObject().put("key", artKey)) }, 300) }
             } else if (artKey == null) artworkBytes = null
-            if (data.optString("outcome") == "dispatched") { status = "Sent to player; waiting for observed playback."; send("GET_STATE") }
+            if (data.optString("outcome") == "dispatched") { status = DISPATCHED_STATUS; send("GET_STATE") }
             if (data.optString("outcome") == "observed") status = "Playback state confirmed by source."
             val snapshot = JSONObject().put("state", state).put("sources", sources).put("library", library).toString()
             if (snapshot.toByteArray().size <= 262144) runCatching { snapshotFile.writeText(snapshot) }
