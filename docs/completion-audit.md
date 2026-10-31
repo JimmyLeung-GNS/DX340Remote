@@ -1,6 +1,10 @@
 # Full-scope completion audit
 
-## Current full-scope audit —31 October2026,20:41 HKT
+## Current full-scope audit —31 October2026,21:09 HKT
+
+**NOT ACHIEVED; goal ACTIVE/incomplete.** [Storage menu correction and current audio](test-results/2026-10-31-mango-storage-menu.md):193 JVM/native assembly/lint pass, mounted navigation succeeds and two current Mango selections are owner-audible. Original no-card timeout is not retested; Apple outside-queue Downloaded-album selection fails offline/error3 despite a dispatched result. Prior storage-event crash remains open. Model111→146/zero evictions/prior rows preserved; final Mango2/Apple0/volume37, approvals/settings preserved, normal Disconnect. Full T01–T18/two-phone/source/format/output/reliability/owner-iPhone signing/Watch remain required. Fresh30min readiness pending/no hold; no pause/device switch.
+
+## Prior full-scope audit —31 October2026,20:41 HKT
 
 **NOT ACHIEVED; goal ACTIVE/incomplete.** [Unavailable SD gating](test-results/2026-10-31-sd-availability.md) is verified for disabled actions/warm Internal/remount with188 JVM checks, but cached-SD/foreground Internal still times out. [Apple storage-event crash](test-results/2026-10-31-apple-storage-crash.md) fails source preservation; read-only recovery restores Downloaded browsing and sessionNONE0, not playback/audio. [Older f009 All Music context](test-results/2026-10-31-mango-all-music-sd-context.md) retains exact separate scope. All111 requests/earlier records/failed cases preserved, no playback/volume. Full T01–T18/current two-phone/source/audio/format/output/latency/sleep/range/call/battery/walk/ownership/owner-iPhone signing/Watch remain required. Fresh listening/30min readiness pending; no pause/device switch.
 

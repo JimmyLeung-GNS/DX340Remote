@@ -1,0 +1,1296 @@
+{
+  "recordedAt": "2026-10-31T21:08:37.731413+08:00",
+  "goalStatus": "ACTIVE/incomplete",
+  "hostSource": "8f970acba210ce84fffce7f51160fd2e448f2d85",
+  "phoneSource": "80d4edc6f2967596be7474a57eb40118558d562f",
+  "hostApkSha256": "66b21e1c86b1ba8d36453091825c6ff09b67a5c8b44136146fe3856496caf456",
+  "phoneApkSha256": "d75540a514bbc484cc1f84462c50b1f9f62b7bd4b15ce4c8ae019c58655acc02",
+  "versions": {
+    "org.dx340.remote.host": {
+      "versionName": "0.1.0",
+      "versionCode": 1
+    },
+    "com.ibasso.music": {
+      "versionName": "4.1.37",
+      "versionCode": 240
+    },
+    "com.apple.android.music": {
+      "versionName": "6.5.3",
+      "versionCode": 1599
+    },
+    "org.dx340.remote.controller": {
+      "versionName": "0.2.0",
+      "versionCode": 2
+    }
+  },
+  "devices": {
+    "host": "DX340 Android13/API33 eng.iBasso.20260812.181952",
+    "phone": "Pixel9a Android16/API36 CP1A.260405.005",
+    "development": "DESKTOP-T9ICUE4 Windows11 Pro10.0.26300, Java21.0.7"
+  },
+  "tests": {
+    "baseline": "5 cases, 2 fail against old parser; same 5 green after fix",
+    "jvm": {
+      "core-protocol": 55,
+      "controller-core": 3,
+      "library-cache": 7,
+      "source-adapters": 128
+    },
+    "nativeBuildLint": "PASS; scripts/build-android.ps1",
+    "phoneAndApple": "Unchanged; no new Flutter/Swift/hosted Apple run"
+  },
+  "storageDiagnosis": {
+    "at": "2026-10-31T21:06:34.328623+08:00",
+    "retainedTimeoutTraceHasSnapshotNodes": 73,
+    "finalSnapshotHasInternalMarker": false,
+    "finalSnapshotHasSdMarker": false,
+    "conclusion": "The separate unmounted baseline screenshot demonstrates a drawer with no SD entry. The cached-SD/Internal timeout final raw snapshot has neither marker, so the menu fix is a demonstrated parser correction but not a proven complete root cause or physical fix for that timeout. No additional unmount cycle performed."
+  },
+  "physical": {
+    "mountedInternalSdInternal": "VERIFIED actual phone BLE browse; terminal4766/4023/3986ms",
+    "noCardOriginalTimeout": "NOT RETESTED; previous failure retained",
+    "additionalMountOrUnmountCycles": 0,
+    "wav": "VERIFIED expected metadata/state3 and owner audible",
+    "flac": "VERIFIED different folder during active WAV; expected metadata/state3 and owner audible",
+    "apple": "FAILED offline source playback; one dispatched439ms command, source state0/dialog error3; not an audible pass"
+  },
+  "phoneJournal": {
+    "previousUnchanged": 111,
+    "total": 146,
+    "newCount": 35,
+    "zeroEvictions": true,
+    "operations": {
+      "HELLO": 1,
+      "AUTHORIZE": 1,
+      "BROWSE": 24,
+      "SELECT_SOURCE": 2,
+      "PLAY_ITEM": 3,
+      "GET_STATE": 3,
+      "SET_PLAYING": 1
+    },
+    "requests": [
+      {
+        "id": "8159a9f9-aba6-425e-91e8-0c924fb40118",
+        "operation": "HELLO",
+        "source": "mango",
+        "startedMs": 6636428,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 115,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "f3995754-cbc2-4d99-9fab-542c121427dd",
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "startedMs": 6636545,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 972,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "8bc96e73-3333-497e-9984-d694710861ef",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 6656537,
+        "accepted": true,
+        "acceptedAfterMs": 137,
+        "finishedAfterMs": 774,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "6fde8654-8a9d-41d7-ae22-41ce77e28078",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 6666877,
+        "accepted": true,
+        "acceptedAfterMs": 134,
+        "finishedAfterMs": 327,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "928a66d7-53fb-4ed8-a46d-045da1832f38",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 6671895,
+        "accepted": true,
+        "acceptedAfterMs": 88,
+        "finishedAfterMs": 4766,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "c73a1cc3-453d-4eb2-8e39-9498dd9f0253",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 6711943,
+        "accepted": true,
+        "acceptedAfterMs": 160,
+        "finishedAfterMs": 603,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "7d58791e-79cf-46fe-a942-f62a7e274aa0",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 6717199,
+        "accepted": true,
+        "acceptedAfterMs": 171,
+        "finishedAfterMs": 4023,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "70052b98-f747-4e80-b5ad-17b693c252d1",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 6736390,
+        "accepted": true,
+        "acceptedAfterMs": 138,
+        "finishedAfterMs": 530,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "4b2d5a43-6171-4d58-8db9-3cd8f4cb1711",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 6741563,
+        "accepted": true,
+        "acceptedAfterMs": 138,
+        "finishedAfterMs": 3986,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "f09404fc-538b-4264-95e9-a8fd6092b532",
+        "operation": "SELECT_SOURCE",
+        "source": "mango",
+        "startedMs": 6771459,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 465,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "fdb4a257-dc29-4eb6-ac04-7a5399616f9d",
+        "operation": "BROWSE",
+        "source": "apple",
+        "startedMs": 6781675,
+        "accepted": true,
+        "acceptedAfterMs": 95,
+        "finishedAfterMs": 776,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "066190fe-3f3d-4074-b490-f2de860250a6",
+        "operation": "BROWSE",
+        "source": "apple",
+        "startedMs": 6794133,
+        "accepted": true,
+        "acceptedAfterMs": 119,
+        "finishedAfterMs": 2215,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "81fd80bb-d495-4bfe-bb8b-49f488a26f70",
+        "operation": "BROWSE",
+        "source": "apple",
+        "startedMs": 6810846,
+        "accepted": true,
+        "acceptedAfterMs": 125,
+        "finishedAfterMs": 1588,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "cc1d20f0-c7eb-4da6-aa45-5178e8e10e34",
+        "operation": "BROWSE",
+        "source": "apple",
+        "startedMs": 6815814,
+        "accepted": true,
+        "acceptedAfterMs": 130,
+        "finishedAfterMs": 1496,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "225b1433-94c8-4ca3-8a00-def917fc133f",
+        "operation": "BROWSE",
+        "source": "apple",
+        "startedMs": 6830263,
+        "accepted": true,
+        "acceptedAfterMs": 159,
+        "finishedAfterMs": 1577,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "a6e14ff2-13f9-45b5-80bc-67ab355f2cba",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 6851875,
+        "accepted": true,
+        "acceptedAfterMs": 146,
+        "finishedAfterMs": 439,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "c38b6f0e-4df2-4796-845d-e857cc4ebd89",
+        "operation": "GET_STATE",
+        "source": "apple",
+        "startedMs": 6852315,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 387,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "9d21af37-6a2b-416a-89c0-76e069509d8f",
+        "operation": "SELECT_SOURCE",
+        "source": "apple",
+        "startedMs": 6914804,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 449,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "d84a8d3f-c073-4b7e-a0c0-6dd0b1e28bcd",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 6925000,
+        "accepted": true,
+        "acceptedAfterMs": 97,
+        "finishedAfterMs": 781,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "e56982ad-0622-4444-8614-15d211183f87",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 6930396,
+        "accepted": true,
+        "acceptedAfterMs": 162,
+        "finishedAfterMs": 356,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "fdba8a4c-8d58-44b9-b9ef-5d77fa7b624e",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 6935453,
+        "accepted": true,
+        "acceptedAfterMs": 127,
+        "finishedAfterMs": 1833,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "7edbd7b3-b688-4697-8796-59134d3b35f3",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 6964022,
+        "accepted": true,
+        "acceptedAfterMs": 125,
+        "finishedAfterMs": 2563,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "61284f62-c84d-4a25-9922-4c834dbabfd0",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 6988265,
+        "accepted": true,
+        "acceptedAfterMs": 159,
+        "finishedAfterMs": 2114,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "3f236247-7592-45af-9511-f29561d2f81d",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 7003297,
+        "accepted": true,
+        "acceptedAfterMs": 143,
+        "finishedAfterMs": 2440,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "9f54c9c0-49ff-4f63-a039-41b1d886930c",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 7023237,
+        "accepted": true,
+        "acceptedAfterMs": 191,
+        "finishedAfterMs": 4537,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "f48d0469-7f0f-4a24-ba6f-1d1e94371f88",
+        "operation": "GET_STATE",
+        "source": "mango",
+        "startedMs": 7027777,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 432,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "0d496c46-070b-4046-ae06-ac0d0fe1020b",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 7062688,
+        "accepted": true,
+        "acceptedAfterMs": 133,
+        "finishedAfterMs": 770,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "1feca783-04d2-4f6e-afab-9d65dbce99bd",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 7068132,
+        "accepted": true,
+        "acceptedAfterMs": 147,
+        "finishedAfterMs": 359,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "9d3f9e33-e9d3-4ccd-a75c-311d27bbf96c",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 7073095,
+        "accepted": true,
+        "acceptedAfterMs": 157,
+        "finishedAfterMs": 3132,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "3c40133d-6310-4afc-97fa-192c35c21964",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 7090167,
+        "accepted": true,
+        "acceptedAfterMs": 148,
+        "finishedAfterMs": 2150,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "5c7589f4-aff7-4307-9ead-316baa206fcd",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 7105532,
+        "accepted": true,
+        "acceptedAfterMs": 141,
+        "finishedAfterMs": 2192,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "45c3bfbf-ae7b-4b79-bfde-f40fc25a2cbc",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 7113019,
+        "accepted": true,
+        "acceptedAfterMs": 161,
+        "finishedAfterMs": 2452,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "35c77d5e-9083-4e9b-b423-1dd4aae0ffd1",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 7124974,
+        "accepted": true,
+        "acceptedAfterMs": 149,
+        "finishedAfterMs": 4446,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "eccde23c-ed83-4c1b-b666-151dbe6953bf",
+        "operation": "GET_STATE",
+        "source": "mango",
+        "startedMs": 7129422,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 433,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "d73ba0a1-3b10-4d47-b292-3eef885b9bcf",
+        "operation": "SET_PLAYING",
+        "source": "mango",
+        "startedMs": 7209690,
+        "accepted": true,
+        "acceptedAfterMs": 163,
+        "finishedAfterMs": 506,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "observed",
+        "error": null
+      }
+    ],
+    "interpretation": "All protocol results applied; Apple dispatched is not source playback success"
+  },
+  "preservation": {
+    "phonePermissionFlagsUnchanged": true,
+    "phoneExposedBondIdentitiesUnchanged": true,
+    "hostPermissionFlagsUnchanged": true,
+    "hostExposedBondIdentitiesUnchanged": true,
+    "prefsByteHashesUnchanged": true,
+    "settingsUnchanged": true,
+    "phonePidUnchanged": true,
+    "hostForegroundBothBindings": true,
+    "phoneDisconnectedForegroundClearedHelpCollapsed": true,
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 0
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeProof": false,
+    "cardMounted": true,
+    "controlTarget": "Mango"
+  },
+  "pending": [
+    "Original cached-SD/Internal no-card physical regression",
+    "Apple6.5.3 storage-event crash and offline error3 cause/recovery",
+    "Full T01-T18/current two-phone/source/format/playlist/output/reliability/signing/Watch acceptance",
+    "Fresh30-minute background readiness unanswered; no hold started"
+  ],
+  "rawEvidence": [
+    {
+      "file": "artifacts/mango-storage-menu-20261031/added-requests.json",
+      "sha256": "de64c4ef328295d6b26c7827f6b521e94c6d497c82f1fca3ee084ee8aec627ba"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-album-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-album-before.xml",
+      "sha256": "8721f88a08454083ed619b300edf07ba5fe5076c9f43bbd291e67424c2e226d4"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-album-loaded.xml",
+      "sha256": "d899e41e292f6832aceea4fe2208cb03ff2790d2853ea8103e3d719c0c3e5615"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-albums-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-albums-before.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-albums-loaded.xml",
+      "sha256": "8721f88a08454083ed619b300edf07ba5fe5076c9f43bbd291e67424c2e226d4"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-dialog-dismissed.png",
+      "sha256": "e24b88d350f183fe908427ca3b5038cae6dc896e85dd40d1938d9e2f1003bc46"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-library-after.xml",
+      "sha256": "8036dd938c84f2b14572c16f927fca00442d26e898219e1a895f0515304678fb"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-library-before.xml",
+      "sha256": "164668d1e40a34a6a1f15e9daeabbd7bdef2e798dc99ed7c180cb5245fc3cd51"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-offline-failure.json",
+      "sha256": "27788ee3dc5a4535696c3b6e858555ebc32c52ba2460b75715df90c7d794277e"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-parent-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-parent-before.xml",
+      "sha256": "5c2d44b34a522b0558578d9861a282847e63072683e71e505171e40332bb60ae"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-play-once-after.xml",
+      "sha256": "61b4557b473b36e8989e64688c4d24fc8cc2b69998959c8cc0cb4b9737a3fd2e"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-play-once-before.xml",
+      "sha256": "d899e41e292f6832aceea4fe2208cb03ff2790d2853ea8103e3d719c0c3e5615"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-play-settled.xml",
+      "sha256": "61b4557b473b36e8989e64688c4d24fc8cc2b69998959c8cc0cb4b9737a3fd2e"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-playing-audio.txt",
+      "sha256": "3acb2251b06517ee477173632603f99361327864b7a608394319ce0f81c5ee03"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-playing-dx.png",
+      "sha256": "9755a784157d116b9468a19b2d345a8d0c62593c2ad1db10a02eae41cac6a440"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-playing-media-session.txt",
+      "sha256": "6661cfc6849fe93addf2a11ad82919e221d87dff7a0f5a07121c7804726801c5"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-root-after.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-root-before.xml",
+      "sha256": "8036dd938c84f2b14572c16f927fca00442d26e898219e1a895f0515304678fb"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-songs-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-songs-before.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/apple-songs-loaded.xml",
+      "sha256": "5c2d44b34a522b0558578d9861a282847e63072683e71e505171e40332bb60ae"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/before-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/before-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/before-host-accessibility.txt",
+      "sha256": "639513b7f8c6c3d67eb956255677ad420a6bd9787514b420e5705f8cff49f95b"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/before-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "be6d9288a3e28c0b73cf873067f982798450de2a1c5b9fb9ad45298a1745d118"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/before-host-audio.txt",
+      "sha256": "8857577e9c5b979848a20bcd74b6dcc7dbd927b13fd12f6142ac1ab4d4bd365c"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/before-host-bluetooth_manager.txt",
+      "sha256": "197d770819b43ce9c59f3991e14f337c022f78ecc1379abd0b80416fc5f6becc"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/before-host-media_session.txt",
+      "sha256": "1644ec1f4725b0a1fdae4708bfffedd864b3ee536b9ed1270ade1f1d6fd66e91"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/before-host-package-org.dx340.remote.host.txt",
+      "sha256": "d0d4866f2451351daea79ce8eb9ff6ae4bfedbd37333d675b6a6fc31cd16bf30"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/before-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/before-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "e2d9c6304bf84c342f36fce4ffb257a04397dcb7b1930528707ac1bc96ed83e7"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/before-phone-bluetooth_manager.txt",
+      "sha256": "85c3b5c2cddec23d622fc172dd71b67891dd222a65a08c3bece9dcf598451b6f"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/before-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "619357a443cc2a0714511decfa11c3d5c653f572daabbfc5b9fee6280c8e3c39"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/before-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/before.json",
+      "sha256": "eb8ac3ca97faec3e76c22b63674a6999e873a5797fae8ab82d492010a5666002"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/browse-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/browse-root-before.xml",
+      "sha256": "72fb1bd5a6c4c348c653667fcfc0ac1328062c3cd0d4ca30727ce1715f215ca2"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/com.apple.android.music-version.txt",
+      "sha256": "473bc937765501356ade6e0fcca88c1e7df447d05baf7154570ee52d7160466a"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/com.ibasso.music-version.txt",
+      "sha256": "f808f8c30e55fbec70d7051c8250f1747f1a7516fd3d0fe644622788b29b77bf"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/connected.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/export-console.txt",
+      "sha256": "383aea6a9af726e4d111ca16ae012698371e1453c27e3468624c7662da4779b4"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/export-final-disconnect-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/export-final-disconnect-before.xml",
+      "sha256": "eb6bf0763ec4a45028ad7d3fe1d3db53582d1006da07c57017e357dcddc489ec"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/export-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/export-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/export-help-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/export-help-collapse-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/export-save-after.xml",
+      "sha256": "eb6bf0763ec4a45028ad7d3fe1d3db53582d1006da07c57017e357dcddc489ec"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/export-save-before.xml",
+      "sha256": "3d447e9c591af22cffe383a186c7310406dcd7042dbdc214a7e80c0798bed1c3"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/export-scroll-after.xml",
+      "sha256": "3d447e9c591af22cffe383a186c7310406dcd7042dbdc214a7e80c0798bed1c3"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/export-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/export-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/export-setup-before.xml",
+      "sha256": "43e18d09087a6f205eed704e5d5cc0d61672ee39fdac17ced77ed54ecfbc2125"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/final-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/final-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/final-devices.txt",
+      "sha256": "99221000e3050b063712b3b8bb8b7e8b078c782ac467f889eb1e4f7c66d2336c"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/final-host-accessibility.txt",
+      "sha256": "88c6dff5bbcdedc2af269e248f0a6101a5cbe8fb2ee4d8d23ff0076dc6d5ae40"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/final-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "0a515a5b9265c285148c68ef4688426b74d49a5a02e56423bccfa59a616891b9"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/final-host-audio.txt",
+      "sha256": "244b9100c938e8a873d26e030a142a9c55d689e40a431cccca138d574d12027f"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/final-host-bluetooth_manager.txt",
+      "sha256": "3d9fef641422e164535acfd1a91cb6bb21425b6883e492092f84d3daf6f4234d"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/final-host-media_session.txt",
+      "sha256": "c7bf45129a128294ef32c1036427248927091f9edb2d7c06e142778abdf5d442"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/final-host-package-org.dx340.remote.host.txt",
+      "sha256": "7f40e245e7df19a0e582ba93b73d2d596d242d53994252ea58866aa892bdddf6"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/final-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/final-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "45fcd62f68ab1246c38ec422f6a057d26b49ee0bf62a0bafa537d9dacdd4b9d0"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/final-phone-bluetooth_manager.txt",
+      "sha256": "4e6c3a3c0438896f4f90507e8b92a749629616e68c95fa0c929531c2858364c0"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/final-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "dfe4a316d5eb9d31566088678451c88810e84dbbe0907c6b2f7d3c684933873b"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/final-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/final-volumes.txt",
+      "sha256": "2fb3a4584ca100b547913df69aad073824f892b305a5b1f61315c2c073e09dd4"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/final.json",
+      "sha256": "f4d4c91614eb380827462a3e5f22f9ec6b1dc34ff74da6630978cf284f7c640d"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-artists-scroll-after.xml",
+      "sha256": "c8729644bf666c873e578ea6ec4f87583785148f94cd3bb5d15274ca7556f403"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-artists-scroll-before.xml",
+      "sha256": "b15fcc2d6632dc39f0988ac975750667f92153f4c99d9ea5166abf0c607421fd"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-audible-confirmation.json",
+      "sha256": "6ef6c0f91ef90cebe20201b857a59732af05663a49461c223726c150eff527f3"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-before-media_session.txt",
+      "sha256": "df49b1dddef8dcf9fe9acf3c30706150c3a13c398e8c6a6eaedb8981d608794c"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-folders-after.xml",
+      "sha256": "44448766c75c97b8b7074082e4a3070072ed7a836da8c87f441fbce4e1e57b22"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-folders-before.xml",
+      "sha256": "c711756633878611db65033bde7ae9340e6c7feb1c4d5bf6fe0ee83ea88fe5a2"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-internal-after.xml",
+      "sha256": "d5cffb27a47a21bcc65e1b681f728ff27b1cd0c451bd3cb7eb1dc6f5420a7d04"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-internal-before.xml",
+      "sha256": "44448766c75c97b8b7074082e4a3070072ed7a836da8c87f441fbce4e1e57b22"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-internal-scroll-after.xml",
+      "sha256": "c1b5a5cd62a38ea087cf5c74237a3e422dcc144360a34d09637622b97eb77a7e"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-internal-scroll-before.xml",
+      "sha256": "e67da8ec4686aa2eb9506440dc0c0b94c905e0a63a7f1ecd0d61c0363cab0e62"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-internal-wait.xml",
+      "sha256": "e67da8ec4686aa2eb9506440dc0c0b94c905e0a63a7f1ecd0d61c0363cab0e62"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-magic-after.xml",
+      "sha256": "d5cffb27a47a21bcc65e1b681f728ff27b1cd0c451bd3cb7eb1dc6f5420a7d04"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-magic-before.xml",
+      "sha256": "a0a72e87a544928067128e0de00f48cde915f939f6208200e1305ed5eca53ca1"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-magic-loaded.xml",
+      "sha256": "df8898d2d1c5fccbe48f2b6c44ef5b0ee4ffe94a4aaf0c151b831e4fc7c457ca"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-music-after.xml",
+      "sha256": "d5cffb27a47a21bcc65e1b681f728ff27b1cd0c451bd3cb7eb1dc6f5420a7d04"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-music-before.xml",
+      "sha256": "c1b5a5cd62a38ea087cf5c74237a3e422dcc144360a34d09637622b97eb77a7e"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-music-loaded.xml",
+      "sha256": "b15fcc2d6632dc39f0988ac975750667f92153f4c99d9ea5166abf0c607421fd"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-play-once-after.xml",
+      "sha256": "0b11c77adc9a14ab3567e8f2b4eace422c8a16af403278ddc687a24aa4284797"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-play-once-before.xml",
+      "sha256": "df8898d2d1c5fccbe48f2b6c44ef5b0ee4ffe94a4aaf0c151b831e4fc7c457ca"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-playing-audio.txt",
+      "sha256": "6a086f2d9d4271d90c1c3f5a18535d139c45b36ffa4b4f337f38c0a679658ba1"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-playing-dx.png",
+      "sha256": "6ffd13d97d8d7fae58f1f0b5201bc3a660ccf0ff807a819d95e90cbb47dc3e19"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-playing-media_session.txt",
+      "sha256": "9db413ebd91cb15146e985e60ed539a3cf7d1c7002099352ff6ef3361049db4e"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-result.xml",
+      "sha256": "0b11c77adc9a14ab3567e8f2b4eace422c8a16af403278ddc687a24aa4284797"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-root-after.xml",
+      "sha256": "c711756633878611db65033bde7ae9340e6c7feb1c4d5bf6fe0ee83ea88fe5a2"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-root-before.xml",
+      "sha256": "a1d426215ac66bc6889f6d0ded04c973a0b60ff8d8a5dbcf8b55d52352f26689"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-tayori-after.xml",
+      "sha256": "d5cffb27a47a21bcc65e1b681f728ff27b1cd0c451bd3cb7eb1dc6f5420a7d04"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-tayori-before.xml",
+      "sha256": "c8729644bf666c873e578ea6ec4f87583785148f94cd3bb5d15274ca7556f403"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/flac-tayori-loaded.xml",
+      "sha256": "a0a72e87a544928067128e0de00f48cde915f939f6208200e1305ed5eca53ca1"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/folders-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/folders-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/host-after-upgrade.png",
+      "sha256": "32fd13404085b0a18a5aa16c6d76f9792cbe6974fcbe939e84d2909aaf4aadf3"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/host-enabled.png",
+      "sha256": "e9a8d227b56cd98a3eb8fcdc34004e35d1271a0e53fc86e3cf1cdfcbcc0e764e"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/host-installed.apk",
+      "sha256": "66b21e1c86b1ba8d36453091825c6ff09b67a5c8b44136146fe3856496caf456"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/host-launch.txt",
+      "sha256": "3f7c47b0afbd6a39de0220787b5c3b488fdf975631dfc2da8d3c71bf188c45ea"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/install.txt",
+      "sha256": "c4aa470acafcf8576c15b0f0b5ae7e852d1ec5413372d0e6a9272e788e1306d3"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/installed-sha256.txt",
+      "sha256": "22510093bc61d57a2a7c9775a094ba189c3b63bd1d87408fc353450348985836"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/internal-mounted-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/internal-mounted-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/internal-scroll-after.xml",
+      "sha256": "4df7802d8074b1118dadeb56d5313ace8a7541a5b3985a8ec6dff2ede27f3ed8"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/internal-scroll-before.xml",
+      "sha256": "7aedcb01095d65c825d07c93638b4b87028b656280a4a161ff7f300d1443c635"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/internal-settled.xml",
+      "sha256": "7aedcb01095d65c825d07c93638b4b87028b656280a4a161ff7f300d1443c635"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/jvm-results.json",
+      "sha256": "17996169a867f081102ef9c073ac688d731390b0acc2b62f7b669179c8f16536"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/library-after.xml",
+      "sha256": "72fb1bd5a6c4c348c653667fcfc0ac1328062c3cd0d4ca30727ce1715f215ca2"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/library-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-artists-scroll-after.xml",
+      "sha256": "dcdf6c8b97c26ce936401f142ba860a5cd54f21093d0a9b48fbd4479d428481a"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-artists-scroll-before.xml",
+      "sha256": "ec07c8e9b994736b6fe4a043174f1b6a82ca91c18ce098b190564aaef8534b0b"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-folders-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-folders-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-internal-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-internal-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-internal-loaded.xml",
+      "sha256": "7aedcb01095d65c825d07c93638b4b87028b656280a4a161ff7f300d1443c635"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-library-after.xml",
+      "sha256": "5b72ce105bfd44578a630c058de1df7a57d24c80fe6cf3fb1d12e4c2d0bdf9a3"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-library-before.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-music-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-music-before.xml",
+      "sha256": "4df7802d8074b1118dadeb56d5313ace8a7541a5b3985a8ec6dff2ede27f3ed8"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-music-loaded.xml",
+      "sha256": "ec07c8e9b994736b6fe4a043174f1b6a82ca91c18ce098b190564aaef8534b0b"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-player-after.xml",
+      "sha256": "164668d1e40a34a6a1f15e9daeabbd7bdef2e798dc99ed7c180cb5245fc3cd51"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-player-before.xml",
+      "sha256": "61b4557b473b36e8989e64688c4d24fc8cc2b69998959c8cc0cb4b9737a3fd2e"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-root-before.xml",
+      "sha256": "5b72ce105bfd44578a630c058de1df7a57d24c80fe6cf3fb1d12e4c2d0bdf9a3"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-storage-menu-baseline.txt",
+      "sha256": "9dab1c4b08cdb9dab4ed68a30077bf538f42517c0255da9f46906d85bbd161d6"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-storage-menu-build.txt",
+      "sha256": "5a06af822e8e0be796916fbf7c81e215c820cfda2921dfdb8e211f4fd0250592"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-storage-menu-fixed.txt",
+      "sha256": "3598cc6a07d58c3ec8995709c78b3d122127a9c500dea5e017ca6b7ad9c94e24"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-tayori-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-tayori-before.xml",
+      "sha256": "dcdf6c8b97c26ce936401f142ba860a5cd54f21093d0a9b48fbd4479d428481a"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mango-tayori-loaded.xml",
+      "sha256": "1a4d7f70e7b153cb70f9e46354c10f844e1e99c28184b3e6ee4d43531b9072bf"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/menu-apple-candidate-broadcast.txt",
+      "sha256": "d3cda6110a161306f6ad780aa0745afdc9ad6cbf4f9997fafa66a29240644b12"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/menu-apple-candidate.json",
+      "sha256": "ad821ec56001694f58215bca280278542048140879a2ea72594168ad4ddf21b2"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/menu-apple-queue-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/menu-apple-queue.json",
+      "sha256": "1ea96020d64e96b0cc29ef0f9b820d416db974fa92afab14a24ba16e25ca4ffe"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mounted-parent-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/mounted-parent-before.xml",
+      "sha256": "7aedcb01095d65c825d07c93638b4b87028b656280a4a161ff7f300d1443c635"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/org.dx340.remote.controller-version.txt",
+      "sha256": "b25b966aacdd6d4756a6e762fff829fbac6f2f74a9e8061e99ad3971059250ea"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/org.dx340.remote.host-version.txt",
+      "sha256": "10dcc3560051b0979f4c8f0c73060c39de30718f1063623ddaa3ff9fbc78b3ac"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/pause-after-confirmations-after.xml",
+      "sha256": "43e18d09087a6f205eed704e5d5cc0d61672ee39fdac17ced77ed54ecfbc2125"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/pause-after-confirmations-before.xml",
+      "sha256": "b7799abc33cd57002241a91e036ea589982dd22e5b9071ba85644916b3d8cff2"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/phone-final-report.json",
+      "sha256": "8bd2aa1b2e380da3bb38ddd0ffb61adb0b558eade0f657319f382467011419b3"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/phone-start.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/player-before-apple-after.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/player-before-apple-before.xml",
+      "sha256": "7aedcb01095d65c825d07c93638b4b87028b656280a4a161ff7f300d1443c635"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/sd-mounted-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/sd-mounted-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/sd-parent-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/sd-parent-before.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/sd-settled.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/sd-to-internal-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/sd-to-internal-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/sd-to-internal-settled.xml",
+      "sha256": "7aedcb01095d65c825d07c93638b4b87028b656280a4a161ff7f300d1443c635"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/select-apple-after.xml",
+      "sha256": "164668d1e40a34a6a1f15e9daeabbd7bdef2e798dc99ed7c180cb5245fc3cd51"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/select-apple-before.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/select-mango-after.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/select-mango-before.xml",
+      "sha256": "164668d1e40a34a6a1f15e9daeabbd7bdef2e798dc99ed7c180cb5245fc3cd51"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/storage-diagnosis-scope.json",
+      "sha256": "ab5d0065eb2a8c573279324f2295c3cc247f1f5bfb4eb93c21edb45c4e77817b"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/storage-menu-tests.xml",
+      "sha256": "f54a61a781bb342a09fe8cd3a886ef3522441b0f9c0fcb73c636b29247ab3f2e"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/upgrade-signing.json",
+      "sha256": "07a672702fa7f8aa1068ae4d966484f4dcc0df06eda59def033b566eff35de00"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/wav-audible-confirmation.json",
+      "sha256": "5072011a0e375d1bfb0c262bb13e688d1915bb48f2cfbfdda17fe7de4027ca4f"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/wav-back-parent-before.xml",
+      "sha256": "a1d426215ac66bc6889f6d0ded04c973a0b60ff8d8a5dbcf8b55d52352f26689"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/wav-folder-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/wav-folder-before.xml",
+      "sha256": "1a4d7f70e7b153cb70f9e46354c10f844e1e99c28184b3e6ee4d43531b9072bf"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/wav-folder-find.xml",
+      "sha256": "1a4d7f70e7b153cb70f9e46354c10f844e1e99c28184b3e6ee4d43531b9072bf"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/wav-folder-loaded.xml",
+      "sha256": "0f86610cece7b7d770719e8b36b846136db7c90d89ff46fc2764f3e845f3b948"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/wav-play-once-after.xml",
+      "sha256": "5233ceaa302dc2b0b44c6b3aad3729448ae4515d949295122a32078a34d39f01"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/wav-play-once-before.xml",
+      "sha256": "0f86610cece7b7d770719e8b36b846136db7c90d89ff46fc2764f3e845f3b948"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/wav-playing-audio.txt",
+      "sha256": "faa43ddc9fe85785ae1f26a8f3ebecf3866445e8297705a5cb7dfbc95d30bd95"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/wav-playing-dx.png",
+      "sha256": "f9bf2307786db2db95412b0e6fc9db430ea11cd2659bdb2ebccfb2d2043e3b1a"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/wav-playing-media_session.txt",
+      "sha256": "df49b1dddef8dcf9fe9acf3c30706150c3a13c398e8c6a6eaedb8981d608794c"
+    },
+    {
+      "file": "artifacts/mango-storage-menu-20261031/wav-songs-current.xml",
+      "sha256": "0f86610cece7b7d770719e8b36b846136db7c90d89ff46fc2764f3e845f3b948"
+    }
+  ],
+  "diagnosisEvidence": [
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-unmounted-dx.png",
+      "sha256": "7fe0767d0c9ee85aa5f988bdc68572c7ff82fdfbad6da40f39c239397e85f557"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/internal-unmounted-failed-trace.json",
+      "sha256": "1e085bfdfeb67c0caa7c651a8719b4cbb9a5081c6d2c98bca52a9cc028598fd9"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-menu-tree.json",
+      "sha256": "1e50ca1548ac850807b1a11fc221c1b81c9756c8113e40e7901fb6315973e01d"
+    }
+  ]
+}
