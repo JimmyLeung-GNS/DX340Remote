@@ -1,5 +1,9 @@
 # Implementation status
 
+## Active host-service recovery correction
+
+Current installed Pixel04d4397e…/host491dbbff… failed Companion stop/start: Android logged onServiceChanged but the client retained Connected/Ready. Service was restored and manualDisconnect/Connect recovered, followed by normalDisconnect. New native callbacks and shared Kotlin/Swift host-reply epoch routing are implemented; Android168JVM (50/7/111), native/referencebuild/lint/sharedanalyze-release-lint PASS. New phone candidate6b7e379d… is not yet physically installed; Swift and physical confirmation pending. Read test-results/2026-10-31-host-service-restart.md. Both prior iconApplejobs remain terminalSUCCESS; do not rerun/relabel those as this newSwift change. Noobserver/emulator, fresh30-minute readinessstillpending; fullgoalACTIVE/incomplete. Priorbaseline below preserved.
+
 ## Current checkpoint —31 October2026,07:50 HKT
 
 Full goal **ACTIVE/incomplete**. Latest code source is `b3f0638365b601bc95f30b236f77614f29ae5ad5`; preserve newer work and inspect actual HEAD/remote on continuation. The original4df27c90 objective snapshot and prior baseline below are historical.

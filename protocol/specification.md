@@ -46,6 +46,12 @@ Replies: `{v:1,id:requestID,hostEpoch:string,type:HELLO|ACCEPTED|RESULT|STATE_CH
 
 Duplicate IDs in the same authenticated controller/host epoch return cached results or pending, never execute again. Different content under the same ID yields REQUEST_ID_REUSED. The beta ledger holds 2,048 IDs per approved controller and does not evict: SESSION_LIMIT requires a companion restart and new host epoch. Exactly-once execution across crashes is not claimed. Reconnect clears unsent operations, performs HELLO/AUTHORIZE, then observes state; it must not change playback or volume.
 
+## Client service invalidation and reply epochs
+
+A service-database invalidation retires cached handles, authorization and unsent work. Android onServiceChanged and CoreBluetooth invalidation of the protocol service use bounded connection/discovery/HELLO/authorization recovery. Old callback/handle state must not enable playback while that recovery is pending. A restart/invalidation must never replay pending source mutations.
+
+Classify matched replies before ERROR or ACCEPTED dispatch and before applying reply data. A changed/missing known hostEpoch retires the old session even when the reply reports an error or pending dispatch. Unknown request IDs are ignored before comparing epochs, so a delayed old reply cannot tear down a newer session. A nonblank HELLO only establishes an epoch when answering HELLO; unsolicited STATE_CHANGED is ignored until authorization. Initial HELLO errors remain diagnosable before an epoch exists. Shared client-routing cases live in fixtures/host-reply-gate.json. These are client safety rules within protocol v1, not new wire operations or a claim of exactly-once playback across restart.
+
 ## Implemented operations
 
 | Operation | Arguments / reply |

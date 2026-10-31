@@ -1,0 +1,20 @@
+[
+  {"name":"fresh HELLO establishes a host","type":"HELLO","operation":"HELLO","expected":"","reply":"host-B","authorized":false,"result":"hello"},
+  {"name":"deliberate HELLO may replace an old epoch","type":"HELLO","operation":"HELLO","expected":"host-A","reply":"host-B","authorized":false,"result":"hello"},
+  {"name":"blank HELLO cannot authorize","type":"HELLO","operation":"HELLO","expected":"","reply":" ","authorized":false,"result":"reconnect"},
+  {"name":"HELLO must answer a HELLO request","type":"HELLO","operation":"GET_STATE","expected":"host-A","reply":"host-A","authorized":true,"result":"reconnect"},
+  {"name":"unmatched old ERROR cannot tear down a new session","type":"ERROR","operation":null,"expected":"host-B","reply":"host-A","authorized":true,"result":"ignore"},
+  {"name":"unmatched HELLO cannot replace a session","type":"HELLO","operation":null,"expected":"host-B","reply":"host-A","authorized":true,"result":"ignore"},
+  {"name":"ordinary current ERROR keeps its source recovery path","type":"ERROR","operation":"BROWSE","expected":"host-A","reply":"host-A","authorized":true,"result":"current"},
+  {"name":"ERROR cannot conceal a changed host","type":"ERROR","operation":"GET_STATE","expected":"host-A","reply":"host-B","authorized":true,"result":"reconnect"},
+  {"name":"ACCEPTED cannot conceal a changed host","type":"ACCEPTED","operation":"PLAY_ITEM","expected":"host-A","reply":"host-B","authorized":true,"result":"reconnect"},
+  {"name":"RESULT cannot publish a changed host state","type":"RESULT","operation":"GET_STATE","expected":"host-A","reply":"host-B","authorized":true,"result":"reconnect"},
+  {"name":"missing reply epoch invalidates known authorization","type":"ERROR","operation":"GET_STATE","expected":"host-A","reply":"","authorized":true,"result":"reconnect"},
+  {"name":"authorized current notification is accepted","type":"STATE_CHANGED","operation":null,"expected":"host-A","reply":"host-A","authorized":true,"result":"current"},
+  {"name":"changed notification retires old authorization","type":"STATE_CHANGED","operation":null,"expected":"host-A","reply":"host-B","authorized":true,"result":"reconnect"},
+  {"name":"notification before authorization is ignored","type":"STATE_CHANGED","operation":null,"expected":"host-A","reply":"host-A","authorized":false,"result":"ignore"},
+  {"name":"bootstrap error remains diagnosable before an epoch exists","type":"ERROR","operation":"HELLO","expected":"","reply":"host-B","authorized":false,"result":"current"},
+  {"name":"state result before HELLO cannot establish a host","type":"RESULT","operation":"GET_STATE","expected":"","reply":"host-B","authorized":false,"result":"reconnect"},
+  {"name":"current authorization result can complete setup","type":"RESULT","operation":"AUTHORIZE","expected":"host-A","reply":"host-A","authorized":false,"result":"current"},
+  {"name":"current busy error can offer deliberate takeover","type":"ERROR","operation":"AUTHORIZE","expected":"host-A","reply":"host-A","authorized":false,"result":"current"}
+]

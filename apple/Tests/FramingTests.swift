@@ -2,6 +2,15 @@ import XCTest
 @testable import DXProtocol
 
 final class FramingTests: XCTestCase {
+    func testChangedHostsCannotHideBehindReplyStatusAndLateUnknownRepliesAreIgnored() throws {
+        let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        let cases = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("protocol/fixtures/host-reply-gate.json"))) as! [[String: Any]]
+        for item in cases {
+            let result = HostReplyGate.classify(type: item["type"] as! String, operation: item["operation"] as? String,
+                expectedHost: item["expected"] as! String, replyHost: item["reply"] as! String, authorized: item["authorized"] as! Bool)
+            XCTAssertEqual(result.rawValue, item["result"] as! String, item["name"] as! String)
+        }
+    }
     func testDiscoveryNeverSubstitutesAnotherPlayerForTheRememberedIdentity() throws {
         let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
         let cases = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("protocol/fixtures/player-discovery.json"))) as! [[String: Any]]

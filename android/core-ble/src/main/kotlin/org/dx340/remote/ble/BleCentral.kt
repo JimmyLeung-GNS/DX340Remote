@@ -37,6 +37,12 @@ class BleCentral(private val context: Context, private val status: (String) -> U
     private var scanExpiry: Runnable? = null
     val connectedDevice get() = gatt?.device
     private val cb = object : BluetoothGattCallback() {
+        override fun onServiceChanged(g: BluetoothGatt) { main.post {
+            if (g != gatt) return@post
+            // Cached handles are invalid. Reconnect and discover/authorize anew;
+            // fail clears pending writes rather than replaying playback commands.
+            fail("Player service changed. Reconnecting without replay.")
+        } }
         override fun onConnectionStateChange(g: BluetoothGatt, code: Int, newState: Int) { main.post {
             if (g != gatt) { g.close(); return@post }
             if (code == 0 && newState == BluetoothProfile.STATE_CONNECTED) {

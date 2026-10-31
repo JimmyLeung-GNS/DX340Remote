@@ -40,6 +40,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     private var connectionTimeout: Task<Void, Never>?
     private var connectionGeneration = 0
     private var connectionPhase = "idle"
+    private var servicesInvalidated = false
     private var pendingQuickConnect = false
     private var discoveryGeneration = 0
     private var discoveryTimeout: Task<Void, Never>?
@@ -175,7 +176,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         if let p = peripheral { manager.cancelPeripheralConnection(p) }
         clearConnection(); status = "Disconnected. Cached lists may be stale."
     }
-    private func clearConnection() { stopDiscovery(); cancelApprovalCheck(); connectionPhase = "idle"; abandonAssistedPage(); cancelSetupDeadline(); setupExpiryNotice = nil; connectionGeneration += 1; connectionTimeout?.cancel(); connectionTimeout = nil; writeTimeout?.cancel(); writeTimeout = nil; authorized = false; controlProposal.clear(); assistedPageUse.clear(); rx = nil; tx = nil; writing = false; writes = []; pending = [:]; browseLocations = [:]; queueLocations = [:]; activeBrowseId = nil; activeQueueId = nil; hostEpoch = ""; assembler.clear() }
+    private func clearConnection() { stopDiscovery(); cancelApprovalCheck(); servicesInvalidated = false; connectionPhase = "idle"; abandonAssistedPage(); cancelSetupDeadline(); setupExpiryNotice = nil; connectionGeneration += 1; connectionTimeout?.cancel(); connectionTimeout = nil; writeTimeout?.cancel(); writeTimeout = nil; authorized = false; controlProposal.clear(); assistedPageUse.clear(); rx = nil; tx = nil; writing = false; writes = []; pending = [:]; browseLocations = [:]; queueLocations = [:]; activeBrowseId = nil; activeQueueId = nil; hostEpoch = ""; assembler.clear() }
     private func cancelSetupDeadline() { setupTimeout?.cancel(); setupTimeout = nil; setupDeadline.clear() }
     private func beginSetupDeadline() {
         guard !setupDeadline.active else { return }
@@ -212,7 +213,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         if !devices.contains(where: { $0.identifier == peripheral.identifier }) { devices.append(peripheral) }
     }
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        guard peripheral == self.peripheral else { return }
+        guard peripheral == self.peripheral, !servicesInvalidated else { return }
         status = "Discovering DX340 service…"; peripheral.delegate = self; peripheral.discoverServices([CBUUID(string: Wire.service)])
         // Remember only after the host confirms authorization, not merely a radio connection.
     }
@@ -244,13 +245,24 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         if authorized { send("GET_STATE") }
         else if connectionPhase != "approval" && connectionPhase != "busy" && !pending.values.contains(where: { $0 == "HELLO" || $0 == "AUTHORIZE" }) { send("HELLO", bootstrap: true) }
     }
+    func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
+        guard peripheral == self.peripheral, peripheral.state == .connected, !servicesInvalidated,
+              invalidatedServices.contains(where: { $0.uuid == CBUUID(string: Wire.service) }) else { return }
+        // Invalidate handles, authorization and queued mutations immediately.
+        // Cancellation uses the existing bounded reconnect/discovery path.
+        clearConnection(); servicesInvalidated = true
+        connectionPhase = wantsConnection ? "connecting" : "idle"
+        status = "Player service changed. Refreshing the Bluetooth connection."
+        if wantsConnection { armConnectionTimeout(peripheral) }
+        manager.cancelPeripheralConnection(peripheral)
+    }
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        guard peripheral == self.peripheral, peripheral.state == .connected else { return }
+        guard peripheral == self.peripheral, peripheral.state == .connected, !servicesInvalidated else { return }
         guard error == nil, let service = peripheral.services?.first(where: { $0.uuid == CBUUID(string: Wire.service) }) else { status = "DX340 service unavailable."; return }
         peripheral.discoverCharacteristics([CBUUID(string: Wire.rx), CBUUID(string: Wire.tx)], for: service)
     }
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        guard peripheral == self.peripheral, peripheral.state == .connected else { return }
+        guard peripheral == self.peripheral, peripheral.state == .connected, !servicesInvalidated else { return }
         guard error == nil else { status = "Service discovery failed."; return }
         rx = service.characteristics?.first(where: { $0.uuid == CBUUID(string: Wire.rx) })
         tx = service.characteristics?.first(where: { $0.uuid == CBUUID(string: Wire.tx) })
@@ -347,12 +359,18 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
             }
             return
         }
-        if type != "STATE_CHANGED" && operation == nil { return }
+        let route = HostReplyGate.classify(type: type, operation: operation, expectedHost: hostEpoch,
+            replyHost: reply["hostEpoch"] as? String ?? "", authorized: authorized)
+        if route == .ignore { return }
+        if route == .reconnect {
+            disconnect(); connectionPhase = "failed"; setupExpiryNotice = HostReplyGate.changedMessage
+            status = HostReplyGate.changedMessage; return
+        }
         let queueLocation = queueLocations[id]
         if type != "ACCEPTED" { queueLocations[id] = nil }
         if type != "ACCEPTED" { pending[id] = nil }
         if type != "ACCEPTED", reply["hostEpoch"] as? String == hostEpoch { retireAssistedPage(id) }
-        if type == "HELLO" { controlProposal.clear(); hostEpoch = reply["hostEpoch"] as? String ?? ""; authorize(); return }
+        if route == .hello { controlProposal.clear(); hostEpoch = reply["hostEpoch"] as? String ?? ""; authorize(); return }
         if type == "ERROR", reply["hostEpoch"] as? String == hostEpoch, operation == "AUTHORIZE", !authorized {
             if data["code"] as? String == "CONTROLLER_BUSY" {
                 wantsConnection = false; cancelApprovalCheck(); connectionPhase = "busy"

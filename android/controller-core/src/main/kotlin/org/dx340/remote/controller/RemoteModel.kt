@@ -23,6 +23,8 @@ import org.dx340.remote.protocol.BrowseContextTransition
 import org.dx340.remote.protocol.BrowseReset
 import org.dx340.remote.protocol.ConnectionSetupDeadline
 import org.dx340.remote.protocol.AssistedPageUse
+import org.dx340.remote.protocol.HostReplyGate
+import org.dx340.remote.protocol.HostReplyDecision
 
 @SuppressLint("MissingPermission")
 class RemoteModel(private val context: Context) {
@@ -245,13 +247,17 @@ class RemoteModel(private val context: Context) {
                 return
             }
             val operation = pending[id]
-            if (type != "STATE_CHANGED" && operation == null) return
+            val route = HostReplyGate.classify(type, operation, epoch, reply.opt("hostEpoch") as? String ?: "", authorized)
+            if (route == HostReplyDecision.IGNORE) return
+            if (route == HostReplyDecision.RECONNECT) {
+                disconnect(); connectionPhase = "failed"; status = HostReplyGate.CHANGED_MESSAGE; update(); return
+            }
             val location = browseLocations[id]
             val queueLocation = queueLocations[id]
             if (type != "ACCEPTED") queueLocations.remove(id)
             if (type != "ACCEPTED" && id.isNotEmpty()) pending.remove(id)
             if (type != "ACCEPTED" && reply.optString("hostEpoch") == epoch) retireAssistedPage(id)
-            if (type == "HELLO") { controlProposal.clear(); session.hello(reply.getString("hostEpoch")); authorize(); return }
+            if (route == HostReplyDecision.HELLO) { controlProposal.clear(); session.hello(reply.getString("hostEpoch")); authorize(); return }
             if (type == "ERROR" && reply.optString("hostEpoch") == epoch && operation == "AUTHORIZE" && !authorized) {
                 if (data.optString("code") == "CONTROLLER_BUSY") {
                     ble.pauseReconnection(); cancelApprovalCheck(); connectionPhase = "busy"

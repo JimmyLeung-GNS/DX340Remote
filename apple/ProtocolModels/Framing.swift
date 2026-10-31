@@ -1,5 +1,22 @@
 import Foundation
 
+public enum HostReplyDecision: String { case ignore, hello, current, reconnect }
+
+/// Run before ERROR/ACCEPTED dispatch or publishing reply state.
+public enum HostReplyGate {
+    public static let changedMessage = "Player connection changed. Connect again to refresh."
+    public static func classify(type: String, operation: String?, expectedHost: String, replyHost: String, authorized: Bool) -> HostReplyDecision {
+        if type == "STATE_CHANGED" {
+            if !authorized { return .ignore }
+        } else if operation == nil { return .ignore }
+        if type == "HELLO" {
+            return operation == "HELLO" && !replyHost.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? .hello : .reconnect
+        }
+        if expectedHost.isEmpty { return operation == "HELLO" && type == "ERROR" ? .current : .reconnect }
+        return replyHost == expectedHost ? .current : .reconnect
+    }
+}
+
 public struct PlayerChoice: Equatable {
     public let target: String?
     public let choose: Bool
