@@ -1,9 +1,10 @@
 """Synthetic radio-driver orchestration tests, not physical host acceptance."""
 import unittest
+import struct
 
 from test_windows_ble_protocol import Peer
 from windows_ble_protocol import Assembler, run_read_only_checks
-from windows_framing_diagnostic import run_framing_fault_checks
+from windows_framing_diagnostic import run_framing_fault_checks, run_framing_bounds_checks
 
 
 class FramingDiagnosticTests(unittest.IsolatedAsyncioTestCase):
@@ -85,6 +86,115 @@ class FramingDiagnosticTests(unittest.IsolatedAsyncioTestCase):
             peer.handler = handler
             with self.assertRaises(ValueError):
                 await run_framing_fault_checks(peer.session, raw, [], enabled=True, delay=delay)
+
+
+class BoundsDiagnosticTests(unittest.IsolatedAsyncioTestCase):
+    async def ready(self, *, wrong_status=None, delay_offset=0, callback_delay=0):
+        peer = Peer(approved=True)
+        now = [0.0]
+        peer.incoming = Assembler(lambda: now[0])
+        calls = []
+        async def raw(frame):
+            calls.append(frame)
+            try:
+                value = peer.incoming.accept(frame)
+                self.assertIsNone(value, 'Fault bytes must never complete a JSON message')
+                status = 0
+            except ValueError:
+                status = 13
+            now[0] += callback_delay(frame) if callable(callback_delay) else callback_delay
+            return wrong_status if wrong_status is not None else status
+        async def delay(seconds):
+            self.assertEqual(seconds, 9)
+            now[0] += seconds + delay_offset
+        await run_read_only_checks(peer.session, 'authorized-state')
+        return peer, raw, delay, now, calls
+
+    async def test_oversized_and_progressing_expiry_recover_same_authorized_session(self):
+        peer, raw, delay, now, calls = await self.ready()
+        checks = []
+        result = await run_framing_bounds_checks(peer.session, raw, checks, enabled=True,
+                                                capacity=512, delay=delay, clock=lambda: now[0])
+        self.assertEqual(result['oversizedFrames'], 131)
+        self.assertEqual(result['faultWrites'], 140)
+        self.assertEqual(result['sameSessionRecoveries'], 2)
+        self.assertEqual(result['slowDripMinimumAgeMs'], 63000)
+        self.assertEqual(result['slowDripMaximumProgressGapMs'], 9000)
+        self.assertEqual(len(checks), 2)
+        self.assertTrue(all(x['passed'] for x in checks))
+        self.assertEqual(sum(len(x) - 8 for x in calls[:131]), 65537)
+        self.assertTrue(all(x[8:] == b'x' * (len(x) - 8) for x in calls))
+        # A host with no size/age bounds would still have an incomplete,
+        # invalid JSON message: never deliver a full command as a probe.
+        for frame in calls:
+            _, _, _, index, count = struct.unpack('>BBHHH', frame[:8])
+            self.assertLess(index, count - 1)
+        self.assertEqual({x['type'] for x in peer.requests}, {'HELLO', 'AUTHORIZE', 'GET_STATE'})
+        self.assertEqual(len(peer.incoming.partials), 0)
+
+    async def test_no_probe_without_optin_auth_metadata_capacity_and_paused_source(self):
+        for change in ('optin', 'auth', 'metadata', 'capacity', 'small', 'playing'):
+            peer, raw, delay, now, calls = await self.ready()
+            if change == 'auth': peer.session.authorized = False
+            if change == 'metadata': peer.session.allow_authorized_metadata = False
+            if change == 'playing':
+                normal = peer.handler
+                def handler(request):
+                    reply = normal(request)
+                    if 'state' in reply['data']: reply['data']['state']['playing'] = True
+                    return reply
+                peer.handler = handler
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                await run_framing_bounds_checks(peer.session, raw, [], enabled=change != 'optin',
+                    capacity=513 if change == 'capacity' else 20 if change == 'small' else 512,
+                    delay=delay, clock=lambda: now[0])
+            self.assertEqual(calls, [])
+
+    async def test_wrong_first_ack_stops_immediately_and_preserves_failed_probe(self):
+        for status in (13, True, '0'):
+            peer, raw, delay, now, calls = await self.ready(wrong_status=status)
+            progress = {}
+            with self.subTest(status=status), self.assertRaisesRegex(ValueError, 'FRAMING_ATT_STATUS_NOT_VERIFIED'):
+                await run_framing_bounds_checks(peer.session, raw, [], enabled=True, capacity=512,
+                                                delay=delay, clock=lambda: now[0], progress=progress)
+            self.assertEqual(len(calls), 1)
+            self.assertEqual(progress['probes'][0]['observedAttStatus'], status)
+            self.assertEqual(progress['status'], 'FAILED_OR_INTERRUPTED')
+
+    async def test_idle_expiry_is_not_mistaken_for_absolute_lifetime(self):
+        peer, raw, delay, now, calls = await self.ready(delay_offset=1.1)
+        with self.assertRaisesRegex(ValueError, 'FRAMING_ATT_STATUS_NOT_VERIFIED'):
+            await run_framing_bounds_checks(peer.session, raw, [], enabled=True, capacity=512,
+                                            delay=delay, clock=lambda: now[0])
+        self.assertEqual(len(calls), 134)  # stop at the first premature expired fragment
+
+    async def test_callback_delay_cannot_hide_an_idle_gap(self):
+        peer, raw, delay, now, calls = await self.ready(
+            callback_delay=lambda frame: 0.6 if struct.unpack('>H', frame[2:4])[0] == 0xf080 else 0)
+        # Add callback delay only to the drip frames. Host gaps stay9.6s, but the
+        # conservative sender upper bound10.2s cannot prove sub10s progress.
+        progress = {}
+        with self.assertRaisesRegex(ValueError, 'SLOW_DRIP_TIMING_NOT_VERIFIED'):
+            await run_framing_bounds_checks(peer.session, raw, [], enabled=True, capacity=512,
+                                            delay=delay, clock=lambda: now[0], progress=progress)
+        self.assertGreater(progress['slowDripMaximumProgressGapMs'], 10000)
+        self.assertEqual(progress['status'], 'FAILED_OR_INTERRUPTED')
+
+    async def test_changed_source_cannot_pass_recovery(self):
+        peer, raw, delay, now, calls = await self.ready()
+        normal = peer.handler
+        reads = [0]
+        def handler(request):
+            reply = normal(request)
+            if request['type'] == 'GET_STATE':
+                reads[0] += 1
+                if reads[0] == 2: reply['data']['state']['sourceEpoch'] = 'changed'
+            return reply
+        peer.handler = handler
+        with self.assertRaisesRegex(ValueError, 'FRAMING_RECOVERY_STATE_CHANGED'):
+            await run_framing_bounds_checks(peer.session, raw, [], enabled=True, capacity=512,
+                                            delay=delay, clock=lambda: now[0])
+        self.assertEqual(len(calls), 132)
 
 
 if __name__ == '__main__':
