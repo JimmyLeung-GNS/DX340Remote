@@ -1,6 +1,10 @@
 # Full-scope completion audit
 
-## Current full-scope audit —31 October2026,17:42 HKT
+## Current full-scope audit —31 October2026,17:58 HKT
+
+**NOT ACHIEVED; goal ACTIVE/incomplete.** [Automatic host-process recovery](test-results/2026-10-31-host-automatic-recovery.md) removes local handling in one paused644/4318 desk case, while explicit Stop survives a separate process loss. Sticky-only failed authorization is retained; bounded observed-write capacity and two red→green regressions,180 JVM/build/lint and fixed eight applied requests support the correction. Not force-stop/reboot/bag/screen-off/range, mutation no-replay, audio, T04 or full T12 acceptance. Full two-phone/source/playlist/format/SD/output/commands/latency/sleep/call/range/battery/walk/ownership and signed owner-iPhone/Mac/Watch remain required. Fresh long-hold/hearing replies pending; no new audio or observer. Earlier evidence retains exact binaries; no pause/device switch.
+
+## Prior full-scope audit —31 October2026,17:42 HKT
 
 **NOT ACHIEVED; goal ACTIVE/incomplete.** [Current4318 host-process recovery](test-results/2026-10-31-4318-host-process.md) verifies phone recovery after required local Companion reopen/enable, new host epoch/saved approval/fresh decoded read and preservation. Not unattended host restart, range, mutation no-replay, audio, T04 or full T12. Earlier radio/permission/source audio retain exact scopes. Full two-phone/source/playlist/format/SD/output/command/latency/sleep/call/range/battery/walk/ownership and owner-iPhone/Mac signing/Watch remain required. Fresh long-hold readiness/hearing unanswered; no observer/audio inferred. No new code/build/job or pause/device switch.
 

@@ -1,6 +1,17 @@
 # Implementation status
 
-## Current checkpoint —31 October2026,17:42 HKT
+## Current checkpoint —31 October2026,17:58 HKT
+
+Full goal **ACTIVE/incomplete**. New Companion644799cc/source81b3f6b, unchanged phone4318/source5f2de32. [Automatic host recovery and retained failed trial](test-results/2026-10-31-host-automatic-recovery.md), [manifest](test-results/2026-10-31-host-automatic-recovery.json).
+
+- **Implemented:** enabled host requests system-managed restart, STOP/permission exits remain non-sticky; null restart does not redeliver PAIR/PROBE/actions. First sticky-only9d41 host restarts but phone AUTH times out12010ms. Observed-write capacity learning fixes this route; old default20 diagnosis remains an inference, fixed sizes180/220 are logged. Two new regression tests fail baseline/pass fix;180 JVM/native assembly/lint pass. Original-signer in-place installs/final pulled APK byte equality verified.
+- **Automatic desk recovery verified:** actual Settings foreground, one exact own-process kill, no post-kill DX input/local enable/phone Connect/new approval. Host foreground observed1765ms/new PID+epoch, phone PID unchanged/recovery4310ms. Host advertising→approval966ms; decoded HELLO170ms/Auth1707ms/GET_STATE791ms applied. Not range, GATT ACK, p95, bag/sleep or full T12 acceptance.
+- **Stop respected:** actual Companion native Stop removes HostService for10 samples; stopped-process kill recreates bound process but no HostService in15 further samples. Initial enabled state restored deliberately; saved Connect/read93/977/503ms pass.35 journal rows retain23 prior/four failed-trial/eight fixed applied rows, zero evictions. No fixed error/playback/volume; earlier failed history retained.
+- **Final/preserved:** four prefs/settings/own permission flags/exposed bonds unchanged; grants/browsingON, both sources paused2 at37/headset(4)/prooffalse, host foreground/both bindings, phone normal Disconnect/foreground cleared/help collapsed; both USB present. No build/job/emulator/observer/audio/long hold active. Unchanged phone/Apple evidence72 Flutter/19 Swift/closed5f archives retains scope; no new Apple workflow paths.
+
+Next: current644/4318 phone-UI library/stale-token and full T01–T18/two-phone source/playlist/format/SD/output/commands/latency/sleep/call/range/battery/walk/ownership/owner-iPhone/Mac signing/Watch. Fresh30-minute readiness and earlier envision hearing remain pending; no long hold/audio inferred. Older audio retains exact APK scope. No user pause/device switch.
+
+## Prior checkpoint —31 October2026,17:42 HKT
 
 Full goal **ACTIVE/incomplete**. Installed4318/source5f2de32 phone and00e5/source7fbdec8 host unchanged, fresh installed hashes match. [Current process-loss recovery](test-results/2026-10-31-4318-host-process.md), [manifest](test-results/2026-10-31-4318-host-process.json).
 

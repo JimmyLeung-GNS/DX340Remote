@@ -1,0 +1,927 @@
+{
+  "recordedAt": "2026-10-31T17:57:05.636452+08:00",
+  "goalStatus": "ACTIVE/incomplete",
+  "hostSource": "81b3f6bad5ab68fae8dfd70dce0c64303e3cba3c",
+  "stickyServiceSource": "b15edf622a78605b49a766388f5b782e886bd912",
+  "phoneSource": "5f2de32ca58952faf401d0d558755972d4e160ba",
+  "phoneApkSha256": "4318e6ad38ac775f8a635532b628be1cd3a93ab54647d6e6893169aaf88bc440",
+  "hostApkSha256": "644799cca6da1ceb11775d006512c24a618bf536e94c8e1f831a0624936e0093",
+  "failedStickyOnlyApkSha256": "9d41e8981b97d8185659ddac2f0b6220c7fa511a747c8cf295d826f28f7e0970",
+  "versions": {
+    "pixel": "Pixel9a Android16/API36 CP1A.260405.005/shared0.2.0 code2",
+    "dx340": "Android13 eng.iBasso.20260812.181952/Companion0.1.0 code1/Mango4.1.37 code240/Apple6.5.3 code1599"
+  },
+  "software": {
+    "jvmTests": {
+      "controller-core": 3,
+      "core-protocol": 55,
+      "library-cache": 7,
+      "source-adapters": 115
+    },
+    "total": 180,
+    "failures": 0,
+    "nativeBuildLint": "PASS",
+    "capacityRegression": "Two tests fail at retained20 baseline and pass with observed-write capacity; reply framing/reassembly plus bounds",
+    "sharedPhoneAndApple": "No source/package change; prior72 Flutter/19 Swift and closed5f Apple archives retain scope; no new job"
+  },
+  "automaticRecovery": {
+    "at": "2026-10-31T17:51:17.906783+08:00",
+    "beforeHostPid": "12608",
+    "beforePhonePid": "27585",
+    "foregroundBeforeKill": "Android Settings",
+    "killCount": 1,
+    "postKillDxInputCount": 0,
+    "immediatePidofExitCode": 1,
+    "immediatePidofOutput": "",
+    "newHostPid": "12800",
+    "foregroundRecoveryObservedMs": 1765,
+    "afterPhonePid": "27585",
+    "settingsStillForeground": true,
+    "hostEpochChanged": true,
+    "hostAdvertisingToApprovedMs": 966,
+    "phoneConnectingToConnectedMs": 4310,
+    "observedPayloadCapacities": [
+      180,
+      220
+    ],
+    "phoneConnectTapDuringRecovery": false,
+    "newPairingOrApproval": false
+  },
+  "stop": {
+    "at": "2026-10-31T17:53:15.176017+08:00",
+    "normalStopServiceRemoved": true,
+    "preKillSamples": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "postKillSamples": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "beforeStoppedProcessKillPid": "12800",
+    "afterStoppedProcessKillPid": "13001",
+    "hostServiceStayedStopped": true
+  },
+  "receipts": {
+    "total": 35,
+    "priorProcessReportUnchanged": 23,
+    "failedStickyOnlyRequestsRetained": 4,
+    "fixedBuildNewRequests": [
+      {
+        "id": "a5258485-0bfa-435d-9939-a293a1151393",
+        "operation": "HELLO",
+        "source": "mango",
+        "startedMs": 3965322,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 129,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "26e7c11e-66f3-4f96-b60a-6546b679106d",
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "startedMs": 3965452,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 825,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "322def0e-76d7-4c4d-8154-a1590fc0b85e",
+        "operation": "HELLO",
+        "source": "mango",
+        "startedMs": 3975124,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 170,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "cfce9773-ab28-42e0-bcbd-b2eb3b91e1a3",
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "startedMs": 3975295,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 1707,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "78d7105e-e5f9-418c-be50-eb07dc388aee",
+        "operation": "GET_STATE",
+        "source": "mango",
+        "startedMs": 3992444,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 791,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "85c249fe-4076-44a1-8cbe-0c9d4d9a9d01",
+        "operation": "HELLO",
+        "source": "mango",
+        "startedMs": 4168890,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 93,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "2ea5ab6f-effb-4a23-a170-ccb5dc975c27",
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "startedMs": 4168983,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 977,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "cd51a2ff-f156-4c71-9794-83a7a9c4fcf3",
+        "operation": "GET_STATE",
+        "source": "mango",
+        "startedMs": 4179937,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 503,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      }
+    ],
+    "zeroEvictions": true
+  },
+  "preservation": {
+    "phonePermissionsUnchanged": true,
+    "phoneExposedBondIdentityTypesUnchanged": true,
+    "phoneExposedBondRows": 1,
+    "hostPermissionsUnchanged": true,
+    "hostExposedBondIdentityTypesUnchanged": true,
+    "hostExposedBondRows": 4,
+    "prefsByteHashesUnchanged": true,
+    "settingsUnchanged": true,
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeProof": false,
+    "bothBindings": true,
+    "hostForegroundEnabled": true,
+    "phoneDisconnectedForegroundCleared": true
+  },
+  "failedAttempt": {
+    "result": "FAILED phone recovery on sticky-only9d41 host; automatic host restart succeeds",
+    "helloMs": 1794,
+    "authorizationTimeoutMs": 12010,
+    "diagnosis": "Consistent with new server attaching an existing ACL without MTU callback and retaining default20; old capacity was not directly logged. Fixed host explicitly learns180/220 from valid received writes and recovered authorization succeeds. Not an OS-wide root-cause claim.",
+    "driverIssue": "First sticky driver aborts when a stale foreground service record is observed before a replacement PID exists. No repeated kill. Fixed driver accepts expected PID absence while observing the same attempt."
+  },
+  "limits": [
+    "One paused desk automatic process-loss case, not full T12/range/force-stop/reboot/screen-off/bag recovery",
+    "Stop verified for10 pre-loss and15 post-loss samples, not indefinite observation",
+    "No playback mutation/no-replay/audio/T04 acceptance",
+    "No new long hold or owner hearing confirmation inferred",
+    "Full two-phone/source/playlist/format/SD/output/commands/latency/call/range/battery/walk/ownership/signing/Watch remain open"
+  ],
+  "signerSha256": "24f48aa3566dcf7b65774ee12585191a8a0df9eeff9cc49e9e72c22bacca6e8d",
+  "rawEvidence": [
+    {
+      "file": "artifacts/host-sticky-20261031/b15-failed-companion.apk",
+      "sha256": "9d41e8981b97d8185659ddac2f0b6220c7fa511a747c8cf295d826f28f7e0970"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/b15-installed-hash.txt",
+      "sha256": "2399d5671c30486c44bbeb37acf54c1d496f89affee4668a317afcb60078324d"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/before-kill-host-diagnostic.json",
+      "sha256": "6ca72bf66b52b16101f5a9d654f1e0e464960cf9fa8c8b612d1e0f312558856e"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/before-kill-host-services.txt",
+      "sha256": "63ae1be89a254281ffed04c760ec22500ae305b761a49c48bf536f0d6c8544b8"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/before-upgrade-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/before-upgrade-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/before-upgrade-host-accessibility.txt",
+      "sha256": "8e90d020a8806798439770111872f0407d3add9372d5005ee45969a273047bd7"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/before-upgrade-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "445a91e05ac0c8b15d59bd49f12fd747e72414f4070a0a4d1137d035c9870451"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/before-upgrade-host-audio.txt",
+      "sha256": "7ff16859428102a3b46df23d1781d4b00aa8ca4968e1090a3cab68d33719ba84"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/before-upgrade-host-bluetooth_manager.txt",
+      "sha256": "c2f71049b706ce6adc1eac79d41f5b1e2a3140e7b69ed312db11345b854494c4"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/before-upgrade-host-media_session.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/before-upgrade-host-package-org.dx340.remote.host.txt",
+      "sha256": "fc964dfcd5c9ff153e75245039fd5385cd7d24d64c667c91a2c9f024e59861e4"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/before-upgrade-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/before-upgrade-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "ea20260ce0f666fbca13243871fb25268f9df29b5d5b19444c2073a7dc990fba"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/before-upgrade-phone-bluetooth_manager.txt",
+      "sha256": "bf0df346a8f8632da8857ba7bb4a2ab3052809315024985aa0cdf87b1221ba6e"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/before-upgrade-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "f363b682ffb85d55b090fda5064049a831c51691335d9d632c10c0a7a9159010"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/before-upgrade-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/before-upgrade.json",
+      "sha256": "4dbef8e75d30ebbd1adae9d46ab964fba08679e33f13ab3392494ac908ffa1f4"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/build-driver.txt",
+      "sha256": "4dbc337fa76baa625ddbdff483acb89607703160c280426528ce3e72c3b2e4bd"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/capacity-fixed-build.txt",
+      "sha256": "337f1c592d221e958d2f2883171e3db62a30f619c6a817ea4e15165b1f7912a5"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/capacity-red.txt",
+      "sha256": "c0e615098e633b1d581ff4ce91fdc81a0ae0133600a2332a1d050f534974da16"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/advanced-open-top.txt",
+      "sha256": "b19807c30bc787dcb1a6dae1fec92edc58ecf2cfd7081c45544371cc8a80a198"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/advanced-open.png",
+      "sha256": "72a484430aef0513846820d1bc9b94ea10393270ed269f90cd083fc50d2af109"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/advanced-scroll-top.txt",
+      "sha256": "571fa567e09d745afcc73ada306ecfff42884876274d228234d1581e53ef521f"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/advanced-scroll.png",
+      "sha256": "4d049c7433def7c63ef55bd44267eff3558e336a54c630b44b8b16e9eeca026a"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/automatically-recovered-host-diagnostic.json",
+      "sha256": "11f30a8c5035b38d29240d51544b7ecd21a03a6505aa2d9aabc3fcf115948210"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/automatically-recovered-host-services.txt",
+      "sha256": "7dbab684e9c99cb28b1f9d1c3f3d7e3bcb86d3e242f8e6cfcda317b80ad6f5bc"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/before-kill-host-diagnostic.json",
+      "sha256": "c7de15a4184a6035b3bfb901ede6a9bf2597e8b44ffd4092aa3a30d0912418cb"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/before-kill-host-services.txt",
+      "sha256": "9ff1ec7ce7e4fb647150e01f0dda890ce7a953265b61b4fe6819026b5ded33c6"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/export-final-disconnect-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/export-final-disconnect-before.xml",
+      "sha256": "a2a89572738985f349e48b937b7890e7b7c32f85c9ca1d4d219b9fc38482f709"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/export-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/export-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/export-help-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/export-help-collapse-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/export-save-after.xml",
+      "sha256": "a2a89572738985f349e48b937b7890e7b7c32f85c9ca1d4d219b9fc38482f709"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/export-save-before.xml",
+      "sha256": "8641ef78871101fdf15bb849b1475a66ce4161198f6d374ee896ddab02bc1a32"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/export-scroll-after.xml",
+      "sha256": "8641ef78871101fdf15bb849b1475a66ce4161198f6d374ee896ddab02bc1a32"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/export-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/export-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/export-setup-before.xml",
+      "sha256": "fa756946a9a8040d016519b79adb8ecebf7c79e2947fe31e9304bb70a1c60e36"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/final-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/final-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/final-host-accessibility.txt",
+      "sha256": "734c8a606189e05317141d9f99d7ba733e7756abbfe63bd1a5ead856f32e440d"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/final-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "d93b5ba8ce3dcc306fc52fd11323af30cd0011aae04fb6e421ef7e763b52879b"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/final-host-audio.txt",
+      "sha256": "6ff253f75d348401aa12d90860d632239b197680eedc3212197c13c3b2380c10"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/final-host-bluetooth_manager.txt",
+      "sha256": "407b04b73bf9dc59682546fb07692b18ec8fbec93718f837e2fe6d320a423388"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/final-host-diagnostic.json",
+      "sha256": "780d1fa4f041449c734843b29100657ac17d5a7a5709771d06401619dd23124d"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/final-host-media_session.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/final-host-package-org.dx340.remote.host.txt",
+      "sha256": "c3c3b2745b29394f22bf65fc36e1494c10ceb5573072448887c5a1ba1de431f8"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/final-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/final-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "8a5ecb38c0323bd8c22ac62257898faa23d981ec369f2adda84e25a8d36d74ca"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/final-phone-bluetooth_manager.txt",
+      "sha256": "1c99edbdc1ed2f2049270ee269e62c7f742cf4d64f3eb234a024e5f2d569e167"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/final-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "bcd24cd5271ddef553750c565413609a966b4b7d0659ba32663911a9326b31a9"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/final-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/final.json",
+      "sha256": "fec1234f945272bb3b56db8341cc5d69cc897c592078877c275db691d324609e"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/fixed-enabled-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/fixed-enabled-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/fixed-enabled-host-accessibility.txt",
+      "sha256": "89bead32a423b0af2756809a41e5ee0b8c1c364ed842c24dc494b2a209bc74bc"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/fixed-enabled-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "d199ffdff4bb51b825607c9a172a111326570c3a101ee5a72da452d8f698bd7f"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/fixed-enabled-host-audio.txt",
+      "sha256": "77eb3c0a8a8fee35715f1828134ce9f81af8a3ebe6c74e9acca4f37f7b22285f"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/fixed-enabled-host-bluetooth_manager.txt",
+      "sha256": "8184d0f7f2e71e9646cd595d08e271fdfd593c98d7330bcb829ec20be0aee9a5"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/fixed-enabled-host-media_session.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/fixed-enabled-host-package-org.dx340.remote.host.txt",
+      "sha256": "b9e27c5dc6d17a18547e09c5ad0eb18c4462bd9ee70e32f535afcca7b49e6202"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/fixed-enabled-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/fixed-enabled-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "01f9020026f0464c039cb777d7aa169c5e5399edcce7596a5251eb252f413f08"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/fixed-enabled-phone-bluetooth_manager.txt",
+      "sha256": "c40a3670563b696643a98d52b415485da135279d20643adb73f35af5e7ef7e70"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/fixed-enabled-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "638c5023ac575e8371b7fb8d763d7d2f51fe6efac8b3b94b683eaf4da2ee3fa3"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/fixed-enabled-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/fixed-enabled.json",
+      "sha256": "c4a13db161bc6223b3361ab3ecb6865a9e44f92efc51f45502d08fd823bb147d"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/host-native-log.txt",
+      "sha256": "2afb91b6a54b3bacf7bd51645893d709c502e460af1340f8119b8842bf6a515f"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/installed-companion-81b3f6b.apk",
+      "sha256": "644799cca6da1ceb11775d006512c24a618bf536e94c8e1f831a0624936e0093"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/installed-host-sha256.txt",
+      "sha256": "9fba7f8d1f553f28bef5fb2446b526dcd117d44c5e124eac113dd1a3bb8aee20"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/phone-final-report.json",
+      "sha256": "a20212cd53ef29a438b6b387f12ae8900bc64fc03228d4a84f7edff1782ab20b"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/phone-native-log.txt",
+      "sha256": "33f1a61b0ce6fe9c5e380b4817ac3e7b5003e76829fd8894ba4f6c86767c1ce5"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/restore-top.txt",
+      "sha256": "f7a79d25958818b9db60a427154db9ccb35254a609d28808010c3621ef46464e"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/restore.png",
+      "sha256": "ff15c72845851e5337a1a626c9442dbfda70977b842914af00ecfa764372b816"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/settings-after-recovery.txt",
+      "sha256": "77a05745f90ddfb69e25d30920bc589d3a231c4034cf0e5a219b3b7ebf26b6c1"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/settings-before-kill.txt",
+      "sha256": "cb605635fdf46cdac25b20ac2a86029b63c40b0b18a6c0e7ba1524a7be01149b"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-auto-recovery-phone.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-before-kill.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-final-reconnected.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-fixed-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-fixed-connect-before.xml",
+      "sha256": "6ec7c009dbde706b3727bde83937e81d88ecf4aef52de875687929df77a751b0"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-help-close-after.xml",
+      "sha256": "6ec7c009dbde706b3727bde83937e81d88ecf4aef52de875687929df77a751b0"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-help-close-before.xml",
+      "sha256": "6aa1e7ff1af2fe5ee58468bc4fad0e86645a84d31bc1cb5a4ba4ab1b2e67c3a9"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-player-after.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-player-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-process.json",
+      "sha256": "0266b4d854c9617a02ce7d22ed2f0123d60cdd1b9fa36d90f247b41c9609f501"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-refresh-after.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-refresh-before.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-restored-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-restored-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-restored-connected.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-restored-player-after.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-restored-player-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-restored-refresh-after.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-restored-refresh-before.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-stop-disconnect-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-stop-disconnect-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-stop-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-stop-setup-before.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/sticky-success-diagnostic.json",
+      "sha256": "f1d547ba90afe258122288951024445d85cd936ad9dc0edfbfc51394831c7f2c"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-after-loss-00.txt",
+      "sha256": "fa4671adbf41d5869d0e22583227c858e15ab7afabe1db64577508ee5261d0e9"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-after-loss-01.txt",
+      "sha256": "a428341b48fd7919fb940fd992065d2d03e0922ef87319e6dc6cc37cc79ad18d"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-after-loss-02.txt",
+      "sha256": "413a8d359badb5ba4fe00411de08baa40a281ee9c471579506e5985f25e9a600"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-after-loss-03.txt",
+      "sha256": "0bf788d171bcc87bbef5e71ecee8c09b023a061d056ae216316660ff84e87d23"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-after-loss-04.txt",
+      "sha256": "5f690a1a160545709635ddad1b5fc005e03bd05869c62b2c2bd57a69667e01da"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-after-loss-05.txt",
+      "sha256": "b365921d33cac5206dc602400a92dc733eacdf5908dc831c3561d20408f53a7b"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-after-loss-06.txt",
+      "sha256": "631553e5dfd7e046415822ef517020129a009857d6596b505aaa66be6009883a"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-after-loss-07.txt",
+      "sha256": "73c5f49685d9ca333e49d7781d1563b19d145ec2dd71cebc357ec1b16922f225"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-after-loss-08.txt",
+      "sha256": "dc52d01e8edea59a472b39afda5203cb1cd290de9a3166234befa45e7cc2c275"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-after-loss-09.txt",
+      "sha256": "cd3f46e9299ab9a3d9f05d31ae23309faa690c2b0ac61dc2f790a7090b8129db"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-after-loss-10.txt",
+      "sha256": "e9f3fde9634c5ac456beb2eaa52c6d391fc9f648fa9f73f1070955c68cf0638a"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-after-loss-11.txt",
+      "sha256": "5c9a151adc619a1461dbb6e40bf1f839488fe29b538799d0075877449ff5b6e0"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-after-loss-12.txt",
+      "sha256": "728e38679f94103b8d0f4c971d68be06aa017ea18592bc5885612e3a6dd1d229"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-after-loss-13.txt",
+      "sha256": "ee26f5dd44ce388aba0c06fdc378dce3134850f25f11ed34894287d6a31e077a"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-after-loss-14.txt",
+      "sha256": "b4db0941ebe9f43e86963bbc31b1c145b1a1154566765946554266c7a4317b0f"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-after-tap-services.txt",
+      "sha256": "8262705e4c8be0086eacc9656e1c60e7ac06e4b0e092fce24bf8f0e8416da7d5"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-before-loss-00.txt",
+      "sha256": "87dd859406ea1634f5c6dda59e66815b3a36eb6bbdc7ca3d3789c269d48fcd08"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-before-loss-01.txt",
+      "sha256": "b6d2f3289d6b82cf052e9eecb77aa114da5c5bd39a85866312ecd1b29031751c"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-before-loss-02.txt",
+      "sha256": "58febbd905e5c52c36a345a6e872494ca834663af52cc886c3add0fba93d9e64"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-before-loss-03.txt",
+      "sha256": "0bffefc364a7cef5b4d9916fcc00b93a39ad1d3435c2095b4a82806e0928b708"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-before-loss-04.txt",
+      "sha256": "0299e16d9ab9d887d900f5bfd617cda0a97171eae9a978d5e9780215bb5d0c11"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-before-loss-05.txt",
+      "sha256": "0469dc3de749f91e3482f4df7839c5199cf5c588d46c7ce5023112228eb50b2a"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-before-loss-06.txt",
+      "sha256": "712ddf13e771f3b28c95cfca73307f4d3f702dd20f669dd052f348d160aaed90"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-before-loss-07.txt",
+      "sha256": "bbc97f7ed73c5421c9fe09bfbb4b706aa777f555bd7a383b454287a09f9cf1bf"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-before-loss-08.txt",
+      "sha256": "88ecec86a7aa8912ed0e55501edbbb04713b306dd6c1cbc1150085fc53ddaf38"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-before-loss-09.txt",
+      "sha256": "e71e99a18fd0b487735b3394cedff2f2d4ad028e503d74547584496bf7fdd5f3"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-case.json",
+      "sha256": "4bcf97e7ce01f2e3043eeae212a47f3f90988dcd6832de85d83d1111b9d1b5ca"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-pre-scroll-top.txt",
+      "sha256": "dc4f24c5725894386db93af4c1713a373d7255c88a51b3e51f7098eb5fe55eb8"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/stop-pre-scroll.png",
+      "sha256": "2af81fe46a68341ff8e60ef9572b0095cf21d9db76ec2799cbe099d85164a03a"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/upgrade-top.txt",
+      "sha256": "a606a4075e572ee2c2ee972334988bda099ab917305ea9cff48eb22843c6ea0b"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/upgrade.png",
+      "sha256": "58a874ee4b1bbd8ca7ebd709ee09a04a176f39e17102703a1f8ac9ea434311bd"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed/verified-summary.json",
+      "sha256": "e32356e0ccac04684100be769bc20618c89312321de9dd87470c09e900b6defd"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed-signing-check.txt",
+      "sha256": "ac21be92f2cde60da8545d465ee59a9f84ccdc6485f96ddefab1c5473bdbb167"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/fixed-signing-manifest.json",
+      "sha256": "3f85d737a5a391efdcc30c6827c4017409f71d2d8afd51afa3469c827ea3ae78"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/settings-before-kill.txt",
+      "sha256": "620b5e3a04ba50e608f0e0f0fda933cd677b89dc814be641087ec44041b50bde"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/signing-check.txt",
+      "sha256": "76067caa84b3b001ee2eaa1ed1b9800a39cf3b8f5cac9ba6935023f5ce6cbcf4"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/signing-manifest.json",
+      "sha256": "160bed714bc731912bbdaa1e5a45fb1955f5cb6def17dd5cc9f23bd6492070ca"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/sticky-auto-host-activities.txt",
+      "sha256": "ce11fcb14678c6c5c513fa447f0cd7aa6161c1e9a9032f5d6c1185558fdeef93"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/sticky-auto-host-diagnostic.json",
+      "sha256": "9fecf5e8e3befc57d97e2f68c810846a88c4715a9c4c3376e659a0ca6d7ee478"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/sticky-auto-host-services.txt",
+      "sha256": "a6c1fd79a97255b76c249d7e7dc16858eda21382dab0f546177997663e4d644f"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/sticky-before-kill.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/sticky-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/sticky-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/sticky-failed-phone-log.txt",
+      "sha256": "7595294dfc19e6dd6d6fd9d829794e40608f025d66cf71ebeace449896b633da"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/sticky-failed-report.json",
+      "sha256": "4e44713c2521842f6eca078ae8d315a444439694eaadda7713c1b08607c84ee6"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/sticky-failure-export-after.xml",
+      "sha256": "6aa1e7ff1af2fe5ee58468bc4fad0e86645a84d31bc1cb5a4ba4ab1b2e67c3a9"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/sticky-failure-export-before.xml",
+      "sha256": "38e99082c78774c57b2941bf41300c349e411ae3acdc9213e50d97afa13f3e22"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/sticky-failure-help-after.xml",
+      "sha256": "0ce5b6ccd65ef614c0ca33835d0c7c6f1cae136f20eb8d5e8b6c355dd9b8bce0"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/sticky-failure-help-before.xml",
+      "sha256": "228d51c3c81b77136acaae9ae3291902bdf8ec58789f4f1c6d510e05eda337b4"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/sticky-failure-scroll-after.xml",
+      "sha256": "38e99082c78774c57b2941bf41300c349e411ae3acdc9213e50d97afa13f3e22"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/sticky-failure-scroll-before.xml",
+      "sha256": "0ce5b6ccd65ef614c0ca33835d0c7c6f1cae136f20eb8d5e8b6c355dd9b8bce0"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/sticky-new-host-log.txt",
+      "sha256": "98e85baf435b497c2da7436173ad1ab45096a8d6274f9cf560e4064e330c1282"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/sticky-process.json",
+      "sha256": "3b90a880f482ef1ec4d90d44c7cc27a3818fd2a777d9ece6ae150956d4c531f5"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/sticky-recovery-followup.xml",
+      "sha256": "228d51c3c81b77136acaae9ae3291902bdf8ec58789f4f1c6d510e05eda337b4"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/upgrade-top.txt",
+      "sha256": "c69d9ed6cf76b9ad3b03c7ac3b61a9f44fbbf3eccbfd1681fa34c444655061a2"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/upgrade.png",
+      "sha256": "61232633d594773e518c6b7c4028d0e85431084df568134adb752a8dee4ca0a2"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/upgraded-enabled-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/upgraded-enabled-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/upgraded-enabled-host-accessibility.txt",
+      "sha256": "f1f662be1b876ba3121889f0183dc896761fb665acc9370c8d58646cc71715a5"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/upgraded-enabled-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "caa257e4099ea3c24f14e50b9b2ca746918a6c3bf88c94bbd181f03c441f24e3"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/upgraded-enabled-host-audio.txt",
+      "sha256": "7d615a6b5de1c7a06a1126ab0a8e4183c15ccb2ce40834f93949ef5e3ec39687"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/upgraded-enabled-host-bluetooth_manager.txt",
+      "sha256": "acd685e6619ce7cb4605da479f8b653b6bbfc0365bc1cc0f3a5930c2c52f8f35"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/upgraded-enabled-host-media_session.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/upgraded-enabled-host-package-org.dx340.remote.host.txt",
+      "sha256": "331065e610ba86843a44bce36255add7de209e77d96c3541b0cd9296804d88e1"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/upgraded-enabled-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/upgraded-enabled-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "593b9197a141305845d319172eb800dcb3b7840a0ccf199db31e1f0d918ac141"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/upgraded-enabled-phone-bluetooth_manager.txt",
+      "sha256": "09f2c5c9c8ebb7e5da85064b33ead94b7b3d8230aae263bb36e4ad76dfadb375"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/upgraded-enabled-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "9049fa478053e4d5ee8c2eb3ffe9853da133d11d5c941938b2d37e83b64db66e"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/upgraded-enabled-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/host-sticky-20261031/upgraded-enabled.json",
+      "sha256": "5c298b13a45190fee7b1705c7be798afb954d9be8bd6c7b25b8d0667e9e96a9f"
+    }
+  ]
+}
