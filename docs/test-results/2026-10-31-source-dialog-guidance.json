@@ -1,0 +1,534 @@
+{
+  "recordedAt": "2026-10-31T19:17:28.245122+08:00",
+  "status": "VERIFIED Android paused subset; full goal ACTIVE/incomplete",
+  "versions": {
+    "pc": "DESKTOP-T9ICUE4 / Windows11 Pro10.0.26300 / PowerShell7.6.5",
+    "phone": "Pixel9a / Android16 API36 / CP1A.260405.005 / shared0.2.0 code2",
+    "host": "DX340 / Android13 API33 / eng.iBasso.20260812.181952 / Companion0.1.0 code1",
+    "mango": "4.1.37 code240",
+    "appleMusic": "6.5.3 code1599"
+  },
+  "phoneSource": "80d4edc6f2967596be7474a57eb40118558d562f",
+  "hostSource": "81b3f6bad5ab68fae8dfd70dce0c64303e3cba3c",
+  "installedApks": {
+    "phone": "d75540a514bbc484cc1f84462c50b1f9f62b7bd4b15ce4c8ae019c58655acc02",
+    "host": "644799cca6da1ceb11775d006512c24a618bf536e94c8e1f831a0624936e0093"
+  },
+  "signer": {
+    "package": "org.dx340.remote.controller",
+    "candidateSha256": "d75540a514bbc484cc1f84462c50b1f9f62b7bd4b15ce4c8ae019c58655acc02",
+    "installedSignerSha256": "24f48aa3566dcf7b65774ee12585191a8a0df9eeff9cc49e9e72c22bacca6e8d",
+    "candidateSignerSha256": "24f48aa3566dcf7b65774ee12585191a8a0df9eeff9cc49e9e72c22bacca6e8d",
+    "sameSigner": true,
+    "note": "Read-only development-key comparison; no install, uninstall, data reset or signing-key migration."
+  },
+  "guidance": {
+    "newGuidanceVisible": true,
+    "message": "Check the music app on your player. Close any dialogs or overlays, then browse again.",
+    "oldRowsCleared": true,
+    "trackSelected": false
+  },
+  "recovery": {
+    "freshRootAndFoldersAndSdRequested": true,
+    "visibleFolderRows": 4,
+    "modalCancelledLocallyOnce": true,
+    "scanConfirmed": false,
+    "playbackAttempted": false
+  },
+  "receipts": {
+    "modelInstanceId": "60276d32-d73a-4e41-a4c5-be5a895e1228",
+    "total": 8,
+    "operations": {
+      "HELLO": 1,
+      "AUTHORIZE": 1,
+      "BROWSE": 6
+    },
+    "requests": [
+      {
+        "id": "893b4002-2dd6-4f48-ab19-8072e8ecaa72",
+        "operation": "HELLO",
+        "source": "mango",
+        "startedMs": 86641,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 131,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "694f4fa5-11c0-4013-9e35-cf2b7841fd3b",
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "startedMs": 86773,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 829,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "54ea9866-0fda-4213-8f7f-ddbc5aabce0b",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 95861,
+        "accepted": true,
+        "acceptedAfterMs": 172,
+        "finishedAfterMs": 811,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "9be60d3d-380f-4dad-bc17-3211a097dee0",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 101313,
+        "accepted": true,
+        "acceptedAfterMs": 133,
+        "finishedAfterMs": 328,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "35a28140-29ab-4555-92e2-ed351202cf6a",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 106313,
+        "accepted": true,
+        "acceptedAfterMs": 153,
+        "finishedAfterMs": 250,
+        "result": "error",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": "UI_UNEXPECTED_SCREEN"
+      },
+      {
+        "id": "5f3a2b9a-7711-41c5-9352-f4702038ec6a",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 436759,
+        "accepted": true,
+        "acceptedAfterMs": 145,
+        "finishedAfterMs": 780,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "2b3c0f59-2293-4ff7-a715-0e617460b9e4",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 442179,
+        "accepted": true,
+        "acceptedAfterMs": 135,
+        "finishedAfterMs": 329,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "7a91f156-00af-4e79-8d67-8d7865d98351",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 447182,
+        "accepted": true,
+        "acceptedAfterMs": 152,
+        "finishedAfterMs": 1131,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      }
+    ],
+    "zeroEvictions": true,
+    "apk": "d75540a514bbc484cc1f84462c50b1f9f62b7bd4b15ce4c8ae019c58655acc02"
+  },
+  "preservation": {
+    "phonePermissionsUnchanged": true,
+    "phoneExposedBondIdentitiesUnchanged": true,
+    "hostPermissionsUnchanged": true,
+    "hostExposedBondIdentitiesUnchanged": true,
+    "preferencesByteIdentical": true,
+    "settingsUnchanged": true,
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeProof": false,
+    "phoneDisconnectedForegroundCleared": true,
+    "hostForegroundAndBothBindings": true,
+    "hostProcessUnchanged": true,
+    "cardMounted": true
+  },
+  "ci": [
+    {
+      "runId": 41195490397,
+      "name": "Apple build and simulator launch",
+      "headSha": "80d4edc6f2967596be7474a57eb40118558d562f",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/41195490397",
+      "archiveInspected": true,
+      "artifactId": 13041375287,
+      "archiveSha256": "dc7c36a5c1d00baa8163afadf736643871fa2ca24d60313662e3d0a5ba33105b",
+      "swiftTests": 19,
+      "captureGuards": 12,
+      "simulator": [
+        "com.apple.CoreSimulator.SimRuntime.iOS-26-5",
+        "iPhone Air"
+      ],
+      "macOS": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.2\nBuildVersion:\t\t25G83",
+      "xcode": "Xcode 26.6\nBuild version 17F113",
+      "limit": "Hosted simulator/build evidence only; not owner signing, physical iPhone BLE or audio"
+    },
+    {
+      "runId": 41195490341,
+      "name": "Shared phone interface verification",
+      "headSha": "80d4edc6f2967596be7474a57eb40118558d562f",
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/41195490341"
+    }
+  ],
+  "rawEvidence": [
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/blocked-guidance-case.json",
+      "sha256": "2bd67997a43167bb0ec90cad2bd13b5b36b97078c57c3d83a0c84264de58438f"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397/apple-build.txt",
+      "sha256": "82b2b750f7f35c2a3d698fe1c311a89c98ea2c2c75dad0e55e37c4ca14224570"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397/apple-capture-matcher-tests.txt",
+      "sha256": "2072ea10acb601303ef8f21be984d3cfc065831ff61278198aa4b2b3955354ce"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397/apple-capture-readiness.txt",
+      "sha256": "2d281066dd34cbb93d31c51774640e2c11c79f3159aa05bbf62b1ce5d058f529"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397/apple-library-light.png",
+      "sha256": "3dd62f000813f510074e290443421e9fb67230576452f67c2724fef4964ccb0e"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397/apple-player-dark.png",
+      "sha256": "d5dd0bcc639b1471c6db55cc9ec3c93f45f27953fe6908e6d3e4ecf4827e7876"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397/apple-player-large-dark.png",
+      "sha256": "ef0920c49adcbd8c3da4b42cc46c0b0886a4572f0c37fa8515416c81804feeb3"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397/apple-queue-light.png",
+      "sha256": "89d6dc804ca89ce6a9b1034189b5a9c830b6f93878bbd95841b37eb153bc8c0c"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397/apple-setup-light.png",
+      "sha256": "e9ac49c48e454decc15808c2313a366fb58f5ca5ee4b3131f09cb73501d4cab9"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397/apple-simulator-boot.txt",
+      "sha256": "ca0fe89307e7de6cc1632c369d4a9e7f165969cd2367693699ece1de7c5b3271"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397/apple-simulator-launch.png",
+      "sha256": "1dee15a099eda566d3eb8bd47309af966cc4cd144e25423d839f934b3537edad"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397/apple-simulator-launch.txt",
+      "sha256": "e41ed5370dfa7a071b3e6f3965b3de92bfcad5ea421f7645c8cc1fd8360308aa"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397/apple-simulator-processes.txt",
+      "sha256": "af5ecd8a5ca1a55bdfe72296689fc22827393b231fee0669ff64b27f6a5c1e9f"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397/ci-simulators.json",
+      "sha256": "594084d646f2586e52c66328c583b79fcde9330e82ceb24cc72373ab3630ff45"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397/ci-xcode-version.txt",
+      "sha256": "18730ed2ae28a2c9cf0c2d5db549033a4f07089331391a7133b7b32187454fa9"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397/macos-version.txt",
+      "sha256": "cd5d6399b3785b04ceaae75045a9ca9f80f0bbc3526eff9d0c36b170ed1ec348"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397/swift-tests.txt",
+      "sha256": "7871b1ede14ac255e73df7cae03caa8254ed4fb7d2e0830f64122c5d85f8f562"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397/xcode-version.txt",
+      "sha256": "18730ed2ae28a2c9cf0c2d5db549033a4f07089331391a7133b7b32187454fa9"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397-artifacts.json",
+      "sha256": "4291f218c49e30d89ceb03f9e5cf52552c4b4c26bb23896c806effebaeb6ac0d"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397-jobs.json",
+      "sha256": "ee357a22c4ae47639f95d3d0eb17f3a5c50deaa67d84a3a7ecc97febfb588292"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397-verified.json",
+      "sha256": "fa2062099cca811866055c8a71e722e1053f88a12389d3917301fda06b59ce78"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397.zip",
+      "sha256": "dc7c36a5c1d00baa8163afadf736643871fa2ca24d60313662e3d0a5ba33105b"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/dialog-blocked-card-after.xml",
+      "sha256": "b9cb0c46a77a6e41f75d0bfa6f14fab3ce328f0509fce97243219bba0960d1f1"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/dialog-blocked-card-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/dialog-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/dialog-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/dialog-folders-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/dialog-folders-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/dialog-library-after.xml",
+      "sha256": "72fb1bd5a6c4c348c653667fcfc0ac1328062c3cd0d4ca30727ce1715f215ca2"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/dialog-library-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/dialog-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/dialog-root-before.xml",
+      "sha256": "72fb1bd5a6c4c348c653667fcfc0ac1328062c3cd0d4ca30727ce1715f215ca2"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/dialog-setup-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/dialog-setup-before.xml",
+      "sha256": "7049441428db793cf468b5586a7ca1ead8ec9833114542574e9408a65c5cd161"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/dx-after-cancel.png",
+      "sha256": "a9ebf83c97c6bbd359dfed819a505eeaceb4c1bfd9c6c7ab17ca6c2f9e0f53e2"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/dx-dialog-before-cancel-top.txt",
+      "sha256": "8a9108e973e2bb16ee57755b636a86810d44c4ab4b9c3f807a3b9eebb4a378cc"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/dx-dialog-before-cancel.png",
+      "sha256": "2bdea5986d55c4479ec9e87e2d06aa453792a6242a2620af5fd317d9445d4377"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/export-final-disconnect-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/export-final-disconnect-before.xml",
+      "sha256": "552eb5e0b19299a90ae9303a588ff38266b1e7ee90e11e8c01a29f4931c5cf2a"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/export-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/export-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/export-help-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/export-help-collapse-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/export-save-after.xml",
+      "sha256": "552eb5e0b19299a90ae9303a588ff38266b1e7ee90e11e8c01a29f4931c5cf2a"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/export-save-before.xml",
+      "sha256": "e15fd2e375a748169e7f71f55d0adf7979f458ca03d8630a4449848461d0eaa5"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/export-scroll-after.xml",
+      "sha256": "e15fd2e375a748169e7f71f55d0adf7979f458ca03d8630a4449848461d0eaa5"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/export-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/export-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/export-setup-before.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/final-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/final-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/final-host-accessibility.txt",
+      "sha256": "e40594e954a7a2c0fba5ea3e89ca9aa800c85d6a4adeb06c79f700c3ddc4b422"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/final-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "ee1468eedad0eb05102d2637ff3479e22109e705fea0d3179e12a708b60b322f"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/final-host-audio.txt",
+      "sha256": "f6b7d24e7b77daae88d95fbc639010656d57cea7af77ebd226cde311430803a2"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/final-host-bluetooth_manager.txt",
+      "sha256": "ce750620254caec018bb4810a2fa7e64150daff9d26ae8743422bddc8b636090"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/final-host-media_session.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/final-host-package-org.dx340.remote.host.txt",
+      "sha256": "eed0e09dbc07268d36edbeabab5753cd7877a60f48277ba43e48ceaafe238b87"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/final-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/final-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "4011c55c379157fb40cbb37d83c1d97f4b4e3d0e6669c2e6d83a2fb651398c51"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/final-phone-bluetooth_manager.txt",
+      "sha256": "63516caf19b8e158b05f818cc096ce15412c2188d6527fbdbf79a1d38b8d84cc"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/final-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "52db2005cc5a1244d7a42e6bff5c730be099aae25e3518aeb000a21d69b7af55"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/final-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/final-volumes.txt",
+      "sha256": "7f7be54d6ac662c6c253fefac52be59dce97549438b29993566e0dd53c4803a4"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/final.json",
+      "sha256": "9ae7c5d37aa72731859835d68581c41ec67fd6b4ba84b628d8dbd4f1b6a812b4"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/fresh-recovery.json",
+      "sha256": "684a7250456aac33c6bf70f9b2ff5f0378dbec9e66cbba4af821eb6aa98d0ca2"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/host-installed-base.apk",
+      "sha256": "644799cca6da1ceb11775d006512c24a618bf536e94c8e1f831a0624936e0093"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/installed-apk-match.json",
+      "sha256": "49b7fc46d007d8ad26f8f8fb2141b6d4f1a1c4076368bc0c8e54f46a4da2d2c6"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/native-build.txt",
+      "sha256": "c102b75f859d75a6037954ea9db12f9963fbc7e3a41828aed05988d37a53bf64"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/phone-blocked-guidance.png",
+      "sha256": "5d50cae87c0a988e2a7cfba3b69e72f457767eabd21358375ad2469ba39ae5c9"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/phone-final-report.json",
+      "sha256": "25a20727551938af3d1b4cb68c0f580cab9494d67e0c79c982fca727f0b0b024"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/phone-installed-base.apk",
+      "sha256": "d75540a514bbc484cc1f84462c50b1f9f62b7bd4b15ce4c8ae019c58655acc02"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/recovered-sd.png",
+      "sha256": "51e290e301791b314b2120200e9ce315ecdc4e24e9aee926d8e13c35975dca43"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/recovery-fresh-folders-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/recovery-fresh-folders-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/recovery-fresh-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/recovery-fresh-root-before.xml",
+      "sha256": "b9cb0c46a77a6e41f75d0bfa6f14fab3ce328f0509fce97243219bba0960d1f1"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/recovery-fresh-sd-after.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/recovery-fresh-sd-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/shared-build.txt",
+      "sha256": "56c4cfa44fda6622029aee84a624a462b72febabaf73b28445fba76a42a44601"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/signing-check.txt",
+      "sha256": "0974e0d3d28c755c46463543187aa3ad596752b5ba2402815352169c915cee15"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/signing-manifest.json",
+      "sha256": "395c9552fd6c6b90d07ac2c615b3f46dd618139ee498061c129014f4a38911d0"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/verified-summary.json",
+      "sha256": "ce4e558615a24dbcda9d357bec267c2bc22c01b5579648c23382e2633d0bb8e8"
+    }
+  ]
+}

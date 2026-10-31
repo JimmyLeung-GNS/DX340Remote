@@ -20,6 +20,8 @@ Use Player, Library and Queue for the capabilities available from the chosen sou
 
 If Queue says **Read-only queue**, choose tracks from **Library**. Some sources expose a queue for display without supporting selection from it; those entries stay disabled.
 
+If browsing asks you to close a dialog, check the music app on the player, handle its prompt locally, then browse again from the phone. The remote leaves source-app prompts for you to decide.
+
 **Disconnect** ends phone control and leaves music playing on the player. It keeps the saved approval for next time. **Stop Bluetooth remote** in Companion also stops phone control without pausing the source music app.
 
 ## If connection needs attention

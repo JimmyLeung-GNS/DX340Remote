@@ -1,6 +1,12 @@
 # Implementation status
 
-## Current checkpoint —31 October2026,18:42 HKT
+## Current checkpoint —31 October2026,19:17 HKT
+
+Current31 October2026,19:17 HKT: full goal ACTIVE/incomplete. Read docs/test-results/2026-10-31-sd-volume-cycle.md/.json and docs/test-results/2026-10-31-source-dialog-guidance.md/.json. Actual one OS SD unmount/remount (not physical pull) on phonef9/host644 clears old phone rows before post-event debug probes; callback/invalidation0/0→4/2→8/4 and both source epochs retired. Card restored. Fresh SD recovery initially blocked by real Mango Scan SD card? modal, guard retained; initial SD3677ms remains over3s target. Source80d4edc changes only Kotlin/Swift UI_UNEXPECTED_SCREEN guidance. Current original-signer phone d75540a5/unchanged host644799cc pulled exact; real blocked guidance/cleared rows, one local Cancel/no scan, fresh SD rows verified. Separate f9 journal19/prior9 unchanged/new10 (nine results/one error); d755 model8 (seven results/one expected error), zero evictions/no playback/volume.180 JVM/native builds/lint and shared analyze/release/lint pass; unchanged Dart76 retains prior scope. native Apple41195490397 SUCCESS/archive inspected; shared iPhone41195490341 IN PROGRESS/archive inspection pending. Final both paused37/headset(4)/prooffalse, four prefs/settings/permission flags/exposed bonds preserved, browsingON/grants/bindings retained, phone normal Disconnect/help collapsed, both USB/card mounted. Fresh listening/30min readiness pending; no observer/audio/long hold. Full T01–T18/two-phone/source/playlist/format/SD/output/commands/latency/sleep/call/range/battery/walk/ownership and physical owner-iPhone/Mac signing/Watch remain open. Old audio scopes preserved. No pause/device switch; docs/status.md authoritative.
+
+Next: follow only the still-live exact80d4edc Apple job and inspect its terminal archive; continue current-build paused fault/recovery and separately owner-ready audio/sleep tests. No old CI polling or inferred listening approval.
+
+## Prior checkpoint —31 October2026,18:42 HKT
 
 Full goal **ACTIVE/incomplete**. New phonef9b899ef/source2cf7c74, unchanged Companion644799cc/source81b3f6b. [Queue clarity correction](test-results/2026-10-31-read-only-queue.md)/[manifest](test-results/2026-10-31-read-only-queue.json), [separate4318 phone UI source/queue evidence](test-results/2026-10-31-phone-ui-source-scope.md).
 

@@ -1,0 +1,15 @@
+# Real Android SD volume cycle —31 October2026
+
+**VERIFIED paused subset; full T11 remains incomplete.** [Versions, receipts and hashed raw evidence](2026-10-31-sd-volume-cycle.json). Pixel phonef9b899ef/source2cf7c74 and Companion644799cc/source81b3f6b. This precedes the later d755 phone wording update.
+
+One mounted public removable volume was identified. Both source sessions were paused at37; three spaced block-I/O observations showed unchanged write counters and zero in-flight I/O. The shell remained uid2000. Android `sm unmount` and `sm mount` were each issued once for that exact public volume, with actual unmounted and restored-mounted states observed. This was an **OS volume cycle, not physical removal/reinsertion**, and used no root, format, partition, forget, fabricated protected broadcast or file modification.
+
+The actual Pixel Library cleared its old SD rows and showed Library changed **before any post-event own debug probe**. Subsequent own storage diagnostics report callbackEvents/libraryInvalidations0/0 before,4/2 unmounted and8/4 remounted. Both public source epochs changed at both boundaries; Apple/Mango assisted frames and Apple offline context were retired. Eight callbacks/four boundaries are not four physical removals. These probes select Mango and emit state even for the same source; their observations must not replace the earlier phone clearing evidence.
+
+Old Queue rows/page count clear too, and fresh Queue returns28. Root and folder stubs recover, but the SD browse then correctly returns UI_UNEXPECTED_SCREEN: Mango has opened **Scan SD card?** above its library. DX is awake and the volume is mounted. The window guard refuses the covered page; the old phone message was too generic. That failed attempt is retained. No stale opaque token was replayed and no track was selected.
+
+The native journal has19 records, preserving the previous nine f9 records unchanged. Ten new requests: HELLO1, AUTHORIZE1, GET_QUEUE2, BROWSE6; nine applied results and one applied expected modal error, zero evictions. Initial SD BROWSE terminal3677ms exceeds the proposed3-second uncached-page target; retain that limitation. The total18:53:10.640854–18:53:21.093331 observation interval includes diagnostics and is not event or BLE latency.
+
+The SD Music inventory contained only two hidden metadata paths, with no FLAC/WAV observed in the subsequent recursive listing. No contents were read. This is neither a full-card integrity audit nor an SD-file playback/added-removed-file test. Remount was restored; both direct source sessions stayed paused2 at37, four preferences/settings unchanged. The later [dialog guidance and local cancellation recovery](2026-10-31-source-dialog-guidance.md) uses a separate phone APK/model.
+
+The snapshot probe correctly refused the modal. A scratch collector then failed on its null payload; this is a collector failure, not an app crash. Its failed logs and the successful independent window observation are retained. T11 file add/remove/rescan/physical pull/stale-token wire replay and actual SD audio remain NOT TESTED.

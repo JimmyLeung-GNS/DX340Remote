@@ -1,0 +1,884 @@
+{
+  "oneOsCycle": {
+    "startedAt": "2026-10-31T18:53:10.640854+08:00",
+    "kind": "real OS volume cycle; no physical card removal",
+    "cardIoPreflight": [
+      {
+        "writesCompleted": 23,
+        "sectorsWritten": 23,
+        "ioInFlight": 0
+      },
+      {
+        "writesCompleted": 23,
+        "sectorsWritten": 23,
+        "ioInFlight": 0
+      },
+      {
+        "writesCompleted": 23,
+        "sectorsWritten": 23,
+        "ioInFlight": 0
+      }
+    ],
+    "unmountIssued": true,
+    "restored": true,
+    "unmountOutput": "",
+    "unmountedStateObserved": true,
+    "oldLibraryRowsClearedBeforeAnyDebugProbe": true,
+    "unmountedStorageDiagnostic": {
+      "status": "ACTIVE",
+      "active": true,
+      "callbackEvents": 4,
+      "retainedVolumes": 2,
+      "libraryInvalidations": 2,
+      "appleUi": {
+        "hasFrame": false,
+        "busy": false,
+        "offlineContext": false
+      },
+      "mangoUi": {
+        "hasFrame": false,
+        "busy": false
+      }
+    },
+    "mountOutput": "",
+    "finishedAt": "2026-10-31T18:53:21.093331+08:00"
+  },
+  "diagnosticCounts": [
+    [
+      0,
+      0
+    ],
+    [
+      4,
+      2
+    ],
+    [
+      8,
+      4
+    ]
+  ],
+  "bothPublicEpochsRetiredAtEachBoundary": true,
+  "physicalCardRemoval": false,
+  "freshAudioPlayback": false,
+  "versions": {
+    "pc": "DESKTOP-T9ICUE4 / Windows11 Pro10.0.26300 / PowerShell7.6.5",
+    "phone": "Pixel9a / Android16 API36 / CP1A.260405.005 / shared0.2.0 code2",
+    "host": "DX340 / Android13 API33 / eng.iBasso.20260812.181952 / Companion0.1.0 code1",
+    "mango": "4.1.37 code240",
+    "appleMusic": "6.5.3 code1599"
+  },
+  "phoneSource": "2cf7c746ad09a575a5ebbbc55aee2b43801b6fff",
+  "phoneApkSha256": "f9b899efeb80c1efd41c62fa1e03e70934c4a8080c69cf5ab792e338e3061c99",
+  "hostSource": "81b3f6bad5ab68fae8dfd70dce0c64303e3cba3c",
+  "hostApkSha256": "644799cca6da1ceb11775d006512c24a618bf536e94c8e1f831a0624936e0093",
+  "status": "VERIFIED one OS volume cycle; physical removal and SD audio NOT TESTED",
+  "receipts": {
+    "modelInstanceId": "ad3e3e0b-a881-4111-9666-810bd5b184e5",
+    "total": 19,
+    "operations": {
+      "HELLO": 2,
+      "AUTHORIZE": 2,
+      "GET_QUEUE": 6,
+      "SELECT_SOURCE": 2,
+      "BROWSE": 7
+    },
+    "requests": [
+      {
+        "id": "e9480bee-6ff8-4700-9cbb-34286f84c30b",
+        "operation": "HELLO",
+        "source": "mango",
+        "startedMs": 77033,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 112,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "1e83cd5f-1e47-4e97-9cb8-04714881d122",
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "startedMs": 77145,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 877,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "248d1fea-33e6-4d39-bfdb-fda7f660eada",
+        "operation": "GET_QUEUE",
+        "source": "mango",
+        "startedMs": 85467,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 360,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "4c0cc4ff-4173-40cc-9b7b-d7265d721594",
+        "operation": "GET_QUEUE",
+        "source": "mango",
+        "startedMs": 280591,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 338,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "d20cbec3-375e-4a34-a2c3-86b0bd13e718",
+        "operation": "SELECT_SOURCE",
+        "source": "mango",
+        "startedMs": 337539,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 428,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "83db12e0-d315-45dd-9644-f4551140e769",
+        "operation": "GET_QUEUE",
+        "source": "apple",
+        "startedMs": 347751,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 552,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "493bc050-2a86-40a5-a139-31d6ec752623",
+        "operation": "BROWSE",
+        "source": "apple",
+        "startedMs": 358034,
+        "accepted": true,
+        "acceptedAfterMs": 112,
+        "finishedAfterMs": 2462,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "311c4e5e-c73b-47b5-9946-f2e877534162",
+        "operation": "SELECT_SOURCE",
+        "source": "apple",
+        "startedMs": 471649,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 401,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "665f7db2-b272-4841-9cfd-62a390c269ae",
+        "operation": "GET_QUEUE",
+        "source": "mango",
+        "startedMs": 481786,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 339,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "e9bf1ecc-85be-4951-85b0-dcb159d27ebc",
+        "operation": "HELLO",
+        "source": "mango",
+        "startedMs": 1854772,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 191,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "2ff066a8-5821-484a-9461-9fab0ee8398d",
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "startedMs": 1854965,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 472,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "5408fe12-590a-4cd7-9321-bf30c5d05d52",
+        "operation": "GET_QUEUE",
+        "source": "mango",
+        "startedMs": 1863707,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 176,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "a3d29cee-f034-4dae-b535-a4ccda1a14e6",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 1873727,
+        "accepted": true,
+        "acceptedAfterMs": 92,
+        "finishedAfterMs": 260,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "8912d101-97ce-4c46-b6cc-f23e76d5f4dc",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 1878730,
+        "accepted": true,
+        "acceptedAfterMs": 83,
+        "finishedAfterMs": 136,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "4bb4a382-5287-4b5f-9aef-0ce3db3ca8d8",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 1883755,
+        "accepted": true,
+        "acceptedAfterMs": 91,
+        "finishedAfterMs": 3677,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "7b02c3df-fd9c-4b4f-ab02-c64f438e798e",
+        "operation": "GET_QUEUE",
+        "source": "mango",
+        "startedMs": 2173209,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 155,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "cf85ad41-7a25-4555-94e8-3ed4196dbdaa",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 2183261,
+        "accepted": true,
+        "acceptedAfterMs": 83,
+        "finishedAfterMs": 245,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "4ac37dca-b620-4fc9-9edd-21c8cf5e3030",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 2188259,
+        "accepted": true,
+        "acceptedAfterMs": 105,
+        "finishedAfterMs": 157,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "9d72cea1-28a6-4ca6-99c9-61163d53a7a4",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 2193247,
+        "accepted": true,
+        "acceptedAfterMs": 103,
+        "finishedAfterMs": 165,
+        "result": "error",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": "UI_UNEXPECTED_SCREEN"
+      }
+    ],
+    "zeroEvictions": true,
+    "apk": "f9b899efeb80c1efd41c62fa1e03e70934c4a8080c69cf5ab792e338e3061c99",
+    "priorNineUnchanged": true,
+    "newRequests": [
+      {
+        "id": "e9bf1ecc-85be-4951-85b0-dcb159d27ebc",
+        "operation": "HELLO",
+        "source": "mango",
+        "startedMs": 1854772,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 191,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "2ff066a8-5821-484a-9461-9fab0ee8398d",
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "startedMs": 1854965,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 472,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "5408fe12-590a-4cd7-9321-bf30c5d05d52",
+        "operation": "GET_QUEUE",
+        "source": "mango",
+        "startedMs": 1863707,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 176,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "a3d29cee-f034-4dae-b535-a4ccda1a14e6",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 1873727,
+        "accepted": true,
+        "acceptedAfterMs": 92,
+        "finishedAfterMs": 260,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "8912d101-97ce-4c46-b6cc-f23e76d5f4dc",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 1878730,
+        "accepted": true,
+        "acceptedAfterMs": 83,
+        "finishedAfterMs": 136,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "4bb4a382-5287-4b5f-9aef-0ce3db3ca8d8",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 1883755,
+        "accepted": true,
+        "acceptedAfterMs": 91,
+        "finishedAfterMs": 3677,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "7b02c3df-fd9c-4b4f-ab02-c64f438e798e",
+        "operation": "GET_QUEUE",
+        "source": "mango",
+        "startedMs": 2173209,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 155,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "cf85ad41-7a25-4555-94e8-3ed4196dbdaa",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 2183261,
+        "accepted": true,
+        "acceptedAfterMs": 83,
+        "finishedAfterMs": 245,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "4ac37dca-b620-4fc9-9edd-21c8cf5e3030",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 2188259,
+        "accepted": true,
+        "acceptedAfterMs": 105,
+        "finishedAfterMs": 157,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "9d72cea1-28a6-4ca6-99c9-61163d53a7a4",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 2193247,
+        "accepted": true,
+        "acceptedAfterMs": 103,
+        "finishedAfterMs": 165,
+        "result": "error",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": "UI_UNEXPECTED_SCREEN"
+      }
+    ]
+  },
+  "rawEvidence": [
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/cycle-before-phone.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/cycle-before-volumes.txt",
+      "sha256": "50ff0693788b0b1460f3d58d2153e10d5553823fa4f8c81a189138cae1e1c803"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/export-final-disconnect-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/export-final-disconnect-before.xml",
+      "sha256": "f536ad317e0acdd17c459a0294b47aadecc20f103b369f8a9f4939c6e60510ae"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/export-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/export-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/export-help-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/export-help-collapse-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/export-save-after.xml",
+      "sha256": "f536ad317e0acdd17c459a0294b47aadecc20f103b369f8a9f4939c6e60510ae"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/export-save-before.xml",
+      "sha256": "49561d46e67c4b3e61e00967dbb564c70233f9acfee63395843d73eb5bd9a803"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/export-scroll-after.xml",
+      "sha256": "49561d46e67c4b3e61e00967dbb564c70233f9acfee63395843d73eb5bd9a803"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/export-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/export-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/export-setup-before.xml",
+      "sha256": "4a815f8a1c9b507a3da5240cf31cbb2682b387a100f4ff739c50c9955fc601c8"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/final-before-guidance-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/final-before-guidance-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/final-before-guidance-host-accessibility.txt",
+      "sha256": "572f591f19b905e79a7617eebac394c2358d03580b4aaeb9645dc6137a6d2f0d"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/final-before-guidance-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "f1bcf8f0c4be69b7fbd01a333d88fe628b69d2e3ac27c94c395545cd1275fb9c"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/final-before-guidance-host-audio.txt",
+      "sha256": "bd4b9d4c27802f1806457b23a2e44a5830079920a69f4e9d4b237a77c1e04003"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/final-before-guidance-host-bluetooth_manager.txt",
+      "sha256": "e16e555a4dd1038928671db231021e3462f4a830f16575906bf7585e6920090d"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/final-before-guidance-host-media_session.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/final-before-guidance-host-package-org.dx340.remote.host.txt",
+      "sha256": "45c944250e374f23d761decedc06546bd696f6caa79c0c1adb98f84ed1306e10"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/final-before-guidance-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/final-before-guidance-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "9b244759d9c62867d340babe95887dc3b91d8a4aec96c4ffeed12dfa4f4d67f8"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/final-before-guidance-phone-bluetooth_manager.txt",
+      "sha256": "464b46994284c9d518e89ae86d629f7f3d6a032e3655993c20a1276aad43f989"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/final-before-guidance-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "820643b62c6f0c9d019ef612e3ba718689737f1c1d1ba9a91b14a8cf60e97cf0"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/final-before-guidance-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/final-before-guidance.json",
+      "sha256": "2a6a0f06d5608677143793ae535dc14a245f0a6d2f57ea8928e4de7e964db536"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/host-log-after-cycle.txt",
+      "sha256": "f070acfe89f46c12f44504ab69133728ef82be62a1a62a79589815ddfcb61201"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/os-volume-cycle.json",
+      "sha256": "dd16d5016038fa6ea7f3a56eb6cea2bb153a8100b394abef7c2d2b1c23647c36"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/page-preflight.json",
+      "sha256": "fb801b48ec3dec5353ec982babf2a11040b7556169238a9c1b74d10b832cd5f5"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/phone-final-report.json",
+      "sha256": "d28c1b438c3111f1e4e2dcbace33b974e420f18e2dd3c139e7bba5776c3c9f45"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/preflight-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/preflight-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/preflight-host-accessibility.txt",
+      "sha256": "1b820ba9fb4654eb56071d276b070d9f596754944e0a22a129caa9f2be2eb699"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/preflight-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "2d10bd7ae9f4999d70ab945cbef5bd553b8dcc7ff806fecbfef6eacf0c1a78da"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/preflight-host-audio.txt",
+      "sha256": "69fef93eb6785a08b74af8d1bb06cef701e36ea5cdb1e807f2015ed5f3a928c3"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/preflight-host-bluetooth_manager.txt",
+      "sha256": "2cba21c9603bf4ea43be0f20c4c2d7b4c016505d340615347f6b99bea8cdb2a6"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/preflight-host-media_session.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/preflight-host-package-org.dx340.remote.host.txt",
+      "sha256": "044f4ed571ea7c52fc543158ce5116d41e286ebb9842a76ad075fa623a83942c"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/preflight-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/preflight-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "58363c13eb34bcecdfcbc5211d1e5ccc25a60a521b69097c535b7b4a6c99e9a0"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/preflight-phone-bluetooth_manager.txt",
+      "sha256": "7b61f32eba3031a413b3c8f1f7dd3d75941bc1cef4403abc87071af36367d5a9"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/preflight-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "55de299dbd0d7eef46f32a52cf16fde02e549c4e178feb37e2747af1ff9f88f6"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/preflight-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/preflight.json",
+      "sha256": "45e3a7e5106fd6bfba440f46358ce7010d8950c3ee47b2049beb4c5d06f58ff4"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/public-music-files-after.txt",
+      "sha256": "defc55a23b49ada028aa82cbeb338ceba0a659bdd4366f8ed7d02adabc46fb94"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/public-music-files-before.txt",
+      "sha256": "bb604f4bd4631631deda76031d7844cdf05416300e6b612386049ac92a471e91"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/recovery-failure-current.xml",
+      "sha256": "4a815f8a1c9b507a3da5240cf31cbb2682b387a100f4ff739c50c9955fc601c8"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/remounted-phone-before-any-debug-probe.xml",
+      "sha256": "5b72ce105bfd44578a630c058de1df7a57d24c80fe6cf3fb1d12e4c2d0bdf9a3"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/restoration-observed-volumes.txt",
+      "sha256": "50ff0693788b0b1460f3d58d2153e10d5553823fa4f8c81a189138cae1e1c803"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/restore-check-volumes.txt",
+      "sha256": "39ee622c83c63ad3fd4f6ec879dd286dd90d49ed4025ed9a90e0e2d43f2367d8"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-before-state-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-before-state.json",
+      "sha256": "8eec9c44ab2222c00b53d6e01be3b6ddf32d60aa96d2217e6d3ddbd39fab08d7"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-card-page-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-card-page-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-card-page-wait-0.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-folders-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-folders-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-library-after-boundary-after.xml",
+      "sha256": "6fbba7ea2e42410b69fac4c9624efa9e6ac6e25717370ed8ff3ad95a617f9b04"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-library-after-boundary-before.xml",
+      "sha256": "80b955ae801cac5d6425b5c1cd9d26bfe51bc503dc9cf12ad17aa6a82601fa84"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-library-after.xml",
+      "sha256": "6fbba7ea2e42410b69fac4c9624efa9e6ac6e25717370ed8ff3ad95a617f9b04"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-library-before.xml",
+      "sha256": "80b955ae801cac5d6425b5c1cd9d26bfe51bc503dc9cf12ad17aa6a82601fa84"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-native-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-native-root-before.xml",
+      "sha256": "6fbba7ea2e42410b69fac4c9624efa9e6ac6e25717370ed8ff3ad95a617f9b04"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-queue-after-boundary-after.xml",
+      "sha256": "52b004adc176eeba719990278f0619cd486d425d76b1c7591989ce30ffa36ea8"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-queue-after-boundary-before.xml",
+      "sha256": "5b72ce105bfd44578a630c058de1df7a57d24c80fe6cf3fb1d12e4c2d0bdf9a3"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-queue-after.xml",
+      "sha256": "12deeae47fad49475e3f13ebbb574b811beed9b02049dd59aa3c988b924b47d5"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-queue-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-queue-fresh-after.xml",
+      "sha256": "80b955ae801cac5d6425b5c1cd9d26bfe51bc503dc9cf12ad17aa6a82601fa84"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-queue-fresh-before.xml",
+      "sha256": "52b004adc176eeba719990278f0619cd486d425d76b1c7591989ce30ffa36ea8"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-queue-read-after.xml",
+      "sha256": "80b955ae801cac5d6425b5c1cd9d26bfe51bc503dc9cf12ad17aa6a82601fa84"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-queue-read-before.xml",
+      "sha256": "12deeae47fad49475e3f13ebbb574b811beed9b02049dd59aa3c988b924b47d5"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-recovery-card-after.xml",
+      "sha256": "4a815f8a1c9b507a3da5240cf31cbb2682b387a100f4ff739c50c9955fc601c8"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-recovery-card-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-recovery-card-wait-0.xml",
+      "sha256": "4a815f8a1c9b507a3da5240cf31cbb2682b387a100f4ff739c50c9955fc601c8"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-recovery-card-wait-1.xml",
+      "sha256": "4a815f8a1c9b507a3da5240cf31cbb2682b387a100f4ff739c50c9955fc601c8"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-recovery-card-wait-2.xml",
+      "sha256": "4a815f8a1c9b507a3da5240cf31cbb2682b387a100f4ff739c50c9955fc601c8"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-recovery-card-wait-3.xml",
+      "sha256": "4a815f8a1c9b507a3da5240cf31cbb2682b387a100f4ff739c50c9955fc601c8"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-recovery-card-wait-4.xml",
+      "sha256": "4a815f8a1c9b507a3da5240cf31cbb2682b387a100f4ff739c50c9955fc601c8"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-recovery-card-wait-5.xml",
+      "sha256": "4a815f8a1c9b507a3da5240cf31cbb2682b387a100f4ff739c50c9955fc601c8"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-recovery-failed-dx-top.txt",
+      "sha256": "eea2ff408cb1e7dbf593622fa5a2a7e45590524467e93434a6049475f41800c8"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-recovery-failed-dx.png",
+      "sha256": "de6afbc1ae703639293680920f81aeca020cd04fd6e994263991059d431e8a64"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-recovery-folders-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-recovery-folders-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-recovery-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-recovery-root-before.xml",
+      "sha256": "6fbba7ea2e42410b69fac4c9624efa9e6ac6e25717370ed8ff3ad95a617f9b04"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-remounted-state-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-remounted-state.json",
+      "sha256": "4d2bcc6a46f19154afeacec2f7359a737a7456b97d5b8851f6fe871ce508a703"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-scan-dialog-snapshot-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-scan-dialog-snapshot.json",
+      "sha256": "62357809b95441c033be7d8797bb5cbced3848157523736391350d1e9d817dd5"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-scan-dialog-windows-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-scan-dialog-windows.json",
+      "sha256": "6f820a92dae637ee72e75a35eff1942a7b6747dc82b981129f5e243ba626303d"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-unmounted-state-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/sd-unmounted-state.json",
+      "sha256": "0453c6cd3274476dd74b543d21d93c74d02cecc96788b67187e91d5c64136f9d"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/shell-identity.txt",
+      "sha256": "d6feb94065e75448d00c852863a780505206935e30249a5de3c77b73f912080c"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/unmount-observed-volumes.txt",
+      "sha256": "39ee622c83c63ad3fd4f6ec879dd286dd90d49ed4025ed9a90e0e2d43f2367d8"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/unmounted-media-session.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/unmounted-native-diagnostic-before-probe.json",
+      "sha256": "6914503186e77db4bb1954ddfcdee69e58e241939dd1b5da4f88336926c0d7e0"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/unmounted-phone-before-any-debug-probe.xml",
+      "sha256": "5b72ce105bfd44578a630c058de1df7a57d24c80fe6cf3fb1d12e4c2d0bdf9a3"
+    },
+    {
+      "file": "artifacts/sd-mount-cycle-20261031/volumes-before.txt",
+      "sha256": "50ff0693788b0b1460f3d58d2153e10d5553823fa4f8c81a189138cae1e1c803"
+    }
+  ]
+}

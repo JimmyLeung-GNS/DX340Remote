@@ -1,6 +1,10 @@
 # Full-scope completion audit
 
-## Current full-scope audit —31 October2026,18:42 HKT
+## Current full-scope audit —31 October2026,19:17 HKT
+
+**NOT ACHIEVED; goal ACTIVE/incomplete.** [Real OS SD cycle](test-results/2026-10-31-sd-volume-cycle.md) verifies real event-driven stale-context clearing; it is not physical pull, file-change/rescan, token wire replay or SD audio proof. [Source-dialog guidance](test-results/2026-10-31-source-dialog-guidance.md) corrects a reproduced modal error message and verifies local cancellation/fresh phone browse on new d755/644.180 JVM/Android builds and separate exact-source Apple jobs retain their recorded scopes: native Apple41195490397 SUCCESS/archive inspected; shared iPhone41195490341 IN PROGRESS/archive inspection pending. Full T01–T18/current two-phone/source/audio/format/output/reliability/owner-iPhone signing/Watch remain open. No new audio/long hold from silence; no pause/device switch.
+
+## Prior full-scope audit —31 October2026,18:42 HKT
 
 **NOT ACHIEVED; goal ACTIVE/incomplete.** [Read-only queue correction/current f9 evidence](test-results/2026-10-31-read-only-queue.md) adds76 Flutter checks, original-signer installed UI and actual capability/row-bound/font preservation. [Separate4318 phone-only source/queue switching](test-results/2026-10-31-phone-ui-source-scope.md) adds16 applied results and real second-page reset. No playback/audio, pending switch, token replay, p95/ACK, sleep/range/bag or full T09/T12/T16 pass. shared iPhone41192248278 SUCCESS/archive13039228009 verified (76 Flutter/12 guards/native report sheet/ordinary restoration), simulator only; no polling. Full two-phone/source/playlist/format/SD/output/commands/latency/calls/battery/walk/ownership and physical owner-iPhone/Mac signing/Watch remain required. Fresh listening/long-hold availability pending, no audio from silence. Older evidence retains exact versions; no pause/device switch.
 
