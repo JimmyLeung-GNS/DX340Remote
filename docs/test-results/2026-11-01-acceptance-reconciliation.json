@@ -71,7 +71,7 @@
     {
       "id": "P6",
       "status": "IMPLEMENTED_PARTIAL_VALIDATION",
-      "finding": "Mango native metadata plus optional awake/unlocked folders/playlists; current navigation verified, current20-file audio matrix incomplete. Current731 Android20 folder selections/17FLAC3WAV observed with stable rows; exposed playlists empty, iPhone and independent hearing/quality remain open."
+      "finding": "Mango native metadata plus optional awake/unlocked folders/playlists; current731 Android20 folder selections/17FLAC3WAV observed with stable rows. Current exposed playlist page returned no items; iPhone and independent output/quality acceptance remain open."
     },
     {
       "id": "P7",
@@ -140,7 +140,7 @@
     {
       "id": "T07",
       "status": "PARTIAL_OLDER_AUDIO",
-      "finding": "Older source-local20 cases retain24attempts/4rejections/mixed builds; later b805/00e5 audible outside101 queue and ce47/82ad outside21 queue remain separate. Earlier611/95 downloaded-album selection outside captured101 queue reaches expected PLAYING3; hearing pending, no a65 audio pass. [Prior pair](test-results/2026-11-01-current-pair-source-selection.md). [Evidence](test-results/2026-10-31-current-sd-audio.md).",
+      "finding": "Older source-local20 cases retain24attempts/4rejections/mixed builds; later b805/00e5 audible outside101 queue and ce47/82ad outside21 queue remain separate. Earlier611/95 downloaded-album selection outside captured101 queue reaches expected PLAYING3; hearing untested; routine prompts waived, no a65 audio pass. [Prior pair](test-results/2026-11-01-current-pair-source-selection.md). [Evidence](test-results/2026-10-31-current-sd-audio.md).",
       "remainingRequirement": "20 correct offline downloaded selections across5albums/2playlists, outside prior queue included, each phone.",
       "evidence": "2026-10-31-current-sd-audio.md",
       "currentPairSelectionSupplement": "2026-11-01-current-pair-source-selection.md"
@@ -148,7 +148,7 @@
     {
       "id": "T08",
       "status": "PARTIAL_CURRENT_ANDROID_OBSERVED",
-      "finding": "b805/00e5 physical Pixel WAV/FLAC owner hearing (2/20 in that scope) and earlier source-local cases retain caveats. Earlier611/95 two selected WAV/FLAC files reach expected PLAYING3, sampled rows stable; hearing pending, no a65 audio pass. [Prior pair](test-results/2026-11-01-current-pair-source-selection.md). [Evidence](test-results/2026-10-31-current-phone-source-audio.md). Current731 e1/dac actual Pixel20 distinct files across4folders reach expected PLAYING/progress, stable rows and exact20 native PLAY_ITEM receipts;17FLAC3WAV headers verified. Hearing prompts waived, audibility unverified; exposed playlist page returns no items.",
+      "finding": "b805/00e5 physical Pixel WAV/FLAC owner hearing (2/20 in that scope) and earlier source-local cases retain caveats. Earlier611/95 two selected WAV/FLAC files reach expected PLAYING3, sampled rows stable; hearing untested; routine prompts waived, no a65 audio pass. [Prior pair](test-results/2026-11-01-current-pair-source-selection.md). [Evidence](test-results/2026-10-31-current-phone-source-audio.md). Current731 e1/dac actual Pixel20 distinct files across4folders reach expected PLAYING/progress, stable rows and exact20 native PLAY_ITEM receipts;17FLAC3WAV headers verified. Hearing prompts waived, audibility unverified; exposed playlist page returns no items.",
       "remainingRequirement": "At least20 correct FLAC/WAV selections across albums/folders/exposed playlists through Mango, each phone.",
       "evidence": "2026-10-31-current-phone-source-audio.md",
       "currentPairSelectionSupplement": "2026-11-01-current-pair-source-selection.md",
@@ -157,7 +157,7 @@
     {
       "id": "T09",
       "status": "PARTIAL",
-      "finding": "Older source-switch/state/audio subsets retain exact hashes; earlier611/95 exclusive source snapshots and deliberate pauses pass, hearing pending/no full acoustic matrix. [Prior pair](test-results/2026-11-01-current-pair-source-selection.md). [Evidence](test-results/2026-10-31-phone-ui-source-scope.md).",
+      "finding": "Older source-switch/state/audio subsets retain exact hashes; earlier611/95 exclusive source snapshots and deliberate pauses pass, hearing untested; routine prompts waived/no full acoustic matrix. [Prior pair](test-results/2026-11-01-current-pair-source-selection.md). [Evidence](test-results/2026-10-31-phone-ui-source-scope.md).",
       "remainingRequirement": "Alternate source control during playback; only selected source changes, no unwanted overlap.",
       "evidence": "2026-10-31-phone-ui-source-scope.md",
       "currentPairSelectionSupplement": "2026-11-01-current-pair-source-selection.md"
