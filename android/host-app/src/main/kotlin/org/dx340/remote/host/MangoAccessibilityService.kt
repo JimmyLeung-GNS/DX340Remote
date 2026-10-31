@@ -7,9 +7,12 @@ import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
+import android.os.storage.StorageManager
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import org.dx340.remote.sources.MangoBrowseBudget
+import org.dx340.remote.sources.MangoStorageAvailability
+import org.dx340.remote.sources.RemovableStorageState
 import org.dx340.remote.sources.MangoUiModel
 import org.dx340.remote.sources.MangoPlaylistUiModel
 import org.dx340.remote.sources.ParsedMangoUi
@@ -107,14 +110,19 @@ class MangoAccessibilityService : AccessibilityService() {
                 .put("class", n.className).put("clickable", n.clickable).put("forward", n.forward).put("drawingOrder", n.drawingOrder))
         } })
     }
+    private fun canAttemptSd() = MangoStorageAvailability.canAttemptSd(runCatching {
+        getSystemService(StorageManager::class.java).storageVolumes.map { RemovableStorageState(it.isRemovable, it.state) }
+    }.getOrNull())
     private fun home(): JSONObject {
+        val sdAvailable = canAttemptSd()
         val revision = "$session:home:${++sequence}"
         val actions = MangoUiModel.storages.map { (key, title) -> "mango-ui:$session:$sequence:$key" to Action("", "storage", title, key) }.toMap()
         last = Frame(revision, -1, null, actions)
         return JSONObject().put("uiAssisted", true).put("title", "Mango local folders").put("revision", revision).put("page", 0)
             .put("parent", SourceRegistry.MANGO_UI_ROOT).put("backId", SourceRegistry.MANGO_NATIVE_ROOT).put("nextPage", JSONObject.NULL)
             .put("items", JSONArray().apply { actions.forEach { (id, action) -> put(JSONObject().put("id", id).put("title", action.title)
-                .put("subtitle", "DX340 must stay awake and unlocked").put("browsable", true).put("playable", false)) } })
+                .put("subtitle", if (action.storage == "sd" && !sdAvailable) MangoStorageAvailability.UNAVAILABLE_HINT else "DX340 must stay awake and unlocked")
+                .put("browsable", action.storage != "sd" || sdAvailable).put("playable", false)) } })
     }
     private fun result(current: Tree, storage: String, page: Int, end: Boolean = false): JSONObject {
         val parsed = parse(current.nodes, storage)
@@ -140,6 +148,8 @@ class MangoAccessibilityService : AccessibilityService() {
         val previous = last ?: error("STALE_LIBRARY")
         require(previous.revision == revision) { "STALE_LIBRARY" }
         val action = previous.actions[item] ?: error("EXPIRED_ITEM")
+        // Cover a mount-state change that arrives before its observer callback.
+        if (action.storage == "sd") require(canAttemptSd()) { "STALE_LIBRARY" }
         require(kind == null || action.kind == kind) { "UNSUPPORTED_CAPABILITY" }
         if (previous.parsed == null) { require(action.kind == "storage") { "UNSUPPORTED_CAPABILITY" }; return null to action }
         val current = tree(); val parsed = parse(current.nodes, previous.parsed.storage)
@@ -265,7 +275,9 @@ class MangoAccessibilityService : AccessibilityService() {
         fun openStorage(storage: String) {
             if (finished) return
             try {
-                guard(); val treeStarted = android.os.SystemClock.elapsedRealtime(); val current = tree()
+                guard()
+                if (storage == "sd") require(canAttemptSd()) { "STALE_LIBRARY" }
+                val treeStarted = android.os.SystemClock.elapsedRealtime(); val current = tree()
                 foregroundStartup.observed()
                 val treeMs = android.os.SystemClock.elapsedRealtime() - treeStarted
                 // Mango changes child indices during page animations. Only navigate from a
