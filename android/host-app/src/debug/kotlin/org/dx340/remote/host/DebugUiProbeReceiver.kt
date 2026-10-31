@@ -28,8 +28,11 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
             if (finished) return
             finished = true
             try {
-                val report = JSONObject().put("kind", if (intent.getStringExtra("operation") == "ARM_MISSED_INDICATION_CALLBACK")
-                    "debug-injected-missed-indication-callback-arm-only" else "physical-own-accessibility-adapter-debug-probe-no-ble")
+                val report = JSONObject().put("kind", when (intent.getStringExtra("operation")) {
+                    "ARM_MISSED_INDICATION_CALLBACK" -> "debug-injected-missed-indication-callback-arm-only"
+                    "ARM_WITHHELD_WRITE_RESPONSE" -> "debug-injected-held-input-response-arm-only"
+                    else -> "physical-own-accessibility-adapter-debug-probe-no-ble"
+                })
                     .put("time", System.currentTimeMillis()).put("operation", intent.getStringExtra("operation") ?: "BROWSE")
                     .put("phase", "FINISHED").put("requestedSource", intent.getStringExtra("source") ?: "com.apple.android.music")
                     .put("elapsedMs", android.os.SystemClock.elapsedRealtime() - startedAt)
@@ -60,13 +63,16 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
                 require(states.length() == org.dx340.remote.sources.SourceRegistry.PACKAGES.size &&
                     (0 until states.length()).all { states.getJSONObject(it).optInt("playbackState") in listOf(1, 2) }) { "PAUSE_BOTH_SOURCES_FIRST" }
             }
-            if (operation == "ARM_MISSED_INDICATION_CALLBACK") {
+            if (operation in setOf("ARM_MISSED_INDICATION_CALLBACK", "ARM_WITHHELD_WRITE_RESPONSE")) {
                 require(reportTag != null) { "REPORT_TAG_REQUIRED" }
                 requirePausedSources()
                 require(intent.getStringExtra("source") == sources.selected) { "INVALID_SOURCE" }
                 val host = HostService.instance ?: return finish(null, "START_COMPANION_FIRST")
-                val armed = host.armMissedIndicationCallback(intent.getStringExtra("hostEpoch") ?: "")
+                val write = operation == "ARM_WITHHELD_WRITE_RESPONSE"
+                val expectedEpoch = intent.getStringExtra("hostEpoch") ?: ""
+                val armed = if (write) host.armWithheldWriteResponse(expectedEpoch) else host.armMissedIndicationCallback(expectedEpoch)
                 return finish(JSONObject().put("armed", armed).put("hostEpoch", host.epoch)
+                    .put("fallbackCloseAfterMs", if (write) 5000 else JSONObject.NULL)
                     .put("expiresAfterMs", 20000).put("playbackDispatched", false), if (armed) null else "DIAGNOSTIC_NOT_IDLE_OR_UNAVAILABLE")
             }
             sources.select(intent.getStringExtra("source") ?: "com.apple.android.music")

@@ -6,7 +6,7 @@ import org.junit.Test
 
 class HostTransportFaultsTest {
     private var now = 100L
-    private val faults = HostTransportFaults { now }
+    private val faults = HostTransportFaults({ now })
     private val link = Any()
 
     @Test fun unarmedAndConsumedCallbacksAreNeverIgnored() {

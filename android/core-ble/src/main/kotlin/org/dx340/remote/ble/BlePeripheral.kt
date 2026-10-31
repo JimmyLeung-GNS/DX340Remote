@@ -25,13 +25,15 @@ class BlePeripheral(
     private val message: (BluetoothDevice, ByteArray) -> Unit,
     // Production callers leave this false. The host debug variant can exercise
     // the real deadline after a deliberately ignored successful callback.
-    private val ignoreCompletion: (Any, Boolean) -> Boolean = { _, _ -> false }
+    private val ignoreCompletion: (Any, Boolean) -> Boolean = { _, _ -> false },
+    private val withholdWriteResponse: (Any, () -> Unit) -> Boolean = { _, _ -> false }
 ) {
     private class Link(val device: BluetoothDevice) {
         var subscribed = false
         var capacity = 20
         var serial = 0
         var controlling = false
+        var inputHeld = false
         var expiry: Runnable? = null
         val assembler = Reassembler(SystemClock::elapsedRealtime)
     }
@@ -116,6 +118,7 @@ class BlePeripheral(
         } }
         override fun onCharacteristicWriteRequest(device: BluetoothDevice, requestId: Int, characteristic: BluetoothGattCharacteristic, preparedWrite: Boolean, responseNeeded: Boolean, offset: Int, value: ByteArray) { main.post {
             val link = peers[device]
+            if (link?.inputHeld == true) { closeLink(link, "DIAGNOSTIC_WRITE_OVERLAP: held request discarded"); return@post }
             var code = BluetoothGatt.GATT_SUCCESS
             var complete: ByteArray? = null
             if (link == null || !link.subscribed || device.bondState != BluetoothDevice.BOND_BONDED || characteristic.uuid.toString() != Wire.RX || preparedWrite || offset != 0 || !responseNeeded) code = BluetoothGatt.GATT_FAILURE
@@ -130,6 +133,17 @@ class BlePeripheral(
                     status("PAYLOAD_CAPACITY:$observed from received write")
                 }
             } catch (_: IllegalArgumentException) { code = BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH }
+            if (code == BluetoothGatt.GATT_SUCCESS && link != null && link.controlling) {
+                val currentServer = server
+                if (currentServer != null && withholdWriteResponse(link) {
+                    if (server === currentServer && peers[device] === link && link.inputHeld)
+                        closeLink(link, "DIAGNOSTIC_WRITE_CLOSED: bounded pending-write close; no message dispatched")
+                }) {
+                    link.inputHeld = true
+                    status("DIAGNOSTIC_WRITE_RESPONSE_HELD: valid frame discarded before ACK and dispatch; peer closes within 5 seconds")
+                    return@post
+                }
+            }
             if (responseNeeded) server?.sendResponse(device, requestId, code, offset, null)
             if (code == BluetoothGatt.GATT_SUCCESS) complete?.let { message(device, it) }
         } }
@@ -168,7 +182,7 @@ class BlePeripheral(
     fun discardQueued(device: BluetoothDevice) { peers[device]?.let(outgoing::discardQueued) }
     /** Opaque link identity; never grants access or alters the indication queue. */
     fun idleControllerToken(device: BluetoothDevice): Any? = peers[device]?.takeIf {
-        server != null && it.controlling && it.subscribed && outgoing.pendingCount == 0
+        server != null && it.controlling && it.subscribed && !it.inputHeld && outgoing.pendingCount == 0
     }
     fun send(device: BluetoothDevice, bytes: ByteArray, lowPriority: Boolean = false) {
         val link = peers[device]?.takeIf { it.subscribed } ?: return

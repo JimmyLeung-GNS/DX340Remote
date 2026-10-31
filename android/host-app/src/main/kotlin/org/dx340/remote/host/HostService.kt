@@ -48,7 +48,10 @@ class HostService : Service() {
     private var started = false
     private val radio = HostRadioRecovery()
     private val transportRecovery = HostTransportRecovery()
-    private val transportFaults = HostTransportFaults(SystemClock::elapsedRealtime)
+    private val transportFaults = HostTransportFaults(SystemClock::elapsedRealtime, schedule = { delay, action ->
+        val task = Runnable { action() }; main.postDelayed(task, delay)
+        val cancel: () -> Unit = { main.removeCallbacks(task) }; cancel
+    })
     private var peripheralGeneration = 0L
     private var transportRecoveryTask: Runnable? = null
     val transportNeedsRestart get() = started && (!ble.isRunning || status.startsWith("BLE_START_FAILED") ||
@@ -94,17 +97,20 @@ class HostService : Service() {
             if (pending == device) pending = null
             requestWindows.remove(device.address)
             observer?.invoke()
-        }, ::receive, transportFaults::ignoreCompletion)
+        }, ::receive, transportFaults::ignoreCompletion, transportFaults::withholdWriteResponse)
     }
 
-    internal fun armMissedIndicationCallback(expectedEpoch: String): Boolean {
+    internal fun armMissedIndicationCallback(expectedEpoch: String): Boolean = armTransportDiagnostic(expectedEpoch, false)
+    internal fun armWithheldWriteResponse(expectedEpoch: String): Boolean = armTransportDiagnostic(expectedEpoch, true)
+    private fun armTransportDiagnostic(expectedEpoch: String, write: Boolean): Boolean {
         require(expectedEpoch == epoch) { "STALE_HOST" }
         val device = authenticated ?: return false
         if (instance !== this || !started || !HostControlStore(this).enabled || !radioOn() ||
             authorization.current(device.address) == null || !approved.contains(device.address)) return false
         val token = ble.idleControllerToken(device) ?: return false
-        if (!transportFaults.arm(token)) return false
-        record("DIAGNOSTIC_CALLBACK_ARMED: one successful callback on current idle controller; expires in 20 seconds")
+        if (!(if (write) transportFaults.armWrite(token) else transportFaults.arm(token))) return false
+        record(if (write) "DIAGNOSTIC_WRITE_RESPONSE_ARMED: one valid input frame on current idle controller; expires in 20 seconds"
+            else "DIAGNOSTIC_CALLBACK_ARMED: one successful callback on current idle controller; expires in 20 seconds")
         return true
     }
 
@@ -409,5 +415,5 @@ class HostService : Service() {
             record("REQUEST_ERROR:$code")
         }
     }
-    override fun onDestroy() { authorization.clear(); authenticated = null; pending = null; main.removeCallbacksAndMessages(null); unregisterReceiver(bonds); ble.stop(); sources.close(); observer = null; instance = null; super.onDestroy() }
+    override fun onDestroy() { transportFaults.clear(); authorization.clear(); authenticated = null; pending = null; main.removeCallbacksAndMessages(null); unregisterReceiver(bonds); ble.stop(); sources.close(); observer = null; instance = null; super.onDestroy() }
 }
