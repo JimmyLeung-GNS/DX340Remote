@@ -1,6 +1,10 @@
 # Full-scope completion audit
 
-## Current full-scope audit —31 October2026,17:28 HKT
+## Current full-scope audit —31 October2026,17:42 HKT
+
+**NOT ACHIEVED; goal ACTIVE/incomplete.** [Current4318 host-process recovery](test-results/2026-10-31-4318-host-process.md) verifies phone recovery after required local Companion reopen/enable, new host epoch/saved approval/fresh decoded read and preservation. Not unattended host restart, range, mutation no-replay, audio, T04 or full T12. Earlier radio/permission/source audio retain exact scopes. Full two-phone/source/playlist/format/SD/output/command/latency/sleep/call/range/battery/walk/ownership and owner-iPhone/Mac signing/Watch remain required. Fresh long-hold readiness/hearing unanswered; no observer/audio inferred. No new code/build/job or pause/device switch.
+
+## Prior full-scope audit —31 October2026,17:28 HKT
 
 **NOT ACHIEVED; goal ACTIVE/incomplete.** [Current4318 radio-off/background cleanup/restoration/read reconnect](test-results/2026-10-31-4318-radio-recovery.md) is verified with unchanged PID, exact settings/grant flags/preferences and exposed bond preservation. This advances Android P1/P3/P4/P8 interruption coverage, not complete T12, automatic range recovery or mutation no-replay. Full source/playlist/format/SD/output/command/latency/sleep/range/call/battery/walk/ownership and owner-iPhone/Mac signing/Watch remain required. Long-hold readiness and earlier hearing replies pending; no observer/audio result inferred. No new product build or job, no user pause/device switch.
 

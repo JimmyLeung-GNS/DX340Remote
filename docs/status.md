@@ -1,6 +1,17 @@
 # Implementation status
 
-## Current checkpoint —31 October2026,17:28 HKT
+## Current checkpoint —31 October2026,17:42 HKT
+
+Full goal **ACTIVE/incomplete**. Installed4318/source5f2de32 phone and00e5/source7fbdec8 host unchanged, fresh installed hashes match. [Current process-loss recovery](test-results/2026-10-31-4318-host-process.md), [manifest](test-results/2026-10-31-4318-host-process.json).
+
+- **Verified with local host handling:** exact own Companion process termination invalidates the phone session; public Companion reopen/Enable phone control is required. Phone then recovers automatically without phone Connect, pairing or new approval. Host PID/epoch change; phone PID unchanged. Intermediate preauthorization closure retained. Host advertising→approval10120ms; phone recovery phase34077ms includes local handling, not range/ACK acceptance.
+- **Decoded recovery:** fresh applied HELLO123ms/authorization875ms/GET_STATE464ms. Five new results/23 total, previous18 unchanged, zero evictions, no new error/playback/volume command. Driver's expected absent-PID exit was mishandled after the successful kill; continuation observed/reopened only, no second kill or exact kill-time claim.
+- **Preserved/final:** four saved preferences/settings/own permission flags and exposed bond identities/types unchanged; modesON/grants retained. Both paused2 at37/headset(4)/prooffalse, host foreground/both bindings, phone normal Disconnect/foreground cleared/help collapsed, both USB present. No product patch/build/new CI/emulator/observer/audio run. Existing178 JVM/72 Flutter/19 Swift and closed5f Apple archives keep scope.
+- **Open:** unattended host recovery, full T01–T18/two-phone source/playlist/format/SD/output/commands/latency/sleep/range/calls/battery/walk/ownership, owner-iPhone/Mac signing and Watch. Fresh30-minute readiness and earlier envision hearing pending; no hold/audio inferred. No user pause/device-switch request.
+
+Next: assess remaining current-build phone-UI interruption/stale-token and source/reliability cases without replaying mutations; start long hold only after fresh readiness. Preserve exact earlier audio/build scopes.
+
+## Prior checkpoint —31 October2026,17:28 HKT
 
 Full goal **ACTIVE/incomplete**. Installed phone4318/source5f2de32 and host00e5/source7fbdec8 unchanged. [Current radio interruption/recovery](test-results/2026-10-31-4318-radio-recovery.md), [versions/hash manifest](test-results/2026-10-31-4318-radio-recovery.json).
 

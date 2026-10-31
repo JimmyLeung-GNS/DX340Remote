@@ -1,0 +1,395 @@
+{
+  "recordedAt": "2026-10-31T17:40:42.563565+08:00",
+  "result": "VERIFIED/current Android paused host-process-loss recovery with local host re-enable",
+  "phoneApkSha256": "4318e6ad38ac775f8a635532b628be1cd3a93ab54647d6e6893169aaf88bc440",
+  "hostApkSha256": "00e5e50b19d13f3e626ac0c882386a26174adff283dc9b2c8926413ef258e7cb",
+  "beforePids": {
+    "host": "5826",
+    "phone": "27585"
+  },
+  "afterPids": {
+    "host": "11873",
+    "phone": "27585"
+  },
+  "hostEpochChanged": true,
+  "phonePidUnchanged": true,
+  "localHostReopenAndEnableRequired": true,
+  "phoneConnectTapDuringRecovery": false,
+  "newApprovalOrPairing": false,
+  "hostAdvertisingToApprovedMs": 10120,
+  "phoneConnectingToConnectedMsIncludingLocalHandling": 34077,
+  "intermediatePreauthorizationDisconnectRetained": true,
+  "receipts": {
+    "total": 23,
+    "priorUnchanged": 18,
+    "newRequests": [
+      {
+        "id": "7495dfa5-1cd4-43c2-b046-df79bb5b9ab2",
+        "operation": "HELLO",
+        "source": "mango",
+        "startedMs": 3128738,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 187,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "3ad33ea7-c5bc-476b-8899-0d24fcdc089a",
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "startedMs": 3128926,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 528,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "1b4a3bb6-5aab-4b8e-8ea9-852ac8da891e",
+        "operation": "HELLO",
+        "source": "mango",
+        "startedMs": 3182920,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 123,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "073c33d0-b0d4-4965-9b5e-513f21df1b6c",
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "startedMs": 3183044,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 875,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "71b41a00-92d7-4509-a972-1312d54dbf0e",
+        "operation": "GET_STATE",
+        "source": "mango",
+        "startedMs": 3205687,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 464,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      }
+    ],
+    "zeroEvictions": true
+  },
+  "preservation": {
+    "phonePermissionsUnchanged": true,
+    "phoneExposedBondIdentityTypesUnchanged": true,
+    "phoneExposedBondRows": 1,
+    "hostPermissionsUnchanged": true,
+    "hostExposedBondIdentityTypesUnchanged": true,
+    "hostExposedBondRows": 4,
+    "prefsByteHashesUnchanged": true,
+    "settingsUnchanged": true,
+    "bothBindings": true,
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeProof": false,
+    "phoneDisconnectedForegroundCleared": true,
+    "hostForegroundEnabled": true
+  },
+  "driverIssue": "After successful SIGKILL, pidof returned exit1 for absent process. Driver stopped before saving process-kill.json. Continued observation/reopen only; no second kill. Original call traceback and subsequent fresh native captures establish sequence; no exact kill latency claimed.",
+  "limits": [
+    "No unattended host restart",
+    "No range, interrupted playback/no-replay, audio, T04 or full T12 pass",
+    "Source and phone clocks are separate",
+    "No new playback or volume command",
+    "No new long hold or audio confirmation inferred"
+  ],
+  "appSource": "5f2de32ca58952faf401d0d558755972d4e160ba",
+  "hostSource": "7fbdec8ada9faa1573afa7efea9fa598c22b2ef1",
+  "versions": {
+    "pixel": "Pixel9a Android16/API36 CP1A.260405.005/shared0.2.0 code2",
+    "dx340": "Android13 eng.iBasso.20260812.181952/Companion0.1.0 code1/Mango4.1.37 code240/Apple6.5.3 code1599"
+  },
+  "goalStatus": "ACTIVE/incomplete",
+  "rawEvidence": [
+    {
+      "file": "artifacts/4318-host-process-20261031/after-host-enable.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/after-host-kill.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/connected.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/diagnostic-before-kill.json",
+      "sha256": "ed70dd52e385c97599d26536e1925210cfdf753fa1367cdd76729fa9d52279ef"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/final-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/final-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/final-host-accessibility.txt",
+      "sha256": "8e90d020a8806798439770111872f0407d3add9372d5005ee45969a273047bd7"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/final-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "df5efe657b7ae1fe7c3945d538a690aecc2dbb5ed96918a0afa92a6468985b63"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/final-host-audio.txt",
+      "sha256": "3b17be179927548b0b9369fbbebd841caab321ca0b36c427db00f0473233ea24"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/final-host-bluetooth_manager.txt",
+      "sha256": "a501f8c721d63c306fb74bc2480b1a3a99e03feb5c432cd5718bb301486a51e1"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/final-host-media_session.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/final-host-package-org.dx340.remote.host.txt",
+      "sha256": "673f698f38e86c7b6fbc8391c890f39911dc54c6650d5878497f370ec57ea237"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/final-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/final-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "0000ea14f1568b0c44f9b7c7fbb67f02af7ff3667b8edc7c972e6fdb03af8e8e"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/final-phone-bluetooth_manager.txt",
+      "sha256": "d8aafdd16b323d366e619a78cf89560cdb2af7d9e0291f4267e20eecfd552853"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/final-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "f636008b86faf01c8a1ef3a043d7054d47698b62f123f30fd447b106169615c6"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/final-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/final.json",
+      "sha256": "b474b4a1b3ae145a973262031ed6f760032176e2be6ea05041b49f3f4235bfd1"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/host-enabled-diagnostic.json",
+      "sha256": "a36f25eed2d8788b6cfe5305d461f7d0f75bdbee2266efe7a96b9e437ad6c7c0"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/host-enabled-services.txt",
+      "sha256": "0e1212d18b44c946ce8bbb9f7efab383ce88838a61d7aadafaff377979927de3"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/host-final-diagnostic.json",
+      "sha256": "6a9d4a217b5afbfe7d086b6e00abb811f4254810ffb9c9685075d88ce5e971c9"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/host-installed-sha256.txt",
+      "sha256": "43afc6ee56e9b3ec4f5d86718ce212c8b4ceb006d6c0ee58024186f1c0b88651"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/host-native-log.txt",
+      "sha256": "78828b1feefe4db1bc21c857eb8ceb0b95fbe5a9f2825563b14280af905d9679"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/host-reopen-services.txt",
+      "sha256": "8f633e6b31e9c95bc1d6616af426c5b9459072e7ed0c7ce0207b2889f00af4ff"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/host-reopen-top.txt",
+      "sha256": "531ba4b7b4cf5717878cc51b391538180d4b1a4902c16b059a112f02b4b217f2"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/host-reopen.png",
+      "sha256": "225553e6bc2203e488ea562b4b3b1285c62be34397e0d56d7d3a7726448e6090"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/phone-installed-sha256.txt",
+      "sha256": "6ecc787e1c05549c646a9ce1d2da4e8b087bf13825dee0e0f0ee8d56c3caed19"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/phone-native-log.txt",
+      "sha256": "e42b18f1e9ba49d6808b93856dc4edf11fea9684436b61354d9c962609e3499d"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/phone-process-report.json",
+      "sha256": "cb3d8e91bf879dfd1bf9e33f53b2b09a958bb444ebb7bda4bdbdbf56d7d160d4"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/phone-service-before-kill.txt",
+      "sha256": "ac5dc141eaadfa1758f1fe0fae0ef745f6bdc9cd225a097f79bc34b4667f8cfa"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/preflight-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/preflight-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/preflight-host-accessibility.txt",
+      "sha256": "17c02ffe710c299d8d009979f7381f27f9536ec708cd31ab061f4beec711f5af"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/preflight-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "11bf707788f435b57520fecdae379640bcc7794e6853128818204486453397cd"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/preflight-host-audio.txt",
+      "sha256": "173e1756740309b0c73716f9668ee5db907b59e749bca189aa1d7123cc317b13"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/preflight-host-bluetooth_manager.txt",
+      "sha256": "d21342dd59715a0d0473f2d26ae7be8e43195012b89e996ce1d7b2e786896b2b"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/preflight-host-media_session.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/preflight-host-package-org.dx340.remote.host.txt",
+      "sha256": "61e44418b9c477323873af041a7bdf89c98f6d39a1a96605ced36974b6f51134"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/preflight-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/preflight-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "e351b603dfe7065c84e07c10a12ecb1eb5214a66c723e3255ddfc2afdbdb4604"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/preflight-phone-bluetooth_manager.txt",
+      "sha256": "75965b47ba44d8e51daf5a121b7942ab04e0e360cc1251e57dd1fe2b6e82f2b5"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/preflight-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "14187066c22a45c43c3021443cb99d2880cd3fa5c7c1cff5f7226c9c634805d9"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/preflight-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/preflight.json",
+      "sha256": "dd032f24613f832e0b36224224742b4489554f55c07202ea9c07cc5f47a2c320"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-disconnect-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-disconnect-before.xml",
+      "sha256": "5e764d6f650ae871b178e37751be8efb47645af194c934ea78aadccef738765b"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-export-after.xml",
+      "sha256": "5e764d6f650ae871b178e37751be8efb47645af194c934ea78aadccef738765b"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-export-before.xml",
+      "sha256": "6d2e9311a060e322f02768d595406c950e6a6cbea966aafef5c9e2f824834337"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-help-close-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-help-close-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-help-scroll-after.xml",
+      "sha256": "6d2e9311a060e322f02768d595406c950e6a6cbea966aafef5c9e2f824834337"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-help-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-player-after.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-player-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-player-scroll-after.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-player-scroll-before.xml",
+      "sha256": "fa756946a9a8040d016519b79adb8ecebf7c79e2947fe31e9304bb70a1c60e36"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-refresh-after.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-refresh-before.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-setup-before.xml",
+      "sha256": "fa756946a9a8040d016519b79adb8ecebf7c79e2947fe31e9304bb70a1c60e36"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/process-summary.json",
+      "sha256": "c136dbe35b46a3131c0613beb54576d4a2425bba69068c3e2d97cf74ee9909f2"
+    },
+    {
+      "file": "artifacts/4318-host-process-20261031/recovery-check.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    }
+  ]
+}
