@@ -23,10 +23,10 @@
       "build": "CP1A.260405.005",
       "app": {
         "package": "org.dx340.remote.controller",
-        "sha256": "dac6016c1223f1f2edcc431d95fd108daaa1b2e8d5139fd2ae72d9393092f84f",
+        "sha256": "5d7082344b7d9c8fe8d5ab46510be9545e1055f448c982d113ec1daea19934fd",
         "versionName": "0.2.0",
         "versionCode": 2,
-        "sourceCommit": "731aa64424fa65c771b7ce0f4a3db7a590ead662"
+        "sourceCommit": "3571db290084aa1ee9180cb43e62123a4a9cd377"
       }
     }
   },
@@ -61,7 +61,7 @@
     {
       "id": "P4",
       "status": "IMPLEMENTED_PARTIAL_VALIDATION",
-      "finding": "Shared Pixela65 installed; submission/ACK diagnostics, reply-loss retirement and saved recovery verified. Older95 browse/audio evidence retains exact scope; full source/reliability remains open."
+      "finding": "Shared Pixela65 installed; submission/ACK diagnostics, reply-loss retirement and saved recovery verified. Older95 browse/audio evidence retains exact scope; full source/reliability remains open. Current3571 shared Library toolbar verified on Pixel5d;86Flutter/build/lint. Existing native transport scope unchanged."
     },
     {
       "id": "P5",
@@ -76,7 +76,7 @@
     {
       "id": "P7",
       "status": "IMPLEMENTED_PARTIAL_VALIDATION",
-      "finding": "Optional awake/unlocked Apple Downloaded UI adapter; older offline outside-queue hearing is scoped, current20/both-phone matrix incomplete."
+      "finding": "Optional awake/unlocked Apple Downloaded UI adapter; older offline outside-queue hearing is scoped, current20/both-phone matrix incomplete. Current5d/e1 Downloaded Songs A・RA・SHI outside full21 queue reaches expected reported playback with no active network on both endpoints;1/20 current selections, hearing untested."
     },
     {
       "id": "P8",
@@ -139,8 +139,8 @@
     },
     {
       "id": "T07",
-      "status": "PARTIAL_OLDER_AUDIO",
-      "finding": "Older source-local20 cases retain24attempts/4rejections/mixed builds; later b805/00e5 audible outside101 queue and ce47/82ad outside21 queue remain separate. Earlier611/95 downloaded-album selection outside captured101 queue reaches expected PLAYING3; hearing untested; routine prompts waived, no a65 audio pass. [Prior pair](test-results/2026-11-01-current-pair-source-selection.md). [Evidence](test-results/2026-10-31-current-sd-audio.md).",
+      "status": "PARTIAL_CURRENT_ANDROID_OBSERVED",
+      "finding": "Older source-local20 cases retain24attempts/4rejections/mixed builds; later b805/00e5 audible outside101 queue and ce47/82ad outside21 queue remain separate. Earlier611/95 downloaded-album selection outside captured101 queue reaches expected PLAYING3; hearing untested; routine prompts waived, no a65 audio pass. [Prior pair](test-results/2026-11-01-current-pair-source-selection.md). [Evidence](test-results/2026-10-31-current-sd-audio.md). Current5d/e1 one actual Pixel A・RA・SHI offline selection outside full21 queue reaches expected PLAYING/progress; current20/5albums/2playlists remains incomplete.",
       "remainingRequirement": "20 correct offline downloaded selections across5albums/2playlists, outside prior queue included, each phone.",
       "evidence": "2026-10-31-current-sd-audio.md",
       "currentPairSelectionSupplement": "2026-11-01-current-pair-source-selection.md"
@@ -148,7 +148,7 @@
     {
       "id": "T08",
       "status": "PARTIAL_CURRENT_ANDROID_OBSERVED",
-      "finding": "b805/00e5 physical Pixel WAV/FLAC owner hearing (2/20 in that scope) and earlier source-local cases retain caveats. Earlier611/95 two selected WAV/FLAC files reach expected PLAYING3, sampled rows stable; hearing untested; routine prompts waived, no a65 audio pass. [Prior pair](test-results/2026-11-01-current-pair-source-selection.md). [Evidence](test-results/2026-10-31-current-phone-source-audio.md). Current731 e1/dac actual Pixel20 distinct files across4folders reach expected PLAYING/progress, stable rows and exact20 native PLAY_ITEM receipts;17FLAC3WAV headers verified. Hearing prompts waived, audibility unverified; exposed playlist page returns no items.",
+      "finding": "b805/00e5 physical Pixel WAV/FLAC owner hearing (2/20 in that scope) and earlier source-local cases retain caveats. Earlier611/95 two selected WAV/FLAC files reach expected PLAYING3, sampled rows stable; hearing untested; routine prompts waived, no a65 audio pass. [Prior pair](test-results/2026-11-01-current-pair-source-selection.md). [Evidence](test-results/2026-10-31-current-phone-source-audio.md). Current731 e1/dac actual Pixel20 distinct files across4folders reach expected PLAYING/progress, stable rows and exact20 native PLAY_ITEM receipts;17FLAC3WAV headers verified. Hearing prompts waived, audibility unverified; exposed playlist page returns no items. New5d/e1 focused three-file regression passes; prior20 e1/dac binary scope retained separately.",
       "remainingRequirement": "At least20 correct FLAC/WAV selections across albums/folders/exposed playlists through Mango, each phone.",
       "evidence": "2026-10-31-current-phone-source-audio.md",
       "currentPairSelectionSupplement": "2026-11-01-current-pair-source-selection.md",
@@ -411,6 +411,26 @@
     "allNewAppliedResults": true,
     "exposedPlaylistPage": "No items returned; unavailable coverage",
     "hearing": "NOT TESTED; routine prompts waived",
+    "fullAcceptancePassed": false
+  },
+  "libraryRecoveryToolbarSupplement": {
+    "evidence": "2026-11-01-library-recovery-toolbar.md",
+    "phoneSource": "3571db290084aa1ee9180cb43e62123a4a9cd377",
+    "flutterTests": 86,
+    "targetedTests": 17,
+    "physicalMangoSelections": 3,
+    "physicalAppleSelections": 1,
+    "applePreviousFullQueueItems": 21,
+    "toolbarSelectedRowBoundsStable": true,
+    "appleLastClippedRowBottomDeltaPx": -3,
+    "journalCounts": [
+      2,
+      34
+    ],
+    "allNewAppliedResults": true,
+    "sharedIphoneRun": 41252477906,
+    "sharedIphoneStatus": "IN_PROGRESS; terminal/artifact review pending",
+    "icons": "Already implemented/verified31Oct; broadUX partial",
     "fullAcceptancePassed": false
   }
 }

@@ -1,0 +1,261 @@
+{
+  "date": "2026-11-01",
+  "status": "VERIFIED Android Library recovery toolbar and four observed source selections; iPhone simulator evidence pending until collected",
+  "goal": "ACTIVE/incomplete",
+  "hostSource": "731aa64424fa65c771b7ce0f4a3db7a590ead662",
+  "phoneSource": "3571db290084aa1ee9180cb43e62123a4a9cd377",
+  "installedSha256": {
+    "org.dx340.remote.host": "e1a024293c70e334de1e45c31176be6c19e4555fe97391e84f56b4515148b1f8",
+    "org.dx340.remote.controller": "5d7082344b7d9c8fe8d5ab46510be9545e1055f448c982d113ec1daea19934fd"
+  },
+  "deviceScope": "DX340 Android13/API33 eng.iBasso.20260812.181952 Companion0.1.0/code1; Pixel9a Android16/API36 CP1A.260405.005 Remote0.2.0/code2; Mango4.1.37/code240; Apple Music6.5.3/code1599",
+  "implementation": "Browse source library remains in a fixed adaptive Library toolbar, with existing authorization/capability/loading/busy guards. Disconnected status omits irrelevant page-expired guidance. No automatic browse/playback replay; no native/wire/source-adapter change.",
+  "software": {
+    "baseline": "Four regression tests fail on old scrolling Browse action",
+    "harnessCorrection": "First post-edit run hit foundation platform-override cleanup assertions; explicit end-of-test reset fixes the test harness, without another product change",
+    "targetedTests": 17,
+    "flutterTests": 86,
+    "analysisAndroidReleaseLint": "PASSED",
+    "native268Swift22Analyser18": "Prior unchanged scopes; not rerun for Dart-only change"
+  },
+  "signing": {
+    "package": "org.dx340.remote.controller",
+    "candidateSha256": "5d7082344b7d9c8fe8d5ab46510be9545e1055f448c982d113ec1daea19934fd",
+    "installedSignerSha256": "24f48aa3566dcf7b65774ee12585191a8a0df9eeff9cc49e9e72c22bacca6e8d",
+    "candidateSignerSha256": "24f48aa3566dcf7b65774ee12585191a8a0df9eeff9cc49e9e72c22bacca6e8d",
+    "sameSigner": true,
+    "note": "Read-only development-key comparison; no install, uninstall, data reset or signing-key migration."
+  },
+  "selections": [
+    {
+      "case": "toolbar-gold-music-selection.json",
+      "file": "05. MUSIC!!!.flac",
+      "title": "MUSIC!!!",
+      "artist": "AAA",
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 1870,
+      "outsideFullPriorQueue": null,
+      "previousQueueCount": null
+    },
+    {
+      "case": "toolbar-wav-kaze-selection.json",
+      "file": "03. 風のたより.wav",
+      "title": "風のたより",
+      "artist": "tayori",
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 2081,
+      "outsideFullPriorQueue": null,
+      "previousQueueCount": null
+    },
+    {
+      "case": "toolbar-flac-ghost-selection.json",
+      "file": "03. ゴースト.flac",
+      "title": "ゴースト",
+      "artist": "tayori",
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 2217,
+      "outsideFullPriorQueue": null,
+      "previousQueueCount": null
+    },
+    {
+      "case": "toolbar-apple-selection.json",
+      "file": null,
+      "title": "A・RA・SHI",
+      "artist": "ARASHI",
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 1862,
+      "outsideFullPriorQueue": true,
+      "previousQueueCount": 21
+    }
+  ],
+  "geometry": [
+    {
+      "case": "toolbar-apple-selection",
+      "selectedRowBounds": "[53,1268][1028,1417]",
+      "selectedRowBoundsStable": true,
+      "allVisibleRowBoundsStable": false,
+      "otherRowBoundsChanges": {
+        "Ablaze": [
+          "[53,1874][1028,1983]",
+          "[53,1874][1028,1983]",
+          "[53,1874][1028,1980]"
+        ]
+      },
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "toolbar-flac-ghost-selection",
+      "selectedRowBounds": "[53,1788][1028,1979]",
+      "selectedRowBoundsStable": true,
+      "allVisibleRowBoundsStable": true,
+      "otherRowBoundsChanges": {},
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "toolbar-gold-music-selection",
+      "selectedRowBounds": "[53,1380][1028,1572]",
+      "selectedRowBoundsStable": true,
+      "allVisibleRowBoundsStable": true,
+      "otherRowBoundsChanges": {},
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "toolbar-wav-kaze-selection",
+      "selectedRowBounds": "[53,1866][1028,1983]",
+      "selectedRowBoundsStable": true,
+      "allVisibleRowBoundsStable": true,
+      "otherRowBoundsChanges": {},
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    }
+  ],
+  "physicalRecovery": "Gold fifth row selected from scrolled page; next fresh browsing uses fixed button with zero scroll-to-top input. All three Mango visible row bounds match. Apple selected row/all row tops fixed; last clipped Ablaze row bottom changes1983→1980 with now-playing metadata, no selected target movement.",
+  "journal": {
+    "modelInstanceId": "48994bfe-e4fc-4834-9c4e-377efcba3e8a",
+    "counts": [
+      2,
+      34
+    ],
+    "allPriorRowsUnchanged": true,
+    "zeroEvictions": true,
+    "newOperationCounts": {
+      "BROWSE": 20,
+      "PLAY_ITEM": 4,
+      "GET_STATE": 4,
+      "SET_PLAYING": 2,
+      "SELECT_SOURCE": 2
+    },
+    "allNewAppliedResults": true,
+    "playItemReceipts": [
+      {
+        "id": "41d163d5-abe3-450c-9ac7-729a7a1be10a",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 183813,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 98,
+        "accepted": true,
+        "acceptedAfterMs": 117,
+        "finishedAfterMs": 3830,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "cc6e5261-6b5b-4914-876e-6c1d9a00faff",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 253882,
+        "firstWriteSubmittedAfterMs": 3,
+        "writeAcknowledgedAfterMs": 111,
+        "accepted": true,
+        "acceptedAfterMs": 128,
+        "finishedAfterMs": 3426,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "20495aa1-9b0b-43c3-8d02-41b366a6aa1f",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 335565,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 99,
+        "accepted": true,
+        "acceptedAfterMs": 115,
+        "finishedAfterMs": 3288,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "a41ce5f8-1d99-4454-9c21-df9f402adc52",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 458190,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 87,
+        "accepted": true,
+        "acceptedAfterMs": 103,
+        "finishedAfterMs": 2075,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      }
+    ]
+  },
+  "offlineScope": "Apple selection absent from full21-item prior queue, both endpoints no active default network and no ADB reverse immediately before/after. Wi-Fi0; Pixel mobile_data1 retained, strict cellular-offT01 remains incomplete.",
+  "audibility": "NOT TESTED; routine hearing prompts waived. Screen/state/progress observations and estimated public PlaybackState position do not prove acoustic output or audio quality.",
+  "display": {
+    "before": {
+      "fontScale": "1.0",
+      "nightMode": "no"
+    },
+    "at": "2026-11-01T07:33:04.884679+08:00",
+    "phase": "CAPTURED; RESTORED",
+    "observed": {
+      "fontScale": "2.5",
+      "nightMode": "yes"
+    },
+    "restored": {
+      "fontScale": "1.0",
+      "nightMode": "no"
+    }
+  },
+  "driverObservations": [
+    "One read-only DX activity-services dump timed out25s; ADB automatically started a daemon. Both devices later online; no Bluetooth reset or playback replay. Partial capture retained.",
+    "Apple preparation sampled Mango immediately after its one Pause request, before state updated; first assertion failed. Later read-only sample confirmed both paused; preparation resumed after Pause without sending another Pause.",
+    "Initial Flutter command used wrong relative SDK path; no tests ran. Correct absolute pinned SDK then produced the recorded red baseline.",
+    "GitHub connector advertised workflow tool but returned Unknown tool; public API used for existing push job, no duplicate dispatch.",
+    "One commentary mistakenly said101 prior queue items; corrected immediately to actual21, as preserved by raw/structured evidence."
+  ],
+  "final": {
+    "at": "2026-11-01T07:36:21.945770+08:00",
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "pidsBefore": {
+      "host": "21079",
+      "phone": "15533"
+    },
+    "pidsAfter": {
+      "host": "21079",
+      "phone": "29724"
+    },
+    "hostEpoch": "2159b3e5-2f0d-408c-badf-379c8548416c",
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeVerified": false,
+    "prefsSettingsGrantsBondsBindingsStorage": "retained; SD mountedFBB9-E8FE, no storage setting/mount action",
+    "phone": "ordinary Disconnect/help collapsed, targetMango",
+    "host": "saved enabled/foreground service/advertising"
+  },
+  "priorTwentyMangoSelections": "Separate e1/dac source731 observed matrix remains frozen; not relabelled as20 selections on this new5d phone build.",
+  "icons": "Original icon family already implemented/verified in docs/test-results/2026-10-31-icon-family.md/.json; do not restart it from stale pending wording. Full UX acceptance remains scoped/incomplete.",
+  "fullAcceptancePassed": false,
+  "next": "Complete current Android Apple20 selections across5albums/2playlists and remaining full T01-T18/owner-iPhone/signing/Watch gates; preserve earlier interrupted-link and storage failures.",
+  "rawPhysicalEvidence": {
+    "root": "artifacts/library-recovery-toolbar-20261101",
+    "manifest": "physical-sha256-manifest.json",
+    "filesHashed": 239,
+    "manifestSha256": "210d471ed773be701376c7bf7b83a20198c983f3dfd6842f6da9cf58d88056a5",
+    "scope": "All current non-CI files; frozen. CI-prefixed evidence is independently collected from the existing run and excluded from this manifest."
+  },
+  "sharedIphoneCI": {
+    "id": 41252477906,
+    "head_sha": "3571db290084aa1ee9180cb43e62123a4a9cd377",
+    "status": "in_progress",
+    "conclusion": null,
+    "html_url": "https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/41252477906",
+    "artifactInspection": "PENDING existing run terminal completion"
+  }
+}
