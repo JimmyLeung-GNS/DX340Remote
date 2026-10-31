@@ -1,0 +1,217 @@
+{
+  "date": "2026-10-31",
+  "goalStatus": "ACTIVE/incomplete",
+  "appSource": "956e5bf936e71ede95b14f09ec19e2be1e6fe06a",
+  "analyserSource": "50c080d89672664684aeec6a233563f74f830b30",
+  "localBuilds": {
+    "status": "VERIFIED",
+    "nativeJvm": {
+      "protocol": 53,
+      "controllerJson": 3,
+      "cache": 7,
+      "adapters": 111,
+      "total": 174
+    },
+    "flutterTests": 72,
+    "analyserTests": 8,
+    "nativeBuildLint": true,
+    "sharedAnalyzeReleaseLint": true
+  },
+  "candidatePackages": [
+    {
+      "file": "companion-final-candidate.apk",
+      "sha256": "6faf6fd7d20bb67292317c57c256efcecca43edd97b64bf21aa935b52685b16e",
+      "installedPhysical": false
+    },
+    {
+      "file": "native-reference-final-candidate.apk",
+      "sha256": "7f679f198ae4e28fa7cc264672f393713453a80ac139710f4aed7877fe670ea0",
+      "installedPhysical": false
+    },
+    {
+      "file": "phone-final-candidate.apk",
+      "sha256": "66f12aaffe3aed081fd478cf2ca1c446b7c4e3429f0064ca5360b251a5a63ae8",
+      "installedPhysical": false,
+      "emulatorOnly": true
+    }
+  ],
+  "signerSha256": "24f48aa3566dcf7b65774ee12585191a8a0df9eeff9cc49e9e72c22bacca6e8d",
+  "emulator": {
+    "status": "VERIFIED",
+    "serial": "emulator-5560",
+    "avd": "Medium_Phone_API_36.1",
+    "os": "Android16/API36",
+    "build": "BP41.250822.007",
+    "target": "ordinary release app",
+    "exportBytes": 960,
+    "mediaStore": {
+      "id": 600,
+      "mime": "application/json",
+      "relativePath": "Download/DX340Remote/",
+      "isPending": 0,
+      "ownRowDeletedAfterPull": true
+    },
+    "strictSchema": true,
+    "installedApkDigestMatches": true,
+    "requests": 0,
+    "authorized": false,
+    "samePid": 4149,
+    "foregroundStartCountBefore": 0,
+    "foregroundStartCountAfter": 0,
+    "queuedOperations": 0,
+    "summaryPhysicalT04": "NOT_ADJUDICATED",
+    "fontRestored": 1.0,
+    "nightRestored": "no",
+    "shutDown": true,
+    "windowsForegroundInputUsed": false
+  },
+  "visualScope": {
+    "status": "VERIFIED",
+    "platform": "Android emulator",
+    "appearance": "light portrait",
+    "fontScales": [
+      1.0,
+      2.0
+    ],
+    "reportControlAndHelperReadable": true,
+    "savedFilenameWraps": true,
+    "scrollingRequired": true,
+    "contrast": {
+      "screenshot": "help-default.png",
+      "scope": "Normal light Android emulator report-action glyph/background only; not iOS or a whole-UI verdict",
+      "foreground": [
+        103,
+        80,
+        164
+      ],
+      "background": [
+        254,
+        247,
+        255
+      ],
+      "contrastRatio": 6.122998509555333,
+      "passesNormalText4_5": true
+    },
+    "wholeUx01Verdict": false,
+    "iOSButtonReview": "NOT TESTED"
+  },
+  "apple": {
+    "status": "NOT TESTED",
+    "observation": "Native terminal SUCCESS and archive verified; shared run still in progress",
+    "nativeRun": 41159819250,
+    "sharedRun": 41159819268,
+    "source": "956e5bf936e71ede95b14f09ec19e2be1e6fe06a",
+    "native": {
+      "status": "VERIFIED",
+      "run": 41159819250,
+      "conclusion": "success",
+      "artifact": 13026059784,
+      "archiveSha256": "c69543ed7f1623b0c7d2a3f360d0a7f43a76236823e6ce1ad3688fc13a682d01",
+      "swiftSoftwareTests": 19,
+      "captureGuards": 12,
+      "simulatorBuildInstallLaunch": true,
+      "xcode": "26.6/17F113",
+      "physicalIPhone": false
+    }
+  },
+  "physical": {
+    "status": "NOT TESTED",
+    "journalCandidateInstalled": false,
+    "adbInventoryAfterEmulatorShutdown": [],
+    "lastVerifiedPhoneApkSha256": "0cf86c9cfead4b27b3b2c1dcf2135b98fbe78fb992bc755491a1549d79b2fdc0",
+    "lastVerifiedCompanionApkSha256": "491dbbffabda8f7a20d64a2f591caa486427e036ba9e3821d831ccf6eff5934a",
+    "newAudio": false,
+    "ownerListeningQuestion": "unanswered",
+    "priorBackgroundTransferredToNewCandidate": false,
+    "physicalSettingsChanged": false
+  },
+  "limitations": [
+    "Native send to matched decoded reply includes encoding, queued writes and reassembly; not GATT frame ACK or UI-tap/acoustic timing.",
+    "Unsolicited STATE events are not converted into inferred request timing samples.",
+    "Host dispatched, host observed and human audible results remain separate.",
+    "No physical iPhone or full T04/T05/source/format/SD/output/range/sleep/battery/walking/handoff/Watch completion."
+  ],
+  "rawEvidence": [
+    {
+      "path": "artifacts/request-journal-20261031/emulator/help-default.png",
+      "bytes": 282086,
+      "sha256": "8a141bad0d1afb8fa92790b8ebc0929c1398b418f6d66fafd9dec6c7eeef27cd"
+    },
+    {
+      "path": "artifacts/request-journal-20261031/emulator/help-saved.png",
+      "bytes": 294285,
+      "sha256": "1c53be879d224a61b68a292bdd00a4bc9c8fb5a5609c4e5a6b35842eecb99a08"
+    },
+    {
+      "path": "artifacts/request-journal-20261031/emulator/help-large.png",
+      "bytes": 289837,
+      "sha256": "a426a44e8809e09b0fa2138e7e4f3eda863c935bc6896adc0f1c5b1f36029ca6"
+    },
+    {
+      "path": "artifacts/request-journal-20261031/emulator/native-export.json",
+      "bytes": 960,
+      "sha256": "32422da3ef82187238a49cdba8ae3e891c3479df8a7eea8f498ca213186e1b49"
+    },
+    {
+      "path": "artifacts/request-journal-20261031/emulator/report-summary.json",
+      "bytes": 819,
+      "sha256": "fbb28731c51b17492295cfa6d6d386f13d6d6bbcfeb7ec8419eae8f9a621fa5d"
+    },
+    {
+      "path": "artifacts/request-journal-20261031/emulator/service-before-save.txt",
+      "bytes": 2869,
+      "sha256": "5ba9da61e432d59cbec3a6ea4f26c25ed13db02405ffbf3b7a674a9b2e03c606"
+    },
+    {
+      "path": "artifacts/request-journal-20261031/emulator/service-after-save.txt",
+      "bytes": 2872,
+      "sha256": "493f0c9492600a7d8fcd5d9e8df15c2dd4ee15f66f16faca82aaaf45fb051b78"
+    },
+    {
+      "path": "artifacts/request-journal-20261031/emulator/client-events.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/request-journal-20261031/emulator/mediastore-row.txt",
+      "bytes": 261,
+      "sha256": "fcac0b0c7b2ce635c748513d1888c229751a829b3646fb4cb181eb16e872a652"
+    },
+    {
+      "path": "artifacts/request-journal-20261031/emulator/report-action-contrast.json",
+      "bytes": 330,
+      "sha256": "9647517909fecf9b1f26aec12b2ecd426f50a4ab57feb0430a8a37c8d371e556"
+    },
+    {
+      "path": "artifacts/request-journal-20261031/analyser-tests.txt",
+      "bytes": 1483,
+      "sha256": "30fe5d020b8a1c3ca4d49aa783bf59effe9e1777e5bf5225b63f503c806bba4a"
+    },
+    {
+      "path": "artifacts/request-journal-20261031/native-final-build-session.txt",
+      "bytes": 22303,
+      "sha256": "5b6e21b868f62c47215a6be2689820a2f2ba9ffecc82f55065412b8cf8466eeb"
+    },
+    {
+      "path": "artifacts/request-journal-20261031/native-final-test-counts.json",
+      "bytes": 414,
+      "sha256": "f4540fae37fcac0e2ce89657115fd57fdd58ccbe08167fe5ea478ef26bf02dae"
+    },
+    {
+      "path": "artifacts/request-journal-20261031/shared-final-build-session.txt",
+      "bytes": 21978,
+      "sha256": "840fec929c885f4e5aef03fe85448925ee0ef89ce5d1c5a1ee05f884d09ccb15"
+    },
+    {
+      "path": "artifacts/request-journal-20261031/flutter-tests.txt",
+      "bytes": 11178,
+      "sha256": "f5145fa680781c0643e9f5aaf610cd0356720b2e53b91338259e0fdeaaee5880"
+    }
+  ],
+  "preservedEarlierFailedHarnessLogs": [
+    "core-tests-initial.txt",
+    "core-tests-initial.xml",
+    "flutter-tests-initial.txt",
+    "flutter-tests-platform-cleanup.txt"
+  ]
+}

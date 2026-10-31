@@ -1,6 +1,18 @@
 # Implementation status
 
-## Current checkpoint —31 October2026,09:37 HKT
+## Current checkpoint —31 October2026,10:34 HKT
+
+Full goal **ACTIVE/incomplete**. App-code source `956e5bf936e71ede95b14f09ec19e2be1e6fe06a`; receipt analyser source `50c080d89672664684aeec6a233563f74f830b30`. Preserve newer work and exact physical evidence; the original4df goal snapshot is historical.
+
+- **Implemented:** bounded Kotlin/Swift request/connection journal, first accepted/terminal receipts, explicit applied flag, loss/timeout/error outcomes, no payload/music/Bluetooth identity/credential fields. Explicit shared Setup → Connection help → Save/Share report; Android app-owned Downloads and native iPhone sharing. No journal in normal snapshots, no added library/queue observer update, replay or control action. [Format and interpretation](connection-reports.md).
+- **Local VERIFIED:**174 JVM tests/native builds/lint;72 Flutter/analyze/release/lint;8 analyser tests. Original development certificate preserved. Shared candidate `66f12aaf…` is **emulator-only**; Companion `6faf6fd7…` and native reference `7f679f19…` built/not installed. Generic artifact paths now contain these candidates, not the physical packages. [Scoped evidence and full hashes](test-results/2026-10-31-connection-reports.md).
+- **Emulator SDK export VERIFIED:** ordinary Android16/API36 release app actually saves/publishes one app-owned JSON file, with its own installed APK digest matching66f. Strict schema passes;0 requests/idle/unauthorized, no BLE commands or foreground start. Summary retains0 samples/no latency pass. Normal/200% light report action/helper/filename readable with scrolling, action contrast6.12299851:1. Font/theme restored, exact created export removed after pulling; headless emulator shut down. No desktop foreground input or physical setting change.
+- **Apple:** native run41159819250 at956e5bf is terminalSUCCESS:19 Swift/12 capture guards/native build-install-launch; artifact13026059784 archiveSHA256 `c69543ed7f1623b0c7d2a3f360d0a7f43a76236823e6ce1ad3688fc13a682d01` verified. Xcode26.6/17F113, hosted iPhone Air. Shared run41159819268 is **still in progress**: poll the same ID through terminal, verify archive, inspect real UIKit export probe/JSON and ordinary-app restoration. No physical iPhone result.
+- **Physical unchanged/unavailable:** latest ADB inventory empty after emulator shutdown. Last installed/re-pulled Pixel0cf86c9c…/Companion491dbbff… retain their09:33 preservation/paused37 state in the timeout report. USB absence does not prove BLE failure. New journal has no physical request, source, audio or background result. Prior6b/source5321802.562-second USB/Awake/paused background check remains scoped and does not transfer to66f. Owner Apple-listening question is unanswered; no audio from silence.
+
+Next: finish shared Apple41159819268 and archive/update this checkpoint; re-inventory physical hardware, then verify candidate in place with the original signer and collect controlled receipt/source/listening evidence. Never infer a T04 pass from empty reports, dispatched-only replies or unsolicited state events. Preserve Pixel/JIMMYAH approvals, bonds, engines and optional browsingON. Full T01–T18, iPhone/signing, source/format/SD/output, calls/in-flight/range/sleep/battery/walking/handoff/Watch remain incomplete. Automatic switch handoff applies only on an explicit stop-to-switch request; no such new request occurred.
+
+## Prior checkpoint —31 October2026,09:37 HKT
 
 Full goal **ACTIVE/incomplete**. Code-bearing source is `fb26152fa4ab79122bfc0f51981526c0f173b313`; one Android timeout message changed. Preserve newer work; the original4df objective snapshot is historical.
 
