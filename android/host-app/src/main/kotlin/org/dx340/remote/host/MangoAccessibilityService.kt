@@ -9,6 +9,7 @@ import android.os.Looper
 import android.os.PowerManager
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
+import org.dx340.remote.sources.MangoBrowseBudget
 import org.dx340.remote.sources.MangoUiModel
 import org.dx340.remote.sources.MangoPlaylistUiModel
 import org.dx340.remote.sources.ParsedMangoUi
@@ -254,8 +255,8 @@ class MangoAccessibilityService : AccessibilityService() {
         var finished = false
         fun finish(value: JSONObject?, error: String?) { if (!finished) { finished = true; busy = false; cancelBrowse = null; if (error != null) last = null; trace("finished", JSONObject().put("error", error ?: JSONObject.NULL)); done(value, error) } }
         cancelBrowse = { finish(null, it) }
-        val deadline = android.os.SystemClock.elapsedRealtime() + 8000
-        fun guard() { require(stillAuthorized()) { "AUTHORIZATION_DENIED" }; readiness()?.let { error(it) }; check(android.os.SystemClock.elapsedRealtime() <= deadline) { "UI_ACTION_TIMEOUT" } }
+        val budget = MangoBrowseBudget(startedAt)
+        fun guard() { require(stillAuthorized()) { "AUTHORIZATION_DENIED" }; readiness()?.let { error(it) }; check(!budget.expired(android.os.SystemClock.elapsedRealtime())) { "UI_ACTION_TIMEOUT" } }
         var storageClicked = false; var menuClicked = false; var libraryClicked = false; var resetFingerprint = ""
         var reloadReturnStorage: String? = null
         val foregroundStartup = org.dx340.remote.sources.UiForegroundStartup()
@@ -284,7 +285,7 @@ class MangoAccessibilityService : AccessibilityService() {
                 val stableMs = navigationStability.observe(current.window, signature, now)
                 navigationTrace.put("storage", storage).put("menu", menu).put("storageClicked", storageClicked)
                     .put("title", parsed?.title).put("root", parsed?.root).put("resetFingerprint", resetFingerprint)
-                    .put("fingerprint", parsed?.fingerprint).put("stableMs", stableMs).put("remainingMs", deadline - now)
+                    .put("fingerprint", parsed?.fingerprint).put("stableMs", stableMs).put("remainingMs", budget.remainingMs(now))
                 trace("observed", JSONObject().put("treeMs", treeMs).put("nodes", current.nodes.size).put("menu", menu)
                     .put("title", parsed?.title ?: JSONObject.NULL).put("stableMs", stableMs))
                 // One complete 450ms settling interval for a final folder. Previously the
@@ -297,8 +298,9 @@ class MangoAccessibilityService : AccessibilityService() {
                 // Mango retains an obsolete SD directory list even when its SD menu
                 // entry is selected again. A deliberate root browse leaves that storage
                 // once before returning; it never retries the old folder/file action.
-                if (storage == "sd" && parsed?.storage == "sd" &&
+                if (storage == "sd" && parsed?.storage == "sd" && parsed.root == null &&
                     !storageClicked && !menuClicked && reloadReturnStorage == null) {
+                    budget.beginSdReload(android.os.SystemClock.elapsedRealtime())
                     reloadReturnStorage = storage
                     trace("sd-reload-via-internal")
                     openStorage("internal"); return
@@ -324,10 +326,7 @@ class MangoAccessibilityService : AccessibilityService() {
                         }
                     } else if (parsed != null) {
                         val rootPath = parsed.root
-                        // A reload is leaving SD anyway. Its toolbar menu is already
-                        // available in nested folders, so avoid a redundant crumb round trip.
-                        val leavingSdForReload = reloadReturnStorage == "sd" && storage == "internal" && parsed.storage == "sd"
-                        if (rootPath != null && !leavingSdForReload) {
+                        if (rootPath != null) {
                             // Mango may pop only one cached page even for the storage crumb.
                             // Continue only after a newly observed, settled folder snapshot.
                             if (resetFingerprint != parsed.fingerprint) {
@@ -384,7 +383,7 @@ class MangoAccessibilityService : AccessibilityService() {
                         }
                     }
                     catch (failure: Exception) { finish(null, failure.message ?: "UI_SETUP_REQUIRED") }
-                } else if (e.message == "UI_TREE_CHANGED" && android.os.SystemClock.elapsedRealtime() < deadline) {
+                } else if (e.message == "UI_TREE_CHANGED" && !budget.expired(android.os.SystemClock.elapsedRealtime())) {
                     navigationStability = UiSnapshotStability(); main.postDelayed({ openStorage(storage) }, 180)
                 } else finish(null, e.message ?: "UI_UNEXPECTED_SCREEN")
             }
@@ -397,11 +396,11 @@ class MangoAccessibilityService : AccessibilityService() {
                     val now = android.os.SystemClock.elapsedRealtime()
                     if (settled != parsed.fingerprint) { settled = parsed.fingerprint; since = now }
                     else if (now - since >= 450) { guard(); finish(result(current, storage, page), null); return }
-                } else if (endAllowed && android.os.SystemClock.elapsedRealtime() + 450 >= deadline) { finish(result(current, storage, page, true), null); return }
+                } else if (endAllowed && budget.remainingMs(android.os.SystemClock.elapsedRealtime()) <= 450) { finish(result(current, storage, page, true), null); return }
                 else { settled = "" }
                 main.postDelayed({ waitChanged(storage, before, endAllowed) }, 150)
             } catch (e: Exception) {
-                if (e.message in setOf("UI_TREE_CHANGED", "UI_UNEXPECTED_SCREEN", "UI_ACTIVE_PAGE_UNVERIFIED") && android.os.SystemClock.elapsedRealtime() < deadline) {
+                if (e.message in setOf("UI_TREE_CHANGED", "UI_UNEXPECTED_SCREEN", "UI_ACTIVE_PAGE_UNVERIFIED") && !budget.expired(android.os.SystemClock.elapsedRealtime())) {
                     settled = ""; main.postDelayed({ waitChanged(storage, before, endAllowed) }, 150)
                 } else finish(null, e.message ?: "UI_UNEXPECTED_SCREEN")
             }
