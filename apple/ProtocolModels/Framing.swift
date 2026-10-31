@@ -185,6 +185,29 @@ public final class Reassembler {
     }
 }
 
+/// Main-thread FIFO. A successful final frame completes its logical write.
+public final class AcknowledgedWriteQueue<Tag> {
+    private struct Frame { let bytes: Data; let completion: Tag? }
+    private let capacity: Int
+    private var pending: [Frame] = []
+    private var flight: Frame?
+    public init(capacity: Int = 12000) { precondition((1...12000).contains(capacity)); self.capacity = capacity }
+    public var pendingCount: Int { pending.count }
+    public var busy: Bool { flight != nil }
+    public func enqueue(_ frames: [Data], completion: Tag? = nil) throws {
+        guard !frames.isEmpty, frames.count <= capacity - pending.count else { throw WireError.limit }
+        pending.append(contentsOf: frames.enumerated().map { Frame(bytes: $0.element, completion: $0.offset == frames.count - 1 ? completion : nil) })
+    }
+    public func next() -> Data? {
+        guard flight == nil, !pending.isEmpty else { return nil }
+        flight = pending.removeFirst(); return flight?.bytes
+    }
+    public func acknowledge() -> Tag? {
+        let current = flight; flight = nil; return current?.completion
+    }
+    public func clear() { pending.removeAll(); flight = nil }
+}
+
 /// Bounded observations only. Never authorizes, sends or retries a command.
 public final class RequestJournal {
     private let capacity: Int
@@ -194,7 +217,7 @@ public final class RequestJournal {
         let id: String, operation: String, source: String
         let start: Int64
         var accepted = false
-        var acceptedAfter: Int64?, finishedAfter: Int64?
+        var acceptedAfter: Int64?, finishedAfter: Int64?, writeAcknowledgedAfter: Int64?
         var result = "pending", outcome = "none"
         var terminalApplied = false
         var error: String?
@@ -240,6 +263,11 @@ public final class RequestJournal {
         guard var entry = entries[id], ["result", "error", "other_reply"].contains(entry.result) else { return }
         entry.terminalApplied = true; entries[id] = entry
     }
+    public func writeAcknowledged(id: String) {
+        guard var entry = entries[id], entry.writeAcknowledgedAfter == nil,
+              ["pending", "result", "error", "other_reply"].contains(entry.result) else { return }
+        entry.writeAcknowledgedAfter = elapsed(now(), entry.start); entries[id] = entry
+    }
     @discardableResult public func finish(id: String, reason: String) -> [String: Any]? {
         guard var entry = entries[id], entry.result == "pending" else { return nil }
         entry.result = Self.endings.contains(reason) ? reason : "other"; entry.finishedAfter = elapsed(now(), entry.start)
@@ -248,6 +276,7 @@ public final class RequestJournal {
     @discardableResult public func abandon(reason: String = "connection_lost") -> [[String: Any]] { order.compactMap { finish(id: $0, reason: reason) } }
     private func snapshot(_ e: Entry) -> [String: Any] {
         ["id": e.id, "operation": e.operation, "source": e.source, "startedMs": elapsed(e.start, origin) as Any? ?? NSNull(),
+         "writeAcknowledgedAfterMs": e.writeAcknowledgedAfter as Any? ?? NSNull(),
          "accepted": e.accepted, "acceptedAfterMs": e.acceptedAfter as Any? ?? NSNull(), "finishedAfterMs": e.finishedAfter as Any? ?? NSNull(),
          "result": e.result, "terminalApplied": e.terminalApplied, "hostOutcome": e.outcome, "error": e.error as Any? ?? NSNull()]
     }

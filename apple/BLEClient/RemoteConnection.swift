@@ -36,8 +36,8 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     private var rx: CBCharacteristic?
     private var tx: CBCharacteristic?
     private var serial: UInt16 = 0
-    private var writes: [Data] = []
-    private var writing = false
+    private let writes = AcknowledgedWriteQueue<String>()
+    private var writing: Bool { writes.busy }
     private var wantsConnection = false
     private var reconnectAttempts = 0
     private var connectionTimeout: Task<Void, Never>?
@@ -180,7 +180,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         if let p = peripheral { manager.cancelPeripheralConnection(p) }
         clearConnection(); status = "Disconnected. Cached lists may be stale."
     }
-    private func clearConnection() { journal.abandon(); stopDiscovery(); cancelApprovalCheck(); servicesInvalidated = false; connectionPhase = "idle"; abandonAssistedPage(); cancelSetupDeadline(); setupExpiryNotice = nil; connectionGeneration += 1; connectionTimeout?.cancel(); connectionTimeout = nil; writeTimeout?.cancel(); writeTimeout = nil; authorized = false; controlProposal.clear(); assistedPageUse.clear(); rx = nil; tx = nil; writing = false; writes = []; pending = [:]; browseLocations = [:]; queueLocations = [:]; activeBrowseId = nil; activeQueueId = nil; hostEpoch = ""; assembler.clear() }
+    private func clearConnection() { journal.abandon(); stopDiscovery(); cancelApprovalCheck(); servicesInvalidated = false; connectionPhase = "idle"; abandonAssistedPage(); cancelSetupDeadline(); setupExpiryNotice = nil; connectionGeneration += 1; connectionTimeout?.cancel(); connectionTimeout = nil; writeTimeout?.cancel(); writeTimeout = nil; authorized = false; controlProposal.clear(); assistedPageUse.clear(); rx = nil; tx = nil; writes.clear(); pending = [:]; browseLocations = [:]; queueLocations = [:]; activeBrowseId = nil; activeQueueId = nil; hostEpoch = ""; assembler.clear() }
     private func cancelSetupDeadline() { setupTimeout?.cancel(); setupTimeout = nil; setupDeadline.clear() }
     private func beginSetupDeadline() {
         guard !setupDeadline.active else { return }
@@ -295,7 +295,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         do {
             let data = try JSONSerialization.data(withJSONObject: request, options: [.sortedKeys])
             let frames = try Wire.frames(data, capacity: min(512, p.maximumWriteValueLength(for: .withResponse)), id: serial)
-            guard writes.count + frames.count <= 12000 else { journal.finish(id: id, reason: "send_failed"); status = "Too many queued messages."; return }
+            guard writes.pendingCount + frames.count <= 12000 else { journal.finish(id: id, reason: "send_failed"); status = "Too many queued messages."; return }
             serial &+= 1; pending[id] = type
             if type == "PLAY_ITEM" {
                 assistedPageUse.begin(id: id, source: state["source"] as? String ?? "", epoch: state["sourceEpoch"] as? String ?? "",
@@ -308,22 +308,22 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
                 browseLocations[id] = BrowseLocation(source: state["source"] as? String ?? "", epoch: state["sourceEpoch"] as? String ?? "", parent: args["parent"] as? String)
                 activeBrowseId = id; library = ["loading": true]; status = "Loading library…"
             }
-            writes.append(contentsOf: frames); pump()
+            try writes.enqueue(frames, completion: id); pump()
             let replyBudget = ReplyBudget.milliseconds(type, item: args["item"] as? String)
             Task { try? await Task.sleep(for: .milliseconds(replyBudget)); if pending.removeValue(forKey: id) != nil { journal.finish(id: id, reason: "timeout"); if type == "AUTHORIZE" { cancelApprovalCheck(); connectionPhase = "failed" }; retireAssistedPage(id); browseLocations[id] = nil; queueLocations[id] = nil; if id == activeBrowseId { library = [:] }; status = "Reply timed out; outcome unknown. Refresh before retrying." } }
         } catch { journal.finish(id: id, reason: "send_failed"); status = "Cannot encode Bluetooth message." }
     }
     private func pump() {
-        guard !writing, !writes.isEmpty, let p = peripheral, let rx else { return }
-        writing = true; p.writeValue(writes.removeFirst(), for: rx, type: .withResponse)
+        guard let p = peripheral, let rx, let frame = writes.next() else { return }
+        p.writeValue(frame, for: rx, type: .withResponse)
         writeTimeout?.cancel()
         writeTimeout = Task { try? await Task.sleep(for: .seconds(10)); guard !Task.isCancelled else { return }; if writing { manager.cancelPeripheralConnection(p); clearConnection(); status = "Bluetooth write timed out; outcome unknown. Pending controls cleared." } }
     }
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
-        guard peripheral == self.peripheral, characteristic == rx else { return }
-        writeTimeout?.cancel(); writeTimeout = nil; writing = false
+        guard peripheral == self.peripheral, characteristic == rx, writing else { return }
+        writeTimeout?.cancel(); writeTimeout = nil
         if error != nil { clearConnection(); status = "Write failed; outcome unknown. Reconnect before retrying." }
-        else { pump() }
+        else { if let id = writes.acknowledge() { journal.writeAcknowledged(id: id) }; pump() }
     }
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         guard peripheral == self.peripheral, characteristic == tx else { return }
@@ -359,7 +359,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         report["modelInstanceId"] = diagnosticSessionId
         report["platform"] = "ios"; report["authorized"] = authorized
         report["connectionPhase"] = connectionSetup["phase"]
-        report["timingScope"] = "Native send start to matched decoded reply, including encoding, queued writes and reassembly; not a GATT frame ACK or acoustic measurement."
+        report["timingScope"] = "Native send start to last successful ATT request-write response callback, protocol ACCEPTED, and matched decoded reply measured separately. Includes encoding, queue and callback delay; reply also includes reassembly. No UI-tap or acoustic timing."
         report["privacy"] = "Current model instance only. No music metadata, arguments, Bluetooth identities or credentials. Process restart clears this history."
         return try JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted, .sortedKeys])
     }

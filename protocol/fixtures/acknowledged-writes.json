@@ -1,0 +1,225 @@
+[
+  {
+    "name": "only final frame completes, FIFO across requests",
+    "capacity": 3,
+    "steps": [
+      {
+        "action": "enqueue",
+        "frames": [
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "tag": "a"
+      },
+      {
+        "action": "enqueue",
+        "frames": [
+          [
+            3
+          ]
+        ],
+        "tag": "b"
+      },
+      {
+        "action": "next",
+        "bytes": [
+          1
+        ]
+      },
+      {
+        "action": "next",
+        "bytes": null
+      },
+      {
+        "action": "ack",
+        "tag": null
+      },
+      {
+        "action": "next",
+        "bytes": [
+          2
+        ]
+      },
+      {
+        "action": "ack",
+        "tag": "a"
+      },
+      {
+        "action": "next",
+        "bytes": [
+          3
+        ]
+      },
+      {
+        "action": "ack",
+        "tag": "b"
+      },
+      {
+        "action": "next",
+        "bytes": null
+      },
+      {
+        "action": "ack",
+        "tag": null
+      }
+    ]
+  },
+  {
+    "name": "disconnect clears queued and in-flight correlations",
+    "capacity": 3,
+    "steps": [
+      {
+        "action": "enqueue",
+        "frames": [
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "tag": "old"
+      },
+      {
+        "action": "next",
+        "bytes": [
+          1
+        ]
+      },
+      {
+        "action": "clear"
+      },
+      {
+        "action": "ack",
+        "tag": null
+      },
+      {
+        "action": "enqueue",
+        "frames": [
+          [
+            3
+          ]
+        ],
+        "tag": "new"
+      },
+      {
+        "action": "ack",
+        "tag": null
+      },
+      {
+        "action": "next",
+        "bytes": [
+          3
+        ]
+      },
+      {
+        "action": "ack",
+        "tag": "new"
+      }
+    ]
+  },
+  {
+    "name": "capacity failure is atomic and retains older writes",
+    "capacity": 2,
+    "steps": [
+      {
+        "action": "enqueue",
+        "frames": [
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "tag": "a"
+      },
+      {
+        "action": "enqueue",
+        "frames": [
+          [
+            3
+          ]
+        ],
+        "tag": "bad",
+        "rejected": true
+      },
+      {
+        "action": "next",
+        "bytes": [
+          1
+        ]
+      },
+      {
+        "action": "enqueue",
+        "frames": [
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ],
+        "tag": "bad2",
+        "rejected": true
+      },
+      {
+        "action": "enqueue",
+        "frames": [
+          [
+            3
+          ]
+        ],
+        "tag": "b"
+      },
+      {
+        "action": "ack",
+        "tag": null
+      },
+      {
+        "action": "next",
+        "bytes": [
+          2
+        ]
+      },
+      {
+        "action": "ack",
+        "tag": "a"
+      },
+      {
+        "action": "next",
+        "bytes": [
+          3
+        ]
+      },
+      {
+        "action": "ack",
+        "tag": "b"
+      }
+    ]
+  },
+  {
+    "name": "empty logical writes cannot fabricate an acknowledgement",
+    "capacity": 2,
+    "steps": [
+      {
+        "action": "enqueue",
+        "frames": [],
+        "tag": "empty",
+        "rejected": true
+      },
+      {
+        "action": "next",
+        "bytes": null
+      },
+      {
+        "action": "ack",
+        "tag": null
+      }
+    ]
+  }
+]

@@ -2,6 +2,45 @@ import XCTest
 @testable import DXProtocol
 
 final class FramingTests: XCTestCase {
+    func testSharedAcknowledgedWriteQueueFixtures() throws {
+        let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        let cases = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("protocol/fixtures/acknowledged-writes.json"))) as! [[String: Any]]
+        for item in cases {
+            let q = AcknowledgedWriteQueue<String>(capacity: item["capacity"] as! Int)
+            for (index, step) in (item["steps"] as! [[String: Any]]).enumerated() {
+                let label = (item["name"] as! String) + " step \(index)"
+                switch step["action"] as! String {
+                case "enqueue":
+                    let frames = (step["frames"] as! [[NSNumber]]).map { Data($0.map { $0.uint8Value }) }
+                    var rejected = false
+                    do { try q.enqueue(frames, completion: step["tag"] as? String) }
+                    catch WireError.limit { rejected = true }
+                    catch { XCTFail("Unexpected queue error: \(error)") }
+                    XCTAssertEqual(rejected, step["rejected"] as? Bool ?? false, label)
+                case "next":
+                    let expected = (step["bytes"] as? [NSNumber]).map { Data($0.map { $0.uint8Value }) }
+                    XCTAssertEqual(q.next(), expected, label)
+                case "ack": XCTAssertEqual(q.acknowledge(), step["tag"] as? String, label)
+                case "clear": q.clear()
+                default: XCTFail("Unknown queue fixture action")
+                }
+            }
+            XCTAssertFalse(q.busy); XCTAssertEqual(q.pendingCount, 0)
+        }
+    }
+    func testQueuedWriteReceiptsIncludeWaitingWithoutImplyingPlayback() throws {
+        var clock: Int64 = 0; let journal = RequestJournal(now: { clock }); let q = AcknowledgedWriteQueue<String>()
+        journal.begin(id: "a", operation: "NEXT", source: "mango"); try q.enqueue([Data([1]), Data([2])], completion: "a")
+        clock = 10; journal.begin(id: "b", operation: "GET_STATE", source: "mango"); try q.enqueue([Data([3])], completion: "b")
+        let before = journal.report()
+        _ = q.next(); clock = 20; XCTAssertNil(q.acknowledge())
+        _ = q.next(); clock = 40; journal.writeAcknowledged(id: q.acknowledge()!)
+        _ = q.next(); clock = 70; journal.writeAcknowledged(id: q.acknowledge()!)
+        let rows = journal.report()["requests"] as! [[String: Any]]
+        XCTAssertEqual(rows[0]["writeAcknowledgedAfterMs"] as? Int64, 40); XCTAssertEqual(rows[1]["writeAcknowledgedAfterMs"] as? Int64, 60)
+        XCTAssertTrue(rows.allSatisfy { $0["result"] as? String == "pending" && $0["accepted"] as? Bool == false && $0["terminalApplied"] as? Bool == false })
+        XCTAssertTrue((before["requests"] as! [[String: Any]]).allSatisfy { $0["writeAcknowledgedAfterMs"] is NSNull })
+    }
     func testSharedRequestJournalFixtures() throws {
         let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
         let cases = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("protocol/fixtures/request-journal.json"))) as! [[String: Any]]
@@ -14,6 +53,7 @@ final class FramingTests: XCTestCase {
                 case "begin": journal.begin(id: step["id"] as! String, operation: step["operation"] as! String, source: step["source"] as! String)
                 case "reply": journal.reply(id: step["id"] as! String, type: step["type"] as! String, outcome: step["outcome"] as? String ?? "", error: step["error"] as? String ?? "")
                 case "apply": journal.markTerminalApplied(id: step["id"] as! String)
+                case "writeAck": journal.writeAcknowledged(id: step["id"] as! String)
                 case "finish": journal.finish(id: step["id"] as! String, reason: step["reason"] as! String)
                 case "abandon": journal.abandon(reason: step["reason"] as! String)
                 case "phase": journal.phase(step["phase"] as! String)

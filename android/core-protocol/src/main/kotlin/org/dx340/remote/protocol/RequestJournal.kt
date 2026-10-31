@@ -5,7 +5,7 @@ class RequestJournal(private val capacity: Int = 256, private val nowMs: () -> L
     init { require(capacity in 1..512) }
     private val origin = nowMs()
     private data class Entry(val id: String, val operation: String, val source: String, val start: Long,
-        var accepted: Boolean = false, var acceptedAfter: Long? = null, var finishedAfter: Long? = null,
+        var accepted: Boolean = false, var acceptedAfter: Long? = null, var finishedAfter: Long? = null, var writeAcknowledgedAfter: Long? = null,
         var result: String = "pending", var terminalApplied: Boolean = false, var outcome: String = "none", var error: String? = null)
     private val entries = linkedMapOf<String, Entry>()
     private val connections = ArrayDeque<Map<String, Any?>>()
@@ -39,6 +39,10 @@ class RequestJournal(private val capacity: Int = 256, private val nowMs: () -> L
     fun markTerminalApplied(id: String) {
         entries[id]?.takeIf { it.result in setOf("result", "error", "other_reply") }?.terminalApplied = true
     }
+    fun writeAcknowledged(id: String) {
+        val entry = entries[id]?.takeIf { it.writeAcknowledgedAfter == null && it.result in setOf("pending", "result", "error", "other_reply") } ?: return
+        entry.writeAcknowledgedAfter = elapsed(nowMs(), entry.start)
+    }
     fun finish(id: String, reason: String): Map<String, Any?>? {
         val entry = entries[id]?.takeIf { it.result == "pending" } ?: return null
         entry.result = reason.takeIf { it in endings } ?: "other"
@@ -47,7 +51,8 @@ class RequestJournal(private val capacity: Int = 256, private val nowMs: () -> L
     }
     fun abandon(reason: String = "connection_lost"): List<Map<String, Any?>> = entries.keys.toList().mapNotNull { finish(it, reason) }
     private fun snapshot(e: Entry): Map<String, Any?> = linkedMapOf("id" to e.id, "operation" to e.operation, "source" to e.source,
-        "startedMs" to elapsed(e.start, origin), "accepted" to e.accepted, "acceptedAfterMs" to e.acceptedAfter,
+        "startedMs" to elapsed(e.start, origin), "writeAcknowledgedAfterMs" to e.writeAcknowledgedAfter,
+        "accepted" to e.accepted, "acceptedAfterMs" to e.acceptedAfter,
         "finishedAfterMs" to e.finishedAfter, "result" to e.result, "terminalApplied" to e.terminalApplied, "hostOutcome" to e.outcome, "error" to e.error)
     fun report(): Map<String, Any?> = linkedMapOf("formatVersion" to 1, "clock" to "monotonic_ms_relative_to_model", "capacity" to capacity,
         "evictedRequests" to evictedRequests, "evictedConnections" to evictedConnections,

@@ -29,6 +29,36 @@ def row(id='request-A', **changes):
 
 
 class ReportsTest(unittest.TestCase):
+    def test_write_ack_is_optional_for_legacy_and_never_inferred_from_reply(self):
+        value = reports.summarize([report([row(result='result', finishedAfterMs=80, terminalApplied=True)])])
+        self.assertEqual(value['groups'][0]['attWriteAcknowledged']['samples'], 0)
+        value = reports.summarize([report([row(writeAcknowledgedAfterMs=None)])])
+        self.assertIsNone(value['groups'][0]['attWriteAcknowledged']['p95Ms'])
+
+    def test_write_ack_merges_after_terminal_in_either_order_without_changing_reply_time(self):
+        first = report([row(result='result', finishedAfterMs=20, terminalApplied=True, writeAcknowledgedAfterMs=None)])
+        second = copy.deepcopy(first); second['requests'][0]['writeAcknowledgedAfterMs'] = 30
+        a = reports.summarize([first, second]); b = reports.summarize([second, first])
+        self.assertEqual(a, b)
+        self.assertEqual(a['groups'][0]['attWriteAcknowledged']['p95Ms'], 30)
+        self.assertEqual(a['groups'][0]['terminalReply']['p95Ms'], 20)
+        self.assertEqual(a['groups'][0]['acceptedReceipt']['samples'], 0)
+        self.assertEqual(a['physicalT04'], 'NOT_ADJUDICATED')
+
+    def test_write_ack_conflicts_invalid_values_and_post_loss_attribution_are_rejected(self):
+        for value in (-1, True, '1', 2**63):
+            with self.subTest(value=value), self.assertRaises(reports.ReportError):
+                reports.summarize([report([row(writeAcknowledgedAfterMs=value)])])
+        with self.assertRaises(reports.ReportError):
+            reports.summarize([report([row(writeAcknowledgedAfterMs=1)]), report([row(writeAcknowledgedAfterMs=2)])])
+        with self.assertRaises(reports.ReportError):
+            reports.summarize([report([row(result='connection_lost', finishedAfterMs=10, writeAcknowledgedAfterMs=11)])])
+
+    def test_valid_write_ack_survives_later_loss_without_counting_as_applied_state(self):
+        value = reports.summarize([report([row(result='connection_lost', finishedAfterMs=40, writeAcknowledgedAfterMs=10)])])
+        self.assertEqual(value['groups'][0]['attWriteAcknowledged']['samples'], 1)
+        self.assertEqual(value['groups'][0]['appliedResult']['samples'], 0)
+
     def test_empty_and_missing_durations_never_imply_pass_or_zero(self):
         value = reports.summarize([report()])
         self.assertEqual(value['uniqueRequests'], 0)

@@ -9,6 +9,7 @@ import re
 
 ROOT_KEYS = set('formatVersion clock capacity evictedRequests evictedConnections requests connections modelInstanceId app os platform authorized connectionPhase timingScope privacy'.split())
 ROW_KEYS = set('id operation source startedMs accepted acceptedAfterMs finishedAfterMs result terminalApplied hostOutcome error'.split())
+WRITE_ACK = 'writeAcknowledgedAfterMs'
 ENDINGS = {'result', 'error', 'other_reply', 'timeout', 'send_failed', 'connection_lost', 'session_reset', 'other'}
 SAFE = re.compile(r'[A-Za-z0-9_-]{1,64}\Z')
 OPERATIONS = set('HELLO AUTHORIZE REQUEST_CONTROL GET_STATE GET_QUEUE GET_ARTWORK GET_CAPABILITIES LIST_SOURCES SUBSCRIBE_STATE SET_PLAYING NEXT PREVIOUS SEEK SELECT_SOURCE PLAY_ITEM PLAY_QUEUE_ITEM ADJUST_VOLUME BROWSE SEARCH SET_SHUFFLE SET_REPEAT OTHER'.split())
@@ -51,12 +52,13 @@ def validate(report):
     require(type(report['connections']) is list and len(report['connections']) <= report['capacity'], 'Connection bound exceeded')
     seen = set()
     for row in report['requests']:
-        require(type(row) is dict and set(row) == ROW_KEYS, 'Unexpected request fields')
+        require(type(row) is dict and ROW_KEYS <= set(row) <= ROW_KEYS | {WRITE_ACK}, 'Unexpected request fields')
         require(isinstance(row['id'], str) and SAFE.fullmatch(row['id']) and row['id'] not in seen, 'Invalid or duplicate request ID')
         seen.add(row['id'])
         require(all(isinstance(row[k], str) for k in ('operation', 'source', 'result', 'hostOutcome')), 'Invalid request categories')
         require(row['operation'] in OPERATIONS and row['source'] in SOURCES, 'Unknown operation/source category')
         require(all(milliseconds(row[k]) for k in ('startedMs', 'acceptedAfterMs', 'finishedAfterMs')), 'Invalid duration')
+        require(milliseconds(row.get(WRITE_ACK)), 'Invalid write-acknowledgement duration')
         require(type(row['accepted']) is bool and type(row['terminalApplied']) is bool, 'Invalid receipt flags')
         require(row['accepted'] or row['acceptedAfterMs'] is None, 'Timing without ACCEPTED receipt')
         require(row['result'] in ENDINGS | {'pending'}, 'Unknown terminal category')
@@ -69,6 +71,9 @@ def validate(report):
         require((row['error'] is not None) == (row['result'] == 'error'), 'Error category disagrees with terminal receipt')
         a, b = row['acceptedAfterMs'], row['finishedAfterMs']
         require(a is None or b is None or a <= b, 'ACCEPTED is later than terminal receipt')
+        ack = row.get(WRITE_ACK)
+        if row['result'] not in ('pending', 'result', 'error', 'other_reply'):
+            require(ack is None or b is None or ack <= b, 'Write acknowledgement appeared after local termination')
     for row in report['connections']:
         require(type(row) is dict and set(row) == {'atMs', 'phase'} and milliseconds(row['atMs']) and isinstance(row['phase'], str), 'Invalid connection transition')
 
@@ -78,6 +83,8 @@ def merge(first, second):
         require(first[key] == second[key], 'Conflicting immutable request identity')
     if first['accepted'] and second['accepted']:
         require(first['acceptedAfterMs'] == second['acceptedAfterMs'], 'Conflicting first ACCEPTED timing')
+    a, b = first.get(WRITE_ACK), second.get(WRITE_ACK)
+    require(a is None or b is None or a == b, 'Conflicting first write acknowledgement timing')
     terminals = [r for r in (first, second) if r['result'] != 'pending']
     if len(terminals) == 2:
         for key in ('result', 'finishedAfterMs', 'hostOutcome', 'error', 'accepted', 'acceptedAfterMs'):
@@ -89,6 +96,12 @@ def merge(first, second):
     elif accepted:
         final.update(accepted=True, acceptedAfterMs=accepted['acceptedAfterMs'])
     final['terminalApplied'] = any(r['terminalApplied'] for r in (first, second))
+    if WRITE_ACK in first or WRITE_ACK in second:
+        final[WRITE_ACK] = a if a is not None else b
+    validate_row_ack = final.get(WRITE_ACK)
+    if final['result'] not in ('pending', 'result', 'error', 'other_reply'):
+        require(validate_row_ack is None or final['finishedAfterMs'] is None or validate_row_ack <= final['finishedAfterMs'],
+                'Merged write acknowledgement appeared after local termination')
     return final
 
 
@@ -129,9 +142,10 @@ def summarize(reports, allow_multiple_sessions=False):
         timed = [r for r in items if r['startedMs'] is not None]
         applied = [r for r in timed if r['result'] == 'result' and r['terminalApplied']]
         def times(values, key):
-            return distribution([r[key] for r in values if r[key] is not None])
+            return distribution([r[key] for r in values if r.get(key) is not None])
         output.append({'operation': operation, 'source': source, 'requests': len(items),
                        'outcomes': dict(sorted(Counter(r['result'] for r in items).items())),
+                       'attWriteAcknowledged': times(timed, WRITE_ACK),
                        'acceptedReceipt': times([r for r in timed if r['accepted']], 'acceptedAfterMs'),
                        'terminalReply': times([r for r in timed if r['result'] in ('result', 'error', 'other_reply')], 'finishedAfterMs'),
                        'appliedResult': times(applied, 'finishedAfterMs'),
@@ -142,7 +156,7 @@ def summarize(reports, allow_multiple_sessions=False):
             'evictedConnectionsAtLeast': sum(v[1] for v in evictions.values()),
             'percentiles': 'nearest_rank', 'groups': output,
             'physicalT04': 'NOT_ADJUDICATED',
-            'scope': 'Native send registration to matched decoded reply; not GATT frame ACK, UI-tap or acoustic timing. Host observed state is not audible proof. Empty/missing samples never pass acceptance.'}
+            'scope': 'Separate native registration-to-last-ATT-write-response, protocol ACCEPTED and decoded-reply times. Includes encoding/queue/callback delay, plus reply reassembly. Legacy missing write receipts stay unknown. No UI-tap/acoustic or audible proof. Empty/missing samples never pass acceptance.'}
 
 
 def read_report(path):

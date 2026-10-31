@@ -221,7 +221,7 @@ class RemoteModel(private val context: Context) {
         }
         update()
         try {
-            ble.send(request.toString().toByteArray())
+            ble.send(request.toString().toByteArray()) { journal.writeAcknowledged(id) }
             // Types only: no metadata, identities, arguments or credentials.
             android.util.Log.i("DX340RemoteClient", "QUEUED:$type")
         }
@@ -339,7 +339,7 @@ class RemoteModel(private val context: Context) {
             .put("os", JSONObject().put("version", android.os.Build.VERSION.RELEASE).put("api", android.os.Build.VERSION.SDK_INT).put("model", android.os.Build.MODEL))
             .put("platform", "android").put("authorized", authorized)
             .put("connectionPhase", connectionSetup.optString("phase"))
-            .put("timingScope", "Native send start to matched decoded reply, including encoding, queued writes and reassembly; not a GATT frame ACK or acoustic measurement.")
+            .put("timingScope", "Native send start to last successful ATT request-write response callback, protocol ACCEPTED, and matched decoded reply measured separately. Includes encoding, queue and callback delay; reply also includes reassembly. No UI-tap or acoustic timing.")
             .put("privacy", "Current model instance only. No music metadata, arguments, Bluetooth identities or credentials. Process restart clears this history.")
             .toString(2)
     }

@@ -60,7 +60,8 @@
           "result": "result",
           "error": null,
           "hostOutcome": "observed",
-          "terminalApplied": true
+          "terminalApplied": true,
+          "writeAcknowledgedAfterMs": null
         }
       ],
       "connections": []
@@ -115,7 +116,8 @@
           "result": "error",
           "error": "OTHER",
           "hostOutcome": "none",
-          "terminalApplied": false
+          "terminalApplied": false,
+          "writeAcknowledgedAfterMs": null
         }
       ],
       "connections": [
@@ -197,7 +199,8 @@
           "result": "connection_lost",
           "error": null,
           "hostOutcome": "none",
-          "terminalApplied": false
+          "terminalApplied": false,
+          "writeAcknowledgedAfterMs": null
         },
         {
           "id": "read-new",
@@ -210,7 +213,8 @@
           "result": "result",
           "error": null,
           "hostOutcome": "none",
-          "terminalApplied": false
+          "terminalApplied": false,
+          "writeAcknowledgedAfterMs": null
         }
       ],
       "connections": [
@@ -307,7 +311,8 @@
           "result": "timeout",
           "error": null,
           "hostOutcome": "none",
-          "terminalApplied": false
+          "terminalApplied": false,
+          "writeAcknowledgedAfterMs": null
         },
         {
           "id": "c",
@@ -320,7 +325,8 @@
           "result": "send_failed",
           "error": null,
           "hostOutcome": "none",
-          "terminalApplied": false
+          "terminalApplied": false,
+          "writeAcknowledgedAfterMs": null
         }
       ],
       "connections": [
@@ -383,7 +389,8 @@
           "result": "result",
           "error": null,
           "hostOutcome": "none",
-          "terminalApplied": false
+          "terminalApplied": false,
+          "writeAcknowledgedAfterMs": null
         }
       ],
       "connections": []
@@ -439,7 +446,8 @@
           "result": "error",
           "error": "STALE_SOURCE",
           "hostOutcome": "none",
-          "terminalApplied": false
+          "terminalApplied": false,
+          "writeAcknowledgedAfterMs": null
         }
       ],
       "connections": []
@@ -559,7 +567,8 @@
           "result": "result",
           "error": null,
           "hostOutcome": "none",
-          "terminalApplied": false
+          "terminalApplied": false,
+          "writeAcknowledgedAfterMs": null
         },
         {
           "id": "apple-wire",
@@ -572,7 +581,8 @@
           "result": "result",
           "error": null,
           "hostOutcome": "none",
-          "terminalApplied": false
+          "terminalApplied": false,
+          "writeAcknowledgedAfterMs": null
         },
         {
           "id": "unknown-wire",
@@ -585,7 +595,8 @@
           "result": "result",
           "error": null,
           "hostOutcome": "none",
-          "terminalApplied": false
+          "terminalApplied": false,
+          "writeAcknowledgedAfterMs": null
         },
         {
           "id": "lookalike-wire",
@@ -598,7 +609,8 @@
           "result": "result",
           "error": null,
           "hostOutcome": "none",
-          "terminalApplied": false
+          "terminalApplied": false,
+          "writeAcknowledgedAfterMs": null
         },
         {
           "id": "upper-wire",
@@ -611,7 +623,8 @@
           "result": "result",
           "error": null,
           "hostOutcome": "none",
-          "terminalApplied": false
+          "terminalApplied": false,
+          "writeAcknowledgedAfterMs": null
         },
         {
           "id": "no-source",
@@ -624,7 +637,8 @@
           "result": "result",
           "error": null,
           "hostOutcome": "none",
-          "terminalApplied": false
+          "terminalApplied": false,
+          "writeAcknowledgedAfterMs": null
         },
         {
           "id": "empty-source",
@@ -635,6 +649,369 @@
           "acceptedAfterMs": null,
           "finishedAfterMs": 4,
           "result": "result",
+          "error": null,
+          "hostOutcome": "none",
+          "terminalApplied": false,
+          "writeAcknowledgedAfterMs": null
+        }
+      ],
+      "connections": []
+    }
+  },
+  {
+    "name": "write ACK before independent protocol receipts",
+    "capacity": 3,
+    "steps": [
+      {
+        "at": 10,
+        "action": "begin",
+        "id": "a",
+        "operation": "GET_STATE",
+        "source": "mango"
+      },
+      {
+        "at": 20,
+        "action": "writeAck",
+        "id": "a"
+      },
+      {
+        "at": 22,
+        "action": "writeAck",
+        "id": "a"
+      },
+      {
+        "at": 30,
+        "action": "reply",
+        "id": "a",
+        "type": "ACCEPTED"
+      },
+      {
+        "at": 50,
+        "action": "reply",
+        "id": "a",
+        "type": "RESULT"
+      },
+      {
+        "at": 51,
+        "action": "apply",
+        "id": "a"
+      }
+    ],
+    "expected": {
+      "formatVersion": 1,
+      "clock": "monotonic_ms_relative_to_model",
+      "capacity": 3,
+      "evictedRequests": 0,
+      "evictedConnections": 0,
+      "requests": [
+        {
+          "id": "a",
+          "operation": "GET_STATE",
+          "source": "mango",
+          "startedMs": 10,
+          "writeAcknowledgedAfterMs": 10,
+          "accepted": true,
+          "acceptedAfterMs": 20,
+          "finishedAfterMs": 40,
+          "result": "result",
+          "error": null,
+          "hostOutcome": "none",
+          "terminalApplied": true
+        }
+      ],
+      "connections": []
+    }
+  },
+  {
+    "name": "write ACK callback can follow a decoded terminal",
+    "capacity": 3,
+    "steps": [
+      {
+        "at": 10,
+        "action": "begin",
+        "id": "a",
+        "operation": "GET_STATE",
+        "source": "mango"
+      },
+      {
+        "at": 20,
+        "action": "reply",
+        "id": "a",
+        "type": "RESULT"
+      },
+      {
+        "at": 21,
+        "action": "apply",
+        "id": "a"
+      },
+      {
+        "at": 25,
+        "action": "writeAck",
+        "id": "a"
+      },
+      {
+        "at": 30,
+        "action": "writeAck",
+        "id": "a"
+      }
+    ],
+    "expected": {
+      "formatVersion": 1,
+      "clock": "monotonic_ms_relative_to_model",
+      "capacity": 3,
+      "evictedRequests": 0,
+      "evictedConnections": 0,
+      "requests": [
+        {
+          "id": "a",
+          "operation": "GET_STATE",
+          "source": "mango",
+          "startedMs": 10,
+          "writeAcknowledgedAfterMs": 15,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 10,
+          "result": "result",
+          "error": null,
+          "hostOutcome": "none",
+          "terminalApplied": true
+        }
+      ],
+      "connections": []
+    }
+  },
+  {
+    "name": "write ACK cannot revive lost timed out or unsent requests",
+    "capacity": 3,
+    "steps": [
+      {
+        "at": 0,
+        "action": "begin",
+        "id": "lost",
+        "operation": "GET_STATE",
+        "source": "mango"
+      },
+      {
+        "at": 1,
+        "action": "begin",
+        "id": "timeout",
+        "operation": "GET_STATE",
+        "source": "mango"
+      },
+      {
+        "at": 2,
+        "action": "begin",
+        "id": "failed",
+        "operation": "GET_STATE",
+        "source": "mango"
+      },
+      {
+        "at": 10,
+        "action": "finish",
+        "id": "lost",
+        "reason": "connection_lost"
+      },
+      {
+        "at": 11,
+        "action": "finish",
+        "id": "timeout",
+        "reason": "timeout"
+      },
+      {
+        "at": 12,
+        "action": "finish",
+        "id": "failed",
+        "reason": "send_failed"
+      },
+      {
+        "at": 13,
+        "action": "writeAck",
+        "id": "lost"
+      },
+      {
+        "at": 14,
+        "action": "writeAck",
+        "id": "timeout"
+      },
+      {
+        "at": 15,
+        "action": "writeAck",
+        "id": "failed"
+      },
+      {
+        "at": 16,
+        "action": "writeAck",
+        "id": "unknown"
+      }
+    ],
+    "expected": {
+      "formatVersion": 1,
+      "clock": "monotonic_ms_relative_to_model",
+      "capacity": 3,
+      "evictedRequests": 0,
+      "evictedConnections": 0,
+      "requests": [
+        {
+          "id": "lost",
+          "operation": "GET_STATE",
+          "source": "mango",
+          "startedMs": 0,
+          "writeAcknowledgedAfterMs": null,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 10,
+          "result": "connection_lost",
+          "error": null,
+          "hostOutcome": "none",
+          "terminalApplied": false
+        },
+        {
+          "id": "timeout",
+          "operation": "GET_STATE",
+          "source": "mango",
+          "startedMs": 1,
+          "writeAcknowledgedAfterMs": null,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 10,
+          "result": "timeout",
+          "error": null,
+          "hostOutcome": "none",
+          "terminalApplied": false
+        },
+        {
+          "id": "failed",
+          "operation": "GET_STATE",
+          "source": "mango",
+          "startedMs": 2,
+          "writeAcknowledgedAfterMs": null,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 10,
+          "result": "send_failed",
+          "error": null,
+          "hostOutcome": "none",
+          "terminalApplied": false
+        }
+      ],
+      "connections": []
+    }
+  },
+  {
+    "name": "write ACK ignores evicted IDs and regressed clocks",
+    "capacity": 1,
+    "steps": [
+      {
+        "at": 10,
+        "action": "begin",
+        "id": "old",
+        "operation": "GET_STATE",
+        "source": "mango"
+      },
+      {
+        "at": 20,
+        "action": "begin",
+        "id": "new",
+        "operation": "GET_STATE",
+        "source": "mango"
+      },
+      {
+        "at": 30,
+        "action": "writeAck",
+        "id": "old"
+      },
+      {
+        "at": 19,
+        "action": "writeAck",
+        "id": "new"
+      },
+      {
+        "at": 25,
+        "action": "writeAck",
+        "id": "new"
+      },
+      {
+        "at": 40,
+        "action": "reply",
+        "id": "new",
+        "type": "RESULT"
+      },
+      {
+        "at": 41,
+        "action": "apply",
+        "id": "new"
+      }
+    ],
+    "expected": {
+      "formatVersion": 1,
+      "clock": "monotonic_ms_relative_to_model",
+      "capacity": 1,
+      "evictedRequests": 1,
+      "evictedConnections": 0,
+      "requests": [
+        {
+          "id": "new",
+          "operation": "GET_STATE",
+          "source": "mango",
+          "startedMs": 20,
+          "writeAcknowledgedAfterMs": 5,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 20,
+          "result": "result",
+          "error": null,
+          "hostOutcome": "none",
+          "terminalApplied": true
+        }
+      ],
+      "connections": []
+    }
+  },
+  {
+    "name": "write ACK remains delivery evidence after later loss",
+    "capacity": 3,
+    "steps": [
+      {
+        "at": 10,
+        "action": "begin",
+        "id": "a",
+        "operation": "GET_STATE",
+        "source": "mango"
+      },
+      {
+        "at": 15,
+        "action": "writeAck",
+        "id": "a"
+      },
+      {
+        "at": 20,
+        "action": "finish",
+        "id": "a",
+        "reason": "connection_lost"
+      },
+      {
+        "at": 25,
+        "action": "writeAck",
+        "id": "a"
+      }
+    ],
+    "expected": {
+      "formatVersion": 1,
+      "clock": "monotonic_ms_relative_to_model",
+      "capacity": 3,
+      "evictedRequests": 0,
+      "evictedConnections": 0,
+      "requests": [
+        {
+          "id": "a",
+          "operation": "GET_STATE",
+          "source": "mango",
+          "startedMs": 10,
+          "writeAcknowledgedAfterMs": 5,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 10,
+          "result": "connection_lost",
           "error": null,
           "hostOutcome": "none",
           "terminalApplied": false

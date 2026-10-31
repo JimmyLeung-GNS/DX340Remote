@@ -9,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.os.ParcelUuid
 import org.dx340.remote.protocol.Reassembler
+import org.dx340.remote.protocol.AcknowledgedWriteQueue
 import org.dx340.remote.protocol.Wire
 import java.util.UUID
 
@@ -25,8 +26,7 @@ class BleCentral(private val context: Context, private val status: (String) -> U
     private var tx: BluetoothGattCharacteristic? = null
     private var capacity = 20
     private var serial = 0
-    private val writes = ArrayDeque<ByteArray>()
-    private var busy = false
+    private val writes = AcknowledgedWriteQueue<() -> Unit>()
     private var established = false
     private var desired: BluetoothDevice? = null
     private var retries = 0
@@ -67,9 +67,10 @@ class BleCentral(private val context: Context, private val status: (String) -> U
             established = true; phase(CentralPhase.CHECKING); retries = 0; status("Connected; checking authorization…"); ready()
         } }
         override fun onCharacteristicWrite(g: BluetoothGatt, c: BluetoothGattCharacteristic, code: Int) { main.post {
-            if (g != gatt) return@post
-            busy = false
-            if (code != 0) fail("Bluetooth write failed ($code); outcome unknown") else pump()
+            if (g != gatt || c.uuid.toString() != Wire.RX || !writes.busy) return@post
+            if (code != 0) fail("Bluetooth write failed ($code); outcome unknown") else {
+                writes.acknowledge()?.invoke(); pump()
+            }
         } }
         override fun onCharacteristicChanged(g: BluetoothGatt, c: BluetoothGattCharacteristic, value: ByteArray) { receive(g, value) }
         override fun onCharacteristicChanged(g: BluetoothGatt, c: BluetoothGattCharacteristic) { if (android.os.Build.VERSION.SDK_INT < 33) receive(g, c.value) }
@@ -118,18 +119,16 @@ class BleCentral(private val context: Context, private val status: (String) -> U
         val current = gatt
         main.postDelayed({ if (gatt == current && !established) fail("Connection timed out. Check phone control is enabled in Companion on your player, then tap Connect again.") }, 30000)
     }
-    fun send(bytes: ByteArray) {
+    fun send(bytes: ByteArray, acknowledged: (() -> Unit)? = null) {
         check(established) { "Not connected" }
         val frames = Wire.frames(bytes, capacity, serial++ and 65535)
-        check(writes.size + frames.size <= 12000) { "Too many pending messages" }
-        writes.addAll(frames); pump()
+        writes.enqueue(frames, acknowledged); pump()
     }
     private fun pump() {
         val g = gatt ?: return; val c = rx ?: return
-        if (busy || writes.isEmpty()) return
-        val frame = writes.removeFirst(); busy = true
+        val frame = writes.next() ?: return
         val generation = ++writeGeneration
-        main.postDelayed({ if (busy && g == gatt && generation == writeGeneration) fail("Bluetooth write timed out; outcome unknown. Reconnecting without replay.") }, 10000)
+        main.postDelayed({ if (writes.busy && g == gatt && generation == writeGeneration) fail("Bluetooth write timed out; outcome unknown. Reconnecting without replay.") }, 10000)
         val result = if (android.os.Build.VERSION.SDK_INT >= 33) g.writeCharacteristic(c, frame, BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT)
         else { c.writeType = BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT; c.value = frame; if (g.writeCharacteristic(c)) 0 else -1 }
         if (result != 0) fail("Could not queue command; reconnect")
@@ -150,7 +149,7 @@ class BleCentral(private val context: Context, private val status: (String) -> U
         desired = null; retries = 0; reconnect?.let { main.removeCallbacks(it) }; reconnect = null; clearLink(); phase(CentralPhase.IDLE)
     }
     private fun clearLink() {
-        val old = gatt; gatt = null; rx = null; tx = null; established = false; busy = false; capacity = 20; writeGeneration++
+        val old = gatt; gatt = null; rx = null; tx = null; established = false; capacity = 20; writeGeneration++
         writes.clear(); assembler.clear(); runCatching { old?.disconnect() }; runCatching { old?.close() }; lost()
     }
 }

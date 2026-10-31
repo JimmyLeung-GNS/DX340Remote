@@ -26,6 +26,7 @@ class RequestJournalTest {
                     "begin" -> journal.begin(s.getString("id"), s.getString("operation"), s.getString("source"))
                     "reply" -> journal.reply(s.getString("id"), s.getString("type"), s.optString("outcome"), s.optString("error"))
                     "apply" -> journal.markTerminalApplied(s.getString("id"))
+                    "writeAck" -> journal.writeAcknowledged(s.getString("id"))
                     "finish" -> journal.finish(s.getString("id"), s.getString("reason"))
                     "abandon" -> journal.abandon(s.getString("reason"))
                     "phase" -> journal.phase(s.getString("phase"))
