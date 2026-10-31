@@ -1,0 +1,132 @@
+{
+  "date": "2026-11-01",
+  "status": "VERIFIED callback-ordered bounded GATT resource cleanup; FAILED short recovery observation and no demonstrated speed improvement; VERIFIED eventual saved automatic recovery; full goal incomplete",
+  "phoneSource": "84e56ac883dcfb541627c8becee318870268e0f2",
+  "hostSource": "5f4f1f24a673f778d7b403203e35f3e48edf4b8a",
+  "installedSha256": {
+    "org.dx340.remote.host": "3a32689ac5805cf58758286f27ee1c1b2abeec16f01b8de70b5ac9cfe8307b2c",
+    "org.dx340.remote.controller": "daa9f5e572c27380647b76485ed67c2efd20291082fdb87c2632847688e6349b"
+  },
+  "devices": {
+    "host": "DX340 Android13/API33 eng.iBasso.20260812.181952 Companion0.1.0/code1",
+    "phone": "Pixel9a Android16/API36 CP1A.260405.005 Remote0.2.0/code2",
+    "sources": "Mango4.1.37/code240; Apple Music6.5.3/code1599"
+  },
+  "pids": {
+    "host": "16085",
+    "phone": "12008"
+  },
+  "hostEpoch": "a74fdb31-5aac-4b91-bffd-5d35e46a4772",
+  "modelInstanceId": "a71a45b6-6fb1-4aa1-8067-b96bb71d8d0e",
+  "implementation": {
+    "publicApiOnly": true,
+    "cleanupFallbackMs": 2000,
+    "waitForCallbackBeforeClose": true,
+    "clearPendingRequestsImmediately": true,
+    "replacementWaitsForRetirement": true,
+    "userCancelClearsWaitingReconnect": true,
+    "lateOldCallbackOrTimerCannotCloseReplacement": true,
+    "newPermissionsWireOrIosChanges": false
+  },
+  "builds": {
+    "jvmAggregate": 253,
+    "newCleanupTests": 5,
+    "nativeBuildLint": "PASSED",
+    "sharedAndroidAnalyzeReleaseBuildLint": "PASSED",
+    "flutter82": "Prior unchanged Dart scope; not rerun (-WithoutTests)",
+    "swift22": "Prior d06 simulator scope; unchanged",
+    "hostRelease20": "Prior installed5f release scope; not rerun",
+    "rebuiltNativeHostCandidateInstalled": false,
+    "appleCI": "No new matching paths; prior jobs closed, no polling"
+  },
+  "physical": {
+    "uniqueReportTag": "retire-fallback-054553",
+    "heldToLogicalRetirementAndCancelRequestMs": 5005,
+    "cancelScope": "Host application state released and public cancelConnection requested; immediate physical ACL teardown is not proven",
+    "interruptedRequest": {
+      "id": "5a25417b-0778-4cfa-aa0d-83aefe1208a0",
+      "operation": "GET_STATE",
+      "source": "mango",
+      "startedMs": 143109,
+      "firstWriteSubmittedAfterMs": 4,
+      "writeAcknowledgedAfterMs": null,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 10024,
+      "result": "connection_lost",
+      "terminalApplied": false,
+      "hostOutcome": "none",
+      "error": null
+    },
+    "shortObservation": "FAILED Ready within23-second driver observation; receipt retained unchanged",
+    "sameAttemptEventuallyAutomaticApproved": true,
+    "logicalCloseToConnectedMs": 80676,
+    "logicalCloseToApprovedMs": 81580,
+    "previousPairLogicalCloseToApprovedMs": 81526,
+    "latencyImprovement": "NOT DEMONSTRATED; same two30s discovery stalls persist",
+    "intermediateFailure": "status22 disconnected after transient connected callback; do not relabel as prior status133",
+    "nativeCleanup": "Actual disconnect callback before close, GATT_RETIRED:disconnected; no deadline fallback used in this sample",
+    "firstCleanupLogTimingMs": {
+      "disconnectRequestToCallback": 18,
+      "disconnectRequestToClose": 38
+    },
+    "freshRead": {
+      "id": "c34cdcf2-7d57-4651-9765-4fd9bfb0d2be",
+      "operation": "GET_STATE",
+      "source": "mango",
+      "startedMs": 244868,
+      "firstWriteSubmittedAfterMs": 4,
+      "writeAcknowledgedAfterMs": 124,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 418,
+      "result": "result",
+      "terminalApplied": true,
+      "hostOutcome": "none",
+      "error": null
+    },
+    "journalCounts": [
+      2,
+      6
+    ],
+    "oldRowsUnchanged": true,
+    "evictions": 0,
+    "noReplay": true,
+    "duringFaultRadioOrNetworkChanges": false,
+    "powerBeforeFault": "DX340 Awake, USB powered; no sleep/range proof"
+  },
+  "additionalObservation": {
+    "pixelBeforeFault": "One app GATT client and four OS/Google GATT server registrations show same-peer connections",
+    "pixelAfterNormalDisconnect": "No app GATT client or same-peer server connection rows remain; server registrations remain",
+    "causality": "NOT PROVEN; snapshots are before/final, not during stalled discovery. Do not blame or disable OS/Nearby services.",
+    "nextMeasurement": "Read-only GATT connection snapshots during exact held/cancelled/stalled phases, correlated within each device clock; evaluate supported host-side pending ATT cleanup without replay or radio reset"
+  },
+  "final": {
+    "at": "2026-11-01T05:48:57.433565+08:00",
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeVerified": false,
+    "prefsSettingsSourcePositionsRetained": true,
+    "phone": "ordinary Disconnect, help collapsed, foreground service cleared",
+    "host": "same PID/epoch, saved enabled, foreground service, advertising",
+    "browsing": "both optional modes and Accessibility bindings retained",
+    "storage": "public:179,1 mounted FBB9-E8FE, no Apple destination/mount action",
+    "cellular": "Pixel mobile_data1 retained; strict cellular-offT01 open"
+  },
+  "limits": [
+    "single debug-injected read-only fault, not natural vendor failure/fullT12/T16",
+    "bounded resource lifetime is not faster reconnection proof",
+    "no source playback or headphone audibility test in this case",
+    "earlier failed holds/no-card Internal timeout/Apple MEDIA_MOUNTED crash retained",
+    "physical owner iPhone/Mac signing and Watch remain unavailable/unfinished"
+  ],
+  "rawEvidence": {
+    "root": "artifacts/gatt-retirement-20261101",
+    "filesHashed": 239,
+    "manifestSha256": "2a631a88783a281ed186868eb1ded6c26732111cde5050d37f20c95770d9e758"
+  }
+}

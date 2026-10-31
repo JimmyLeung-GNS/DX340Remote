@@ -69,7 +69,8 @@
     "closeToHostConnectedMs": 80587,
     "closeToHostApprovedMs": 81526,
     "clientTrace": "10s write deadline; two 30s service-discovery stalls; one status133; later HELLO/AUTHORIZE succeeds",
-    "recoveryLatencyStatus": "UNRESOLVED slow recovery; no fast/full reliability pass"
+    "recoveryLatencyStatus": "UNRESOLVED slow recovery; no fast/full reliability pass",
+    "closeScopeClarification": "Host application link retired and public cancelConnection requested; immediate physical ACL teardown not proven. Follow-up 2026-11-01-gatt-retirement retains same long recovery."
   },
   "journal": {
     "modelInstanceId": "a6d211e5-d892-4ae6-a416-ebe05ff24768",

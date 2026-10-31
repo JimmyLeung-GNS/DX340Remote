@@ -23,10 +23,10 @@
       "build": "CP1A.260405.005",
       "app": {
         "package": "org.dx340.remote.controller",
-        "sha256": "a65ac6a9660223532a23f0eaf828dc62282759d1e66e04dba66fb10a2704622a",
+        "sha256": "daa9f5e572c27380647b76485ed67c2efd20291082fdb87c2632847688e6349b",
         "versionName": "0.2.0",
         "versionCode": 2,
-        "sourceCommit": "d06a481b4eb533b42d80331203891f8f62a342ab"
+        "sourceCommit": "84e56ac883dcfb541627c8becee318870268e0f2"
       }
     }
   },
@@ -178,7 +178,7 @@
     {
       "id": "T12",
       "status": "PARTIAL",
-      "finding": "Current95 pending browse loss clears spinner; saved reconnect does not replay. Earlier radio/permission/process recovery scopes retained; new host debug-injected timeout auto-recovery verified without replay; budget exhaustion/native Restart now verified with an intermediate reconnect loss retained. [Budget evidence](test-results/2026-11-01-recovery-budget.md). Natural faults/calls/full sleep/two-phone matrix incomplete. [Evidence](test-results/2026-11-01-interrupted-library.md).  Currenta65/611 real phone-radio interruption retires a read; un-injected host timeout restores advertising693ms later, saved Connect/fresh read pass. [Current result](test-results/2026-11-01-first-write-submission.md). Separate3a/a65 input-response hold retires a pending write without replay; five-second host fallback verified, but23s recovery observation fails and eventual automatic approval takes81526ms after close. Slow discovery recovery unresolved.",
+      "finding": "Current95 pending browse loss clears spinner; saved reconnect does not replay. Earlier radio/permission/process recovery scopes retained; new host debug-injected timeout auto-recovery verified without replay; budget exhaustion/native Restart now verified with an intermediate reconnect loss retained. [Budget evidence](test-results/2026-11-01-recovery-budget.md). Natural faults/calls/full sleep/two-phone matrix incomplete. [Evidence](test-results/2026-11-01-interrupted-library.md).  Currenta65/611 real phone-radio interruption retires a read; un-injected host timeout restores advertising693ms later, saved Connect/fresh read pass. [Current result](test-results/2026-11-01-first-write-submission.md). Separate3a/a65 input-response hold retires a pending write without replay; five-second host fallback verified, but23s recovery observation fails and eventual automatic approval takes81526ms after close. Slow discovery recovery unresolved. Currentdaa callback-ordered close works but two30s discovery stalls persist;23s observation failed, eventual auto-approval81580ms after logical retirement. No speed fix.",
       "remainingRequirement": "Calls/radio/permission/background/restart produce honest status and bounded recovery with clear required action.",
       "evidence": "2026-11-01-interrupted-library.md",
       "injectedRecoverySupplement": "2026-11-01-injected-indication-recovery.md",
@@ -219,9 +219,9 @@
     {
       "id": "T17",
       "status": "PARTIAL",
-      "finding": "Original-signer host3a/phonea65 in-place updates verified, grants/settings retained. Earlier enabled/stopped package-restoration scopes retained; final fresh install/production signing/owner-iPhone not tested.",
+      "finding": "Original-signer host3a/phonedaa in-place updates verified, grants/settings retained. Earlier enabled/stopped package-restoration scopes retained; final fresh install/production signing/owner-iPhone not tested.",
       "remainingRequirement": "Fresh install and upgrades preserve intended pairing/state with valid installation/signing.",
-      "evidence": "2026-11-01-held-input-write.md",
+      "evidence": "2026-11-01-gatt-retirement.md",
       "injectedRecoverySupplement": "2026-11-01-injected-indication-recovery.md",
       "firstSubmissionEvidence": "2026-11-01-first-write-submission.md"
     },
@@ -247,7 +247,7 @@
       "sha256": "1be147c02380d16b086f0947f8292d83e244533dbc0b2aaa69462857856eff29"
     }
   ],
-  "lastSupplementedAt": "2026-11-01T05:38:46.058382+08:00",
+  "lastSupplementedAt": "2026-11-01T05:51:51.694393+08:00",
   "injectedRecoverySupplement": {
     "evidence": "2026-11-01-injected-indication-recovery.md",
     "scope": "one debug-injected missed successful indication callback; actual existing timeout/recreation/automatic phone authorization; no playback",
@@ -333,5 +333,23 @@
     "repeatedListeningQuestions": false,
     "historicalUnansweredQuestionsBlockDevelopment": false,
     "audibilityInferred": false
+  },
+  "gattRetirementSupplement": {
+    "evidence": "2026-11-01-gatt-retirement.md",
+    "jvm": 253,
+    "sharedAndroidBuildLint": "PASSED",
+    "callbackBeforeClose": "VERIFIED hardware",
+    "fallback2s": "JVM only; not exercised on hardware",
+    "shortRecoveryObservation": "FAILED",
+    "logicalRetirementToApprovedMs": 81580,
+    "priorMs": 81526,
+    "latencyImprovement": "NOT DEMONSTRATED",
+    "slowRecoveryUnresolved": true,
+    "journalCounts": [
+      2,
+      6
+    ],
+    "noReplay": true,
+    "fullAcceptancePassed": false
   }
 }

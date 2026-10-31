@@ -1,6 +1,6 @@
 # Pending input-write retirement and slow fallback recovery
 
-**VERIFIED:** an actually unacknowledged input write retires without dispatch/replay; the debug host fallback closes its held link after 5,002ms. **FAILED:** the fallback observation did not reach Ready within its 23-second window. **VERIFIED later:** the same attempt eventually reauthorizes automatically, 81,526ms after the host close. That recovery delay remains unresolved. [Structured result](2026-11-01-held-input-write.json). Full acceptance remains incomplete.
+**VERIFIED:** an actually unacknowledged input write retires without dispatch/replay; the debug host fallback logically retires its held application link and requests disconnection after 5,002ms. This is not immediate physical ACL teardown proof. **FAILED:** the fallback observation did not reach Ready within its 23-second window. **VERIFIED later:** the same attempt eventually reauthorizes automatically, 81,526ms after logical retirement. That recovery delay remains unresolved. [Structured result](2026-11-01-held-input-write.json). Full acceptance remains incomplete.
 
 ## Installed pair and implementation
 
@@ -40,6 +40,10 @@ Native model `a6d211e5-d892-4ae6-a416-ebe05ff24768` grows9→10→13→16→17. 
 Final05:35:43 HKT: both sessions PAUSED2, volume37/headset(4), volume proof false, source states/positions exactly preserved. All four preference hashes, settings and PIDs match the pre-radio capture; saved grants/bonds are retained, both optional modes and Accessibility bindings remain on. Phone uses ordinary Disconnect/help collapsed, foreground service cleared. Host saved enabled/foreground service/advertising; the source UI may remain foreground. SD volume `public:179,1` stays mounted as `FBB9-E8FE`; no storage location or mount action. Both Wi-Fi0, Pixel mobile_data1 preserved; strict cellular-off T01 stays open.
 
 Raw evidence: ignored `artifacts/held-input-write-20261101/`,337 files hashed in `sha256-manifest.json`; digest in the structured report. Earlier frozen reports/raw evidence are unchanged. Original no-card Mango Internal timeout, Apple MEDIA_MOUNTED crash, earlier failed holds and full source/format/output/sleep/range/calls/battery/walking/owner-iPhone/Watch gates remain open.
+
+## Subsequent scope clarification
+
+The [callback-ordered cleanup follow-up](2026-11-01-gatt-retirement.md) confirms that the host fallback marker measures application-link retirement plus a public disconnect request, not immediate physical ACL teardown. Its new phone still takes81,580ms to saved approval versus81,526ms here. Preserve the original failure and timing; neither case proves fast recovery.
 
 ## Routine playback checks
 
