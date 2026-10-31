@@ -14,6 +14,8 @@ First direct-file captures ended with empty power logs despite OFF samples. Thos
 
 ## Fresh physical sequence
 
+1 November preparation correction: the DX340 repeats `mIsPowered` in the main Power Manager and battery-saver sections. The recorder now reads only one valid main-section value and fails closed on missing/ambiguous data. Actual Android-shell parsing of saved/synthetic text and three software tests pass; this is not physical unplugged arming proof. The [fresh failed arming attempt](test-results/2026-11-01-unplugged-arming.json) keeps its original script digest and zero hold samples. Do not reuse that terminal job. Read the [framing/recorder checkpoint](test-results/2026-11-01-framing-bounds.md) before the next repeat.
+
 1. Obtain fresh owner availability for about31minutes, allowing arming time around the30-minute hold. Inventory both devices, exact installed binaries, source/output states and settings. Keep both sources paused at the agreed unchanged volume. Prepare the ordinary approved phone connection and source target, then foreground Android Settings on the phone. These setup actions are separate from the read-only recorder.
 2. With both USB endpoints still connected, start exactly one new manifest:
 
@@ -39,4 +41,4 @@ First direct-file captures ended with empty power logs despite OFF samples. Thos
 
 6. Inspect the terminal summary, initial arming evidence, every sample, gaps, logger lifetime/cap and all power/display events within the actual hold interval. Distinguish the expected unplugging/reconnection wake events from any earlier wake. Confirm clocks/durations, source/output, process identities, settings/grants/bonds and final ordinary Disconnect/source pause. Restore original awake state only after the post-hold no-DX-handling test. Failed or incomplete evidence remains failed/incomplete.
 
-Software checks: `python -m unittest discover -s scripts/tests -p test_device_hold_recorder.py -v` and `python -m unittest discover -s scripts/tests -p test_phone_background_observer.py -v`. Short plugged-in capture/stop/negative-preflight checks do not prove real USB-detachment survival,30-minute sleep, unplugged reliability or any physical iPhone result.
+Software checks: `python -m unittest discover -s scripts/tests -p test_device_hold_recorder.py -v`, `python -m unittest discover -s scripts/tests -p test_phone_background_observer.py -v` and `python -m unittest discover -s scripts/tests -p test_hold_power_parser.py -v`. Short plugged-in capture/stop/parser/negative-preflight checks do not prove real USB-detachment survival,30-minute sleep, unplugged reliability or any physical iPhone result.

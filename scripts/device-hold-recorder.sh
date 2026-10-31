@@ -49,11 +49,24 @@ display_state() {
     if [ "$number" != 1 ]; then printf 'Unknown\n'; return; fi
     printf '%s\n' "$records" | sed -n 's/.*, state \([A-Z_]*\),.*/\1/p'
 }
+powered_state() {
+    # Battery-saver state repeats mIsPowered at the same indentation. Read
+    # exactly one value from the main section; ambiguous/missing data fails.
+    awk '
+        /^Power Manager State:$/ { active=1; headers++; next }
+        active && /^[^[:space:]]/ { active=0 }
+        active && /^  mIsPowered=/ { value=$0; sub(/^  mIsPowered=/, "", value); count++ }
+        END {
+            if (headers == 1 && count == 1 && (value == "true" || value == "false")) print value;
+            else print "Unknown";
+        }
+    ' "$1"
+}
 streak=0
 while :; do
     dump arming-power power
     dump arming-display display
-    powered=$(sed -n 's/^  mIsPowered=//p' "$root/arming-power.txt")
+    powered=$(powered_state "$root/arming-power.txt")
     display=$(display_state "$root/arming-display.txt")
     if [ "$powered" = false ] && [ "$display" = OFF ]; then streak=$((streak + 1)); else streak=0; fi
     printf '%s\t%s\t%s\t%s\n' "$(clock)" "$powered" "$display" "$streak" >> "$root/arming.tsv"
@@ -84,7 +97,7 @@ while :; do
     if ! timeout 15 dumpsys activity services org.dx340.remote.host > "$root/$tag-service.txt" 2> "$root/error.txt"; then reason=DUMP_FAILED; exit 1; fi
     pidof org.dx340.remote.host > "$root/$tag-pid.txt"
     display=$(display_state "$root/$tag-display.txt")
-    powered=$(sed -n 's/^  mIsPowered=//p' "$root/$tag-power.txt")
+    powered=$(powered_state "$root/$tag-power.txt")
     count=$((count + 1))
     if [ "$(cat "$root/$tag-pid.txt")" != "$host_pid" ]; then reason=HOST_PROCESS_CHANGED; exit 1; fi
     if [ "$unplugged_off" = 1 ] && { [ "$display" != OFF ] || [ "$powered" != false ]; }; then reason=UNPLUGGED_OFF_CONDITION_LOST; exit 1; fi

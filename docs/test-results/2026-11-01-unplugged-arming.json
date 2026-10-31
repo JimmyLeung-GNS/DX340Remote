@@ -1,0 +1,108 @@
+{
+  "recordedAt": "2026-11-01T02:27:09+08:00",
+  "status": "FAILED_ARMING_TIMEOUT",
+  "holdStarted": false,
+  "phoneObserverStarted": false,
+  "ownerUnplugConfirmationReceived": false,
+  "device": "DX340 Android13/API33 eng.iBasso.20260812.181952",
+  "companionSha256": "dc53629d33cecb25fb381d464fe3e55656b35ca5575c32211da3971fbda7e775",
+  "companionSource": "1e3c551de98dba20183c452ea0f0b9f08bed42c9",
+  "phoneSha256": "4eea5c15a6c567efedba5329b2bb2256137caa3c964bbd5f818233827222212d",
+  "manifest": {
+    "serial": "d",
+    "remoteRoot": "/data/local/tmp/dx340-hold-ca34cbf0b91e4c89b5426b9db8a59fa1",
+    "pid": 5024,
+    "durationSeconds": 1800,
+    "sampleSeconds": 30,
+    "requireUnpluggedDisplayOff": true,
+    "scriptSha256": "107e08b392852358bc90143c39acb94f45fc42ddce279d4730d99c4da5f29f9e",
+    "launchedAt": "2026-11-01T02:24:51.198652+08:00",
+    "scope": "Read-only shell recorder; no wake lock, source/BLE/screen/configuration action. Sampling may pause during suspend. Not battery/radio/audio acceptance."
+  },
+  "summary": {
+    "status": "FAILED",
+    "reason": "ARMING_TIMEOUT",
+    "startedUptime": "",
+    "endedUptime": "41822.73",
+    "samples": "0",
+    "deadlineUptime": ""
+  },
+  "files": [
+    {
+      "file": "arming-display.txt",
+      "sha256": "1a28af8f780f1019c0d10cbb132088f602488052c1b435a34a5f1a5b61e9298a"
+    },
+    {
+      "file": "arming-power.txt",
+      "sha256": "c0431210dbd46a85886f94d2fde04798afb9e522a87c31314ef8b9f837a999cd"
+    },
+    {
+      "file": "arming.tsv",
+      "sha256": "53fdeca5e2f0471a45db66cac43b3f69a818e175e2777c277f3a66ed82647ca2"
+    },
+    {
+      "file": "error.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "launcher.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "logger-pid",
+      "sha256": "063b16c0ab0ca8135df09d77938a72e11ec98894034992cbf040869ac0470e7f"
+    },
+    {
+      "file": "logger.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "pid",
+      "sha256": "6b9de846e3bafbce57a6dafa62e9505c84b408b598954ce7ba32d2ce2884d46d"
+    },
+    {
+      "file": "power-events.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "record.sh",
+      "sha256": "107e08b392852358bc90143c39acb94f45fc42ddce279d4730d99c4da5f29f9e"
+    },
+    {
+      "file": "state",
+      "sha256": "03cbb6c52e522ce55e217e3f9d66dbd66d21ef6bf85024016a3b7f3080c7944f"
+    },
+    {
+      "file": "summary.tsv",
+      "sha256": "72a953e6f673d995b7e18864eb62ce4e51c57918928956d225e308cf4264bb02"
+    }
+  ],
+  "scope": "Zero hold samples; not30-minute background evidence; no restart. Prior USB-power-wake failures retained separately.",
+  "parserCorrection": {
+    "remoteScratch": "/data/local/tmp/dx340-power-parser-8bbe8db3ff804453855eade98716efd3",
+    "recorderSha256": "db2b381bf25f2da62e426ba4b23634b0dc3f14d92e86eafa43c4e6c23ae6a5c7",
+    "androidShellSyntax": "PASS",
+    "parsing": [
+      {
+        "fixture": "observed-power.txt",
+        "expected": "true",
+        "observed": "true",
+        "sha256": "c0431210dbd46a85886f94d2fde04798afb9e522a87c31314ef8b9f837a999cd"
+      },
+      {
+        "fixture": "synthetic-unpowered.txt",
+        "expected": "false",
+        "observed": "false",
+        "sha256": "cee9c4da377e1f2601000e0f585b7b448f07783ee903ea0652332b968e5b9dee"
+      }
+    ],
+    "scope": "Actual DX340 shell/parser execution on saved and synthetic text only; no power, display, recorder launch or configuration action. Not physical unplugging/arming proof.",
+    "softwareChecks": {
+      "actualFunctionTests": 3,
+      "fixtures": 11,
+      "recorderTests": 14,
+      "phoneObserverTests": 5
+    },
+    "originalFailurePreserved": true
+  }
+}

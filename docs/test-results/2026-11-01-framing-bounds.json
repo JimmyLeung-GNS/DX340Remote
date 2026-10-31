@@ -1,0 +1,459 @@
+{
+  "recordedAt": "2026-11-01T02:34:38.100415+08:00",
+  "status": "VERIFIED_PC_FRAMING_BOUNDS_SUBSET",
+  "goal": "ACTIVE/incomplete",
+  "diagnosticSource": "65626fd",
+  "hostSource": "1e3c551de98dba20183c452ea0f0b9f08bed42c9",
+  "hostSha256": "dc53629d33cecb25fb381d464fe3e55656b35ca5575c32211da3971fbda7e775",
+  "host": "DX340 Android13/API33 eng.iBasso.20260812.181952; Companion0.1.0/code1; PID4334",
+  "phoneSha256": "4eea5c15a6c567efedba5329b2bb2256137caa3c964bbd5f818233827222212d",
+  "phone": "Pixel9a Android16/API36 CP1A.260405.005; Remote0.2.0/code2; PID17394; ordinary Disconnect",
+  "windows": "Windows-10-10.0.26300-SP0",
+  "python": "3.11.5",
+  "bleak": "3.0.2",
+  "mtu": 517,
+  "normalFramesWritten": 73,
+  "indicationCallbacks": 32,
+  "faultWrites": 140,
+  "sameSessionRecoveries": 2,
+  "oversize": {
+    "bytes": 65537,
+    "frames": 131,
+    "declaredFrames": 132,
+    "finalAttStatus": 13,
+    "elapsedUpperBoundMs": 46985.0,
+    "maxProgressGapUpperBoundMs": 1250.0,
+    "sameSerialIncompleteRestartAccepted": true
+  },
+  "slowDrip": {
+    "writes": 8,
+    "declaredFrames": 32,
+    "finalIndex": 7,
+    "finalAttStatus": 13,
+    "minimumAgeMs": 64750.0,
+    "maximumProgressGapMs": 9671.0
+  },
+  "approval": {
+    "normalIdentifiedDesktopApproved": true,
+    "currentGrantCount": 3,
+    "twoPriorGrantsUnchanged": true,
+    "OSPairingNotChanged": true,
+    "OSAuthenticatedBondRetained": true,
+    "clientDisconnected": true
+  },
+  "preserved": {
+    "threeOtherPreferenceHashesUnchanged": true,
+    "controllersChangedOnlyByOneNormalGrant": true,
+    "globalSettingsUnchanged": true,
+    "bothSourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "positions": {
+      "com.ibasso.music": "78991",
+      "com.apple.android.music": "99367"
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "cardMounted": true,
+    "savedHostChoiceEnabled": true,
+    "hostForeground": true,
+    "pids": {
+      "host": "4334",
+      "phone": "17394"
+    }
+  },
+  "software": "51 Windows diagnostic tests, including6 new bounds orchestration cases;232 JVM/native build/lint from host recovery",
+  "limits": [
+    "PC-only; no phone fault injection, duplicate playback mutation, heap measurement or fullT16",
+    "No playback/volume/source operation or new hearing/audio quality proof",
+    "New host automatic indication-timeout recreation still NOT PHYSICALLY VERIFIED",
+    "Phone cellular flag1 keeps strictT01 open; prior Apple jobs closed/simulator-only",
+    "Fresh unplugged recorder terminalFAILED/ARMING_TIMEOUT, zero hold samples; parser defect separately fixed without retry",
+    "FullT01\u2013T18, physical owner-iPhone/signing/source/formats/output/background/range/walking/battery/Watch incomplete"
+  ],
+  "retainedFailures": [
+    {
+      "file": "artifacts/windows-ble/current-20261101-saved-grant.json",
+      "scope": "Original protected INFO timeout; no normal frame writes"
+    },
+    {
+      "file": "artifacts/windows-ble/current-20261101-identified-pc.json",
+      "scope": "Original local approval/bootstrap expiry; later host indication timeout"
+    },
+    {
+      "file": "artifacts/windows-ble/current-20261101-pc-approval-repeat.json",
+      "scope": "Updated host connect/enumeration timeout before protocol; cleanup complete"
+    }
+  ],
+  "rawEvidence": [
+    {
+      "file": "artifacts/framing-bounds-20261101/after-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/after-controllers.xml",
+      "sha256": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/after-host-accessibility.txt",
+      "sha256": "27ff20d243e2759076c609c5e0ae75c42b3bdf59e946d3bbb3ae6319ed86a083"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/after-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "60216e2fbdd40b0119f42574f29b451f84b65ac0e220a726f180dd952cfd679c"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/after-host-audio.txt",
+      "sha256": "340596feec57a21b90ad9279162d97df2180356a94519d645bffb097d9e5476c"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/after-host-bluetooth_manager.txt",
+      "sha256": "f05c871791a676b9269e1cbe71c0a917fd5f48f6fc54cd66cebb3e8f272c8217"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/after-host-media_session.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/after-host-package-org.dx340.remote.host.txt",
+      "sha256": "7388e1726ddfc41bcfbe434a38da5e90bd060c181c1b00c144105098689d99a2"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/after-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/after-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "a095d8741d6fcfcdc88f079226cd77d535fdd704bd2b6d46afda9bc049ace5eb"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/after-phone-bluetooth_manager.txt",
+      "sha256": "857d43dc4d7719aee6fd09ed394ae320f778b3d246b0d158bde9d9eeb2e1d1b4"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/after-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "0765afd67d4c04ea394014c7880007d3c6854061845eaa7554cf1e6d7a218726"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/after-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/after.json",
+      "sha256": "8bd14f6a0bd45cf115773ffd440f9beadf61bd72c99397436465930cffdc7a61"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/before-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/before-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/before-host-accessibility.txt",
+      "sha256": "5bf3f8a7e539cf3cf2d6c13a1e72d4cbc62366b044f4998492a79144e361be26"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/before-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "ed308452620052cc34aec4335b140e6e7da0c0829319af2c9e5f57593f6120b1"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/before-host-audio.txt",
+      "sha256": "5000cf540ed22e582be22ddbec271656d8ccc1c43c8a5fb0506b22669b40b0f4"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/before-host-bluetooth_manager.txt",
+      "sha256": "c7fac6e5dc2a0743777a57fefa98d0f4f4ea5c42793b277ee0e3baa112fb85de"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/before-host-media_session.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/before-host-package-org.dx340.remote.host.txt",
+      "sha256": "c468f08590bcb2730430e4b057a3d4fe17b7744dd9c4a222fb9c2d69ab080866"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/before-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/before-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "0915f0a221153ded83af5bcdb3340c6de0204f83771b344ad18c2618f0c7e998"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/before-phone-bluetooth_manager.txt",
+      "sha256": "ab24b8d492218d6449f83d83fd2d91acdabd3a784395cd2e9e47e43a2b9279a7"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/before-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "1fdbd43d5fdc402219940982b462dca3061755bf2144fe53fb1b0ffa3e897b8f"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/before-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/before.json",
+      "sha256": "8f8899defb1eccfa502ba2d3be9f0d2072f998380863e253a1a314cd2d338645"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/bounds-in-progress-diagnostic.json",
+      "sha256": "c7f65d7628d86455fada4befe530abe0c56363cd5d9ca0328c68b8a7d7533986"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/final-diagnostic.json",
+      "sha256": "591c5479e6a5a932565b24276bbf13d58fb86c4946578a7d1d93635e1fd9e819"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/final-enabled-choice.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/final-volumes.txt",
+      "sha256": "7f7be54d6ac662c6c253fefac52be59dce97549438b29993566e0dd53c4803a4"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/host-pc-approved.png",
+      "sha256": "94655fe3b86a1b1b4db7066a9fe01896e5f28e44d2b4227d7592503dc9bff045"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/host-pc-pending.png",
+      "sha256": "4d426c560f0da3eaf79bb602b1713b5fef538a19312815839953896758c747eb"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/host-setup-before.png",
+      "sha256": "a3437b1c355a675dbcc863886aa3c45a146a3ca61d214a1324d1eff6650e0c26"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/host-setup-launch.txt",
+      "sha256": "8c7da1c2cb267b6f85f0f2e41ddcb72c6b48ef6644d08c94f2fe5f6f5fd6955a"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/installed-recovery.apk",
+      "sha256": "dc53629d33cecb25fb381d464fe3e55656b35ca5575c32211da3971fbda7e775"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pairing-after-console.txt",
+      "sha256": "8096cd9bf4dfd3c6f7f195cd548c21de05c525da6b337f2bfcf972707b03a935"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pairing-diagnostic.json",
+      "sha256": "47fde1cdbb0768f88399d4b902c158ef20e0746dabb8bd96732edd13923c9280"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-approval-preflight.json",
+      "sha256": "4c1ff144ff1f7c06ddebfeeb8504a3394e9963d6eaafc43a0d4a5e867cd930df"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-approval-repeat-console.txt",
+      "sha256": "5dc8bf82a2e5f4dd5ef72c42e2e78a4c89a8d311477d192725a8d7f190520a44"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-approval-third-console.txt",
+      "sha256": "da7d4d70a2f31bed06b540529cfc285377418fe991a0a4f57cd95df622d14067"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-approved-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-approved-controllers.xml",
+      "sha256": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-approved-host-accessibility.txt",
+      "sha256": "27ff20d243e2759076c609c5e0ae75c42b3bdf59e946d3bbb3ae6319ed86a083"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-approved-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "ed39540de363d26545750a3bf26bf202db7aa4d2def23cd8090ea96a67406f54"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-approved-host-audio.txt",
+      "sha256": "ae22541c7d2c8d8cab77ee611cf1fba982894b442898ec228802f67fd7ff5d4e"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-approved-host-bluetooth_manager.txt",
+      "sha256": "67af1f38565bbb7bbc0895f50c007005ce946e2a483faf60bce0ff0c961f9bc8"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-approved-host-media_session.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-approved-host-package-org.dx340.remote.host.txt",
+      "sha256": "1565bd9f273f34c7d9fa934323a008fd564d1f32be285b1f5d7a5c4f1fb88dd1"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-approved-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-approved-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "907273de0f90a8d7a43e168509b8d75b1dda99977e8e3282e6b80308dcf3ee05"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-approved-phone-bluetooth_manager.txt",
+      "sha256": "4cc3ac5ccbd40cc6f518cd6bed918acd8f864eddf8751cba657e94189624a7a9"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-approved-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "4baf41bbf1819175399fb8befe4fb8d9f76625ea37afb2c0e8ce31e426158d38"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-approved-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-approved.json",
+      "sha256": "1cb96d7fce0713694529f362050cd16ed299468b79779e040b8a11914fb7dcff"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-expired-diagnostic.json",
+      "sha256": "6f5585e022fb3cbbfab5bca7ed5bd020556ca3a489282ba21b9bd9cea9e9d8a6"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-identified-approval-console.txt",
+      "sha256": "a9c675ff46d36ed36930860791534362e33c58f85b9a687066ae9e0cd16963ed"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-saved-grant-console.txt",
+      "sha256": "6b299131fabf9f5be5fb96bbae96b289866bedac017607c651de7a2b421a6855"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/pc-third-host-diagnostic.json",
+      "sha256": "ccbcbde4fe8579a5fe9bf20a215894ad45d2213aeb15b0ae4c558e3820317de2"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/physical-bounds-console.txt",
+      "sha256": "fb203af962160b870d529d5fcd5475c58059bbfd940cd022d1882f295b86a0ed"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-connected-diagnostic.json",
+      "sha256": "d54702d727e840c7e507d689f2efc17aaa868c4658405c497c29e41ec418b39f"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-host-before-pc.png",
+      "sha256": "699933ac4ff92b8f6dc75639b9fd0aa6d52cd301365b25ed429f4266487644ed"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-installed-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-installed-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-installed-host-accessibility.txt",
+      "sha256": "0bbedaee3ad282165d85ef75e9630fa359ac0394472477adea7824f94f14bcbf"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-installed-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "34dbb58b0ebe5e5027fc3e5db2e09674d85bbf114fcf27ac2a99153c10335e08"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-installed-host-audio.txt",
+      "sha256": "e95bf8990f50e8e3c28521f23e817ac1227fe419201f3d483392e295ca3d16c0"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-installed-host-bluetooth_manager.txt",
+      "sha256": "7eb4cf17ea4b4d84ea31ceb6e8e829f3f1a1da6d84e79c622d163841fff658af"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-installed-host-media_session.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-installed-host-package-org.dx340.remote.host.txt",
+      "sha256": "905f73b1772f305f809f8b781425ceacd3eb0fcd22cc673551f35a624d5c8e31"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-installed-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-installed-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "4fb78f927ec475bf062d202c7e81cea959748fd2f51290165ef8d8064793cece"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-installed-phone-bluetooth_manager.txt",
+      "sha256": "f8598d1f29d8829055dd643e36946fb2832cbba127f1a59835da1e2e2d4ccdf0"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-installed-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "5fc873581b3c5d5d2e6ef74f48a3431b76a1c8e31c31ad4bfcfaec1bb03ca6bc"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-installed-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-installed.json",
+      "sha256": "8ead7838f0975716a9185c5ee15a830c36e6b1d35678e87b1dec51e3d35a6b5d"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-pc-approved.png",
+      "sha256": "f242f062ad44411a0ae5079c97e2b34268d1d96397a7cec2417b539f51419c42"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-pc-pending-2.png",
+      "sha256": "a71156ea7acc6809c6f83d64e007ab390521f139bf4386ff9353952b375a20ae"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-pc-pending-3.png",
+      "sha256": "669dcd877de9baed530d1874ae829afdeacc1c511c14452ea76e30c9decade65"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-pc-pending-4.png",
+      "sha256": "eb9fd50a40dc8688cb7cd724a6846722d4f74121d5a0efd215750268ff99593b"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-pc-pending.png",
+      "sha256": "9a8aadfd2f822c0f673d660e55671637ba5bdc85ad6581ef36d9908ac502807f"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/recovery-signing.json",
+      "sha256": "caeee8be73b857109824752a52d03c1f217df46226f4462b8fdcdc2fb3962e4b"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/transport-recovery-build-console.txt",
+      "sha256": "7fe89cff64aa5fed3c846e796a04619290dd2bbcfb004b19cb2b4a3d7cfc03a2"
+    },
+    {
+      "file": "artifacts/framing-bounds-20261101/windows-software-tests.txt",
+      "sha256": "eec85305075ad15568962301bc2c00d437afa19875cf94401476923336ae47ab"
+    },
+    {
+      "file": "artifacts/windows-ble/current-20261101-after-bounds.json",
+      "sha256": "d030c497be515003ffbe8ff165532ebc190f08e800908c05243f09bd4b3fe1b2"
+    },
+    {
+      "file": "artifacts/windows-ble/current-20261101-framing-bounds.json",
+      "sha256": "2e530e358804ae5a77c8e48cc7cde0297ab86a9736ebe51a22f7e769f2add847"
+    },
+    {
+      "file": "artifacts/windows-ble/current-20261101-identified-pc.json",
+      "sha256": "72d75ccedb722406e630762b6152406c1ad12daa70167dd5a6c21a1c7880852a"
+    },
+    {
+      "file": "artifacts/windows-ble/current-20261101-pc-approval-repeat.json",
+      "sha256": "d896d6b0e389d5b2b47e1af1ecd7dcc3fddcf784c277bdb4a3185c03f6b64130"
+    },
+    {
+      "file": "artifacts/windows-ble/current-20261101-pc-approval-third.json",
+      "sha256": "32e24baf8812a6debe2e6c00f9c32ef7a9081720ed03cf29f4936c9247cfbb68"
+    },
+    {
+      "file": "artifacts/windows-ble/current-20261101-readonly.json",
+      "sha256": "69f363b423a309c80f7211a2669565db658990871f2aebe65063960eb00dbb6e"
+    },
+    {
+      "file": "artifacts/windows-ble/current-20261101-saved-grant.json",
+      "sha256": "65152a7724978267ee6ff8033b16da39ca7ea801d51d3b66bcb34ad43d56b8df"
+    }
+  ]
+}
