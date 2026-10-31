@@ -1,0 +1,734 @@
+{
+  "recordedAt": "2026-10-31T18:16:25.695992+08:00",
+  "result": "VERIFIED paused current-phone UI library/queue source-context subset",
+  "phoneApkSha256": "4318e6ad38ac775f8a635532b628be1cd3a93ab54647d6e6893169aaf88bc440",
+  "hostApkSha256": "644799cca6da1ceb11775d006512c24a618bf536e94c8e1f831a0624936e0093",
+  "phoneSource": "5f2de32ca58952faf401d0d558755972d4e160ba",
+  "hostSource": "81b3f6bad5ab68fae8dfd70dce0c64303e3cba3c",
+  "bothLibraryDirectionsClearRows": true,
+  "freshAppleSongsAndMangoRootLoad": true,
+  "bothQueueDirectionsClearRows": true,
+  "appleQueuePagesRead": [
+    [
+      1,
+      50
+    ],
+    [
+      51,
+      100
+    ]
+  ],
+  "appleReportedQueueTotal": 101,
+  "appleLastOneItemPageNotRequested": true,
+  "mangoReportedQueueTotal": 28,
+  "mangoPageOffsetResetsAfterAppleSecondPage": true,
+  "visibleReadOnlyMangoRows": 8,
+  "readOnlyClarityFinding": "Disabled/nonclickable queue rows still announce Play; separate UI correction needed. No row was selected in this case.",
+  "receipts": {
+    "total": 51,
+    "priorUnchanged": 35,
+    "newCount": 16,
+    "operations": {
+      "HELLO": 1,
+      "AUTHORIZE": 1,
+      "BROWSE": 6,
+      "SELECT_SOURCE": 4,
+      "GET_QUEUE": 4
+    },
+    "requests": [
+      {
+        "id": "2f05d9fe-e44b-4c51-a7bf-ccef27b5a442",
+        "operation": "HELLO",
+        "source": "mango",
+        "startedMs": 4644980,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 74,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "c469770e-2a9f-4db6-9069-e8faefba7613",
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "startedMs": 4645054,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 769,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "3764b16c-63b4-4b3d-8b37-e061a10ce8e8",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 4654551,
+        "accepted": true,
+        "acceptedAfterMs": 140,
+        "finishedAfterMs": 728,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "63d9a90b-cf54-4286-a034-e36b7fd8f540",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 4672349,
+        "accepted": true,
+        "acceptedAfterMs": 139,
+        "finishedAfterMs": 332,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "ed6e85bf-c37f-4f21-8229-298f5519e6a2",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 4677452,
+        "accepted": true,
+        "acceptedAfterMs": 152,
+        "finishedAfterMs": 1469,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "dd3219c6-3e5e-4480-914c-b7796a02ad84",
+        "operation": "SELECT_SOURCE",
+        "source": "mango",
+        "startedMs": 4699367,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 422,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "edf2b64f-bbc4-41c3-a696-201bed3f4a9e",
+        "operation": "BROWSE",
+        "source": "apple",
+        "startedMs": 4709661,
+        "accepted": true,
+        "acceptedAfterMs": 169,
+        "finishedAfterMs": 1924,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "c6d12bc2-b1bd-4a14-9dec-824e4e560246",
+        "operation": "BROWSE",
+        "source": "apple",
+        "startedMs": 4731510,
+        "accepted": true,
+        "acceptedAfterMs": 161,
+        "finishedAfterMs": 1770,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "928168ad-a1df-40ff-b09f-1d922b41729f",
+        "operation": "SELECT_SOURCE",
+        "source": "apple",
+        "startedMs": 4744287,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 452,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "49c8e728-6e53-4371-acc6-a24e9591a440",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 4774883,
+        "accepted": true,
+        "acceptedAfterMs": 126,
+        "finishedAfterMs": 766,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "6004b69d-d164-49a1-aa1c-dd361cd518a9",
+        "operation": "GET_QUEUE",
+        "source": "mango",
+        "startedMs": 4816362,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 381,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "10c0655c-ed86-4559-ad63-6eaa5a4e4c55",
+        "operation": "SELECT_SOURCE",
+        "source": "mango",
+        "startedMs": 4887469,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 401,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "7643f830-4f8c-4e28-a989-8aee98223f7b",
+        "operation": "GET_QUEUE",
+        "source": "apple",
+        "startedMs": 4897783,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 571,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "30dd6b64-6395-4bb6-bd75-74173493a519",
+        "operation": "GET_QUEUE",
+        "source": "apple",
+        "startedMs": 5011707,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 625,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "bcab6fd6-6450-47a3-bca1-5d030f12442b",
+        "operation": "SELECT_SOURCE",
+        "source": "apple",
+        "startedMs": 5072136,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 405,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "d40765bc-c723-4369-81fd-24e07ca9a7fc",
+        "operation": "GET_QUEUE",
+        "source": "mango",
+        "startedMs": 5082487,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 347,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      }
+    ],
+    "zeroEvictions": true
+  },
+  "preservation": {
+    "prefsByteHashesUnchanged": true,
+    "settingsUnchanged": true,
+    "pidsUnchanged": true,
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "phoneDisconnectedForegroundCleared": true,
+    "hostForegroundEnabled": true,
+    "bothBrowsingBindings": true,
+    "controlTarget": "Mango"
+  },
+  "limits": [
+    "Source changes follow completed pages, not pending requests",
+    "No stale opaque token replay over wire",
+    "No playback/volume command or new audio; not full T09/T12/T16/T04",
+    "Sampled visible row/context proof, not continuous flicker or rapid-tap proof",
+    "No build/CI/observer/long hold in this physical subset"
+  ],
+  "versions": {
+    "pixel": "Pixel9a Android16/API36 CP1A.260405.005/shared0.2.0 code2",
+    "dx340": "Android13 eng.iBasso.20260812.181952/Companion0.1.0 code1/Mango4.1.37 code240/Apple6.5.3 code1599"
+  },
+  "rawEvidence": [
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/apple-queue-before-continuation.xml",
+      "sha256": "497b7e31a3f08618a5ab6b7f08c32c2faa8e1cc4adaf2fe6c9c08f761ba6f75d"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/apple-queue-page1-scroll-00-after.xml",
+      "sha256": "688aab0caa55fb8ce5ab7591a5ff8f0197910b7b1b448ac4ba7fcc9dcb9051c9"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/apple-queue-page1-scroll-00-before.xml",
+      "sha256": "497b7e31a3f08618a5ab6b7f08c32c2faa8e1cc4adaf2fe6c9c08f761ba6f75d"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/apple-queue-page1-scroll-01-after.xml",
+      "sha256": "7b1b9039ffecda85346c9102a2b0479a65db98fa96d7ac6a926bd60b181de399"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/apple-queue-page1-scroll-01-before.xml",
+      "sha256": "688aab0caa55fb8ce5ab7591a5ff8f0197910b7b1b448ac4ba7fcc9dcb9051c9"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/apple-queue-page1-scroll-02-after.xml",
+      "sha256": "f77e4d6fa757abf3a3003c43e7f52ca09f83c084382230726711cba77eeda5e7"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/apple-queue-page1-scroll-02-before.xml",
+      "sha256": "7b1b9039ffecda85346c9102a2b0479a65db98fa96d7ac6a926bd60b181de399"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/apple-queue-page1-scroll-03-after.xml",
+      "sha256": "7c70d3a1587e926f58d01ec268283e912562b08691a54a5da20ca473522811ca"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/apple-queue-page1-scroll-03-before.xml",
+      "sha256": "f77e4d6fa757abf3a3003c43e7f52ca09f83c084382230726711cba77eeda5e7"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/apple-queue-page1-scroll-04-after.xml",
+      "sha256": "da492ba07f9d50839e685370df4171ea799f73083cd3a5508da56c69145a7d7b"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/apple-queue-page1-scroll-04-before.xml",
+      "sha256": "7c70d3a1587e926f58d01ec268283e912562b08691a54a5da20ca473522811ca"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/apple-queue-page1-scroll-05-after.xml",
+      "sha256": "499614689206b643c510498e4b49bacff534b9a02d81ddd53ca869aa64e394ec"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/apple-queue-page1-scroll-05-before.xml",
+      "sha256": "da492ba07f9d50839e685370df4171ea799f73083cd3a5508da56c69145a7d7b"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/apple-queue-page1-scroll-06-after.xml",
+      "sha256": "98df0afd975e50a13f78b2412eadb8ab2ba4d7de7ae54c7b32a14c2f526f8832"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/apple-queue-page1-scroll-06-before.xml",
+      "sha256": "499614689206b643c510498e4b49bacff534b9a02d81ddd53ca869aa64e394ec"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/apple-queue-page2-request-after.xml",
+      "sha256": "1efeb20dd18dae3b28162a736b7256c8434db4e1308ba91ed11a54f9fd859b3e"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/apple-queue-page2-request-before.xml",
+      "sha256": "98df0afd975e50a13f78b2412eadb8ab2ba4d7de7ae54c7b32a14c2f526f8832"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/export-final-disconnect-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/export-final-disconnect-before.xml",
+      "sha256": "98cdb5009ffa911dfd2d1dfd8e2c3910bee634335151c8b21e407d6b2c9b1bf3"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/export-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/export-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/export-help-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/export-help-collapse-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/export-save-after.xml",
+      "sha256": "98cdb5009ffa911dfd2d1dfd8e2c3910bee634335151c8b21e407d6b2c9b1bf3"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/export-save-before.xml",
+      "sha256": "3cf99368ec2a5d6fd1ce767f89c825e420852253370a23dbbc7ea6e18f7586b3"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/export-scroll-after.xml",
+      "sha256": "3cf99368ec2a5d6fd1ce767f89c825e420852253370a23dbbc7ea6e18f7586b3"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/export-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/export-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/export-setup-before.xml",
+      "sha256": "2491c333d97f6abe03ae3231d8a6d05cf9ee56f8f7d77b2ff7caabddd6025cfd"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/final-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/final-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/final-host-accessibility.txt",
+      "sha256": "1b820ba9fb4654eb56071d276b070d9f596754944e0a22a129caa9f2be2eb699"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/final-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "a3c194e50e8162e8666a1be28d0b8483e49a7ef4c3f1e2135d183eff648aa7a6"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/final-host-audio.txt",
+      "sha256": "8d7094936a7cc6d2836e36ea7efa60dad8439034d688cfc8121d80d2525f696b"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/final-host-bluetooth_manager.txt",
+      "sha256": "88ea496f7d75c7e9cdbbdf396aa456d58a8f74e2f179f8b093f9c58b43f7806f"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/final-host-media_session.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/final-host-package-org.dx340.remote.host.txt",
+      "sha256": "bb5380343955e8c4322e1c021989cf79673d865bd740ccc2991b0570c811c253"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/final-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/final-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "d6883e178ec3cedfb4cf0d36f062790df6d0814001a2bcfca92ce4d3a07a81c2"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/final-phone-bluetooth_manager.txt",
+      "sha256": "4f74be52dec64972686b333da57c9e1d03099b8c1b6ee355b394c9afb1b2bfa4"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/final-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "998844a9af4c36a2a845255a1e36c46403b3d3b504e1debd5d829703656f5dd7"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/final-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/final.json",
+      "sha256": "9dcd4e18ec22ac8617819562d9e06ad9958fb15eeef707af2e23968d4a520998"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/mango-queue-before-clarity.png",
+      "sha256": "8951f31582eafa8c50c6f37bf845126c6903ecdc0561072718f0de7c50d76dd6"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/phone-final-report.json",
+      "sha256": "e2aca21f7b6c67073aa7ef276554493316da4a98dec72e41e98d7a5d0426103b"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/preflight-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/preflight-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/preflight-host-accessibility.txt",
+      "sha256": "734c8a606189e05317141d9f99d7ba733e7756abbfe63bd1a5ead856f32e440d"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/preflight-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "ae8e65dc0870ba74c04d62e57bb67384440bf819de327ae4985d3461784ef400"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/preflight-host-audio.txt",
+      "sha256": "9436cd3666d7ed5a406c2885cbb9c0d01f11450a7b86f66d175b263b2221c4c6"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/preflight-host-bluetooth_manager.txt",
+      "sha256": "70f7ef72167d370bb19054973b0612f3e9e91fb43a0f04c0a98ffd91c723658c"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/preflight-host-media_session.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/preflight-host-package-org.dx340.remote.host.txt",
+      "sha256": "ba2ce67c0aee481f5af6e04dc04e8453af09a26e329def8b14ff861c7024998c"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/preflight-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/preflight-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "afe2dc9eb45a253dcbf31f0f9468cc407e583a204ef8cc0c92556612b3a1fa56"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/preflight-phone-bluetooth_manager.txt",
+      "sha256": "76b34e186812efd920861c8bda95ac0e9eab2e87e8e1a6607bcdfaf46507d3b3"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/preflight-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "65c3a4438b726c56750ea7e425486e96086344af949cff70287c687525fbabc0"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/preflight-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/preflight.json",
+      "sha256": "e6bb29b7d39cb4647c14ce3c8454b6e8bdbc44369eca5ae2772b2436286e0e7b"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-apple-cleared-after.xml",
+      "sha256": "8036dd938c84f2b14572c16f927fca00442d26e898219e1a895f0515304678fb"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-apple-cleared-before.xml",
+      "sha256": "bcbd22651d7658362c2b7862c84d3247c0da71487022d6990de08436e0998ccf"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-apple-old-rows.xml",
+      "sha256": "5c2d44b34a522b0558578d9861a282847e63072683e71e505171e40332bb60ae"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-apple-player-after.xml",
+      "sha256": "bcbd22651d7658362c2b7862c84d3247c0da71487022d6990de08436e0998ccf"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-apple-player-before.xml",
+      "sha256": "5c2d44b34a522b0558578d9861a282847e63072683e71e505171e40332bb60ae"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-apple-queue-cleared-after.xml",
+      "sha256": "9bf1440f0b0ea2ecc19c168989cee671919141ab5e967585d1c9548c89492a8e"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-apple-queue-cleared-before.xml",
+      "sha256": "bcbd22651d7658362c2b7862c84d3247c0da71487022d6990de08436e0998ccf"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-apple-queue-refresh-after.xml",
+      "sha256": "497b7e31a3f08618a5ab6b7f08c32c2faa8e1cc4adaf2fe6c9c08f761ba6f75d"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-apple-queue-refresh-before.xml",
+      "sha256": "9bf1440f0b0ea2ecc19c168989cee671919141ab5e967585d1c9548c89492a8e"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-apple-root-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-apple-root-before.xml",
+      "sha256": "8036dd938c84f2b14572c16f927fca00442d26e898219e1a895f0515304678fb"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-apple-root-settled.xml",
+      "sha256": "a8d5f34901acb7a575fc91c48bd5ed29cb8d709506650a0604dfee677d13ba44"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-apple-songs-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-apple-songs-before.xml",
+      "sha256": "a8d5f34901acb7a575fc91c48bd5ed29cb8d709506650a0604dfee677d13ba44"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-library-after.xml",
+      "sha256": "72fb1bd5a6c4c348c653667fcfc0ac1328062c3cd0d4ca30727ce1715f215ca2"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-library-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-mango-cleared-after.xml",
+      "sha256": "5b72ce105bfd44578a630c058de1df7a57d24c80fe6cf3fb1d12e4c2d0bdf9a3"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-mango-cleared-before.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-mango-folders-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-mango-folders-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-mango-fresh-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-mango-fresh-root-before.xml",
+      "sha256": "5b72ce105bfd44578a630c058de1df7a57d24c80fe6cf3fb1d12e4c2d0bdf9a3"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-mango-fresh-settled.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-mango-internal-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-mango-internal-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-mango-old-rows.xml",
+      "sha256": "7aedcb01095d65c825d07c93638b4b87028b656280a4a161ff7f300d1443c635"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-mango-player-after.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-mango-player-before.xml",
+      "sha256": "7aedcb01095d65c825d07c93638b4b87028b656280a4a161ff7f300d1443c635"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-mango-queue-after.xml",
+      "sha256": "d901c7aa63cbefef44d629491d2e5c2731651eced62df55870fcb9fd9b5aef00"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-mango-queue-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-mango-queue-loaded.xml",
+      "sha256": "2491c333d97f6abe03ae3231d8a6d05cf9ee56f8f7d77b2ff7caabddd6025cfd"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-mango-queue-refresh-after.xml",
+      "sha256": "2491c333d97f6abe03ae3231d8a6d05cf9ee56f8f7d77b2ff7caabddd6025cfd"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-mango-queue-refresh-before.xml",
+      "sha256": "d901c7aa63cbefef44d629491d2e5c2731651eced62df55870fcb9fd9b5aef00"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-mango-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-mango-root-before.xml",
+      "sha256": "72fb1bd5a6c4c348c653667fcfc0ac1328062c3cd0d4ca30727ce1715f215ca2"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-page2-mango-cleared-after.xml",
+      "sha256": "99b44a450d5518475b1d70cdf48f477351d3f45124307233be27101f60e90455"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-page2-mango-cleared-before.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-page2-mango-loaded.xml",
+      "sha256": "2491c333d97f6abe03ae3231d8a6d05cf9ee56f8f7d77b2ff7caabddd6025cfd"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-page2-mango-refresh-after.xml",
+      "sha256": "2491c333d97f6abe03ae3231d8a6d05cf9ee56f8f7d77b2ff7caabddd6025cfd"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-page2-mango-refresh-before.xml",
+      "sha256": "99b44a450d5518475b1d70cdf48f477351d3f45124307233be27101f60e90455"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-page2-player-after.xml",
+      "sha256": "bcbd22651d7658362c2b7862c84d3247c0da71487022d6990de08436e0998ccf"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-page2-player-before.xml",
+      "sha256": "1efeb20dd18dae3b28162a736b7256c8434db4e1308ba91ed11a54f9fd859b3e"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-page2-select-mango-after.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-page2-select-mango-before.xml",
+      "sha256": "bcbd22651d7658362c2b7862c84d3247c0da71487022d6990de08436e0998ccf"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-queue-mango-player-after.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-queue-mango-player-before.xml",
+      "sha256": "2491c333d97f6abe03ae3231d8a6d05cf9ee56f8f7d77b2ff7caabddd6025cfd"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-queue-select-apple-after.xml",
+      "sha256": "bcbd22651d7658362c2b7862c84d3247c0da71487022d6990de08436e0998ccf"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-queue-select-apple-before.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-select-apple-after.xml",
+      "sha256": "bcbd22651d7658362c2b7862c84d3247c0da71487022d6990de08436e0998ccf"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-select-apple-before.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-select-mango-after.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/scope-select-mango-before.xml",
+      "sha256": "bcbd22651d7658362c2b7862c84d3247c0da71487022d6990de08436e0998ccf"
+    },
+    {
+      "file": "artifacts/phone-ui-source-scope-20261031/verified-summary.json",
+      "sha256": "1c81545e1a32ac2c3d7c451ce703cf6eddeed2cfc5ddce1b6f7a0841d4f3dc89"
+    }
+  ]
+}

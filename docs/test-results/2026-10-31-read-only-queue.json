@@ -1,0 +1,782 @@
+{
+  "recordedAt": "2026-10-31T18:30:44.499739+08:00",
+  "goalStatus": "ACTIVE/incomplete",
+  "phoneSource": "2cf7c746ad09a575a5ebbbc55aee2b43801b6fff",
+  "phoneApkSha256": "f9b899efeb80c1efd41c62fa1e03e70934c4a8080c69cf5ab792e338e3061c99",
+  "hostSource": "81b3f6bad5ab68fae8dfd70dce0c64303e3cba3c",
+  "hostApkSha256": "644799cca6da1ceb11775d006512c24a618bf536e94c8e1f831a0624936e0093",
+  "checks": {
+    "flutterTests": 76,
+    "nativeJvmPreviousUnchangedScope": 180,
+    "androidAnalysisReleaseLint": "PASS",
+    "newUiRegressionCases": 4,
+    "bothPlatformsAndBrowseAvailableOrUnavailable": true,
+    "sampledVisibleRowsSameBoundsAcrossUpgrade": 8,
+    "fontCase": {
+      "originalFontScale": "1.0",
+      "largeConfigurationConfirmed": true,
+      "restoredFontScale": "1.0"
+    },
+    "appleCapabilities": {
+      "appleQueueSelectableRowsObserved": true,
+      "readOnlyHintAbsentForApple": true,
+      "unsupportedArtistsUnavailableAndDisabled": true,
+      "rowSelectionAttempted": false
+    },
+    "mangoReadOnlyReturned": true
+  },
+  "receipts": {
+    "total": 9,
+    "operations": {
+      "HELLO": 1,
+      "AUTHORIZE": 1,
+      "GET_QUEUE": 4,
+      "SELECT_SOURCE": 2,
+      "BROWSE": 1
+    },
+    "requests": [
+      {
+        "id": "e9480bee-6ff8-4700-9cbb-34286f84c30b",
+        "operation": "HELLO",
+        "source": "mango",
+        "startedMs": 77033,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 112,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "1e83cd5f-1e47-4e97-9cb8-04714881d122",
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "startedMs": 77145,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 877,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "248d1fea-33e6-4d39-bfdb-fda7f660eada",
+        "operation": "GET_QUEUE",
+        "source": "mango",
+        "startedMs": 85467,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 360,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "4c0cc4ff-4173-40cc-9b7b-d7265d721594",
+        "operation": "GET_QUEUE",
+        "source": "mango",
+        "startedMs": 280591,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 338,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "d20cbec3-375e-4a34-a2c3-86b0bd13e718",
+        "operation": "SELECT_SOURCE",
+        "source": "mango",
+        "startedMs": 337539,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 428,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "83db12e0-d315-45dd-9644-f4551140e769",
+        "operation": "GET_QUEUE",
+        "source": "apple",
+        "startedMs": 347751,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 552,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "493bc050-2a86-40a5-a139-31d6ec752623",
+        "operation": "BROWSE",
+        "source": "apple",
+        "startedMs": 358034,
+        "accepted": true,
+        "acceptedAfterMs": 112,
+        "finishedAfterMs": 2462,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "311c4e5e-c73b-47b5-9946-f2e877534162",
+        "operation": "SELECT_SOURCE",
+        "source": "apple",
+        "startedMs": 471649,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 401,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "665f7db2-b272-4841-9cfd-62a390c269ae",
+        "operation": "GET_QUEUE",
+        "source": "mango",
+        "startedMs": 481786,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 339,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      }
+    ],
+    "allAppliedResults": true,
+    "zeroEvictions": true,
+    "separateModelFromPrevious51RequestExport": true
+  },
+  "preservation": {
+    "phonePermissionsUnchanged": true,
+    "phoneExposedBondIdentitiesUnchanged": true,
+    "hostPermissionsUnchanged": true,
+    "hostExposedBondIdentitiesUnchanged": true,
+    "prefsByteHashesUnchanged": true,
+    "settingsRestored": true,
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "phoneDisconnectedForegroundCleared": true,
+    "hostForegroundEnabled": true,
+    "bothBrowsingBindings": true,
+    "controlTarget": "Mango"
+  },
+  "driverNotes": [
+    "Initial test command used wrong SDK relative path and did not run tests; actual baseline log then shows missing-guidance failures. Post-fix harness cleanup issues (duplicate Remote disposal, late SemanticsHandle disposal) were corrected; tests-pass and full build are final green results. Earlier failed logs retained.",
+    "First physical source-button lookup was below viewport; safe guard issued no tap/selection. Following readonly-apple-* captures are still Mango and include one extra read-only GET_QUEUE. Only actual-apple-* checked captures establish Apple behavior; no row selected."
+  ],
+  "limits": [
+    "Simulated Android/iOS widget cases are not physical iPhone proof",
+    "No current-build audio or track selection in these cases",
+    "Sampled bounds and unit held-state guards, not continuous no-flicker or rapid-tap proof",
+    "No full T04/T09/T12/T16, force-stop/reboot/bag/range/sleep/long-hold/owner-iPhone/signing/Watch acceptance",
+    "Shared iPhone run closed/archived; simulator only, not physical owner-iPhone evidence"
+  ],
+  "ci": {
+    "runId": 41192248278,
+    "headSha": "2cf7c746ad09a575a5ebbbc55aee2b43801b6fff",
+    "status": "VERIFIED/SUCCESS; simulator only",
+    "artifactId": 13039228009,
+    "archiveSha256": "d4c036b93b342ea5ce78ad3fadac9b1537260f14094a3a05b7f8ac27bcc0af72",
+    "flutterTests": 76,
+    "captureGuards": 12,
+    "nativeUIKitReportSheet": "presented, matching model/export; ordinary build restored and final frame manually inspected",
+    "macOS": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.2\nBuildVersion:\t\t25G83",
+    "xcode": "Xcode 26.6\nBuild version 17F113",
+    "simulator": [
+      "com.apple.CoreSimulator.SimRuntime.iOS-26-5",
+      "iPhone Air"
+    ],
+    "description": "[Shared iPhone job41192248278](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/41192248278) is terminal SUCCESS at exact source2cf7c74. Artifact13039228009 ZIP SHA256 `d4c036b93b342ea5ce78ad3fadac9b1537260f14094a3a05b7f8ac27bcc0af72` is verified and safely extracted. Archive inspection confirms76 Flutter tests/analyze,12 capture guards, ordinary/Setup/browsing/handoff/volume/report-probe simulator builds and final ordinary rebuild/relaunch. The actual native UIKit export-sheet result matches its export model; the restored ordinary frame was inspected and shows Bluetooth unavailable/no track, not a connected fixture. Hosted macOS26.6.2/25G83, Xcode26.6/17F113, iPhone Air/iOS26.5 simulator. This is not owner signing, physical iPhone Bluetooth or audio. The run is closed; no further polling. Prior5f Apple jobs remain closed with their own scopes.",
+    "shortDescription": "shared iPhone41192248278 SUCCESS/archive13039228009 verified (76 Flutter/12 guards/native report sheet/ordinary restoration), simulator only; no polling"
+  },
+  "versions": {
+    "pixel": "Pixel9a Android16/API36 CP1A.260405.005/shared0.2.0 code2",
+    "dx340": "Android13 eng.iBasso.20260812.181952/Companion0.1.0 code1/Mango4.1.37 code240/Apple6.5.3 code1599"
+  },
+  "signerSha256": "24f48aa3566dcf7b65774ee12585191a8a0df9eeff9cc49e9e72c22bacca6e8d",
+  "rawEvidence": [
+    {
+      "file": "artifacts/read-only-queue-20261031/actual-apple-case.json",
+      "sha256": "65f2277764e68e14283d0a84d5b9615476fe0f11c0eca63f54dbdd0d80a240ca"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/actual-apple-library-after.xml",
+      "sha256": "7d2b340661dcb00dcb9201c223807f9439c8fac73c22d5ce6d9d858b9d9ddd48"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/actual-apple-library-before.xml",
+      "sha256": "497b7e31a3f08618a5ab6b7f08c32c2faa8e1cc4adaf2fe6c9c08f761ba6f75d"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/actual-apple-library-root-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/actual-apple-library-root-before.xml",
+      "sha256": "7d2b340661dcb00dcb9201c223807f9439c8fac73c22d5ce6d9d858b9d9ddd48"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/actual-apple-library-wait-0.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/actual-apple-player-after.xml",
+      "sha256": "6e9170982d868bbf12ef1d104d01fba85b28b43153865191d635f48f6d16f415"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/actual-apple-player-before.xml",
+      "sha256": "80b955ae801cac5d6425b5c1cd9d26bfe51bc503dc9cf12ad17aa6a82601fa84"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/actual-apple-player-scroll-after.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/actual-apple-player-scroll-before.xml",
+      "sha256": "6e9170982d868bbf12ef1d104d01fba85b28b43153865191d635f48f6d16f415"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/actual-apple-queue-after.xml",
+      "sha256": "9bf1440f0b0ea2ecc19c168989cee671919141ab5e967585d1c9548c89492a8e"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/actual-apple-queue-before.xml",
+      "sha256": "bcbd22651d7658362c2b7862c84d3247c0da71487022d6990de08436e0998ccf"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/actual-apple-queue-refresh-after.xml",
+      "sha256": "497b7e31a3f08618a5ab6b7f08c32c2faa8e1cc4adaf2fe6c9c08f761ba6f75d"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/actual-apple-queue-refresh-before.xml",
+      "sha256": "9bf1440f0b0ea2ecc19c168989cee671919141ab5e967585d1c9548c89492a8e"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/actual-apple-selection-after.xml",
+      "sha256": "bcbd22651d7658362c2b7862c84d3247c0da71487022d6990de08436e0998ccf"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/actual-apple-selection-before.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-bootstrap.txt",
+      "sha256": "3684c4ef2c9558af5ba482c0643293ecef75de71c5adbcb6f6493c44fbd37091"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-browsing-fixture-launch.txt",
+      "sha256": "bb68d1d516d8dd1b71c8a8e9ba1b58433ae29abeae0b61e09975a1804dee15ef"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-capture-matcher-tests.txt",
+      "sha256": "2072ea10acb601303ef8f21be984d3cfc065831ff61278198aa4b2b3955354ce"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-capture-readiness.txt",
+      "sha256": "1d8d00829b3b8f79e8c286ee0c624cf1979217f2b2b4aa9aec83f23998a3a51a"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-handoff-fixture-launch.txt",
+      "sha256": "4f629ee183188772d5fdff360179a37584ed4c152fc3c4d6a5a1723948e3dd47"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-ios-analyze.txt",
+      "sha256": "9fd6082cf8aaa20e5fa84669229a98208ffb76ac93b9fb668efafe6574675d52"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-ios-browsing-fixture-build.txt",
+      "sha256": "309bd28f6843e725f7fe9838621dc7f3cd00571fed5ec21ede1276d9d948ebcd"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-ios-build.txt",
+      "sha256": "22be46f7082c773e53f406e893416c49395c6e7d3bd571e972e4e3edf78bf1dc"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-ios-handoff-fixture-build.txt",
+      "sha256": "3e1c9b6e049c0beb4da47aab14dd700bbecfe32b5875f836ff220660227352e1"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-ios-report-probe-build.txt",
+      "sha256": "779cb018663f5bdd3d5d5874b429368bcc8b711fe2416736027e55a1f743bab6"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-ios-restore-build.txt",
+      "sha256": "e27d6d9233ac837380468be35af8e6b54ca81ac9e096fc5abefa87b4d9b72cd5"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-ios-setup-fixture-build.txt",
+      "sha256": "141fdb95b1641e8b3878487d40048f72f69bc75412c85d9e89b45e2ef70cf9ac"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-ios-tests.txt",
+      "sha256": "d2b1c09faa407057d24e26a01597d9a17e91d89f56fbba0dc7cff3f768ecbf2d"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-ios-toolchain.json",
+      "sha256": "4c13dc6534635375ab58ff3b75ae0d02bd5967ee36a84a40b0e48126b7ea84a4"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-ios-volume-fixture-build.txt",
+      "sha256": "6cd8eca34caf45cfb859e74b0954ef1678bf377691c75879f964e22979a91d86"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-library-light.png",
+      "sha256": "393f5ec7a57d6ea0faeae8c2dbf4d2cc94c5fd2faf53e1f566ccb2335c8c6bad"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-macos-version.txt",
+      "sha256": "cd5d6399b3785b04ceaae75045a9ca9f80f0bbc3526eff9d0c36b170ed1ec348"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-native-report-export.json",
+      "sha256": "ecfbed3fc0778ffc122c8d5de53577ee9e4b3330ecc2bd91ee72e50bc950d9b9"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-native-report-share-sheet.png",
+      "sha256": "c300e51f6d3e663d3be9583a87985f0bd0947950ec2c38a743f86e441288d79c"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-player-dark.png",
+      "sha256": "e43186956cb194fef430260625a854fd8a9c5c49d7f80c277b7a9fb58a4d8cbf"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-player-large-dark.png",
+      "sha256": "67affbf38e59e2cde3d1cb7cf1839f332448b4219f09d3f84704f1eba3638d8d"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-player-light.png",
+      "sha256": "b6c78a75ac4cc2f19c4c771418f4e73949cb487a782ed17212646f68cb8f34d4"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-queue-light.png",
+      "sha256": "d01225b85b659b8917385abb2657f1514ce2196cf25f620d0eb1edbfe0db1a99"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-report-probe-launch.txt",
+      "sha256": "4d00b5997b9e9bb38f7a2cc3cf3ca935a4ec56be926ec7bbe12363f865c6e51f"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-report-probe-result.json",
+      "sha256": "08de4b3065b02fd1c77c7bcdb38a44a940d8139d9fc2640f803980426462eb7a"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-restored-launch.txt",
+      "sha256": "4981173666caf549f69637466e777bd84b0c9d4cb886551b7abeb518cb1d4e2e"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-restored-player-light.png",
+      "sha256": "b50c9d612df653b551d6fbe1edac67806b1789fc31d7c84f4e6da5ed6ab2f42f"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-setup-fixture-launch.txt",
+      "sha256": "85589913b3ef52c0158b1f6a934b337646a8844670d1eeb50df6ab9084b96bb0"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-setup-light.png",
+      "sha256": "b8579269e15bc8aaad68041abc3ebf6d7af4ff38e52beaa8681325a3d206bcbe"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-simulator-boot.txt",
+      "sha256": "6755a673754ec83ca48963f36d1c165e20e8024f4600ded8f09fc1ab063634da"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-simulator-launch.txt",
+      "sha256": "5d21e0ebfac41b8169356c460d42cc20fabae281d627a35b88aee8247d0168ab"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-simulators.json",
+      "sha256": "b8bbdec4294de79fb0519d509e7ed74aac56b4b448f17a7b80afe36e99cb90c7"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-synthetic-browsing-expired-large-dark.png",
+      "sha256": "e451f49307d34b6c6e61d516e8871aa7759f4809c1bb48675f369d375b53aa58"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-synthetic-browsing-expired-light.png",
+      "sha256": "59db6e5cb7b57bae86e5d24dd36e4efbdb4c359a884e07ffbca31bb7f4d7ddfc"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-synthetic-browsing-large-dark.png",
+      "sha256": "dc3037eff1deaa81ce6ef8da5fb0f34b1cf7fe87ecd2a9bc139c83369ea2cf2e"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-synthetic-browsing-library-light.png",
+      "sha256": "6cb329c655e5f3a748d5ee973b92b6f14d241bbc69980822377dbaeccc1cfc78"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-synthetic-browsing-queue-light.png",
+      "sha256": "1a97ef73289f90d3d9c0a579787314051f9bb52df840bb5b905f33e9f0610103"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-synthetic-handoff-large-dark.png",
+      "sha256": "88205d05e70f2bfc9faca86d14db8ef4dd89147c30437b5214701c4c2e323203"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-synthetic-handoff-lost-light.png",
+      "sha256": "daa266ea046e83859f2d6ab44aaf2674c869f013444d7056c0b18a7288b97f21"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-synthetic-handoff-pending-light.png",
+      "sha256": "daa266ea046e83859f2d6ab44aaf2674c869f013444d7056c0b18a7288b97f21"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-synthetic-handoff-ready-dark.png",
+      "sha256": "3df8e892d992905eae556d3296c58c4c57908c32156137f63f787fce710ef8af"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-synthetic-handoff-ready-light.png",
+      "sha256": "19a979cc2cfb9b7ac13ba5ffba097aae8ca7bc5f8914ce18256edf98c585d6bc"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-synthetic-setup-approval-large-dark.png",
+      "sha256": "b7132b18eb9791a501bdca02291cf6f5c496e75bdba3378ea6cf792d58d0007d"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-synthetic-setup-approval-light.png",
+      "sha256": "50d0f17ad363f1f5218674bf1ccee1f2b1722e1479354bca60de5dd412d1c051"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-synthetic-setup-choosing-light.png",
+      "sha256": "3db4bac98ad4c42e30f03a15be2bdfd19899349616f730a7603f26e41c1fe7c6"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-synthetic-setup-connected-light.png",
+      "sha256": "c4c1478b9493d2382a0b99f9fb8c340ca74be8477e0929ff55e2fc3fb58af201"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-synthetic-setup-idle-light.png",
+      "sha256": "2a6f4eb9dbea5f6ab09caa4c4c2bcd7cb07d78327bd02a0354000fdcba4c5939"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-synthetic-volume-high-light.png",
+      "sha256": "062d78b2861e0009d334afbe5f1155104fe07fd0309345c35026a71cd8179287"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-synthetic-volume-large-dark.png",
+      "sha256": "017b4bc9e4c31ce9d5f938d8f7613c7427900a6d8d79bb883c97521058f03874"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-synthetic-volume-low-light.png",
+      "sha256": "2fc4fbd5788ad300e322a9377981cbfd0685529439f90b7d58a4eb0cc4f4c787"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-volume-fixture-launch.txt",
+      "sha256": "5dae3c9bc0aac72adf895dbbbf5634b227def69cfe01cea7f2f96800101e3068"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278/flutter-xcode-version.txt",
+      "sha256": "18730ed2ae28a2c9cf0c2d5db549033a4f07089331391a7133b7b32187454fa9"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278-artifacts.json",
+      "sha256": "da4842a2f7102318065de30c3dcba791423aab19d2eca9937052512125ca0a45"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278-checkpoint-20261031-183850.json",
+      "sha256": "94b98908713af2fcd3a35070fe0c42ed6501fd3b30df78a39a1ad7e6a852dbe9"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278-checkpoint-20261031-184237.json",
+      "sha256": "33e53e5f9697efead0aab8fb4b42157860d5a9e5ed7919d268d83ebe3060d30d"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278-jobs.json",
+      "sha256": "d908c2e7068173233c5ee920a489c7ee512df302317aae55464f0dfc6fc5307a"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-41192248278.zip",
+      "sha256": "d4c036b93b342ea5ce78ad3fadac9b1537260f14094a3a05b7f8ac27bcc0af72"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/ci-verified-summary.json",
+      "sha256": "5ad5428dca53df30e76b91b91c332bf53cd1551369d4b2d9ed106143be7af3d0"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/export-final-disconnect-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/export-final-disconnect-before.xml",
+      "sha256": "b4d84c47c0228d015a1434e7654ee704f41d6f26b2e9e5b39c293ef3325a40fb"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/export-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/export-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/export-help-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/export-help-collapse-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/export-save-after.xml",
+      "sha256": "b4d84c47c0228d015a1434e7654ee704f41d6f26b2e9e5b39c293ef3325a40fb"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/export-save-before.xml",
+      "sha256": "e15fd2e375a748169e7f71f55d0adf7979f458ca03d8630a4449848461d0eaa5"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/export-scroll-after.xml",
+      "sha256": "e15fd2e375a748169e7f71f55d0adf7979f458ca03d8630a4449848461d0eaa5"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/export-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/export-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/export-setup-before.xml",
+      "sha256": "80b955ae801cac5d6425b5c1cd9d26bfe51bc503dc9cf12ad17aa6a82601fa84"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/final-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/final-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/final-host-accessibility.txt",
+      "sha256": "1b820ba9fb4654eb56071d276b070d9f596754944e0a22a129caa9f2be2eb699"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/final-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "21dc93c9497bd64ba376d4b4eb5608cc62502a4ffc8b38ef7eaae865d8a298c7"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/final-host-audio.txt",
+      "sha256": "0134a9fb5c45c49adbbd8317226ec305e50a82a8239372a8cf52c1b646b0047c"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/final-host-bluetooth_manager.txt",
+      "sha256": "05bf567c3c43404546dad59309acf2ee4273add52a8d6054f127f2bcb32d1073"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/final-host-media_session.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/final-host-package-org.dx340.remote.host.txt",
+      "sha256": "77ee4f49c0c5e31b454cdd28a6fe94bcf1b2846a5369f2c9689944c43a79c70a"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/final-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/final-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "c63861d7b1dcec859a88cc1acfae7156bef6675dec5ae07f5421865b4054fdd1"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/final-phone-bluetooth_manager.txt",
+      "sha256": "627586e41b45b92f1835b64405a9d7c19ad6b6492fcce0b8151a62980e711e02"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/final-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "b6d1c71bb18de9901438bffaf939eeae4f38b0fd793805fb088d197b79a74bf0"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/final-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/final.json",
+      "sha256": "44c438a31f1f96c9c552f03e980a2ee5501c7d8bd13c9a83dde6756df1651698"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/font-case.json",
+      "sha256": "f4871673e58dcdfea0760c4f2d9e7b17e55a08313985d84fd2f41b723390129a"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/font-large-own-activity.txt",
+      "sha256": "27c55f55435c28f4a964526fee80e7340f939c66e4283c78a1731599c4fd1dd6"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/full-phone-build.txt",
+      "sha256": "b749fd3c3fda47fb0dd9be855a3f56235f6d718ff3943e0cc9db6b103ea1d9e6"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/installed-phone-2cf7c74.apk",
+      "sha256": "f9b899efeb80c1efd41c62fa1e03e70934c4a8080c69cf5ab792e338e3061c99"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/installed-phone-sha256.txt",
+      "sha256": "579890054c758a0c9e567dd2c96fee77bd7a2f5d8d1606c424f490f38b11c013"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/phone-final-report.json",
+      "sha256": "32ef0ec3c404958d428c4095ccba619d5b26f30665537448c24832963bb953e5"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/queue-default.png",
+      "sha256": "833f9ab420ebe0cefd49b73d3989520c58367f95f7af9f0fa2905f3721321f8d"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/queue-font-large.png",
+      "sha256": "65af76c5efb5eddd5431f3484ad04668387495ecfcf0dd11c09eab052ef112a9"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/queue-font-large.xml",
+      "sha256": "0471f8466771781a0d93d42fd9b08fd31d34349e4dae006b76dff5b4789c3ff2"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/queue-font-restored.xml",
+      "sha256": "80b955ae801cac5d6425b5c1cd9d26bfe51bc503dc9cf12ad17aa6a82601fa84"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/readonly-apple-queue-after.xml",
+      "sha256": "80b955ae801cac5d6425b5c1cd9d26bfe51bc503dc9cf12ad17aa6a82601fa84"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/readonly-apple-queue-before.xml",
+      "sha256": "6e9170982d868bbf12ef1d104d01fba85b28b43153865191d635f48f6d16f415"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/readonly-apple-queue-loaded.xml",
+      "sha256": "80b955ae801cac5d6425b5c1cd9d26bfe51bc503dc9cf12ad17aa6a82601fa84"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/readonly-apple-queue-refresh-after.xml",
+      "sha256": "80b955ae801cac5d6425b5c1cd9d26bfe51bc503dc9cf12ad17aa6a82601fa84"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/readonly-apple-queue-refresh-before.xml",
+      "sha256": "80b955ae801cac5d6425b5c1cd9d26bfe51bc503dc9cf12ad17aa6a82601fa84"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/readonly-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/readonly-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/readonly-player-after.xml",
+      "sha256": "6e9170982d868bbf12ef1d104d01fba85b28b43153865191d635f48f6d16f415"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/readonly-player-before.xml",
+      "sha256": "80b955ae801cac5d6425b5c1cd9d26bfe51bc503dc9cf12ad17aa6a82601fa84"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/readonly-queue-after.xml",
+      "sha256": "cb36a57b77b5699400fa6c5b12faf002c8f441a214912ca13ab7583d9206b587"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/readonly-queue-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/readonly-queue-refresh-after.xml",
+      "sha256": "80b955ae801cac5d6425b5c1cd9d26bfe51bc503dc9cf12ad17aa6a82601fa84"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/readonly-queue-refresh-before.xml",
+      "sha256": "cb36a57b77b5699400fa6c5b12faf002c8f441a214912ca13ab7583d9206b587"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/readonly-select-apple-before.xml",
+      "sha256": "6e9170982d868bbf12ef1d104d01fba85b28b43153865191d635f48f6d16f415"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/readonly-setup-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/readonly-setup-before.xml",
+      "sha256": "7049441428db793cf468b5586a7ca1ead8ec9833114542574e9408a65c5cd161"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/restore-mango-case.json",
+      "sha256": "2d4ac245beeacc90ae44d25f2cc435d22a45340192c441073a0ed32fb18e0600"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/restore-mango-player-after.xml",
+      "sha256": "bcbd22651d7658362c2b7862c84d3247c0da71487022d6990de08436e0998ccf"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/restore-mango-player-before.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/restore-mango-queue-after.xml",
+      "sha256": "52b004adc176eeba719990278f0619cd486d425d76b1c7591989ce30ffa36ea8"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/restore-mango-queue-before.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/restore-mango-queue-refresh-after.xml",
+      "sha256": "80b955ae801cac5d6425b5c1cd9d26bfe51bc503dc9cf12ad17aa6a82601fa84"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/restore-mango-queue-refresh-before.xml",
+      "sha256": "52b004adc176eeba719990278f0619cd486d425d76b1c7591989ce30ffa36ea8"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/restore-mango-select-after.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/restore-mango-select-before.xml",
+      "sha256": "bcbd22651d7658362c2b7862c84d3247c0da71487022d6990de08436e0998ccf"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/signing-check.txt",
+      "sha256": "b6f9d7f7844b2da7c12e63548f602a22cd760ad9bbd4c5afac1d1e47fb560a28"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/signing-manifest.json",
+      "sha256": "bda7fa916842d866cb60f2da7af67867e727c42cea7f90e6c103576d1df478e8"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/tests-green-final.txt",
+      "sha256": "df09d436b7831bf22c452a8695448047d44780b71ec18ed025a14fdfd1926ffc"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/tests-green.txt",
+      "sha256": "0d9ebca402803f4a13378b8c1b610afc19b116e43af5b4811aa9c730906c044d"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/tests-pass.txt",
+      "sha256": "98d40b5e306cf14b4770f0e014c101cc6eebd9ff08031931959ae74cc259e0dd"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/tests-red.txt",
+      "sha256": "653733b9cd7c045210410e94b4958497e1cbe84930e5c5b6aeebdfd09e3ed850"
+    },
+    {
+      "file": "artifacts/read-only-queue-20261031/verified-summary.json",
+      "sha256": "95532c0e7884c5c3f8736488b81c1d3f48d85cb06761a874d882dbcf1afa350b"
+    }
+  ]
+}

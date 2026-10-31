@@ -18,6 +18,8 @@ Keep Bluetooth on and Companion's phone control enabled. In Remote → Setup, ta
 
 Use Player, Library and Queue for the capabilities available from the chosen source. Optional Apple Music downloads and Mango folders/playlists browsing need the DX340 awake and unlocked. These browsing options can stay enabled; ordinary supported playback controls and optional screen-assisted browsing have different requirements.
 
+If Queue says **Read-only queue**, choose tracks from **Library**. Some sources expose a queue for display without supporting selection from it; those entries stay disabled.
+
 **Disconnect** ends phone control and leaves music playing on the player. It keeps the saved approval for next time. **Stop Bluetooth remote** in Companion also stops phone control without pausing the source music app.
 
 ## If connection needs attention

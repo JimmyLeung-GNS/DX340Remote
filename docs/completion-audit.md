@@ -1,6 +1,10 @@
 # Full-scope completion audit
 
-## Current full-scope audit —31 October2026,17:58 HKT
+## Current full-scope audit —31 October2026,18:42 HKT
+
+**NOT ACHIEVED; goal ACTIVE/incomplete.** [Read-only queue correction/current f9 evidence](test-results/2026-10-31-read-only-queue.md) adds76 Flutter checks, original-signer installed UI and actual capability/row-bound/font preservation. [Separate4318 phone-only source/queue switching](test-results/2026-10-31-phone-ui-source-scope.md) adds16 applied results and real second-page reset. No playback/audio, pending switch, token replay, p95/ACK, sleep/range/bag or full T09/T12/T16 pass. shared iPhone41192248278 SUCCESS/archive13039228009 verified (76 Flutter/12 guards/native report sheet/ordinary restoration), simulator only; no polling. Full two-phone/source/playlist/format/SD/output/commands/latency/calls/battery/walk/ownership and physical owner-iPhone/Mac signing/Watch remain required. Fresh listening/long-hold availability pending, no audio from silence. Older evidence retains exact versions; no pause/device switch.
+
+## Prior full-scope audit —31 October2026,17:58 HKT
 
 **NOT ACHIEVED; goal ACTIVE/incomplete.** [Automatic host-process recovery](test-results/2026-10-31-host-automatic-recovery.md) removes local handling in one paused644/4318 desk case, while explicit Stop survives a separate process loss. Sticky-only failed authorization is retained; bounded observed-write capacity and two red→green regressions,180 JVM/build/lint and fixed eight applied requests support the correction. Not force-stop/reboot/bag/screen-off/range, mutation no-replay, audio, T04 or full T12 acceptance. Full two-phone/source/playlist/format/SD/output/commands/latency/sleep/call/range/battery/walk/ownership and signed owner-iPhone/Mac/Watch remain required. Fresh long-hold/hearing replies pending; no new audio or observer. Earlier evidence retains exact binaries; no pause/device switch.
 

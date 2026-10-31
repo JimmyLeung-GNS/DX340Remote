@@ -1,6 +1,18 @@
 # Implementation status
 
-## Current checkpoint —31 October2026,17:58 HKT
+## Current checkpoint —31 October2026,18:42 HKT
+
+Full goal **ACTIVE/incomplete**. New phonef9b899ef/source2cf7c74, unchanged Companion644799cc/source81b3f6b. [Queue clarity correction](test-results/2026-10-31-read-only-queue.md)/[manifest](test-results/2026-10-31-read-only-queue.json), [separate4318 phone UI source/queue evidence](test-results/2026-10-31-phone-ui-source-scope.md).
+
+- **UI corrected:** capability-based read-only queue guidance sits in the fixed status viewport. Informational queue rows say Queue track; unplayable library entries say Unavailable; supported Play stays available. Four Android/iOS-style regressions cover no-browse fallback, disabled taps, supported selection and fixed row position.76 Flutter/analyze/release/lint pass; unchanged180 JVM/19 Swift retain scope.
+- **Physical f9:** original-signer upgrade/pulled byte match, saved-grant reconnect, Mango28 read-only guidance/disabled rows, eight default-font row bounds equal to old4318, actual font2.0 inspected/restore1.0, Apple queue first50/101 selectable/no read-only hint and unverified Artists disabled/Unavailable, restoredMango. New native model9 applied RESULTs/zero evictions/no playback/volume/error. Lookup-before-scroll driver failure and extra Mango refresh retained, not miscounted as Apple proof.
+- **Separate old4318 subset:** phone buttons clear completed Library/Queue pages both source directions; fresh Apple Songs/Mango root succeed. Apple page51–100 of101 clears to new Mango queue1–28;51-row report retains35 old/16 new applied records. No pending switch or stale-token wire replay; no audio/no-overlap or full T09/T12/T16 claim.
+- **CI:** shared iPhone41192248278 SUCCESS/archive13039228009 verified (76 Flutter/12 guards/native report sheet/ordinary restoration), simulator only; no polling. Follow this exact source/run; do not restart from polling timeout. Prior5f jobs stay closed. No local build/emulator/observer/audio/long hold active.
+- **Preserved/final:** four host prefs/settings/own permission flags/exposed bonds, grants/modesON retained. Both sources paused2 at37/headset(4)/prooffalse; host foreground/both bindings, targetMango; phone normal Disconnect/foreground cleared/help collapsed. Both USB present. Optional empty scratch-directory removal was blocked by automatic approval review; directories retained.
+
+Next: shared iPhone job is closed/archived; continue current f9/644 full source/audio/SD/commands/latency/sleep/call/range/battery/walk/ownership and physical owner-iPhone/Mac signing/Watch gates. Fresh short listening availability and30-minute hold unanswered; historical envision hearing unconfirmed. Keep all APK/model scopes separate. No pause/device-switch request.
+
+## Prior checkpoint —31 October2026,17:58 HKT
 
 Full goal **ACTIVE/incomplete**. New Companion644799cc/source81b3f6b, unchanged phone4318/source5f2de32. [Automatic host recovery and retained failed trial](test-results/2026-10-31-host-automatic-recovery.md), [manifest](test-results/2026-10-31-host-automatic-recovery.json).
 
