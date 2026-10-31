@@ -24,6 +24,8 @@ If browsing asks you to close a dialog, check the music app on the player, handl
 
 Mango can keep an old SD-folder listing. A fresh SD-root browse may briefly switch the player through Internal Storage and back to reload it. If an old folder was removed, browse again after the error; the remote does not retry that folder action.
 
+If **SD Card** is unavailable, check the card on your player and browse again after it is mounted. Internal Storage stays separate. A cached SD screen can still require local player handling; the current test report records that limitation.
+
 **Disconnect** ends phone control and leaves music playing on the player. It keeps the saved approval for next time. **Stop Bluetooth remote** in Companion also stops phone control without pausing the source music app.
 
 ## If connection needs attention

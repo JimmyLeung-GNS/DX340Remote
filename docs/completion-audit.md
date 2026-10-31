@@ -1,6 +1,10 @@
 # Full-scope completion audit
 
-## Current full-scope audit —31 October2026,19:49 HKT
+## Current full-scope audit —31 October2026,20:41 HKT
+
+**NOT ACHIEVED; goal ACTIVE/incomplete.** [Unavailable SD gating](test-results/2026-10-31-sd-availability.md) is verified for disabled actions/warm Internal/remount with188 JVM checks, but cached-SD/foreground Internal still times out. [Apple storage-event crash](test-results/2026-10-31-apple-storage-crash.md) fails source preservation; read-only recovery restores Downloaded browsing and sessionNONE0, not playback/audio. [Older f009 All Music context](test-results/2026-10-31-mango-all-music-sd-context.md) retains exact separate scope. All111 requests/earlier records/failed cases preserved, no playback/volume. Full T01–T18/current two-phone/source/audio/format/output/latency/sleep/range/call/battery/walk/ownership/owner-iPhone signing/Watch remain required. Fresh listening/30min readiness pending; no pause/device switch.
+
+## Prior full-scope audit —31 October2026,19:49 HKT
 
 **NOT ACHIEVED; goal ACTIVE/incomplete.** [Real SD empty-directory change](test-results/2026-10-31-sd-folder-refresh.md) reproduces and corrects a fresh-browse cache defect on finalf009/d755, retaining first nested timeout, second near-budget trial, source/terminal times and all78 requests. No playback or volume command. T11 remains partial: no audio-file/rescan/physical-pull/full context gate. Four native builds/lint and183 JVM checks pass; three new bounded-deadline regressions and both closed80d Apple archives retain exact scopes. Full current two-phone/source/audio/format/output/command/latency/sleep/call/range/battery/walk/ownership/owner-iPhone signing/Watch remain required. Fresh listening and30min readiness unanswered; no audio/long hold inferred. No pause/device switch.
 

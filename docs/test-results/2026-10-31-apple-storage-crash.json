@@ -1,0 +1,363 @@
+{
+  "status": "FAILED source-app preservation; read-only Library recovery VERIFIED, playback/audio NOT TESTED",
+  "versions": {
+    "pc": "DESKTOP-T9ICUE4 / Windows11 Pro10.0.26300 / PowerShell7.6.5",
+    "phone": "Pixel9a / Android16 API36 / CP1A.260405.005 / shared0.2.0 code2",
+    "host": "DX340 / Android13 API33 / eng.iBasso.20260812.181952 / Companion0.1.0 code1",
+    "mango": "4.1.37 code240",
+    "appleMusic": "6.5.3 code1599"
+  },
+  "hostSource": "3ad1ed3de30aa960756640913fe9bbeb45c7bd7c",
+  "installedApks": {
+    "host": "d1668fed903082560a13c0d2aeceb0db449e6c094e8b4d02d59c4b1e4d22cb99",
+    "phone": "d75540a514bbc484cc1f84462c50b1f9f62b7bd4b15ce4c8ae019c58655acc02"
+  },
+  "crash": {
+    "appleCrashRecordAt": "2026-10-31 20:07:59.687",
+    "publicCrashBufferHasAppleProcess": true,
+    "lastObservedSession": "Absent before recovery; new Apple session NONE after explicit read-only Library recovery",
+    "causation": "MEDIA_MOUNTED receiver exception observed; exact mount-event attribution and underlying app defect are unresolved",
+    "observedBroadcastActions": [
+      "android.intent.action.MEDIA_MOUNTED"
+    ],
+    "exceptionTypes": [
+      "java.lang.RuntimeException",
+      "java.lang.StringIndexOutOfBoundsException"
+    ],
+    "receiverFrame": "com.apple.android.music.download.b.b"
+  },
+  "clockOffsetScope": {
+    "sampledAtPc": "2026-10-31T20:25:42.466189+08:00",
+    "samples": [
+      {
+        "pcBeforeMs": 1793449542173,
+        "deviceMs": 1793449554788,
+        "pcAfterMs": 1793449542273,
+        "deviceMinusPcLowerMs": 12515,
+        "deviceMinusPcUpperMs": 12615
+      },
+      {
+        "pcBeforeMs": 1793449542273,
+        "deviceMs": 1793449554883,
+        "pcAfterMs": 1793449542366,
+        "deviceMinusPcLowerMs": 12517,
+        "deviceMinusPcUpperMs": 12610
+      },
+      {
+        "pcBeforeMs": 1793449542366,
+        "deviceMs": 1793449554982,
+        "pcAfterMs": 1793449542466,
+        "deviceMinusPcLowerMs": 12516,
+        "deviceMinusPcUpperMs": 12616
+      }
+    ]
+  },
+  "recoveryRequests": {
+    "name": "appleReadonlyRecovery",
+    "previousUnchanged": 105,
+    "newCount": 6,
+    "operations": {
+      "HELLO": 1,
+      "AUTHORIZE": 1,
+      "SELECT_SOURCE": 2,
+      "BROWSE": 2
+    },
+    "requests": [
+      {
+        "id": "50ffaf5b-b39d-4e3e-adff-a08d0f6510d6",
+        "operation": "HELLO",
+        "source": "mango",
+        "startedMs": 4796931,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 71,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "e532ecbb-cb08-4eb2-932e-f47f58f91286",
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "startedMs": 4797003,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 748,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "11acfaec-5144-4077-8bdf-6f1c3b074443",
+        "operation": "SELECT_SOURCE",
+        "source": "mango",
+        "startedMs": 4816467,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 394,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "61663d6c-230e-4be7-9278-4b9ccff59e02",
+        "operation": "BROWSE",
+        "source": "apple",
+        "startedMs": 4826664,
+        "accepted": true,
+        "acceptedAfterMs": 144,
+        "finishedAfterMs": 973,
+        "result": "error",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": "AUTHORIZATION_DENIED"
+      },
+      {
+        "id": "988ae977-4ccf-42b1-b2df-1a0255f1aaae",
+        "operation": "BROWSE",
+        "source": "apple",
+        "startedMs": 4910419,
+        "accepted": true,
+        "acceptedAfterMs": 140,
+        "finishedAfterMs": 1554,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "31f4fefd-3242-4fff-9601-a0ed240bfe13",
+        "operation": "SELECT_SOURCE",
+        "source": "apple",
+        "startedMs": 4979804,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 372,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      }
+    ]
+  },
+  "finalSourceStates": {
+    "com.ibasso.music": 2,
+    "com.apple.android.music": 0
+  },
+  "noPlaybackOrVolumeCommand": true,
+  "rawEvidence": [
+    {
+      "file": "artifacts/sd-unavailable-20261031/android-crash-buffer.txt",
+      "sha256": "55feb4b6e353e8decba5f7a92cfe69a95479bbcfe4f53082b051bd5d559f2791"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-exit-info.txt",
+      "sha256": "5c6a7409ba23da51d1a66bf6677f54680be19cecc8382a0209d1338c6662a722"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-audio.txt",
+      "sha256": "12159e51c3f53cdb0684c9a90baf18eb18a1c49d92019e6cf2ff31cf46933b9f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-browse-after.xml",
+      "sha256": "8036dd938c84f2b14572c16f927fca00442d26e898219e1a895f0515304678fb"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-browse-before.xml",
+      "sha256": "c784db8adc1d2c9e1a96c6c514232fa4a22d448f2d6ed7b3f0508d08d9301253"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-control-find-0.xml",
+      "sha256": "f70663cea5f15057dd3c505c40fff2b2538f4d1e7f97340559894e0aff53dea9"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-control-find-1.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-dx.png",
+      "sha256": "ec470300c124a7b75c496c793672884424e07e5cd5e09f9ed1b24c58c60ba80f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-fresh-phone.png",
+      "sha256": "2f82ba09241531cfecbfa55bf59a043bb2e3f945b6b1e1f900efb1e04f8f34ff"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-fresh-result.json",
+      "sha256": "3016108ea667904d7c67ddf683835f26ab640bd59af8dcf89774b986de4813a5"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-fresh-root-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-fresh-root-before.xml",
+      "sha256": "8036dd938c84f2b14572c16f927fca00442d26e898219e1a895f0515304678fb"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-fresh-wait-0.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-library-after.xml",
+      "sha256": "c784db8adc1d2c9e1a96c6c514232fa4a22d448f2d6ed7b3f0508d08d9301253"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-library-before.xml",
+      "sha256": "6cbb2f105c7e31ff6e896fdcdcf08494484c1b7c1b274eab6bfe0e7bf3cbfbca"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-media-session.txt",
+      "sha256": "1644ec1f4725b0a1fdae4708bfffedd864b3ee536b9ed1270ade1f1d6fd66e91"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-phone-labels.json",
+      "sha256": "d5f0989f4f55058b0566d0e0b8f9aad10af64bafd383b395cfad3073a8cb2722"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-phone.png",
+      "sha256": "c33c7e66b83ee6327ec8278175dcd5f34ed24b872e4f910f9f96a3c0afff7fde"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-player-after.xml",
+      "sha256": "f70663cea5f15057dd3c505c40fff2b2538f4d1e7f97340559894e0aff53dea9"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-player-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-player-scroll-0-after.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-player-scroll-0-before.xml",
+      "sha256": "f70663cea5f15057dd3c505c40fff2b2538f4d1e7f97340559894e0aff53dea9"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-select-after.xml",
+      "sha256": "6cbb2f105c7e31ff6e896fdcdcf08494484c1b7c1b274eab6bfe0e7bf3cbfbca"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-select-before.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-session-check.json",
+      "sha256": "b9ce2a1769efa3964c350867697fc8bdaaab4b99e3ee7950afa27a9487f31f63"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-setup-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-setup-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-host-accessibility.txt",
+      "sha256": "42ea38bb25441d0406f1afc4ed230722a6b05f95028e794f8377357d58fd1220"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "9c8037efb8c1bbb46d4b3ec2fc7b290a46f9c264821bb12385117445196c93eb"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-host-audio.txt",
+      "sha256": "c13b03c866da01b3ec3880e6f1101b8a5d13c9436d7858a7d372436defc96093"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-host-bluetooth_manager.txt",
+      "sha256": "7d2baeeadb05fbbda1615f80bfa37e22105dd1efbcd2d674b16170da91a5644f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-host-media_session.txt",
+      "sha256": "2c43684abbe8ce8f97aa6a62528c1ed2c57cf30813131ab02c97e4753f584c20"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-host-package-org.dx340.remote.host.txt",
+      "sha256": "008ba4d08076b9679c25ce8d99742f066636d9c0413851c8447156d4479db89d"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "584428bfef8accc688736a51b1db44dbe157400dc682a6e02aaf9b8340f67e3c"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-phone-bluetooth_manager.txt",
+      "sha256": "d5cc004a95cfb2cfaa4f13b3a09f0dd77509cb80f473f9f369e4bf3959428d82"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "52dfd83a806dab0be2d6b2566f8689688eb9e8bf1fdda0672218179c4d359fde"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-storage-state-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-storage-state.json",
+      "sha256": "0ab632f846fd9b947c18e53dfeb11a9c47f6d3698ec4f73be9cbb269fc65db55"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/clock-offset.json",
+      "sha256": "1f3a0e5b19810f9ef5f0f8c563627ded6de81aa81c613e00969d588a24247a9f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/crash-summary.json",
+      "sha256": "eaea3dfddb2e3b9d782c85c7be2c6e3c1856bd982bbedc51a8c671aa0a646260"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-specific-crash.txt",
+      "sha256": "cb353a7e2ddca66296a7c74ae6e1db417c9049fbe9ec2a28b6955efa943863cb"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/source-versions.json",
+      "sha256": "61a07d90164570c183adfcbda4eeb7c6067130a35c54e77867a1c5ede51df03b"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/com.ibasso.music-package-final.txt",
+      "sha256": "7c2a13b6034b89f87696beab56e0895e207e47dc61edc84cb21ef84ff2dc2c8a"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/com.apple.android.music-package-final.txt",
+      "sha256": "f49d4558ee1e273136b99edaf7b06b6c4e034f013c847c11e51bd01b965d3aba"
+    }
+  ],
+  "freshSourceVersions": {
+    "com.ibasso.music": {
+      "versionName": "4.1.37",
+      "versionCode": 240
+    },
+    "com.apple.android.music": {
+      "versionName": "6.5.3",
+      "versionCode": 1599
+    }
+  }
+}

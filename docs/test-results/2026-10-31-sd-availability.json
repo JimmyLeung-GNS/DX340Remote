@@ -1,0 +1,1380 @@
+{
+  "recordedAt": "2026-10-31T20:37:40.179521+08:00",
+  "goalStatus": "ACTIVE/incomplete",
+  "phoneSource": "80d4edc6f2967596be7474a57eb40118558d562f",
+  "hostSource": "3ad1ed3de30aa960756640913fe9bbeb45c7bd7c",
+  "installedApks": {
+    "host": "d1668fed903082560a13c0d2aeceb0db449e6c094e8b4d02d59c4b1e4d22cb99",
+    "phone": "d75540a514bbc484cc1f84462c50b1f9f62b7bd4b15ce4c8ae019c58655acc02"
+  },
+  "jvmTests": {
+    "protocol": 55,
+    "controller": 3,
+    "cache": 7,
+    "sources": 123
+  },
+  "stages": [
+    {
+      "name": "oldHostAllMusicAndMissingSd",
+      "previousUnchanged": 78,
+      "newCount": 11,
+      "operations": {
+        "HELLO": 1,
+        "AUTHORIZE": 1,
+        "BROWSE": 9
+      },
+      "requests": [
+        {
+          "id": "55f6cf23-bd21-405b-9012-a6789f4a9e08",
+          "operation": "HELLO",
+          "source": "mango",
+          "startedMs": 2848988,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 71,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "09c72a1f-d127-4dce-a6ce-e81981be19fd",
+          "operation": "AUTHORIZE",
+          "source": "mango",
+          "startedMs": 2849059,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 792,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "01b96703-9117-4cb6-b396-70ea68adc24b",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 2857870,
+          "accepted": true,
+          "acceptedAfterMs": 170,
+          "finishedAfterMs": 760,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "4e54a934-8edb-4a2e-a8ff-9d9133e7168b",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 2863307,
+          "accepted": true,
+          "acceptedAfterMs": 143,
+          "finishedAfterMs": 339,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "12ecb423-9050-43e5-a71a-03f683e97f9f",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 2868304,
+          "accepted": true,
+          "acceptedAfterMs": 169,
+          "finishedAfterMs": 4462,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "47d03460-bd91-4495-83f5-70ab96bc81fc",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 3045488,
+          "accepted": true,
+          "acceptedAfterMs": 146,
+          "finishedAfterMs": 740,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "524bb979-c736-43a0-81eb-cc0ed10228d3",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 3050882,
+          "accepted": true,
+          "acceptedAfterMs": 163,
+          "finishedAfterMs": 366,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "1ef40ac1-03bd-4b16-a989-118e9221b96c",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 3055930,
+          "accepted": true,
+          "acceptedAfterMs": 138,
+          "finishedAfterMs": 3945,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "89b758d9-09fd-4e50-bab7-a1d57e56f16f",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 3152271,
+          "accepted": true,
+          "acceptedAfterMs": 131,
+          "finishedAfterMs": 719,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "a6d00aac-6ff5-47f7-8755-0334cf90d7c2",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 3157683,
+          "accepted": true,
+          "acceptedAfterMs": 132,
+          "finishedAfterMs": 326,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "8ecf93bb-c4f0-4bdb-86a4-2837ff5c8955",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 3163288,
+          "accepted": true,
+          "acceptedAfterMs": 134,
+          "finishedAfterMs": 10423,
+          "result": "error",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": "UI_ACTION_TIMEOUT"
+        }
+      ]
+    },
+    {
+      "name": "newHostAvailability",
+      "previousUnchanged": 89,
+      "newCount": 16,
+      "operations": {
+        "HELLO": 1,
+        "AUTHORIZE": 1,
+        "BROWSE": 14
+      },
+      "requests": [
+        {
+          "id": "4dc1c9a9-7910-4e31-916e-1f05ef885ee0",
+          "operation": "HELLO",
+          "source": "mango",
+          "startedMs": 3535217,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 126,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "6dab4efc-5513-40ed-9486-ca55598ffdb8",
+          "operation": "AUTHORIZE",
+          "source": "mango",
+          "startedMs": 3535344,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 780,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "c45f6f31-1c63-4c19-ab36-ce3243f6ed80",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 3540974,
+          "accepted": true,
+          "acceptedAfterMs": 117,
+          "finishedAfterMs": 756,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "1c9ad016-7020-4eae-a4ee-40b28b750e4a",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 3546427,
+          "accepted": true,
+          "acceptedAfterMs": 78,
+          "finishedAfterMs": 271,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "10f338e0-da57-4922-8314-774aa7ed910d",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 3660079,
+          "accepted": true,
+          "acceptedAfterMs": 161,
+          "finishedAfterMs": 751,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "bc30adcd-6ae0-4e1a-82f6-dd6dabf4a25d",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 3665534,
+          "accepted": true,
+          "acceptedAfterMs": 170,
+          "finishedAfterMs": 362,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "5b6e0cfa-b453-42f3-aefe-c85d408db061",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 3673722,
+          "accepted": true,
+          "acceptedAfterMs": 124,
+          "finishedAfterMs": 8412,
+          "result": "error",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": "UI_ACTION_TIMEOUT"
+        },
+        {
+          "id": "751b3c4d-1410-42d6-b760-378b2bae17cc",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 3882112,
+          "accepted": true,
+          "acceptedAfterMs": 141,
+          "finishedAfterMs": 732,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "68f50458-d22d-4f5a-984f-a1704637197d",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 3887558,
+          "accepted": true,
+          "acceptedAfterMs": 154,
+          "finishedAfterMs": 349,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "a873997c-ec52-40fa-ad9b-aa0d294a275c",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 3892560,
+          "accepted": true,
+          "acceptedAfterMs": 129,
+          "finishedAfterMs": 4516,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "7c4667f5-1355-4e92-95a4-a2eee5b0b01c",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 4014276,
+          "accepted": true,
+          "acceptedAfterMs": 141,
+          "finishedAfterMs": 731,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "3d6b4dea-8fa2-4c3b-a2a9-e8f2e777c20a",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 4019708,
+          "accepted": true,
+          "acceptedAfterMs": 170,
+          "finishedAfterMs": 380,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "472fdb63-3394-4d9f-a141-30ce2abe9395",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 4028043,
+          "accepted": true,
+          "acceptedAfterMs": 175,
+          "finishedAfterMs": 1341,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "e8a902b0-8660-49cc-a968-7027e2addf7c",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 4124715,
+          "accepted": true,
+          "acceptedAfterMs": 171,
+          "finishedAfterMs": 810,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "27053a84-3498-40c3-8b56-89471a3ad765",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 4130239,
+          "accepted": true,
+          "acceptedAfterMs": 156,
+          "finishedAfterMs": 355,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "c57059e5-cd3c-436a-a35e-e4b95056e1c9",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 4135315,
+          "accepted": true,
+          "acceptedAfterMs": 151,
+          "finishedAfterMs": 4249,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        }
+      ]
+    },
+    {
+      "name": "appleReadonlyRecovery",
+      "previousUnchanged": 105,
+      "newCount": 6,
+      "operations": {
+        "HELLO": 1,
+        "AUTHORIZE": 1,
+        "SELECT_SOURCE": 2,
+        "BROWSE": 2
+      },
+      "requests": [
+        {
+          "id": "50ffaf5b-b39d-4e3e-adff-a08d0f6510d6",
+          "operation": "HELLO",
+          "source": "mango",
+          "startedMs": 4796931,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 71,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "e532ecbb-cb08-4eb2-932e-f47f58f91286",
+          "operation": "AUTHORIZE",
+          "source": "mango",
+          "startedMs": 4797003,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 748,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "11acfaec-5144-4077-8bdf-6f1c3b074443",
+          "operation": "SELECT_SOURCE",
+          "source": "mango",
+          "startedMs": 4816467,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 394,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "61663d6c-230e-4be7-9278-4b9ccff59e02",
+          "operation": "BROWSE",
+          "source": "apple",
+          "startedMs": 4826664,
+          "accepted": true,
+          "acceptedAfterMs": 144,
+          "finishedAfterMs": 973,
+          "result": "error",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": "AUTHORIZATION_DENIED"
+        },
+        {
+          "id": "988ae977-4ccf-42b1-b2df-1a0255f1aaae",
+          "operation": "BROWSE",
+          "source": "apple",
+          "startedMs": 4910419,
+          "accepted": true,
+          "acceptedAfterMs": 140,
+          "finishedAfterMs": 1554,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "31f4fefd-3242-4fff-9601-a0ed240bfe13",
+          "operation": "SELECT_SOURCE",
+          "source": "apple",
+          "startedMs": 4979804,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 372,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        }
+      ]
+    }
+  ],
+  "requestsTotal": 111,
+  "zeroEvictions": true,
+  "noPlaybackOrVolumeCommand": true,
+  "capabilityCases": {
+    "mountedEnabled": true,
+    "unmountedDisabledWithHint": true,
+    "disabledTapNoBrowseCommand": true,
+    "warmInternalBrowseVerified": true,
+    "restoredSdBrowseVerified": true,
+    "sourceLocalCurrentIdRejectionMs": 44,
+    "sourceLocalNotBle": true
+  },
+  "failures": {
+    "baselineUnavailableSdTimeoutMs": 10423,
+    "cachedSdForegroundInternalBrowse": "FAILED UI_ACTION_TIMEOUT; native trace retained",
+    "appleCrash": {
+      "appleCrashRecordAt": "2026-10-31 20:07:59.687",
+      "publicCrashBufferHasAppleProcess": true,
+      "lastObservedSession": "Absent before recovery; new Apple session NONE after explicit read-only Library recovery",
+      "causation": "MEDIA_MOUNTED receiver exception observed; exact mount-event attribution and underlying app defect are unresolved",
+      "observedBroadcastActions": [
+        "android.intent.action.MEDIA_MOUNTED"
+      ],
+      "exceptionTypes": [
+        "java.lang.RuntimeException",
+        "java.lang.StringIndexOutOfBoundsException"
+      ],
+      "receiverFrame": "com.apple.android.music.download.b.b"
+    },
+    "appleRecovery": "First browse canceled; fresh Downloaded root works; session NONE not paused-playback/audio proof",
+    "firstIoPreflight": "Rejected before unmount; exact failed sample values not retained; repeated preflight records three stable zero-in-flight samples"
+  },
+  "preservation": {
+    "phonePermissionFlagsUnchanged": true,
+    "phoneExposedBondIdentitiesUnchanged": true,
+    "hostPermissionFlagsUnchanged": true,
+    "hostExposedBondIdentitiesUnchanged": true,
+    "prefsByteHashesUnchanged": true,
+    "settingsUnchanged": true,
+    "phonePidUnchanged": true,
+    "hostForegroundBothBindings": true,
+    "phoneDisconnectedForegroundCleared": true,
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 0
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeProof": false,
+    "cardMounted": true,
+    "temporaryDirectoryRemoved": true,
+    "controlTarget": "Mango"
+  },
+  "versions": {
+    "pc": "DESKTOP-T9ICUE4 / Windows11 Pro10.0.26300 / PowerShell7.6.5",
+    "phone": "Pixel9a / Android16 API36 / CP1A.260405.005 / shared0.2.0 code2",
+    "host": "DX340 / Android13 API33 / eng.iBasso.20260812.181952 / Companion0.1.0 code1",
+    "mango": "4.1.37 code240",
+    "appleMusic": "6.5.3 code1599"
+  },
+  "signer": {
+    "package": "org.dx340.remote.host",
+    "candidateSha256": "d1668fed903082560a13c0d2aeceb0db449e6c094e8b4d02d59c4b1e4d22cb99",
+    "installedSignerSha256": "24f48aa3566dcf7b65774ee12585191a8a0df9eeff9cc49e9e72c22bacca6e8d",
+    "candidateSignerSha256": "24f48aa3566dcf7b65774ee12585191a8a0df9eeff9cc49e9e72c22bacca6e8d",
+    "sameSigner": true,
+    "note": "Read-only development-key comparison; no install, uninstall, data reset or signing-key migration."
+  },
+  "apiReferences": [
+    "https://developer.android.com/reference/android/os/storage/StorageManager#getStorageVolumes()",
+    "https://developer.android.com/reference/android/os/storage/StorageVolume#getState()"
+  ],
+  "rawEvidence": [
+    {
+      "file": "artifacts/sd-unavailable-20261031/android-crash-buffer.txt",
+      "sha256": "55feb4b6e353e8decba5f7a92cfe69a95479bbcfe4f53082b051bd5d559f2791"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-exit-info.txt",
+      "sha256": "5c6a7409ba23da51d1a66bf6677f54680be19cecc8382a0209d1338c6662a722"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-audio.txt",
+      "sha256": "12159e51c3f53cdb0684c9a90baf18eb18a1c49d92019e6cf2ff31cf46933b9f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-browse-after.xml",
+      "sha256": "8036dd938c84f2b14572c16f927fca00442d26e898219e1a895f0515304678fb"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-browse-before.xml",
+      "sha256": "c784db8adc1d2c9e1a96c6c514232fa4a22d448f2d6ed7b3f0508d08d9301253"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-control-find-0.xml",
+      "sha256": "f70663cea5f15057dd3c505c40fff2b2538f4d1e7f97340559894e0aff53dea9"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-control-find-1.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-dx.png",
+      "sha256": "ec470300c124a7b75c496c793672884424e07e5cd5e09f9ed1b24c58c60ba80f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-fresh-phone.png",
+      "sha256": "2f82ba09241531cfecbfa55bf59a043bb2e3f945b6b1e1f900efb1e04f8f34ff"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-fresh-result.json",
+      "sha256": "3016108ea667904d7c67ddf683835f26ab640bd59af8dcf89774b986de4813a5"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-fresh-root-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-fresh-root-before.xml",
+      "sha256": "8036dd938c84f2b14572c16f927fca00442d26e898219e1a895f0515304678fb"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-fresh-wait-0.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-library-after.xml",
+      "sha256": "c784db8adc1d2c9e1a96c6c514232fa4a22d448f2d6ed7b3f0508d08d9301253"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-library-before.xml",
+      "sha256": "6cbb2f105c7e31ff6e896fdcdcf08494484c1b7c1b274eab6bfe0e7bf3cbfbca"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-media-session.txt",
+      "sha256": "1644ec1f4725b0a1fdae4708bfffedd864b3ee536b9ed1270ade1f1d6fd66e91"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-phone-labels.json",
+      "sha256": "d5f0989f4f55058b0566d0e0b8f9aad10af64bafd383b395cfad3073a8cb2722"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-phone.png",
+      "sha256": "c33c7e66b83ee6327ec8278175dcd5f34ed24b872e4f910f9f96a3c0afff7fde"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-player-after.xml",
+      "sha256": "f70663cea5f15057dd3c505c40fff2b2538f4d1e7f97340559894e0aff53dea9"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-player-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-player-scroll-0-after.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-player-scroll-0-before.xml",
+      "sha256": "f70663cea5f15057dd3c505c40fff2b2538f4d1e7f97340559894e0aff53dea9"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-select-after.xml",
+      "sha256": "6cbb2f105c7e31ff6e896fdcdcf08494484c1b7c1b274eab6bfe0e7bf3cbfbca"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-select-before.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-session-check.json",
+      "sha256": "b9ce2a1769efa3964c350867697fc8bdaaab4b99e3ee7950afa27a9487f31f63"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-setup-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-recovery-setup-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-after-remount-dx.png",
+      "sha256": "157c2242f46129326ee29add3fa42b79deb3fc0b110f122b3bb5077bebdad019"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-before-volumes.txt",
+      "sha256": "7f7be54d6ac662c6c253fefac52be59dce97549438b29993566e0dd53c4803a4"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-choices.png",
+      "sha256": "be1a9b9124d26f5b14b6ceaf6bd206b92412e05d78072003bd7ef7ec56256021"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-cycle.json",
+      "sha256": "d6bf099e060a7bc38274c6899e104809cc077f588f69dc147daf97ab306d9c78"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-restoration-before-volumes.txt",
+      "sha256": "78f2e62e4cfb1aa17aeefa10047a3b5bbd847939e6ec3dab1e8f5386ebac578f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-restored-volumes.txt",
+      "sha256": "7f7be54d6ac662c6c253fefac52be59dce97549438b29993566e0dd53c4803a4"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-unmounted-before-debug.xml",
+      "sha256": "5b72ce105bfd44578a630c058de1df7a57d24c80fe6cf3fb1d12e4c2d0bdf9a3"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-unmounted-choices-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-unmounted-choices-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-unmounted-dx.png",
+      "sha256": "7fe0767d0c9ee85aa5f988bdc68572c7ff82fdfbad6da40f39c239397e85f557"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-unmounted-outcome.png",
+      "sha256": "e437a80b85aa7934b4479b764f087c6f8f5f6411b18e51e1f3e8eb0b7cd6bb8a"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-unmounted-result-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-unmounted-result-1.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-unmounted-result-2.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-unmounted-result-3.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-unmounted-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-unmounted-root-before.xml",
+      "sha256": "5b72ce105bfd44578a630c058de1df7a57d24c80fe6cf3fb1d12e4c2d0bdf9a3"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-unmounted-sd-request-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-unmounted-sd-request-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/baseline-unmounted-volumes.txt",
+      "sha256": "78f2e62e4cfb1aa17aeefa10047a3b5bbd847939e6ec3dab1e8f5386ebac578f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-host-accessibility.txt",
+      "sha256": "42ea38bb25441d0406f1afc4ed230722a6b05f95028e794f8377357d58fd1220"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "9c8037efb8c1bbb46d4b3ec2fc7b290a46f9c264821bb12385117445196c93eb"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-host-audio.txt",
+      "sha256": "c13b03c866da01b3ec3880e6f1101b8a5d13c9436d7858a7d372436defc96093"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-host-bluetooth_manager.txt",
+      "sha256": "7d2baeeadb05fbbda1615f80bfa37e22105dd1efbcd2d674b16170da91a5644f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-host-media_session.txt",
+      "sha256": "2c43684abbe8ce8f97aa6a62528c1ed2c57cf30813131ab02c97e4753f584c20"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-host-package-org.dx340.remote.host.txt",
+      "sha256": "008ba4d08076b9679c25ce8d99742f066636d9c0413851c8447156d4479db89d"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "584428bfef8accc688736a51b1db44dbe157400dc682a6e02aaf9b8340f67e3c"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-phone-bluetooth_manager.txt",
+      "sha256": "d5cc004a95cfb2cfaa4f13b3a09f0dd77509cb80f473f9f369e4bf3959428d82"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "52dfd83a806dab0be2d6b2566f8689688eb9e8bf1fdda0672218179c4d359fde"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-storage-state-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/before-apple-recovery-final-storage-state.json",
+      "sha256": "0ab632f846fd9b947c18e53dfeb11a9c47f6d3698ec4f73be9cbb269fc65db55"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/clock-offset.json",
+      "sha256": "1f3a0e5b19810f9ef5f0f8c563627ded6de81aa81c613e00969d588a24247a9f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/crash-summary.json",
+      "sha256": "eaea3dfddb2e3b9d782c85c7be2c6e3c1856bd982bbedc51a8c671aa0a646260"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/export-final-disconnect-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/export-final-disconnect-before.xml",
+      "sha256": "e9eb44fc5663ba06d49824623b9ae0f9a8be73905c729e2d4d843c5b165fbfc8"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/export-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/export-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/export-help-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/export-help-collapse-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/export-save-after.xml",
+      "sha256": "e9eb44fc5663ba06d49824623b9ae0f9a8be73905c729e2d4d843c5b165fbfc8"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/export-save-before.xml",
+      "sha256": "d93c0d801d8010acf8d84f662f17dacfd267c70b932745c15e51a0572c657104"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/export-scroll-after.xml",
+      "sha256": "d93c0d801d8010acf8d84f662f17dacfd267c70b932745c15e51a0572c657104"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/export-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/export-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/export-setup-before.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/final-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/final-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/final-host-accessibility.txt",
+      "sha256": "639513b7f8c6c3d67eb956255677ad420a6bd9787514b420e5705f8cff49f95b"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/final-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "10454814285b65d1a8a2068e08b646b1579a17d3103f720e63f2ac1832916289"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/final-host-audio.txt",
+      "sha256": "05240376c2dd73e10c31236d292b44f72c0374f30fc7f32b60ceadf90c95f613"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/final-host-bluetooth_manager.txt",
+      "sha256": "f6707fcd4a93311dfc77d70b30149020727ed144db83f3723b3db2b6274e3a8f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/final-host-media_session.txt",
+      "sha256": "1644ec1f4725b0a1fdae4708bfffedd864b3ee536b9ed1270ade1f1d6fd66e91"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/final-host-package-org.dx340.remote.host.txt",
+      "sha256": "a94a80dd4f1f86fa080e8662312da03260443530d075eaa98c409a7ef5b79086"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/final-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/final-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "bbf77b2e06ac0b2cb5fc1ef59104b9e6ad546a7fd6563c06441e1bf31a238ed3"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/final-phone-bluetooth_manager.txt",
+      "sha256": "0c00df2e31313e90063007e813ce86f34f64f4f57069996e30ec0443e93a5b5c"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/final-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "9807e1f1ce695c28d451b497c62f7d27e699bb72d52a98941a31c11b52395cfa"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/final-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/final-storage-state-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/final-storage-state.json",
+      "sha256": "0ab632f846fd9b947c18e53dfeb11a9c47f6d3698ec4f73be9cbb269fc65db55"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/final.json",
+      "sha256": "af64a9a455583ab6da88f66280bbe08cb8be9451a587c3f5db0bd92f5adf4a11"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-after-remount-dx.png",
+      "sha256": "2bdea5986d55c4479ec9e87e2d06aa453792a6242a2620af5fd317d9445d4377"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-before-volumes.txt",
+      "sha256": "7f7be54d6ac662c6c253fefac52be59dce97549438b29993566e0dd53c4803a4"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-cycle.json",
+      "sha256": "b16bf11be5f703893b5c30aa3ba0ef3269553b503340c5ea011bff544731f0fe"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-disabled-tap-after.xml",
+      "sha256": "d4553d9522497a0479d7c4406790073fd478123b059c8142093f886e175a7c4c"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-internal-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-internal-wait-1.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-internal-wait-2.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-internal-wait-3.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-internal-wait-4.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-internal-wait-5.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-internal-while-unmounted-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-internal-while-unmounted-before.xml",
+      "sha256": "d4553d9522497a0479d7c4406790073fd478123b059c8142093f886e175a7c4c"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-io-preflight.json",
+      "sha256": "fd8b561add5cd8dcd68c2a98e50949e0160d7b2994a9f79fab29a2c8353767db"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-library-after.xml",
+      "sha256": "72fb1bd5a6c4c348c653667fcfc0ac1328062c3cd0d4ca30727ce1715f215ca2"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-library-before.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-mounted-choice.json",
+      "sha256": "45f1e4c75c4a3d36cf7fbb58f883e7284dd5ff002a024644dd12c92d1d9c5e6c"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-mounted-choices-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-mounted-choices-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-mounted-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-mounted-root-before.xml",
+      "sha256": "72fb1bd5a6c4c348c653667fcfc0ac1328062c3cd0d4ca30727ce1715f215ca2"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-restoration-before-volumes.txt",
+      "sha256": "78f2e62e4cfb1aa17aeefa10047a3b5bbd847939e6ec3dab1e8f5386ebac578f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-restored-volumes.txt",
+      "sha256": "7f7be54d6ac662c6c253fefac52be59dce97549438b29993566e0dd53c4803a4"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-setup-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-setup-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-unmounted-before-debug.xml",
+      "sha256": "5b72ce105bfd44578a630c058de1df7a57d24c80fe6cf3fb1d12e4c2d0bdf9a3"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-unmounted-choices-after.xml",
+      "sha256": "d4553d9522497a0479d7c4406790073fd478123b059c8142093f886e175a7c4c"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-unmounted-choices-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-unmounted-choices.png",
+      "sha256": "2bae8d3e55f63ac70c716153e9985e92f7a10a0e765b08f31b8048dc692eda7b"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-unmounted-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-unmounted-root-before.xml",
+      "sha256": "5b72ce105bfd44578a630c058de1df7a57d24c80fe6cf3fb1d12e4c2d0bdf9a3"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/fixed-unmounted-volumes.txt",
+      "sha256": "78f2e62e4cfb1aa17aeefa10047a3b5bbd847939e6ec3dab1e8f5386ebac578f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/host-after-upgrade.png",
+      "sha256": "24594b1bc9ec6e7ae1660cc3227370f464ef311a5946561f0156087b22462a2d"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/host-installed.apk",
+      "sha256": "d1668fed903082560a13c0d2aeceb0db449e6c094e8b4d02d59c4b1e4d22cb99"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/host-permissions.txt",
+      "sha256": "aacd041d8aab55b14a7aedff3a94444e6f92356cd3be2aafdd33bac6c3f08ecb"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/installed-match.json",
+      "sha256": "1ffa7c18c05fcded6a433d54de7ee2cd8b17036cc5290861538a8796cbbda405"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/internal-unmounted-failed-trace-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/internal-unmounted-failed-trace.json",
+      "sha256": "1e085bfdfeb67c0caa7c651a8719b4cbb9a5081c6d2c98bca52a9cc028598fd9"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/jvm-results.json",
+      "sha256": "e94b7887ea34b9510a03ff4e274c86df5b3b6015bce2bbe3f70676622f875003"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/mounted-internal-recovery.json",
+      "sha256": "43a6d384b69beb4bc89ac38b2b4d2f9c074e76f934ad746bd92abd0f7dd616e2"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/native-build.txt",
+      "sha256": "90d6643d55141654026a0de4384f7156376b32d87bb5bbfbd787389a181348cb"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/phone-after-storage-checks.json",
+      "sha256": "9cbb387d9a971991ed785d42f061bf628954fd5b7bed543db1cb1845a67a69b7"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/phone-before-update.json",
+      "sha256": "b9562fc2fe333da68dbc03bc1cc2c1c818b8c3e92e858708eba2cc7b6000dde3"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/phone-final-report.json",
+      "sha256": "fde9a9ea2473c116ec583b2a9a75fbfb22e3f8650df386d4743b08382d98254e"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/phone-installed.apk",
+      "sha256": "d75540a514bbc484cc1f84462c50b1f9f62b7bd4b15ce4c8ae019c58655acc02"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/preflight-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/preflight-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/preflight-host-accessibility.txt",
+      "sha256": "c5f3290b7ce11fb6d0e4904bf448f80ea4276eb7c3082ce5a80c807f8a111cdf"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/preflight-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "263c2b0d26330494c99c50b732989733f696a44bd18ec9fad89500728b2eae38"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/preflight-host-audio.txt",
+      "sha256": "d40c300ab3bc30528cf81d3bb026559e1627dce8434706479b598ffc4c0ad2f1"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/preflight-host-bluetooth_manager.txt",
+      "sha256": "0424622ca9610b25fdc2d8f98eba96a043087ee2fa78a6088cd9c4d55ce0c8a1"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/preflight-host-media_session.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/preflight-host-package-org.dx340.remote.host.txt",
+      "sha256": "b35952fe93846a0bb9f4644d7b709fd50d36e51ef6b9330fbb4acfc703db0eef"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/preflight-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/preflight-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "e2a6d1ff440e134155b7d69cade4eab5db358634bc41183dfe7b0fa64f80bc04"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/preflight-phone-bluetooth_manager.txt",
+      "sha256": "6caceb2e49a7c81feef66363ba03877c0b4292a1135a67d8114c319ef3b2ab63"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/preflight-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "fad20ed768de8ba7868043862327535e9f201be51534247643b9688047b011fc"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/preflight-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/preflight.json",
+      "sha256": "c460501b092fa4f820dbe0642f12a73e3a8da17a2a4d0c5c94749be13b3d590b"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/recovery-internal-choices-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/recovery-internal-choices-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/recovery-internal-mounted-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/recovery-internal-mounted-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/recovery-internal-mounted-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/recovery-internal-mounted-wait-1.xml",
+      "sha256": "7aedcb01095d65c825d07c93638b4b87028b656280a4a161ff7f300d1443c635"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/recovery-internal-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/recovery-internal-root-before.xml",
+      "sha256": "5b72ce105bfd44578a630c058de1df7a57d24c80fe6cf3fb1d12e4c2d0bdf9a3"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/restore-mango-find-0.xml",
+      "sha256": "164668d1e40a34a6a1f15e9daeabbd7bdef2e798dc99ed7c180cb5245fc3cd51"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/restore-mango-player-after.xml",
+      "sha256": "164668d1e40a34a6a1f15e9daeabbd7bdef2e798dc99ed7c180cb5245fc3cd51"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/restore-mango-player-before.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/restore-mango-target-after.xml",
+      "sha256": "9950b9462ceb2a082709ba34224140ab67b845d7c3335a6545cd4865fa0320e4"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/restore-mango-target-before.xml",
+      "sha256": "164668d1e40a34a6a1f15e9daeabbd7bdef2e798dc99ed7c180cb5245fc3cd51"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/restored-availability.json",
+      "sha256": "70b5503a896b55f7c24b567f76678683969d0a10a39301cc1b5998c6d00eda95"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/restored-choices-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/restored-choices-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/restored-phone.png",
+      "sha256": "502bad0363204f7d487ea4f14f03211225b197fe41e2b9892a1f59d9ce3b5422"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/restored-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/restored-root-before.xml",
+      "sha256": "5b72ce105bfd44578a630c058de1df7a57d24c80fe6cf3fb1d12e4c2d0bdf9a3"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/restored-sd-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/restored-sd-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/restored-sd-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/restored-sd-wait-1.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/signing-manifest.json",
+      "sha256": "c2bdf45b61bdbc639d8e260a95a416693c73fdd0b95da8c0ff423bcba95973d4"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/verified-summary.json",
+      "sha256": "d949740cbad3841c193abee29449f595b7cb797cdf568a6e3854dd7e08f906b5"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-after-remount-dx.png",
+      "sha256": "47dcd3de7a85c0c469ab6e13e9537a0cb38589fda82ff8439fecc6fde7e6344a"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-before-volumes.txt",
+      "sha256": "7f7be54d6ac662c6c253fefac52be59dce97549438b29993566e0dd53c4803a4"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-cycle.json",
+      "sha256": "2fa642658c4879cb1f76aa8b7c8866194c80979ba1476be7f21a3a1208a3b550"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-disabled-tap-after.xml",
+      "sha256": "d4553d9522497a0479d7c4406790073fd478123b059c8142093f886e175a7c4c"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-internal-while-unmounted-after.xml",
+      "sha256": "7aedcb01095d65c825d07c93638b4b87028b656280a4a161ff7f300d1443c635"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-internal-while-unmounted-before.xml",
+      "sha256": "d4553d9522497a0479d7c4406790073fd478123b059c8142093f886e175a7c4c"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-io-preflight.json",
+      "sha256": "fd8b561add5cd8dcd68c2a98e50949e0160d7b2994a9f79fab29a2c8353767db"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-restoration-before-volumes.txt",
+      "sha256": "78f2e62e4cfb1aa17aeefa10047a3b5bbd847939e6ec3dab1e8f5386ebac578f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-restored-volumes.txt",
+      "sha256": "7f7be54d6ac662c6c253fefac52be59dce97549438b29993566e0dd53c4803a4"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-unavailable-current-home-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-unavailable-current-home.json",
+      "sha256": "4affa80beb5e74e107913efa598d2ee87362163c8c3723c3b921e5ebf9d961fa"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-unavailable-current-sd-action-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-unavailable-current-sd-action.json",
+      "sha256": "9a7834ade7d9dd427acc711cad8ef3d5132360bc1ea0146977d5cb08e601bac9"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-unmounted-before-debug.xml",
+      "sha256": "5b72ce105bfd44578a630c058de1df7a57d24c80fe6cf3fb1d12e4c2d0bdf9a3"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-unmounted-choices-after.xml",
+      "sha256": "d4553d9522497a0479d7c4406790073fd478123b059c8142093f886e175a7c4c"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-unmounted-choices-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-unmounted-choices.png",
+      "sha256": "e7b6a93875c19af82c771480802bbcd48c7d65b68a0e4737f10723785467bf25"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-unmounted-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-unmounted-root-before.xml",
+      "sha256": "5b72ce105bfd44578a630c058de1df7a57d24c80fe6cf3fb1d12e4c2d0bdf9a3"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/warm-unmounted-volumes.txt",
+      "sha256": "78f2e62e4cfb1aa17aeefa10047a3b5bbd847939e6ec3dab1e8f5386ebac578f"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/apple-specific-crash.txt",
+      "sha256": "cb353a7e2ddca66296a7c74ae6e1db417c9049fbe9ec2a28b6955efa943863cb"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/source-versions.json",
+      "sha256": "61a07d90164570c183adfcbda4eeb7c6067130a35c54e77867a1c5ede51df03b"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/com.ibasso.music-package-final.txt",
+      "sha256": "7c2a13b6034b89f87696beab56e0895e207e47dc61edc84cb21ef84ff2dc2c8a"
+    },
+    {
+      "file": "artifacts/sd-unavailable-20261031/com.apple.android.music-package-final.txt",
+      "sha256": "f49d4558ee1e273136b99edaf7b06b6c4e034f013c847c11e51bd01b965d3aba"
+    }
+  ],
+  "freshSourceVersions": {
+    "com.ibasso.music": {
+      "versionName": "4.1.37",
+      "versionCode": 240
+    },
+    "com.apple.android.music": {
+      "versionName": "6.5.3",
+      "versionCode": 1599
+    }
+  }
+}
