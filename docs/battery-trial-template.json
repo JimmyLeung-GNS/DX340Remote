@@ -1,0 +1,299 @@
+{
+  "formatVersion": 1,
+  "runs": [
+    {
+      "pair": "pair-1",
+      "controllerState": null,
+      "evidence": {
+        "start": {
+          "path": null,
+          "sha256": null
+        },
+        "end": {
+          "path": null,
+          "sha256": null
+        }
+      },
+      "serviceState": null,
+      "startedAt": null,
+      "status": "not_tested",
+      "sourcePlayingAtEnd": null,
+      "configuration": {
+        "companionApkSha256": null,
+        "controllerApkSha256": null,
+        "controllerModel": null,
+        "controllerOsBuild": null,
+        "eq": null,
+        "gain": null,
+        "networkPolicy": null,
+        "outputProfile": null,
+        "playbackSetSha256": null,
+        "playerModel": null,
+        "playerOsBuild": null,
+        "screenPolicy": null,
+        "sourcePackage": null,
+        "sourceVersion": null,
+        "volume": null
+      },
+      "id": "pair-1-off",
+      "endedAt": null,
+      "mode": "off",
+      "endPercent": null,
+      "pluggedAtStart": null,
+      "pluggedAtEnd": null,
+      "conditions": {
+        "clockStableAttested": null,
+        "configurationUnchangedAttested": null,
+        "noKnownPlaybackInterruptionAttested": null,
+        "unpluggedThroughoutAttested": null
+      },
+      "sourcePlayingAtStart": null,
+      "startPercent": null
+    },
+    {
+      "pair": "pair-1",
+      "controllerState": null,
+      "evidence": {
+        "start": {
+          "path": null,
+          "sha256": null
+        },
+        "end": {
+          "path": null,
+          "sha256": null
+        }
+      },
+      "serviceState": null,
+      "startedAt": null,
+      "status": "not_tested",
+      "sourcePlayingAtEnd": null,
+      "configuration": {
+        "companionApkSha256": null,
+        "controllerApkSha256": null,
+        "controllerModel": null,
+        "controllerOsBuild": null,
+        "eq": null,
+        "gain": null,
+        "networkPolicy": null,
+        "outputProfile": null,
+        "playbackSetSha256": null,
+        "playerModel": null,
+        "playerOsBuild": null,
+        "screenPolicy": null,
+        "sourcePackage": null,
+        "sourceVersion": null,
+        "volume": null
+      },
+      "id": "pair-1-on",
+      "endedAt": null,
+      "mode": "on",
+      "endPercent": null,
+      "pluggedAtStart": null,
+      "pluggedAtEnd": null,
+      "conditions": {
+        "clockStableAttested": null,
+        "configurationUnchangedAttested": null,
+        "noKnownPlaybackInterruptionAttested": null,
+        "unpluggedThroughoutAttested": null
+      },
+      "sourcePlayingAtStart": null,
+      "startPercent": null
+    },
+    {
+      "pair": "pair-2",
+      "controllerState": null,
+      "evidence": {
+        "start": {
+          "path": null,
+          "sha256": null
+        },
+        "end": {
+          "path": null,
+          "sha256": null
+        }
+      },
+      "serviceState": null,
+      "startedAt": null,
+      "status": "not_tested",
+      "sourcePlayingAtEnd": null,
+      "configuration": {
+        "companionApkSha256": null,
+        "controllerApkSha256": null,
+        "controllerModel": null,
+        "controllerOsBuild": null,
+        "eq": null,
+        "gain": null,
+        "networkPolicy": null,
+        "outputProfile": null,
+        "playbackSetSha256": null,
+        "playerModel": null,
+        "playerOsBuild": null,
+        "screenPolicy": null,
+        "sourcePackage": null,
+        "sourceVersion": null,
+        "volume": null
+      },
+      "id": "pair-2-on",
+      "endedAt": null,
+      "mode": "on",
+      "endPercent": null,
+      "pluggedAtStart": null,
+      "pluggedAtEnd": null,
+      "conditions": {
+        "clockStableAttested": null,
+        "configurationUnchangedAttested": null,
+        "noKnownPlaybackInterruptionAttested": null,
+        "unpluggedThroughoutAttested": null
+      },
+      "sourcePlayingAtStart": null,
+      "startPercent": null
+    },
+    {
+      "pair": "pair-2",
+      "controllerState": null,
+      "evidence": {
+        "start": {
+          "path": null,
+          "sha256": null
+        },
+        "end": {
+          "path": null,
+          "sha256": null
+        }
+      },
+      "serviceState": null,
+      "startedAt": null,
+      "status": "not_tested",
+      "sourcePlayingAtEnd": null,
+      "configuration": {
+        "companionApkSha256": null,
+        "controllerApkSha256": null,
+        "controllerModel": null,
+        "controllerOsBuild": null,
+        "eq": null,
+        "gain": null,
+        "networkPolicy": null,
+        "outputProfile": null,
+        "playbackSetSha256": null,
+        "playerModel": null,
+        "playerOsBuild": null,
+        "screenPolicy": null,
+        "sourcePackage": null,
+        "sourceVersion": null,
+        "volume": null
+      },
+      "id": "pair-2-off",
+      "endedAt": null,
+      "mode": "off",
+      "endPercent": null,
+      "pluggedAtStart": null,
+      "pluggedAtEnd": null,
+      "conditions": {
+        "clockStableAttested": null,
+        "configurationUnchangedAttested": null,
+        "noKnownPlaybackInterruptionAttested": null,
+        "unpluggedThroughoutAttested": null
+      },
+      "sourcePlayingAtStart": null,
+      "startPercent": null
+    },
+    {
+      "pair": "pair-3",
+      "controllerState": null,
+      "evidence": {
+        "start": {
+          "path": null,
+          "sha256": null
+        },
+        "end": {
+          "path": null,
+          "sha256": null
+        }
+      },
+      "serviceState": null,
+      "startedAt": null,
+      "status": "not_tested",
+      "sourcePlayingAtEnd": null,
+      "configuration": {
+        "companionApkSha256": null,
+        "controllerApkSha256": null,
+        "controllerModel": null,
+        "controllerOsBuild": null,
+        "eq": null,
+        "gain": null,
+        "networkPolicy": null,
+        "outputProfile": null,
+        "playbackSetSha256": null,
+        "playerModel": null,
+        "playerOsBuild": null,
+        "screenPolicy": null,
+        "sourcePackage": null,
+        "sourceVersion": null,
+        "volume": null
+      },
+      "id": "pair-3-off",
+      "endedAt": null,
+      "mode": "off",
+      "endPercent": null,
+      "pluggedAtStart": null,
+      "pluggedAtEnd": null,
+      "conditions": {
+        "clockStableAttested": null,
+        "configurationUnchangedAttested": null,
+        "noKnownPlaybackInterruptionAttested": null,
+        "unpluggedThroughoutAttested": null
+      },
+      "sourcePlayingAtStart": null,
+      "startPercent": null
+    },
+    {
+      "pair": "pair-3",
+      "controllerState": null,
+      "evidence": {
+        "start": {
+          "path": null,
+          "sha256": null
+        },
+        "end": {
+          "path": null,
+          "sha256": null
+        }
+      },
+      "serviceState": null,
+      "startedAt": null,
+      "status": "not_tested",
+      "sourcePlayingAtEnd": null,
+      "configuration": {
+        "companionApkSha256": null,
+        "controllerApkSha256": null,
+        "controllerModel": null,
+        "controllerOsBuild": null,
+        "eq": null,
+        "gain": null,
+        "networkPolicy": null,
+        "outputProfile": null,
+        "playbackSetSha256": null,
+        "playerModel": null,
+        "playerOsBuild": null,
+        "screenPolicy": null,
+        "sourcePackage": null,
+        "sourceVersion": null,
+        "volume": null
+      },
+      "id": "pair-3-on",
+      "endedAt": null,
+      "mode": "on",
+      "endPercent": null,
+      "pluggedAtStart": null,
+      "pluggedAtEnd": null,
+      "conditions": {
+        "clockStableAttested": null,
+        "configurationUnchangedAttested": null,
+        "noKnownPlaybackInterruptionAttested": null,
+        "unpluggedThroughoutAttested": null
+      },
+      "sourcePlayingAtStart": null,
+      "startPercent": null
+    }
+  ]
+}

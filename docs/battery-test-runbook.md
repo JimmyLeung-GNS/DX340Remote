@@ -1,0 +1,34 @@
+# T13 matched battery trials
+
+**NOT TESTED physically.** This procedure and the analyser prepare the implementation plan's three matched off/on pairs. They do not establish battery life or a T13 pass. The completed USB-powered, awake, paused background check is separate.
+
+Use the same actual DX340, installed Companion/phone/source builds, playback sequence, output, gain, EQ, volume, screen policy and environment for all six trials. The `off` case means Companion phone control stopped and the controller disconnected; it does not mean uninstalling the app, deleting approvals or changing the Bluetooth radio. The `on` case means phone control enabled and the identified, approved phone connected, with ordinary background behavior. Keep both endpoints' Wi-Fi/cellular off and Bluetooth on in both cases. Record settings before any change and restore them after the series.
+
+Schedule each two-hour trial with the owner. No long run or playback starts from an unanswered question or the earlier30-minute agreement. Keep Mango/Apple as the existing playback engines, preserve downloads and other files, grants/bonds and optional browsing preferences. Choose one source and the same owner-selected repeatable playback sequence for the series; keep the other source paused. Do not send controls, browse, update apps or change output during a trial. Observe any interruption and retain it as a failed/ineligible attempt rather than silently restarting.
+
+## Capture real, unplugged endpoints
+
+1. Copy `docs/battery-trial-template.json` into an ignored folder such as `artifacts/battery-series-YYYYMMDD/trials.json`. The six entries are **not_tested**, with null observations. They contain no fabricated levels/timings. The suggested order is off/on, on/off, off/on to expose order effects.
+2. Prepare source playback, installed-build hashes and the ordinary service/controller state while USB is available. Record each trial's actual configuration independently. `playbackSetSha256` identifies an owner-prepared ordered playback/repeat manifest, not a private Apple download or an extracted audio file. Its contents and correct playback still need human review.
+3. Disconnect USB, chargers and any external power before the first endpoint. Record the actual battery percentage, timestamp with UTC offset, output/settings, source playing and service/controller state **while unplugged**. Save a distinct photograph or an on-device observation captured at that endpoint. Include the clock/stopwatch and relevant screen evidence so a reviewer can correlate it. The analyser does not OCR or authenticate images.
+4. Leave the configured source playing for two hours with the planned screen policy. Do not use ADB's battery simulation commands or a USB cable for observation. If power is connected, the source stops, configuration changes or timing becomes uncertain, record that fact and exclude the trial. Endpoint power checks alone cannot prove the entire interval was unplugged; the operator attestation and any available real battery-history evidence remain necessary.
+5. Capture the second real battery percentage and timestamp **before** reconnecting USB or stopping playback. Record known interruptions honestly. Then stop the test safely, transfer endpoint evidence into that trial folder, and record its SHA256 with `Get-FileHash -LiteralPath <actual-file> -Algorithm SHA256`. Use relative slash-separated evidence paths inside the JSON's directory. Keep raw photos/logs under ignored `artifacts/`.
+6. Fill the actual fields and change that entry's status to `recorded`. Configuration values are nonempty strings; its three identity fields contain64-digit hexadecimal SHA256 values, with either letter case accepted. Endpoint battery levels are integer percentages. `pluggedAtStart/End`, `sourcePlayingAtStart/End` and all four condition attestations require explicit booleans. Unknown configuration is not a matched setup. For `off`, observed service/controller states are `stopped`/`disconnected`; for `on`, `enabled`/`connected`. The network profile literal is `wifi_off_cellular_off_bluetooth_on`.
+7. Recharge/cool between runs as needed, with charging outside each measured interval. Start the paired trial within five battery percentage points of its baseline. Record ambient/thermal differences in the raw notes and reject comparisons a reviewer cannot defend. Do not pool different outputs, source/build versions or playback sets.
+
+This endpoint procedure requires physical participation when the device is unplugged. It avoids calling a USB-powered ADB observation a battery-drain measurement. No automatic battery sampler or product behavior is added by these tools.
+
+## Analyse without manufacturing a pass
+
+```powershell
+python scripts/summarize-battery-trials.py artifacts/battery-series-YYYYMMDD/trials.json > artifacts/battery-series-YYYYMMDD/summary.json
+python -m unittest discover -s scripts/tests -p test_battery_trials.py -v
+```
+
+The helper checks explicit endpoint files/digests, unique trial IDs, distinct endpoint bytes, relative paths and recorded configuration. It refuses duplicate JSON keys, reused evidence, inconsistent/missing observations and oversized inputs. It does not read music storage or contact a device/service.
+
+For comparison eligibility, this procedure uses7200–7260seconds per trial, at most30seconds difference within a pair and at most five starting battery points difference. These are declared collection tolerances, not a change to the two-hour target. Short runs are never extrapolated. Overlapping trials on the same player, powered endpoints, unconfirmed conditions, paused endpoints, incorrect service/controller state or increasing battery levels are excluded and remain visible. A configuration mismatch excludes a pair. Three comparable pairs with different configurations do not become one pooled result.
+
+Discharge is `startPercent - endPercent`; additional drain is `onDischarge - offDischarge`, in **percentage points**, not relative percent. The output exposes each pair, its order, the mean for a consistent setup and whether each reported difference is within the proposed five-point target. Coarse integer battery levels, thermal/order effects, actual evidence and failures still need review. A hash proves file integrity, not that its contents depict the claimed physical run. The output always says `physicalT13=NOT_ADJUDICATED`, even when synthetic data or three recorded pairs produce favorable arithmetic.
+
+After the series, verify the original approved phone reconnects, then use ordinary Disconnect if appropriate. Restore the recorded service/radio/output/screen settings and leave source playback in the owner's chosen final state. Do not revoke retained controllers, clear data or uninstall apps for this test. Store a sanitized result under `docs/test-results/` with exact builds, raw evidence hashes, all attempts and explicit physical acceptance findings.
