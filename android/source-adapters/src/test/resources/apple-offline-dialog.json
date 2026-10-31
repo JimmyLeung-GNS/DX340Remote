@@ -1,0 +1,45 @@
+{
+  "note": "Actual Apple Music6.5.3/code1599 offline error dialog captured from public Accessibility nodes on DX340; no app-private data. Enabled defaults true because debug export omitted it.",
+  "nodes": [
+    {
+      "path": "0",
+      "id": "",
+      "text": "",
+      "description": "",
+      "class": "android.widget.FrameLayout",
+      "clickable": false,
+      "selected": false,
+      "forward": false
+    },
+    {
+      "path": "0.0",
+      "id": "com.apple.android.music:id/title",
+      "text": "You're Offline",
+      "description": "",
+      "class": "android.widget.TextView",
+      "clickable": false,
+      "selected": false,
+      "forward": false
+    },
+    {
+      "path": "0.1",
+      "id": "com.apple.android.music:id/message",
+      "text": "Connect to the internet, then try again.\n\nError code: 3",
+      "description": "",
+      "class": "android.widget.TextView",
+      "clickable": true,
+      "selected": false,
+      "forward": false
+    },
+    {
+      "path": "0.2",
+      "id": "",
+      "text": "OK",
+      "description": "",
+      "class": "android.widget.Button",
+      "clickable": true,
+      "selected": false,
+      "forward": false
+    }
+  ]
+}

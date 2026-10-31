@@ -10,6 +10,7 @@ import android.view.accessibility.AccessibilityNodeInfo
 import org.dx340.remote.sources.AppleUiModel
 import org.dx340.remote.sources.ParsedAppleUi
 import org.dx340.remote.sources.UiNode
+import org.dx340.remote.sources.UiPostDispatchCheck
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.UUID
@@ -24,7 +25,7 @@ class AppleMusicAccessibilityService : AccessibilityService() {
     private val session = UUID.randomUUID().toString()
     private var offlineContext = false
     private var busy = false
-    private var cancelBrowse: ((String) -> Unit)? = null
+    private var cancelOperation: ((String) -> Unit)? = null
     private var last: Frame? = null
     private var eventPending = false
     private var lastReadiness = "not-bound"
@@ -33,9 +34,9 @@ class AppleMusicAccessibilityService : AccessibilityService() {
     private data class Action(val path: String, val kind: String, val signature: String)
     private data class Frame(val revision: String, val window: Int, val parsed: ParsedAppleUi, val actions: Map<String, Action>)
     override fun onServiceConnected() { instance = this; notifyHost(true) }
-    override fun onUnbind(intent: android.content.Intent?): Boolean { instance = null; cancelBrowse?.invoke("UI_PERMISSION_REQUIRED"); main.removeCallbacksAndMessages(null); last = null; notifyHost(true); return super.onUnbind(intent) }
-    override fun onInterrupt() { last = null; offlineContext = false; cancelBrowse?.invoke("UI_ACTION_INTERRUPTED"); notifyHost(true) }
-    fun invalidateLibrary() { last = null; offlineContext = false; cancelBrowse?.invoke("STALE_LIBRARY") }
+    override fun onUnbind(intent: android.content.Intent?): Boolean { instance = null; cancelOperation?.invoke("UI_PERMISSION_REQUIRED"); main.removeCallbacksAndMessages(null); last = null; notifyHost(true); return super.onUnbind(intent) }
+    override fun onInterrupt() { last = null; offlineContext = false; cancelOperation?.invoke("UI_ACTION_INTERRUPTED"); notifyHost(true) }
+    fun invalidateLibrary() { last = null; offlineContext = false; cancelOperation?.invoke("STALE_LIBRARY") }
     fun libraryDiagnostic() = JSONObject().put("hasFrame", last != null).put("busy", busy).put("offlineContext", offlineContext)
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         if (!eventPending) { eventPending = true; main.postDelayed({ eventPending = false; notifyHost() }, 500) }
@@ -135,18 +136,31 @@ class AppleMusicAccessibilityService : AccessibilityService() {
     fun validatePlayable(item: String, revision: String): String? = try { validate(item, revision, "play"); null } catch (e: Exception) { e.message ?: "UI_UNEXPECTED_SCREEN" }
     fun play(item: String, revision: String, stillAuthorized: () -> Boolean, done: (String?) -> Unit) {
         if (busy) { done("UI_BUSY"); return }
+        busy = true
+        var finished = false
+        fun finish(error: String?) {
+            if (finished) return
+            finished = true; busy = false; cancelOperation = null; last = null
+            done(error)
+        }
         try {
-            val (tree, action) = validate(item, revision, "play")
+            val (current, action) = validate(item, revision, "play")
             require(stillAuthorized()) { "AUTHORIZATION_DENIED" }
-            perform(tree, action.path, "play", action.signature); done(null)
-        } catch (e: Exception) { done(e.message ?: "UI_ACTION_FAILED") }
+            perform(current, action.path, "play", action.signature)
+            val observation = UiPostDispatchCheck({ android.os.SystemClock.elapsedRealtime() },
+                { delay, task -> main.postDelayed(task, delay) },
+                { if (stillAuthorized()) readiness() else "AUTHORIZATION_DENIED" },
+                { AppleUiModel.postDispatchFailure(tree().nodes) }, ::finish)
+            cancelOperation = observation::cancel
+            observation.start()
+        } catch (e: Exception) { finish(e.message ?: "UI_ACTION_FAILED") }
     }
     fun browse(parent: String?, page: Int, revision: String?, stillAuthorized: () -> Boolean, done: (JSONObject?, String?) -> Unit) {
         if (busy) { done(null, "UI_BUSY"); return }
         busy = true
         var finished = false
-        fun finish(value: JSONObject?, error: String?) { if (!finished) { finished = true; busy = false; cancelBrowse = null; if (error != null) last = null; done(value, error) } }
-        cancelBrowse = { finish(null, it) }
+        fun finish(value: JSONObject?, error: String?) { if (!finished) { finished = true; busy = false; cancelOperation = null; if (error != null) last = null; done(value, error) } }
+        cancelOperation = { finish(null, it) }
         val deadline = android.os.SystemClock.elapsedRealtime() + 6000
         fun publish(end: Boolean = false) { try { require(stillAuthorized()) { "AUTHORIZATION_DENIED" }; finish(result(frame(tree()), page, end), null) } catch (e: Exception) { finish(null, e.message ?: "UI_UNEXPECTED_SCREEN") } }
         var settlingFingerprint: String? = null

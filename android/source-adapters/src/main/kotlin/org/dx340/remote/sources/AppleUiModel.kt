@@ -27,6 +27,15 @@ object AppleUiModel {
         ?: nodes.firstOrNull { it.id == PREFIX + "navigation_bar_item_large_label_view" && it.text == "Library" }
     fun back(nodes: List<UiNode>) = nodes.firstOrNull { it.className == "android.widget.ImageButton" && it.description == "Navigate up" && it.clickable && it.enabled }
     fun downloaded(nodes: List<UiNode>) = nodes.firstOrNull { it.id == "library_categories-Downloaded" }
+    /** Observed source error dialog; inspect only, never click its message or confirmation. */
+    fun postDispatchFailure(nodes: List<UiNode>): String? {
+        require(nodes.size <= 400 && nodes.map { it.path }.distinct().size == nodes.size) { "UI_TREE_LIMIT" }
+        val message = nodes.singleOrNull { it.id == PREFIX + "message" && it.className == "android.widget.TextView" && it.text.isNotBlank() } ?: return null
+        val parent = message.parent ?: return null
+        val title = nodes.singleOrNull { it.parent == parent && it.id == PREFIX + "title" && it.className == "android.widget.TextView" && it.text.isNotBlank() }
+        val confirmation = nodes.singleOrNull { it.parent == parent && it.className == "android.widget.Button" && it.clickable && it.enabled }
+        return if (title != null && confirmation != null && libraryTab(nodes)?.selected != true) "UI_UNEXPECTED_SCREEN" else null
+    }
     fun parse(nodes: List<UiNode>, offlineContext: Boolean): ParsedAppleUi {
         require(nodes.size <= 400) { "UI_TREE_LIMIT" }
         require(libraryTab(nodes)?.selected == true) { "UI_UNEXPECTED_SCREEN" }
