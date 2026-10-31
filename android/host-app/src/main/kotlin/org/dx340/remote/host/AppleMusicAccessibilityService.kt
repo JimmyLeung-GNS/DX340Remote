@@ -11,6 +11,7 @@ import org.dx340.remote.sources.AppleUiModel
 import org.dx340.remote.sources.ParsedAppleUi
 import org.dx340.remote.sources.UiNode
 import org.dx340.remote.sources.UiPostDispatchCheck
+import org.dx340.remote.sources.AppleRootNavigation
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.UUID
@@ -32,6 +33,7 @@ class AppleMusicAccessibilityService : AccessibilityService() {
     private var lastValidation: JSONObject? = null
     private var lastActionFailure: JSONObject? = null
     private var rootSettlingWaits = 0
+    private var rootNavigationWaits = 0
     private data class Tree(val window: Int, val nodes: List<UiNode>)
     private data class Action(val path: String, val kind: String, val signature: String)
     private data class Frame(val revision: String, val window: Int, val parsed: ParsedAppleUi, val actions: Map<String, Action>)
@@ -78,7 +80,8 @@ class AppleMusicAccessibilityService : AccessibilityService() {
     fun debugSnapshot(): JSONObject {
         val current = tree()
         return JSONObject().put("window", current.window).put("validation", lastValidation ?: JSONObject.NULL)
-            .put("actionFailure", lastActionFailure ?: JSONObject.NULL).put("rootSettlingWaits", rootSettlingWaits).put("nodes", JSONArray().apply { current.nodes.forEach { n ->
+            .put("actionFailure", lastActionFailure ?: JSONObject.NULL).put("rootSettlingWaits", rootSettlingWaits)
+            .put("rootNavigationWaits", rootNavigationWaits).put("nodes", JSONArray().apply { current.nodes.forEach { n ->
             put(JSONObject().put("path", n.path).put("id", n.id).put("text", n.text).put("description", n.description)
                 .put("class", n.className).put("clickable", n.clickable).put("selected", n.selected).put("forward", n.forward))
         } })
@@ -171,7 +174,12 @@ class AppleMusicAccessibilityService : AccessibilityService() {
         fun finish(value: JSONObject?, error: String?) { if (!finished) { finished = true; busy = false; cancelOperation = null; if (error != null) last = null; done(value, error) } }
         cancelOperation = { finish(null, it) }
         val deadline = android.os.SystemClock.elapsedRealtime() + 6000
-        fun publish(end: Boolean = false) { try { require(stillAuthorized()) { "AUTHORIZATION_DENIED" }; finish(result(frame(tree()), page, end), null) } catch (e: Exception) { finish(null, e.message ?: "UI_UNEXPECTED_SCREEN") } }
+        fun publish(end: Boolean = false, requireRoot: Boolean = false) { try {
+            require(stillAuthorized()) { "AUTHORIZATION_DENIED" }
+            val value = frame(tree())
+            require(!requireRoot || value.parsed.downloadedRoot) { "UI_UNEXPECTED_SCREEN" }
+            finish(result(value, page, end), null)
+        } catch (e: Exception) { finish(null, e.message ?: "UI_UNEXPECTED_SCREEN") } }
         var settlingFingerprint: String? = null
         var settlingSince = 0L
         fun waitChanged(before: String) {
@@ -200,18 +208,32 @@ class AppleMusicAccessibilityService : AccessibilityService() {
             }
         }
         var rootSteps = 0
+        val navigation = AppleRootNavigation()
+        fun navigateRoot(current: Tree, path: String, kind: String, action: AppleRootNavigation.Action, parsed: ParsedAppleUi?) {
+            navigation.started(action, parsed)
+            try { perform(current, path, kind) } catch (e: Exception) {
+                // Navigation can report false after its destination starts to
+                // appear. Observe that destination, never click the action again.
+                // This applies only to read-only root navigation, never playback.
+                if (e.message != "UI_ACTION_FAILED") throw e
+            }
+        }
         fun root() {
             if (finished) return
             if (!stillAuthorized()) { finish(null, "AUTHORIZATION_DENIED"); return }
-            if (android.os.SystemClock.elapsedRealtime() >= deadline || rootSteps++ > 20) { finish(null, "UI_SETUP_REQUIRED"); return }
+            if (android.os.SystemClock.elapsedRealtime() >= deadline || rootSteps++ > 20) { finish(null, if (lastActionFailure != null) "UI_ACTION_FAILED" else "UI_SETUP_REQUIRED"); return }
             try {
                 val current = tree()
                 val downloaded = AppleUiModel.downloaded(current.nodes)
-                if (downloaded != null) { val action = AppleUiModel.clickable(current.nodes, downloaded) ?: error("UI_ACTION_FAILED"); perform(current, action.path, "browse"); offlineContext = true; main.postDelayed({ root() }, 250); return }
                 val parsed = runCatching { AppleUiModel.parse(current.nodes, offlineContext) }.getOrNull()
-                if (parsed?.downloadedRoot == true) { publish(); return }
+                when (navigation.observe(parsed, downloaded != null, android.os.SystemClock.elapsedRealtime())) {
+                    AppleRootNavigation.Decision.WAIT -> { rootNavigationWaits++; main.postDelayed({ root() }, 250); return }
+                    AppleRootNavigation.Decision.PUBLISH -> { publish(requireRoot = true); return }
+                    AppleRootNavigation.Decision.NAVIGATE -> Unit
+                }
+                if (downloaded != null) { val action = AppleUiModel.clickable(current.nodes, downloaded) ?: error("UI_ACTION_FAILED"); navigateRoot(current, action.path, "browse", AppleRootNavigation.Action.DOWNLOADS, parsed); offlineContext = true; main.postDelayed({ root() }, 250); return }
                 val back = AppleUiModel.back(current.nodes)
-                if (back != null && AppleUiModel.libraryTab(current.nodes)?.selected == true) { perform(current, back.path, "back"); main.postDelayed({ root() }, 250); return }
+                if (back != null && AppleUiModel.libraryTab(current.nodes)?.selected == true) { navigateRoot(current, back.path, "back", AppleRootNavigation.Action.BACK, parsed); main.postDelayed({ root() }, 250); return }
                 val tab = AppleUiModel.libraryTab(current.nodes)
                 if (tab == null) { main.postDelayed({ root() }, 250); return }
                 if (AppleUiModel.libraryTabNeedsSettling(current.nodes)) {
@@ -219,7 +241,7 @@ class AppleMusicAccessibilityService : AccessibilityService() {
                     main.postDelayed({ root() }, 250); return
                 }
                 val action = AppleUiModel.clickable(current.nodes, tab) ?: error("UI_ACTION_FAILED")
-                perform(current, action.path, "browse"); main.postDelayed({ root() }, 250)
+                navigateRoot(current, action.path, "browse", AppleRootNavigation.Action.LIBRARY, parsed); main.postDelayed({ root() }, 250)
             } catch (e: Exception) {
                 if (e.message == "UI_FOREGROUND_REQUIRED" || e.message == "STALE_LIBRARY") {
                     if (e.message == "UI_FOREGROUND_REQUIRED" && rootSteps == 1) {
@@ -232,7 +254,7 @@ class AppleMusicAccessibilityService : AccessibilityService() {
         }
         try {
             readiness()?.let { error(it) }
-            if (parent == null) { offlineContext = false; last = null; lastActionFailure = null; rootSettlingWaits = 0; root() }
+            if (parent == null) { offlineContext = false; last = null; lastActionFailure = null; rootSettlingWaits = 0; rootNavigationWaits = 0; root() }
             else {
                 val (current, action) = validate(parent, revision ?: "")
                 require(action.kind in setOf("browse", "back", "scroll")) { "UNSUPPORTED_CAPABILITY" }
