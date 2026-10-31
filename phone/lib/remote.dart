@@ -187,6 +187,8 @@ class Remote extends ChangeNotifier {
       sources = objects(data['sources']);
       devices = objects(data['devices']);
       library = object(data['library']);
+      // A lost/restored connection cannot retain a live loading operation.
+      if (!authorized && library['loading'] == true) library = {};
       queue = objects(data['queue']);
       queueRevision = textValue(data['queueRevision']);
       queuePage = object(data['queuePage']);

@@ -81,6 +81,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         journal.phase("idle")
         if let bytes = try? Data(contentsOf: snapshotURL()), bytes.count <= 262144, let saved = try? JSONSerialization.jsonObject(with: bytes) as? [String: Any] {
             state = saved["state"] as? [String: Any] ?? [:]; sources = saved["sources"] as? [[String: Any]] ?? []; library = saved["library"] as? [String: Any] ?? [:]
+            if library["loading"] as? Bool == true { library = [:] }
             status = "Cached metadata is stale. Connect to DX340 before controlling playback."
         }
         manager = CBCentralManager(delegate: self, queue: .main, options: [CBCentralManagerOptionRestoreIdentifierKey: "org.dx340.remote.central"])
@@ -344,6 +345,8 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         send("BROWSE", args: ["parent": parent.map { $0 as Any } ?? NSNull(), "page": page, "revision": parent == nil ? NSNull() : (library["revision"] ?? state["sourceEpoch"] ?? "")])
     }
     private func abandonAssistedPage() {
+        // A pending browse has no cached page to retain after its request dies.
+        if library["loading"] as? Bool == true { library = [:] }
         if assistedPageUse.abandon(source: state["source"] as? String ?? "", epoch: state["sourceEpoch"] as? String ?? "", revision: library["revision"] as? String ?? "") {
             library["invalidated"] = true
         }
@@ -442,7 +445,8 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         } else if state["artworkKey"] is NSNull { artwork = nil }
         if data["outcome"] as? String == "dispatched" { status = Self.dispatchedStatus; send("GET_STATE") }
         if data["outcome"] as? String == "observed" { status = "Playback state confirmed by source." }
-        if let snapshot = try? JSONSerialization.data(withJSONObject: ["state": state, "sources": sources, "library": library]), snapshot.count <= 262144 { try? snapshot.write(to: snapshotURL(), options: .atomic) }
+        let cachedLibrary: [String: Any] = library["loading"] as? Bool == true ? [:] : library
+        if let snapshot = try? JSONSerialization.data(withJSONObject: ["state": state, "sources": sources, "library": cachedLibrary]), snapshot.count <= 262144 { try? snapshot.write(to: snapshotURL(), options: .atomic) }
         journal.markTerminalApplied(id: id)
     }
     private func applyState(_ new: [String: Any], notifyLibraryChange: Bool = true) {

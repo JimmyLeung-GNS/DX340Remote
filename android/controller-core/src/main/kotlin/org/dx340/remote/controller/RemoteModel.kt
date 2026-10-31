@@ -86,6 +86,7 @@ class RemoteModel(private val context: Context) {
             if (snapshotFile.length() in 1..262144) {
                 val cached = JSONObject(snapshotFile.readText())
                 state = cached.optJSONObject("state") ?: JSONObject(); library = cached.optJSONObject("library") ?: JSONObject(); sources = cached.optJSONArray("sources") ?: JSONArray()
+                if (library.optBoolean("loading")) library = JSONObject()
                 status = "Cached metadata is stale. Connect to DX340 before controlling playback."
             }
         }
@@ -237,6 +238,8 @@ class RemoteModel(private val context: Context) {
         }
     }
     private fun abandonAssistedPage() {
+        // A pending browse has no cached page to retain after its request dies.
+        if (library.optBoolean("loading")) library = JSONObject()
         if (assistedPageUse.abandon(state.optString("source"), state.optString("sourceEpoch"), library.optString("revision"))) {
             library.put("invalidated", true)
         }
@@ -324,7 +327,8 @@ class RemoteModel(private val context: Context) {
             } else if (artKey == null) artworkBytes = null
             if (data.optString("outcome") == "dispatched") { status = DISPATCHED_STATUS; send("GET_STATE") }
             if (data.optString("outcome") == "observed") status = "Playback state confirmed by source."
-            val snapshot = JSONObject().put("state", state).put("sources", sources).put("library", library).toString()
+            val snapshot = JSONObject().put("state", state).put("sources", sources)
+                .put("library", if (library.optBoolean("loading")) JSONObject() else library).toString()
             if (snapshot.toByteArray().size <= 262144) runCatching { snapshotFile.writeText(snapshot) }
             journal.markTerminalApplied(id)
             update()

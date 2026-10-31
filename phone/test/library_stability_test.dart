@@ -114,6 +114,65 @@ void main() {
   );
   for (final platform in [TargetPlatform.android, TargetPlatform.iOS]) {
     testWidgets(
+      '$platform interrupted browse stops loading and reconnect never replays it',
+      (tester) async {
+        debugDefaultTargetPlatformOverride = platform;
+        addTearDown(() => debugDefaultTargetPlatformOverride = null);
+        tester.view.physicalSize = const Size(400, 1000);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+        final bridge = FakeBridge();
+        final remote = Remote(bridge);
+        await tester.pumpWidget(DX340App(remote: remote));
+        await tester.pumpAndSettle();
+        remote.accept(snapshot(library: {'loading': true}));
+        await tester.tap(find.text('Library').last);
+        await tester.pump(const Duration(milliseconds: 100));
+        expect(remote.libraryLoading, true);
+        expect(find.byType(CircularProgressIndicator), findsOneWidget);
+        final lost = snapshot(authorized: false, library: {'loading': true})
+          ..['connectionSetup'] = {'phase': 'idle', 'hasSavedPlayer': true};
+        remote.accept(lost);
+        await tester.pumpAndSettle();
+        expect(remote.libraryLoading, false);
+        expect(find.byType(CircularProgressIndicator), findsNothing);
+        expect(
+          find.text('Reconnect in Setup to browse music on DX340.'),
+          findsOneWidget,
+        );
+        expect(bridge.calls.where((call) => call.$1 == 'browse'), isEmpty);
+        remote.accept(snapshot());
+        await tester.pumpAndSettle();
+        expect(find.byType(CircularProgressIndicator), findsNothing);
+        expect(bridge.calls.where((call) => call.$1 == 'browse'), isEmpty);
+        await tester.tap(find.text('Browse source library'));
+        await tester.pumpAndSettle();
+        expect(bridge.calls.where((call) => call.$1 == 'browse').length, 1);
+        // Completed cached pages are retained on loss, with actions disabled.
+        final completed = snapshot(
+          authorized: false,
+          library: {
+            'title': 'Cached album',
+            'revision': 'old',
+            'items': [
+              {'id': 'old-song', 'title': 'Cached song', 'playable': true},
+            ],
+          },
+        );
+        remote.accept(completed);
+        await tester.pumpAndSettle();
+        expect(find.text('Cached song'), findsOneWidget);
+        await tester.tap(find.text('Cached song'));
+        await tester.pumpAndSettle();
+        expect(bridge.calls.where((call) => call.$1 == 'send'), isEmpty);
+        expect(bridge.calls.where((call) => call.$1 == 'browse').length, 1);
+        expect(tester.takeException(), isNull);
+        await tester.pumpWidget(const SizedBox());
+        debugDefaultTargetPlatformOverride = null;
+      },
+    );
+    testWidgets(
       '$platform retiring a page keeps rows fixed and cancels a held tap',
       (tester) async {
         debugDefaultTargetPlatformOverride = platform;

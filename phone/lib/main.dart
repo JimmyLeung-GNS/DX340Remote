@@ -211,7 +211,11 @@ class _PhoneShellState extends State<PhoneShell>
   Widget recovery(String purpose) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      label('Connect and approve this phone in Setup to $purpose.'),
+      label(
+        remote.hasSavedPlayer
+            ? 'Reconnect in Setup to $purpose.'
+            : 'Connect and approve this phone in Setup to $purpose.',
+      ),
       action('Open Setup', setup, icon: Icons.bluetooth),
     ],
   );
