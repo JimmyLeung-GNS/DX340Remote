@@ -1,0 +1,1365 @@
+{
+  "recordedAt": "2026-11-01T03:13:34.320486+08:00",
+  "goal": "ACTIVE/incomplete",
+  "status": "VERIFIED_ANDROID_INTERRUPTED_BROWSE_RECOVERY",
+  "source": "e40b822813573ee93493cf863ea0bde49885a36f",
+  "phone": {
+    "version": "Remote0.2.0/code2",
+    "sha256": "95d29be69f09e90b978a6907e46d2ec9952b5a0676ccd0a7da0d36fa54d06bca",
+    "device": "Pixel9a Android16/API36 CP1A.260405.005",
+    "pid": "25153",
+    "modelInstanceId": "0baf310c-e141-4cfb-95f4-c16c8b7d459b",
+    "sameSigner": true
+  },
+  "host": {
+    "sha256": "dc53629d33cecb25fb381d464fe3e55656b35ca5575c32211da3971fbda7e775",
+    "source": "1e3c551de98dba20183c452ea0f0b9f08bed42c9",
+    "device": "DX340 Android13/API33 eng.iBasso.20260812.181952",
+    "version": "Companion0.1.0/code1",
+    "pid": "4334",
+    "notUpdated": true
+  },
+  "baseline": {
+    "sha256": "4eea5c15a6c567efedba5329b2bb2256137caa3c964bbd5f818233827222212d",
+    "modelInstanceId": "69f72db0-331f-4f34-ad09-8e1421f93c67",
+    "counts": [
+      52,
+      54
+    ],
+    "retiredRequest": {
+      "id": "679aeb00-02a2-4d2b-9cf6-1d31b356f4e5",
+      "operation": "BROWSE",
+      "source": "mango",
+      "startedMs": 4835831,
+      "writeAcknowledgedAfterMs": 97,
+      "accepted": true,
+      "acceptedAfterMs": 115,
+      "finishedAfterMs": 1019,
+      "result": "connection_lost",
+      "terminalApplied": false,
+      "hostOutcome": "none",
+      "error": null
+    },
+    "noProtocolReplay": true,
+    "spinnerPersistedOfflineAndAfterReadyReconnect": true
+  },
+  "fixed": {
+    "counts": [
+      5,
+      7,
+      10
+    ],
+    "allPreviousRowsUnchanged": true,
+    "evictions": 0,
+    "retiredRequest": {
+      "id": "c616cbd4-254a-48ac-8f99-6cb22755308a",
+      "operation": "BROWSE",
+      "source": "mango",
+      "startedMs": 61313,
+      "writeAcknowledgedAfterMs": 93,
+      "accepted": true,
+      "acceptedAfterMs": 95,
+      "finishedAfterMs": 904,
+      "result": "connection_lost",
+      "terminalApplied": false,
+      "hostOutcome": "none",
+      "error": null
+    },
+    "noSpinnerAfterLossOrReconnect": true,
+    "rootEnabledAfterReconnect": true,
+    "reconnectRequests": [
+      {
+        "id": "8171bf41-1dd9-47c6-b72d-640428a34f1a",
+        "operation": "HELLO",
+        "source": "mango",
+        "startedMs": 177713,
+        "writeAcknowledgedAfterMs": 179,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 183,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "773a74a9-61f4-4a2e-8564-c1cb16d31e9b",
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "startedMs": 177897,
+        "writeAcknowledgedAfterMs": 183,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 537,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      }
+    ],
+    "freshDeliberateRequests": [
+      {
+        "id": "986bcb25-e290-4c1d-b0b5-88b645244ccd",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 240301,
+        "writeAcknowledgedAfterMs": 97,
+        "accepted": true,
+        "acceptedAfterMs": 121,
+        "finishedAfterMs": 304,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "1466041f-46ec-4c09-af9d-049015ddce14",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 247859,
+        "writeAcknowledgedAfterMs": 94,
+        "accepted": true,
+        "acceptedAfterMs": 118,
+        "finishedAfterMs": 192,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "3ca03dc9-648f-4f6b-a4d8-6264cb101d12",
+        "operation": "BROWSE",
+        "source": "mango",
+        "startedMs": 255734,
+        "writeAcknowledgedAfterMs": 87,
+        "accepted": true,
+        "acceptedAfterMs": 109,
+        "finishedAfterMs": 7777,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      }
+    ],
+    "noReplay": true,
+    "phoneRadioRestored": true
+  },
+  "software": {
+    "jvmTests": 232,
+    "flutterTests": 82,
+    "nativeAndSharedAndroidBuildsLintAnalyze": "PASS",
+    "newWidgetSequences": 2,
+    "scope": "Protocol JVM tests retain their existing scopes; new UI sequences cover Android/iOS presentation, not physical iPhone BLE"
+  },
+  "ci": [
+    {
+      "run": 41231890453,
+      "status": "SUCCESS_ARCHIVE_VERIFIED",
+      "artifact": 13054290705,
+      "zipSha256": "c0f3e2f9e66318e9751b71802e861b035da5cbdfeb34200f2aa017e6c651c8f9",
+      "checks": {
+        "swiftTests": 21,
+        "captureGuards": 12,
+        "nativeBuildLaunch": true
+      }
+    },
+    {
+      "run": 41231890444,
+      "status": "SUCCESS_ARCHIVE_VERIFIED",
+      "artifact": 13054271858,
+      "zipSha256": "f517b8412ce0f14fa79e89809a72fbbb38d5a89c8c3745eb8f5167c4bead3e66",
+      "checks": {
+        "flutterTests": 82,
+        "captureGuards": 12,
+        "simulatorBuilds": 7,
+        "shareExportModelMatches": true,
+        "exportedRequests": 0,
+        "shareAndRestoredOrdinaryImagesInspected": true
+      }
+    }
+  ],
+  "preserved": {
+    "prefs": {
+      "controllers": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311",
+      "mango-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "apple-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "source-verification": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    "settings": {
+      "host": {
+        "wifi_on": "0",
+        "mobile_data": "0",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      },
+      "phone": {
+        "wifi_on": "0",
+        "mobile_data": "1",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      }
+    },
+    "phonePermissionFlagsUnchanged": true,
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "positions": {
+      "com.ibasso.music": "78991",
+      "com.apple.android.music": "99367"
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "cardMounted": true,
+    "hostForegroundEnabled": true,
+    "phoneDisconnectedHelpCollapsedForegroundCleared": true
+  },
+  "limits": [
+    "One pending-browse receive interruption; not an interrupted ATT write or duplicate playback mutation/fullT12/T16",
+    "No new playback/audio/volume/output-quality result; fresh SD7777ms exceeds page target",
+    "Native Swift compile/protocol and shared widget evidence are not physical iPhone recovery",
+    "No-card Internal timeout/Apple MEDIA_MOUNTED crash/host automatic indication-timeout recreation remain open",
+    "Pixel cellular1 keeps strictT01 open; job5024 remains failed arming/zero samples; fresh readiness unanswered",
+    "FullT01\u2013T18/two-phone/source/audio/formats/output/reliability/owner-iPhone/signing/Watch incomplete"
+  ],
+  "rawEvidence": [
+    {
+      "file": "artifacts/inflight-radio-20261101/after-radio-on-library.xml",
+      "sha256": "1d40aca6a500b8a8b7f359adeb5e29fe69b7e09e9c038a1d5616c71b7f38c132"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/before-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/before-controllers.xml",
+      "sha256": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/before-host-accessibility.txt",
+      "sha256": "926896c1740ddc72f86c392f39ef7f812983ba63d250ccc9e3a221d11a9774bf"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/before-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "7231792c4064377eac2962852d8c46de0cba6a04ac382d95ca62667c22e5a72b"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/before-host-audio.txt",
+      "sha256": "4f389d553a1ec7c912a0eef077bb634945029fa4823088a01111df2ec71421d9"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/before-host-bluetooth_manager.txt",
+      "sha256": "e7993f6aa4cc232b2d756c6845c5bed46e2c9c9fa60c7839b2db53ca8b6be04a"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/before-host-media_session.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/before-host-package-org.dx340.remote.host.txt",
+      "sha256": "4e69e79c4be57d3f5ade3ca30382831bf08a0905fef035f488a3a87b2305c3eb"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/before-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/before-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "9ec3cdf1799195aed21e18996beb86558b22d611fb5be9fb38d7bce8d25806fb"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/before-phone-bluetooth_manager.txt",
+      "sha256": "bcd585dafc7c86f262b8491a204f944ee2f6bb14690e2d999063807c0ee3ad0c"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/before-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "04a70fb36c140b882900a4438d05b08de21f4841f372d20f1fa7457cf5305153"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/before-radio-off-phone.png",
+      "sha256": "a0cee52068625534b0d6940b2c0147d2a89fcd2e99dba2c78d76cc4b7ce84b59"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/before-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/before.json",
+      "sha256": "5a224ce7e73339b4c4acafa7f27590f66507ca968755b55b2b1a6068f6716ef9"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-bootstrap.txt",
+      "sha256": "3d5a820a995b78836ad6fde11477a7a63e596aa61bdb8715d31094f7a32ff186"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-browsing-fixture-launch.txt",
+      "sha256": "ba6b91c31812f1b818e6548dbb244a506f5bd0e7ddcd35cb647ad67e56376644"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-capture-matcher-tests.txt",
+      "sha256": "2072ea10acb601303ef8f21be984d3cfc065831ff61278198aa4b2b3955354ce"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-capture-readiness.txt",
+      "sha256": "61fd7e27b1bb8efaa062fdea505728fa10aeae05e27762d3eb2b6d2428d7d0a3"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-handoff-fixture-launch.txt",
+      "sha256": "36a4193b3e31ad7ebfc8d420f1a32987886a8c281c8ee773b83a2df352d47325"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-ios-analyze.txt",
+      "sha256": "f51c1ba79a37fc611f4e968d90f69263d80bf6c4669710e9c829f7d50ec0be7c"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-ios-browsing-fixture-build.txt",
+      "sha256": "8a0c5701f95d2e2cecf682103901f73b4d6f32a93837d1034d919206c9439ce8"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-ios-build.txt",
+      "sha256": "c05604eecc943e83c0073c8101fa1caf0cf2c649e200498a8225501d3d1268f0"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-ios-handoff-fixture-build.txt",
+      "sha256": "28e5bc72c3048319857d8ec43e3790bffe8de7f2b12a7fdfe231fb3a5b69bb8f"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-ios-report-probe-build.txt",
+      "sha256": "3579ea190ebb0ac1a30b8786c4dcfbc258f14255984f4fc8f2640889a0124545"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-ios-restore-build.txt",
+      "sha256": "c8ad296fb810e439177c2f5de54c098bb523854eba0e8f4b112a6596f9b178b8"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-ios-setup-fixture-build.txt",
+      "sha256": "3579ea190ebb0ac1a30b8786c4dcfbc258f14255984f4fc8f2640889a0124545"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-ios-tests.txt",
+      "sha256": "418eb810c794b6e9a42eec590e45f56e30324657ea072c25e81ff85c27fad946"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-ios-toolchain.json",
+      "sha256": "4c13dc6534635375ab58ff3b75ae0d02bd5967ee36a84a40b0e48126b7ea84a4"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-ios-volume-fixture-build.txt",
+      "sha256": "28e5bc72c3048319857d8ec43e3790bffe8de7f2b12a7fdfe231fb3a5b69bb8f"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-library-light.png",
+      "sha256": "324a5c0de9240125d490476d4ac83a4c111441296ca061b106b68dbc17512112"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-macos-version.txt",
+      "sha256": "cd5d6399b3785b04ceaae75045a9ca9f80f0bbc3526eff9d0c36b170ed1ec348"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-native-report-export.json",
+      "sha256": "5af861d22d2d96add7b9188c73463d7bcf41f866dd8b8d1309772a5b2ed7386d"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-native-report-share-sheet.png",
+      "sha256": "49b6e846ff787913d1262493859b5d88c2b38c0d52222eb4463afe5661af3feb"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-player-dark.png",
+      "sha256": "1822cd894b03c5fa45159020e9e567d0746511d23453bd993955db43538b0704"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-player-large-dark.png",
+      "sha256": "a0c4ef590b98e4dd5964cb25c7f80dee091db6487690f291ac1de024f23588d0"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-player-light.png",
+      "sha256": "5e0d50f12889ecc6fc56feb43d79107aacf2a021d0518dd5be92bc22c3a93a7a"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-queue-light.png",
+      "sha256": "c27ef3f1b42afa2805426caba7462c5a46dc88b1320f8765a9d11252e78a8083"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-report-probe-launch.txt",
+      "sha256": "e03cbaa90647ddb5ae7e9d6edb98d60093530b4dc57814bfa3d4730928994354"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-report-probe-result.json",
+      "sha256": "bc16e1560d04f10e494644dcbad37d7488441f4a7e8ef99139600c77c693b3ef"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-restored-launch.txt",
+      "sha256": "79f229d246aa16a360fbceb492e2be43a32c807a3b44658222d3129da36ba26b"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-restored-player-light.png",
+      "sha256": "9685f859fed6d26b36a5d84aec79692d06a35091a9fc7cec891ff786562d61f6"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-setup-fixture-launch.txt",
+      "sha256": "7a9eff48deffc3ba4e4d1ff56247a262fe21f100a8240656fde6abc1bba2f89a"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-setup-light.png",
+      "sha256": "481ff03147719ab5cb02c0035e8acb7f265745bd7d39b3b73e44d4a2baa4b46e"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-simulator-boot.txt",
+      "sha256": "ed60c613e80d04fbe2b59ce157e85044187816a32cb5c6ec6a1cadc9be46862a"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-simulator-launch.txt",
+      "sha256": "9641a60837e82d4ce95f5a9bf70b18e1d729a7a35eaebc19a3457cef28868181"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-simulators.json",
+      "sha256": "b8bbdec4294de79fb0519d509e7ed74aac56b4b448f17a7b80afe36e99cb90c7"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-synthetic-browsing-expired-large-dark.png",
+      "sha256": "e93a724075dce9086394f015cd94ec6bd69a41c2ba5b64d42714cd353ff82386"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-synthetic-browsing-expired-light.png",
+      "sha256": "15c177eefa32d8c3e24dcd9eea45e352961fe8a0783ecd3e14e1152c87787cec"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-synthetic-browsing-large-dark.png",
+      "sha256": "ebfa10a867c54f690f9cce23bffeaff660c477eb090fc521686064cc6db67141"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-synthetic-browsing-library-light.png",
+      "sha256": "428f7f1474b59a7418935f335642f2c34c8154492fdec8ad443cb27e259d6097"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-synthetic-browsing-queue-light.png",
+      "sha256": "d36bbe5937fdfb92424ad278666810157252659f9744f2010a5d00a255746248"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-synthetic-handoff-large-dark.png",
+      "sha256": "96ed6b462405c0fb1fc7d4c3752e3350d86be523741dc6ac390f39d3683932f5"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-synthetic-handoff-lost-light.png",
+      "sha256": "c93290b58e60c97c6472dca894f8e5d515508c7689ea5cf6053dcc5bc3d018b0"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-synthetic-handoff-pending-light.png",
+      "sha256": "c93290b58e60c97c6472dca894f8e5d515508c7689ea5cf6053dcc5bc3d018b0"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-synthetic-handoff-ready-dark.png",
+      "sha256": "cec10aa6f359f8affac7081fb7cd4c91f8866edc80d667785aea3845d711728a"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-synthetic-handoff-ready-light.png",
+      "sha256": "d212615d1dcc7d58a17459b2f21e6984a9c94d504e3504a35458dd3519ddfb66"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-synthetic-setup-approval-large-dark.png",
+      "sha256": "431708779abc176821cf8093ab7d6e98374b2fc9ca3d0d5543116164efbc0ff1"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-synthetic-setup-approval-light.png",
+      "sha256": "32a5309a604432d19ae148de80cc9c454db4d83da8596817a3443c3c3b54acf4"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-synthetic-setup-choosing-light.png",
+      "sha256": "e05ecba7bda1fb471961337127e7ff85422280a219f116e3fa74b7459d025305"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-synthetic-setup-connected-light.png",
+      "sha256": "b2ad3a01816fee25cb07aa44738f99bc3a778e19fd09381d6259b25ca19c46e8"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-synthetic-setup-idle-light.png",
+      "sha256": "a75443368791de64038c5523fd0a64635c70568f4dad335456f3f91c43fbd8f0"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-synthetic-volume-high-light.png",
+      "sha256": "4f5b4ca5cd529a63c64424a2f5daf22a203defa8b723f779ca2f62557eaf9245"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-synthetic-volume-large-dark.png",
+      "sha256": "7b137a527c4f66907db393a54196cd0bdae6c7e4cb4fbbfa19757ef4ceef3199"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-synthetic-volume-low-light.png",
+      "sha256": "bcf9050d7040074d4a784d4c009b7ce3095909b71ba050216f0b497cbb701ef9"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-volume-fixture-launch.txt",
+      "sha256": "9c5891ff7a68239f5929200d6898db3d483238966e67c9fbcc3dfccc420de057"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444/flutter-xcode-version.txt",
+      "sha256": "18730ed2ae28a2c9cf0c2d5db549033a4f07089331391a7133b7b32187454fa9"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444-metadata.json",
+      "sha256": "754c5a4a0a6a72a947033dd1eabe493bb59fb9a479f85f94b3859c303f013cad"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890444.zip",
+      "sha256": "f517b8412ce0f14fa79e89809a72fbbb38d5a89c8c3745eb8f5167c4bead3e66"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890453/apple-build.txt",
+      "sha256": "9dcf3d955bdf81de5f86deb4b0b8fd40dd7b60e7ec73b90e87f85bc22784c79f"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890453/apple-capture-matcher-tests.txt",
+      "sha256": "2072ea10acb601303ef8f21be984d3cfc065831ff61278198aa4b2b3955354ce"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890453/apple-capture-readiness.txt",
+      "sha256": "2d281066dd34cbb93d31c51774640e2c11c79f3159aa05bbf62b1ce5d058f529"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890453/apple-library-light.png",
+      "sha256": "8b643c4e61cc4b5251d259441094ee0d8fcbe4dddb87a8a5efde47cf1e983684"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890453/apple-player-dark.png",
+      "sha256": "f2cf332bc7e850a21bca5962863f2a4b3ca99c7f338e2d2323cb7fd61a0e2728"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890453/apple-player-large-dark.png",
+      "sha256": "e17f064c2d117b111f8142828fa474d350dd2792b5b8da6a98b6872fcf9ca66c"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890453/apple-queue-light.png",
+      "sha256": "0e9aa4a68aa23867dd80c27dfbd57233b5d919c6b618941b16ee6944bb923218"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890453/apple-setup-light.png",
+      "sha256": "d2b2753c2d7d191dc8f468d8f7e94608ad14dd92b65397e6a922e5ad6ca369bc"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890453/apple-simulator-boot.txt",
+      "sha256": "94bed1d82e7daf09dd0eff48413453ed5e7cd6c32d7909070c2371be15f4b85d"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890453/apple-simulator-launch.png",
+      "sha256": "f0e3be086aa85bd266fec2f2bbfd8d3e3a419ba339e78b8f00174667c5c35e2f"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890453/apple-simulator-launch.txt",
+      "sha256": "b82ec64043fc5bf22a0b0e49b1394fa002a6a385c3f697ca3ae0fa1becc9f47e"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890453/apple-simulator-processes.txt",
+      "sha256": "1c9150396fd852533db9024208bd1e1a1aca274b4de3c5df327510d2ca9ba3c3"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890453/ci-simulators.json",
+      "sha256": "594084d646f2586e52c66328c583b79fcde9330e82ceb24cc72373ab3630ff45"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890453/ci-xcode-version.txt",
+      "sha256": "18730ed2ae28a2c9cf0c2d5db549033a4f07089331391a7133b7b32187454fa9"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890453/macos-version.txt",
+      "sha256": "cd5d6399b3785b04ceaae75045a9ca9f80f0bbc3526eff9d0c36b170ed1ec348"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890453/swift-tests.txt",
+      "sha256": "89b7ad057d8231cacd4763a5f394b6627b308946d6b9531df78a01f3638cce2c"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890453/xcode-version.txt",
+      "sha256": "18730ed2ae28a2c9cf0c2d5db549033a4f07089331391a7133b7b32187454fa9"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890453-metadata.json",
+      "sha256": "583d37181f0ffe0ec7cb6a706769c7793209a4f94e0c357c44b93145548b104e"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-41231890453.zip",
+      "sha256": "c0f3e2f9e66318e9751b71802e861b035da5cbdfeb34200f2aa017e6c651c8f9"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/ci-runs.json",
+      "sha256": "60abba980ba626fe8419b6ec55ee7318afaabcf7aa34c385be17996631752c29"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/failed-interruption-phone-report.json",
+      "sha256": "f91cc2e219d45d1c611fc31e8c4642f5599c5aa5c931831253bf834044a17bcc"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/failure-cleaned-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/failure-cleaned-controllers.xml",
+      "sha256": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/failure-cleaned-host-accessibility.txt",
+      "sha256": "7932b39b25ef8ef659885d943a6d76c666d4c8e14e64101a0af93e6de7692a9f"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/failure-cleaned-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "10ea220251c7f4d17f625532bbcb1a125616ac222036e421d28f49e221d90ed5"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/failure-cleaned-host-audio.txt",
+      "sha256": "e51519a0a317e122b3a219f5b66aec8e1b36006727e18ca1fd836e116bee381a"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/failure-cleaned-host-bluetooth_manager.txt",
+      "sha256": "97d6db0b5abe212e5eb17e841eb69a5890c7089c8314849854f603ed519f9862"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/failure-cleaned-host-media_session.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/failure-cleaned-host-package-org.dx340.remote.host.txt",
+      "sha256": "12998e262aaaa0907708e6a844c326f112a232c1626bdfbb0e9afdabd2fe29bd"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/failure-cleaned-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/failure-cleaned-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "85385bafe87bf6f93e9b30fc9303fd7db33b0841baa61174261f99ee6927fde7"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/failure-cleaned-phone-bluetooth_manager.txt",
+      "sha256": "3b1c98f1c622270e94b22b96871c90d4fd4cc7bc291e8fb72a1dcdff0e1acae5"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/failure-cleaned-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "a45198c0dd37b87b5fb9fb451b7fbd70ea7abdb533f5a1cdea1eab1f66944f28"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/failure-cleaned-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/failure-cleaned.json",
+      "sha256": "99883b039e1120d168c37898d61aa8d1cbc6e5e69a373bfb4766eaba44b9b923"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fault-action-before.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fault-events.json",
+      "sha256": "6ff15c12381d90fd15cccd81badf1460f82b413fbdfaf82210ef8f79c618ba9d"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fault-export-after.xml",
+      "sha256": "2b9db19151b38f9fb67b30f3a6ba9849722da627ff80eafb374e8d736d2a99db"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fault-export-before.xml",
+      "sha256": "769977f878214e490a0bdc7ddc50361c5f8d69d502e63eb15e006988ccec75d9"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fault-export-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fault-export-collapse-before.xml",
+      "sha256": "2b9db19151b38f9fb67b30f3a6ba9849722da627ff80eafb374e8d736d2a99db"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fault-export-collapse-wait-0.xml",
+      "sha256": "2b9db19151b38f9fb67b30f3a6ba9849722da627ff80eafb374e8d736d2a99db"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fault-export-help-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fault-export-help-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fault-export-help-wait-0.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fault-export-scroll-after.xml",
+      "sha256": "769977f878214e490a0bdc7ddc50361c5f8d69d502e63eb15e006988ccec75d9"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fault-export-scroll-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fault-export-setup-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fault-export-setup-before.xml",
+      "sha256": "1d40aca6a500b8a8b7f359adeb5e29fe69b7e09e9c038a1d5616c71b7f38c132"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fault-export-setup-wait-0.xml",
+      "sha256": "1d40aca6a500b8a8b7f359adeb5e29fe69b7e09e9c038a1d5616c71b7f38c132"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fault-export-wait-0.xml",
+      "sha256": "769977f878214e490a0bdc7ddc50361c5f8d69d502e63eb15e006988ccec75d9"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/final-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/final-controllers.xml",
+      "sha256": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/final-host-accessibility.txt",
+      "sha256": "926896c1740ddc72f86c392f39ef7f812983ba63d250ccc9e3a221d11a9774bf"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/final-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "13722316599ef6b7ebeb7fd179e262bd2f44a836a8f8ae21c5c8b2a561c4f95f"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/final-host-audio.txt",
+      "sha256": "ad3664f9b781db918a084f97c373f6d0a3f971e10f9536886473de417681bf51"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/final-host-bluetooth_manager.txt",
+      "sha256": "76004cc679d499c8b5f732cb81e597276a317fc702e6422741e9689a083965b2"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/final-host-choice.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/final-host-diagnostic.json",
+      "sha256": "e9b662c7fe6dcc7b9d1c2ebeb95500cba82aa48f0625832b13b323299669dd61"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/final-host-media_session.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/final-host-package-org.dx340.remote.host.txt",
+      "sha256": "0b0ba23b621dacf0957bba97010e7c30a06ba905b05d906e12deff42a3e7b96d"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/final-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/final-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "0641f44c2eb858de9276524979b899daf33e6d4a6e5c5aa2373c6b5de24862a0"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/final-phone-bluetooth_manager.txt",
+      "sha256": "024e18087fa21271053511371d4155c9484e1c49ac066dead51d4efbe6f808cf"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/final-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "d9ed504534b5ce418e3852639b551ee4c89c63adefa3f66417caef44810890be"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/final-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/final-volumes.txt",
+      "sha256": "7f7be54d6ac662c6c253fefac52be59dce97549438b29993566e0dd53c4803a4"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/final.json",
+      "sha256": "f89e60f3c244645b5493e602a87821ba66d1c84d86a472dda912e52b4aa6f5e7"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-interruption-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-interruption-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-interruption-collapse-before.xml",
+      "sha256": "fd8780efd7477fe169b1829a072abba38b5141b566964f0cc8182bb6da3ff22c"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-interruption-collapse-wait-0.xml",
+      "sha256": "fd8780efd7477fe169b1829a072abba38b5141b566964f0cc8182bb6da3ff22c"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-interruption-help-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-interruption-help-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-interruption-help-wait-0.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-interruption-phone-report.json",
+      "sha256": "efb993a37ca2e2ade8a9f6880b8bad3c46f1f03904a7b0da9ea21a1ddb493a9a"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-interruption-save-after.xml",
+      "sha256": "fd8780efd7477fe169b1829a072abba38b5141b566964f0cc8182bb6da3ff22c"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-interruption-save-before.xml",
+      "sha256": "de4d367b6485161c3390c5c3485a3c2e5574954e872aa82a850cb31db2950a24"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-interruption-save-wait-0.xml",
+      "sha256": "de4d367b6485161c3390c5c3485a3c2e5574954e872aa82a850cb31db2950a24"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-interruption-scroll-after.xml",
+      "sha256": "de4d367b6485161c3390c5c3485a3c2e5574954e872aa82a850cb31db2950a24"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-interruption-scroll-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-reconnect-collapse-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-reconnect-collapse-before.xml",
+      "sha256": "51a8062e582ebe43601e09b13cb49dfe115398b2cbd40c6018bfa5f75b89773b"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-reconnect-collapse-wait-0.xml",
+      "sha256": "51a8062e582ebe43601e09b13cb49dfe115398b2cbd40c6018bfa5f75b89773b"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-reconnect-export-after.xml",
+      "sha256": "51a8062e582ebe43601e09b13cb49dfe115398b2cbd40c6018bfa5f75b89773b"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-reconnect-export-before.xml",
+      "sha256": "1e253024c421f45cbcfd53e9cfa50f13e4b25ecb9600b8f6d6a011088bd388fe"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-reconnect-export-wait-0.xml",
+      "sha256": "1e253024c421f45cbcfd53e9cfa50f13e4b25ecb9600b8f6d6a011088bd388fe"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-reconnect-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-reconnect-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-reconnect-help-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-reconnect-phone-report.json",
+      "sha256": "9ce770b804691348593b36e02137aff3e7fab1b090d06e93efbd7f7c29714742"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-reconnect-scroll-after.xml",
+      "sha256": "1e253024c421f45cbcfd53e9cfa50f13e4b25ecb9600b8f6d6a011088bd388fe"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-reconnect-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/after-reconnect-setup.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/before-radio-off-phone.png",
+      "sha256": "f1c77f9045c076ee0d1d2ce8000531def2f6ea68268fc31de8a6794520c86f8b"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fault-action-before.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fault-events.json",
+      "sha256": "ee1a9e2bb142d79229d46f398c3453f333a97e84169ecdd5b91b3cfb1a32a303"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/final-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/final-collapse-before.xml",
+      "sha256": "e7ca55a16462d0ad7b5055ec99898a60959c99f0bfe9034c82fdd78fadb632e7"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/final-collapse-wait-0.xml",
+      "sha256": "e7ca55a16462d0ad7b5055ec99898a60959c99f0bfe9034c82fdd78fadb632e7"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/final-disconnect-after.xml",
+      "sha256": "e7ca55a16462d0ad7b5055ec99898a60959c99f0bfe9034c82fdd78fadb632e7"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/final-disconnect-before.xml",
+      "sha256": "74084ef4df71e650cbdefed438c6ebfb663912b2834f3d2dfaa85a1651f4ef3d"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/final-disconnect-wait-0.xml",
+      "sha256": "74084ef4df71e650cbdefed438c6ebfb663912b2834f3d2dfaa85a1651f4ef3d"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/final-export-after.xml",
+      "sha256": "74084ef4df71e650cbdefed438c6ebfb663912b2834f3d2dfaa85a1651f4ef3d"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/final-export-before.xml",
+      "sha256": "0904d6dc5a01ac8369b418eb000bcd095e11dc87766d8cec823ae6f16c35c322"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/final-export-wait-0.xml",
+      "sha256": "0904d6dc5a01ac8369b418eb000bcd095e11dc87766d8cec823ae6f16c35c322"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/final-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/final-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/final-help-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/final-phone-report.json",
+      "sha256": "6b2ff3ec40fcdbac79c290410109e1d6e62cf5f1c4d70e503d3afc7c945c1d7a"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/final-scroll-after.xml",
+      "sha256": "0904d6dc5a01ac8369b418eb000bcd095e11dc87766d8cec823ae6f16c35c322"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/final-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/final-setup.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-export-setup-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-export-setup-before.xml",
+      "sha256": "3755964b24d26027257fa53609824b4a65751b1f82ad6d0ac4e4bd6d018b5294"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-export-setup-wait-0.xml",
+      "sha256": "3755964b24d26027257fa53609824b4a65751b1f82ad6d0ac4e4bd6d018b5294"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-final-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-final-setup-before.xml",
+      "sha256": "1e7176727a6597cf29ea52bd363588031f41f3ed321ec1420ae9ae6cd2c4b85f"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-final-setup-wait-0.xml",
+      "sha256": "1e7176727a6597cf29ea52bd363588031f41f3ed321ec1420ae9ae6cd2c4b85f"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-fresh-folders-after.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-fresh-folders-before.xml",
+      "sha256": "6edadd75b0ce2fc2c2a7fb95b115825d257d37fee6649e4bc863be05a162b438"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-fresh-folders-wait-0.xml",
+      "sha256": "6edadd75b0ce2fc2c2a7fb95b115825d257d37fee6649e4bc863be05a162b438"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-fresh-library-after.xml",
+      "sha256": "00f059c207354f26d2a679ce2bf9e3b2162d4a1e4986dae04abc61cb5ebeb9ff"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-fresh-library-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-fresh-library-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-fresh-root-after.xml",
+      "sha256": "6edadd75b0ce2fc2c2a7fb95b115825d257d37fee6649e4bc863be05a162b438"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-fresh-root-before.xml",
+      "sha256": "00f059c207354f26d2a679ce2bf9e3b2162d4a1e4986dae04abc61cb5ebeb9ff"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-fresh-root-wait-0.xml",
+      "sha256": "00f059c207354f26d2a679ce2bf9e3b2162d4a1e4986dae04abc61cb5ebeb9ff"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-fresh-sd-after.xml",
+      "sha256": "924526ad5552f97d581faf1fe7e0def4cef6bef45f05e261cfafbf84d5c2e3a2"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-fresh-sd-before.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-fresh-sd-result.xml",
+      "sha256": "924526ad5552f97d581faf1fe7e0def4cef6bef45f05e261cfafbf84d5c2e3a2"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-fresh-sd-terminal.xml",
+      "sha256": "1e7176727a6597cf29ea52bd363588031f41f3ed321ec1420ae9ae6cd2c4b85f"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-fresh-sd-wait-0.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-radio-on-library.xml",
+      "sha256": "3755964b24d26027257fa53609824b4a65751b1f82ad6d0ac4e4bd6d018b5294"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-reconnect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-reconnect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-reconnect-export-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-reconnect-export-before.xml",
+      "sha256": "00f059c207354f26d2a679ce2bf9e3b2162d4a1e4986dae04abc61cb5ebeb9ff"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-reconnect-export-wait-0.xml",
+      "sha256": "00f059c207354f26d2a679ce2bf9e3b2162d4a1e4986dae04abc61cb5ebeb9ff"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-reconnect-library-after.xml",
+      "sha256": "00f059c207354f26d2a679ce2bf9e3b2162d4a1e4986dae04abc61cb5ebeb9ff"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-reconnect-library-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-reconnect-library-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-reconnect-ready.xml",
+      "sha256": "00f059c207354f26d2a679ce2bf9e3b2162d4a1e4986dae04abc61cb5ebeb9ff"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/fixed-reconnect-wait-0.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/radio-off-host-diagnostic.json",
+      "sha256": "318c75513a476a2ec17221d0deb79583cc0477b0d508bafb859d19932546c7eb"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/radio-off-phone.xml",
+      "sha256": "3755964b24d26027257fa53609824b4a65751b1f82ad6d0ac4e4bd6d018b5294"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/radio-off-service.txt",
+      "sha256": "4c0193b209f9b6aaed64a6c7b99f242c3e44fb32446d89915001815f00525326"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/fixed/radio-off-setting.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/installed-phone.json",
+      "sha256": "40a9290e8993f04c38b68813f4f51c6c6c2a7f749962e074ec173565e832779c"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/interrupt-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/interrupt-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/interrupt-connect-wait-0.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/interrupt-folders-after.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/interrupt-folders-before.xml",
+      "sha256": "6edadd75b0ce2fc2c2a7fb95b115825d257d37fee6649e4bc863be05a162b438"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/interrupt-folders-wait-0.xml",
+      "sha256": "6edadd75b0ce2fc2c2a7fb95b115825d257d37fee6649e4bc863be05a162b438"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/interrupt-library-after.xml",
+      "sha256": "8989be3737b1ef3c99a637f0a075bbf471734c8b280780736c98cb86cd78f1e5"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/interrupt-library-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/interrupt-library-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/interrupt-root-after.xml",
+      "sha256": "6edadd75b0ce2fc2c2a7fb95b115825d257d37fee6649e4bc863be05a162b438"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/interrupt-root-before.xml",
+      "sha256": "8989be3737b1ef3c99a637f0a075bbf471734c8b280780736c98cb86cd78f1e5"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/interrupt-root-wait-0.xml",
+      "sha256": "8989be3737b1ef3c99a637f0a075bbf471734c8b280780736c98cb86cd78f1e5"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/library-widget-tests-corrected.txt",
+      "sha256": "09ed565b650567842be3b00e7598b21e2da8d459c81ba0ea4b3d6d3f33b67a7e"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/library-widget-tests.txt",
+      "sha256": "433232d0d9b762c4683c2c508dcc0d348b801f5880ba0cdbc2fe2334462dc322"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/native-build.txt",
+      "sha256": "bc1fb8c2a6031b6176c7098c15919bd131dacdbe0c5076458ce18bf2962e2176"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/new-build-setup.xml",
+      "sha256": "8764df990f74013d3418829b57e851af4c6842077ce047323fcde1c5794f09f2"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/new-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/new-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/new-connect-wait-0.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/new-folders-after.xml",
+      "sha256": "b8914d24b8b84d2c03880feb7bb2fb0f9cb21886b2ea30f8f6fc9f3ecd40e867"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/new-folders-before.xml",
+      "sha256": "6edadd75b0ce2fc2c2a7fb95b115825d257d37fee6649e4bc863be05a162b438"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/new-folders-wait-0.xml",
+      "sha256": "6edadd75b0ce2fc2c2a7fb95b115825d257d37fee6649e4bc863be05a162b438"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/new-library-after.xml",
+      "sha256": "00f059c207354f26d2a679ce2bf9e3b2162d4a1e4986dae04abc61cb5ebeb9ff"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/new-library-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/new-library-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/new-root-after.xml",
+      "sha256": "6edadd75b0ce2fc2c2a7fb95b115825d257d37fee6649e4bc863be05a162b438"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/new-root-before.xml",
+      "sha256": "00f059c207354f26d2a679ce2bf9e3b2162d4a1e4986dae04abc61cb5ebeb9ff"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/new-root-wait-0.xml",
+      "sha256": "00f059c207354f26d2a679ce2bf9e3b2162d4a1e4986dae04abc61cb5ebeb9ff"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/new-setup-tab-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/new-setup-tab-before.xml",
+      "sha256": "8764df990f74013d3418829b57e851af4c6842077ce047323fcde1c5794f09f2"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/new-setup-tab-wait-0.xml",
+      "sha256": "8764df990f74013d3418829b57e851af4c6842077ce047323fcde1c5794f09f2"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-export-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-export-setup-before.xml",
+      "sha256": "a3ffa7fd07687b10d308e2e1bd83eca40e327814ae1c966bf6026a9c696fa8f9"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-export-setup-wait-0.xml",
+      "sha256": "a3ffa7fd07687b10d308e2e1bd83eca40e327814ae1c966bf6026a9c696fa8f9"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnect-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnect-final.xml",
+      "sha256": "a3ffa7fd07687b10d308e2e1bd83eca40e327814ae1c966bf6026a9c696fa8f9"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnect-library-after.xml",
+      "sha256": "a3ffa7fd07687b10d308e2e1bd83eca40e327814ae1c966bf6026a9c696fa8f9"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnect-library-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnect-library-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnect-wait-0.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnected-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnected-collapse-before.xml",
+      "sha256": "dbb4e6f7066ca0228f0607b1808258eeb82b02ba65386354431b304e8a1e5593"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnected-collapse-wait-0.xml",
+      "sha256": "dbb4e6f7066ca0228f0607b1808258eeb82b02ba65386354431b304e8a1e5593"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnected-disconnect-after.xml",
+      "sha256": "dbb4e6f7066ca0228f0607b1808258eeb82b02ba65386354431b304e8a1e5593"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnected-disconnect-before.xml",
+      "sha256": "fca6a0f26e382f55881c77b2f7a73557dfa232a299366d72198fbe3e1636acb8"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnected-disconnect-wait-0.xml",
+      "sha256": "fca6a0f26e382f55881c77b2f7a73557dfa232a299366d72198fbe3e1636acb8"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnected-export-after.xml",
+      "sha256": "fca6a0f26e382f55881c77b2f7a73557dfa232a299366d72198fbe3e1636acb8"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnected-export-before.xml",
+      "sha256": "7e881c6e22558c162280eafc763d6f586341b503c9112007f2e99f44b92c8e3d"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnected-export-wait-0.xml",
+      "sha256": "7e881c6e22558c162280eafc763d6f586341b503c9112007f2e99f44b92c8e3d"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnected-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnected-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnected-help-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnected-phone-report.json",
+      "sha256": "8dfa631c94cb12a55586a54ab4d7230cec36f8274caccff6469f3f05668b9f59"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnected-scroll-after.xml",
+      "sha256": "7e881c6e22558c162280eafc763d6f586341b503c9112007f2e99f44b92c8e3d"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnected-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/old-reconnected-setup.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/phone-upgrade-signing.json",
+      "sha256": "09fee6257f9e1cbb995405d8e46f0a08aa431c938c2532d83815bc1b230b758f"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/radio-off-host-diagnostic.json",
+      "sha256": "f10ac6f9e64f3673a5d7edc31ce9e70b9f0dd8a8db8c58aed9a72cd6d7a7c53d"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/radio-off-phone.xml",
+      "sha256": "1d40aca6a500b8a8b7f359adeb5e29fe69b7e09e9c038a1d5616c71b7f38c132"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/radio-off-service.txt",
+      "sha256": "351c8ee0a2c187105f967feadd6ef6d79b6c60597e64346123a5517ab3278e4f"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/radio-off-setting.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/shared-build.txt",
+      "sha256": "bfe642e22ae066a4962838bfeb1fbd1e66149d59f84f82fcd4f1395e28c53d22"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/shared-ci-current.json",
+      "sha256": "bbc9d6ad3fa57e37c8473f9934b94cd877a6d9fdfbce45771404571db42cbb79"
+    },
+    {
+      "file": "artifacts/inflight-radio-20261101/shared-ci-jobs.json",
+      "sha256": "236b3c903e6e2ac91f4ab4d706b5f8a3f75c03a8351941c0b2833a448d3c9a5c"
+    }
+  ]
+}
