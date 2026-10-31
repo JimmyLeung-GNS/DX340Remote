@@ -187,16 +187,16 @@ public final class Reassembler {
 
 /// Main-thread FIFO. A successful final frame completes its logical write.
 public final class AcknowledgedWriteQueue<Tag> {
-    private struct Frame { let bytes: Data; let completion: Tag? }
+    private struct Frame { let bytes: Data; let completion: Tag?; var submission: Tag? }
     private let capacity: Int
     private var pending: [Frame] = []
     private var flight: Frame?
     public init(capacity: Int = 12000) { precondition((1...12000).contains(capacity)); self.capacity = capacity }
     public var pendingCount: Int { pending.count }
     public var busy: Bool { flight != nil }
-    public func enqueue(_ frames: [Data], completion: Tag? = nil) throws {
+    public func enqueue(_ frames: [Data], completion: Tag? = nil, submission: Tag? = nil) throws {
         guard !frames.isEmpty, frames.count <= capacity - pending.count else { throw WireError.limit }
-        pending.append(contentsOf: frames.enumerated().map { Frame(bytes: $0.element, completion: $0.offset == frames.count - 1 ? completion : nil) })
+        pending.append(contentsOf: frames.enumerated().map { Frame(bytes: $0.element, completion: $0.offset == frames.count - 1 ? completion : nil, submission: $0.offset == 0 ? submission : nil) })
     }
     public func next() -> Data? {
         guard flight == nil, !pending.isEmpty else { return nil }
@@ -204,6 +204,10 @@ public final class AcknowledgedWriteQueue<Tag> {
     }
     public func acknowledge() -> Tag? {
         let current = flight; flight = nil; return current?.completion
+    }
+    /// Records only the first platform submission, without advancing the FIFO.
+    public func submitted() -> Tag? {
+        let tag = flight?.submission; flight?.submission = nil; return tag
     }
     public func clear() { pending.removeAll(); flight = nil }
 }
@@ -217,7 +221,8 @@ public final class RequestJournal {
         let id: String, operation: String, source: String
         let start: Int64
         var accepted = false
-        var acceptedAfter: Int64?, finishedAfter: Int64?, writeAcknowledgedAfter: Int64?
+        var acceptedAfter: Int64?, finishedAfter: Int64?, writeAcknowledgedAfter: Int64?, firstWriteSubmittedAfter: Int64?
+        var submissionSeen = false
         var result = "pending", outcome = "none"
         var terminalApplied = false
         var error: String?
@@ -268,6 +273,12 @@ public final class RequestJournal {
               ["pending", "result", "error", "other_reply"].contains(entry.result) else { return }
         entry.writeAcknowledgedAfter = elapsed(now(), entry.start); entries[id] = entry
     }
+    public func writeSubmitted(id: String) {
+        guard var entry = entries[id], !entry.submissionSeen,
+              ["pending", "result", "error", "other_reply"].contains(entry.result) else { return }
+        entry.submissionSeen = true; entry.firstWriteSubmittedAfter = elapsed(now(), entry.start)
+        entries[id] = entry
+    }
     @discardableResult public func finish(id: String, reason: String) -> [String: Any]? {
         guard var entry = entries[id], entry.result == "pending" else { return nil }
         entry.result = Self.endings.contains(reason) ? reason : "other"; entry.finishedAfter = elapsed(now(), entry.start)
@@ -277,6 +288,7 @@ public final class RequestJournal {
     private func snapshot(_ e: Entry) -> [String: Any] {
         ["id": e.id, "operation": e.operation, "source": e.source, "startedMs": elapsed(e.start, origin) as Any? ?? NSNull(),
          "writeAcknowledgedAfterMs": e.writeAcknowledgedAfter as Any? ?? NSNull(),
+         "firstWriteSubmittedAfterMs": e.firstWriteSubmittedAfter as Any? ?? NSNull(),
          "accepted": e.accepted, "acceptedAfterMs": e.acceptedAfter as Any? ?? NSNull(), "finishedAfterMs": e.finishedAfter as Any? ?? NSNull(),
          "result": e.result, "terminalApplied": e.terminalApplied, "hostOutcome": e.outcome, "error": e.error as Any? ?? NSNull()]
     }

@@ -119,10 +119,10 @@ class BleCentral(private val context: Context, private val status: (String) -> U
         val current = gatt
         main.postDelayed({ if (gatt == current && !established) fail("Connection timed out. Check phone control is enabled in Companion on your player, then tap Connect again.") }, 30000)
     }
-    fun send(bytes: ByteArray, acknowledged: (() -> Unit)? = null) {
+    fun send(bytes: ByteArray, submitted: (() -> Unit)? = null, acknowledged: (() -> Unit)? = null) {
         check(established) { "Not connected" }
         val frames = Wire.frames(bytes, capacity, serial++ and 65535)
-        writes.enqueue(frames, acknowledged); pump()
+        writes.enqueue(frames, acknowledged, submitted); pump()
     }
     private fun pump() {
         val g = gatt ?: return; val c = rx ?: return
@@ -131,7 +131,7 @@ class BleCentral(private val context: Context, private val status: (String) -> U
         main.postDelayed({ if (writes.busy && g == gatt && generation == writeGeneration) fail("Bluetooth write timed out; outcome unknown. Reconnecting without replay.") }, 10000)
         val result = if (android.os.Build.VERSION.SDK_INT >= 33) g.writeCharacteristic(c, frame, BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT)
         else { c.writeType = BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT; c.value = frame; if (g.writeCharacteristic(c)) 0 else -1 }
-        if (result != 0) fail("Could not queue command; reconnect")
+        if (result != 0) fail("Could not queue command; reconnect") else writes.submitted()?.invoke()
     }
     private fun fail(reason: String) {
         clearLink(); status(reason)

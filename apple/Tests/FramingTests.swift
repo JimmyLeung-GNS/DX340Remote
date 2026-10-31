@@ -13,7 +13,7 @@ final class FramingTests: XCTestCase {
                 case "enqueue":
                     let frames = (step["frames"] as! [[NSNumber]]).map { Data($0.map { $0.uint8Value }) }
                     var rejected = false
-                    do { try q.enqueue(frames, completion: step["tag"] as? String) }
+                    do { try q.enqueue(frames, completion: step["tag"] as? String, submission: step["submission"] as? String) }
                     catch WireError.limit { rejected = true }
                     catch { XCTFail("Unexpected queue error: \(error)") }
                     XCTAssertEqual(rejected, step["rejected"] as? Bool ?? false, label)
@@ -21,12 +21,27 @@ final class FramingTests: XCTestCase {
                     let expected = (step["bytes"] as? [NSNumber]).map { Data($0.map { $0.uint8Value }) }
                     XCTAssertEqual(q.next(), expected, label)
                 case "ack": XCTAssertEqual(q.acknowledge(), step["tag"] as? String, label)
+                case "submitted": XCTAssertEqual(q.submitted(), step["tag"] as? String, label)
                 case "clear": q.clear()
                 default: XCTFail("Unknown queue fixture action")
                 }
             }
             XCTAssertFalse(q.busy); XCTAssertEqual(q.pendingCount, 0)
         }
+    }
+    func testFirstSubmissionAndLastAcknowledgementKeepDifferentQueueWaits() throws {
+        var clock: Int64 = 0; let journal = RequestJournal(now: { clock }); let q = AcknowledgedWriteQueue<String>()
+        journal.begin(id: "a", operation: "GET_STATE", source: "mango"); try q.enqueue([Data([1]), Data([2])], completion: "a", submission: "a")
+        _ = q.next(); clock = 1; journal.writeSubmitted(id: q.submitted()!)
+        clock = 10; journal.begin(id: "b", operation: "GET_STATE", source: "mango"); try q.enqueue([Data([3])], completion: "b", submission: "b")
+        clock = 20; XCTAssertNil(q.acknowledge()); _ = q.next(); XCTAssertNil(q.submitted())
+        clock = 40; journal.writeAcknowledged(id: q.acknowledge()!)
+        _ = q.next(); clock = 41; journal.writeSubmitted(id: q.submitted()!)
+        clock = 70; journal.writeAcknowledged(id: q.acknowledge()!)
+        let rows = journal.report()["requests"] as! [[String: Any]]
+        XCTAssertEqual(rows[0]["firstWriteSubmittedAfterMs"] as? Int64, 1); XCTAssertEqual(rows[0]["writeAcknowledgedAfterMs"] as? Int64, 40)
+        XCTAssertEqual(rows[1]["firstWriteSubmittedAfterMs"] as? Int64, 31); XCTAssertEqual(rows[1]["writeAcknowledgedAfterMs"] as? Int64, 60)
+        XCTAssertTrue(rows.allSatisfy { $0["result"] as? String == "pending" && $0["terminalApplied"] as? Bool == false })
     }
     func testQueuedWriteReceiptsIncludeWaitingWithoutImplyingPlayback() throws {
         var clock: Int64 = 0; let journal = RequestJournal(now: { clock }); let q = AcknowledgedWriteQueue<String>()
@@ -54,6 +69,7 @@ final class FramingTests: XCTestCase {
                 case "reply": journal.reply(id: step["id"] as! String, type: step["type"] as! String, outcome: step["outcome"] as? String ?? "", error: step["error"] as? String ?? "")
                 case "apply": journal.markTerminalApplied(id: step["id"] as! String)
                 case "writeAck": journal.writeAcknowledged(id: step["id"] as! String)
+                case "writeSubmitted": journal.writeSubmitted(id: step["id"] as! String)
                 case "finish": journal.finish(id: step["id"] as! String, reason: step["reason"] as! String)
                 case "abandon": journal.abandon(reason: step["reason"] as! String)
                 case "phase": journal.phase(step["phase"] as! String)

@@ -309,7 +309,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
                 browseLocations[id] = BrowseLocation(source: state["source"] as? String ?? "", epoch: state["sourceEpoch"] as? String ?? "", parent: args["parent"] as? String)
                 activeBrowseId = id; library = ["loading": true]; status = "Loading library…"
             }
-            try writes.enqueue(frames, completion: id); pump()
+            try writes.enqueue(frames, completion: id, submission: id); pump()
             let replyBudget = ReplyBudget.milliseconds(type, item: args["item"] as? String)
             Task { try? await Task.sleep(for: .milliseconds(replyBudget)); if pending.removeValue(forKey: id) != nil { journal.finish(id: id, reason: "timeout"); if type == "AUTHORIZE" { cancelApprovalCheck(); connectionPhase = "failed" }; retireAssistedPage(id); browseLocations[id] = nil; queueLocations[id] = nil; if id == activeBrowseId { library = [:] }; status = "Reply timed out; outcome unknown. Refresh before retrying." } }
         } catch { journal.finish(id: id, reason: "send_failed"); status = "Cannot encode Bluetooth message." }
@@ -317,6 +317,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     private func pump() {
         guard let p = peripheral, let rx, let frame = writes.next() else { return }
         p.writeValue(frame, for: rx, type: .withResponse)
+        if let id = writes.submitted() { journal.writeSubmitted(id: id) }
         writeTimeout?.cancel()
         writeTimeout = Task { try? await Task.sleep(for: .seconds(10)); guard !Task.isCancelled else { return }; if writing { manager.cancelPeripheralConnection(p); clearConnection(); status = "Bluetooth write timed out; outcome unknown. Pending controls cleared." } }
     }
@@ -362,7 +363,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         report["modelInstanceId"] = diagnosticSessionId
         report["platform"] = "ios"; report["authorized"] = authorized
         report["connectionPhase"] = connectionSetup["phase"]
-        report["timingScope"] = "Native send start to last successful ATT request-write response callback, protocol ACCEPTED, and matched decoded reply measured separately. Includes encoding, queue and callback delay; reply also includes reassembly. No UI-tap or acoustic timing."
+        report["timingScope"] = "Native send start to first CoreBluetooth withResponse write invocation, last successful ATT request-write response callback, protocol ACCEPTED, and matched decoded reply measured separately. Includes encoding, queue and callback delay; reply also includes reassembly. No UI-tap or acoustic timing."
         report["privacy"] = "Current model instance only. No music metadata, arguments, Bluetooth identities or credentials. Process restart clears this history."
         return try JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted, .sortedKeys])
     }

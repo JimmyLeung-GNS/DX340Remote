@@ -29,6 +29,41 @@ def row(id='request-A', **changes):
 
 
 class ReportsTest(unittest.TestCase):
+    def test_submission_is_separate_from_acknowledgement_and_application(self):
+        value = reports.summarize([report([row(firstWriteSubmittedAfterMs=2, writeAcknowledgedAfterMs=8)])])
+        group = value['groups'][0]
+        self.assertEqual(group['firstAttWriteSubmitted']['p95Ms'], 2)
+        self.assertEqual(group['attWriteAcknowledged']['p95Ms'], 8)
+        self.assertEqual(group['appliedResult']['samples'], 0)
+
+    def test_legacy_or_null_submission_is_not_inferred_from_reply_or_ack(self):
+        for changes in ({}, {'firstWriteSubmittedAfterMs': None}):
+            value = reports.summarize([report([row(result='result', finishedAfterMs=20, writeAcknowledgedAfterMs=10, terminalApplied=True, **changes)])])
+            self.assertEqual(value['groups'][0]['firstAttWriteSubmitted']['samples'], 0)
+
+    def test_invalid_submission_durations_and_order_are_rejected(self):
+        for value in [-1, True, 1.5, '2']:
+            with self.assertRaises(reports.ReportError):
+                reports.summarize([report([row(firstWriteSubmittedAfterMs=value)])])
+        for changes in [dict(firstWriteSubmittedAfterMs=9, writeAcknowledgedAfterMs=8),
+                        dict(firstWriteSubmittedAfterMs=11, finishedAfterMs=10, result='connection_lost')]:
+            with self.assertRaises(reports.ReportError):reports.summarize([report([row(**changes)])])
+
+    def test_overlapping_submission_exports_merge_in_both_orders(self):
+        old = report([row(result='result', finishedAfterMs=20, terminalApplied=True, writeAcknowledgedAfterMs=10)])
+        newer = copy.deepcopy(old); newer['requests'][0]['firstWriteSubmittedAfterMs'] = 2
+        for values in ([old, newer, old], [newer, old, newer]):
+            value = reports.summarize(values)
+            self.assertEqual(value['uniqueRequests'], 1)
+            self.assertEqual(value['groups'][0]['firstAttWriteSubmitted']['p95Ms'], 2)
+
+    def test_merged_submission_cannot_conflict_or_follow_ack_or_local_loss(self):
+        for first, second in [
+            (row(firstWriteSubmittedAfterMs=1), row(firstWriteSubmittedAfterMs=2)),
+            (row(firstWriteSubmittedAfterMs=10), row(writeAcknowledgedAfterMs=5)),
+            (row(firstWriteSubmittedAfterMs=12), row(result='connection_lost', finishedAfterMs=10))]:
+            with self.assertRaises(reports.ReportError):reports.summarize([report([first]), report([second])])
+
     def test_write_ack_is_optional_for_legacy_and_never_inferred_from_reply(self):
         value = reports.summarize([report([row(result='result', finishedAfterMs=80, terminalApplied=True)])])
         self.assertEqual(value['groups'][0]['attWriteAcknowledged']['samples'], 0)

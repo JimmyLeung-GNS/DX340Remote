@@ -12,7 +12,7 @@ class JournalReportJsonTest {
         val parsed = JSONObject(JournalReportJson.encode(journal).toString())
         val row = parsed.getJSONArray("requests").getJSONObject(0)
         assertEquals(5, row.getInt("startedMs"))
-        for (field in listOf("writeAcknowledgedAfterMs", "acceptedAfterMs", "finishedAfterMs", "error")) { assertTrue(row.has(field)); assertTrue(row.isNull(field)) }
+        for (field in listOf("firstWriteSubmittedAfterMs", "writeAcknowledgedAfterMs", "acceptedAfterMs", "finishedAfterMs", "error")) { assertTrue(row.has(field)); assertTrue(row.isNull(field)) }
         assertFalse(row.getBoolean("accepted")); assertFalse(row.getBoolean("terminalApplied"))
     }
     @Test fun privacyCategoriesCannotTurnUnknownLabelsIntoExportedMetadata() {
@@ -26,12 +26,13 @@ class JournalReportJsonTest {
     }
     @Test fun acceptedAndAppliedTerminalUseDifferentFieldsWithoutChangingTheirTimings() {
         var clock = 0L; val journal = RequestJournal { clock }
-        journal.begin("pause", "SET_PLAYING", "apple"); clock = 5; journal.writeAcknowledged("pause"); clock = 10; journal.reply("pause", "ACCEPTED")
+        journal.begin("pause", "SET_PLAYING", "apple"); clock = 2; journal.writeSubmitted("pause"); clock = 5; journal.writeAcknowledged("pause"); clock = 10; journal.reply("pause", "ACCEPTED")
         val accepted = JSONObject(JournalReportJson.encode(journal).toString()).getJSONArray("requests").getJSONObject(0)
         assertTrue(accepted.getBoolean("accepted")); assertFalse(accepted.getBoolean("terminalApplied")); assertTrue(accepted.isNull("finishedAfterMs"))
         clock = 30; journal.reply("pause", "RESULT", outcome = "observed"); journal.markTerminalApplied("pause")
         val final = JSONObject(JournalReportJson.encode(journal).toString()).getJSONArray("requests").getJSONObject(0)
         assertEquals(10, final.getInt("acceptedAfterMs")); assertEquals(30, final.getInt("finishedAfterMs")); assertTrue(final.getBoolean("terminalApplied")); assertEquals("observed", final.getString("hostOutcome"))
         assertEquals(5, final.getInt("writeAcknowledgedAfterMs"))
+        assertEquals(2, final.getInt("firstWriteSubmittedAfterMs"))
     }
 }

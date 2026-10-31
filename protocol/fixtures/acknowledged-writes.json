@@ -221,5 +221,227 @@
         "tag": null
       }
     ]
+  },
+  {
+    "name": "first submission is once, independent from final completion and FIFO waiting",
+    "capacity": 3,
+    "steps": [
+      {
+        "action": "enqueue",
+        "frames": [
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "tag": "a",
+        "submission": "sa"
+      },
+      {
+        "action": "enqueue",
+        "frames": [
+          [
+            3
+          ]
+        ],
+        "tag": "b",
+        "submission": "sb"
+      },
+      {
+        "action": "submitted",
+        "tag": null
+      },
+      {
+        "action": "next",
+        "bytes": [
+          1
+        ]
+      },
+      {
+        "action": "submitted",
+        "tag": "sa"
+      },
+      {
+        "action": "submitted",
+        "tag": null
+      },
+      {
+        "action": "next",
+        "bytes": null
+      },
+      {
+        "action": "ack",
+        "tag": null
+      },
+      {
+        "action": "next",
+        "bytes": [
+          2
+        ]
+      },
+      {
+        "action": "submitted",
+        "tag": null
+      },
+      {
+        "action": "ack",
+        "tag": "a"
+      },
+      {
+        "action": "next",
+        "bytes": [
+          3
+        ]
+      },
+      {
+        "action": "submitted",
+        "tag": "sb"
+      },
+      {
+        "action": "ack",
+        "tag": "b"
+      },
+      {
+        "action": "submitted",
+        "tag": null
+      }
+    ]
+  },
+  {
+    "name": "clear discards both pending and in-flight submission tags",
+    "capacity": 3,
+    "steps": [
+      {
+        "action": "enqueue",
+        "frames": [
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "tag": "a",
+        "submission": "sa"
+      },
+      {
+        "action": "next",
+        "bytes": [
+          1
+        ]
+      },
+      {
+        "action": "clear"
+      },
+      {
+        "action": "submitted",
+        "tag": null
+      },
+      {
+        "action": "ack",
+        "tag": null
+      },
+      {
+        "action": "enqueue",
+        "frames": [
+          [
+            3
+          ]
+        ],
+        "tag": "b",
+        "submission": "sb"
+      },
+      {
+        "action": "next",
+        "bytes": [
+          3
+        ]
+      },
+      {
+        "action": "submitted",
+        "tag": "sb"
+      },
+      {
+        "action": "ack",
+        "tag": "b"
+      }
+    ]
+  },
+  {
+    "name": "rejected enqueue never installs a submission tag",
+    "capacity": 1,
+    "steps": [
+      {
+        "action": "enqueue",
+        "frames": [
+          [
+            1
+          ]
+        ],
+        "tag": "a",
+        "submission": "sa"
+      },
+      {
+        "action": "enqueue",
+        "frames": [
+          [
+            2
+          ]
+        ],
+        "tag": "b",
+        "submission": "sb",
+        "rejected": true
+      },
+      {
+        "action": "next",
+        "bytes": [
+          1
+        ]
+      },
+      {
+        "action": "submitted",
+        "tag": "sa"
+      },
+      {
+        "action": "ack",
+        "tag": "a"
+      },
+      {
+        "action": "submitted",
+        "tag": null
+      }
+    ]
+  },
+  {
+    "name": "a caller without submission observation retains legacy completion behavior",
+    "capacity": 1,
+    "steps": [
+      {
+        "action": "enqueue",
+        "frames": [
+          [
+            1
+          ]
+        ],
+        "tag": "a",
+        "submission": null
+      },
+      {
+        "action": "next",
+        "bytes": [
+          1
+        ]
+      },
+      {
+        "action": "submitted",
+        "tag": null
+      },
+      {
+        "action": "ack",
+        "tag": "a"
+      }
+    ]
   }
 ]

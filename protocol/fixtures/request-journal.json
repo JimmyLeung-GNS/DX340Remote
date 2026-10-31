@@ -61,7 +61,8 @@
           "error": null,
           "hostOutcome": "observed",
           "terminalApplied": true,
-          "writeAcknowledgedAfterMs": null
+          "writeAcknowledgedAfterMs": null,
+          "firstWriteSubmittedAfterMs": null
         }
       ],
       "connections": []
@@ -117,7 +118,8 @@
           "error": "OTHER",
           "hostOutcome": "none",
           "terminalApplied": false,
-          "writeAcknowledgedAfterMs": null
+          "writeAcknowledgedAfterMs": null,
+          "firstWriteSubmittedAfterMs": null
         }
       ],
       "connections": [
@@ -200,7 +202,8 @@
           "error": null,
           "hostOutcome": "none",
           "terminalApplied": false,
-          "writeAcknowledgedAfterMs": null
+          "writeAcknowledgedAfterMs": null,
+          "firstWriteSubmittedAfterMs": null
         },
         {
           "id": "read-new",
@@ -214,7 +217,8 @@
           "error": null,
           "hostOutcome": "none",
           "terminalApplied": false,
-          "writeAcknowledgedAfterMs": null
+          "writeAcknowledgedAfterMs": null,
+          "firstWriteSubmittedAfterMs": null
         }
       ],
       "connections": [
@@ -312,7 +316,8 @@
           "error": null,
           "hostOutcome": "none",
           "terminalApplied": false,
-          "writeAcknowledgedAfterMs": null
+          "writeAcknowledgedAfterMs": null,
+          "firstWriteSubmittedAfterMs": null
         },
         {
           "id": "c",
@@ -326,7 +331,8 @@
           "error": null,
           "hostOutcome": "none",
           "terminalApplied": false,
-          "writeAcknowledgedAfterMs": null
+          "writeAcknowledgedAfterMs": null,
+          "firstWriteSubmittedAfterMs": null
         }
       ],
       "connections": [
@@ -390,7 +396,8 @@
           "error": null,
           "hostOutcome": "none",
           "terminalApplied": false,
-          "writeAcknowledgedAfterMs": null
+          "writeAcknowledgedAfterMs": null,
+          "firstWriteSubmittedAfterMs": null
         }
       ],
       "connections": []
@@ -447,7 +454,8 @@
           "error": "STALE_SOURCE",
           "hostOutcome": "none",
           "terminalApplied": false,
-          "writeAcknowledgedAfterMs": null
+          "writeAcknowledgedAfterMs": null,
+          "firstWriteSubmittedAfterMs": null
         }
       ],
       "connections": []
@@ -568,7 +576,8 @@
           "error": null,
           "hostOutcome": "none",
           "terminalApplied": false,
-          "writeAcknowledgedAfterMs": null
+          "writeAcknowledgedAfterMs": null,
+          "firstWriteSubmittedAfterMs": null
         },
         {
           "id": "apple-wire",
@@ -582,7 +591,8 @@
           "error": null,
           "hostOutcome": "none",
           "terminalApplied": false,
-          "writeAcknowledgedAfterMs": null
+          "writeAcknowledgedAfterMs": null,
+          "firstWriteSubmittedAfterMs": null
         },
         {
           "id": "unknown-wire",
@@ -596,7 +606,8 @@
           "error": null,
           "hostOutcome": "none",
           "terminalApplied": false,
-          "writeAcknowledgedAfterMs": null
+          "writeAcknowledgedAfterMs": null,
+          "firstWriteSubmittedAfterMs": null
         },
         {
           "id": "lookalike-wire",
@@ -610,7 +621,8 @@
           "error": null,
           "hostOutcome": "none",
           "terminalApplied": false,
-          "writeAcknowledgedAfterMs": null
+          "writeAcknowledgedAfterMs": null,
+          "firstWriteSubmittedAfterMs": null
         },
         {
           "id": "upper-wire",
@@ -624,7 +636,8 @@
           "error": null,
           "hostOutcome": "none",
           "terminalApplied": false,
-          "writeAcknowledgedAfterMs": null
+          "writeAcknowledgedAfterMs": null,
+          "firstWriteSubmittedAfterMs": null
         },
         {
           "id": "no-source",
@@ -638,7 +651,8 @@
           "error": null,
           "hostOutcome": "none",
           "terminalApplied": false,
-          "writeAcknowledgedAfterMs": null
+          "writeAcknowledgedAfterMs": null,
+          "firstWriteSubmittedAfterMs": null
         },
         {
           "id": "empty-source",
@@ -652,7 +666,8 @@
           "error": null,
           "hostOutcome": "none",
           "terminalApplied": false,
-          "writeAcknowledgedAfterMs": null
+          "writeAcknowledgedAfterMs": null,
+          "firstWriteSubmittedAfterMs": null
         }
       ],
       "connections": []
@@ -716,7 +731,8 @@
           "result": "result",
           "error": null,
           "hostOutcome": "none",
-          "terminalApplied": true
+          "terminalApplied": true,
+          "firstWriteSubmittedAfterMs": null
         }
       ],
       "connections": []
@@ -774,7 +790,8 @@
           "result": "result",
           "error": null,
           "hostOutcome": "none",
-          "terminalApplied": true
+          "terminalApplied": true,
+          "firstWriteSubmittedAfterMs": null
         }
       ],
       "connections": []
@@ -863,7 +880,8 @@
           "result": "connection_lost",
           "error": null,
           "hostOutcome": "none",
-          "terminalApplied": false
+          "terminalApplied": false,
+          "firstWriteSubmittedAfterMs": null
         },
         {
           "id": "timeout",
@@ -877,7 +895,8 @@
           "result": "timeout",
           "error": null,
           "hostOutcome": "none",
-          "terminalApplied": false
+          "terminalApplied": false,
+          "firstWriteSubmittedAfterMs": null
         },
         {
           "id": "failed",
@@ -891,7 +910,8 @@
           "result": "send_failed",
           "error": null,
           "hostOutcome": "none",
-          "terminalApplied": false
+          "terminalApplied": false,
+          "firstWriteSubmittedAfterMs": null
         }
       ],
       "connections": []
@@ -961,7 +981,8 @@
           "result": "result",
           "error": null,
           "hostOutcome": "none",
-          "terminalApplied": true
+          "terminalApplied": true,
+          "firstWriteSubmittedAfterMs": null
         }
       ],
       "connections": []
@@ -1014,7 +1035,294 @@
           "result": "connection_lost",
           "error": null,
           "hostOutcome": "none",
-          "terminalApplied": false
+          "terminalApplied": false,
+          "firstWriteSubmittedAfterMs": null
+        }
+      ],
+      "connections": []
+    }
+  },
+  {
+    "name": "first platform submission is distinct from final write acknowledgment and result",
+    "capacity": 3,
+    "steps": [
+      {
+        "at": 10,
+        "action": "begin",
+        "id": "a",
+        "operation": "GET_STATE",
+        "source": "mango"
+      },
+      {
+        "at": 15,
+        "action": "writeSubmitted",
+        "id": "a"
+      },
+      {
+        "at": 20,
+        "action": "writeSubmitted",
+        "id": "a"
+      },
+      {
+        "at": 30,
+        "action": "writeAck",
+        "id": "a"
+      },
+      {
+        "at": 40,
+        "action": "reply",
+        "id": "a",
+        "type": "RESULT"
+      },
+      {
+        "at": 41,
+        "action": "apply",
+        "id": "a"
+      }
+    ],
+    "expected": {
+      "formatVersion": 1,
+      "clock": "monotonic_ms_relative_to_model",
+      "capacity": 3,
+      "evictedRequests": 0,
+      "evictedConnections": 0,
+      "requests": [
+        {
+          "id": "a",
+          "operation": "GET_STATE",
+          "source": "mango",
+          "startedMs": 10,
+          "firstWriteSubmittedAfterMs": 5,
+          "writeAcknowledgedAfterMs": 20,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 30,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        }
+      ],
+      "connections": []
+    }
+  },
+  {
+    "name": "local loss preserves submission but late callbacks cannot revive abandoned requests",
+    "capacity": 3,
+    "steps": [
+      {
+        "at": 10,
+        "action": "begin",
+        "id": "a",
+        "operation": "GET_STATE",
+        "source": "mango"
+      },
+      {
+        "at": 15,
+        "action": "writeSubmitted",
+        "id": "a"
+      },
+      {
+        "at": 20,
+        "action": "abandon",
+        "id": "a",
+        "reason": "connection_lost"
+      },
+      {
+        "at": 25,
+        "action": "writeSubmitted",
+        "id": "a"
+      },
+      {
+        "at": 26,
+        "action": "writeAck",
+        "id": "a"
+      },
+      {
+        "at": 30,
+        "action": "begin",
+        "id": "b",
+        "operation": "GET_STATE",
+        "source": "mango"
+      },
+      {
+        "at": 33,
+        "action": "writeSubmitted",
+        "id": "b"
+      },
+      {
+        "at": 35,
+        "action": "writeAck",
+        "id": "b"
+      },
+      {
+        "at": 40,
+        "action": "reply",
+        "id": "b",
+        "type": "RESULT"
+      },
+      {
+        "at": 41,
+        "action": "apply",
+        "id": "b"
+      }
+    ],
+    "expected": {
+      "formatVersion": 1,
+      "clock": "monotonic_ms_relative_to_model",
+      "capacity": 3,
+      "evictedRequests": 0,
+      "evictedConnections": 0,
+      "requests": [
+        {
+          "id": "a",
+          "operation": "GET_STATE",
+          "source": "mango",
+          "startedMs": 10,
+          "firstWriteSubmittedAfterMs": 5,
+          "writeAcknowledgedAfterMs": null,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 10,
+          "result": "connection_lost",
+          "terminalApplied": false,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "b",
+          "operation": "GET_STATE",
+          "source": "mango",
+          "startedMs": 30,
+          "firstWriteSubmittedAfterMs": 3,
+          "writeAcknowledgedAfterMs": 5,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 10,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        }
+      ],
+      "connections": []
+    }
+  },
+  {
+    "name": "evicted and locally failed request submissions remain unknown",
+    "capacity": 1,
+    "steps": [
+      {
+        "at": 1,
+        "action": "begin",
+        "id": "a",
+        "operation": "GET_STATE",
+        "source": "mango"
+      },
+      {
+        "at": 3,
+        "action": "begin",
+        "id": "b",
+        "operation": "GET_STATE",
+        "source": "mango"
+      },
+      {
+        "at": 4,
+        "action": "writeSubmitted",
+        "id": "a"
+      },
+      {
+        "at": 5,
+        "action": "finish",
+        "id": "b",
+        "reason": "send_failed"
+      },
+      {
+        "at": 6,
+        "action": "writeSubmitted",
+        "id": "b"
+      }
+    ],
+    "expected": {
+      "formatVersion": 1,
+      "clock": "monotonic_ms_relative_to_model",
+      "capacity": 1,
+      "evictedRequests": 1,
+      "evictedConnections": 0,
+      "requests": [
+        {
+          "id": "b",
+          "operation": "GET_STATE",
+          "source": "mango",
+          "startedMs": 3,
+          "firstWriteSubmittedAfterMs": null,
+          "writeAcknowledgedAfterMs": null,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 2,
+          "result": "send_failed",
+          "terminalApplied": false,
+          "hostOutcome": "none",
+          "error": null
+        }
+      ],
+      "connections": []
+    }
+  },
+  {
+    "name": "regressed first submission stays unknown despite a later duplicate",
+    "capacity": 3,
+    "steps": [
+      {
+        "at": 10,
+        "action": "begin",
+        "id": "a",
+        "operation": "GET_STATE",
+        "source": "mango"
+      },
+      {
+        "at": 9,
+        "action": "writeSubmitted",
+        "id": "a"
+      },
+      {
+        "at": 20,
+        "action": "writeSubmitted",
+        "id": "a"
+      },
+      {
+        "at": 25,
+        "action": "writeAck",
+        "id": "a"
+      },
+      {
+        "at": 26,
+        "action": "finish",
+        "id": "a",
+        "reason": "connection_lost"
+      }
+    ],
+    "expected": {
+      "formatVersion": 1,
+      "clock": "monotonic_ms_relative_to_model",
+      "capacity": 3,
+      "evictedRequests": 0,
+      "evictedConnections": 0,
+      "requests": [
+        {
+          "id": "a",
+          "operation": "GET_STATE",
+          "source": "mango",
+          "startedMs": 10,
+          "firstWriteSubmittedAfterMs": null,
+          "writeAcknowledgedAfterMs": 15,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 16,
+          "result": "connection_lost",
+          "terminalApplied": false,
+          "hostOutcome": "none",
+          "error": null
         }
       ],
       "connections": []
