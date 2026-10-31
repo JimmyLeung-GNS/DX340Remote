@@ -1,4 +1,23 @@
-# Device inventory — updated 30 October 2026
+# Device inventory
+
+## Current verified inventory —1 November2026
+
+Full goal remains ACTIVE/incomplete. The [acceptance reconciliation](test-results/2026-11-01-acceptance-reconciliation.json) and [current matrix](compatibility-matrix.md) supersede the older checkpoint summaries below. Direct read-only inventory again finds both physical Android devices and confirms their installed APK hashes:
+
+| Item | Current evidence | Limit |
+|---|---|---|
+| DX340 | Android13/API33, eng.iBasso.20260812.181952; original-signer Companion0.1.0/code1 SHA dc53629d33cecb25fb381d464fe3e55656b35ca5575c32211da3971fbda7e775/source1e3c551 | Latest source/control/audio/reliability results remain scoped; automatic indication-timeout recovery unverified physically. |
+| Pixel9a | Android16/API36 CP1A.260405.005; original-signer shared Remote0.2.0/code2 SHA95d29be69f09e90b978a6907e46d2ec9952b5a0676ccd0a7da0d36fa54d06bca/sourcee40b822 | Pending-browse loss/reconnect/fresh browse verified; current-build hearing/full acceptance incomplete. |
+| Current Windows PC | Microsoft Windows11 Pro10.0.26300; Android Studio JBR21.0.7 and pinned Flutter3.41.4/ff37bef603469fb030f2b72995ab929ccfc227f0 directly verified | `adb` on PATH resolves to the existing WinGet scrcpy3.3.3 package, while signing preflight uses explicit Android SDK tools. No global toolchain/configuration change. |
+| Android signing | Original private keystore remains present outside Git; original-signer update comparisons and installed hashes are in the dated reports | No private key is tracked or replaced; report certificates do not prove production distribution signing. |
+| Owner Mac/iPhone | Current Xcode tool inventory fails spawn xcrun ENOENT in this Windows connection; actual Mac/iPhone/team availability question pending | Hosted macOS26.6.2/Xcode26.6/iPhoneAir iOS26.5 simulator archives are not an owner Mac/signing/phone-BLE inventory. Reported iOS27.2 remains unverified. |
+| Watch/other DAPs | Hardware/OS not inventoried; Watch implementation gated on stable phones | No universal DAP or Watch support claim. |
+
+Raw `artifacts/acceptance-reconciliation-20261101/inventory.json` and `xcode-tool-inventory.json` are ignored. This reconciliation changes no package, source engine, volume, bond, radio, network, storage or power setting. The last physical-case final snapshots remain paused37/headset(4), normal phone Disconnect and mounted SD; inspect fresh state before another test. Source versions remain Mango4.1.37/code240 and Apple Music6.5.3/code1599.
+
+## Historical inventories
+
+The following dated records retain their original conditions. Old Current/availability labels are historical; use the current section and docs/status.md before acting.
 
 31 October device-switch checkpoint: shared phone **2dce4f99…/source5b8175d**, companion unchanged **58314b84…/sourcecf3bccc**. Context-invalidation guidance implemented in Kotlin/Swift;160 aggregate JVM/46 Flutter/10 Swift checks and Android build/lint plus both hosted Mac simulator jobs pass. Physical Pixel native album/queue synthetic invalidation now shows clear refresh guidance and recovers23 queue rows. Assisted-message physical test not executed because Mango optional UI mode was observed off (cause unconfirmed); Apple mode on, preserve current settings. [Current evidence](test-results/2026-10-31-refresh-background.md) retains first347.428s run interrupted by unexplained playback (single local Pause recovery), and repeat1779.414s/56 successful samples ending in device-read failure before30minutes. All successful repeat samples retained processes/services/paused sources/output37, but DX340 woke; no full background/sleep pass or post-return BLE read. Both devices disappeared from ADB before cleanup: final Disconnect and Pixel Wi-Fi restoration NOT VERIFIED/PERFORMED (last Wi-Fi0, original1); last sources paused37/proof false, grants retained. Resume by inspecting devices, ordinary Disconnect and restoring Wi-Fi as appropriate; never infer USB removal ended BLE. **Pending UX-01: improved app UI and original logos/icons**, [brief](ui-branding-plan.md); design not started. Full system ACTIVE/incomplete; physical iPhone/signing, actual SD/rescan, broader phone/audio/reliability/Watch remain open. Earlier paragraphs below are historical and retain their package scope.
 

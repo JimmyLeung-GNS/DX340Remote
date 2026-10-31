@@ -1,0 +1,230 @@
+{
+  "recordedAt": "2026-11-01T03:20:44.637356+08:00",
+  "auditedFromCommit": "bade60d46bcb232dcdb6bf2649a8b61ce6793b61",
+  "goal": "ACTIVE/incomplete",
+  "status": "ACCEPTANCE_INCOMPLETE",
+  "fullAcceptancePassed": false,
+  "installed": {
+    "host": {
+      "serial": "d",
+      "model": "DX340",
+      "build": "DX340-userdebug 13 TKQ1.221013.002 eng.iBasso.20260812.181952 release-keys",
+      "app": {
+        "package": "org.dx340.remote.host",
+        "sha256": "dc53629d33cecb25fb381d464fe3e55656b35ca5575c32211da3971fbda7e775",
+        "versionName": "0.1.0",
+        "versionCode": 1
+      }
+    },
+    "phone": {
+      "serial": "53061JEBF22737",
+      "model": "Pixel 9a",
+      "build": "CP1A.260405.005",
+      "app": {
+        "package": "org.dx340.remote.controller",
+        "sha256": "95d29be69f09e90b978a6907e46d2ec9952b5a0676ccd0a7da0d36fa54d06bca",
+        "versionName": "0.2.0",
+        "versionCode": 2
+      }
+    }
+  },
+  "historicalMatrixArchive": {
+    "file": "docs/compatibility-matrix.bade60d-archive.md",
+    "canonicalSha256": "2ca0de4920fd059f5c4e35e2d58254c994f5f5052937b38c32eacb4644bdf5cb",
+    "sourceCommit": "bade60d46bcb232dcdb6bf2649a8b61ce6793b61"
+  },
+  "stages": [
+    {
+      "id": "P0",
+      "status": "PARTIAL",
+      "finding": "DX340/Pixel/Windows/signing inventoried; owner Mac/iPhone model/build/team and Watch remain unknown."
+    },
+    {
+      "id": "P1",
+      "status": "PARTIAL",
+      "finding": "Actual Android/PC BLE and local authorization subsets verified; physical iPhone/offline/sleep gate incomplete."
+    },
+    {
+      "id": "P2",
+      "status": "PARTIAL",
+      "finding": "Versioned source adapters and many physical subsets exist; full both-phone/source action/audio matrix incomplete."
+    },
+    {
+      "id": "P3",
+      "status": "IMPLEMENTED_PARTIAL_VALIDATION",
+      "finding": "Host protocol/routing/authorization/storage guards implemented; physical automatic indication-timeout recovery still unverified."
+    },
+    {
+      "id": "P4",
+      "status": "IMPLEMENTED_PARTIAL_VALIDATION",
+      "finding": "Shared Pixel95 installed; saved setup/browsing/interruption recovery verified.100 controls/source, full audio/reliability remain open."
+    },
+    {
+      "id": "P5",
+      "status": "IMPLEMENTED_SIMULATOR_ONLY",
+      "finding": "Shared/native iPhone build and simulator/export checks pass. Owner signing/install/BLE/audio not tested."
+    },
+    {
+      "id": "P6",
+      "status": "IMPLEMENTED_PARTIAL_VALIDATION",
+      "finding": "Mango native metadata plus optional awake/unlocked folders/playlists; current navigation verified, current20-file audio matrix incomplete."
+    },
+    {
+      "id": "P7",
+      "status": "IMPLEMENTED_PARTIAL_VALIDATION",
+      "finding": "Optional awake/unlocked Apple Downloaded UI adapter; older offline outside-queue hearing is scoped, current20/both-phone matrix incomplete."
+    },
+    {
+      "id": "P8",
+      "status": "PARTIAL",
+      "finding": "Original-signer updates and fault subsets pass; page latency, calls/range/sleep/battery/walking/output/store gates remain open."
+    },
+    {
+      "id": "P9",
+      "status": "NOT_STARTED",
+      "finding": "Native Watch remains gated on stable phones; no Watch hardware evidence."
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "T01",
+      "status": "PARTIAL",
+      "finding": "Both endpoints Wi-Fi0 in BLE cases; Pixel cellular1 keeps strict cellular-off requirement open. Physical iPhone missing.",
+      "remainingRequirement": "Both phones connect with Wi-Fi and cellular off.",
+      "evidence": "2026-11-01-interrupted-library.md"
+    },
+    {
+      "id": "T02",
+      "status": "PARTIAL_OLDER_BINARY",
+      "finding": "Ten earlier1a592/491 desk saved-connect cycles; current95 saved reconnect passes. No bag-distance discovery cohort.",
+      "remainingRequirement": "At least9/10 discovery/connect trials within10s at normal bag distance, each phone.",
+      "evidence": "2026-10-31-saved-player-reconnect.md"
+    },
+    {
+      "id": "T03",
+      "status": "NOT_PASSED",
+      "finding": "Older owner-audible controls retain their source hashes; current95 interrupted browsing is not100 playback controls.",
+      "remainingRequirement": "100 deliberate commands per source/phone, at least99percent confirmed, no duplicate skip/wrong-source command.",
+      "evidence": "2026-10-31-current-phone-source-audio.md"
+    },
+    {
+      "id": "T04",
+      "status": "NOT_PASSED",
+      "finding": "Earlier4ee read-only ACK/reply p95 Mango160/469ms, Apple168/494ms are scoped. Current95 fresh SD result7777ms misses3s page target; no full control/state/acoustic pass.",
+      "remainingRequirement": "ACK p95 below500ms, observed local state below1.5s; cache pages below500ms/uncached below3s measured separately.",
+      "evidence": "2026-11-01-write-ack-timing.md"
+    },
+    {
+      "id": "T05",
+      "status": "NOT_PASSED",
+      "finding": "Earlier1802.562s USB-powered Awake/background subset; two USB-power-wake sleep holds failed. Job5024 failedARMING_TIMEOUT with zero hold samples; parser fixed, no repeat underway.",
+      "remainingRequirement": "Actual DX340 sleep/30minute pause followed by phone resume with no DX340 handling.",
+      "evidence": "2026-11-01-unplugged-arming.json"
+    },
+    {
+      "id": "T06",
+      "status": "NOT_TESTED",
+      "finding": "No physical ten-cycle range cohort on either phone.",
+      "remainingRequirement": "Ten out-of-range returns; reconnect within15s after phone foreground/host available without stale replay.",
+      "evidence": "2026-11-01-interrupted-library.md"
+    },
+    {
+      "id": "T07",
+      "status": "PARTIAL_OLDER_AUDIO",
+      "finding": "Older source-local20 cases retain24attempts/4rejections/mixed builds; later b805/00e5 audible outside101 queue and ce47/82ad outside21 queue remain separate. No95 audio result.",
+      "remainingRequirement": "20 correct offline downloaded selections across5albums/2playlists, outside prior queue included, each phone.",
+      "evidence": "2026-10-31-current-sd-audio.md"
+    },
+    {
+      "id": "T08",
+      "status": "PARTIAL_OLDER_AUDIO",
+      "finding": "b805/00e5 physical Pixel WAV/FLAC owner hearing (2/20 in that scope) and earlier source-local cases retain caveats.95 mounted storage/fault recovery contains no selected-file playback.",
+      "remainingRequirement": "At least20 correct FLAC/WAV selections across albums/folders/exposed playlists through Mango, each phone.",
+      "evidence": "2026-10-31-current-phone-source-audio.md"
+    },
+    {
+      "id": "T09",
+      "status": "PARTIAL",
+      "finding": "Older source-switch/state/audio subsets retain exact hashes; no current95/full both-phone acoustic overlap matrix.",
+      "remainingRequirement": "Alternate source control during playback; only selected source changes, no unwanted overlap.",
+      "evidence": "2026-10-31-phone-ui-source-scope.md"
+    },
+    {
+      "id": "T10",
+      "status": "PARTIAL_OLDER_AUDIO",
+      "finding": "Older37\u219236\u219237 owner-confirmed adapter steps on AMP15 phone out. Current volume proof false and remote volume disabled; output/range/wheel/phone/reconnect coverage incomplete.",
+      "remainingRequirement": "Bounded low-level volume steps match wheel and actual output, no reconnect jump.",
+      "evidence": "2026-10-29-resumed-volume.md"
+    },
+    {
+      "id": "T11",
+      "status": "PARTIAL_WITH_RETAINED_FAILURES",
+      "finding": "Real OS cycles/add-remove stale-folder cases retain scope. Current mounted root/nested Internal navigation passes; original no-card Internal8412ms timeout and Apple MEDIA_MOUNTED crash remain open.",
+      "remainingRequirement": "Safe add/remove/rescan/physical SD handling with stale IDs rejected/refreshed and original files preserved.",
+      "evidence": "2026-11-01-mounted-storage-navigation.md"
+    },
+    {
+      "id": "T12",
+      "status": "PARTIAL",
+      "finding": "Current95 pending browse loss clears spinner; saved reconnect does not replay. Earlier radio/permission/process recovery scopes retained; new-host indication-timeout auto-recovery, calls/full sleep/two-phone matrix incomplete.",
+      "remainingRequirement": "Calls/radio/permission/background/restart produce honest status and bounded recovery with clear required action.",
+      "evidence": "2026-11-01-interrupted-library.md"
+    },
+    {
+      "id": "T13",
+      "status": "NOT_TESTED_PHYSICALLY",
+      "finding": "Six two-hour entries/matched procedure and12 software checks prepared; zero measured battery trials.",
+      "remainingRequirement": "Three matched2hour off/on pairs; proposed extra drain no more than5percentage points/2hours.",
+      "evidence": "2026-10-31-battery-preparation.md"
+    },
+    {
+      "id": "T14",
+      "status": "NOT_TESTED",
+      "finding": "No physical one-hour bag walk on either phone.",
+      "remainingRequirement": "One hour in actual bag per phone; supported controls reliable without unexpected playback interruption.",
+      "evidence": "2026-11-01-interrupted-library.md"
+    },
+    {
+      "id": "T15",
+      "status": "PARTIAL",
+      "finding": "Prior unapproved/revoked denial subsets retained. Current desktop added through normal identified approval; Pixel/JIMMYAH and OS bonds preserved. No existing PC revocation repeated. Full each-phone/live timing incomplete.",
+      "remainingRequirement": "No metadata/control before approval; revocation enforced, preserving instructed grants during development.",
+      "evidence": "2026-11-01-framing-bounds.md"
+    },
+    {
+      "id": "T16",
+      "status": "PARTIAL",
+      "finding": "PC65537-byte and60s slow-drip bounds, earlier malformed/quota/idle subset, current95 pending-browse loss/no replay verified. Duplicate playback mutation, physical pending ATT writes and delayed callbacks remain open.",
+      "remainingRequirement": "Duplicate/delayed/truncated/oversized/transfer-loss faults cause no crash, duplicate mutation or unbounded allocation.",
+      "evidence": "2026-11-01-framing-bounds.md"
+    },
+    {
+      "id": "T17",
+      "status": "PARTIAL",
+      "finding": "Original-signer hostdc/phone95 verified in place, grants/settings retained. Earlier enabled/stopped package-restoration scopes retained. Final fresh install/production signing/owner-iPhone not tested.",
+      "remainingRequirement": "Fresh install and upgrades preserve intended pairing/state with valid installation/signing.",
+      "evidence": "2026-11-01-interrupted-library.md"
+    },
+    {
+      "id": "T18",
+      "status": "NOT_IMPLEMENTED_NOT_TESTED",
+      "finding": "No Watch target/hardware acceptance; stable-phone gate remains unmet.",
+      "remainingRequirement": "Later supported Watch commands tested on actual hardware, wrist-down/out-of-range, no internet.",
+      "evidence": "2026-11-01-interrupted-library.md"
+    }
+  ],
+  "sourceOfTargets": "docs/implementation-plan.md sections12,13,18; numeric targets remain proposed, not proven",
+  "resourceGate": "FAILED spawn xcrun ENOENT; no owner Mac available through current tool connection",
+  "ownerMacAvailability": "UNKNOWN; fresh text question pending",
+  "limits": "This reconciliation is a documentation/evidence audit, not an additional radio/audio/build/physical acceptance test.",
+  "rawEvidence": [
+    {
+      "file": "artifacts/acceptance-reconciliation-20261101/inventory.json",
+      "sha256": "154d41a5222435f06f9fe202035f208a469b6e555117d13c158987861118a2ac"
+    },
+    {
+      "file": "artifacts/acceptance-reconciliation-20261101/xcode-tool-inventory.json",
+      "sha256": "1be147c02380d16b086f0947f8292d83e244533dbc0b2aaa69462857856eff29"
+    }
+  ]
+}
