@@ -23,9 +23,10 @@
       "build": "CP1A.260405.005",
       "app": {
         "package": "org.dx340.remote.controller",
-        "sha256": "95d29be69f09e90b978a6907e46d2ec9952b5a0676ccd0a7da0d36fa54d06bca",
+        "sha256": "a65ac6a9660223532a23f0eaf828dc62282759d1e66e04dba66fb10a2704622a",
         "versionName": "0.2.0",
-        "versionCode": 2
+        "versionCode": 2,
+        "sourceCommit": "d06a481b4eb533b42d80331203891f8f62a342ab"
       }
     }
   },
@@ -54,12 +55,13 @@
       "id": "P3",
       "status": "IMPLEMENTED_PARTIAL_VALIDATION",
       "finding": "Host protocol/routing/authorization/storage implemented; injected physical automatic recovery, budget exhaustion and native Restart verified; natural faults/full matrix incomplete.",
-      "recoveryBudgetEvidence": "2026-11-01-recovery-budget.md"
+      "recoveryBudgetEvidence": "2026-11-01-recovery-budget.md",
+      "firstSubmissionRecoveryEvidence": "2026-11-01-first-write-submission.md"
     },
     {
       "id": "P4",
       "status": "IMPLEMENTED_PARTIAL_VALIDATION",
-      "finding": "Shared Pixel95 installed; saved setup/browsing/interruption recovery verified.100 controls/source, full audio/reliability remain open."
+      "finding": "Shared Pixela65 installed; submission/ACK diagnostics, reply-loss retirement and saved recovery verified. Older95 browse/audio evidence retains exact scope; full source/reliability remains open."
     },
     {
       "id": "P5",
@@ -114,11 +116,12 @@
     {
       "id": "T04",
       "status": "NOT_PASSED",
-      "finding": "Earlier4ee read-only ACK/reply p95 Mango160/469ms, Apple168/494ms are scoped. Current95 fresh SD result7777ms misses3s page target; no full control/state/acoustic pass.",
+      "finding": "Earlier4ee read-only ACK/reply p95 Mango160/469ms, Apple168/494ms are scoped. Current95 fresh SD result7777ms misses3s page target; no full control/state/acoustic pass. [Evidence](test-results/2026-11-01-write-ack-timing.md).  Current95 isolated GET_STATE ATT94ms/RESULT322ms is one read, not a p95/control/audio pass. [Current read](test-results/2026-11-01-no-active-network-read.md).  Currenta65 first-submission timing is separate from ACK; no p95/control/audio pass. [Submission report](test-results/2026-11-01-first-write-submission.md).",
       "remainingRequirement": "ACK p95 below500ms, observed local state below1.5s; cache pages below500ms/uncached below3s measured separately.",
       "evidence": "2026-11-01-write-ack-timing.md",
       "supplementalEvidence": "2026-11-01-no-active-network-read.md",
-      "supplementalFinding": "Current95 isolated GET_STATE ATT94ms/RESULT322ms is one read, not a p95/control/audio pass."
+      "supplementalFinding": "Current95 isolated GET_STATE ATT94ms/RESULT322ms is one read, not a p95/control/audio pass.",
+      "firstSubmissionEvidence": "2026-11-01-first-write-submission.md"
     },
     {
       "id": "T05",
@@ -137,7 +140,7 @@
     {
       "id": "T07",
       "status": "PARTIAL_OLDER_AUDIO",
-      "finding": "Older source-local20 cases retain24attempts/4rejections/mixed builds; later b805/00e5 audible outside101 queue and ce47/82ad outside21 queue remain separate. No95 audio result.",
+      "finding": "Older source-local20 cases retain24attempts/4rejections/mixed builds; later b805/00e5 audible outside101 queue and ce47/82ad outside21 queue remain separate. Earlier611/95 downloaded-album selection outside captured101 queue reaches expected PLAYING3; hearing pending, no a65 audio pass. [Prior pair](test-results/2026-11-01-current-pair-source-selection.md). [Evidence](test-results/2026-10-31-current-sd-audio.md).",
       "remainingRequirement": "20 correct offline downloaded selections across5albums/2playlists, outside prior queue included, each phone.",
       "evidence": "2026-10-31-current-sd-audio.md",
       "currentPairSelectionSupplement": "2026-11-01-current-pair-source-selection.md"
@@ -145,7 +148,7 @@
     {
       "id": "T08",
       "status": "PARTIAL_OLDER_AUDIO",
-      "finding": "b805/00e5 physical Pixel WAV/FLAC owner hearing (2/20 in that scope) and earlier source-local cases retain caveats.95 mounted storage/fault recovery contains no selected-file playback.",
+      "finding": "b805/00e5 physical Pixel WAV/FLAC owner hearing (2/20 in that scope) and earlier source-local cases retain caveats. Earlier611/95 two selected WAV/FLAC files reach expected PLAYING3, sampled rows stable; hearing pending, no a65 audio pass. [Prior pair](test-results/2026-11-01-current-pair-source-selection.md). [Evidence](test-results/2026-10-31-current-phone-source-audio.md).",
       "remainingRequirement": "At least20 correct FLAC/WAV selections across albums/folders/exposed playlists through Mango, each phone.",
       "evidence": "2026-10-31-current-phone-source-audio.md",
       "currentPairSelectionSupplement": "2026-11-01-current-pair-source-selection.md"
@@ -153,7 +156,7 @@
     {
       "id": "T09",
       "status": "PARTIAL",
-      "finding": "Older source-switch/state/audio subsets retain exact hashes; no current95/full both-phone acoustic overlap matrix.",
+      "finding": "Older source-switch/state/audio subsets retain exact hashes; earlier611/95 exclusive source snapshots and deliberate pauses pass, hearing pending/no full acoustic matrix. [Prior pair](test-results/2026-11-01-current-pair-source-selection.md). [Evidence](test-results/2026-10-31-phone-ui-source-scope.md).",
       "remainingRequirement": "Alternate source control during playback; only selected source changes, no unwanted overlap.",
       "evidence": "2026-10-31-phone-ui-source-scope.md",
       "currentPairSelectionSupplement": "2026-11-01-current-pair-source-selection.md"
@@ -175,11 +178,12 @@
     {
       "id": "T12",
       "status": "PARTIAL",
-      "finding": "Current95 pending browse loss clears spinner; saved reconnect does not replay. Earlier radio/permission/process recovery scopes retained; new host debug-injected timeout auto-recovery verified without replay; budget exhaustion/native Restart now verified with an intermediate reconnect loss retained. [Budget evidence](test-results/2026-11-01-recovery-budget.md). Natural faults/calls/full sleep/two-phone matrix incomplete. [Evidence](test-results/2026-11-01-interrupted-library.md).",
+      "finding": "Current95 pending browse loss clears spinner; saved reconnect does not replay. Earlier radio/permission/process recovery scopes retained; new host debug-injected timeout auto-recovery verified without replay; budget exhaustion/native Restart now verified with an intermediate reconnect loss retained. [Budget evidence](test-results/2026-11-01-recovery-budget.md). Natural faults/calls/full sleep/two-phone matrix incomplete. [Evidence](test-results/2026-11-01-interrupted-library.md).  Currenta65/611 real phone-radio interruption retires a read; un-injected host timeout restores advertising693ms later, saved Connect/fresh read pass. [Current result](test-results/2026-11-01-first-write-submission.md).",
       "remainingRequirement": "Calls/radio/permission/background/restart produce honest status and bounded recovery with clear required action.",
       "evidence": "2026-11-01-interrupted-library.md",
       "injectedRecoverySupplement": "2026-11-01-injected-indication-recovery.md",
-      "recoveryBudgetEvidence": "2026-11-01-recovery-budget.md"
+      "recoveryBudgetEvidence": "2026-11-01-recovery-budget.md",
+      "firstSubmissionEvidence": "2026-11-01-first-write-submission.md"
     },
     {
       "id": "T13",
@@ -205,19 +209,21 @@
     {
       "id": "T16",
       "status": "PARTIAL",
-      "finding": "PC65537-byte and60s slow-drip bounds, earlier malformed/quota/idle subset, current95 pending-browse loss/no replay verified. One debug-injected successful indication callback omission reaches the real deadline and recovers, with no old read replay. Three burst callback omissions also verify bounded exhaustion/native Restart and retired reads without replay. [Budget evidence](test-results/2026-11-01-recovery-budget.md). Duplicate playback mutations, input ATT write faults and natural vendor failures remain open. [Evidence](test-results/2026-11-01-framing-bounds.md).",
+      "finding": "PC65537-byte and60s slow-drip bounds, earlier malformed/quota/idle subset, current95 pending-browse loss/no replay verified. One debug-injected successful indication callback omission reaches the real deadline and recovers, with no old read replay. Three burst callback omissions also verify bounded exhaustion/native Restart and retired reads without replay. [Budget evidence](test-results/2026-11-01-recovery-budget.md). Duplicate playback mutations, input ATT write faults and natural vendor failures remain open. [Evidence](test-results/2026-11-01-framing-bounds.md).  Currenta65 input-write phase target NOT MET (ACK144ms before loss363ms); do not count this reply-wait cut as pending-write proof. [Phase result](test-results/2026-11-01-first-write-submission.md).",
       "remainingRequirement": "Duplicate/delayed/truncated/oversized/transfer-loss faults cause no crash, duplicate mutation or unbounded allocation.",
       "evidence": "2026-11-01-framing-bounds.md",
       "injectedRecoverySupplement": "2026-11-01-injected-indication-recovery.md",
-      "recoveryBudgetEvidence": "2026-11-01-recovery-budget.md"
+      "recoveryBudgetEvidence": "2026-11-01-recovery-budget.md",
+      "firstSubmissionEvidence": "2026-11-01-first-write-submission.md"
     },
     {
       "id": "T17",
       "status": "PARTIAL",
-      "finding": "Original-signer host611/phone95 verified in place, grants/settings retained. Earlier enabled/stopped package-restoration scopes retained. Final fresh install/production signing/owner-iPhone not tested. [Evidence](test-results/2026-11-01-interrupted-library.md).",
+      "finding": "Original-signer host611/phonea65 verified in place, grants/settings retained. [Current update](test-results/2026-11-01-first-write-submission.md). Earlier enabled/stopped package-restoration scopes retained. Final fresh install/production signing/owner-iPhone not tested. [Earlier evidence](test-results/2026-11-01-interrupted-library.md).",
       "remainingRequirement": "Fresh install and upgrades preserve intended pairing/state with valid installation/signing.",
       "evidence": "2026-11-01-interrupted-library.md",
-      "injectedRecoverySupplement": "2026-11-01-injected-indication-recovery.md"
+      "injectedRecoverySupplement": "2026-11-01-injected-indication-recovery.md",
+      "firstSubmissionEvidence": "2026-11-01-first-write-submission.md"
     },
     {
       "id": "T18",
@@ -241,7 +247,7 @@
       "sha256": "1be147c02380d16b086f0947f8292d83e244533dbc0b2aaa69462857856eff29"
     }
   ],
-  "lastSupplementedAt": "2026-11-01T04:25:43.981125+08:00",
+  "lastSupplementedAt": "2026-11-01T05:02:45.570724+08:00",
   "injectedRecoverySupplement": {
     "evidence": "2026-11-01-injected-indication-recovery.md",
     "scope": "one debug-injected missed successful indication callback; actual existing timeout/recreation/automatic phone authorization; no playback",
@@ -282,6 +288,24 @@
     "allPreviousRowsUnchanged": true,
     "interruptedReadsRetired": 3,
     "noReplay": true,
+    "fullAcceptancePassed": false
+  },
+  "firstSubmissionSupplement": {
+    "evidence": "2026-11-01-first-write-submission.md",
+    "newOptionalField": "firstWriteSubmittedAfterMs",
+    "jvm": 242,
+    "flutter": 82,
+    "swift": 22,
+    "pythonAnalyser": 18,
+    "inputWritePhaseTarget": "NOT_MET afterACK reply loss",
+    "unsuppressedIndicationTimeoutAdvertisingMs": 693,
+    "journalCounts": [
+      3,
+      4,
+      7
+    ],
+    "noReplay": true,
+    "bothD06AppleJobsClosedArchiveVerified": true,
     "fullAcceptancePassed": false
   }
 }

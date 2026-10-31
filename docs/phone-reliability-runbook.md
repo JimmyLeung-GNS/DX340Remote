@@ -1,5 +1,7 @@
 # Phone connection acceptance
 
+Latest1 November: installed Pixela65ac6a9/source d06a481/PID4427 and unchanged host61153223/source9fb/PID10544. New first-submission diagnostics are verified; requested pending-input-write phase is NOT MET (ACK144ms before loss363ms). Real controller-radio interruption also verifies un-injected host timeout/advertising recovery693ms, no replay/saved recovery. Both new Apple jobs closedSUCCESS/archiveverified, simulator only. All source hearing answers/currenta65 audio/full acceptance remain unproved. [Detailed report](test-results/2026-11-01-first-write-submission.md). Older inventory/results below keep exact scopes.
+
 Latest1 November: actual611/95 debug-injected burst now verifies the two-per-minute recovery limit and native Restart phone control path without new pairing/approval. One intermediate reconnect loss is retained; a distinct fresh read succeeds, all saved grants/settings and paused37 preserved. [Budget/restart evidence](test-results/2026-11-01-recovery-budget.md). This is not natural vendor/input-write/audio/full acceptance proof.
 
 Current611/95 pair also verifies three source PLAYING selections and stable sampled song rows; all three fresh listening answers remain pending. Final04:11:50 both sources paused37, grants/settings preserved and phone disconnected. [Source selection evidence](test-results/2026-11-01-current-pair-source-selection.md).

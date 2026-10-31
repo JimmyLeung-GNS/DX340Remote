@@ -1,0 +1,199 @@
+{
+  "date": "2026-11-01",
+  "implementation": "VERIFIED native first-write submission timing, separate from final ACK; no command/retry/playback changes",
+  "source": "d06a481b4eb533b42d80331203891f8f62a342ab",
+  "phone": {
+    "sha256": "a65ac6a9660223532a23f0eaf828dc62282759d1e66e04dba66fb10a2704622a",
+    "version": "shared0.2.0/code2",
+    "device": "Pixel9a Android16/API36 CP1A.260405.005",
+    "pid": "4427",
+    "previousSha256": "95d29be69f09e90b978a6907e46d2ec9952b5a0676ccd0a7da0d36fa54d06bca",
+    "previousPid": "25153",
+    "originalSignerVerified": true
+  },
+  "host": {
+    "sha256": "61153223b7a37d5ed3ac293455478d4199cf4fed4b2f4282fb21e5f03915a215",
+    "source": "9fb503a3eac7fc8832a3e4abfd5758962b19aa48",
+    "device": "DX340 Android13/API33 eng.iBasso.20260812.181952 Companion0.1.0/code1",
+    "pid": "10544",
+    "notUpdated": true,
+    "newNativeHostCandidateNotInstalled": true
+  },
+  "validation": {
+    "jvmCounts": {
+      "core-protocol": 58,
+      "controller-core": 3,
+      "library-cache": 7,
+      "source-adapters": 146,
+      "host-app": 28
+    },
+    "jvmTotal": 242,
+    "flutter": 82,
+    "pythonReportTests": 18,
+    "sharedQueueFixtures": 8,
+    "sharedJournalFixtures": 16,
+    "ci": [
+      {
+        "run": 41239849340,
+        "source": "d06a481b4eb533b42d80331203891f8f62a342ab",
+        "status": "CLOSED_SUCCESS_ARCHIVE_VERIFIED",
+        "artifact": 13057022917,
+        "sha256": "abbfc8bfe3baf4027f66cd45827e6573a54cc78d6599c48e9f7730021f660e8d",
+        "simulatorRuntime": "com.apple.CoreSimulator.SimRuntime.iOS-26-5",
+        "simulatorName": "iPhone Air"
+      },
+      {
+        "run": 41239849305,
+        "source": "d06a481b4eb533b42d80331203891f8f62a342ab",
+        "status": "CLOSED_SUCCESS_ARCHIVE_VERIFIED",
+        "artifact": 13056948663,
+        "sha256": "fe1d840255a93f6d7be156bdc17eac2c4d5d8869465c395afda0c6669ced65a2",
+        "simulatorRuntime": "com.apple.CoreSimulator.SimRuntime.iOS-26-5",
+        "simulatorName": "iPhone Air"
+      }
+    ],
+    "swiftTests": 22,
+    "captureGuardsPerAppleJob": 12,
+    "sharedSimulatorBuilds": 7,
+    "nativeShareAndOrdinaryRestorationImagesInspected": true,
+    "emptyNativeReportModelMatched": true,
+    "appleEvidenceScope": "macOS26.6.2/25G83 Xcode26.6/17F113; iPhoneAir/iOS26.5 simulators only, no physical iPhone or signing"
+  },
+  "targetedFaultPhase": {
+    "requested": "input write before successful last-frame callback",
+    "result": "NOT_MET; this was a post-ACK reply-wait interruption",
+    "interruptedRow": {
+      "id": "6e482d41-aad7-4c04-9058-57d8f8becede",
+      "operation": "GET_STATE",
+      "source": "mango",
+      "startedMs": 425171,
+      "firstWriteSubmittedAfterMs": 3,
+      "writeAcknowledgedAfterMs": 144,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 363,
+      "result": "connection_lost",
+      "terminalApplied": false,
+      "hostOutcome": "none",
+      "error": null
+    },
+    "why": "write acknowledged at144ms after send start; local loss at363ms; not proof of pending input ATT write",
+    "next": "Use a separate bounded debug host ATT-response hold/discard harness; preserve this failed phase targeting, do not race/replay playback"
+  },
+  "actualRadioInterruption": {
+    "status": "VERIFIED one single-use on-device job after explicit fresh first-write submission; radio choice restored",
+    "job": {
+      "caseId": "f8a0c7b5ce9c469ba30de651e4fa0f43",
+      "root": "/data/local/tmp/dx340-write-cut-f8a0c7b5ce9c469ba30de651e4fa0f43",
+      "scriptSha256": "1b7cd06e25b02f3743fde5118bb6b6a60c9ff76d6895562f9251b2353bc24f80",
+      "pid": 6068,
+      "phase": "FINISHED",
+      "startedAt": "2026-11-01T04:46:55.344473+08:00",
+      "tap": {
+        "bounds": [
+          53,
+          1479,
+          1028,
+          1605
+        ],
+        "at": "2026-11-01T04:46:59.147040+08:00"
+      },
+      "finalPhase": "FINISHED",
+      "collectedAt": "2026-11-01T04:47:03.321217+08:00"
+    },
+    "offSetting": 0,
+    "offSampleManagerState": "BLE_TURNING_ON",
+    "notAFullRfOffClaim": true,
+    "restoredSetting": 1,
+    "restoredManagerState": "ON",
+    "jobAndLoggerExited": true
+  },
+  "uninjectedHostRecovery": {
+    "status": "VERIFIED indication timeout following deliberate real controller-radio interruption; no callback suppression armed",
+    "disconnectToTimeoutMs": 9890,
+    "timeoutToAdvertisingMs": 693,
+    "lastArmAgeAtTimeoutMs": 1655617,
+    "hostPidAndEpochUnchanged": true,
+    "notASpontaneousVendorFailureClaim": true,
+    "laterSavedPhoneConnectUsed": true
+  },
+  "journal": {
+    "modelInstanceId": "a6d211e5-d892-4ae6-a416-ebe05ff24768",
+    "counts": [
+      3,
+      4,
+      7
+    ],
+    "allPriorRowsUnchanged": true,
+    "zeroEvictions": true,
+    "newModelAfterUpgradeExpected": true,
+    "previousModel60RowsRetainedInOlderArtifacts": true,
+    "afterLossOnlyFreshHelloAuthorizeThenOneExplicitRead": true,
+    "freshRead": {
+      "id": "c6acd300-c3a9-45a1-955e-c5dd74c32c42",
+      "operation": "GET_STATE",
+      "source": "mango",
+      "startedMs": 734284,
+      "firstWriteSubmittedAfterMs": 4,
+      "writeAcknowledgedAfterMs": 160,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 556,
+      "result": "result",
+      "terminalApplied": true,
+      "hostOutcome": "none",
+      "error": null
+    },
+    "legacy60RowsSubmissionUnknownNotInferred": true
+  },
+  "preserved": {
+    "fourPreferenceHashes": {
+      "controllers": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311",
+      "mango-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "apple-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "source-verification": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    "settingsBeforeAndFinal": {
+      "host": {
+        "wifi_on": "0",
+        "mobile_data": "0",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      },
+      "phone": {
+        "wifi_on": "0",
+        "mobile_data": "1",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      }
+    },
+    "permissionGrantFlagsUnchanged": true,
+    "sourcePausedPositions": {
+      "com.ibasso.music": 69226,
+      "com.apple.android.music": 136548
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeProof": false,
+    "threeApprovedControllersAndBondsRetained": true,
+    "browsingModesBindingsAndCardRetained": true,
+    "phone": "normal Disconnect/help collapsed/foreground cleared",
+    "host": "main/foreground service retained"
+  },
+  "limits": [
+    "input ATT write fault target NOT MET",
+    "no duplicate playback mutation or audio proof",
+    "three older611/95 hearing questions remain pending",
+    "no full T12/T16/T04 p95",
+    "no strict cellular-offT01",
+    "no physical iPhone/Mac signing/Watch",
+    "no30minute unplugged hold"
+  ],
+  "evidence": {
+    "root": "artifacts/first-write-submission-20261101",
+    "files": 308,
+    "hashManifest": "artifacts/first-write-submission-20261101/SHA256SUMS.json"
+  }
+}

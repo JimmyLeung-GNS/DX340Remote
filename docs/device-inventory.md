@@ -1,5 +1,7 @@
 # Device inventory
 
+Latest1 November: installed Pixela65ac6a9/source d06a481/PID4427 and unchanged host61153223/source9fb/PID10544. New first-submission diagnostics are verified; requested pending-input-write phase is NOT MET (ACK144ms before loss363ms). Real controller-radio interruption also verifies un-injected host timeout/advertising recovery693ms, no replay/saved recovery. Both new Apple jobs closedSUCCESS/archiveverified, simulator only. All source hearing answers/currenta65 audio/full acceptance remain unproved. [Detailed report](test-results/2026-11-01-first-write-submission.md). Older inventory/results below keep exact scopes.
+
 Current611/95 pair also verifies three source PLAYING selections and stable sampled song rows; all three fresh listening answers remain pending. Final04:11:50 both sources paused37, grants/settings preserved and phone disconnected. [Source selection evidence](test-results/2026-11-01-current-pair-source-selection.md).
 
 Latest1 November2026: Current installed Companion is now61153223/source9fb503a, verified by original-signer comparison and pulled APK byte match. Host PID10544, Pixel95/PID25153 unchanged. Owner confirms only Windows/Android available now; physical owner Mac/iPhone/signing unavailable for current tests. See [injected timeout evidence](test-results/2026-11-01-injected-indication-recovery.md). Older inventory/results below retain their exact binary scope.
