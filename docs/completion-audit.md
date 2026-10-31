@@ -1,6 +1,10 @@
 # Full-scope completion audit
 
-## Current full-scope audit —31 October2026,21:09 HKT
+## Current full-scope audit —31 October2026,21:50 HKT
+
+**NOT ACHIEVED; goal ACTIVE/incomplete.** [Apple error observation/assisted-page protection/SD destination](test-results/2026-10-31-apple-offline-observation.md) is verified in stated Android cases;199 JVM/77 Flutter/native build/lint and both5218 hosted Apple archives pass. SD chooser now verifies SD Card; original237GB integrity not proven, storage/Pins transition cause unresolved. One offline same-album selection reaches expected sourcePLAYING3 then observed pause; owner hearing still pending, immediate preselection full queue missing. Earlier failed source playback/crash/no-card navigation remain visible. Old161 records and new20 separately preserved, zero evictions; settings/grants/bonds/own prefs retained, final both paused37/normal Disconnect. Physical owner iPhone/Mac signing, clean current-build source/format/output/playlist/strict offline/full T01–T18/reliability/Watch remain required. Both new CI jobs closed; fresh30min readiness pending/no hold, no pause/device switch.
+
+## Prior full-scope audit —31 October2026,21:09 HKT
 
 **NOT ACHIEVED; goal ACTIVE/incomplete.** [Storage menu correction and current audio](test-results/2026-10-31-mango-storage-menu.md):193 JVM/native assembly/lint pass, mounted navigation succeeds and two current Mango selections are owner-audible. Original no-card timeout is not retested; Apple outside-queue Downloaded-album selection fails offline/error3 despite a dispatched result. Prior storage-event crash remains open. Model111→146/zero evictions/prior rows preserved; final Mango2/Apple0/volume37, approvals/settings preserved, normal Disconnect. Full T01–T18/two-phone/source/format/output/reliability/owner-iPhone signing/Watch remain required. Fresh30min readiness pending/no hold; no pause/device switch.
 

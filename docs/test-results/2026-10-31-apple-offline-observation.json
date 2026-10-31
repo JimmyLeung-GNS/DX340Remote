@@ -1,0 +1,2367 @@
+{
+  "recordedAt": "2026-10-31T21:53:03.628714+08:00",
+  "goalStatus": "ACTIVE/incomplete",
+  "hostSource": "fa60705ac5c798a58ffb26c1d32b43f2ae77ff5f",
+  "phoneSource": "5218d8ead325ca69a879683e28fc5a9e2ec731a1",
+  "hostApkSha256": "82ad322f6f804c224603dde6668cb2f34c1a7de83b974edbfc4dec5245c721a5",
+  "phoneApkSha256": "277d236cbf7d9a97c11e06f711ce616b9957de6670dc04094f5fe552ebbe57f5",
+  "note": "Host82ad retains the compiled fa607 observer; later client-only protocol helper is not used by host. New native-page-build candidate was built but not installed.",
+  "builtLaterHostCandidateSha256": "729b5652bb30da397d183fa5e330dec30d978e2de8268b1234b304d9c056384c",
+  "versions": {
+    "org.dx340.remote.host": {
+      "versionName": "0.1.0",
+      "versionCode": 1
+    },
+    "com.ibasso.music": {
+      "versionName": "4.1.37",
+      "versionCode": 240
+    },
+    "com.apple.android.music": {
+      "versionName": "6.5.3",
+      "versionCode": 1599
+    },
+    "org.dx340.remote.controller": {
+      "versionName": "0.2.0",
+      "versionCode": 2
+    }
+  },
+  "deviceScope": {
+    "host": "DX340 Android13/API33 eng.iBasso.20260812.181952",
+    "phone": "Pixel9a Android16/API36 CP1A.260405.005"
+  },
+  "checks": {
+    "jvm": {
+      "core-protocol": 55,
+      "controller-core": 3,
+      "library-cache": 7,
+      "source-adapters": 134
+    },
+    "nativeBuildLint": "PASS twice; latest includes14 shared admission fixtures",
+    "flutterTests": 77,
+    "flutterAnalyzeReleaseLint": "PASS",
+    "admissionBaseline": "New Apple eligibility case fails old helper; full JVM suite green after correction",
+    "initialFlutterFailure": "Two tests used incomplete fresh-page capability fixtures; preserved, corrected, all77 green",
+    "sourceUnitCases": 6,
+    "sharedAdmissionCases": 14,
+    "appleCI": {
+      "native": {
+        "runId": 41205379069,
+        "source": "5218d8ead325ca69a879683e28fc5a9e2ec731a1",
+        "status": "completed",
+        "conclusion": "success",
+        "verification": {
+          "archiveInspected": true,
+          "artifactId": 13043784620,
+          "archiveSha256": "ba44dc708eeb60cc3ff865d226d6e326e08231f5e6523f79e50df082238db47d",
+          "swiftTests": 19,
+          "captureGuards": 12,
+          "simulator": [
+            "com.apple.CoreSimulator.SimRuntime.iOS-26-5",
+            "iPhone Air"
+          ],
+          "macOS": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.2\nBuildVersion:\t\t25G83",
+          "xcode": "Xcode 26.6\nBuild version 17F113",
+          "limit": "Hosted simulator/build evidence only; not owner signing, physical iPhone BLE or audio"
+        }
+      },
+      "shared": {
+        "runId": 41205378994,
+        "source": "5218d8ead325ca69a879683e28fc5a9e2ec731a1",
+        "status": "completed",
+        "conclusion": "success",
+        "verification": {
+          "archiveInspected": true,
+          "runId": 41205378994,
+          "headSha": "5218d8ead325ca69a879683e28fc5a9e2ec731a1",
+          "status": "VERIFIED/SUCCESS; simulator only",
+          "artifactId": 13044806309,
+          "archiveSha256": "97cf746498b65b3813117aa4939a27dacc0fef512f2f0ef325dedd9ae9545399",
+          "flutterTests": 77,
+          "captureGuards": 12,
+          "nativeUIKitReportSheet": "presented, matching model/export; ordinary build restored and final frame manually inspected",
+          "macOS": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.2\nBuildVersion:\t\t25G83",
+          "xcode": "Xcode 26.6\nBuild version 17F113",
+          "simulator": [
+            "com.apple.CoreSimulator.SimRuntime.iOS-26-5",
+            "iPhone Air"
+          ],
+          "description": "[Shared iPhone job41205378994](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/41205378994) is terminal SUCCESS at exact source5218d8e. Artifact13044806309 ZIP SHA256 `97cf746498b65b3813117aa4939a27dacc0fef512f2f0ef325dedd9ae9545399` is verified and safely extracted. Archive inspection confirms77 Flutter tests/analyze,12 capture guards, ordinary/Setup/browsing/handoff/volume/report-probe simulator builds and final ordinary rebuild/relaunch. The actual native UIKit export-sheet result matches its export model; the restored ordinary frame was inspected and shows Bluetooth unavailable/no track, not a connected fixture. Hosted macOS26.6.2/25G83, Xcode26.6/17F113, iPhone Air/iOS26.5 simulator. This is not owner signing, physical iPhone Bluetooth or audio. The run is closed; no further polling. Prior5f Apple jobs remain closed with their own scopes.",
+          "shortDescription": "shared iPhone41205378994 SUCCESS/archive13044806309 verified (77 Flutter/12 guards/native report sheet/ordinary restoration), simulator only; no polling"
+        }
+      }
+    }
+  },
+  "stages": [
+    {
+      "name": "oldHostBaseline",
+      "previousUnchanged": 146,
+      "newCount": 8,
+      "operations": {
+        "HELLO": 1,
+        "AUTHORIZE": 1,
+        "SELECT_SOURCE": 1,
+        "BROWSE": 3,
+        "PLAY_ITEM": 1,
+        "GET_STATE": 1
+      },
+      "requests": [
+        {
+          "id": "3ba35117-10d1-4281-9d61-00fa0300adcf",
+          "operation": "HELLO",
+          "source": "mango",
+          "startedMs": 7519736,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 91,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "4119b06d-338d-4c08-a1cf-65e56ff04283",
+          "operation": "AUTHORIZE",
+          "source": "mango",
+          "startedMs": 7519828,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 900,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "0d438447-efd6-410e-859d-986ff3895ecd",
+          "operation": "SELECT_SOURCE",
+          "source": "mango",
+          "startedMs": 7548636,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 444,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "1823f0f9-b801-491e-9f21-f92918a23902",
+          "operation": "BROWSE",
+          "source": "apple",
+          "startedMs": 7563821,
+          "accepted": true,
+          "acceptedAfterMs": 107,
+          "finishedAfterMs": 2178,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "708d42f0-9253-443b-9670-3e2dab60279a",
+          "operation": "BROWSE",
+          "source": "apple",
+          "startedMs": 7571238,
+          "accepted": true,
+          "acceptedAfterMs": 114,
+          "finishedAfterMs": 1465,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "16d99951-e985-4bed-ac9c-5aaabac8567e",
+          "operation": "BROWSE",
+          "source": "apple",
+          "startedMs": 7578723,
+          "accepted": true,
+          "acceptedAfterMs": 101,
+          "finishedAfterMs": 1544,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "7c9ba469-39b4-4ac9-9be2-4dcb26524a08",
+          "operation": "PLAY_ITEM",
+          "source": "apple",
+          "startedMs": 7589014,
+          "accepted": true,
+          "acceptedAfterMs": 159,
+          "finishedAfterMs": 296,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "dispatched",
+          "error": null
+        },
+        {
+          "id": "0091d6ea-d23a-475e-be02-17530bde129e",
+          "operation": "GET_STATE",
+          "source": "apple",
+          "startedMs": 7589311,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 358,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        }
+      ]
+    },
+    {
+      "name": "newHostOldPhoneError",
+      "previousUnchanged": 154,
+      "newCount": 7,
+      "operations": {
+        "HELLO": 1,
+        "AUTHORIZE": 1,
+        "SELECT_SOURCE": 1,
+        "BROWSE": 3,
+        "PLAY_ITEM": 1
+      },
+      "requests": [
+        {
+          "id": "6109d54f-c5a5-45f0-9f5e-dcd54eda9709",
+          "operation": "HELLO",
+          "source": "apple",
+          "startedMs": 7826810,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 136,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "f2fed61e-107d-46fc-a89f-f0af151335e1",
+          "operation": "AUTHORIZE",
+          "source": "apple",
+          "startedMs": 7826948,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 878,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "0bb7f7ff-0e20-4ed6-9a3a-65fff452947a",
+          "operation": "SELECT_SOURCE",
+          "source": "mango",
+          "startedMs": 7848905,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 304,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "ff5d9aa3-24f5-48b0-8f31-aad00494024b",
+          "operation": "BROWSE",
+          "source": "apple",
+          "startedMs": 7863927,
+          "accepted": true,
+          "acceptedAfterMs": 115,
+          "finishedAfterMs": 1796,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "d185bbbb-6b22-41e9-ae2b-b6f3ca6127f7",
+          "operation": "BROWSE",
+          "source": "apple",
+          "startedMs": 7871412,
+          "accepted": true,
+          "acceptedAfterMs": 101,
+          "finishedAfterMs": 1330,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "b5de3bc7-5935-42e3-99de-cbb0762959fd",
+          "operation": "BROWSE",
+          "source": "apple",
+          "startedMs": 7879822,
+          "accepted": true,
+          "acceptedAfterMs": 91,
+          "finishedAfterMs": 1522,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "d12e0040-b847-4adb-9945-63565f9382f8",
+          "operation": "PLAY_ITEM",
+          "source": "apple",
+          "startedMs": 7890261,
+          "accepted": true,
+          "acceptedAfterMs": 107,
+          "finishedAfterMs": 366,
+          "result": "error",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": "UI_UNEXPECTED_SCREEN"
+        }
+      ]
+    },
+    {
+      "name": "newPhoneRetiredError",
+      "previousUnchanged": 0,
+      "newCount": 8,
+      "operations": {
+        "HELLO": 1,
+        "AUTHORIZE": 1,
+        "BROWSE": 4,
+        "PLAY_ITEM": 1,
+        "SELECT_SOURCE": 1
+      },
+      "requests": [
+        {
+          "id": "a206685f-d641-4753-9a23-8bd76f407c29",
+          "operation": "HELLO",
+          "source": "apple",
+          "startedMs": 122103,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 154,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "f2c5a93d-0e35-4a50-aeac-4a8430bee371",
+          "operation": "AUTHORIZE",
+          "source": "apple",
+          "startedMs": 122258,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 828,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "49234f32-fd51-4c5a-8e05-d818fc54d5cf",
+          "operation": "BROWSE",
+          "source": "apple",
+          "startedMs": 154630,
+          "accepted": true,
+          "acceptedAfterMs": 143,
+          "finishedAfterMs": 1607,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "cf77f1ad-0821-4da1-83a7-d175c4401d42",
+          "operation": "BROWSE",
+          "source": "apple",
+          "startedMs": 162087,
+          "accepted": true,
+          "acceptedAfterMs": 144,
+          "finishedAfterMs": 1461,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "b703359b-413c-4198-a45f-1556d1f23e57",
+          "operation": "BROWSE",
+          "source": "apple",
+          "startedMs": 169533,
+          "accepted": true,
+          "acceptedAfterMs": 158,
+          "finishedAfterMs": 1915,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "3bf73ab3-5f41-4c05-9265-ace61b804067",
+          "operation": "PLAY_ITEM",
+          "source": "apple",
+          "startedMs": 179801,
+          "accepted": true,
+          "acceptedAfterMs": 128,
+          "finishedAfterMs": 375,
+          "result": "error",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": "UI_UNEXPECTED_SCREEN"
+        },
+        {
+          "id": "d3905486-75e0-48aa-a793-de4a65c9c191",
+          "operation": "BROWSE",
+          "source": "apple",
+          "startedMs": 268772,
+          "accepted": true,
+          "acceptedAfterMs": 128,
+          "finishedAfterMs": 1980,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "42c580dd-c4dc-429b-a2b3-63ac90faf124",
+          "operation": "SELECT_SOURCE",
+          "source": "apple",
+          "startedMs": 283769,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 393,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        }
+      ]
+    },
+    {
+      "name": "sdSelectedPlaybackObservation",
+      "previousUnchanged": 8,
+      "newCount": 12,
+      "operations": {
+        "HELLO": 1,
+        "AUTHORIZE": 1,
+        "SELECT_SOURCE": 2,
+        "BROWSE": 4,
+        "PLAY_ITEM": 1,
+        "GET_STATE": 1,
+        "GET_ARTWORK": 1,
+        "SET_PLAYING": 1
+      },
+      "requests": [
+        {
+          "id": "dcef42c2-d39d-48c7-9a4f-8781bf973d20",
+          "operation": "HELLO",
+          "source": "mango",
+          "startedMs": 678656,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 94,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "5c87aec8-9588-42e0-a633-71a96456a538",
+          "operation": "AUTHORIZE",
+          "source": "mango",
+          "startedMs": 678750,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 830,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "879a0ec1-0520-4960-b21c-233300020c2d",
+          "operation": "SELECT_SOURCE",
+          "source": "mango",
+          "startedMs": 695715,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 390,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "4a9de7b9-976f-415a-9a75-995ef615ce67",
+          "operation": "BROWSE",
+          "source": "apple",
+          "startedMs": 710756,
+          "accepted": true,
+          "acceptedAfterMs": 121,
+          "finishedAfterMs": 561,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "f4477987-4069-4c66-bb07-76520be7c877",
+          "operation": "BROWSE",
+          "source": "apple",
+          "startedMs": 718488,
+          "accepted": true,
+          "acceptedAfterMs": 91,
+          "finishedAfterMs": 1310,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "fe7a3d35-d1a7-433e-975e-92eebcd6b6fb",
+          "operation": "BROWSE",
+          "source": "apple",
+          "startedMs": 726861,
+          "accepted": true,
+          "acceptedAfterMs": 152,
+          "finishedAfterMs": 1523,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "a49c5692-7c0b-4a39-aa16-61d911983e0d",
+          "operation": "PLAY_ITEM",
+          "source": "apple",
+          "startedMs": 737223,
+          "accepted": true,
+          "acceptedAfterMs": 75,
+          "finishedAfterMs": 2033,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "dispatched",
+          "error": null
+        },
+        {
+          "id": "2387f657-fc2c-4379-83b4-d4adfc8f0f9f",
+          "operation": "GET_STATE",
+          "source": "apple",
+          "startedMs": 739257,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 481,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "77d728f2-aebf-4c93-9ada-bf7cc1d02b6c",
+          "operation": "GET_ARTWORK",
+          "source": "apple",
+          "startedMs": 740045,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 5304,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "a2bb457b-1fee-4084-ac7e-af568f44d4ba",
+          "operation": "SET_PLAYING",
+          "source": "apple",
+          "startedMs": 922360,
+          "accepted": true,
+          "acceptedAfterMs": 95,
+          "finishedAfterMs": 488,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "observed",
+          "error": null
+        },
+        {
+          "id": "4190f45b-23b9-490d-8780-8c2b1ae61b21",
+          "operation": "BROWSE",
+          "source": "apple",
+          "startedMs": 968013,
+          "accepted": true,
+          "acceptedAfterMs": 170,
+          "finishedAfterMs": 2072,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "63891e13-1e86-4760-8697-e9fdc02a0673",
+          "operation": "SELECT_SOURCE",
+          "source": "apple",
+          "startedMs": 983016,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 383,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        }
+      ]
+    }
+  ],
+  "oldPhoneRecordsPreserved": 161,
+  "newPhoneRecords": 20,
+  "zeroEvictions": true,
+  "noVolumeCommand": true,
+  "errorAndRowBehavior": {
+    "oldHost": "Click accepted/dispatched296ms despite error3; source NONE0",
+    "newHost": "Immediate observed dialog mapped to existing UI_UNEXPECTED_SCREEN366ms",
+    "newPhone": "Error375ms; two sampled rows retain bounds, all old actions disabled; two disabled taps issue no second PLAY_ITEM",
+    "recovery": "Fresh explicit root browse works after error and clean selection, no automatic playback retry",
+    "cleanObservationMeaning": "Dispatched only; actual source metadata/state and hearing remain separate",
+    "deadline": "Fixed1.2s post-dispatch observation deadline, node reads/callback overhead may add time; not p95 or a hard command-latency bound"
+  },
+  "storage": {
+    "at": "2026-10-31T21:31:10.262108+08:00",
+    "status": "VERIFIED public source UI observation; cause unresolved",
+    "downloadDestinationSelected": "Device Storage",
+    "sdCardOfferedButNotSelected": true,
+    "deviceFreeLabel": "94.03 GB Free",
+    "downloadedMusicLabel": "237 GB",
+    "playbackCacheLabel": "Currently 5 GB",
+    "settingChanged": false,
+    "chooserCanceledWithoutSelectingStorage": true,
+    "accountOrCredentialUIOpened": false,
+    "previousDestination": "SD Card, explicitly confirmed by owner at this turn",
+    "scope": "No file, download, cache, library, network, mount or source-app version change",
+    "restorationApproval": "Owner: just make sure that apple music download is stored on sd card",
+    "causation": "Current destination differs from owner original; relation to tested mount events or error3 is not proven",
+    "restorationRequestedAt": "2026-10-31T21:33:10.249204+08:00",
+    "verifiedFinalDestination": "SD Card",
+    "finalCardFreeLabel": "272 GB Free",
+    "downloadedMusicStillLabel": "237 GB",
+    "settingAlreadySdBeforeAgentSelection": true,
+    "storageSelectionActionIssuedByAgent": false,
+    "transitionActorOrCause": "Unresolved; no attribution to test mount or owner interaction",
+    "downloadPinsObservedBefore": "On",
+    "downloadPinsObservedAfter": "Off; transition cause unresolved, left unchanged",
+    "verificationAt": "2026-10-31T21:35:22.874383+08:00",
+    "fullDownloadIntegrity": "NOT TESTED; no private download inspection or extraction"
+  },
+  "audio": {
+    "at": "2026-10-31T21:39:42.466688+08:00",
+    "status": "PENDING owner hearing confirmation",
+    "sourceStateAndTitle": "Expected Apple track observed PLAYING3 before intentional pause",
+    "noActiveDefaultNetwork": true,
+    "volume": 37,
+    "audioQuality": "Not established",
+    "queueScope": "Absent from earlier full101 queue; immediate pre-SD-check full queue was not captured, so this is not a fresh outside-current-queue proof"
+  },
+  "queueProofLimit": "Immediate pre-SD-play full queue not read. Candidate absent from much earlier full101 queue is retained, not promoted to fresh outside-queue acceptance.",
+  "preservation": {
+    "phonePermissionFlagsUnchanged": true,
+    "phoneExposedBondIdentitiesUnchanged": true,
+    "hostPermissionFlagsUnchanged": true,
+    "hostExposedBondIdentitiesUnchanged": true,
+    "prefsByteHashesUnchanged": true,
+    "globalSettingsUnchanged": true,
+    "pidsBefore": {
+      "host": "20535",
+      "phone": "7944"
+    },
+    "pidsAfter": {
+      "host": "22092",
+      "phone": "23795"
+    },
+    "phoneUpgradeStartsNewJournal": true,
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "bothPausedAfterRealApplePlaybackAndPause": true,
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeProof": false,
+    "hostForegroundBothBindings": true,
+    "phoneNormallyDisconnectedHelpCollapsed": true,
+    "controlTarget": "Mango",
+    "cardMounted": true
+  },
+  "pending": [
+    "Hearing confirmation pending unless audio field records an explicit owner answer",
+    "Full237GB download integrity not established",
+    "Original cached-SD/Internal no-card physical regression not rerun; prior Apple storage-event crash remains open",
+    "Download Pins changed On to Off during shared UI inspection; actor/cause unresolved; left as observed",
+    "Full T01-T18, current-build clean source matrix, strict SIM-off/latency/background/range/owner-iPhone/Mac signing/Watch still open",
+    "Fresh30-minute screen-off readiness remains unanswered; no hold started"
+  ],
+  "rawEvidence": [
+    {
+      "file": "artifacts/apple-offline-observation-20261031/apple-download-options.png",
+      "sha256": "e974d1d2f26057990ba26d876384c2832bae3b79f6eff2e4a12cd2fe7537ebaf"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/apple-page-baseline.txt",
+      "sha256": "92b705289ee82696ef068a91f9ea2dd65cf5ef53dcf768e17a1d15b9007fff1a"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/apple-settings-exited.png",
+      "sha256": "2985b1be1f2b343f38fd6dcd3064700b0cf47b5cd2d1a45e897622455c745e3b"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/apple-settings.png",
+      "sha256": "7eb99463ddfb5115e507d2f093db3f16e6b782a84555d158f315a2740ebd616f"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/apple-storage-choice-canceled.png",
+      "sha256": "e0bedbc8b41cf1ec42e3eff641da00d1c2479e509dc0942d15464c555cb25d35"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/apple-storage-choice.png",
+      "sha256": "5d20ea3891bbdb8c7f15dcaec3c8ea9e4c5b20c27e7641f2fee1f7aea2534d72"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/apple-storage-setting.json",
+      "sha256": "c0d68d093c1a67659677180b8a762b357ce5dc734ceb617fe889f2609503ea83"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-after-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-after-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-after-host-accessibility.txt",
+      "sha256": "2fdf0c8737cdf23ea999ca8aae24fdce7f2b25c553d956ce1ab97d05e0a5038e"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-after-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "51919ba3ae2c95059324f2732a8fb903a8e080d0292f90dfe8a56705e6fca792"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-after-host-audio.txt",
+      "sha256": "4aadfe11ffd771a70731eb2259bd7a9f7578a02b84347b9bb2f9d5e8e6f2cfad"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-after-host-bluetooth_manager.txt",
+      "sha256": "8da5fed161df67a547244bc449a542594be06d7c76e05530cb09eb4a829a0b5d"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-after-host-media_session.txt",
+      "sha256": "b179e9b240840d3f5fad2c1046c29c76c85f3cc461735eeaa8b3f6bb852dd0f0"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-after-host-package-org.dx340.remote.host.txt",
+      "sha256": "4ab1c3f2ccee1db32b2bfc1de43048be665419fc8cc67c318f7f4d5353a922b1"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-after-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-after-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "f57f065213cbb329554f619ed73f68d09d029b4cb73d65272649b8e3931e115f"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-after-phone-bluetooth_manager.txt",
+      "sha256": "6a224902e5595f6af19183defa364d4266c00476da6a7ffce27ff24e02caa2b4"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-after-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "2f22b6de7110382a6dedc25ce48c69e4a47fdc9b04de2bfcdcaad2ba2d8553cc"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-after-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-after.json",
+      "sha256": "32827b754a28ab77708e0c82df1fb7eb08356a454089049fb59cb78712b5891b"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-album-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-album-before.xml",
+      "sha256": "8721f88a08454083ed619b300edf07ba5fe5076c9f43bbd291e67424c2e226d4"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-album-wait-0.xml",
+      "sha256": "8721f88a08454083ed619b300edf07ba5fe5076c9f43bbd291e67424c2e226d4"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-albums-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-albums-before.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-albums-wait-0.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-before-play-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-before-play.json",
+      "sha256": "bb33faa8b4817f9a3f12c487bcdd7f502bdfd8b092022d14118522340486a0a6"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-connect-wait-0.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-console.txt",
+      "sha256": "bacf666e5e88da465cbc2ddebb733dbbae890c4517a80e724943052123ba192d"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-error-before-dismiss.png",
+      "sha256": "08f33afd1e7f1f1411444fdd772c15ddec987f7c9de25aada698c1ddc697690f"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-error-dx.png",
+      "sha256": "002a8313de85923cbc32ca7f1eef31e74ee107c433e827deb10e42126019688f"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-export-console.txt",
+      "sha256": "5b6c33ee4da8157d667594240ba3a52cdec2db0fd1b36217960ca872720832f7"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-library-after.xml",
+      "sha256": "8036dd938c84f2b14572c16f927fca00442d26e898219e1a895f0515304678fb"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-library-before.xml",
+      "sha256": "164668d1e40a34a6a1f15e9daeabbd7bdef2e798dc99ed7c180cb5245fc3cd51"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-library-wait-0.xml",
+      "sha256": "164668d1e40a34a6a1f15e9daeabbd7bdef2e798dc99ed7c180cb5245fc3cd51"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-offline-dialog-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-offline-dialog.json",
+      "sha256": "b166e5b84d81a60ed519450446c13a201a2b5f56514d7cae32386a9805ef3488"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-play-once-after.xml",
+      "sha256": "61b4557b473b36e8989e64688c4d24fc8cc2b69998959c8cc0cb4b9737a3fd2e"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-play-once-before.xml",
+      "sha256": "d899e41e292f6832aceea4fe2208cb03ff2790d2853ea8103e3d719c0c3e5615"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-play-once-wait-0.xml",
+      "sha256": "d899e41e292f6832aceea4fe2208cb03ff2790d2853ea8103e3d719c0c3e5615"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-player-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-player-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-player-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-root-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-root-before.xml",
+      "sha256": "8036dd938c84f2b14572c16f927fca00442d26e898219e1a895f0515304678fb"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-root-wait-0.xml",
+      "sha256": "8036dd938c84f2b14572c16f927fca00442d26e898219e1a895f0515304678fb"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-snapshot-console.txt",
+      "sha256": "8b31b2543dd41f6f7aeb3b3db6ad54527c6ffd4d2ec96bcf6f8653a5ac0ee77e"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-source-after.xml",
+      "sha256": "164668d1e40a34a6a1f15e9daeabbd7bdef2e798dc99ed7c180cb5245fc3cd51"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-source-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-source-find-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-source-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/baseline-track-find-0.xml",
+      "sha256": "d899e41e292f6832aceea4fe2208cb03ff2790d2853ea8103e3d719c0c3e5615"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/before-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/before-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/before-host-accessibility.txt",
+      "sha256": "88c6dff5bbcdedc2af269e248f0a6101a5cbe8fb2ee4d8d23ff0076dc6d5ae40"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/before-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "32acda2c59cc15e88949f3df8f8e3e4fa76ddae1b7929206a799a5bc918ee71d"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/before-host-audio.txt",
+      "sha256": "62b7bf981993e8467f67501acac0643b124a7eb51188d756dedfbb4bc3e466b3"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/before-host-bluetooth_manager.txt",
+      "sha256": "887a0a6e08830556c0c8ec21e3a89c47c53aa064827dc249aaf011a1ecb027a8"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/before-host-media_session.txt",
+      "sha256": "c7bf45129a128294ef32c1036427248927091f9edb2d7c06e142778abdf5d442"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/before-host-package-org.dx340.remote.host.txt",
+      "sha256": "c40a0cf71e3990bdd9500664bb1b086c3816d0337d2b8aca7ad8fa8ebeff0fdf"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/before-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/before-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "f3cf53c4f639ae737d4a125d333b4a381d31c2edf30e870e494201656231047c"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/before-phone-bluetooth_manager.txt",
+      "sha256": "f2be73effc9dad80c988c61a9f015d97b0d1501bea72a9350811fa73ec68b8eb"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/before-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "5d4ea9821f0c707a9b4b9c1cf30ad5bfe376c5d9b4114d142b4383dbd4e4f738"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/before-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/before.json",
+      "sha256": "bfea468a2f370edbfb891c8187982a11dbce1f16814fb4044dd7b6431e25b399"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/checkpoint-verification.txt",
+      "sha256": "c9e03d1f089136d05f6879518acccd2114febec7184687af2a07fff84207cb68"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-bootstrap.txt",
+      "sha256": "853312e0a6ae45519a1c88a76b8b24d51ece5892a43dad6274feb000af62b390"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-browsing-fixture-launch.txt",
+      "sha256": "8bbb28015599d1abc34f3bd4eb413520e174fb95cc0d050d43d6935c5450dab8"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-capture-matcher-tests.txt",
+      "sha256": "2072ea10acb601303ef8f21be984d3cfc065831ff61278198aa4b2b3955354ce"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-capture-readiness.txt",
+      "sha256": "edd95f6dd3efb6fc6a8e8f1285fd337ba3297c0179e16c8765ba77cee78cdd3e"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-handoff-fixture-launch.txt",
+      "sha256": "1ba108764d72c23b804ba26e72a673fa86dde8149a0702f39d0bfce117d30ab8"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-ios-analyze.txt",
+      "sha256": "09c62ce1251deaee2333a6d59d9a973a0f5c1ec2c73220b847be08e1629e11f4"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-ios-browsing-fixture-build.txt",
+      "sha256": "e3ad1df6acd65f02bc6030a2650a84a22c1735cd037d0b89cd578581f3f5912d"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-ios-build.txt",
+      "sha256": "e051343bdee4f519dc6ab40f74426a86e7c7103f66366a159e872581e40f8385"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-ios-handoff-fixture-build.txt",
+      "sha256": "51246ee8f681cf5237e20fb80a5d8bd0dfa632364ad4386d3d8f2b9ab571e85a"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-ios-report-probe-build.txt",
+      "sha256": "bc7a713bac01b72b7898b61ea6cdc58742ba47196239d80bad38e8bf6720e387"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-ios-restore-build.txt",
+      "sha256": "d1fb048f64d4349cee2aedddf0446fe66926ddf42c2c002766b8257e78da2451"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-ios-setup-fixture-build.txt",
+      "sha256": "d7a6d87ac705141a33b701d1c2bd7eaeba0faa0e2374d8f11ce2f813bb75fcf4"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-ios-tests.txt",
+      "sha256": "f99fb88a18f5f775651199b9eaf1dc890c49318047aeea7bf8d5ff978bf52a23"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-ios-toolchain.json",
+      "sha256": "4c13dc6534635375ab58ff3b75ae0d02bd5967ee36a84a40b0e48126b7ea84a4"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-ios-volume-fixture-build.txt",
+      "sha256": "c70bede5794af98cebd7debb8659c0543bcdd50ab4fd516aa2201250b1398c12"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-library-light.png",
+      "sha256": "4d8377636eda2fe0ce49111a739f47d0f487c5c491eda84c87aa90365cb49ee8"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-macos-version.txt",
+      "sha256": "cd5d6399b3785b04ceaae75045a9ca9f80f0bbc3526eff9d0c36b170ed1ec348"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-native-report-export.json",
+      "sha256": "0cdd874f8139addafd4190dccc646fb6e6e146a17143a4dcdc2ade19349a20a1"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-native-report-share-sheet.png",
+      "sha256": "4497a9222e471847f083a71d6136ade7af700a1f676dac4f8977fd97844a8632"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-player-dark.png",
+      "sha256": "227eec729d37c7acd2611eda3314bef5524701313edbf95e31f26038b686124a"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-player-large-dark.png",
+      "sha256": "342733ffad3ac8863e55310dbf9059cd86bf1d6b86a9b6336ab6c567ca24017f"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-player-light.png",
+      "sha256": "e35a01dd3c8cf838082e45989bf7c65276f917549af0488e00bb16dcebf7af95"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-queue-light.png",
+      "sha256": "63a51a3591b6c2618e85cb1659f433091a7260242f8ab292a222ec2dee3b0f9b"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-report-probe-launch.txt",
+      "sha256": "5b4969d6e613b4061b6f40f660ea3fcb7f08ccf14a059388df01578b299ea441"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-report-probe-result.json",
+      "sha256": "86206253f42cdd700f334cd275c732472768d21953bfa15e50aad7c9a8f2a7d7"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-restored-launch.txt",
+      "sha256": "67670c2b6b6cbe4f0bf7e5fd1f05b91d0e3421a90cbe9f73a12d14e7fcea378e"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-restored-player-light.png",
+      "sha256": "d14d437acff852976968aadb6b0a50bb906c64fe3d276ac304203ac76871b8a9"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-setup-fixture-launch.txt",
+      "sha256": "69a67a3ea84836fc8ca1445e529bd852495db2cd2af55e8af1d06345b5b053d6"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-setup-light.png",
+      "sha256": "4aef372b2e983543889d7a5303b79f3ef0d1777622377c795f198b2d6aec79bc"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-simulator-boot.txt",
+      "sha256": "8b80ee23fb931a7df42dd7e07022e0b90623d3c8d5c0ff1b4c9522a0f13691a9"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-simulator-launch.txt",
+      "sha256": "11b752087bd3059bee34da4bc2c2586d0dfd0ae6e3bd9f8577333ab47939efe9"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-simulators.json",
+      "sha256": "594084d646f2586e52c66328c583b79fcde9330e82ceb24cc72373ab3630ff45"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-synthetic-browsing-expired-large-dark.png",
+      "sha256": "6612fbcabd053db8ae9fcbfc95221f98f2d2f4734176ed471a003718e5b40dd8"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-synthetic-browsing-expired-light.png",
+      "sha256": "a65c82a8b76f04f651e7448b65ab8cdb7b76955a23d606062db46a989ded7540"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-synthetic-browsing-large-dark.png",
+      "sha256": "456ac61fe35c7cc84a66857178bdf14f1b28c583b34e6c129a971c3b09aff155"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-synthetic-browsing-library-light.png",
+      "sha256": "a2ab53ebcb37c4186c1a0a0b28c80f5341c71fa1beeb139e3913aa93e35ad0ea"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-synthetic-browsing-queue-light.png",
+      "sha256": "d14bdbc94f3f4923af061302162c0975cf4f9d7baa1230c6566374ff2d85cec7"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-synthetic-handoff-large-dark.png",
+      "sha256": "a8c7a973e0eb323ebb68cb313f8e14d135d7a1d35747e16e9663c4e7a671a363"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-synthetic-handoff-lost-light.png",
+      "sha256": "8291b01774dc16a14660c8fe1b96207dbbd5da1ca02955c50d51ab617ca3c8b0"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-synthetic-handoff-pending-light.png",
+      "sha256": "57a2986d94a717548de5baf51d6ce6f2fa189651b7409100a520aa769b6d21c0"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-synthetic-handoff-ready-dark.png",
+      "sha256": "07153be213eeb154d5a3e308b4a089b0d371424ff597f2103d98feb9d76c7ccb"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-synthetic-handoff-ready-light.png",
+      "sha256": "e5fc02c57da3e57d8cc5e396fc1ed2b28f8e223c5c5e3d6af6ad2ca4e163cc49"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-synthetic-setup-approval-large-dark.png",
+      "sha256": "28adab5d1b30f3ee5f3dfbce2b3f2415dd3088c36d33c8dc11bab6209febfdc7"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-synthetic-setup-approval-light.png",
+      "sha256": "16f6db6ae2621f3c1a5db1013917faa71f040357aae7d2eba32eda0e1eab7b50"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-synthetic-setup-choosing-light.png",
+      "sha256": "447738ba305f5cd1d5bb677079001729d906dbfcc252ad9598fc3b4e40fe3e61"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-synthetic-setup-connected-light.png",
+      "sha256": "51d017a58a697a29ef1c6820b7532e889be6c74a3e7cad1f5bb8fb798f39bf8d"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-synthetic-setup-idle-light.png",
+      "sha256": "6f09759180746b5d5eb92e7da78b3a4b97280498e1299629231aac2c673c8165"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-synthetic-volume-high-light.png",
+      "sha256": "e5c5b422bdf84d0fa00d0062997254addc1b96e3ee1427259465fa60db302c81"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-synthetic-volume-large-dark.png",
+      "sha256": "e5e5b286b451238309f1b7326e3d0ed47fc6e158832201432debd4a526a85978"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-synthetic-volume-low-light.png",
+      "sha256": "7e4d165f01ad36f2def7ae5397cd97414c8b443ac67ee38310e8f29e6bc7f8ba"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-volume-fixture-launch.txt",
+      "sha256": "7bb759687804f08d66e987dd16246a0407190cd98e14b3d572697c55a55b640f"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994/flutter-xcode-version.txt",
+      "sha256": "18730ed2ae28a2c9cf0c2d5db549033a4f07089331391a7133b7b32187454fa9"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994-artifacts.json",
+      "sha256": "dceb4ac80cea71da82e490c654c8259e0924107e9c46b1ec962f83d0cacf42a9"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994-current-jobs.json",
+      "sha256": "e049f32067f068b3aafe7716987f5d7b552354ffb3a3ad55b20fffa0c045b02d"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994-jobs.json",
+      "sha256": "e1621f0d16dd0362e7f5aa02014f6f81a3a98c07618c665a26868341404dc4c4"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994-verified.json",
+      "sha256": "9e3a25d1987a685218bedceccb9a1d1ae04283cabb8c839e0adc8d9ebd8d24d9"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994.json",
+      "sha256": "489faffcdaa1ef7fc2a69b30d88a6adc577e4a25924ca1d5c639284ccfa31ada"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205378994.zip",
+      "sha256": "97cf746498b65b3813117aa4939a27dacc0fef512f2f0ef325dedd9ae9545399"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069/apple-build.txt",
+      "sha256": "0fb664b2c1ce099f825f62824d66b283ebea1cba390999af41328d0a17a60ba0"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069/apple-capture-matcher-tests.txt",
+      "sha256": "2072ea10acb601303ef8f21be984d3cfc065831ff61278198aa4b2b3955354ce"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069/apple-capture-readiness.txt",
+      "sha256": "2982690fb31c095117af4ab2d450dbb221a2aae5c6c74c48c751e795de98cbd0"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069/apple-library-light.png",
+      "sha256": "654df5cc84be691dce7c05e83cbd5cbf083c7990befc8f520fd9e34fea719590"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069/apple-player-dark.png",
+      "sha256": "34bb19a8db54708340f9310467ebeaa56e2a38575b968b387c8b3f7f44752931"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069/apple-player-large-dark.png",
+      "sha256": "edacc34cc81b5d964f47eb83b5ef840f30fbc8dd176e1a261e9390e4b35fb8a1"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069/apple-queue-light.png",
+      "sha256": "09d30c8a91faea0171584e6c1b76b2eaa06ed5957370f1809175f6c2334735ad"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069/apple-setup-light.png",
+      "sha256": "1c4933f9ace85051fc2414b790f9badf3595d705e3d967c53fbc13a5b0b0c88c"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069/apple-simulator-boot.txt",
+      "sha256": "57d4f0737a845b565aa7b765b87b3de647119f8facb6b1ad2e9111af0458f78c"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069/apple-simulator-launch.png",
+      "sha256": "3868d4cabfe230cad493049dc6d62a14c26899b00363b80a8105c645df104a70"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069/apple-simulator-launch.txt",
+      "sha256": "460a0f74ec02b549b4f1bbf6625f18a49525827482ef41a687d2c982a25b3967"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069/apple-simulator-processes.txt",
+      "sha256": "a256324f4fae9a6db427249e402d9359a28a138fb21365c8b53bbfc9ae69d237"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069/ci-simulators.json",
+      "sha256": "594084d646f2586e52c66328c583b79fcde9330e82ceb24cc72373ab3630ff45"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069/ci-xcode-version.txt",
+      "sha256": "18730ed2ae28a2c9cf0c2d5db549033a4f07089331391a7133b7b32187454fa9"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069/macos-version.txt",
+      "sha256": "cd5d6399b3785b04ceaae75045a9ca9f80f0bbc3526eff9d0c36b170ed1ec348"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069/swift-tests.txt",
+      "sha256": "dc2b3f04bd732593ff2d8cf047d60f62632726d7da6840d9beefa6ddce7d58c0"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069/xcode-version.txt",
+      "sha256": "18730ed2ae28a2c9cf0c2d5db549033a4f07089331391a7133b7b32187454fa9"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069-artifacts.json",
+      "sha256": "739d8c68e0a5a803e4cb12edfeb836b132be81fcf23226069756ccd89b99c510"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069-jobs.json",
+      "sha256": "b29b96f47dc448b8c29b143b22d05909b46f16f24b4794dbee26c0060920577a"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069-verified.json",
+      "sha256": "f37ae6b98342546f701ad19c2b1e9027c293af74b750f72565d8aaa01bcc3f5d"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069.json",
+      "sha256": "94153baf63863dad067141cc024cd2592468bdbfeb2ba7ca332a4aae0011ab4c"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/ci-41205379069.zip",
+      "sha256": "ba44dc708eeb60cc3ff865d226d6e326e08231f5e6523f79e50df082238db47d"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/cleanup-observation.json",
+      "sha256": "6acd26a995a979c1c4408a41bb55adf2007560863713e475b3ed22e569e7196d"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/disabled-track-0-after.xml",
+      "sha256": "b27b42d3a5ff4a318f6c8598be54649654cd7bae107e00da3d23a950c04b4e15"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/disabled-track-0-before.xml",
+      "sha256": "b27b42d3a5ff4a318f6c8598be54649654cd7bae107e00da3d23a950c04b4e15"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/disabled-track-1-after.xml",
+      "sha256": "b27b42d3a5ff4a318f6c8598be54649654cd7bae107e00da3d23a950c04b4e15"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/disabled-track-1-before.xml",
+      "sha256": "b27b42d3a5ff4a318f6c8598be54649654cd7bae107e00da3d23a950c04b4e15"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/export-final-disconnect-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/export-final-disconnect-before.xml",
+      "sha256": "6f2b5e94ad044d283297ebd7b6143c77b5e87e88e1b323a81effb5c7149a49b9"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/export-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/export-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/export-help-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/export-help-collapse-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/export-save-after.xml",
+      "sha256": "6f2b5e94ad044d283297ebd7b6143c77b5e87e88e1b323a81effb5c7149a49b9"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/export-save-before.xml",
+      "sha256": "648a87e98e17372296b0e8fb73c82d332605c22df7d5f62ba0310d608f2f2879"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/export-scroll-after.xml",
+      "sha256": "648a87e98e17372296b0e8fb73c82d332605c22df7d5f62ba0310d608f2f2879"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/export-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/export-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/export-setup-before.xml",
+      "sha256": "61b4557b473b36e8989e64688c4d24fc8cc2b69998959c8cc0cb4b9737a3fd2e"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/final-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/final-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/final-devices.txt",
+      "sha256": "99221000e3050b063712b3b8bb8b7e8b078c782ac467f889eb1e4f7c66d2336c"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/final-host-accessibility.txt",
+      "sha256": "f0ee84906b3a3502fbefc5d96ecd324412daca8339c4409e9e9023d7cc3f0ed0"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/final-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "00818f3597edc8a5d682c297cf515348c7111cd74d39598e8ba730dc512a89c1"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/final-host-audio.txt",
+      "sha256": "c7ea6213e3e5f9647f21759249d36a84f2bc54b7efb0d5f40af61ef700a6e282"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/final-host-bluetooth_manager.txt",
+      "sha256": "716a813df28a06b870b2a3b019e465906f79222062df68fcf0d95b4b969630c9"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/final-host-media_session.txt",
+      "sha256": "8715fc285fadb1edbf6d2ac337bb9d3fb25f1d626c117767ebe854364637ea8a"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/final-host-package-org.dx340.remote.host.txt",
+      "sha256": "69256e7e7d2ee80764ac808c3cefea512c45d2fde243f22ec34e46d5d09f6761"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/final-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/final-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "7890b9b12fede429ca3e09f15338bb4c2f12014f04868c80f64c2ef917b5312b"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/final-phone-bluetooth_manager.txt",
+      "sha256": "f3cd6cd4f82933aff6a33e57d75f0fc6c6a612a2485b01a7d32c74f3b14886ba"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/final-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "17c6f90eb968bfd1c7453aa1aff7228f35f4da0353eaf84a23d7f13a57e9c924"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/final-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/final-volumes.txt",
+      "sha256": "2fb3a4584ca100b547913df69aad073824f892b305a5b1f61315c2c073e09dd4"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/final.json",
+      "sha256": "496e8bc40453636c5a044037c672788c561f4d1173017d92613edea25dca9ad8"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-after-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-after-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-after-host-accessibility.txt",
+      "sha256": "a4f88d8148ee56709bb94bdb758b7fdd670ef115b7472ed55b83e667c41da0a7"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-after-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "9c3fd5b592ef676382e33e805ce6a1739f8bb07f19d8a8cc99bc0866953d2807"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-after-host-audio.txt",
+      "sha256": "fc147a1ab5e3f782cc6c36950a9cd852239d43b3c812146c17a9ca17613356e2"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-after-host-bluetooth_manager.txt",
+      "sha256": "ad1caae3f650d9e7405dafba1b6100c7f923c33de3279d5db476dd80512f9c10"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-after-host-media_session.txt",
+      "sha256": "15398a1cf809f7af1c04d281bbcbeea4a87ddb432b965bffc6f6233c247b1c44"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-after-host-package-org.dx340.remote.host.txt",
+      "sha256": "0a1829e488e470e67160105206771a185e858377b85dbc47d640971da4e0dfff"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-after-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-after-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "eda312ffc8331cc832fb2dc4952bee6c4a2ce2da8bd0bbee5d2f4d9e05446d6f"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-after-phone-bluetooth_manager.txt",
+      "sha256": "5d59c361e7b90755dd87a73a75da4c58dab275f38499ee416afb120241a233fe"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-after-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "4acbb165a26a3bba28f3a5bc46c1a730f29da8d2a0a795440f52a61cc38a63eb"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-after-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-after.json",
+      "sha256": "3ea9dd11b7909a9323878cffb9a3634fab4060397163646ed560fd14d48c3665"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-album-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-album-before.xml",
+      "sha256": "8721f88a08454083ed619b300edf07ba5fe5076c9f43bbd291e67424c2e226d4"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-album-wait-0.xml",
+      "sha256": "8721f88a08454083ed619b300edf07ba5fe5076c9f43bbd291e67424c2e226d4"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-albums-after.xml",
+      "sha256": "8721f88a08454083ed619b300edf07ba5fe5076c9f43bbd291e67424c2e226d4"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-albums-before.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-albums-wait-0.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-before-play-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-before-play.json",
+      "sha256": "c44639496fc4b367061382d4eac10cef0b50da7a652609cd5b2c5720cd7c29cd"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-connect-wait-0.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-console.txt",
+      "sha256": "575fbabfca0d4dc00545ce095efa3c850ca938cc1fae81913b658dadfaf1272f"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-error-before-dismiss.png",
+      "sha256": "a3be7476ec8585f5943694b3ef27ee94e3f20ac928125bd54bb1b5d1493e91ef"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-error-dialog-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-error-dialog.json",
+      "sha256": "be1b0502efbf702462c2abf854b3d2f85f034d61022be98de87c75e17e085b2b"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-error-dx.png",
+      "sha256": "f49d1fe01ddfb682d7c7d85fccdeac6e266553fcaa89a66f34f71c780211b45c"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-error-phone.png",
+      "sha256": "854fe5eb10d3bb681be584ada457648a366651410304067047a13ca5c269b318"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-export-console.txt",
+      "sha256": "bb2406eca5a94a5fa099f38c86593e3feaad3622de4ae79b05b35870443de9ab"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-export-final-disconnect-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-export-final-disconnect-before.xml",
+      "sha256": "d9707e44e308d5f842a7c8f441063828453b6735b47b415c933d2c571cf0edac"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-export-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-export-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-export-help-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-export-help-collapse-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-export-save-after.xml",
+      "sha256": "d9707e44e308d5f842a7c8f441063828453b6735b47b415c933d2c571cf0edac"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-export-save-before.xml",
+      "sha256": "ac5a1958279fad0fc21e42342a26fbfcbddbebbb9b0dbee4a18fde2fb0c379a5"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-export-scroll-after.xml",
+      "sha256": "ac5a1958279fad0fc21e42342a26fbfcbddbebbb9b0dbee4a18fde2fb0c379a5"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-export-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-export-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-export-setup-before.xml",
+      "sha256": "89b94e21bceddf748f2c87ac4c048a10a9ff7c1719b633c1bbbcb4b35c7bfd39"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-library-after.xml",
+      "sha256": "fcfabcb15a78edf9d09e75fc5dbfa4c6c5a98a6ba39780d63a098dafa049a65a"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-library-before.xml",
+      "sha256": "164668d1e40a34a6a1f15e9daeabbd7bdef2e798dc99ed7c180cb5245fc3cd51"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-library-wait-0.xml",
+      "sha256": "164668d1e40a34a6a1f15e9daeabbd7bdef2e798dc99ed7c180cb5245fc3cd51"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-play-once-after.xml",
+      "sha256": "89b94e21bceddf748f2c87ac4c048a10a9ff7c1719b633c1bbbcb4b35c7bfd39"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-play-once-before.xml",
+      "sha256": "d899e41e292f6832aceea4fe2208cb03ff2790d2853ea8103e3d719c0c3e5615"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-play-once-wait-0.xml",
+      "sha256": "d899e41e292f6832aceea4fe2208cb03ff2790d2853ea8103e3d719c0c3e5615"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-player-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-player-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-player-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-root-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-root-before.xml",
+      "sha256": "fcfabcb15a78edf9d09e75fc5dbfa4c6c5a98a6ba39780d63a098dafa049a65a"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-root-wait-0.xml",
+      "sha256": "fcfabcb15a78edf9d09e75fc5dbfa4c6c5a98a6ba39780d63a098dafa049a65a"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-snapshot-console.txt",
+      "sha256": "88cee5e5d5648b2cf0d9316fafd7752d2e7b454dd3bb72b6498cb994c4d688fe"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-source-after.xml",
+      "sha256": "164668d1e40a34a6a1f15e9daeabbd7bdef2e798dc99ed7c180cb5245fc3cd51"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-source-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-source-find-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-source-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/fixed-track-find-0.xml",
+      "sha256": "d899e41e292f6832aceea4fe2208cb03ff2790d2853ea8103e3d719c0c3e5615"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/flutter-analyze.txt",
+      "sha256": "cf6f3fe0abc6f26c3f55f5f70c27b7015f3039d54d56ad7fc994582ec3b2b85c"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/flutter-android-build.txt",
+      "sha256": "b3024843f573be4ab36f6df764078aa966f7abe5e66fdf7f836ca49acb00edf1"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/flutter-android-lint.txt",
+      "sha256": "66dae1b29298e3fdb9409b4240b3614e2f33c7feb3d54c9a50e514201a60713a"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/flutter-tests.txt",
+      "sha256": "75b4125fd080bd3c4a5249bba2a7041bafe4d36438cafeea7a13fb0c30439fbb"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/host-after-upgrade.png",
+      "sha256": "e8c656593a1ba6149b2fdda57e5b009a65c4c99995a0fd04e8ad7472a3c4d656"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/host-enabled.png",
+      "sha256": "28e24df3639d349e67ffd2f0a3de096c636be359319aba694a108fa536f9e1c4"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/host-installed.apk",
+      "sha256": "82ad322f6f804c224603dde6668cb2f34c1a7de83b974edbfc4dec5245c721a5"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/host-launch.txt",
+      "sha256": "d523daa8ce3d65fab0783b14a38ee90f495ab6a4992ca0e23e876e457bbb24d6"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/install.txt",
+      "sha256": "c4aa470acafcf8576c15b0f0b5ae7e852d1ec5413372d0e6a9272e788e1306d3"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/installed-sha256.txt",
+      "sha256": "b078750e0551709f7e7ff59a9e12a5acc5b89cf871060cc10f77c5dc3eeaa550"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/jvm-results.json",
+      "sha256": "7eb2f8a14bd9cea2afdf49ac62fa4be6fb2ad408a78fdec84f8bc6d92ca02eee"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/native-build.txt",
+      "sha256": "6bdaeff17f6f55263b6a863ac601e4684a9ef6f2cb09c0441fac5988a78677f9"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/native-page-build.txt",
+      "sha256": "48aa3133438cb3f6dcc55bfaad554fba5e162d8e7b18035c3e1a107d80ebbd21"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/phone-after-upgrade-current.xml",
+      "sha256": "a44e67574673dc06a92fd365fa611f415d6150b9024cf32a5059f94daaf1ef76"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/phone-baseline-report.json",
+      "sha256": "a388a72187371196e04d56fe112542db583009e368ef6ef6b16ea8213c5b6db5"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/phone-build-fixed.txt",
+      "sha256": "4c6e56f9f8f7d67fdd47bcfcd016213809326f7f73c4220a058f10e94b0f76e4"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/phone-build.txt",
+      "sha256": "c13936a5ee43b1ced96bbc92efb5deb5919721c56edcdcb4f1f9dbee3728fdf7"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/phone-final-report.json",
+      "sha256": "1eb9b863f52f2461c526da75892789a1199cdb7b3d3f8487bd14bd1a713e8c82"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/phone-fixed-report.json",
+      "sha256": "3dfe163ae146f8d54d26cd6ec67b3d46c381fa1acb2e8addb8f8890df1bfbc45"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/phone-incomplete-fixture-tests.txt",
+      "sha256": "e66f310a6a7cf6efe8f6485af82c985d8c73f3f59dd8fa0b18b69dae320a4378"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/phone-install.txt",
+      "sha256": "c4aa470acafcf8576c15b0f0b5ae7e852d1ec5413372d0e6a9272e788e1306d3"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/phone-installed-sha256.txt",
+      "sha256": "f4c54ffa082b95879db0370f500aeb6d36986eac5ba8c1a347cf73414d3ae8b8"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/phone-installed.apk",
+      "sha256": "277d236cbf7d9a97c11e06f711ce616b9957de6670dc04094f5fe552ebbe57f5"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/phone-launch.txt",
+      "sha256": "ae0e353e0a586d39be33280e3101096d135363695aa22d50ebeecaa900445380"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/phone-sd-recovery-report.json",
+      "sha256": "d68ad62f29b1d57a87c7f21641284035526f1a9309a32bb07bfab45d4c13ecfa"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/phone-upgrade-signing.json",
+      "sha256": "b4cfe8ffdba5524cdcbf33d92557865736ca8504cbb4f3c812044acf9e4f1c4e"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/post-dispatch-tests.xml",
+      "sha256": "15f9b01d3f6e4c75ed7c6b8a54cacd5d4d51db974bb89608374108c56a569179"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/restore-download-options.png",
+      "sha256": "35fa65de37fa7b9959074c49b78cd2901543d55c73c472e774510bd80111a72b"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/restore-mango-find-0.xml",
+      "sha256": "026c0a5b71191472e0a118d001762b720d707a3ca81f1ea410b45c7b5c57db06"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/restore-mango-player-after.xml",
+      "sha256": "026c0a5b71191472e0a118d001762b720d707a3ca81f1ea410b45c7b5c57db06"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/restore-mango-player-before.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/restore-mango-target-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/restore-mango-target-before.xml",
+      "sha256": "026c0a5b71191472e0a118d001762b720d707a3ca81f1ea410b45c7b5c57db06"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/restore-menu.png",
+      "sha256": "783f2b13256d8519c284d56a652280ff1b9321c4ef14fd5f0ee833e27fd1eb16"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/restore-settings.png",
+      "sha256": "a32b2ac745f11a2b913c9d6e0362d12cf02ac0dfe6265efa336214b32258c83a"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-album-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-album-before.xml",
+      "sha256": "8721f88a08454083ed619b300edf07ba5fe5076c9f43bbd291e67424c2e226d4"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-album-wait-0.xml",
+      "sha256": "8721f88a08454083ed619b300edf07ba5fe5076c9f43bbd291e67424c2e226d4"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-albums-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-albums-before.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-albums-wait-0.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-before-play-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-before-play.json",
+      "sha256": "def4314b447e5dc9d4d2301618d227e4f1ebcb1ccd75da76e0bfd77a6b9407a1"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-connect-wait-0.xml",
+      "sha256": "a44e67574673dc06a92fd365fa611f415d6150b9024cf32a5059f94daaf1ef76"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-connect-wait-1.xml",
+      "sha256": "a44e67574673dc06a92fd365fa611f415d6150b9024cf32a5059f94daaf1ef76"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-connect-wait-2.xml",
+      "sha256": "a44e67574673dc06a92fd365fa611f415d6150b9024cf32a5059f94daaf1ef76"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-connect-wait-3.xml",
+      "sha256": "a44e67574673dc06a92fd365fa611f415d6150b9024cf32a5059f94daaf1ef76"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-connect-wait-4.xml",
+      "sha256": "a44e67574673dc06a92fd365fa611f415d6150b9024cf32a5059f94daaf1ef76"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-connect-wait-5.xml",
+      "sha256": "a44e67574673dc06a92fd365fa611f415d6150b9024cf32a5059f94daaf1ef76"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-connect-wait-6.xml",
+      "sha256": "a44e67574673dc06a92fd365fa611f415d6150b9024cf32a5059f94daaf1ef76"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-connect-wait-7.xml",
+      "sha256": "a44e67574673dc06a92fd365fa611f415d6150b9024cf32a5059f94daaf1ef76"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-console.txt",
+      "sha256": "d95a21054dcfe2b5ea5d48f26924326701342496a3e8ab8c64c43a81c2996bac"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-error-dx.png",
+      "sha256": "1f412bbaafd07ac1953d8c93f37a86bb754cb5a1817aad6244d9eb1077444ff9"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-error-media_session.txt",
+      "sha256": "b020f04b62ba7db6c65862d732d726204828005c316483b08ded7683194a92e5"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-error-phone.png",
+      "sha256": "0d8d79327848b1de34a8294cfa1e08abf58670d76fba812b0437a8d84df91d10"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-export-console.txt",
+      "sha256": "50d643fe967f25b2d1b19e808acd49d0872ff8d87ae673d5628f06a5a5d73210"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-export-final-disconnect-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-export-final-disconnect-before.xml",
+      "sha256": "2e751806074e561be5e2edc6a5b7d9826f5c7a771d6a9d3f56b9611b4d6a4523"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-export-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-export-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-export-help-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-export-help-collapse-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-export-save-after.xml",
+      "sha256": "2e751806074e561be5e2edc6a5b7d9826f5c7a771d6a9d3f56b9611b4d6a4523"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-export-save-before.xml",
+      "sha256": "e15fd2e375a748169e7f71f55d0adf7979f458ca03d8630a4449848461d0eaa5"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-export-scroll-after.xml",
+      "sha256": "e15fd2e375a748169e7f71f55d0adf7979f458ca03d8630a4449848461d0eaa5"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-export-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-export-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-export-setup-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-fresh-root-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-fresh-root-before.xml",
+      "sha256": "b27b42d3a5ff4a318f6c8598be54649654cd7bae107e00da3d23a950c04b4e15"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-library-after.xml",
+      "sha256": "a85e30449d95cbb255b5e1eadfe1ae37d9c05c1610237d2abe4cf57fc57729dc"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-library-before.xml",
+      "sha256": "026c0a5b71191472e0a118d001762b720d707a3ca81f1ea410b45c7b5c57db06"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-library-wait-0.xml",
+      "sha256": "026c0a5b71191472e0a118d001762b720d707a3ca81f1ea410b45c7b5c57db06"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-page-checks.json",
+      "sha256": "36e92f2ec4f9b2d20a7754916f41f100d37776fc20ea6fca3b9a576ae288e6c9"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-play-once-after.xml",
+      "sha256": "b27b42d3a5ff4a318f6c8598be54649654cd7bae107e00da3d23a950c04b4e15"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-play-once-before.xml",
+      "sha256": "d899e41e292f6832aceea4fe2208cb03ff2790d2853ea8103e3d719c0c3e5615"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-play-once-wait-0.xml",
+      "sha256": "d899e41e292f6832aceea4fe2208cb03ff2790d2853ea8103e3d719c0c3e5615"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-player-after.xml",
+      "sha256": "45d25c2e4d5a84af03060507ab62e43a0e48600bb42f18fdfb165ac877217304"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-player-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-player-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-ready-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-ready-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-ready-connect-wait-0.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-ready-setup-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-ready-setup-before.xml",
+      "sha256": "a44e67574673dc06a92fd365fa611f415d6150b9024cf32a5059f94daaf1ef76"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-ready-setup-wait-0.xml",
+      "sha256": "a44e67574673dc06a92fd365fa611f415d6150b9024cf32a5059f94daaf1ef76"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-recovery.json",
+      "sha256": "abf23b3a7786f36526d4993e0ab5cd68d4cbeddba679a002cc60d2f82170bf7e"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-root-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-root-before.xml",
+      "sha256": "a85e30449d95cbb255b5e1eadfe1ae37d9c05c1610237d2abe4cf57fc57729dc"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-root-recovery-0.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-root-wait-0.xml",
+      "sha256": "a85e30449d95cbb255b5e1eadfe1ae37d9c05c1610237d2abe4cf57fc57729dc"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-settled.xml",
+      "sha256": "b27b42d3a5ff4a318f6c8598be54649654cd7bae107e00da3d23a950c04b4e15"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-source-find-0.xml",
+      "sha256": "45d25c2e4d5a84af03060507ab62e43a0e48600bb42f18fdfb165ac877217304"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-source-find-1.xml",
+      "sha256": "026c0a5b71191472e0a118d001762b720d707a3ca81f1ea410b45c7b5c57db06"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-source-scroll-0-after.xml",
+      "sha256": "026c0a5b71191472e0a118d001762b720d707a3ca81f1ea410b45c7b5c57db06"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-source-scroll-0-before.xml",
+      "sha256": "45d25c2e4d5a84af03060507ab62e43a0e48600bb42f18fdfb165ac877217304"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/retired-track-find-0.xml",
+      "sha256": "d899e41e292f6832aceea4fe2208cb03ff2790d2853ea8103e3d719c0c3e5615"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-album-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-album-before.xml",
+      "sha256": "8721f88a08454083ed619b300edf07ba5fe5076c9f43bbd291e67424c2e226d4"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-album-wait-0.xml",
+      "sha256": "8721f88a08454083ed619b300edf07ba5fe5076c9f43bbd291e67424c2e226d4"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-albums-after.xml",
+      "sha256": "8721f88a08454083ed619b300edf07ba5fe5076c9f43bbd291e67424c2e226d4"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-albums-before.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-albums-wait-0.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-audible-confirmation.json",
+      "sha256": "506d3f10ec5cb927e9668ac315e1b58046594fd85d4187f7e7115887dc5aa184"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-audio.txt",
+      "sha256": "dc038e447ba59f10fbfd38ed0f7279303bf00ac3c75cced6234d77ccd41f13c9"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-before-pause-media_session.txt",
+      "sha256": "b24eb0b150c156dd09ee5ac76b322c92da0e3eaa554e62689fc2a9aa00622483"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-before-play-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-before-play.json",
+      "sha256": "9365fabac09de7d0978333aa70a78c25ca20a6b8b5190ce3c4c7c94fdcc78088"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-connect-wait-0.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-connectivity.txt",
+      "sha256": "4e54cf939698a6f567a75ddf46f717ab339731833afeacdd0364d27330193f84"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-console.txt",
+      "sha256": "0dde3ddf6547334ecf6e93cae4499de2f000aed20b0ff74bc7b7b146a646093e"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-dx.png",
+      "sha256": "e899b1a0cb8152e57332eabbe3534887f9d0a274487afd3dc9bb92afad31903f"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-fresh-root-after.xml",
+      "sha256": "759d7959168bc08dd615d763253dbaff48802af487223ac01faf251fff058f3f"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-fresh-root-before.xml",
+      "sha256": "a9ccaba017c9911f68e82db2cdd5a3169ad3bfe5051c406fbc340eb942d03dde"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-library-after.xml",
+      "sha256": "fcfabcb15a78edf9d09e75fc5dbfa4c6c5a98a6ba39780d63a098dafa049a65a"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-library-before.xml",
+      "sha256": "164668d1e40a34a6a1f15e9daeabbd7bdef2e798dc99ed7c180cb5245fc3cd51"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-library-wait-0.xml",
+      "sha256": "164668d1e40a34a6a1f15e9daeabbd7bdef2e798dc99ed7c180cb5245fc3cd51"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-mango-find-0.xml",
+      "sha256": "8c60d4759925ff7399f86d2a763244f10099c52759b0d736d6e39b23385ad752"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-media_session.txt",
+      "sha256": "b24eb0b150c156dd09ee5ac76b322c92da0e3eaa554e62689fc2a9aa00622483"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-pause-after.xml",
+      "sha256": "a9ccaba017c9911f68e82db2cdd5a3169ad3bfe5051c406fbc340eb942d03dde"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-pause-before.xml",
+      "sha256": "cb604ced6d908b4ce2df4a05cb913af8b1bbbd934ba3240f325129749cb4b604"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-play-once-after.xml",
+      "sha256": "884ccc82916e8d89e56c80a428d0e6f00f76603f050094f21f42ad50be33de0d"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-play-once-before.xml",
+      "sha256": "d899e41e292f6832aceea4fe2208cb03ff2790d2853ea8103e3d719c0c3e5615"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-play-once-wait-0.xml",
+      "sha256": "d899e41e292f6832aceea4fe2208cb03ff2790d2853ea8103e3d719c0c3e5615"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-player-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-player-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-player-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-restore-mango-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-restore-mango-before.xml",
+      "sha256": "8c60d4759925ff7399f86d2a763244f10099c52759b0d736d6e39b23385ad752"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-restore-player-after.xml",
+      "sha256": "8c60d4759925ff7399f86d2a763244f10099c52759b0d736d6e39b23385ad752"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-restore-player-before.xml",
+      "sha256": "adc707b47369f2894165fd5812c6fe5faf21251a2f121198c7c4601ba906bdbe"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-reverse.txt",
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-root-after.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-root-before.xml",
+      "sha256": "fcfabcb15a78edf9d09e75fc5dbfa4c6c5a98a6ba39780d63a098dafa049a65a"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-root-recovery-0.xml",
+      "sha256": "adc707b47369f2894165fd5812c6fe5faf21251a2f121198c7c4601ba906bdbe"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-root-recovery.json",
+      "sha256": "ac4b92c5bf2ddab4a952eaaf61298f6b0b52235b3ea3c2ea7fc7b700679cb687"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-root-wait-0.xml",
+      "sha256": "fcfabcb15a78edf9d09e75fc5dbfa4c6c5a98a6ba39780d63a098dafa049a65a"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-row-checks.json",
+      "sha256": "df8eb8d0fdd8f9e3a681ce468b87d18631a0d1bc05a245b2c66930aa17d5c709"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-settled.xml",
+      "sha256": "cb604ced6d908b4ce2df4a05cb913af8b1bbbd934ba3240f325129749cb4b604"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-setup-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-setup-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-setup-wait-0.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-source-after.xml",
+      "sha256": "164668d1e40a34a6a1f15e9daeabbd7bdef2e798dc99ed7c180cb5245fc3cd51"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-source-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-source-find-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-source-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-check-track-find-0.xml",
+      "sha256": "d899e41e292f6832aceea4fe2208cb03ff2790d2853ea8103e3d719c0c3e5615"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-choice-closed.png",
+      "sha256": "69871ccb2f1e6b388c0bf795a89ffc97181322735eb431f19877dbb2a1f59bd5"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-export-console.txt",
+      "sha256": "dcc948332e66948315fa7cef0b949a94a370418ff1c0965baccbda35b0b800c7"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-export-final-disconnect-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-export-final-disconnect-before.xml",
+      "sha256": "6f717d5880cce8d47eec747f39b8c1b65f76bec799167ee6918067037dbc8835"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-export-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-export-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-export-help-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-export-help-collapse-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-export-save-after.xml",
+      "sha256": "6f717d5880cce8d47eec747f39b8c1b65f76bec799167ee6918067037dbc8835"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-export-save-before.xml",
+      "sha256": "a78ad6875d45f59a65c024923a31ed8b75fb68bc1d9eee20957dbc40fd9b25aa"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-export-scroll-after.xml",
+      "sha256": "a78ad6875d45f59a65c024923a31ed8b75fb68bc1d9eee20957dbc40fd9b25aa"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-export-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-export-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-export-setup-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-public-space.txt",
+      "sha256": "e2b287e2f533a1743d8aa43e840c5bc2f8eae97f1e29de1d7c2633967f2373f6"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-selection-verification.png",
+      "sha256": "163b69f85ca63439d3c13e6fdf1590f7fe1c95d50fec8d2c3a8ea39eeda36b3d"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/sd-settings-exited.png",
+      "sha256": "b1fe7a26e3e580d3fc5dddd78f808d328bbced9020a7fa909cd83cc6c2d6e14e"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/settings-menu.png",
+      "sha256": "33de12a3a259f6fd80911ae622d45d01d523ff16acec6103405757655ce7e6ad"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/settings-start.png",
+      "sha256": "4b737b6ef845d0165cf2e0fe20cbd64a0733364707e9527203f0edbe18b26171"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/storage-restore-start.png",
+      "sha256": "cc27efcea6a5c3d79836d44b2bba8d0250fcc06657b90c90b0f419bbd87c267b"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/targeted-tests.txt",
+      "sha256": "3199837f27412f42a2da81dd1acad283595bf71cb7329515524e28d78328f248"
+    },
+    {
+      "file": "artifacts/apple-offline-observation-20261031/upgrade-signing.json",
+      "sha256": "004b4c630f9666ce3061029a5ac82d6eee345dfa80b6ef6056834f5d673e28a5"
+    }
+  ]
+}
