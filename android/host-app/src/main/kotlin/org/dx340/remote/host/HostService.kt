@@ -141,7 +141,7 @@ class HostService : Service() {
             else -> Unit
         }
         if (intent?.action == "RESTORE") record("PACKAGE_UPDATE_RECOVERED: saved phone control enabled; fresh authorization required")
-        if (intent == null) record("SERVICE_RECOVERED: Bluetooth availability restored; fresh authorization required")
+        if (intent == null) record("SERVICE_RECOVERED: saved phone control enabled; Bluetooth state rechecked; fresh authorization required")
         // Recover an enabled remote after process loss without redelivering PAIR,
         // PROBE or a playback action. Explicit Stop and permission loss exit above.
         return START_STICKY
