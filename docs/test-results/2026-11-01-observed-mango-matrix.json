@@ -1,0 +1,722 @@
+{
+  "date": "2026-11-01",
+  "status": "VERIFIED 20 actual Pixel-to-Mango observed playback selections and stable row geometry; full both-phone/audio acceptance incomplete",
+  "sourceCommit": "731aa64424fa65c771b7ce0f4a3db7a590ead662",
+  "installedSha256": {
+    "org.dx340.remote.host": "e1a024293c70e334de1e45c31176be6c19e4555fe97391e84f56b4515148b1f8",
+    "org.dx340.remote.controller": "dac6016c1223f1f2edcc431d95fd108daaa1b2e8d5139fd2ae72d9393092f84f"
+  },
+  "deviceScope": "DX340 Android13/API33 eng.iBasso.20260812.181952 Companion0.1.0/code1; Pixel9a Android16/API36 CP1A.260405.005 Remote0.2.0/code2; Mango4.1.37/code240; Apple Music6.5.3/code1599",
+  "selections": [
+    {
+      "case": "mango-01-gold-intro-selection",
+      "file": "01. Intro -GOLD SYMPHONY-.flac",
+      "title": "Intro -GOLD SYMPHONY-",
+      "artist": "AAA",
+      "precedingSource": {
+        "state": 2,
+        "basePosition": 69226,
+        "description": "ゴースト, tayori, tayori LIVE TOUR \"magic\""
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 1993,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    },
+    {
+      "case": "mango-02-gold-call-selection",
+      "file": "02. CALL.flac",
+      "title": "CALL",
+      "artist": "AAA",
+      "precedingSource": {
+        "state": 3,
+        "basePosition": 0,
+        "description": "Intro -GOLD SYMPHONY-, AAA, Gold Symphony"
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 2076,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    },
+    {
+      "case": "mango-03-gold-shout-selection",
+      "file": "03. SHOUT & SHAKE.flac",
+      "title": "SHOUT & SHAKE",
+      "artist": "AAA",
+      "precedingSource": {
+        "state": 3,
+        "basePosition": 0,
+        "description": "CALL, AAA, Gold Symphony"
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 1970,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    },
+    {
+      "case": "mango-04-gold-mask-selection",
+      "file": "04. MASK.flac",
+      "title": "MASK",
+      "artist": "AAA",
+      "precedingSource": {
+        "state": 3,
+        "basePosition": 0,
+        "description": "SHOUT & SHAKE, AAA, Gold Symphony"
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 1901,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    },
+    {
+      "case": "mango-05-gold-music-selection",
+      "file": "05. MUSIC!!!.flac",
+      "title": "MUSIC!!!",
+      "artist": "AAA",
+      "precedingSource": {
+        "state": 3,
+        "basePosition": 0,
+        "description": "MASK, AAA, Gold Symphony"
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 2205,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    },
+    {
+      "case": "mango-06-gold-crazy-selection",
+      "file": "06. CRAZY GONNA CRAZY.flac",
+      "title": "CRAZY GONNA CRAZY",
+      "artist": "AAA",
+      "precedingSource": {
+        "state": 3,
+        "basePosition": 0,
+        "description": "MUSIC!!!, AAA, Gold Symphony"
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 2155,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    },
+    {
+      "case": "mango-07-gold-instrumental-selection",
+      "file": "07. Instrucmental 1.flac",
+      "title": "Instrucmental 1",
+      "artist": "AAA",
+      "precedingSource": {
+        "state": 3,
+        "basePosition": 0,
+        "description": "CRAZY GONNA CRAZY, AAA, Gold Symphony"
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 2149,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    },
+    {
+      "case": "mango-08-gold-sayonara-selection",
+      "file": "08. さよならの前に.flac",
+      "title": "さよならの前に",
+      "artist": "AAA",
+      "precedingSource": {
+        "state": 3,
+        "basePosition": 0,
+        "description": "Instrucmental 1, AAA, Gold Symphony"
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 1871,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    },
+    {
+      "case": "mango-09-gold-autumn-selection",
+      "file": "09. autumn orange.flac",
+      "title": "autumn orange",
+      "artist": "AAA",
+      "precedingSource": {
+        "state": 3,
+        "basePosition": 0,
+        "description": "さよならの前に, AAA, Gold Symphony"
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 1904,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    },
+    {
+      "case": "mango-10-tayori-intro-selection",
+      "file": "01. Intro.wav",
+      "title": "Intro",
+      "artist": "tayori",
+      "precedingSource": {
+        "state": 3,
+        "basePosition": 0,
+        "description": "autumn orange, AAA, Gold Symphony"
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 1953,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    },
+    {
+      "case": "mango-11-tayori-wav-hakuchumu-selection",
+      "file": "02. 白日夢.wav",
+      "title": "白日夢",
+      "artist": "tayori",
+      "precedingSource": {
+        "state": 3,
+        "basePosition": 0,
+        "description": "Intro, tayori, 1st Live “春を待つ” 追加公演  [BD]"
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 1937,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    },
+    {
+      "case": "mango-12-tayori-wav-kaze-selection",
+      "file": "03. 風のたより.wav",
+      "title": "風のたより",
+      "artist": "tayori",
+      "precedingSource": {
+        "state": 3,
+        "basePosition": 0,
+        "description": "白日夢, tayori, 1st Live “春を待つ” 追加公演  [BD]"
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 1988,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    },
+    {
+      "case": "mango-13-tayori-envision-selection",
+      "file": "01. envision.flac",
+      "title": "envision",
+      "artist": "tayori",
+      "precedingSource": {
+        "state": 3,
+        "basePosition": 0,
+        "description": "風のたより, tayori, 1st Live “春を待つ” 追加公演  [BD]"
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 1934,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    },
+    {
+      "case": "mango-14-tayori-maho-selection",
+      "file": "02. 魔法.flac",
+      "title": "魔法",
+      "artist": "tayori",
+      "precedingSource": {
+        "state": 3,
+        "basePosition": 0,
+        "description": "envision, tayori, tayori LIVE TOUR \"magic\""
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 1915,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    },
+    {
+      "case": "mango-15-tayori-ghost-selection",
+      "file": "03. ゴースト.flac",
+      "title": "ゴースト",
+      "artist": "tayori",
+      "precedingSource": {
+        "state": 3,
+        "basePosition": 0,
+        "description": "魔法, tayori, tayori LIVE TOUR \"magic\""
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 2092,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    },
+    {
+      "case": "mango-16-tayori-flac-hakuchumu-selection",
+      "file": "04. 白日夢.flac",
+      "title": "白日夢",
+      "artist": "tayori",
+      "precedingSource": {
+        "state": 3,
+        "basePosition": 0,
+        "description": "ゴースト, tayori, tayori LIVE TOUR \"magic\""
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 1909,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    },
+    {
+      "case": "mango-17-way-opening-selection",
+      "file": "01. OPENING VTR.flac",
+      "title": "OPENING VTR",
+      "artist": "AAA",
+      "precedingSource": {
+        "state": 3,
+        "basePosition": 0,
+        "description": "白日夢, tayori, tayori LIVE TOUR \"magic\""
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 1833,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    },
+    {
+      "case": "mango-18-way-magic-selection",
+      "file": "02. MAGIC.flac",
+      "title": "MAGIC",
+      "artist": "AAA",
+      "precedingSource": {
+        "state": 3,
+        "basePosition": 0,
+        "description": "OPENING VTR, AAA, WAY OF GLORY"
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 1892,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    },
+    {
+      "case": "mango-19-way-mosaic-selection",
+      "file": "03. Mosaic.flac",
+      "title": "Mosaic",
+      "artist": "AAA",
+      "precedingSource": {
+        "state": 3,
+        "basePosition": 0,
+        "description": "MAGIC, AAA, WAY OF GLORY"
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 1898,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    },
+    {
+      "case": "mango-20-way-next-stage-selection",
+      "file": "04. Next Stage.flac",
+      "title": "Next Stage",
+      "artist": "AAA",
+      "precedingSource": {
+        "state": 3,
+        "basePosition": 0,
+        "description": "Mosaic, AAA, WAY OF GLORY"
+      },
+      "playingObserved": true,
+      "reportedPositionAdvanceMs": 1988,
+      "beforePendingFinalRowBoundsEqual": true,
+      "volume": 37,
+      "output": "headset(4)"
+    }
+  ],
+  "formatCounts": {
+    ".flac": 17,
+    ".wav": 3
+  },
+  "hearing": "NOT TESTED; owner waived routine listening prompts. Actual screen/expected track/PLAYING and advancing reported position are the observed-playback scope. No acoustic or decoded-frame proof.",
+  "positionScope": "SourceRegistry estimates public PlaybackState position/speed/update-time; advancing estimate alone does not establish audible output.",
+  "playlists": "UNAVAILABLE in current exposed Mango page: no items returned. No playlists or fixtures created.",
+  "journal": {
+    "modelInstanceId": "665863d7-8c97-4990-b2e1-9a71afb2a423",
+    "counts": [
+      8,
+      171
+    ],
+    "allPreviousRowsUnchanged": true,
+    "zeroEvictions": true,
+    "newOperationCounts": {
+      "BROWSE": 122,
+      "PLAY_ITEM": 20,
+      "GET_STATE": 20,
+      "SET_PLAYING": 1
+    },
+    "allNewAppliedResults": true,
+    "singlePlayItemReceipts": [
+      {
+        "id": "333abbb6-f9a0-4356-b873-26f1ea2c0c55",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 2458548,
+        "firstWriteSubmittedAfterMs": 3,
+        "writeAcknowledgedAfterMs": 95,
+        "accepted": true,
+        "acceptedAfterMs": 125,
+        "finishedAfterMs": 3744,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "d5b97f73-cbd8-4619-9d23-5d2e78b1837d",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 2534226,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 98,
+        "accepted": true,
+        "acceptedAfterMs": 121,
+        "finishedAfterMs": 3466,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "4f994b4f-4925-4f55-9f5c-fe1c43f3bfcc",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 2599065,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 105,
+        "accepted": true,
+        "acceptedAfterMs": 118,
+        "finishedAfterMs": 3789,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "c1841c1c-b32b-49fd-8f46-50017f7cd582",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 2662835,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 95,
+        "accepted": true,
+        "acceptedAfterMs": 110,
+        "finishedAfterMs": 3784,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "87c79abe-1597-4944-9c44-554640c63731",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 2773591,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 93,
+        "accepted": true,
+        "acceptedAfterMs": 118,
+        "finishedAfterMs": 3433,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "a3676a79-f00e-4bb1-a48c-7c934c172911",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 2846317,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 91,
+        "accepted": true,
+        "acceptedAfterMs": 107,
+        "finishedAfterMs": 3372,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "3108b934-4573-437f-a42a-76d2907fa439",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 2919225,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 98,
+        "accepted": true,
+        "acceptedAfterMs": 120,
+        "finishedAfterMs": 3433,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "132a99ce-c2a2-4f47-8db4-0e6c9f3bef8b",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 2991988,
+        "firstWriteSubmittedAfterMs": 3,
+        "writeAcknowledgedAfterMs": 90,
+        "accepted": true,
+        "acceptedAfterMs": 117,
+        "finishedAfterMs": 3639,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "e9822983-21a9-48c0-a1cf-485583c6dada",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 3074072,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 92,
+        "accepted": true,
+        "acceptedAfterMs": 97,
+        "finishedAfterMs": 3518,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "411796a8-c7f8-4dff-ae85-dcc63dce9f65",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 3151810,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 98,
+        "accepted": true,
+        "acceptedAfterMs": 107,
+        "finishedAfterMs": 3768,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "a9c40321-8c7a-4049-9d56-94b75d53fa24",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 3218288,
+        "firstWriteSubmittedAfterMs": 3,
+        "writeAcknowledgedAfterMs": 95,
+        "accepted": true,
+        "acceptedAfterMs": 112,
+        "finishedAfterMs": 3755,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "0dd109ae-961b-4997-be07-b2bd4ef5cd74",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 3284837,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 97,
+        "accepted": true,
+        "acceptedAfterMs": 116,
+        "finishedAfterMs": 3689,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "91b6159f-d5c2-4d1e-bd0c-2dafdecefb67",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 3351762,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 114,
+        "accepted": true,
+        "acceptedAfterMs": 120,
+        "finishedAfterMs": 3765,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "bc911fbb-81aa-4519-8736-f2b93278c0d1",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 3418136,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 100,
+        "accepted": true,
+        "acceptedAfterMs": 118,
+        "finishedAfterMs": 3549,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "480d72e2-c009-47b9-923f-7939110834c0",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 3484034,
+        "firstWriteSubmittedAfterMs": 5,
+        "writeAcknowledgedAfterMs": 93,
+        "accepted": true,
+        "acceptedAfterMs": 111,
+        "finishedAfterMs": 3820,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "000c4e69-6c20-4f58-aeda-52d2074ede21",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 3550319,
+        "firstWriteSubmittedAfterMs": 3,
+        "writeAcknowledgedAfterMs": 92,
+        "accepted": true,
+        "acceptedAfterMs": 109,
+        "finishedAfterMs": 3566,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "85cb2ee0-705d-4bad-b135-d8de49c0a082",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 3614440,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 100,
+        "accepted": true,
+        "acceptedAfterMs": 101,
+        "finishedAfterMs": 3595,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "265721f3-aab3-49d7-b019-f95c417cb269",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 3672560,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 92,
+        "accepted": true,
+        "acceptedAfterMs": 109,
+        "finishedAfterMs": 3627,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "671497a6-7a25-4e23-8498-1f2379b2da13",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 3730782,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 95,
+        "accepted": true,
+        "acceptedAfterMs": 120,
+        "finishedAfterMs": 3493,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "1f410669-ef3a-4416-ac80-7b6532a2df4c",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 3797150,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 68,
+        "accepted": true,
+        "acceptedAfterMs": 75,
+        "finishedAfterMs": 3571,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      }
+    ]
+  },
+  "driverRefusal": "After fourth selection, Browse source library was above the scrolled viewport. No fifth playback tap was sent. Driver scrolled to the actual current button before continuing; completed selections were never replayed.",
+  "final": {
+    "at": "2026-11-01T07:18:09.708813+08:00",
+    "prefsSettingsPidsRetained": true,
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeVerified": false,
+    "phone": "ordinary Disconnect/help collapsed",
+    "host": "saved enabled/foreground service/advertising",
+    "storage": "SD mounted; no storage selection/mount/reset/private-file action"
+  },
+  "remaining": [
+    "Physical iPhone matrix",
+    "Exposed playlist coverage unavailable",
+    "Headphone audibility and quality not independently measured",
+    "Current-pair Apple20/5albums/2playlists and outside-queue offline coverage",
+    "100 deliberate playback controls per source/phone",
+    "Existing shared-link stalls, strict cellular-off, no-card/Internal and Apple MEDIA_MOUNTED failures, full T01-T18 and Watch"
+  ],
+  "fullAcceptancePassed": false,
+  "rawEvidence": {
+    "root": "artifacts/observed-source-matrix-20261101",
+    "filesHashed": 794,
+    "manifestSha256": "689004474f56c51ea5f3abd3e0226f579346809423b247b8121c81afdef16094"
+  },
+  "playItemNativeTimingMs": {
+    "firstWriteSubmittedAfterMs": {
+      "min": 3,
+      "max": 5,
+      "p95NearestRank": 4
+    },
+    "writeAcknowledgedAfterMs": {
+      "min": 68,
+      "max": 114,
+      "p95NearestRank": 105
+    },
+    "acceptedAfterMs": {
+      "min": 75,
+      "max": 125,
+      "p95NearestRank": 121
+    },
+    "finishedAfterMs": {
+      "min": 3372,
+      "max": 3820,
+      "p95NearestRank": 3789
+    }
+  },
+  "containerSignatureVerification": {
+    "files": 20,
+    "FLAC": 17,
+    "WAV": 3,
+    "publicHeaderBytesPerFile": 12,
+    "scope": "No audio frames decoded, no quality proof"
+  },
+  "folderSelectionCounts": {
+    "Gold Symphony": 9,
+    "春を待つ": 3,
+    "magic": 4,
+    "WAY OF GLORY": 4
+  },
+  "driverReadCorrection": "Initial exec-out header command retained shell quoting and returned an error string; exact12-byte guard failed. Corrected read-only shell command verifies all20 headers. No playback/device state action."
+}

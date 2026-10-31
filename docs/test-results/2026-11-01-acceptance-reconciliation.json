@@ -71,7 +71,7 @@
     {
       "id": "P6",
       "status": "IMPLEMENTED_PARTIAL_VALIDATION",
-      "finding": "Mango native metadata plus optional awake/unlocked folders/playlists; current navigation verified, current20-file audio matrix incomplete."
+      "finding": "Mango native metadata plus optional awake/unlocked folders/playlists; current navigation verified, current20-file audio matrix incomplete. Current731 Android20 folder selections/17FLAC3WAV observed with stable rows; exposed playlists empty, iPhone and independent hearing/quality remain open."
     },
     {
       "id": "P7",
@@ -116,7 +116,7 @@
     {
       "id": "T04",
       "status": "NOT_PASSED",
-      "finding": "Earlier4ee read-only ACK/reply p95 Mango160/469ms, Apple168/494ms are scoped. Current95 fresh SD result7777ms misses3s page target; no full control/state/acoustic pass. [Evidence](test-results/2026-11-01-write-ack-timing.md).  Current95 isolated GET_STATE ATT94ms/RESULT322ms is one read, not a p95/control/audio pass. [Current read](test-results/2026-11-01-no-active-network-read.md).  Currenta65 first-submission timing is separate from ACK; no p95/control/audio pass. [Submission report](test-results/2026-11-01-first-write-submission.md).",
+      "finding": "Earlier4ee read-only ACK/reply p95 Mango160/469ms, Apple168/494ms are scoped. Current95 fresh SD result7777ms misses3s page target; no full control/state/acoustic pass. [Evidence](test-results/2026-11-01-write-ack-timing.md).  Current95 isolated GET_STATE ATT94ms/RESULT322ms is one read, not a p95/control/audio pass. [Current read](test-results/2026-11-01-no-active-network-read.md).  Currenta65 first-submission timing is separate from ACK; no p95/control/audio pass. [Submission report](test-results/2026-11-01-first-write-submission.md). Current73120 Mango PLAY_ITEM p95 submission4/ATT105/ACCEPTED121/dispatchedRESULT3789ms; not fullT04/UI-tap/acoustic proof.",
       "remainingRequirement": "ACK p95 below500ms, observed local state below1.5s; cache pages below500ms/uncached below3s measured separately.",
       "evidence": "2026-11-01-write-ack-timing.md",
       "supplementalEvidence": "2026-11-01-no-active-network-read.md",
@@ -147,11 +147,12 @@
     },
     {
       "id": "T08",
-      "status": "PARTIAL_OLDER_AUDIO",
-      "finding": "b805/00e5 physical Pixel WAV/FLAC owner hearing (2/20 in that scope) and earlier source-local cases retain caveats. Earlier611/95 two selected WAV/FLAC files reach expected PLAYING3, sampled rows stable; hearing pending, no a65 audio pass. [Prior pair](test-results/2026-11-01-current-pair-source-selection.md). [Evidence](test-results/2026-10-31-current-phone-source-audio.md).",
+      "status": "PARTIAL_CURRENT_ANDROID_OBSERVED",
+      "finding": "b805/00e5 physical Pixel WAV/FLAC owner hearing (2/20 in that scope) and earlier source-local cases retain caveats. Earlier611/95 two selected WAV/FLAC files reach expected PLAYING3, sampled rows stable; hearing pending, no a65 audio pass. [Prior pair](test-results/2026-11-01-current-pair-source-selection.md). [Evidence](test-results/2026-10-31-current-phone-source-audio.md). Current731 e1/dac actual Pixel20 distinct files across4folders reach expected PLAYING/progress, stable rows and exact20 native PLAY_ITEM receipts;17FLAC3WAV headers verified. Hearing prompts waived, audibility unverified; exposed playlist page returns no items.",
       "remainingRequirement": "At least20 correct FLAC/WAV selections across albums/folders/exposed playlists through Mango, each phone.",
       "evidence": "2026-10-31-current-phone-source-audio.md",
-      "currentPairSelectionSupplement": "2026-11-01-current-pair-source-selection.md"
+      "currentPairSelectionSupplement": "2026-11-01-current-pair-source-selection.md",
+      "currentObservedSupplement": "2026-11-01-observed-mango-matrix.md"
     },
     {
       "id": "T09",
@@ -390,6 +391,26 @@
     ],
     "noReplay": true,
     "freshReadMs": 477,
+    "fullAcceptancePassed": false
+  },
+  "observedMangoMatrixSupplement": {
+    "evidence": "2026-11-01-observed-mango-matrix.md",
+    "source": "731aa64424fa65c771b7ce0f4a3db7a590ead662",
+    "selections": 20,
+    "containerCounts": {
+      "FLAC": 17,
+      "WAV": 3
+    },
+    "folders": 4,
+    "rowGeometryStable": true,
+    "journalCounts": [
+      8,
+      171
+    ],
+    "exactPlayItemReceipts": 20,
+    "allNewAppliedResults": true,
+    "exposedPlaylistPage": "No items returned; unavailable coverage",
+    "hearing": "NOT TESTED; routine prompts waived",
     "fullAcceptancePassed": false
   }
 }

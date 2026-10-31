@@ -1,6 +1,14 @@
 # Implementation status
 
-## Current checkpoint —1 November2026,06:32 HKT
+## Current checkpoint —1 November2026,07:18 HKT
+
+Current1 November2026,07:18 HKT: full goal ACTIVE/incomplete. Read docs/test-results/2026-11-01-observed-mango-matrix.md/.json. Unchanged source731 pair remains installed/hash exact: Companion e1a02429/PID21079, Pixel dac6016c/PID15533/host epoch2159b3e5. Actual Pixel-to-Mango20 distinct local selections pass expected title/artist/PLAYING/advancing reported position and stable before/pending/final row geometry:9Gold Symphony FLAC,3春を待つ WAV,4magic FLAC,4WAY OF GLORY FLAC. Public12-byte signatures verify17FLAC/3WAV. Routine hearing prompts waived; audibility/quality NOT TESTED, public position estimate is not acoustic proof. Apple remains paused. Playlists page returns no items, so current exposed-playlist coverage unavailable.
+
+Native model665863d7 grows8→171, all prior8 unchanged/zero evictions;163 new applied results =122BROWSE/20PLAY_ITEM/20GET_STATE/one finalPause, no extra auth/duplicate selection/skip/volume command. PLAY_ITEM p95 first submission4/ATT105/ACCEPTED121/RESULT3789ms (dispatch scope, not UI/acoustic/fullT04). No connection loss/protocol error in this ordinary browsing cohort; earlier73–82s interrupted-link stalls remain unresolved. After selection4 a driver navigation refusal sent no playback input; scroll back exposed the current Browse button. UX follow-up: post-selection instruction can point to an off-screen action. No app/source/build/install/CI change; prior268JVM/82Flutter/22Swift/18 analyser/f1-release20 retain their recorded scopes.
+
+Final07:18:09 bothPAUSED2/37/headset(4)/prooffalse, four prefs/settings/PIDs/grants/host bonds/both bindings retained, SD mountedFBB9-E8FE/no storage action. Pixel normalDisconnect/help collapsed; host service enabled/advertising.794 raw hashes frozen. No live test/export/build job. NEXT: current-pair Apple offline20/5albums/2playlists/outside full prior queue, clearer post-selection browsing,100playback controls/source/phone and fullT01–T18. Only Windows/Android available; owner-iPhone/Mac signing/Watch, strict cellular-off(Pixel flag1 retained), original no-card/Internal timeout/Apple MEDIA_MOUNTED crash/sleep/range/calls/battery/walk/UX-01 icons remain open. No pause/device switch.
+
+## Prior checkpoint —1 November2026,06:32 HKT
 
 Current1 November2026,06:32 HKT: full goal ACTIVE/incomplete. Read docs/test-results/2026-11-01-service-change-recovery.md/.json, input-response-guard.md/.json and gatt-stall-topology.md/.json. Sourcef1fa63b adds fail-closed input response submission: false/exception cannot dispatch a command and uses existing bounded own-server recovery. Source731aa64 serializes Android Service Changed rediscovery after the current discovery/MTU/CCC/write callback drains, clearing pending commands/authorization without replay.268 aggregate JVM/native builds/lint and shared Android analysis/release/lint pass; eight new sequencing/seven prior input-gate tests.20 host release tests/build/lint belong to f1;82Flutter/22Swift/18 analyser unchanged prior scopes, no new Apple matching paths/job/polling.
 

@@ -1,0 +1,28 @@
+# Current Android Mango selection matrix — 1 November 2026
+
+**VERIFIED:** 20 distinct local-file selections through the actual Pixel UI over BLE, with the expected Mango track, PLAYING state and advancing reported position. All 20 before/pending/final song-row bounds match. **Full project acceptance remains incomplete.**
+
+Both installed packages are source `731aa64424fa65c771b7ce0f4a3db7a590ead662`: DX340 Companion SHA256 `e1a024293c70e334de1e45c31176be6c19e4555fe97391e84f56b4515148b1f8`, Pixel Remote `dac6016c1223f1f2edcc431d95fd108daaa1b2e8d5139fd2ae72d9393092f84f`. DX340 Android13/API33 build `eng.iBasso.20260812.181952`, Companion0.1.0/code1; Pixel9a Android16/API36 `CP1A.260405.005`, shared Remote0.2.0/code2. Mango4.1.37/code240; Apple Music6.5.3/code1599. No app changes, rebuild, installation, pairing, radio reset or new approval in this case.
+
+| Actual local folder | Selections | Format |
+|---|---:|---|
+| AAA / Gold Symphony | 9 | FLAC |
+| Tayori / 1st Live “春を待つ” 追加公演 | 3 | WAV |
+| Tayori / LIVE TOUR “magic” | 4 | FLAC |
+| AAA / WAY OF GLORY | 4 | FLAC |
+
+Each selection used a fresh phone browse path and one visible, enabled file-row tap. A different title preceded each selection; changes include browsing across albums during active playback. Read-only DX340 snapshots, media-session state, source screenshots and audio-state dumps then record the expected title/artist, PLAYING and advancing reported position. Representative source screenshots were visually inspected: selected filenames/track details and the Pause control agree. Apple Music stays paused. All 20 audio dumps show unmuted headset(4), stream volume37. Twelve public header bytes per selected local file independently verify 17 FLAC and three RIFF/WAVE containers; no audio frames were decoded.
+
+The owner waived routine listening questions. These are **observed playback** results. Headphone audibility/quality remain **NOT TESTED**, and advancing SourceRegistry position is an estimate from public PlaybackState position/speed/update-time, not acoustic or decoded-frame proof. Older owner-audible results retain their original binary scopes.
+
+The current exposed Mango Playlists page returned no items. That coverage is **UNAVAILABLE**, not proof that every playlist path works or that no playlists exist. No playlist/content fixtures were created. After selection four, the test driver refused its next navigation tap because Browse source library was above the scrolled viewport; it sent no fifth playback tap. Scrolling back to the current button fixed the driver navigation. Completed selections were never replayed. This exposes an outstanding usability issue: the post-selection instruction points to an action that may be off screen.
+
+Native model `665863d7-8c97-4990-b2e1-9a71afb2a423` grows **8→171**, preserving all eight baseline rows with zero evictions. The 163 new applied results are 122 BROWSE, **exactly20 PLAY_ITEM**, 20 GET_STATE and one final SET_PLAYING(false). No extra HELLO/AUTH, duplicate selection, NEXT/PREVIOUS or volume request appears during the matrix. This case has no failed protocol results or observed connection loss; it does not erase earlier interrupted-link stalls.
+
+For the 20 PLAY_ITEM requests, nearest-rank p95 is first write submitted4ms, final ATT write response105ms, protocol ACCEPTED121ms and dispatched RESULT3789ms (range3372–3820ms). These measure native command stages, not UI-tap-to-audio latency. They do not pass full T04; UI-assisted selection latency and the remaining control/state thresholds remain open.
+
+At **07:18:09 HKT**, both sources are PAUSED2 at37/headset(4), volume verification remains false, PIDs21079/15533 and host epoch `2159b3e5-2f0d-408c-badf-379c8548416c` are unchanged. Four preference hashes, settings, saved controller grants, host OS bonds and both Accessibility bindings are retained. Wi-Fi remains0 on both, Bluetooth1, Pixel mobile_data1 unchanged; strict cellular-offT01 remains open. SD `public:179,1` remains mounted `FBB9-E8FE`; no Apple storage setting, mount, reset or private-download action occurred. Apple SD destination retains its earlier own-UI verification scope. Ordinary phone Disconnect/help collapse completes; host foreground service remains enabled/advertising. All test/export jobs finished.
+
+Commands: `python work/observed_matrix_ui.py ...`, `observed_matrix_nav.py`, `observed_mango_batch.py`, `observed_tayori_batch.py`, `observed_way_batch.py`, `observe_selected_file_headers.py`, `export_update_phone.py`, `observed_source_case.py`; `scripts/summarize-connection-reports.py` validates the bounded real exports. An initial header-read command retained quoting through exec-out and failed its length guard; the corrected read-only shell command read exactly12 bytes from each file, with no playback/device-state action. Scratch drivers and raw evidence remain ignored. [Structured results](2026-11-01-observed-mango-matrix.json) preserve all selections and individual native playback receipts. Raw `artifacts/observed-source-matrix-20261101/` has **794 hashed files**, manifest SHA256 `689004474f56c51ea5f3abd3e0226f579346809423b247b8121c81afdef16094`; do not modify or replay that frozen case.
+
+Next: current-pair Apple offline20/5albums/2playlists including outside the full prior queue; make post-selection browsing navigation clearer; 100 playback controls/source/phone and full T01–T18. Physical owner-iPhone/Mac signing and Watch remain unavailable/unverified. This Android folder subset advances T08, without closing exposed-playlist, other-phone, audio-quality or reliability requirements.
