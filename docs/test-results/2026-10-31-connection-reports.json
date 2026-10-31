@@ -2,7 +2,7 @@
   "date": "2026-10-31",
   "goalStatus": "ACTIVE/incomplete",
   "appSource": "956e5bf936e71ede95b14f09ec19e2be1e6fe06a",
-  "analyserSource": "50c080d89672664684aeec6a233563f74f830b30",
+  "analyserSource": "b7a8f567f9e23e8f5777082c03776ac71bb221e8",
   "localBuilds": {
     "status": "VERIFIED",
     "nativeJvm": {
@@ -13,7 +13,7 @@
       "total": 174
     },
     "flutterTests": 72,
-    "analyserTests": 8,
+    "analyserTests": 9,
     "nativeBuildLint": true,
     "sharedAnalyzeReleaseLint": true
   },
@@ -96,8 +96,8 @@
     "iOSButtonReview": "NOT TESTED"
   },
   "apple": {
-    "status": "NOT TESTED",
-    "observation": "Native terminal SUCCESS and archive verified; shared run still in progress",
+    "status": "VERIFIED",
+    "observation": "Both runs terminal SUCCESS; both artifact archive SHA256 digests verified before extraction",
     "nativeRun": 41159819250,
     "sharedRun": 41159819268,
     "source": "956e5bf936e71ede95b14f09ec19e2be1e6fe06a",
@@ -112,6 +112,59 @@
       "simulatorBuildInstallLaunch": true,
       "xcode": "26.6/17F113",
       "physicalIPhone": false
+    },
+    "scope": "Hosted software/simulator builds and real native SDK share-sheet presentation only; no physical iPhone/Bluetooth/audio/selected destination proof",
+    "shared": {
+      "status": "VERIFIED",
+      "run": 41159819268,
+      "conclusion": "success",
+      "artifact": 13027046956,
+      "archiveSha256": "082e4d54d3be0528cf634dec38165f176bfce360b0c9abe70872c310d6e973f7",
+      "flutterTests": 72,
+      "analysis": true,
+      "captureGuards": 12,
+      "ordinaryAndFixtureBuilds": true,
+      "nativeExportProbe": {
+        "markerStatus": "presented",
+        "currentModelIdMatched": true,
+        "strictSchemaPassed": true,
+        "jsonBytes": 923,
+        "requests": 0,
+        "authorized": false,
+        "phase": "failed",
+        "reason": "Simulator reports Bluetooth unavailable; not a physical Bluetooth failure",
+        "nativeSheetVisuallyObserved": true,
+        "destinationSelected": false,
+        "realBleOrAudioEvidence": false
+      },
+      "ordinaryAppRebuiltInstalledLaunched": true,
+      "ordinaryRestoredScreenshotObserved": true,
+      "xcode": "26.6/17F113",
+      "macOS": "26.6.2/25G83",
+      "simulator": "iPhone Air/iOS26.5",
+      "iPadPresentation": "NOT TESTED",
+      "rawEvidence": [
+        {
+          "path": "artifacts/request-journal-20261031/ci-41159819268/flutter-native-report-export.json",
+          "bytes": 923,
+          "sha256": "5e613f1d7a6e00359081f77cfb4e0e1a8d11201bc5d8a8ff229cd8d6ad5629a8"
+        },
+        {
+          "path": "artifacts/request-journal-20261031/ci-41159819268/flutter-report-probe-result.json",
+          "bytes": 214,
+          "sha256": "c320aef241c0b8b3f28e35e07fdd7db7882d8f62182fc2fd68e298419963fc79"
+        },
+        {
+          "path": "artifacts/request-journal-20261031/ci-41159819268/flutter-native-report-share-sheet.png",
+          "bytes": 521882,
+          "sha256": "82a8bfa0c223133972b02bb754622df08bb99937c6524473076110a8ba861f6b"
+        },
+        {
+          "path": "artifacts/request-journal-20261031/ci-41159819268/flutter-restored-player-light.png",
+          "bytes": 221628,
+          "sha256": "3e42bc119c75bf0c84d809c531ca929ea407edbd1c7764f14120fc3700ee6d1e"
+        }
+      ]
     }
   },
   "physical": {
@@ -123,13 +176,20 @@
     "newAudio": false,
     "ownerListeningQuestion": "unanswered",
     "priorBackgroundTransferredToNewCandidate": false,
-    "physicalSettingsChanged": false
+    "physicalSettingsChanged": false,
+    "windowsPresentMatchingDeviceClasses": [
+      "Bluetooth",
+      "MEDIA",
+      "System"
+    ],
+    "windowsInventoryScope": "Saved DX340 Bluetooth profile entries; no Android ADB devices. Profiles alone do not establish a live BLE connection."
   },
   "limitations": [
     "Native send to matched decoded reply includes encoding, queued writes and reassembly; not GATT frame ACK or UI-tap/acoustic timing.",
     "Unsolicited STATE events are not converted into inferred request timing samples.",
     "Host dispatched, host observed and human audible results remain separate.",
-    "No physical iPhone or full T04/T05/source/format/SD/output/range/sleep/battery/walking/handoff/Watch completion."
+    "No physical iPhone or full T04/T05/source/format/SD/output/range/sleep/battery/walking/handoff/Watch completion.",
+    "iOS reports lack a binary digest; the analyser rejects combining distinct iPhone model sessions even with --allow-multiple-sessions. Retain external source/build provenance."
   ],
   "rawEvidence": [
     {
@@ -206,6 +266,11 @@
       "path": "artifacts/request-journal-20261031/flutter-tests.txt",
       "bytes": 11178,
       "sha256": "f5145fa680781c0643e9f5aaf610cd0356720b2e53b91338259e0fdeaaee5880"
+    },
+    {
+      "path": "artifacts/request-journal-20261031/analyser-tests-final.txt",
+      "bytes": 1671,
+      "sha256": "f96f5a54549a365a025a02831c33c92165981f99af6bbc7bb86e9ea5153645b1"
     }
   ],
   "preservedEarlierFailedHarnessLogs": [

@@ -1,16 +1,16 @@
 # Bounded phone request reports
 
-31 October2026. Full goal **ACTIVE/incomplete**. App-code source `956e5bf936e71ede95b14f09ec19e2be1e6fe06a`; analyser source `50c080d89672664684aeec6a233563f74f830b30`. This adds observations and deliberate local export, without new transport, authorization, retry, source-selection or playback behavior. See [format, privacy and interpretation](../connection-reports.md).
+31 October2026. Full goal **ACTIVE/incomplete**. App-code source `956e5bf936e71ede95b14f09ec19e2be1e6fe06a`; analyser source `b7a8f567f9e23e8f5777082c03776ac71bb221e8`. This adds observations and deliberate local export, without new transport, authorization, retry, source-selection or playback behavior. See [format, privacy and interpretation](../connection-reports.md).
 
 ## VERIFIED — local implementation and builds
 
 Kotlin/Swift native journals retain up to256 requests and256 phase assignments, sanitize categories and omit music/argument/Bluetooth/credential fields. First ACCEPTED and terminal receipts are immutable; changed-host/unknown replies are rejected before journaling. Terminal receipt and actual native application of the reply are separate. Null durations survive JSON export. History is excluded from normal Flutter snapshots and introduces no additional library/queue observer notification.
 
-On Windows11 DESKTOP-T9ICUE4, pinned Flutter3.41.4/Dart3.11.1, Android Studio JBR and SDK36.1 build tools:
+On Windows11 DESKTOP-T9ICUE4, pinned Flutter3.41.4/Dart3.11.1, Android Studio JBR and the local Android SDK (36.1.0 apksigner for certificate checks):
 
 - `scripts/build-android.ps1`: native Companion/reference/probe builds and lint PASS; **174 JVM tests** PASS:53 protocol,3 controller JSON,7 cache,111 adapters.
 - `scripts/build-phone.ps1`: analysis, **72 Flutter tests**, release APK and lint PASS.
-- `python -m unittest discover -s scripts/tests -p test_connection_reports.py -v`: **8 synthetic analyser tests** PASS. Duplicate exports, conflicting immutable/terminal values, mixed environments/sessions, evictions, missing/invalid clock values and bounded/duplicate-key JSON inputs are covered.
+- `python -m unittest discover -s scripts/tests -p test_connection_reports.py -v`: **9 synthetic analyser tests** PASS. Duplicate exports, conflicting immutable/terminal values, mixed environments/sessions, evictions, missing/invalid clock values and bounded/duplicate-key JSON inputs are covered. A final guard rejects combining distinct iPhone model sessions even when development version numbers match, because iOS reports lack a binary digest; source/build provenance stays external.
 
 All three Android candidates retain the original development certificate SHA256 `24f48aa3566dcf7b65774ee12585191a8a0df9eeff9cc49e9e72c22bacca6e8d`. Candidate hashes:
 
@@ -32,12 +32,20 @@ Before/after native service dumps retain PID4149 and `startForegroundCount=0`, w
 
 One bounded Android light/portrait inspection covered the normal report action, actual saved notice and200% text. Action/helper/long filename wrap without horizontal overflow; scrolling reaches all copy. Measured report-action glyph/background contrast is **6.12299851:1**, RGB103/80/164 over254/247/255. This is a scoped new-action review, not full UX-01, dark mode, iOS or screen-reader acceptance. Font1.0/nightno restored. Only the exact created MediaStore row600 was deleted after pulling evidence; then the emulator was shut down. A subsequent ADB inventory is empty. No physical device setting was changed.
 
-## NOT TESTED — current physical and Apple scope
+## VERIFIED — hosted native Apple build
 
-At this report's initial checkpoint, hosted native run41159819250 and shared run41159819268 are **in progress** at app source956e5bf. Their terminal outcomes, archive digests and UIKit export probe must be checked before citing current Apple compilation/export. Earlier source532 simulator archives retain their own scope.
+Native run [41159819250](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/41159819250) is terminal **SUCCESS** at app source956e5bf. It passes19 Swift software tests,12 capture-readiness regression checks, native simulator build/install/launch and captures. Hosted macOS26.6.2/25G83, Xcode26.6/17F113, iPhone Air simulator. Artifact13026059784 archive SHA256 `c69543ed7f1623b0c7d2a3f360d0a7f43a76236823e6ce1ad3688fc13a682d01` was checked before safe extraction. These are software/native-reference simulator results, not an installed iPhone or the shared app's UIKit export proof.
+
+## VERIFIED — shared iPhone simulator and real UIKit export
+
+Shared run [41159819268](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/41159819268) is terminal **SUCCESS** at956e5bf: analysis/72 Flutter tests,12 capture guards, ordinary/fixture/probe iOS builds and simulator installs/launches/captures, followed by ordinary `main.dart` restoration. Hosted macOS26.6.2/25G83, Xcode26.6/17F113, iPhone Air/iOS26.5. Artifact13027046956 archive SHA256 `082e4d54d3be0528cf634dec38165f176bfce360b0c9abe70872c310d6e973f7` was verified before safe extraction. Both exact run IDs are closed; do not rerun or keep polling them.
+
+The developer-only probe used the real PhoneBridge/RemoteConnection/UIKit SDK, without synthetic source or Bluetooth requests. Its unique launch marker matches the exported native model instance and says `presented`. The923-byte JSON passes strict keys and contains zero requests/unauthorized plus idle→failed phases; the simulator reports Bluetooth unavailable, which is not a physical failure. The analyser also returns zero timing groups/`NOT_ADJUDICATED` for this actual export. One bounded inspection confirms the native JSON share sheet with Copy/Save to Files and the subsequent ordinary Player screenshot. No destination/recipient was chosen; presentation does not mean a file was saved externally. Ordinary restoration build/install/launch and capture pass. iPad presentation, the iPhone report button at physical text/theme/accessibility settings, signed device install and real BLE remain NOT TESTED; widget coverage is separate.
+
+## NOT TESTED — current physical scope
 
 Pixel and DX340 disappeared from USB after the earlier completed timeout check. This is not evidence of a BLE failure. Last physically installed/re-pulled versions remain Pixel `0cf86c9cfead4b27b3b2c1dcf2135b98fbe78fb992bc755491a1549d79b2fdc0` and Companion `491dbbffabda8f7a20d64a2f591caa486427e036ba9e3821d831ccf6eff5934a`, with the preservation/final paused37 state in [timeout guidance](2026-10-31-timeout-guidance.md). The journal candidate has no physical Bluetooth/source/audio/background result. The [completed1802.562-second awake/paused check](2026-10-31-controlled-background.md) remains tied to Pixel6b/source532 and does not transfer to either0cf or66f.
 
 Owner Apple-listening availability remains unanswered; no audio test starts from silence. Physical iPhone signing/Bluetooth, full T04/T05, calls/in-flight/range/sleep/battery/walking, source/format/SD/output/handoff/Watch remain open. Preserve existing approvals/bonds and optional browsingON; do not repeat PC revocation. Re-inventory hardware before physical action.
 
-Raw packages/logs/reports/screenshots are under ignored `artifacts/request-journal-20261031/`; `local-evidence-sha256.json` binds15 local artifacts and `candidate-packages.json` binds package roles. The adjacent sanitized JSON records statuses and limits. No store upload, production signing key or recipient selection occurred.
+Raw packages/logs/reports/screenshots are under ignored `artifacts/request-journal-20261031/`; `local-evidence-sha256.json` binds16 local artifacts and `candidate-packages.json` binds package roles. The adjacent sanitized JSON records statuses and limits. No store upload, production signing key or recipient selection occurred.
