@@ -478,9 +478,18 @@ class _PhoneShellState extends State<PhoneShell>
       textValue(item['title']).isEmpty ? 'Untitled' : textValue(item['title']),
     );
     final subtitle = textValue(item['subtitle']);
+    final canSelect = queue
+        ? remote.can('canPlayQueueItem')
+        : remote.can('canPlayItem') && item['playable'] == true;
     final icon = Icon(
       browsable ? Icons.folder_outlined : Icons.music_note,
-      semanticLabel: browsable ? 'Browse' : 'Play',
+      semanticLabel: browsable
+          ? 'Browse'
+          : canSelect
+          ? 'Play'
+          : queue
+          ? 'Queue track'
+          : 'Unavailable',
     );
     return Column(
       key: ValueKey((
@@ -729,6 +738,17 @@ class _PhoneShellState extends State<PhoneShell>
     ];
   }
 
+  String? get readOnlyQueueHint {
+    if (_tab.value != 2 ||
+        !remote.can('canReadQueue') ||
+        remote.can('canPlayQueueItem')) {
+      return null;
+    }
+    return remote.can('canBrowse')
+        ? 'Read-only queue. Choose tracks in Library.'
+        : 'Read-only queue. Choose tracks on your player.';
+  }
+
   Widget statusContent() => Semantics(
     liveRegion: true,
     child: Column(
@@ -740,6 +760,8 @@ class _PhoneShellState extends State<PhoneShell>
             child: Text(remote.libraryRecovery),
           ),
         Text(remote.status, style: Theme.of(context).textTheme.bodyMedium),
+        if (readOnlyQueueHint case final hint?)
+          Padding(padding: const EdgeInsets.only(top: 4), child: Text(hint)),
         if (remote.error != null)
           Padding(
             padding: const EdgeInsets.only(top: 12),
@@ -784,6 +806,7 @@ class _PhoneShellState extends State<PhoneShell>
                 remote.error,
                 remote.busy,
                 remote.libraryInvalidated,
+                readOnlyQueueHint,
               )),
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               child: statusContent(),
