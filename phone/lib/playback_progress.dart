@@ -34,6 +34,13 @@ class PlaybackProgress {
   bool get ticking => estimated && positionMs != durationMs;
   bool get needsRefresh =>
       _sampleId.isNotEmpty && _sampleId == _blockedSampleId;
+  bool get hasCurrentPosition =>
+      _authorized &&
+      _foreground &&
+      _sampleId.isNotEmpty &&
+      _sampleId != _blockedSampleId &&
+      _base != null &&
+      durationMs != null;
 
   void _freeze() {
     _base = positionMs;

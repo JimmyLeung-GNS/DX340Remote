@@ -86,6 +86,25 @@ class Remote extends ChangeNotifier {
   bool get busy => mutationPending || _dispatchingMutation;
   bool can(String capability) => authorized && caps[capability] == true;
   bool action(String capability) => can(capability) && !busy;
+  bool get canSeekBackward =>
+      action('canSeek') &&
+      progress.hasCurrentPosition &&
+      ((state['playbackState'] == 2 && state['playing'] == false) ||
+          (state['playbackState'] == 3 &&
+              state['playing'] == true &&
+              progress.estimated));
+
+  Future<void> seekBackward() async {
+    // Recheck at activation: an old gesture callback may outlive a foreground sample.
+    if (!canSeekBackward) return;
+    final position = progress.positionMs!;
+    // Do not derive another seek from the sample already used by this request.
+    progress.invalidate();
+    await command('SEEK', {
+      'position': (position - 10000).clamp(0, progress.durationMs!),
+    }, 'canSeek');
+  }
+
   Json get volume => object(state['volume']);
   bool volumeStepAvailable(int delta) {
     if (!action('canAdjustVolume') ||

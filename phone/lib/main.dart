@@ -313,15 +313,7 @@ class _PhoneShellState extends State<PhoneShell>
       if (remote.can('canSeek'))
         action(
           'Back 10 seconds',
-          perform(
-            remote.action('canSeek') && remote.progress.positionMs != null,
-            () => remote.command('SEEK', {
-              'position': ((remote.progress.positionMs ?? 0) - 10000).clamp(
-                0,
-                1 << 53,
-              ),
-            }, 'canSeek'),
-          ),
+          perform(remote.canSeekBackward, () => remote.seekBackward()),
         ),
       if (remote.authorized && !remote.can('canSeek'))
         label('Seeking is unavailable for this source.'),

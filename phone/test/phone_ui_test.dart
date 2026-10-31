@@ -278,7 +278,7 @@ void main() {
         await tester.pumpWidget(DX340App(remote: remote));
         await tester.pumpAndSettle();
         Json timing(String id, int position) {
-          final data = snapshot();
+          final data = snapshot(caps: {'canSeek': true});
           data['stateSampleId'] = id;
           data['stateAgeMs'] = 0;
           data['state'] = {
@@ -286,6 +286,7 @@ void main() {
             'position': position,
             'duration': 60000,
             'playing': true,
+            'playbackState': 3,
             'playbackSpeed': 1,
           };
           return data;
@@ -301,6 +302,24 @@ void main() {
         now += 2000;
         await tester.pump(const Duration(seconds: 2));
         expect(find.text('0:12 / 1:00 · estimated'), findsOneWidget);
+        await tester.scrollUntilVisible(
+          find.text('Back 10 seconds'),
+          100,
+          scrollable: find.byType(Scrollable).first,
+        );
+        VoidCallback? seekAction() => platform == TargetPlatform.android
+            ? tester
+                  .widget<OutlinedButton>(
+                    find.widgetWithText(OutlinedButton, 'Back 10 seconds'),
+                  )
+                  .onPressed
+            : tester
+                  .widget<CupertinoButton>(
+                    find.widgetWithText(CupertinoButton, 'Back 10 seconds'),
+                  )
+                  .onPressed;
+        final heldSeek = seekAction();
+        expect(heldSeek, isNotNull);
         tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
         await tester.pump();
         now += 30000;
@@ -317,12 +336,34 @@ void main() {
         );
         expect(bridge.calls.where((call) => call.$1 == 'resume').length, 1);
         expect(remote.progress.estimated, false);
+        expect(
+          seekAction(),
+          isNull,
+          reason: 'A frozen clock cannot supply a current seek target.',
+        );
+        heldSeek!();
+        await tester.pump();
+        expect(bridge.calls.where((call) => call.$1 == 'send'), isEmpty);
+        remote.accept(timing('first', 40000));
+        await tester.pump();
+        expect(
+          seekAction(),
+          isNull,
+          reason: 'A repeated old sample must not unlock seeking.',
+        );
         remote.accept(timing('fresh', 45000));
         await tester.pump();
         now += 1000;
         await tester.pump(const Duration(seconds: 1));
         expect(find.text('0:46 / 1:00 · estimated'), findsOneWidget);
         expect(bridge.calls.where((call) => call.$1 == 'send'), isEmpty);
+        expect(seekAction(), isNotNull);
+        await tester.tap(find.text('Back 10 seconds'));
+        await tester.pump();
+        expect(bridge.calls.where((call) => call.$1 == 'send').single.$2, {
+          'type': 'SEEK',
+          'args': {'position': 36000},
+        });
         await tester.pumpWidget(const SizedBox());
         await tester.pump(const Duration(seconds: 5));
         expect(tester.takeException(), isNull);
