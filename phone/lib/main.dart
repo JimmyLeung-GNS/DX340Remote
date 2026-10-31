@@ -38,6 +38,13 @@ class _PhoneShellState extends State<PhoneShell>
   Remote get remote => widget.remote;
   bool get apple => Theme.of(context).platform == TargetPlatform.iOS;
   static const _tabs = ['Player', 'Library', 'Queue', 'Setup'];
+  static final _readableActionBlue =
+      CupertinoDynamicColor.withBrightnessAndContrast(
+        color: CupertinoColors.systemBlue.highContrastColor,
+        darkColor: CupertinoColors.systemBlue.darkColor,
+        highContrastColor: CupertinoColors.systemBlue.highContrastColor,
+        darkHighContrastColor: CupertinoColors.systemBlue.darkHighContrastColor,
+      );
   @override
   String get restorationId => 'phone_shell';
   @override
@@ -366,14 +373,24 @@ class _PhoneShellState extends State<PhoneShell>
     ];
   }
 
-  Widget libraryBrowseAction() => action(
-    'Browse source library',
-    perform(
-      remote.can('canBrowse') && !remote.libraryLoading && !remote.busy,
-      remote.root,
-    ),
-    icon: Icons.library_music,
-  );
+  Widget libraryBrowseAction() {
+    final browse = action(
+      'Browse source library',
+      perform(
+        remote.can('canBrowse') && !remote.libraryLoading && !remote.busy,
+        remote.root,
+      ),
+      icon: Icons.library_music,
+    );
+    return apple
+        ? CupertinoTheme(
+            data: CupertinoTheme.of(
+              context,
+            ).copyWith(primaryColor: _readableActionBlue),
+            child: browse,
+          )
+        : browse;
+  }
 
   List<Widget> library() => [
     if (!remote.authorized) recovery('browse music on DX340'),
@@ -875,16 +892,7 @@ class _PhoneShellState extends State<PhoneShell>
             // Setup's normal-size action labels need a contrast-safe system
             // blue. Retain semantic variants and native controls; other tabs
             // keep their incumbent appearance.
-            primaryColor: _tab.value == 3
-                ? CupertinoDynamicColor.withBrightnessAndContrast(
-                    color: CupertinoColors.systemBlue.highContrastColor,
-                    darkColor: CupertinoColors.systemBlue.darkColor,
-                    highContrastColor:
-                        CupertinoColors.systemBlue.highContrastColor,
-                    darkHighContrastColor:
-                        CupertinoColors.systemBlue.darkHighContrastColor,
-                  )
-                : null,
+            primaryColor: _tab.value == 3 ? _readableActionBlue : null,
             primaryContrastingColor: _tab.value == 3
                 ? const CupertinoDynamicColor.withBrightness(
                     color: CupertinoColors.white,
