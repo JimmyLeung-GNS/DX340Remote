@@ -1,6 +1,18 @@
 # Implementation status
 
-## Current checkpoint —31 October2026,10:49 HKT
+## Current checkpoint —31 October2026,11:09 HKT
+
+Full goal **ACTIVE/incomplete**. This turn made concrete progress: T13 recording/analysis preparation plus actual package-permission and resource checks. Tool source `e35835e0721ba32171f369fda5bd0a7d2a17708e`; app code remains956e5bf and receipt analyserb7a8f56. Preserve newer work, exact package scopes and failed attempts.
+
+- **Battery preparation VERIFIED_SOFTWARE_ONLY:** six not_tested recording entries, explicit unplugged endpoint procedure and evidence analyser.12 synthetic tests pass; untouched template yields0 recorded/eligible trials, null drain and NOT_ADJUDICATED. Checks reject short/powered/interrupted/overlapping/mismatched trials, duplicate/tampered/empty evidence, path escapes and duplicate JSON keys. No physical two-hour run, playback or power-setting change occurred. [Report/JSON](test-results/2026-10-31-battery-preparation.md), [T13 procedure](battery-test-runbook.md).
+- **Fresh resources:** actual hostDESKTOP-T9ICUE4/Windows11 Pro10.0.26300, PowerShell7.6.5, selected Android Studio JBR21.0.7/13880790, BLE Python3.11.5/Bleak3.0.2. Original external key path exists; no key contents read. ADB still lists no Android device. PC radioON/LE-central support verified, but3×3-second filtered scans found0 advertisements/events; no GATT/pairing/approval/source operation followed. Availability failed; this is not a measured T02 trial or a proven BLE regression. Reconnect/unlock hardware reply remains pending.
+- **Actual candidate manifests VERIFIED:** existing shared66f12aaf…, host6faf6fd7…, native7f679f19… APKs declare no Internet/network/Wi-Fi control or broad media/storage permission. This is package evidence, not physical offline playback. Flutter debug/profile manifests are separate development configurations. No new APK, app behavior or unrelated build/test rerun in this tooling/doc-only turn.
+- **Existing proofs retained:** app956e5bf has174 JVM/native builds/lint,72 Flutter/shared Android analyze/release/lint,19 Swift/native hosted iOS and both terminalSUCCESS Apple archives. Native41159819250/shared41159819268 are closed, including actual UIKit report sheet/923-byte JSON and ordinary-app restoration. Receipt analyser has9 tests. Phone66f is emulator-only; host6faf/native7f built/not installed. See [connection reports](test-results/2026-10-31-connection-reports.md).
+- **Physical unchanged/unavailable:** last installed/re-pulled Pixel0cf86c9c…/host491dbbff… and09:33 paused37/preferences/approvals/bonds/browsingON observations retain their scopes. No new physical connection, source, audio, screen-off, battery or iPhone evidence. Source/format/SD/output and T01–T18 still incomplete. The older6b USB/Awake/paused1802.562-second result remains separate; long-run owner agreement is consumed, not reusable. Apple-listening availability remains unanswered.
+
+Next: when actual hardware returns, verify/install original-signer phone66f in place, keep compatible host491, collect real decoded receipts and source/listening evidence. Schedule T13's six unplugged two-hour trials separately with the owner. Preserve Pixel/JIMMYAH grants/bonds, original engines and optional browsingON; no new PC revocation test. Physical owner-iPhone/Mac signing, calls/in-flight/range/sleep/battery/walking/handoff and Watch remain open; Watch stays gated on stable phones. No observer/emulator/local build/Apple job is running. Automatic device-switch handoff applies when explicitly requested; no new switch was requested.
+
+## Prior checkpoint —31 October2026,10:49 HKT
 
 Full goal **ACTIVE/incomplete**. App-code source `956e5bf936e71ede95b14f09ec19e2be1e6fe06a`; final receipt analyser source `b7a8f567f9e23e8f5777082c03776ac71bb221e8`. Preserve newer work and exact physical evidence; the original4df goal snapshot is historical.
 
@@ -349,23 +361,23 @@ Development interruption limitation: instrumentation completion left both Androi
 
 ## Environment and stages
 
-DX340 Android 13/API 33, build `DX340-userdebug 13 TKQ1.221013.002 eng.iBasso.20260812.181952 release-keys`. Firmware marketing version 1.09.851 and iPhone iOS 27.2 remain user-reported; actual iPhone model/build, personal Mac/Xcode and separate Android phone inventory remain unknown. AMP15 phone output/audio confirmations are user reports; gain, audio quality and output-volume mapping are unmeasured.
+DX340 Android 13/API 33, build `DX340-userdebug 13 TKQ1.221013.002 eng.iBasso.20260812.181952 release-keys`. Firmware marketing version 1.09.851 and iPhone iOS 27.2 remain user-reported; actual iPhone model/build and personal Mac/Xcode remain unknown. The separate Pixel9a Android16/API36 CP1A.260405.005 is inventoried in the dated phone reports. AMP15 phone output/audio confirmations are user reports; gain, audio quality and output-volume mapping are unmeasured.
 
-Windows PowerShell 7.6.5/JDK 21.0.9/SDK 36; pinned Gradle 8.14, AGP 8.11.1, Kotlin 2.1.10. Debug signing key remains outside Git. The Java selector workaround is process-local. Flutter 3.41.4/Dart 3.11.1 migration is now user-selected and underway without global configuration changes. Development-only public GitHub Mac CI uses no signing credentials or paid runner and is absent from the everyday BLE path.
+Current DESKTOP-T9ICUE4: Windows PowerShell7.6.5/selected Android Studio JBR21.0.7/SDK36; the earlier21.0.9 entry is historical.  pinned Gradle 8.14, AGP 8.11.1, Kotlin 2.1.10. Debug signing key remains outside Git. The Java selector workaround is process-local. Flutter 3.41.4/Dart 3.11.1 migration is now user-selected and underway without global configuration changes. Development-only public GitHub Mac CI uses no signing credentials or paid runner and is absent from the everyday BLE path.
 
 The user chose shared Flutter phone UI after the Kotlin/Flutter comparison; docs/framework-comparison.md records the decision and primary references. Native Bluetooth/lifecycle components remain underneath it; physical stability still requires the phone test matrix. DX340 host/source work is independent of the phone UI framework.
 
 | Stage | State |
 |---|---|
 | P0 | PARTIAL: Windows/DX340/Pixel9a Android16 and hosted Mac inventoried; physical iPhone/owner Mac/signing/Watch inventory open |
-| P1 | PARTIAL: approved Pixel reads/controls and a no-SIM/offline saved-grant Play/Pause subset verified; setup failures retained, SIM-installed/iPhone/30-minute gates open |
+| P1 | PARTIAL: protected Pixel/no-SIM offline controls and USB/Awake/paused1802.562-second background subset verified at their recorded builds. Full sleep/cellular-installed/iPhone/Gate A remain open |
 | P2 | PARTIAL: native Mango and accepted optional Apple route sampled; source/format/volume/restart matrix incomplete |
 | P3 | IMPLEMENTED BETA: bounded framing/dedup/epochs, bond+local approval, routing, shared handoff, reply revocation guards, library/queue/artwork; real security/recovery open |
-| P4 | IMPLEMENTED BETA: current source53229582 original-signer Pixel6b7e379d…/host491dbbff…; guided connection, icons and brief host-service automatic recovery/read-route/Disconnect cleanup.168 JVM and shared Android analysis/release/lint pass. Earlier separately owner-audible Mango results retain their package scopes. Full Android source/reliability matrix remains open |
-| P5 | SIMULATOR VERIFIED at53229582: native41149354175/17Swift/12guards and shared41149354150/67Flutter/analyze/12guards/builds/ordinary restoration SUCCESS, both archives verified. Physical owner-iPhone signing/Bluetooth/service recovery remains NOT TESTED |
+| P4 | IMPLEMENTED BETA: app956e5bf/phone66f builds174 JVM/72 Flutter/analyze/release/lint; real emulator report save verified. Latest physical Pixel0cf/host491 timeout/recovery and earlier6b/older audible results retain their exact scopes; full Android source/reliability matrix open |
+| P5 | SIMULATOR VERIFIED at956e5bf: native41159819250/19Swift/12guards and shared41159819268/72Flutter/analyze/12guards/builds/real UIKit export/ordinary restoration SUCCESS; archives verified. Physical owner-iPhone/signing/BLE/iPad remain NOT TESTED |
 | P6 | IN PROGRESS: earlier scoped folder/native/playlist matrices retained; latest Pixel two assisted-folder selections owner-audible on ea9f…/583… and explicit post-selection recovery; earlier765… native24-item Queue read. Full current-build/phone formats/playlists/SD/rescan open |
 | P7 | PARTIAL: earlier source-local20-track Apple matrix retained; Pixel Downloaded album/track reads and101-item queue windows pass, phone outside-queue playback/audio and iPhone matrix open |
-| P8 | PARTIAL: builds/checks/docs/matrix; physical reliability, battery, installation and audio acceptance open |
+| P8 | PARTIAL: builds/checks/evidence and T13 six-run template/analyser with12 synthetic tests prepared. Physical battery trials0; reliability/installation/source/audio/security acceptance remains open |
 | P9 | NOT STARTED: stable-phone gate unmet; Watch inventory unknown |
 
 ## Commands and evidence

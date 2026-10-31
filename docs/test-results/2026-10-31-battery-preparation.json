@@ -1,0 +1,127 @@
+{
+  "date": "2026-10-31",
+  "goalStatus": "ACTIVE/incomplete",
+  "toolSource": "e35835e0721ba32171f369fda5bd0a7d2a17708e",
+  "appSourceUnchanged": "956e5bf936e71ede95b14f09ec19e2be1e6fe06a",
+  "resourceChecks": {
+    "adbAndroidDevices": [],
+    "pcBleScan": {
+      "status": "FAILED",
+      "scope": "Availability only; not a T02 bag-distance trial or proof of radio/source regression",
+      "rounds": 3,
+      "secondsPerRound": 3,
+      "matchingDevices": 0,
+      "adapterRadio": "ON",
+      "centralAndLeSupported": true,
+      "gattConnected": false,
+      "pairingApprovalPlaybackChanged": false
+    },
+    "operatorHardwareReply": "pending",
+    "macAndPhysicalIPhone": "NOT TESTED"
+  },
+  "packagePermissions": {
+    "status": "VERIFIED",
+    "scope": "Actual three existing candidate APK manifests; Flutter development-only debug/profile manifests may declare Internet and are not these shared release bytes",
+    "packages": [
+      {
+        "role": "shared_phone",
+        "sha256": "66f12aaffe3aed081fd478cf2ca1c446b7c4e3429f0064ca5360b251a5a63ae8",
+        "permissions": [
+          "android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE",
+          "android.permission.BLUETOOTH_SCAN",
+          "android.permission.FOREGROUND_SERVICE",
+          "android.permission.BLUETOOTH_CONNECT",
+          "android.permission.POST_NOTIFICATIONS",
+          "org.dx340.remote.controller.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        ],
+        "networkOrBroadStorageDeclared": false,
+        "physicalUpgradePerformed": false
+      },
+      {
+        "role": "companion",
+        "sha256": "6faf6fd7d20bb67292317c57c256efcecca43edd97b64bf21aa935b52685b16e",
+        "permissions": [
+          "android.permission.BLUETOOTH_ADVERTISE",
+          "android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE",
+          "android.permission.FOREGROUND_SERVICE",
+          "android.permission.BLUETOOTH_CONNECT",
+          "android.permission.POST_NOTIFICATIONS"
+        ],
+        "networkOrBroadStorageDeclared": false,
+        "physicalUpgradePerformed": false
+      },
+      {
+        "role": "native_reference",
+        "sha256": "7f679f198ae4e28fa7cc264672f393713453a80ac139710f4aed7877fe670ea0",
+        "permissions": [
+          "android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE",
+          "android.permission.BLUETOOTH_SCAN",
+          "android.permission.FOREGROUND_SERVICE",
+          "android.permission.BLUETOOTH_CONNECT",
+          "android.permission.POST_NOTIFICATIONS"
+        ],
+        "networkOrBroadStorageDeclared": false,
+        "physicalUpgradePerformed": false
+      }
+    ]
+  },
+  "toolchain": {
+    "host": "DESKTOP-T9ICUE4",
+    "windowsBuild": "10.0.26300",
+    "bleDiagnosticPython": "3.11.5",
+    "bleak": "3.0.2",
+    "selectedJbr": "21.0.7+13880790",
+    "originalExternalKeyExists": true,
+    "keyContentsRead": false
+  },
+  "batteryPreparation": {
+    "status": "VERIFIED_SOFTWARE_ONLY",
+    "tests": 12,
+    "templatePlannedTrials": 6,
+    "templateRecordedTrials": 0,
+    "templateEligibleTrials": 0,
+    "physicalT13": "NOT_ADJUDICATED",
+    "meanAdditionalDrainPercentagePoints": null,
+    "productBehaviorChanged": false,
+    "physicalRunStarted": false,
+    "requiresSixActualUnpluggedTwoHourTrials": true
+  },
+  "rawEvidence": [
+    {
+      "path": "artifacts/continuation-audit-20261031/ble-availability-scan.json",
+      "sha256": "310075fe56786b81ff248cbcd72ad25cb28b8dee1a3bd739ff686444d1fe6992",
+      "bytes": 987
+    },
+    {
+      "path": "artifacts/continuation-audit-20261031/phone-candidate-permissions.txt",
+      "sha256": "22ea0a044efce15dcdf3ca876104c8ca33a4535dc5407a7ab2f73e5300fd5dda",
+      "bytes": 277
+    },
+    {
+      "path": "artifacts/continuation-audit-20261031/companion-candidate-permissions.txt",
+      "sha256": "dbd8ba3febead2e7c75a7f0fd48fc669255462aa33ddf0dde0c0777b38fb5433",
+      "bytes": 212
+    },
+    {
+      "path": "artifacts/continuation-audit-20261031/native-reference-permissions.txt",
+      "sha256": "b39bf1c98f29de49dec564b208cb08910c6814df4d5fcdb814a6235b8923c77a",
+      "bytes": 207
+    },
+    {
+      "path": "artifacts/continuation-audit-20261031/battery-tests-final.txt",
+      "sha256": "db92b7adb63866e9077f4271e304703de4e9d6e7fb95d4eeb0c6055b9bcc68c4",
+      "bytes": 2226
+    },
+    {
+      "path": "artifacts/continuation-audit-20261031/battery-template-summary.json",
+      "sha256": "4fde49e5299d515bdcdc3163577cda55f497e86b628da0f9586dfc50f4d31312",
+      "bytes": 2059
+    }
+  ],
+  "limits": [
+    "No new physical Bluetooth, source, audio, sleep, range, battery, walking, signing, iPhone/iPad, handoff or Watch acceptance.",
+    "Packet-free scan misses do not reveal why Companion is not advertising or visible.",
+    "Battery evaluator checks declared observations and evidence integrity, not image contents or physical truth.",
+    "Prior builds and physical results retain their exact scope; no new Android or Apple builds were required for script/doc-only changes."
+  ]
+}
