@@ -18,7 +18,7 @@
     "tracks": false
   },
   {
-    "name": "Apple-page",
+    "name": "unrecognized-Apple-item-prefix",
     "source": "com.apple.android.music",
     "item": "apple-ui:track",
     "assisted": true,
@@ -61,5 +61,68 @@
     "requestedRevision": "",
     "pageRevision": "",
     "tracks": false
+  },
+  {
+    "source": "com.apple.android.music",
+    "item": "ui:session:fingerprint:0",
+    "assisted": true,
+    "requestedRevision": "page1",
+    "pageRevision": "page1",
+    "tracks": true,
+    "name": "actual-Apple-assisted-track"
+  },
+  {
+    "source": "com.apple.android.music",
+    "item": "ui:session:fingerprint:0",
+    "assisted": true,
+    "requestedRevision": "old",
+    "pageRevision": "page1",
+    "tracks": false,
+    "name": "Apple-stale-revision"
+  },
+  {
+    "source": "com.apple.android.music",
+    "item": "ui:session:fingerprint:0",
+    "assisted": false,
+    "requestedRevision": "page1",
+    "pageRevision": "page1",
+    "tracks": false,
+    "name": "Apple-mode-unavailable"
+  },
+  {
+    "source": "com.apple.android.music",
+    "item": "ui:session:fingerprint:0",
+    "assisted": true,
+    "requestedRevision": "",
+    "pageRevision": "",
+    "tracks": false,
+    "name": "Apple-missing-revision"
+  },
+  {
+    "source": "com.apple.android.music",
+    "item": "native-song-1",
+    "assisted": true,
+    "requestedRevision": "page1",
+    "pageRevision": "page1",
+    "tracks": false,
+    "name": "Apple-native-item"
+  },
+  {
+    "source": "com.apple.android.music",
+    "item": "mango-ui:session:1:file",
+    "assisted": true,
+    "requestedRevision": "page1",
+    "pageRevision": "page1",
+    "tracks": false,
+    "name": "Apple-cannot-borrow-Mango-prefix"
+  },
+  {
+    "source": "com.ibasso.music",
+    "item": "ui:session:fingerprint:0",
+    "assisted": true,
+    "requestedRevision": "page1",
+    "pageRevision": "page1",
+    "tracks": false,
+    "name": "Mango-cannot-borrow-Apple-prefix"
   }
 ]

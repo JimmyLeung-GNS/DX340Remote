@@ -48,7 +48,9 @@ public struct ApprovalRetry {
 /// An assisted selection consumes source UI action IDs, not the controller grant.
 public struct AssistedPageUse {
     public static func tracks(source: String, item: String, assisted: Bool, requestedRevision: String, pageRevision: String) -> Bool {
-        source == "com.ibasso.music" && item.hasPrefix("mango-ui:") && assisted && !pageRevision.isEmpty && requestedRevision == pageRevision
+        let sourceItem = (source == "com.ibasso.music" && item.hasPrefix("mango-ui:")) ||
+            (source == "com.apple.android.music" && item.hasPrefix("ui:"))
+        return sourceItem && assisted && !pageRevision.isEmpty && requestedRevision == pageRevision
     }
     private struct Use { let id: String, source: String, epoch: String, revision: String }
     private var pending: Use?

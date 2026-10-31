@@ -67,7 +67,7 @@ final class FramingTests: XCTestCase {
         let current = retry.begin(); XCTAssertEqual(current, retry.begin())
         retry.clear(); XCTAssertFalse(retry.current(current))
     }
-    func testOnlyActualMangoAssistedSelectionsConsumeThePage() throws {
+    func testOnlyMatchingSourceAssistedSelectionsConsumeThePage() throws {
         let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
         let cases = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("protocol/fixtures/assisted-selection-eligibility.json"))) as! [[String: Any]]
         for item in cases {

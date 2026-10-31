@@ -5,7 +5,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class AssistedPageUseTest {
-    @Test fun onlyActualMangoAssistedSelectionsConsumeThePage() {
+    @Test fun onlyMatchingSourceAssistedSelectionsConsumeThePage() {
         val cases = JSONArray(javaClass.getResource("/assisted-selection-eligibility.json")!!.readText())
         for (index in 0 until cases.length()) {
             val case = cases.getJSONObject(index)

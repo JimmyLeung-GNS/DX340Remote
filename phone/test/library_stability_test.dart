@@ -21,50 +21,62 @@ Json librarySnapshot({
 )..['status'] = status;
 
 void main() {
-  test(
-    'an expired assisted page allows fresh browsing but no stale action',
-    () async {
-      final bridge = FakeBridge();
-      final remote = Remote(bridge);
-      final expired = librarySnapshot();
-      (expired['state'] as Json)['capabilities'] = {
-        'canBrowse': true,
-        'canBrowseFolders': true,
-        'canPlayItem': true,
-        'canReadQueue': true,
-        'canPause': true,
-      };
-      (expired['library'] as Json).addAll({
-        'invalidated': true,
-        'uiAssisted': true,
-        'backId': 'old-back',
-        'nextPage': 1,
-      });
-      remote.accept(expired);
-      await remote.back();
-      await remote.more(1);
-      await remote.open({'id': 'old-folder', 'browsable': true});
-      await remote.playItem(
-        objects(remote.library['items']).first,
-        revision: 'album-a',
-        sourceScope: remote.scope,
-      );
-      expect(bridge.calls, isEmpty);
-      // Only the retired page is blocked; playback and fresh root browsing remain usable.
-      await remote.command('SET_PLAYING', {'playing': false}, 'canPause');
-      await remote.root();
-      expect(bridge.calls.map((call) => call.$1), ['send', 'browse']);
-      remote.accept(librarySnapshot());
-      expect(remote.libraryInvalidated, false);
-      await remote.playItem(
-        objects(remote.library['items']).first,
-        revision: 'album-a',
-        sourceScope: remote.scope,
-      );
-      expect(bridge.calls.last.$2['type'], 'PLAY_ITEM');
-      remote.dispose();
-    },
-  );
+  for (final source in ['com.ibasso.music', 'com.apple.android.music']) {
+    test(
+      '$source expired assisted page allows fresh browsing but no stale action',
+      () async {
+        final bridge = FakeBridge();
+        final remote = Remote(bridge);
+        Json currentPage() {
+          final page = librarySnapshot();
+          (page['state'] as Json)['source'] = source;
+          (page['state'] as Json)['capabilities'] = {
+            'canBrowse': true,
+            'browseMode': source == 'com.apple.android.music'
+                ? 'ui-assisted'
+                : 'direct',
+            'canBrowseFolders': source == 'com.ibasso.music',
+            'canPlayItem': true,
+            'canReadQueue': true,
+            'canPause': true,
+          };
+          (page['library'] as Json)['uiAssisted'] = true;
+          return page;
+        }
+
+        final expired = currentPage();
+        (expired['library'] as Json).addAll({
+          'invalidated': true,
+          'uiAssisted': true,
+          'backId': 'old-back',
+          'nextPage': 1,
+        });
+        remote.accept(expired);
+        await remote.back();
+        await remote.more(1);
+        await remote.open({'id': 'old-folder', 'browsable': true});
+        await remote.playItem(
+          objects(remote.library['items']).first,
+          revision: 'album-a',
+          sourceScope: remote.scope,
+        );
+        expect(bridge.calls, isEmpty);
+        // Only the retired page is blocked; playback and fresh root browsing remain usable.
+        await remote.command('SET_PLAYING', {'playing': false}, 'canPause');
+        await remote.root();
+        expect(bridge.calls.map((call) => call.$1), ['send', 'browse']);
+        remote.accept(currentPage());
+        expect(remote.libraryInvalidated, false);
+        await remote.playItem(
+          objects(remote.library['items']).first,
+          revision: 'album-a',
+          sourceScope: remote.scope,
+        );
+        expect(bridge.calls.last.$2['type'], 'PLAY_ITEM');
+        remote.dispose();
+      },
+    );
+  }
   test(
     'a retained library row cannot borrow a new revision, page or source',
     () async {
