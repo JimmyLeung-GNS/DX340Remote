@@ -1,0 +1,337 @@
+{
+  "recordedAt": "2026-10-31T16:03:26+08:00",
+  "goalStatus": "ACTIVE/incomplete",
+  "hostSource": "7fbdec8ada9faa1573afa7efea9fa598c22b2ef1",
+  "journalFixSource": "3f4e8629ee9ce9946539b11947a73994c9bccd87",
+  "devices": {
+    "dx340": {
+      "os": "Android 13 eng.iBasso.20260812.181952",
+      "companion": "0.1.0/code1",
+      "apkSha256": "00e5e50b19d13f3e626ac0c882386a26174adff283dc9b2c8926413ef258e7cb",
+      "mango": "4.1.37/code240",
+      "appleMusic": "6.5.3/code1599"
+    },
+    "pixel": {
+      "model": "Pixel 9a",
+      "os": "Android16/API36 CP1A.260405.005",
+      "app": "0.2.0/code2",
+      "installedApkSha256": "b805e4ce2b4105721ce0f748fb610f02f31c48667658379611d7bfdde0221386",
+      "candidateApkSha256": "b805e4ce2b4105721ce0f748fb610f02f31c48667658379611d7bfdde0221386",
+      "candidateInstalled": true,
+      "earlierAudibleApkSha256": "66f12aaffe3aed081fd478cf2ca1c446b7c4e3429f0064ca5360b251a5a63ae8",
+      "installedBytesRepulledMatch": true
+    }
+  },
+  "signerSha256": "24f48aa3566dcf7b65774ee12585191a8a0df9eeff9cc49e9e72c22bacca6e8d",
+  "sourceLocal": {
+    "baseline": "FAILED/UI_ACTION_TIMEOUT",
+    "baselineBrowseMs": 8211,
+    "corrected": "VERIFIED/source-local",
+    "correctedBrowseMs": 4918,
+    "sdRows": 9,
+    "menuClicks": 1,
+    "audibleFile": "01. Intro -GOLD SYMPHONY-.flac",
+    "playMs": 4609,
+    "pauseMs": 170
+  },
+  "physicalPhone": {
+    "status": "VERIFIED/two selections only",
+    "files": [
+      "02. CALL.flac",
+      "01. OPENING VTR.flac"
+    ],
+    "ownerAudibleConfirmations": 2,
+    "selectionCommands": 2,
+    "browseRequests": 12,
+    "browseAcceptedMaxMs": 112,
+    "browseTerminalMaxMs": 2326,
+    "playAcceptedMs": [
+      99,
+      101
+    ],
+    "playTerminalMs": [
+      3617,
+      3454
+    ],
+    "playOutcome": "dispatched",
+    "pauseOutcome": "observed",
+    "pauseTerminalMs": 344,
+    "uniqueRequests": 22,
+    "reportSourceCategory": "other/preserved as exported; not retrospectively inferred",
+    "rowGeometry": "VERIFIED/three visible rows at before,pending,terminal snapshots; no continuous video assertion",
+    "physicalT04": "NOT_ADJUDICATED",
+    "installedDuringAudibleTests": "66f12aaffe3aed081fd478cf2ca1c446b7c4e3429f0064ca5360b251a5a63ae8"
+  },
+  "usb": {
+    "initialPixelConnection": "VERIFIED/update+protected session",
+    "failure": "FAILED/USB descriptor enumeration after unplug/replug; Code43; not proof of phone or app defect",
+    "nonElevatedRestart": "Access is denied despite process exit0",
+    "elevatedLeafRestart": "Device restarted successfully; same descriptor error returned",
+    "knownWorkingCablePortSwap": "VERIFIED/Pixel immediately enumerates with healthy ADB interface",
+    "rootCause": "UNRESOLVED/cable,port,hub or transient USB state not distinguished",
+    "current": "Both actual devices enumerate over USB; phone finally disconnected normally; original USB failure root cause unresolved"
+  },
+  "preservation": {
+    "fourHostPreferencesUnchanged": true,
+    "browsingModes": "ON/owner preference",
+    "accessibility": "both rebound after upgrade",
+    "grants": "Pixel/JIMMYAH retained",
+    "volumeCommandSent": false,
+    "lastDirectDxVolume": 37,
+    "lastDirectDxOutput": "headset(4)",
+    "volumeProof": false,
+    "phoneHistoryExportedBeforeAnyNextUpgrade": true,
+    "fourHostPreferencesFinallyUnchanged": true
+  },
+  "checks": {
+    "jvm": 178,
+    "protocol": 53,
+    "controller": 3,
+    "cache": 7,
+    "adapters": 115,
+    "nativeBuildLint": "PASS",
+    "sharedAnalyzeReleaseLint": "PASS",
+    "flutter72": "prior unchanged Dart checks; not rerun locally for Kotlin/Swift mapping",
+    "appleRuns": [
+      {
+        "id": 41181585937,
+        "kind": "native",
+        "status": "SUCCESS",
+        "artifactId": 13034943110,
+        "archiveSha256": "e4460c86736b0f314f4a641655105f40b076481c572bdd51687effd3deae5513",
+        "archiveVerified": true,
+        "swiftTests": 19,
+        "captureGuards": 12,
+        "simulator": "iPhone Air/iOS26.5",
+        "macOS": "26.6.2/25G83",
+        "xcode": "26.6/17F113"
+      },
+      {
+        "id": 41181585936,
+        "kind": "shared",
+        "status": "SUCCESS",
+        "artifactId": 13035801821,
+        "archiveSha256": "425122ad1cecf253316682fb9c59b67b5ddf9d43c31ecd400b7bd4ff0178e874",
+        "archiveVerified": true,
+        "flutterTests": 72,
+        "captureGuards": 12,
+        "ordinaryAppRestored": true,
+        "reportProbe": "actual native UIKit sheet presented; zero requests; not physical BLE"
+      }
+    ]
+  },
+  "remaining": [
+    "currentb805 playback/audio and full source matrices; two prior66f audible results stay separate",
+    "actual owner iPhone/Mac signing/BLE/source tests",
+    "full T01-T18 including 20-track matrices, command counts, ACK/state responsiveness, sleep/range/calls/SD/outputs/battery/walking/handoff",
+    "Watch after stable phones"
+  ],
+  "evidence": [
+    {
+      "file": "artifacts/phone-journal-physical-20261031/phone66-before-retry-report.json",
+      "sha256": "07d41aad12290018a9ff0a4559f36c9676c0aa55859956539857f84a4c0af479"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/phone66-after-two-plays-report.json",
+      "sha256": "4d17046aed41b61555bde0b3f9db7bbbad6f486101960aa0210f38cbc7705ee3"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/phone66-merged-summary.json",
+      "sha256": "01c16ef146c7936c5e118c51bf7a494520182b4a5af281734f164be588eb61fd"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/phone-call-audible-confirmation.json",
+      "sha256": "35085f185b6e71f19cda597d7953133efc22f51e51450557e579e07fbc34d81f"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/phone-opening-audible-confirmation.json",
+      "sha256": "7934a6d1bbdf7561ce708f84ce19bec7cff1c5e134d330921c04f2d5291d7941"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/phone-call-row-geometry.json",
+      "sha256": "8e5b8f844c7584e7535a13e501f9f2e50147dfd5afdb058a6b04f32710342a16"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/phone-opening-row-geometry.json",
+      "sha256": "58253a1ccfe40301a60ed69be49eb0d9b53bd80769bb2d51f52f9e763d9b3460"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/intro-audible-confirmation.json",
+      "sha256": "8c2c5191303bfe008bfbd14325bff42eafe89c5b04e36d5c863ecd56525183eb"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/dx-cold-home-sd.json",
+      "sha256": "68fa51c61936d0474c4ced485a0bd050beb7941f642cb2a8fb8fc768c5fe5b0a"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/dx-cold-sd-snapshot.json",
+      "sha256": "66ca1bc89e3b61c6091a663f8da3e1735381a166f6a28fe4b4101bfe71a8c3a0"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/journal-fixed-home-sd.json",
+      "sha256": "ff5967f80eeea69aced4c1d6049e2cfc16b44e0af01d4289c149d53878bea6f7"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/fixed-navigation-snapshot.json",
+      "sha256": "11ee37118ef97ae65ccfa8310016a28ecd4629adf2208858eaedb9fd863ff052"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/journal-play-intro-once.json",
+      "sha256": "f3a5804c4deed8e6217a3f619a36d727c4df04a229ba7e863f9890081c9adf74"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/journal-pause-after-intro.json",
+      "sha256": "240d485059ca631e7b502073ab62ada77f8f6479b85a35ae65cd1ea91ecb8d06"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/dx-preferences-before.json",
+      "sha256": "29ad9e36c3691579b9c37918a825b5af1bb9615c513776ee80bf04214222c1d1"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/dx-preferences-after-fix.json",
+      "sha256": "da43cb7612e0a54fe3e91b0d0fa9f53709ad49a60a6bc3c0f4b9a3f51636a7ee"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/installed-package-identity.json",
+      "sha256": "b0cf3fe6312679c123eec36a73b1f489d43f9347f75a557856e2a069208ee3e6"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/journal-alias-native-build.txt",
+      "sha256": "2d3410ea8780f35176e7fb1cabc6b8675f58190fe79a10a3108c5a9c85a13131"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/journal-alias-shared-build.txt",
+      "sha256": "db356cb1a2447f89231401edb42f97fd7325ef68e95e013668dc19bf370e5802"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/journal-alias-test-counts.json",
+      "sha256": "bef2409425a77c35aaf5b802346bae6ff408f99d5cee3f7c9ad05219de1bd144"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/journal-alias-phone-signature.txt",
+      "sha256": "ce7bd40508272b316fba0e422d5f76ef78efc9b858a28ae3a6c5d2245baec7ca"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/usb-elevated-leaf-restart.json",
+      "sha256": "b0b2083bd2d3cb5b7367fea2c4423373da976ee56e738df0ed118246d1bfd8bf"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/usb-after-proven-cable-swap.json",
+      "sha256": "27315f4590ffc2bc78ac75ebde5802ca74251c3d70afcf951d87cf4842a213d6"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/phone-b805-mango-report.json",
+      "sha256": "b8a2b8500e23cd368041fe2a91be83b7d4fdbed7723b6c46433313c04a2811df"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/phone-b805-mango-summary.json",
+      "sha256": "8c65ae34a410be6c25114bc0b752929586808b172234b763fa40b8f796a5656a"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/alias-upgrade-signing.json",
+      "sha256": "3eaff80811ec785197854eb913fec06c85b991ad8120a5fbcc7370b89c6491dd"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/alias-phone-install.txt",
+      "sha256": "c4aa470acafcf8576c15b0f0b5ae7e852d1ec5413372d0e6a9272e788e1306d3"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/phone-b805-both-sources-report.json",
+      "sha256": "f9425e61beca3e072403e8bb26a85150650462b5b0c4f52bbf5ccad0a7b19f95"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/phone-b805-merged-summary.json",
+      "sha256": "bb09e415c6ca89e22157eb997f31ddd0baa5336a7c54a4609fc22c03c3c166c0"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/alias-service-after-disconnect.txt",
+      "sha256": "f8a55b4acaee5161b3f95a820f2ba171ffefbf389024da2948ce2635654dcc8f"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/ci-41181585937.zip",
+      "sha256": "e4460c86736b0f314f4a641655105f40b076481c572bdd51687effd3deae5513"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/ci-41181585936.zip",
+      "sha256": "425122ad1cecf253316682fb9c59b67b5ddf9d43c31ecd400b7bd4ff0178e874"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/final-preservation.json",
+      "sha256": "5e679f12fd20f73e691123fd603fab5403980dcbc1765c30393662a7f5d34a69"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/dx-preferences-final.json",
+      "sha256": "8b6c0817ec5937d68eed67b827618e8cb39878a6f2828e2bc5d773d474987fa1"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/dx-final-media.txt",
+      "sha256": "a79ed289b9bf0a7082cac330f27fd24d199273c1d449887e724a7acf9dbc21c9"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/dx-final-audio.txt",
+      "sha256": "44ee7cfc46bec58f87730d23e80cc0afa06c953075bfaf3e32a10bff0e4b92dc"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/dx-final-services.txt",
+      "sha256": "9917c3e130a2f575e3e19b228f1721c89259e4407631e4294b7f76be59cdfc75"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/dx-final-accessibility.txt",
+      "sha256": "0e08cbf6eef1c9589c5794c3726267092a40aa362411dd87c5793728beceff85"
+    },
+    {
+      "file": "artifacts/phone-journal-physical-20261031/dx-final-settings.json",
+      "sha256": "a11fd98cb64702095d9d9645be463386331e6355e269e2bdd8388d0c54eeaf42"
+    }
+  ],
+  "diagnosticFixPhysical": {
+    "status": "VERIFIED/source selection and library reads; no playback or volume",
+    "apkSha256": "b805e4ce2b4105721ce0f748fb610f02f31c48667658379611d7bfdde0221386",
+    "savedGrantReconnect": true,
+    "newApproval": false,
+    "reportSourceCategory": "mango",
+    "requests": [
+      {
+        "operation": "HELLO",
+        "terminalMs": 118
+      },
+      {
+        "operation": "AUTHORIZE",
+        "terminalMs": 830
+      },
+      {
+        "operation": "BROWSE",
+        "terminalMs": 761
+      }
+    ],
+    "playbackOrVolumeCommands": 0,
+    "audioTest": false,
+    "appleBrowse": {
+      "acceptedMs": 133,
+      "terminalMs": 1451,
+      "source": "apple",
+      "terminalApplied": true
+    },
+    "controlTargetRestored": "mango",
+    "normalDisconnect": true,
+    "foregroundAndStartedCleared": true,
+    "finalPhase": "idle",
+    "requestsTotal": 6
+  },
+  "finalState": {
+    "at": "2026-10-31T16:03:26+08:00",
+    "usb": "both Pixel9a and DX340 enumerated",
+    "sourcePlaybackStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "fourPreferencesUnchanged": true,
+    "hostForeground": true,
+    "bothAccessibilityBound": true,
+    "phone": "disconnected normally; foreground/started ownership cleared",
+    "controlTarget": "Mango",
+    "volumeProof": false
+  }
+}

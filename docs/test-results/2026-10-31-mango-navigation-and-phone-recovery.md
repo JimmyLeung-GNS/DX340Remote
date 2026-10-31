@@ -1,0 +1,45 @@
+# Mango navigation and physical phone recovery —31 October2026
+
+Full goal **ACTIVE/incomplete**. This report supersedes the11:16 resource availability checkpoint; historical failed attempts and earlier package scopes remain preserved. Host source `7fbdec8ada9faa1573afa7efea9fa598c22b2ef1`; diagnostic mapping fix `3f4e8629ee9ce9946539b11947a73994c9bccd87`. [Sanitized evidence manifest and results](2026-10-31-mango-navigation-and-phone-recovery.json).
+
+## Installed versus candidate
+
+- DX340 Android13 eng.iBasso.20260812.181952, Companion0.1.0/code1: `00e5e50b19d13f3e626ac0c882386a26174adff283dc9b2c8926413ef258e7cb`, installed in place and re-pulled byte-identical. Mango4.1.37/code240; Apple Music6.5.3/code1599.
+- Pixel9a Android16/API36 CP1A.260405.005, shared0.2.0/code2: `66f12aaffe3aed081fd478cf2ca1c446b7c4e3429f0064ca5360b251a5a63ae8`, installed in place and re-pulled byte-identical. This is now physical evidence, superseding emulator-only availability notes.
+- Diagnostic fix package `b805e4ce2b4105721ce0f748fb610f02f31c48667658379611d7bfdde0221386`: subsequently installed in place and re-pulled byte-identical after preserving the66f exports. Original signer verified: `24f48aa3566dcf7b65774ee12585191a8a0df9eeff9cc49e9e72c22bacca6e8d`. Do not transfer the66f audio results to this candidate.
+
+## Reproduced source failure and correction
+
+**FAILED/baseline:** from Android Home, the prior491 Companion launches Mango, reaches its All Music screen, then times out browsing the fresh SD storage token after8211ms. Native Accessibility traces identify a132-node All Music page with no recognized return-to-menu action. The generic shell launcher command also printed a resolution error despite exit0; the real adapter's resolved launcher works and was not replaced.
+
+**VERIFIED/source-local correction:** recognize only the observed All Music header, same-page navigation bar and list; click its unique enabled toolbar menu once. Reject ambiguous/disabled/search/cached-folder/playlist contexts. Four tests use the real node geometry/IDs with music text removed. The same Home-to-SD browse completes in4918ms with9 folders; trace has exactly one All Music menu action. This remains above the proposed3-second uncached-page target. Empty SD/Music correctly returns0 rows; Internal Storage/Music contains9 artist folders. No filesystem mutation, SD removal or rescan trial was performed.
+
+**VERIFIED/source-local audio:** selected `01. Intro -GOLD SYMPHONY-.flac` through the own-app adapter once, observed Intro -GOLD SYMPHONY-/AAA playing, and obtained explicit owner confirmation at15:22:58 HKT. Selection4609ms; subsequent typed pause170ms. Volume37/headset(4) unchanged, no volume command. This was **not** a Pixel BLE selection.
+
+## USB interruption and recovery
+
+The Pixel worked at14:45–14:50: in-place update and protected HELLO/authorization/state exchange succeeded. It disappeared after unplug/replug; DX340 also rebooted around14:50. A source/radio/app crash cause was not established.
+
+Windows subsequently reported Code43, Device Descriptor Request Failed, adjacent to the working DX340 on the same USB hub. The owner identified that failed entry as the Pixel. ADB server restart did not recover it. Non-elevated PnP restart was denied despite exit0; a narrowly scoped administrator restart reported success but the same descriptor error returned. No hub, Bluetooth bond, driver uninstall or unrelated device was reset.
+
+**VERIFIED/recovered:** moving the exact working DX340 cable to the Pixel, retaining the PC port, immediately restored healthy Pixel ADB enumeration. Both devices may be plugged in simultaneously; this result does not blame the Pixel and does not distinguish cable, port, hub or transient USB state. DX340 stayed powered and subsequently accepted Bluetooth control without USB. No phone reboot was required; PID20490 and its original model history survived.
+
+## Actual Pixel Bluetooth selections
+
+**VERIFIED/subset on66f phone +00e5 Companion:** saved-player reconnect requires no new pairing or approval. Browse Local folders →Internal Storage →Music →AAA →Gold Symphony; select `02. CALL.flac` once. Returned source state identifies CALL/AAA playing and the owner explicitly confirms expected audio.
+
+During CALL playback, fresh-root browse through the same path to the different WAY OF GLORY folder; select its **first row**, `01. OPENING VTR.flac`, once. Returned state identifies OPENING VTR/AAA playing; owner explicitly confirms expected audio. No volume command was sent. Three visible row rectangles are identical in before/pending/terminal snapshots for each selection, with pending/consumed actions disabled. This is sampled geometry evidence, not a continuous no-flicker/video assertion. No disconnect occurred during these two selections. Mango was then deliberately paused from the Pixel; returned state confirms pause.
+
+**VERIFIED/actual exported receipts:** two real MediaStore JSON exports from the same surviving model, merged without changing their bytes, contain22 unique requests and zero evictions. Initial HELLO192ms/authorization575ms/GET_STATE275ms are decoded terminal replies. The two sessions include12 successful BROWSE requests: ACCEPTED max112ms, terminal max2326ms. PLAY_ITEM ACCEPTED99/101ms and terminal3617/3454ms, both **dispatched**. Subsequent read-state replies227/238ms and explicit SET_PLAYING pause344ms/observed are separate. No GATT ACK, acoustic timing or full T04 pass is claimed. The summary remains NOT_ADJUDICATED.
+
+The old66f journal exports real package sources as `other`. Preserve that limitation; do not infer or rewrite the raw categories. Kotlin and Swift now map only known exact wire package IDs to fixed mango/apple categories. Seven shared cases include real IDs, unknown/lookalike/case variants and none/empty categories. This changes diagnostics only. The older status can say sent/waiting while later state already shows the selected track; keep this observation visible rather than claiming polished outcome reconciliation.
+
+## Checks and preservation
+
+`./scripts/build-android.ps1`: native/reference assembly and lint PASS,178 JVM checks (53 protocol,3 controller JSON,7 cache,115 adapters). `./scripts/build-phone.ps1 -WithoutTests`: shared analyze/release/lint PASS; unchanged Dart72 checks retain their earlier scope. Both source builds and logs remain in ignored artifacts. Native Apple41181585937 at3f4e862 is **SUCCESS**, artifact13034943110/archive SHA256 `e4460c86736b0f314f4a641655105f40b076481c572bdd51687effd3deae5513` verified. Shared41181585936 is also **SUCCESS**, artifact13035801821/archive SHA256 `425122ad1cecf253316682fb9c59b67b5ddf9d43c31ecd400b7bd4ff0178e874` verified,72 Flutter/12 capture guards/actual UIKit report sheet and ordinary-app restoration. Native19 Swift/12 capture guards pass on macOS26.6.2/25G83, Xcode26.6/17F113, iPhone Air/iOS26.5 simulator; no physical iPhone claim. Both are terminal; prior956 Apple jobs stay closed with their own archives.
+
+All four own-app host preferences compare byte-hash unchanged through host upgrade; Pixel/JIMMYAH grants retained, both optional browsing modes remainON and both Accessibility services auto-rebound. Cold boot source state was Mango buffering6/Apple session absent, not the older09:33 paused snapshot. After normal public Apple launch, both direct session snapshots were paused2, volume37/headset(4)/proof false. After the later phone tests Mango is paused by returned BLE state; at the earlier cable-swap point DX USB was absent. Both devices subsequently enumerate again: final direct DX media/audio snapshots confirm both source sessions paused2 at37/headset(4)/proof false, all4 preferences still byte-hash unchanged, host foreground and both Accessibility bindings healthy. Pixel remains normally disconnected with foreground/started state cleared and connection help collapsed. Pixel Wi-Fi0/mobile-data setting1/Bluetooth1 and no active default network/no-SIM subset do not establish the strict SIM-installed cellular-off gate.
+
+**VERIFIED/later diagnostic-fix subset:** original-signer b805 is now installed and re-pulled byte-identical. Saved-player approval and cached metadata survive. Reconnect HELLO118ms/authorization830ms and a fresh Mango library BROWSE761ms are applied decoded results; the actual export correctly reports `source=mango`. A real Apple Downloaded-root BROWSE also returns applied/source=apple (ACCEPTED133ms,terminal1451ms). Source control is restored to Mango. Normal Disconnect clears foreground/started state; final report has6 unique requests/final phase idle. No playback or volume command was sent on b805, so the two66f audio confirmations retain their older binary scope.
+
+Next: continue current-build source/offline/playback/audio cases on b805; both report categories and both Apple CI archives are now verified. Full T01–T18, clean20-track matrices on both phones, iPhone/Mac signing, range/sleep/calls/SD/output/battery/walking/handoff and Watch gates remain open. No observer or long-run battery/background trial is active. No user pause or device-switch request occurred.
