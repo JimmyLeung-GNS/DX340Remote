@@ -1,0 +1,253 @@
+{
+  "recordedAt": "2026-10-31T17:31:25+08:00",
+  "goalStatus": "ACTIVE/incomplete",
+  "appSource": "5f2de32ca58952faf401d0d558755972d4e160ba",
+  "hostSource": "7fbdec8ada9faa1573afa7efea9fa598c22b2ef1",
+  "phoneApkSha256": "4318e6ad38ac775f8a635532b628be1cd3a93ab54647d6e6893169aaf88bc440",
+  "hostApkSha256": "00e5e50b19d13f3e626ac0c882386a26174adff283dc9b2c8926413ef258e7cb",
+  "versions": {
+    "pixel": "Pixel9a Android16/API36 CP1A.260405.005/shared0.2.0 code2",
+    "dx340": "Android13 eng.iBasso.20260812.181952/Companion0.1.0 code1/Mango4.1.37 code240/Apple6.5.3 code1599"
+  },
+  "result": "VERIFIED/current Android background-radio-off/restore/read-reconnect subset",
+  "radioBefore": "1",
+  "phoneBackground": "Settings foreground confirmed",
+  "cleanupObservedMs": 672,
+  "offBackgroundForegroundCleared": true,
+  "offForegroundCleared": true,
+  "radioRestored": true,
+  "pidUnchanged": true,
+  "offLabels": [
+    "Setup",
+    "Turn on Bluetooth",
+    "Turn Bluetooth on in Android Settings, then return here and tap Connect.",
+    "Connect to DX340",
+    "Open Bluetooth settings",
+    "Connection help",
+    "Player\nTab 1 of 4",
+    "Library\nTab 2 of 4",
+    "Queue\nTab 3 of 4",
+    "Setup\nTab 4 of 4"
+  ],
+  "onLabels": [
+    "Setup",
+    "Connect your player",
+    "Your approved player is remembered. Keep it nearby with Companion running.",
+    "Connect to DX340",
+    "Connection help",
+    "Player\nTab 1 of 4",
+    "Library\nTab 2 of 4",
+    "Queue\nTab 3 of 4",
+    "Setup\nTab 4 of 4"
+  ],
+  "onIdleForegroundCleared": true,
+  "receipts": {
+    "total": 18,
+    "priorUnchanged": 13,
+    "newRequests": [
+      {
+        "operation": "HELLO",
+        "source": "mango",
+        "finishedAfterMs": 142,
+        "result": "result",
+        "terminalApplied": true
+      },
+      {
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "finishedAfterMs": 838,
+        "result": "result",
+        "terminalApplied": true
+      },
+      {
+        "operation": "HELLO",
+        "source": "mango",
+        "finishedAfterMs": 86,
+        "result": "result",
+        "terminalApplied": true
+      },
+      {
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "finishedAfterMs": 899,
+        "result": "result",
+        "terminalApplied": true
+      },
+      {
+        "operation": "GET_STATE",
+        "source": "mango",
+        "finishedAfterMs": 436,
+        "result": "result",
+        "terminalApplied": true
+      }
+    ],
+    "restoredReadApplied": true,
+    "noPlaybackOrVolume": true
+  },
+  "final": {
+    "at": "2026-10-31T17:27:19+08:00",
+    "settingsRestored": true,
+    "permissionGrantsAndFlagsUnchanged": true,
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "preferences": [
+      {
+        "file": "controllers.xml",
+        "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd",
+        "unchanged": true
+      },
+      {
+        "file": "mango-ui.xml",
+        "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+        "unchanged": true
+      },
+      {
+        "file": "apple-ui.xml",
+        "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+        "unchanged": true
+      },
+      {
+        "file": "source-verification.xml",
+        "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f",
+        "unchanged": true
+      }
+    ],
+    "phoneForegroundCleared": true,
+    "phoneBondIdentitiesAndTypesEqual": true,
+    "dxExposedBondRowsEqual": true,
+    "sourceControlTarget": "Mango",
+    "longHold": "NOT STARTED; fresh owner reply pending",
+    "hostForeground": true,
+    "bothAccessibilityBound": true
+  },
+  "bondComparison": "Phone exposed identities/types unchanged, DX exposed bonded rows unchanged; live ACL/encryption fields differ between disconnected-before and connected-after snapshots, not a grade audit",
+  "limits": [
+    "672ms includes command/state-wait/service observation overhead; not exact callback/radio latency",
+    "deliberate saved-player reconnect, not an automatic range-recovery proof",
+    "no playback mutation in flight; no no-replay/audio/T04/full T12 claim",
+    "long screen-off readiness and earlier envision hearing replies still pending; no hold started",
+    "physical iPhone/Mac signing and full source/format/SD/output/range/calls/battery/walk/ownership/Watch remain open"
+  ],
+  "evidence": [
+    {
+      "file": "artifacts/4318-radio-20261031/radio-case.json",
+      "sha256": "4c7ac92bdd119ed517af7ce09c728662c16897240c076c3096486af61ecec714"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/settings-before.json",
+      "sha256": "a892c8a4a3731464978e1f4d719f7b53c2669e8bee4ec29cb09745f384eca31c"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/settings-final.json",
+      "sha256": "a892c8a4a3731464978e1f4d719f7b53c2669e8bee4ec29cb09745f384eca31c"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/package-before.txt",
+      "sha256": "eb2589c904b25a55f5a3b9d91899767c510521239ad138f56aad3eba4d3e155d"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/package-final.txt",
+      "sha256": "f21ca025b4c097df4f024e796e7621bcc43505118ca4c1a847e5d00c0bc34ea4"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/phone-bluetooth-before.txt",
+      "sha256": "925bf90c0e9a334cdd5ed06abfb69432a05142a86ae2a0aed66e8d53d710a98e"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/phone-bluetooth-off.txt",
+      "sha256": "8ee4fecbd72a181d3d248d16ecb616ca8339ee78c344e9557c08ec04a0223566"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/phone-bluetooth-after.txt",
+      "sha256": "a2fe718d9ac603495469af99ecf5ff51f144281720a64615546550c973cd44f3"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/dx-bluetooth-before.txt",
+      "sha256": "dec76543e4bc9a12aed8bcc42c702b573d1e709e4b4c84498185a41ab4817dcf"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/dx-bluetooth-after.txt",
+      "sha256": "9ea6b79d86a96638f7085ac30edf4f99ca5c720ba2e8acdf692c15d2ed570263"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/phone-bonded-rows.json",
+      "sha256": "d2ec49914835636c41b28c90f61c521c583a5ec212a93a6a606d60e3b14fa362"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/phone-bonded-rows-initial-unrecognized.json",
+      "sha256": "6d19f601cdaaf645fdc914c1ded07e8bfad00b255574465a5489444e0ec81d85"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/dx-bonded-rows.json",
+      "sha256": "c8f69c7e954d1717d7a6a7191cea61eb5d3dd5aa5f2cba873309b90c7f849732"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/settings-before-off.txt",
+      "sha256": "007bbb0bbdb71024d399a338f77b087280fbf5a9f202aae9e71a7514b742af7a"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/service-connected-before.txt",
+      "sha256": "f853a37035cc612ab9943ecaa51b7bfe59f9f79c18a5e4df162fcb1b5845349f"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/service-off-background.txt",
+      "sha256": "1600bba65eb49ae41c26333be3a46faed21018effc8359c199e3ce0275d96eed"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/service-off-foreground.txt",
+      "sha256": "a9607b8b5533a002af0c12b5dfaa6e1ce37fb614a8a22ab5bf75005461e3d477"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/service-on-idle.txt",
+      "sha256": "35a279a8853c1fcc17337fcb99fe1ed66fdc58362efd4feb819834cd83f48e2f"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/off-guidance.xml",
+      "sha256": "88c5773af52e42d12ad34013aa0698e9a51fe43682f448cce69aca73c563ddbd"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/on-idle-guidance.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/radio-recovered-report.json",
+      "sha256": "538451ac472fead526a7540ea16b43e12d85f6fffcf54741228714673ca9f6fb"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/receipt-delta.json",
+      "sha256": "4cf5d3abd0a362fdfe75afc39d9336b8ae90f5976ca0e3ea83888529a14e926b"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/merged-summary.json",
+      "sha256": "5bc7fd90c65dc682529891115b9c63e9ed4627602f69b5d38f862a6bc0e21ea7"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/media-final.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/audio-final.txt",
+      "sha256": "9522384bed170d5e42df0e450d0f23cc01e7ea5f726460e435037e0899c1c284"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/host-service-final.txt",
+      "sha256": "56079921be13337ef63b25179afea5fecd948f487f0b9a9089d59095e729c3b9"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/accessibility-final.txt",
+      "sha256": "17c02ffe710c299d8d009979f7381f27f9536ec708cd31ab061f4beec711f5af"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/phone-service-final.txt",
+      "sha256": "1bd555f9ca8e0d04364ee6d94f5a9cfcea243e490ac4cdc2a9cf0e8aef6e1e23"
+    },
+    {
+      "file": "artifacts/4318-radio-20261031/final-preservation.json",
+      "sha256": "4697a67fdf39760c1d1196dabc7be21496a58b357a753953626ae1957c99908e"
+    }
+  ]
+}

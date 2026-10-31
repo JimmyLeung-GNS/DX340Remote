@@ -1,6 +1,10 @@
 # Full-scope completion audit
 
-## Current full-scope audit —31 October2026,17:08 HKT
+## Current full-scope audit —31 October2026,17:28 HKT
+
+**NOT ACHIEVED; goal ACTIVE/incomplete.** [Current4318 radio-off/background cleanup/restoration/read reconnect](test-results/2026-10-31-4318-radio-recovery.md) is verified with unchanged PID, exact settings/grant flags/preferences and exposed bond preservation. This advances Android P1/P3/P4/P8 interruption coverage, not complete T12, automatic range recovery or mutation no-replay. Full source/playlist/format/SD/output/command/latency/sleep/range/call/battery/walk/ownership and owner-iPhone/Mac signing/Watch remain required. Long-hold readiness and earlier hearing replies pending; no observer/audio result inferred. No new product build or job, no user pause/device switch.
+
+## Prior full-scope audit —31 October2026,17:08 HKT
 
 **NOT ACHIEVED; goal ACTIVE/incomplete.** [Two current phone pending-browse cases](test-results/2026-10-31-phone-pending-source.md) now verify accepted real Pixel/BLE requests canceled by a source-local Companion switch, stale-row clearing and fresh recovery, with approval/pause/output/preferences preserved. This advances P3/P4/P6/P7/P8 context/routing coverage; it does not complete phone-UI switching, token wire replay, all T12/T16 or full two-phone/source/offline/format/SD/output/command/latency/sleep/range/call/battery/walk/ownership requirements. Owner-iPhone/Mac signing and later Watch remain open. Long-hold readiness/hearing replies pending, no observer or audio claim. No new product patch/build/job, no user pause/device switch.
 

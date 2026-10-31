@@ -1,6 +1,17 @@
 # Implementation status
 
-## Current checkpoint —31 October2026,17:08 HKT
+## Current checkpoint —31 October2026,17:28 HKT
+
+Full goal **ACTIVE/incomplete**. Installed phone4318/source5f2de32 and host00e5/source7fbdec8 unchanged. [Current radio interruption/recovery](test-results/2026-10-31-4318-radio-recovery.md), [versions/hash manifest](test-results/2026-10-31-4318-radio-recovery.json).
+
+- **Background radio-off verified:** actual Settings foreground with live saved-player session; Pixel Bluetooth0 clears foreground/started work in observed672ms including command/state-wait/observation overhead. Off guidance and on/remembered-idle cleanup pass with unchanged app PID. Initially enabled radio restored.
+- **Protected recovery:** one deliberate Connect/Refresh afterOn yields HELLO86ms/authorization899ms/GET_STATE436ms applied results. Five new results/18 total, prior13 unchanged/zero evictions. No new error/playback/volume command. Not automatic range recovery, interrupted-mutation no-replay, audio or T04/full T12 proof.
+- **Preserved:** original settings and3 permission grant/flag sets, four saved host preferences/grants/browsingON. Phone exposed bonded identities/types and DX exposed bonded rows match; live connection-field differences retained, no new encryption-grade audit. Final both direct sessions paused2 at37/headset(4)/proof false, host foreground/both bindings, normal phone Disconnect/foreground cleared/help collapsed; both USB present.
+- **No running work:** no product patch/build/new CI/emulator/observer/audio test.178 JVM/72 Flutter/19 Swift and both closed5f Apple archives retain scopes; no polling. Fresh30-minute readiness and earlier envision hearing questions remain pending; no long hold or new audio pass inferred.
+
+Next: current4318 host-process recovery, full phone-UI interruption/stale-token/T01–T18/source/albums/playlists/formats/SD/output/100-command/latency/call/range/battery/walk/ownership, physical owner-iPhone/Mac signing and later Watch cases. Start the long hold only after fresh readiness. No user pause/device-switch request.
+
+## Prior checkpoint —31 October2026,17:08 HKT
 
 Full goal **ACTIVE/incomplete**. Installed Pixel4318/source5f2de32 and Companion00e5/source7fbdec8 unchanged. [Current pending-source evidence](test-results/2026-10-31-phone-pending-source.md), [versions/hash manifest](test-results/2026-10-31-phone-pending-source.json).
 
