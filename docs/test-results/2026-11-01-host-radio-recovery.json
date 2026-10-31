@@ -1,0 +1,2046 @@
+{
+  "recordedAt": "2026-11-01T01:13:53.051779+08:00",
+  "status": "VERIFIED scoped host radio recovery, Stop preservation, cold update while OFF and sticky process recovery; baseline failure retained",
+  "goal": "ACTIVE/incomplete",
+  "finalHost": {
+    "sha256": "dde825a97b1767c119e4ecc76f638c4c76876cbe7dce86439d277ffb8b2af739",
+    "source": "f3abc266a300030f2a59e4530bbb0dc14aac070f",
+    "version": "Companion0.1.0/code1",
+    "device": "DX340",
+    "os": "Android13/API33 eng.iBasso.20260812.181952",
+    "originalSignerRetained": true
+  },
+  "functionalCandidate": {
+    "sha256": "75e6a6fe1afe552a1d2e877ed7daff22d6f7c393928e2eebf74b1bc7a50eee99",
+    "source": "2045dae",
+    "scope": "Actual connected radio-off/on recovery; final source differs only in null-process-restart status wording"
+  },
+  "baseline": {
+    "sha256": "bcb70d26c58720adc9dac55a81bc3f3a17b56ce38d0c6d71d6114ad70f729e4d",
+    "source": "1c0ea0f",
+    "status": "FAILED to recover in bounded observations; old host events/status unchanged across OFF/ON; Pixel stays connecting until ordinary cancellation",
+    "samples": [
+      {
+        "sample": 0,
+        "elapsedMs": 203
+      },
+      {
+        "sample": 1,
+        "elapsedMs": 1422
+      },
+      {
+        "sample": 2,
+        "elapsedMs": 2625
+      },
+      {
+        "sample": 3,
+        "elapsedMs": 3844
+      },
+      {
+        "sample": 4,
+        "elapsedMs": 5031
+      },
+      {
+        "sample": 5,
+        "elapsedMs": 6203
+      },
+      {
+        "sample": 6,
+        "elapsedMs": 7422
+      },
+      {
+        "sample": 7,
+        "elapsedMs": 8656
+      },
+      {
+        "sample": 8,
+        "elapsedMs": 9875
+      },
+      {
+        "sample": 9,
+        "elapsedMs": 11125
+      },
+      {
+        "sample": 10,
+        "elapsedMs": 12360
+      },
+      {
+        "sample": 11,
+        "elapsedMs": 13578
+      },
+      {
+        "sample": 12,
+        "elapsedMs": 14781
+      },
+      {
+        "sample": 13,
+        "elapsedMs": 15985
+      },
+      {
+        "sample": 14,
+        "elapsedMs": 17188
+      },
+      {
+        "sample": 15,
+        "elapsedMs": 18391
+      },
+      {
+        "sample": 16,
+        "elapsedMs": 19610
+      },
+      {
+        "sample": 17,
+        "elapsedMs": 20844
+      },
+      {
+        "sample": 18,
+        "elapsedMs": 22078
+      },
+      {
+        "sample": 19,
+        "elapsedMs": 23328
+      }
+    ]
+  },
+  "phone": {
+    "source": "25ed62a",
+    "sha256": "ce47b14caa3b78c6e482387a971bc3efc80fdc7539845a7cb01b5c55daa614f2",
+    "device": "Pixel9a",
+    "os": "Android16/API36 CP1A.260405.005",
+    "version": "Remote0.2.0/code2",
+    "modelInstanceId": "441c9c0f-6a4d-406c-aced-449e5f450b82",
+    "counts": [
+      146,
+      148,
+      153,
+      156,
+      159
+    ],
+    "previousRowsUnchanged": true,
+    "zeroEvictions": true,
+    "stages": [
+      {
+        "name": "baselinebcb",
+        "count": 2,
+        "operations": {
+          "HELLO": 1,
+          "AUTHORIZE": 1
+        },
+        "requests": [
+          {
+            "id": "ba7da012-f4be-43df-a815-e9fce995758c",
+            "operation": "HELLO",
+            "source": "mango",
+            "startedMs": 9889633,
+            "accepted": false,
+            "acceptedAfterMs": null,
+            "finishedAfterMs": 161,
+            "result": "result",
+            "terminalApplied": true,
+            "hostOutcome": "none",
+            "error": null
+          },
+          {
+            "id": "40e1b289-28e5-4b3c-889e-27b7cf577858",
+            "operation": "AUTHORIZE",
+            "source": "mango",
+            "startedMs": 9889796,
+            "accepted": false,
+            "acceptedAfterMs": null,
+            "finishedAfterMs": 945,
+            "result": "result",
+            "terminalApplied": true,
+            "hostOutcome": "none",
+            "error": null
+          }
+        ]
+      },
+      {
+        "name": "radioFix75e",
+        "count": 5,
+        "operations": {
+          "HELLO": 2,
+          "AUTHORIZE": 2,
+          "GET_STATE": 1
+        },
+        "requests": [
+          {
+            "id": "4f83fe2b-161e-40ba-b58d-efdbe525a949",
+            "operation": "HELLO",
+            "source": "mango",
+            "startedMs": 10194830,
+            "accepted": false,
+            "acceptedAfterMs": null,
+            "finishedAfterMs": 192,
+            "result": "result",
+            "terminalApplied": true,
+            "hostOutcome": "none",
+            "error": null
+          },
+          {
+            "id": "9e700430-c405-4185-950c-6322899e0266",
+            "operation": "AUTHORIZE",
+            "source": "mango",
+            "startedMs": 10195024,
+            "accepted": false,
+            "acceptedAfterMs": null,
+            "finishedAfterMs": 569,
+            "result": "result",
+            "terminalApplied": true,
+            "hostOutcome": "none",
+            "error": null
+          },
+          {
+            "id": "de5d27a8-eb07-43cc-9f51-1b862385aede",
+            "operation": "HELLO",
+            "source": "mango",
+            "startedMs": 10216553,
+            "accepted": false,
+            "acceptedAfterMs": null,
+            "finishedAfterMs": 84,
+            "result": "result",
+            "terminalApplied": true,
+            "hostOutcome": "none",
+            "error": null
+          },
+          {
+            "id": "5ce2acd3-9478-497f-af0c-e16ddd042d7e",
+            "operation": "AUTHORIZE",
+            "source": "mango",
+            "startedMs": 10216637,
+            "accepted": false,
+            "acceptedAfterMs": null,
+            "finishedAfterMs": 803,
+            "result": "result",
+            "terminalApplied": true,
+            "hostOutcome": "none",
+            "error": null
+          },
+          {
+            "id": "e4712ee5-a420-4664-bfc5-f64be89fdecf",
+            "operation": "GET_STATE",
+            "source": "mango",
+            "startedMs": 10272979,
+            "accepted": false,
+            "acceptedAfterMs": null,
+            "finishedAfterMs": 382,
+            "result": "result",
+            "terminalApplied": true,
+            "hostOutcome": "none",
+            "error": null
+          }
+        ]
+      },
+      {
+        "name": "coldFinaldde",
+        "count": 3,
+        "operations": {
+          "HELLO": 1,
+          "AUTHORIZE": 1,
+          "GET_STATE": 1
+        },
+        "requests": [
+          {
+            "id": "23e77587-3ad7-4bf2-8712-fedcae9d971f",
+            "operation": "HELLO",
+            "source": "mango",
+            "startedMs": 10689526,
+            "accepted": false,
+            "acceptedAfterMs": null,
+            "finishedAfterMs": 70,
+            "result": "result",
+            "terminalApplied": true,
+            "hostOutcome": "none",
+            "error": null
+          },
+          {
+            "id": "028fe3a1-26ac-4270-a78f-352dd14d8fef",
+            "operation": "AUTHORIZE",
+            "source": "mango",
+            "startedMs": 10689597,
+            "accepted": false,
+            "acceptedAfterMs": null,
+            "finishedAfterMs": 878,
+            "result": "result",
+            "terminalApplied": true,
+            "hostOutcome": "none",
+            "error": null
+          },
+          {
+            "id": "36fe361c-4f5e-443b-b86b-dc2764a0ac12",
+            "operation": "GET_STATE",
+            "source": "mango",
+            "startedMs": 10737466,
+            "accepted": false,
+            "acceptedAfterMs": null,
+            "finishedAfterMs": 443,
+            "result": "result",
+            "terminalApplied": true,
+            "hostOutcome": "none",
+            "error": null
+          }
+        ]
+      },
+      {
+        "name": "processFinaldde",
+        "count": 3,
+        "operations": {
+          "HELLO": 1,
+          "AUTHORIZE": 1,
+          "GET_STATE": 1
+        },
+        "requests": [
+          {
+            "id": "f3cddca1-06ba-48fe-9e0f-f982797b759a",
+            "operation": "HELLO",
+            "source": "mango",
+            "startedMs": 10795226,
+            "accepted": false,
+            "acceptedAfterMs": null,
+            "finishedAfterMs": 204,
+            "result": "result",
+            "terminalApplied": true,
+            "hostOutcome": "none",
+            "error": null
+          },
+          {
+            "id": "001ba552-909c-4d63-b211-af8d677971db",
+            "operation": "AUTHORIZE",
+            "source": "mango",
+            "startedMs": 10795431,
+            "accepted": false,
+            "acceptedAfterMs": null,
+            "finishedAfterMs": 1707,
+            "result": "result",
+            "terminalApplied": true,
+            "hostOutcome": "none",
+            "error": null
+          },
+          {
+            "id": "82ad8e87-1775-4720-a25e-4020d67ed5dc",
+            "operation": "GET_STATE",
+            "source": "mango",
+            "startedMs": 10834091,
+            "accepted": false,
+            "acceptedAfterMs": null,
+            "finishedAfterMs": 829,
+            "result": "result",
+            "terminalApplied": true,
+            "hostOutcome": "none",
+            "error": null
+          }
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "fixedRadioSameHostEpoch": "ca7ed509-8cb2-4ae1-a05e-b213fb7db2b8",
+    "fixedRadioNewEvents": [
+      "1793466070127 BLUETOOTH_PAUSED: transport closed; turn Bluetooth on to restore saved phone control",
+      "1793466081516 BLE supported; multipleAdvertisement=true",
+      "1793466081661 ADVERTISING: GATT service active",
+      "1793466081999 CONNECTED: awaiting encrypted subscription and approval; transports=1",
+      "1793466082110 ENCRYPTED_SUBSCRIPTION: authorization required",
+      "1793466082258 CONTROLLER_CONNECTED: approved controller; playback unchanged"
+    ],
+    "fixedRadioNoNewApprovalOrLocalRestart": true,
+    "stoppedRadioOnSamples": 10,
+    "coldOffForegroundSamples": 5,
+    "coldOffNoGattStartErrorPairingOrAdvertising": true,
+    "mainEnableDisabledWhileOffObserved": true,
+    "process": {
+      "oldPid": "31135",
+      "rows": [
+        {
+          "elapsedMs": 203,
+          "pid": null
+        },
+        {
+          "elapsedMs": 828,
+          "pid": null
+        },
+        {
+          "elapsedMs": 1422,
+          "pid": "31888",
+          "foreground": true,
+          "newEpoch": false,
+          "reauthorized": true
+        },
+        {
+          "elapsedMs": 2250,
+          "pid": "31888",
+          "foreground": true,
+          "newEpoch": true,
+          "reauthorized": false
+        },
+        {
+          "elapsedMs": 3062,
+          "pid": "31888",
+          "foreground": true,
+          "newEpoch": true,
+          "reauthorized": true
+        }
+      ]
+    },
+    "noPostKillDxInputLocalEnableOrPhoneConnect": true,
+    "newRequests": "13 applied read/handshake RESULTs, no new error/playback/browse/volume command",
+    "tests": [
+      {
+        "module": "controller-core",
+        "suite": "org.dx340.remote.controller.JournalReportJsonTest",
+        "tests": 3
+      },
+      {
+        "module": "core-protocol",
+        "suite": "org.dx340.remote.protocol.AssistedPageUseTest",
+        "tests": 2
+      },
+      {
+        "module": "core-protocol",
+        "suite": "org.dx340.remote.protocol.AuthorizationSessionTest",
+        "tests": 5
+      },
+      {
+        "module": "core-protocol",
+        "suite": "org.dx340.remote.protocol.BrowseContextTransitionTest",
+        "tests": 1
+      },
+      {
+        "module": "core-protocol",
+        "suite": "org.dx340.remote.protocol.ConnectionAssistTest",
+        "tests": 2
+      },
+      {
+        "module": "core-protocol",
+        "suite": "org.dx340.remote.protocol.ConnectionSetupDeadlineTest",
+        "tests": 2
+      },
+      {
+        "module": "core-protocol",
+        "suite": "org.dx340.remote.protocol.ControlHandoffTest",
+        "tests": 5
+      },
+      {
+        "module": "core-protocol",
+        "suite": "org.dx340.remote.protocol.HostReplyGateTest",
+        "tests": 2
+      },
+      {
+        "module": "core-protocol",
+        "suite": "org.dx340.remote.protocol.IndicationQueueTest",
+        "tests": 7
+      },
+      {
+        "module": "core-protocol",
+        "suite": "org.dx340.remote.protocol.PeerIndicationQueueTest",
+        "tests": 6
+      },
+      {
+        "module": "core-protocol",
+        "suite": "org.dx340.remote.protocol.PeerWriteCapacityTest",
+        "tests": 2
+      },
+      {
+        "module": "core-protocol",
+        "suite": "org.dx340.remote.protocol.ProtocolTest",
+        "tests": 15
+      },
+      {
+        "module": "core-protocol",
+        "suite": "org.dx340.remote.protocol.ReplyAccessTest",
+        "tests": 2
+      },
+      {
+        "module": "core-protocol",
+        "suite": "org.dx340.remote.protocol.ReplyBudgetTest",
+        "tests": 1
+      },
+      {
+        "module": "core-protocol",
+        "suite": "org.dx340.remote.protocol.RequestJournalTest",
+        "tests": 3
+      },
+      {
+        "module": "host-app",
+        "suite": "org.dx340.remote.host.HostControlChoiceTest",
+        "tests": 6
+      },
+      {
+        "module": "host-app",
+        "suite": "org.dx340.remote.host.HostRadioRecoveryTest",
+        "tests": 7
+      },
+      {
+        "module": "library-cache",
+        "suite": "org.dx340.remote.library.LibraryIndexTest",
+        "tests": 4
+      },
+      {
+        "module": "library-cache",
+        "suite": "org.dx340.remote.library.MetadataFixtureTest",
+        "tests": 3
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.ApplePostDispatchTest",
+        "tests": 6
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.AppleRootNavigationTest",
+        "tests": 9
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.AppleUiModelTest",
+        "tests": 11
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.ControllerHandoffCancellationTest",
+        "tests": 1
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.MangoAllMusicNavigationTest",
+        "tests": 4
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.MangoBrowseBudgetTest",
+        "tests": 3
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.MangoNativePlaybackIdTest",
+        "tests": 6
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.MangoPlaylistUiModelTest",
+        "tests": 12
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.MangoStorageAvailabilityTest",
+        "tests": 5
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.MangoStorageMenuTest",
+        "tests": 5
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.MangoUiModelTest",
+        "tests": 10
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.NativeBrowsePageCacheTest",
+        "tests": 5
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.NativeItemFingerprintTest",
+        "tests": 5
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.OutputVolumeTest",
+        "tests": 13
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.PlaybackHandoffTest",
+        "tests": 9
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.PlaybackPositionTest",
+        "tests": 5
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.QueuePagesTest",
+        "tests": 5
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.SourceCallbackGuardTest",
+        "tests": 4
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.SourceRequestTest",
+        "tests": 7
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.SourceSessionAccessTest",
+        "tests": 5
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.StorageVolumeChangesTest",
+        "tests": 7
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.UiForegroundStartupTest",
+        "tests": 3
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.UiSnapshotStabilityTest",
+        "tests": 2
+      },
+      {
+        "module": "source-adapters",
+        "suite": "org.dx340.remote.sources.UiWindowGuardTest",
+        "tests": 4
+      }
+    ],
+    "aggregateJVM": 224,
+    "hostRadioTests": 7,
+    "buildsLint": "PASS actual native/reference/probe builds/lint; no shared phone or Apple workflow source changed"
+  },
+  "preservation": {
+    "phonePermissionFlagsAndExposedBondsUnchanged": true,
+    "hostPermissionFlagsAndExposedBondsUnchanged": true,
+    "fourExistingPrefs": {
+      "controllers": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd",
+      "mango-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "apple-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "source-verification": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    "fifthEnabledChoiceUnchanged": true,
+    "globalSettingsRestored": {
+      "host": {
+        "wifi_on": "0",
+        "mobile_data": "0",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      },
+      "phone": {
+        "wifi_on": "0",
+        "mobile_data": "1",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      }
+    },
+    "sourceMetadataAndPositions": {
+      "com.ibasso.music": {
+        "state": 2,
+        "positionMs": 78991,
+        "description": "ゴースト, tayori, tayori LIVE TOUR \"magic\""
+      },
+      "com.apple.android.music": {
+        "state": 2,
+        "positionMs": 99367,
+        "description": "A・RA・SHI, ARASHI, 5×20 All the BEST!! 1999-2019 (Special Edition)"
+      }
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeProof": false,
+    "hostPidBefore": "28244",
+    "hostPidAfter": "31888",
+    "phonePidUnchanged": "27462",
+    "hostForegroundBothBindings": true,
+    "browsingModes": "Both ON",
+    "phoneNormalDisconnectHelpCollapsed": true,
+    "target": "Mango",
+    "cardMounted": true
+  },
+  "limits": [
+    "Only scoped DX340/Pixel desk recovery; no general DAP/iPhone/range or full T12 acceptance",
+    "Four complete DX radio cycles in this case, plus one extra OFF/ON inspection with service stopped; original radio ON restored, no bond/approval edits",
+    "Connected radio regression on75e; finaldde differs only in recovery log wording and has actual Stop/cold-replacement/process cases",
+    "Decoded reply and PC sampling timings include queues/inspection overhead; not exact OS latency, GATT ACK, acoustic or p95 proof",
+    "No new playback/hearing; prior root/audio scopes stay attached to exact earlier APKs",
+    "No storage/mount/source-data/network/power-policy/volume changes; Apple SD preference retained, no full237GB integrity proof",
+    "No long observer live; fresh unplugged31min availability pending, two prior USB-power-wake holds remain failed",
+    "Full T01–T18/physical owner-iPhone/Mac signing/Watch unfinished"
+  ],
+  "rawEvidence": [
+    {
+      "file": "artifacts/host-radio-recovery-20261101/after-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/after-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/after-host-accessibility.txt",
+      "sha256": "599780da6244434d5a7613266e1cff825f347e77bd497cdad6ee5a5e1da57801"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/after-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "b8264c607f0427b65c59c99d86fb99b04af3aa086eded618a54412cb3fa59cb1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/after-host-audio.txt",
+      "sha256": "66e22e3efa97628395cd23a322c98359e21d489f5b32985134615c017cb15293"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/after-host-bluetooth_manager.txt",
+      "sha256": "c87804399c292f6a7ba95d08190c5f807fc91123cd7e2706371d4b06493621d3"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/after-host-media_session.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/after-host-package-org.dx340.remote.host.txt",
+      "sha256": "3680ac5f1825b79ee99536bea2f1c5ace13f4bcc3b156dfafe0bd5eaf6c9f57a"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/after-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/after-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "181d7644ca5a7a7679a4db620003f11cbff8e3d1668cc7e67075fd4c8bd98fdd"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/after-phone-bluetooth_manager.txt",
+      "sha256": "4eb0a0ed6e34d5953252dc4107dde2d72cf24518f665cca168f74fff3025754a"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/after-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "2f8d6e30e7cc80f166562484c3baabf3ce41ff92d6f256ad873d9ae2d90b1c42"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/after-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/after.json",
+      "sha256": "f4d9b790abf1963fc9d523930372e6a3eb7d3a443f102b446d8efae19c02942a"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/android-build.txt",
+      "sha256": "85fe22d5399586335738f0b0c3b5c5cbf60e71210a475a2282c1838368028763"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/before-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/before-host-radio.txt",
+      "sha256": "507e82701c16f5415da47ea00b081a3ce4987d37014b55ca10bb0d0e12c9138c"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/before-phone-services.txt",
+      "sha256": "b6b01251bba4f0d029a91f78b7c90cffd3f5a045cdae2545480d16db116d0fa5"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/cancel-ended-case-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/cancel-ended-case-before.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/collapse-before.xml",
+      "sha256": "297d0398052219083210ec8b5b9d08fc534050997fe551bc401eca7bb73d4c00"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/collapse-wait-0.xml",
+      "sha256": "297d0398052219083210ec8b5b9d08fc534050997fe551bc401eca7bb73d4c00"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/final-before-cancel.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/help-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/help-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/help-scroll-after.xml",
+      "sha256": "5d9b08f934e6f3e06eaa9924b55aae983faac125100bdbcf910b388452f9694f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/help-scroll-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/host-logcat.txt",
+      "sha256": "0ee45937f216314e804c5ea54d564d2408d5daf7edce6859335557daa4d297ee"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/off-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/off-host-services.txt",
+      "sha256": "2819a170661f0d2d5bea2c4a942cd7c30411db6bbb1e158cc6b45845d7158d34"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/off-phone.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/off-radio.txt",
+      "sha256": "32d336c8debabd086609449d72f3c908cb17723d7376ff1da6a105aca798b4e0"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/off-screen.png",
+      "sha256": "f4ce3042a10b29f3b53c49d568d17d9c227ab39afd712bcb3fa0f9ce99ca0565"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-0-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-0-phone-services.txt",
+      "sha256": "7add3983af389674c6e20acf949be97fbc5950195436274d836560236832c170"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-1-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-1-phone-services.txt",
+      "sha256": "9f05152de94c4381e445f0407457e6b25df2a711a2a939401da2db15daa9b4d7"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-10-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-10-phone-services.txt",
+      "sha256": "02262a0fa2639e454608eebc4ee2977ab0ffa251e12c37ef0d8fe05513ad7b4c"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-11-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-11-phone-services.txt",
+      "sha256": "e6d79fb6cdb2200519db0913fe7282c02d7f2176e4b7edaab128591fb49756c5"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-12-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-12-phone-services.txt",
+      "sha256": "abff8978ea76407a56eae1fb86088bfe818baa91f3ea6e8b37c5be274cc284cd"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-13-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-13-phone-services.txt",
+      "sha256": "c25d6e2edb8be568fe525993119ecf5fea5849c612a9515a5e104c6bbe3459a1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-14-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-14-phone-services.txt",
+      "sha256": "d20b61267f1581d794cdf10048066fabbf3d4a4e9cbe2b36036c02e182d34ff0"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-15-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-15-phone-services.txt",
+      "sha256": "d8f4a6a14fc8489905e8983e33688f58d9f1e97914e79dbddde1271772a153eb"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-16-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-16-phone-services.txt",
+      "sha256": "9b1645b5f328af7eb30e9d5dd56bd221dfc8ac3c87b245d0e2cfffb65d5137fd"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-17-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-17-phone-services.txt",
+      "sha256": "db772a5b7a77fc9abff2ba558f8f9dfb2b3ba56af334f0d649ad2332aa08d40c"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-18-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-18-phone-services.txt",
+      "sha256": "8d48fccbe603dc765441110c702106b03a57c0aa089cb02dc5965f9d8a55237f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-19-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-19-phone-services.txt",
+      "sha256": "7d39ed464fe301e8b315a17a1fed16e2d84502eb65bd32b080934052630f9b24"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-2-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-2-phone-services.txt",
+      "sha256": "0e85822a37a3eb85d21ae45c1aa76084654b4d0268aa21311e19d0783dce8a12"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-3-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-3-phone-services.txt",
+      "sha256": "205fac2f0e2d91033644b7dd6f880f7d7ba4bf1e881ff18b1c9134514bafaaad"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-4-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-4-phone-services.txt",
+      "sha256": "ddc72cf9af307009bc7baf0c4f22262257dbd4ff3b6800122e6ae56b0740c3f6"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-5-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-5-phone-services.txt",
+      "sha256": "2ce86d9125bd5ee4d67ed0e2ac08edb611a8b6026dc26583df4313d62e56d72d"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-6-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-6-phone-services.txt",
+      "sha256": "90828a9aa14217a6e7091ced6305d3fdd3bd6386a38fc66c7b466490c80e1dde"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-7-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-7-phone-services.txt",
+      "sha256": "7f0c3d87dd1371569714b4315a653a857a1bb5506795e0c4ae1fb9f4d434eacc"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-8-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-8-phone-services.txt",
+      "sha256": "bafaf71345f4d8f02be8290c5e7eaf80a494b1fb9122882d1949237a920a5076"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-9-host-diagnostic.json",
+      "sha256": "16eeebc4ab8c12a29fa40aa6f960daf70552fcac4259eebdb7af6deab9549710"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-9-phone-services.txt",
+      "sha256": "dd6d3199ba83acf3a6afbf1e75d267edee9f80be62ca3392fec9aed483c138c4"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-host-services.txt",
+      "sha256": "dc737788cb0c5a045a78e948f359da707be43f6a81d57f5d3565075d8ddfc3ca"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-phone.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-radio.txt",
+      "sha256": "479e91b09e9ef125fa3170a1c26f0073b0b45bb14d12f0c98bfafe813a2e4437"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-samples.json",
+      "sha256": "e3f0d4b0d6f36b328f855a9e37a88bc7f72d00b8eb173d2fdf33e6f6d489cbc1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/on-screen.png",
+      "sha256": "ecd1d0508878fc907bba8914bbeef22939dc080e2831f2600c2055ea5329d20f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/phone-failed-report.json",
+      "sha256": "7a8786ec7a42cc1c7cc7d0c7a258070dd2b430cadb71cbf8911eac5f38c77403"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/save-report-after.xml",
+      "sha256": "297d0398052219083210ec8b5b9d08fc534050997fe551bc401eca7bb73d4c00"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline/save-report-before.xml",
+      "sha256": "5d9b08f934e6f3e06eaa9924b55aae983faac125100bdbcf910b388452f9694f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline-connected.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline-settings-launch.txt",
+      "sha256": "73a326ed7af40b3293658b5141e4622b2922d4efff401d6fda4d696823b68d74"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/baseline-settings.png",
+      "sha256": "418c70a0b0765e9f8674d1deaf6f326e0a62ab510aa8a828cfa4bf4e3b95416b"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/before-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/before-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/before-host-accessibility.txt",
+      "sha256": "b325833113c3d0bf13f72ce7054b2152ab247a066e84aaf088a0c16d76cf39cb"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/before-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "3b78cbe30ca5654412fca4a7072a9a453b3f1b240e9b1637abec7d393d916812"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/before-host-audio.txt",
+      "sha256": "97ddb8377b0df1c65aacb43fbb3b5c6402ac21a86cabddea84ba0003809a1997"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/before-host-bluetooth_manager.txt",
+      "sha256": "589df58887b4236c73794e08bd465ce3203d16df6379e92dbe81abb070993e6a"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/before-host-media_session.txt",
+      "sha256": "be7b76154e714062d8b253a5a0c6c2c4190aaf589b3dba4628569e007d92ebab"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/before-host-package-org.dx340.remote.host.txt",
+      "sha256": "2957ed8fb59348a061b82bf7b0ed84a21c865e23fd731cbd0cda937cc9c51477"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/before-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/before-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "484476c734bae6ad6b248107bf60fe42d5c7bcf707e7f9392840ff9bace13a88"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/before-phone-bluetooth_manager.txt",
+      "sha256": "246b5836bd76baad86b63959b0325c6c85261df61ba688b48f63cb44ad684e3f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/before-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "97ec72220815e8d5e0192e1ab4a7e6405536e38541b023f69eec457484499255"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/before-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/before-stop-off-page.png",
+      "sha256": "30fc6888aa5b9d3ea8f3323d29bf0db47350d4bd2caf3ab88ea224283edb6cc0"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/before.json",
+      "sha256": "719b9289bc51de90f92c2ca0ef5680f645b2a32c73734ae3e429d08f5ba37726"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/candidate.apk",
+      "sha256": "75e6a6fe1afe552a1d2e877ed7daff22d6f7c393928e2eebf74b1bc7a50eee99"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/before-diagnostic.json",
+      "sha256": "39e04514dd3636b7b6968a74a073bba3fef98cf15ff635840048d50706429aa9"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/before-services.txt",
+      "sha256": "5406263909ccea277f6325be082491e6e6850e2584fb724f8becc367c433cc8a"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/connect-after-radio-on-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/connect-after-radio-on-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/install.txt",
+      "sha256": "c4aa470acafcf8576c15b0f0b5ae7e852d1ec5413372d0e6a9272e788e1306d3"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/installed-sha256.txt",
+      "sha256": "9aa46a0031916681e5cacecd55a91d19a9affbab8443d98e6d08d27cc221e0a8"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/installed.apk",
+      "sha256": "dde825a97b1767c119e4ecc76f638c4c76876cbe7dce86439d277ffb8b2af739"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/off-0-diagnostic.json",
+      "sha256": "2546e26c2a39b0ea6cdf6444d6575ae130867ccf989fca79973d1b57c19d7aa1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/off-0-services.txt",
+      "sha256": "e26cd725bd974d61f1e6b351442d899afdfb568ea4d7b7182877a76c33ab22b4"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/off-1-diagnostic.json",
+      "sha256": "2546e26c2a39b0ea6cdf6444d6575ae130867ccf989fca79973d1b57c19d7aa1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/off-1-services.txt",
+      "sha256": "3ea0cb1e98f6aff53ef7f28cb4a1292d44c0d9c76671ad5bab29942e28cdbe4c"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/off-2-diagnostic.json",
+      "sha256": "2546e26c2a39b0ea6cdf6444d6575ae130867ccf989fca79973d1b57c19d7aa1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/off-2-services.txt",
+      "sha256": "ec7b9b26cf249f68bd0c54dc33b2a8900dfad3f45641a36710f4b2a10d8ef9aa"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/off-3-diagnostic.json",
+      "sha256": "2546e26c2a39b0ea6cdf6444d6575ae130867ccf989fca79973d1b57c19d7aa1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/off-3-services.txt",
+      "sha256": "f34eeac572e139448b15b63d1c6a646566908fb6413c39bbdafed8cf24eec831"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/off-4-diagnostic.json",
+      "sha256": "2546e26c2a39b0ea6cdf6444d6575ae130867ccf989fca79973d1b57c19d7aa1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/off-4-services.txt",
+      "sha256": "3fb671231b849ee13002d2f187e6ef8d2490653173d91a84b43a0c8f87241c9e"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/off-radio.txt",
+      "sha256": "c99c05e88df12adfa23d727527af2c04d856fbe7adb3efe7ca728c7473cc167c"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/on-0-diagnostic.json",
+      "sha256": "2546e26c2a39b0ea6cdf6444d6575ae130867ccf989fca79973d1b57c19d7aa1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/on-1-diagnostic.json",
+      "sha256": "2546e26c2a39b0ea6cdf6444d6575ae130867ccf989fca79973d1b57c19d7aa1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/on-2-diagnostic.json",
+      "sha256": "2546e26c2a39b0ea6cdf6444d6575ae130867ccf989fca79973d1b57c19d7aa1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/on-3-diagnostic.json",
+      "sha256": "2546e26c2a39b0ea6cdf6444d6575ae130867ccf989fca79973d1b57c19d7aa1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/on-4-diagnostic.json",
+      "sha256": "2546e26c2a39b0ea6cdf6444d6575ae130867ccf989fca79973d1b57c19d7aa1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/on-5-diagnostic.json",
+      "sha256": "19d154740dcd95669e6d02eb2b8427e47a8998773c0cb200c7ecde32d3c77c15"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/on-radio.txt",
+      "sha256": "c22f081ba10c7e19c5d815e805fa252992c4f5be4de41fa719119e8a14f291b5"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/on-screen.png",
+      "sha256": "196097a7651f8aa0f6982e5c9673c8bea9d77cdaa1a327bf33dc632b9ecfe1ab"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/player-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/player-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/ready.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/setup-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/state-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold/state-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-before-replace-radio-page.png",
+      "sha256": "a91d07753395c48560972d0f540ec2e71a2f189acc2a29688a0d93212cd733ac"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-collapse-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-collapse-before.xml",
+      "sha256": "7096f3fba1041602b8a85528e7a4155f3d30a9c6e005ad1b1d54ef6678e14ca1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-collapse-wait-0.xml",
+      "sha256": "7096f3fba1041602b8a85528e7a4155f3d30a9c6e005ad1b1d54ef6678e14ca1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-enable-on-launch.txt",
+      "sha256": "e2d68fa0e2a753aed5505667d125e290cf852e94b3a79eaa72c7eef668341b86"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-enable-on-main.png",
+      "sha256": "70c0c9049a8f4a319f4a199550406cc695ed8d54eaf70414387abb8f22d24829"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-enabled-choice.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-enabled-on-services.txt",
+      "sha256": "344485ca792e60955cb2a5b80a62d3ae62094b17c657a1cdd66577729867fd48"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-export-after.xml",
+      "sha256": "7096f3fba1041602b8a85528e7a4155f3d30a9c6e005ad1b1d54ef6678e14ca1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-export-before.xml",
+      "sha256": "0f1b6d0ca6fe21259474b0da78bec4d3915c5015ec40285ab58d445ffffb2c01"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-export-wait-0.xml",
+      "sha256": "0f1b6d0ca6fe21259474b0da78bec4d3915c5015ec40285ab58d445ffffb2c01"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-help-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-off-launch.txt",
+      "sha256": "8ce8e30db4dd84802e87206cec30bbaa64d8d46237dd72228508d10ca8c24716"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-off-main-before.png",
+      "sha256": "66fdf0af34d332b85c131244f0ee292e6271bfa55a7cb10f217cb0d943f34860"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-off-return-settings.png",
+      "sha256": "33b0f0a2e6f2959fa3846500df206119fbfbd6b3461554d18f83a1a9f3170570"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-phone-report.json",
+      "sha256": "82fb231a33230624af4e723d5e883668725c4b4ca673fdb49f06f3fbdda01597"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-scroll-after.xml",
+      "sha256": "0f1b6d0ca6fe21259474b0da78bec4d3915c5015ec40285ab58d445ffffb2c01"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/cold-setup.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/driver-note.txt",
+      "sha256": "ab437b6998390de49e18a554151b99658978aea96b12e65e1936d1c5c8292029"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-android-build.txt",
+      "sha256": "5c79c3f23d8ab3e4d927a1f02d7adfb83d06e57bddde33f3f1176da4d70bd8a2"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-apple-package.txt",
+      "sha256": "2f792455672f4a64d992f944ff2cea5a638fa89fcdb8a6d806984697b4f1b38d"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-build-console.txt",
+      "sha256": "5c79c3f23d8ab3e4d927a1f02d7adfb83d06e57bddde33f3f1176da4d70bd8a2"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-candidate.apk",
+      "sha256": "dde825a97b1767c119e4ecc76f638c4c76876cbe7dce86439d277ffb8b2af739"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-choice.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-collapse-before.xml",
+      "sha256": "c7c2a83bb2675514ed423a38594e46f0f6aa56cd3375aed5f0cb32fbddba7da3"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-collapse-wait-0.xml",
+      "sha256": "c7c2a83bb2675514ed423a38594e46f0f6aa56cd3375aed5f0cb32fbddba7da3"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-connectivity.txt",
+      "sha256": "ce0857fbbca898382fd625fb03e3448c1bc176246f9b350bd7f20efed05b69e8"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-devices.txt",
+      "sha256": "99221000e3050b063712b3b8bb8b7e8b078c782ac467f889eb1e4f7c66d2336c"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-disconnect-after.xml",
+      "sha256": "c7c2a83bb2675514ed423a38594e46f0f6aa56cd3375aed5f0cb32fbddba7da3"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-disconnect-before.xml",
+      "sha256": "ff73b9db26e082c3def7f5d07382d51fbcc163ab1fbfedfd90b8bbe13b4fe6b1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-disconnect-wait-0.xml",
+      "sha256": "ff73b9db26e082c3def7f5d07382d51fbcc163ab1fbfedfd90b8bbe13b4fe6b1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-export-after.xml",
+      "sha256": "ff73b9db26e082c3def7f5d07382d51fbcc163ab1fbfedfd90b8bbe13b4fe6b1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-export-before.xml",
+      "sha256": "915d5dade173e7ef83a4d9ee96fa1e0e5cebd7cc515e77fa5bbaf48337ea788a"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-export-wait-0.xml",
+      "sha256": "915d5dade173e7ef83a4d9ee96fa1e0e5cebd7cc515e77fa5bbaf48337ea788a"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-help-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-install.txt",
+      "sha256": "c4aa470acafcf8576c15b0f0b5ae7e852d1ec5413372d0e6a9272e788e1306d3"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-logcat.txt",
+      "sha256": "2d611503e7e5fff3ed97fd1d979a295f33d709e4c5229f6e6f62aefa84d696f6"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-mango-package.txt",
+      "sha256": "b2e61e73d051a2038d88fca185a00df6f74d3b7c3b5d31bb6ba6361fa389aedd"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-phone-report.json",
+      "sha256": "642ef47069e2d5d5c628cde52372f61ae32d530c6e13b59179bc588688a312fc"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-scroll-after.xml",
+      "sha256": "915d5dade173e7ef83a4d9ee96fa1e0e5cebd7cc515e77fa5bbaf48337ea788a"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-setup.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-signing.json",
+      "sha256": "b0d3d8afcf292bfe2f991fbc9350dc9789b35bb8200a3433c3531c1ffffe5310"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/final-volumes.txt",
+      "sha256": "7f7be54d6ac662c6c253fefac52be59dce97549438b29993566e0dd53c4803a4"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/before-host-diagnostic.json",
+      "sha256": "0ad79b86b98806173e9e2d87f6b490fb4e7d8421f7ed59ed38d416c27d24a238"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/before-host-radio.txt",
+      "sha256": "2a3d718e7d8f8ba20dc82f4c37d44f71cd23e4b75b3bc8056991fa8daa59bb74"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/before-phone-services.txt",
+      "sha256": "94b7e999310ae96d74a6687db66fc3f7877fcb6442045c3c63ce1a1ee30d1f78"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/host-logcat.txt",
+      "sha256": "1d573d5554bad4e95a1a56c76479b19cb0f05e7e9811836a67625b19e154e872"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/off-host-diagnostic.json",
+      "sha256": "6be97d5db8aad42196a4813a54ec67191f4655aed109895dcf661b481eefd4bf"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/off-host-services.txt",
+      "sha256": "30b64ce4cad2c5ac9ecc8ca000d982988c0087db4bb06eb2bad813f5253036d5"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/off-phone.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/off-radio.txt",
+      "sha256": "767844754935a9f3d2a21fce4d42c887d5bf38ba23affa05397e999740bbb4eb"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/off-screen.png",
+      "sha256": "9fee0c32554625ccffe72d9acd4fc9bf7b4b95caeffe6a3389019d1e50f686e8"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-0-host-diagnostic.json",
+      "sha256": "6be97d5db8aad42196a4813a54ec67191f4655aed109895dcf661b481eefd4bf"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-0-phone-services.txt",
+      "sha256": "e970d900aaac93d1124447af2cafa593d4b67951aa02c6ad677dcded14093adf"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-1-host-diagnostic.json",
+      "sha256": "6be97d5db8aad42196a4813a54ec67191f4655aed109895dcf661b481eefd4bf"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-1-phone-services.txt",
+      "sha256": "27858ca84176c18c57616cb97f9b9237ce0b5d56557f989d4e957f998a2cc641"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-10-host-diagnostic.json",
+      "sha256": "6fb7379b55e5eb36e0de6db33e76f3b6a60de776aa6c47732f5e06cc75869d2f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-10-phone-services.txt",
+      "sha256": "1edd51da821b79fe6ede7dc453f2b8d349c1d95a56e9fbfc4ca5255222d372d9"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-11-host-diagnostic.json",
+      "sha256": "6fb7379b55e5eb36e0de6db33e76f3b6a60de776aa6c47732f5e06cc75869d2f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-11-phone-services.txt",
+      "sha256": "308d1923836a77304a3e9e17d7093cc26d1e7284250a643c511040818ed60319"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-12-host-diagnostic.json",
+      "sha256": "6fb7379b55e5eb36e0de6db33e76f3b6a60de776aa6c47732f5e06cc75869d2f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-12-phone-services.txt",
+      "sha256": "90f37aeb678babd77d639890df8ddd3a52f32025ec20757477be33674362840a"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-13-host-diagnostic.json",
+      "sha256": "6fb7379b55e5eb36e0de6db33e76f3b6a60de776aa6c47732f5e06cc75869d2f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-13-phone-services.txt",
+      "sha256": "7a094ab1565fce2bb2ae6ce6cba4da5edb34f5cc296d9ca0b554b345d0411cd6"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-14-host-diagnostic.json",
+      "sha256": "6fb7379b55e5eb36e0de6db33e76f3b6a60de776aa6c47732f5e06cc75869d2f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-14-phone-services.txt",
+      "sha256": "17dc6448a8ca69b46e9fe2a7fb5e87602c9d580b98fc7be7fd28d139998e450a"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-15-host-diagnostic.json",
+      "sha256": "6fb7379b55e5eb36e0de6db33e76f3b6a60de776aa6c47732f5e06cc75869d2f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-15-phone-services.txt",
+      "sha256": "e218ca363cc37d1ef6ce8a33f690c4e5d4cf001f13ffa7889f936f5fca96b47a"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-16-host-diagnostic.json",
+      "sha256": "6fb7379b55e5eb36e0de6db33e76f3b6a60de776aa6c47732f5e06cc75869d2f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-16-phone-services.txt",
+      "sha256": "900a75953e7fd4ad091435b9c7eb2203315edba517d64c32ce81129f09838689"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-17-host-diagnostic.json",
+      "sha256": "6fb7379b55e5eb36e0de6db33e76f3b6a60de776aa6c47732f5e06cc75869d2f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-17-phone-services.txt",
+      "sha256": "ae56424909200abe5298fa341f9bc7d1ffcc6754f3090081d34f6d0d04eaf724"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-18-host-diagnostic.json",
+      "sha256": "6fb7379b55e5eb36e0de6db33e76f3b6a60de776aa6c47732f5e06cc75869d2f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-18-phone-services.txt",
+      "sha256": "f4f6eb56b8a2d1a2f90a73787c6f1ad37960b923fc542079647cae31ac44015f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-19-host-diagnostic.json",
+      "sha256": "6fb7379b55e5eb36e0de6db33e76f3b6a60de776aa6c47732f5e06cc75869d2f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-19-phone-services.txt",
+      "sha256": "a1d44beed9300b1927851b8630a3bb38b35649f4ca9f42b289e1eb3932780ad0"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-2-host-diagnostic.json",
+      "sha256": "6be97d5db8aad42196a4813a54ec67191f4655aed109895dcf661b481eefd4bf"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-2-phone-services.txt",
+      "sha256": "e223f79511eef2261bf2e83da99320c43603ed04eeeafa54919e79020fe169a3"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-3-host-diagnostic.json",
+      "sha256": "6fb7379b55e5eb36e0de6db33e76f3b6a60de776aa6c47732f5e06cc75869d2f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-3-phone-services.txt",
+      "sha256": "a7bd46aea530806a791021a15915b8b23219ab6fc4b48613c82c4664e69e86df"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-4-host-diagnostic.json",
+      "sha256": "6fb7379b55e5eb36e0de6db33e76f3b6a60de776aa6c47732f5e06cc75869d2f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-4-phone-services.txt",
+      "sha256": "3384f9846a24bb482a97b958b9ead749304140d05e197e446db1004ab72a000a"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-5-host-diagnostic.json",
+      "sha256": "6fb7379b55e5eb36e0de6db33e76f3b6a60de776aa6c47732f5e06cc75869d2f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-5-phone-services.txt",
+      "sha256": "e443d51fc841b83104644c4baaa2c372be790d20091de5cd25afc78d3888a462"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-6-host-diagnostic.json",
+      "sha256": "6fb7379b55e5eb36e0de6db33e76f3b6a60de776aa6c47732f5e06cc75869d2f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-6-phone-services.txt",
+      "sha256": "b6cb2f1804d0db49e58efc45228a88987a6fcfe40d070eb17c7cd0d11a5b28c4"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-7-host-diagnostic.json",
+      "sha256": "6fb7379b55e5eb36e0de6db33e76f3b6a60de776aa6c47732f5e06cc75869d2f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-7-phone-services.txt",
+      "sha256": "3fab497bb01f086581ea0ef94dfaa03abb621b802754a08a7af76bcd7d71bbfc"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-8-host-diagnostic.json",
+      "sha256": "6fb7379b55e5eb36e0de6db33e76f3b6a60de776aa6c47732f5e06cc75869d2f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-8-phone-services.txt",
+      "sha256": "619ebc033afbda07132e0df0ef405dcb7cc7017bca75b03e9040d63a7781c9e6"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-9-host-diagnostic.json",
+      "sha256": "6fb7379b55e5eb36e0de6db33e76f3b6a60de776aa6c47732f5e06cc75869d2f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-9-phone-services.txt",
+      "sha256": "f81b6913d86e6880212b4ba71914088de3154d506d1650d4aa9aec6777073a2e"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-host-services.txt",
+      "sha256": "4695e39cc8b9b34a5c947013eac59f3874cef12af26ef318c26a9ea0e263b567"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-phone.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-radio.txt",
+      "sha256": "c57e0c58e1bb5bf187a3025ecc1dd05608b11e37097bbe64f94f5e176c289d65"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-samples.json",
+      "sha256": "0b2522fb6dd99ece921fe90c8d03dcec930a951b4e86b1dfaf5d2b72e63e35d5"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/on-screen.png",
+      "sha256": "c2c455d5a8e789a7c641cbc0a9c0e867bf44cfd2c7f9736fc418db8153ac7ee4"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/post-recovery-player-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/post-recovery-player-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/post-recovery-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/post-recovery-setup-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/post-recovery-state-read-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed/post-recovery-state-read-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-cycle-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-cycle-collapse-before.xml",
+      "sha256": "78837071a8e03d712026598a893491ffeceac4e64056e04321ec890bede083d8"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-cycle-collapse-wait-0.xml",
+      "sha256": "78837071a8e03d712026598a893491ffeceac4e64056e04321ec890bede083d8"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-cycle-disconnect-after.xml",
+      "sha256": "78837071a8e03d712026598a893491ffeceac4e64056e04321ec890bede083d8"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-cycle-disconnect-before.xml",
+      "sha256": "e058e2f799091c757ee7d990d9ba5d42fb97404f7a80ab03a52c1d77da09dffa"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-cycle-disconnect-wait-0.xml",
+      "sha256": "e058e2f799091c757ee7d990d9ba5d42fb97404f7a80ab03a52c1d77da09dffa"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-cycle-export-after.xml",
+      "sha256": "e058e2f799091c757ee7d990d9ba5d42fb97404f7a80ab03a52c1d77da09dffa"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-cycle-export-before.xml",
+      "sha256": "1405cc42c84a371adefe73f71d546aa3b0260238682cf2757d1fd677a4ca0c0e"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-cycle-export-wait-0.xml",
+      "sha256": "1405cc42c84a371adefe73f71d546aa3b0260238682cf2757d1fd677a4ca0c0e"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-cycle-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-cycle-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-cycle-help-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-cycle-phone-report.json",
+      "sha256": "36870da20695f84bed1d2d3543807e5f4062267b35c1d5867b8f388c55d00674"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-cycle-scroll-after.xml",
+      "sha256": "1405cc42c84a371adefe73f71d546aa3b0260238682cf2757d1fd677a4ca0c0e"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-cycle-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-cycle-setup.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-radio-before.png",
+      "sha256": "368a92718eb2d1b0eba22d2c15008f1483ff7506af21ef4093ac8df3e227bd3b"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/fixed-ready.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/install.txt",
+      "sha256": "c4aa470acafcf8576c15b0f0b5ae7e852d1ec5413372d0e6a9272e788e1306d3"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/installed-sha256.txt",
+      "sha256": "7408dddcc1d7ac3dbbf89570c0e5fb9a4f6e73c05f957122db975e2a1882e21a"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/installed.apk",
+      "sha256": "75e6a6fe1afe552a1d2e877ed7daff22d6f7c393928e2eebf74b1bc7a50eee99"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/controller-core-TEST-org.dx340.remote.controller.JournalReportJsonTest.xml",
+      "sha256": "4a460c7c403658a7824252867221e3f82fc7d55c53149b84bb27e460f926f8e6"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.AssistedPageUseTest.xml",
+      "sha256": "da01fa422d96034eba8586af0813aa96def7529978394b4c1f5d80813ffa010f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.AuthorizationSessionTest.xml",
+      "sha256": "2346b31f04b8f69ca2c5bd000ed80f26330dcc533d4fa58dad4786211b0837fb"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.BrowseContextTransitionTest.xml",
+      "sha256": "12862987299bbae9091c95cc56df83df214a88a3c722dbae285d206afef1a3f9"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.ConnectionAssistTest.xml",
+      "sha256": "54fc08159f0a30cfbd28870f38b05604d952bdda58a0002b76dc98c5e0d0be64"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.ConnectionSetupDeadlineTest.xml",
+      "sha256": "a11de962e8196b03ba97c6340b8671ebdb8cbda30d4bad90c94d4cb309f7e4a1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.ControlHandoffTest.xml",
+      "sha256": "e6abd54d4e22582b85bb8c92082bc610d5645f655778fe91c833c8de5419d065"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.HostReplyGateTest.xml",
+      "sha256": "ed9447612b40d50b549eb699c7dc7f92ed37cd960bce1b5e8b4b17f81be0fa63"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.IndicationQueueTest.xml",
+      "sha256": "50a3d13ff5c246f1e38e4236dde654c02b8767a77f4e7d44cd548abfc0283f8e"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.PeerIndicationQueueTest.xml",
+      "sha256": "29373dc0eb7a03d55212bbc979e5bb4d56b2e1c4b8c764bbc8d1107eb772bdb3"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.PeerWriteCapacityTest.xml",
+      "sha256": "d9c0da7055f0602eb89d9d98e5822e1394c6576b01b789d04b669f1ca9bb1fce"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.ProtocolTest.xml",
+      "sha256": "9ba0955abb23cf40a714afa38392681c5d9491456317c63049028847cd03357b"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.ReplyAccessTest.xml",
+      "sha256": "356eee3e2a682cfb6a6f247492801af5a5d637fd0bae1e7a1a5f41209a2a4431"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.ReplyBudgetTest.xml",
+      "sha256": "49c4afa06d3f4e45d5d98120784172b5c448ffdeece2d82269a1160afda4606a"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.RequestJournalTest.xml",
+      "sha256": "015d33c0ecfb2a3375ed4dd126721a52488c72cf808669cbd027c9dd2e1e2c23"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/host-app-TEST-org.dx340.remote.host.HostControlChoiceTest.xml",
+      "sha256": "ab719bc228bf284967e580d425b936a20226b2751bbb5edb4c08fd05c96d30d0"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/host-app-TEST-org.dx340.remote.host.HostRadioRecoveryTest.xml",
+      "sha256": "d869de3e1a338276f35576b2a580a1ea3df78285f39c4ff5bfd36742aad5e001"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/library-cache-TEST-org.dx340.remote.library.LibraryIndexTest.xml",
+      "sha256": "721ec6b8e17e2507f298e42ee788b50424dd3bbebb6db45fd4cc71423ec1d612"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/library-cache-TEST-org.dx340.remote.library.MetadataFixtureTest.xml",
+      "sha256": "31a1c48e8923338b98aeaac8194da1ec2f01a469e0131e5e7e5b8e10182bdaae"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.ApplePostDispatchTest.xml",
+      "sha256": "a6888505ae3212378eb2fbe4b726bb61bb96f3c6706c4307f0cf6dd3c35996da"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.AppleRootNavigationTest.xml",
+      "sha256": "822347b8d7312f5c07d87ccf73a8e0761c2bc6c464bc779132e9b4e32fe0e6b8"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.AppleUiModelTest.xml",
+      "sha256": "0f8a68d43597f2d729e25929f8d205b8cb7ec57bf870a578328c6e47548496df"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.ControllerHandoffCancellationTest.xml",
+      "sha256": "06df0913d9eb7d7c6ad5f282696aae179d297faa35093e0b6b4b59d53372c004"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.MangoAllMusicNavigationTest.xml",
+      "sha256": "481fb3b8e2fe09ace0342163f9e1f4b8800960b3e7297521eb5f755162428c8c"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.MangoBrowseBudgetTest.xml",
+      "sha256": "9bcaebe328085eecf1d1271fdb97361d1d9b4e6a8b2a84251583c8d69e15741e"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.MangoNativePlaybackIdTest.xml",
+      "sha256": "4763360914363d12ae5d572b559ba652cf88ace6a08360368c049a008ddaa556"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.MangoPlaylistUiModelTest.xml",
+      "sha256": "7001bcb0e695928eb7558c14f0d260fc7f6f83fa1175f46bc983f63b52c93f02"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.MangoStorageAvailabilityTest.xml",
+      "sha256": "eb898c2aaf1d0c907c272ea102ac614103486d6a2d7bae52a56067ffe2fd72a0"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.MangoStorageMenuTest.xml",
+      "sha256": "84942608c7ecc00a347d7d31b8c99a62239eb467d6c2bbaf3141f2291660bf4e"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.MangoUiModelTest.xml",
+      "sha256": "df03a1accceb1e3ed1a3ffc31835c7aebff0570db9aafebb57d9070c1c3c2cdc"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.NativeBrowsePageCacheTest.xml",
+      "sha256": "829940adce3715381af95723f43772e7c02bb9e2d29bb08a5c74673e3d0949c6"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.NativeItemFingerprintTest.xml",
+      "sha256": "876bb4262859f388b68c48a2ffa1221ce5a11c1e68080d8422dc1df1d88d3118"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.OutputVolumeTest.xml",
+      "sha256": "7ed6a8d7f788266ab7cdc6bb9af6b4498af7afc6d507313fdc9b8545663688a6"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.PlaybackHandoffTest.xml",
+      "sha256": "35c32df35d22329f9b9617c0cb235a9b8b636add1a0915f2dd26379ebf2368bc"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.PlaybackPositionTest.xml",
+      "sha256": "1c7365e99f710c9c190e2e6705063a47afaa78407982ee821511b044782ea56e"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.QueuePagesTest.xml",
+      "sha256": "089092a93665819b3b7181d24c20a2e85136138210c85d7934a87775cd9ebe58"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.SourceCallbackGuardTest.xml",
+      "sha256": "21fffcab2f3c7efcbcc391ba4bd0684d3bcf530ab65a3a7854cc4d0568a27726"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.SourceRequestTest.xml",
+      "sha256": "18b6ada36570d10c99edcc8e73f9de5b85a8e6609bb6728b92b52600c1df67e1"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.SourceSessionAccessTest.xml",
+      "sha256": "c0511496caee50fbd518523ab6a8755218bf280553fbf98a5e684e8a9463ea24"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.StorageVolumeChangesTest.xml",
+      "sha256": "be4741fd4c4ea9434c5516d8193195ba996c2df58c961f91208d90b6241d1f45"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.UiForegroundStartupTest.xml",
+      "sha256": "889bc5b1df381f0a5d5e1b64b33b23e90d514f019a023cf00249c9961bd45be4"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.UiSnapshotStabilityTest.xml",
+      "sha256": "7d21825a1af946d6e76a8b6685cdc5294a38ed8fe396e754a4e50d9a473d6b73"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.UiWindowGuardTest.xml",
+      "sha256": "a41cd05be18a09128e69ea9de530acdf87fdb2dbf580651a31e011d29ff5cbb5"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/preferences-find.png",
+      "sha256": "c9cced0d8a6072ce155e6bf3da07ad83bfa5768423a13b7d610d9fa9a798497a"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/preferences-settled.png",
+      "sha256": "a4df082de35d0437cdc2c1fa580de128168cad55b8f9d70439041b1be5025636"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/preferences.png",
+      "sha256": "06a95a4d8e46fa2d86732048ac20009136fe41144d795ceb4407507c929dae8c"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/process/after-2-diagnostic.json",
+      "sha256": "3cc49b01c459301523826360b14a62dde3b1e4a1a436e26763b393c7d77a8ec2"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/process/after-2-services.txt",
+      "sha256": "da02d437c2e601ebf0d27500260d5cb2a2dd85e74e41ee7fbab773160bd98148"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/process/after-3-diagnostic.json",
+      "sha256": "9d6bd9d110455458c4c4114c3762f18837617f90dc4e2c2fab10e9965a66f544"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/process/after-3-services.txt",
+      "sha256": "ccbc57671c4b40aaa8d17b92953e6c7300dc33895ecf74d17c33428763a4e462"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/process/after-4-diagnostic.json",
+      "sha256": "6c0c95c1b1f292938fb5aaa2643a7b1f91cb12f3793041bbb9d7729fe17abf9e"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/process/after-4-services.txt",
+      "sha256": "e762e9c2df7164479375b74845c49128659de3e5f2161dd29b9299a100318b94"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/process/after-automatic-recovery.xml",
+      "sha256": "ac5be57dfbae76569fe6f7ddba03f1934d920341346e4ccf6053a5f2e602709a"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/process/before-diagnostic.json",
+      "sha256": "3cc49b01c459301523826360b14a62dde3b1e4a1a436e26763b393c7d77a8ec2"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/process/before-phone-services.txt",
+      "sha256": "d7ce9919a923e8635564ae5ee7c24ed17a5fae6161dd972ec9191de66e9f1086"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/process/before-services.txt",
+      "sha256": "861971ec5f071176dc53e2436f2409edf95594d850d8eabb9195936a55a4760b"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/process/host-logcat.txt",
+      "sha256": "a2f2540dcb55ec50953fe3a25ccda2973b33cd3008bc06d8be470a088dd2c24b"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/process/kill.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/process/observations.json",
+      "sha256": "329602cd519613e86c40e9bc39c05a1bc77f2998ff9790f5472371dec5729355"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/process/player-after-restart-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/process/player-after-restart-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/process/read-after-restart-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/process/read-after-restart-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/process/setup-after-restart-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/process/setup-after-restart-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/radio-page.png",
+      "sha256": "956f54e11c52de4379c43d913cc3229ace96767900742bd8559b65bc7de810af"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/radio-toggle-before.png",
+      "sha256": "1dd85fbb44b41d49a3a3863ddaed23877d832b8d6805e49c227b4e432f765d00"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/stop-off-action.png",
+      "sha256": "b1f9a3b277e9f4bf7d16d4057a62c06891a3230f1565837cf6d9507815b2753e"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/stop-off-before-services.txt",
+      "sha256": "2405f2761ab561232bf541b7665c4d5b551b4d44e4ddcebf94f36be99b5c10b8"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/stop-off-diagnostic.json",
+      "sha256": "82cde78663d155d85356e6213d1d9ba5105d3b38ea724bdb6500ab6299a31df8"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/stop-off-notification.png",
+      "sha256": "51757ea0481b559bb95a0ea410b77e0646a2654233a7fa00fb0ae3649803fd6f"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/stopped-after-radio-on-samples.json",
+      "sha256": "5eba072cabe4e7636988a06bd5a0a9303eef9226bb418f05624a4416ec6e862c"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/stopped-after-radio-on.png",
+      "sha256": "609a699fd7ba98e62d15408a71c76edf760562eade03e5383147c7947ef78ff0"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/stopped-while-off-choice.xml",
+      "sha256": "b865982f901baddb00accd44f42fe5fcce5a0ac3877966494dd6f4c353ef2232"
+    },
+    {
+      "file": "artifacts/host-radio-recovery-20261101/upgrade-signing.json",
+      "sha256": "ff24114464226d721ba3207fb347103ceb26f42a9240dc843f6b859e5672ad20"
+    }
+  ]
+}
