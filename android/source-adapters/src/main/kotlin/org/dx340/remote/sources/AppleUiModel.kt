@@ -25,6 +25,10 @@ object AppleUiModel {
     }
     fun libraryTab(nodes: List<UiNode>) = nodes.firstOrNull { it.id == PREFIX + "action_library" && it.description == "Library" }
         ?: nodes.firstOrNull { it.id == PREFIX + "navigation_bar_item_large_label_view" && it.text == "Library" }
+    fun libraryTabNeedsSettling(nodes: List<UiNode>): Boolean {
+        val tab = libraryTab(nodes) ?: return false
+        return tab.selected && clickable(nodes, tab) == null
+    }
     fun back(nodes: List<UiNode>) = nodes.firstOrNull { it.className == "android.widget.ImageButton" && it.description == "Navigate up" && it.clickable && it.enabled }
     fun downloaded(nodes: List<UiNode>) = nodes.firstOrNull { it.id == "library_categories-Downloaded" }
     /** Observed source error dialog; inspect only, never click its message or confirmation. */

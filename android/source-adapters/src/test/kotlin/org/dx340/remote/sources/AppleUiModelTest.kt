@@ -5,6 +5,24 @@ import org.junit.Test
 
 class AppleUiModelTest {
     private val tab = UiNode("0.0", "0", "com.apple.android.music:id/navigation_bar_item_large_label_view", "Library", selected = true)
+    @Test fun selectedNonActionableLibraryTabWaitsForItsPage() {
+        // Model an incomplete frame using the observed merged Library tab.
+        val pending = listOf(tab.copy(id = "com.apple.android.music:id/action_library", text = "", description = "Library"))
+        assertNull(AppleUiModel.clickable(pending, pending.single()))
+        assertTrue(AppleUiModel.libraryTabNeedsSettling(pending))
+        assertThrows(IllegalArgumentException::class.java) { AppleUiModel.parse(pending, false) }
+    }
+    @Test fun actionableSelectedTabStillAllowsExistingNavigation() {
+        assertFalse(AppleUiModel.libraryTabNeedsSettling(listOf(tab.copy(clickable = true))))
+        val nodes = listOf(UiNode("0", null, clickable = true), tab)
+        assertNotNull(AppleUiModel.clickable(nodes, tab))
+        assertFalse(AppleUiModel.libraryTabNeedsSettling(nodes))
+    }
+    @Test fun missingOrUnselectedTabDoesNotAcquireTransitionReadiness() {
+        assertFalse(AppleUiModel.libraryTabNeedsSettling(emptyList()))
+        assertFalse(AppleUiModel.libraryTabNeedsSettling(listOf(tab.copy(selected = false))))
+        assertFalse(AppleUiModel.libraryTabNeedsSettling(listOf(tab.copy(id = "other", text = "Other"))))
+    }
     @Test fun exposesOnlyDownloadedSongRowsAsPlayable() {
         val nodes = listOf(tab,
             UiNode("0.1", "0", "com.apple.android.music:id/collection_header_title", "Synthetic album"),

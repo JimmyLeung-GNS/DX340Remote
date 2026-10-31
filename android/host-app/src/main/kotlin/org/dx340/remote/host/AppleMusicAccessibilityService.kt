@@ -30,6 +30,8 @@ class AppleMusicAccessibilityService : AccessibilityService() {
     private var eventPending = false
     private var lastReadiness = "not-bound"
     private var lastValidation: JSONObject? = null
+    private var lastActionFailure: JSONObject? = null
+    private var rootSettlingWaits = 0
     private data class Tree(val window: Int, val nodes: List<UiNode>)
     private data class Action(val path: String, val kind: String, val signature: String)
     private data class Frame(val revision: String, val window: Int, val parsed: ParsedAppleUi, val actions: Map<String, Action>)
@@ -75,7 +77,8 @@ class AppleMusicAccessibilityService : AccessibilityService() {
     private fun signature(node: UiNode) = "${node.id}\u0000${node.text}\u0000${node.description}\u0000${node.className}"
     fun debugSnapshot(): JSONObject {
         val current = tree()
-        return JSONObject().put("window", current.window).put("validation", lastValidation ?: JSONObject.NULL).put("nodes", JSONArray().apply { current.nodes.forEach { n ->
+        return JSONObject().put("window", current.window).put("validation", lastValidation ?: JSONObject.NULL)
+            .put("actionFailure", lastActionFailure ?: JSONObject.NULL).put("rootSettlingWaits", rootSettlingWaits).put("nodes", JSONArray().apply { current.nodes.forEach { n ->
             put(JSONObject().put("path", n.path).put("id", n.id).put("text", n.text).put("description", n.description)
                 .put("class", n.className).put("clickable", n.clickable).put("selected", n.selected).put("forward", n.forward))
         } })
@@ -89,7 +92,13 @@ class AppleMusicAccessibilityService : AccessibilityService() {
         for (index in path.split('.').drop(1)) live = live.getChild(index.toInt()) ?: error("STALE_LIBRARY")
         require(live.viewIdResourceName.orEmpty() == node.id && live.text?.toString().orEmpty().take(512) == node.text && live.contentDescription?.toString().orEmpty().take(256) == node.description) { "STALE_LIBRARY" }
         val action = if (kind == "scroll") AccessibilityNodeInfo.ACTION_SCROLL_FORWARD else AccessibilityNodeInfo.ACTION_CLICK
-        check(live.performAction(action)) { "UI_ACTION_FAILED" }
+        if (!live.performAction(action)) {
+            // Bounded public-UI evidence for the debug receiver; never relax/replay an action.
+            lastActionFailure = JSONObject().put("kind", kind).put("window", tree.window).put("path", path)
+                .put("id", node.id).put("text", node.text).put("description", node.description)
+                .put("selected", node.selected).put("clickable", node.clickable)
+            error("UI_ACTION_FAILED")
+        }
     }
     private fun frame(tree: Tree): Frame {
         val parsed = AppleUiModel.parse(tree.nodes, offlineContext)
@@ -205,6 +214,10 @@ class AppleMusicAccessibilityService : AccessibilityService() {
                 if (back != null && AppleUiModel.libraryTab(current.nodes)?.selected == true) { perform(current, back.path, "back"); main.postDelayed({ root() }, 250); return }
                 val tab = AppleUiModel.libraryTab(current.nodes)
                 if (tab == null) { main.postDelayed({ root() }, 250); return }
+                if (AppleUiModel.libraryTabNeedsSettling(current.nodes)) {
+                    rootSettlingWaits++
+                    main.postDelayed({ root() }, 250); return
+                }
                 val action = AppleUiModel.clickable(current.nodes, tab) ?: error("UI_ACTION_FAILED")
                 perform(current, action.path, "browse"); main.postDelayed({ root() }, 250)
             } catch (e: Exception) {
@@ -219,7 +232,7 @@ class AppleMusicAccessibilityService : AccessibilityService() {
         }
         try {
             readiness()?.let { error(it) }
-            if (parent == null) { offlineContext = false; last = null; root() }
+            if (parent == null) { offlineContext = false; last = null; lastActionFailure = null; rootSettlingWaits = 0; root() }
             else {
                 val (current, action) = validate(parent, revision ?: "")
                 require(action.kind in setOf("browse", "back", "scroll")) { "UNSUPPORTED_CAPABILITY" }
