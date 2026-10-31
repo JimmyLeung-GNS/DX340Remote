@@ -5,3 +5,5 @@ android {
     compileOptions { sourceCompatibility = JavaVersion.VERSION_21; targetCompatibility = JavaVersion.VERSION_21 }
 }
 dependencies { implementation(project(":core-protocol")); implementation(project(":core-ble")) }
+
+dependencies { testImplementation("junit:junit:4.13.2"); testImplementation("org.json:json:20180813") }

@@ -9,7 +9,7 @@ if ($IsWindows) {
 Push-Location "$repo/android"
 try {
     $tasks = @(':host-app:assembleDebug', ':remote-app:assembleDebug', ':ui-probe-app:assembleDebug', ':host-app:assembleDebugAndroidTest', ':host-app:lintDebug', ':remote-app:lintDebug', ':ui-probe-app:lintDebug')
-    if (!$WithoutTests) { $tasks += @(':core-protocol:test', ':library-cache:test', ':source-adapters:testDebugUnitTest') }
+    if (!$WithoutTests) { $tasks += @(':core-protocol:test', ':controller-core:testDebugUnitTest', ':library-cache:test', ':source-adapters:testDebugUnitTest') }
     & ./gradlew.bat --no-daemon @tasks 2>&1 | Tee-Object "$repo/artifacts/android-build.txt"
     if ($LASTEXITCODE -ne 0) { throw "Android build failed ($LASTEXITCODE). See artifacts/android-build.txt" }
     Copy-Item host-app/build/outputs/apk/debug/host-app-debug.apk "$repo/artifacts/dx340-companion-0.1.0-debug.apk"

@@ -707,6 +707,23 @@ class _PhoneShellState extends State<PhoneShell>
           label(
             'Only players running a compatible Companion can appear. Supported music controls depend on the player and source app. Optional assisted browsing needs the player awake and unlocked.',
           ),
+          action(
+            remote.exportingDiagnostics
+                ? 'Preparing connection report…'
+                : apple
+                ? 'Share connection report'
+                : 'Save connection report',
+            perform(!remote.exportingDiagnostics, remote.exportDiagnostics),
+            icon: apple ? CupertinoIcons.share : Icons.save_alt,
+          ),
+          label(
+            'Includes recent connection states and request timings from this app session. Music titles, Bluetooth addresses and credentials are excluded.',
+          ),
+          if (remote.diagnosticsNotice != null)
+            Semantics(
+              liveRegion: true,
+              child: label(remote.diagnosticsNotice!),
+            ),
         ],
       ],
     ];

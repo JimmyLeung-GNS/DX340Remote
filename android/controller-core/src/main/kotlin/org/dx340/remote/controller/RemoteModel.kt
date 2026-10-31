@@ -15,6 +15,7 @@ import org.dx340.remote.ble.BleCentral
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.UUID
+import org.dx340.remote.protocol.RequestJournal
 import org.dx340.remote.protocol.ControllerSession
 import org.dx340.remote.protocol.ControlProposal
 import org.dx340.remote.protocol.ReplyBudget
@@ -35,6 +36,8 @@ class RemoteModel(private val context: Context) {
     private val snapshotFile = java.io.File(context.cacheDir, "dx340-metadata.json")
     var status = "Enable Bluetooth, then find your DX340."; private set
     private val session = ControllerSession()
+    private val journal = RequestJournal { android.os.SystemClock.elapsedRealtime() }
+    private val diagnosticSessionId = UUID.randomUUID().toString()
     private val controlProposal = ControlProposal()
     val canRequestControl get() = !authorized && controlProposal.available && pending.values.none { it == "REQUEST_CONTROL" }
     val authorized get() = session.authorized && bluetoothAccess() && bluetoothOn()
@@ -63,6 +66,7 @@ class RemoteModel(private val context: Context) {
     private val devices = linkedMapOf<String, BluetoothDevice>()
     private val connectionPreferences = context.getSharedPreferences("approved-player", Context.MODE_PRIVATE)
     private var connectionPhase = "idle"
+        set(value) { field = value; journal.phase(value) }
     private var discoveryGeneration = 0L
     private val approvalRetry = ApprovalRetry()
     private var approvalCheck: Runnable? = null
@@ -72,9 +76,10 @@ class RemoteModel(private val context: Context) {
     val found get() = devices.values.toList()
     private val ble: BleCentral = BleCentral(context, { status = it; update() }, { devices[it.address] = it; update() }, { beginSetupDeadline(); send("HELLO", bootstrap = true) }, ::receive, phase = ::centralPhaseChanged) {
         cancelSetupDeadline(); cancelApprovalCheck()
-        abandonAssistedPage(); session.lost(); controlProposal.clear(); browseLocations.clear(); queueLocations.clear(); activeBrowseId = null; activeQueueId = null; status = "Disconnected. Cached lists may be stale; reconnect to control."; update()
+        abandonAssistedPage(); journal.abandon(); session.lost(); controlProposal.clear(); browseLocations.clear(); queueLocations.clear(); activeBrowseId = null; activeQueueId = null; status = "Disconnected. Cached lists may be stale; reconnect to control."; update()
     }
     init {
+        journal.phase("idle")
         runCatching {
             if (snapshotFile.length() in 1..262144) {
                 val cached = JSONObject(snapshotFile.readText())
@@ -158,7 +163,7 @@ class RemoteModel(private val context: Context) {
         }
         schedule()
     }
-    fun disconnect() { discoveryGeneration++; ble.stopScan(); cancelApprovalCheck(); abandonAssistedPage(); session.lost(); controlProposal.clear(); browseLocations.clear(); queueLocations.clear(); activeBrowseId = null; activeQueueId = null; ble.disconnect(); status = "Disconnected. Cached lists may be stale; reconnect to control."; update() }
+    fun disconnect() { discoveryGeneration++; ble.stopScan(); cancelApprovalCheck(); abandonAssistedPage(); journal.abandon(); session.lost(); controlProposal.clear(); browseLocations.clear(); queueLocations.clear(); activeBrowseId = null; activeQueueId = null; ble.disconnect(); status = "Disconnected. Cached lists may be stale; reconnect to control."; update() }
     internal fun bluetoothAvailabilityChanged() {
         // Adapter shutdown need not deliver a GATT connection-loss callback.
         // Clear the old session/retries now; enabling the radio only refreshes
@@ -200,6 +205,7 @@ class RemoteModel(private val context: Context) {
         val request = JSONObject().put("v", 1).put("id", id).put("type", type).put("hostEpoch", epoch)
             .put("source", state.optString("source")).put("sourceEpoch", state.optString("sourceEpoch")).put("args", args)
         session.register(id, type)
+        journal.begin(id, type, state.optString("source"))
         if (type == "PLAY_ITEM") assistedPageUse.begin(id, state.optString("source"), state.optString("sourceEpoch"),
             library.optString("revision"), AssistedPageUse.tracks(state.optString("source"), args.optString("item"),
                 assistedBrowsing, args.optString("revision"), library.optString("revision")))
@@ -217,8 +223,8 @@ class RemoteModel(private val context: Context) {
             // Types only: no metadata, identities, arguments or credentials.
             android.util.Log.i("DX340RemoteClient", "QUEUED:$type")
         }
-        catch (e: Exception) { pending.remove(id); retireAssistedPage(id); browseLocations.remove(id); queueLocations.remove(id); status = e.message ?: "Send failed"; update(); return }
-        main.postDelayed({ if (pending.remove(id) != null) { if (type == "AUTHORIZE") { cancelApprovalCheck(); connectionPhase = "failed" }; retireAssistedPage(id); browseLocations.remove(id); queueLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); status = "Reply timed out; outcome unknown. Refresh state before retrying."; update() } }, ReplyBudget.milliseconds(type, args.optString("item")))
+        catch (e: Exception) { journal.finish(id, "send_failed"); pending.remove(id); retireAssistedPage(id); browseLocations.remove(id); queueLocations.remove(id); status = e.message ?: "Send failed"; update(); return }
+        main.postDelayed({ if (pending.remove(id) != null) { journal.finish(id, "timeout"); if (type == "AUTHORIZE") { cancelApprovalCheck(); connectionPhase = "failed" }; retireAssistedPage(id); browseLocations.remove(id); queueLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); status = "Reply timed out; outcome unknown. Refresh state before retrying."; update() } }, ReplyBudget.milliseconds(type, args.optString("item")))
     }
     fun browse(parent: String? = null, page: Int = 0) = send("BROWSE", JSONObject().put("parent", parent ?: JSONObject.NULL).put("page", page)
         .put("revision", if (parent == null) JSONObject.NULL else library.optString("revision", state.optString("sourceEpoch"))))
@@ -252,12 +258,14 @@ class RemoteModel(private val context: Context) {
             if (route == HostReplyDecision.RECONNECT) {
                 disconnect(); connectionPhase = "failed"; status = HostReplyGate.CHANGED_MESSAGE; update(); return
             }
+            // Observe only matched, current-host replies; no payload/identity fields enter the journal.
+            journal.reply(id, type, data.optString("outcome"), data.optString("code"))
             val location = browseLocations[id]
             val queueLocation = queueLocations[id]
             if (type != "ACCEPTED") queueLocations.remove(id)
             if (type != "ACCEPTED" && id.isNotEmpty()) pending.remove(id)
             if (type != "ACCEPTED" && reply.optString("hostEpoch") == epoch) retireAssistedPage(id)
-            if (route == HostReplyDecision.HELLO) { controlProposal.clear(); session.hello(reply.getString("hostEpoch")); authorize(); return }
+            if (route == HostReplyDecision.HELLO) { journal.markTerminalApplied(id); journal.abandon("session_reset"); controlProposal.clear(); session.hello(reply.getString("hostEpoch")); authorize(); return }
             if (type == "ERROR" && reply.optString("hostEpoch") == epoch && operation == "AUTHORIZE" && !authorized) {
                 if (data.optString("code") == "CONTROLLER_BUSY") {
                     ble.pauseReconnection(); cancelApprovalCheck(); connectionPhase = "busy"
@@ -269,7 +277,7 @@ class RemoteModel(private val context: Context) {
                     } else { cancelApprovalCheck(); connectionPhase = "failed" }
                 }
             }
-            if (type == "ERROR") { data.optJSONObject("state")?.takeIf { reply.optString("hostEpoch") == epoch }?.let { applyState(it, false) }; browseLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); if (id == activeQueueId) { queue = JSONArray(); queueRevision = ""; queuePage = JSONObject() }; status = errorMessage(data.optString("code", "Unknown source error")); update(); return }
+            if (type == "ERROR") { data.optJSONObject("state")?.takeIf { reply.optString("hostEpoch") == epoch }?.let { applyState(it, false) }; browseLocations.remove(id); if (id == activeBrowseId) library = JSONObject(); if (id == activeQueueId) { queue = JSONArray(); queueRevision = ""; queuePage = JSONObject() }; status = errorMessage(data.optString("code", "Unknown source error")); journal.markTerminalApplied(id); update(); return }
             if (type == "ACCEPTED") { status = "Waiting for source…"; update(); return }
             if (operation in listOf("AUTHORIZE", "REQUEST_CONTROL") && data.optBoolean("authorized")) { controlProposal.clear(); session.approve(reply.getString("hostEpoch")); cancelSetupDeadline(); cancelApprovalCheck(); rememberApprovedPlayer(); connectionPhase = "connected"; ble.resumeReconnection(); status = "Connected to player" }
             if (reply.optString("hostEpoch") != epoch) { disconnect(); return }
@@ -312,8 +320,22 @@ class RemoteModel(private val context: Context) {
             if (data.optString("outcome") == "observed") status = "Playback state confirmed by source."
             val snapshot = JSONObject().put("state", state).put("sources", sources).put("library", library).toString()
             if (snapshot.toByteArray().size <= 262144) runCatching { snapshotFile.writeText(snapshot) }
+            journal.markTerminalApplied(id)
             update()
         } catch (_: Exception) { disconnect(); status = "Invalid host reply; reconnect."; update() }
+    }
+    /** Deliberate user export only; normal snapshots never contain this journal. */
+    fun diagnostics(): String {
+        val info = context.packageManager.getPackageInfo(context.packageName, 0)
+        return JournalReportJson.encode(journal)
+            .put("modelInstanceId", diagnosticSessionId)
+            .put("app", JSONObject().put("id", context.packageName).put("versionName", info.versionName).put("versionCode", info.longVersionCode))
+            .put("os", JSONObject().put("version", android.os.Build.VERSION.RELEASE).put("api", android.os.Build.VERSION.SDK_INT).put("model", android.os.Build.MODEL))
+            .put("platform", "android").put("authorized", authorized)
+            .put("connectionPhase", connectionSetup.optString("phase"))
+            .put("timingScope", "Native send start to matched decoded reply, including encoding, queued writes and reassembly; not a GATT frame ACK or acoustic measurement.")
+            .put("privacy", "Current model instance only. No music metadata, arguments, Bluetooth identities or credentials. Process restart clears this history.")
+            .toString(2)
     }
     private fun isAssistedReady(snapshot: JSONObject): Boolean {
         val caps = snapshot.optJSONObject("capabilities") ?: return false

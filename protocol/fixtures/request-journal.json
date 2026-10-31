@@ -1,0 +1,448 @@
+[
+  {
+    "name": "first acceptance, terminal and late duplicate",
+    "capacity": 3,
+    "steps": [
+      {
+        "at": 10,
+        "action": "begin",
+        "id": "r1",
+        "operation": "NEXT",
+        "source": "mango"
+      },
+      {
+        "at": 25,
+        "action": "reply",
+        "id": "r1",
+        "type": "ACCEPTED"
+      },
+      {
+        "at": 35,
+        "action": "reply",
+        "id": "r1",
+        "type": "ACCEPTED"
+      },
+      {
+        "at": 50,
+        "action": "reply",
+        "id": "r1",
+        "type": "RESULT",
+        "outcome": "observed"
+      },
+      {
+        "at": 51,
+        "action": "apply",
+        "id": "r1"
+      },
+      {
+        "at": 90,
+        "action": "reply",
+        "id": "r1",
+        "type": "ERROR",
+        "error": "STALE_SOURCE"
+      }
+    ],
+    "expected": {
+      "formatVersion": 1,
+      "clock": "monotonic_ms_relative_to_model",
+      "capacity": 3,
+      "evictedRequests": 0,
+      "evictedConnections": 0,
+      "requests": [
+        {
+          "id": "r1",
+          "operation": "NEXT",
+          "source": "mango",
+          "startedMs": 10,
+          "accepted": true,
+          "acceptedAfterMs": 15,
+          "finishedAfterMs": 40,
+          "result": "result",
+          "error": null,
+          "hostOutcome": "observed",
+          "terminalApplied": true
+        }
+      ],
+      "connections": []
+    }
+  },
+  {
+    "name": "unknown payload-like identifiers are omitted or categorized",
+    "capacity": 3,
+    "steps": [
+      {
+        "at": 5,
+        "action": "begin",
+        "id": "/sdcard/PRIVATE_TRACK.wav",
+        "operation": "NEXT",
+        "source": "mango"
+      },
+      {
+        "at": 10,
+        "action": "begin",
+        "id": "safe-id",
+        "operation": "PRIVATE_TRACK.wav",
+        "source": "PRIVATE_ARTIST"
+      },
+      {
+        "at": 20,
+        "action": "reply",
+        "id": "safe-id",
+        "type": "ERROR",
+        "error": "PRIVATE_TITLE"
+      },
+      {
+        "at": 22,
+        "action": "phase",
+        "phase": "PRIVATE_DEVICE_ADDRESS"
+      }
+    ],
+    "expected": {
+      "formatVersion": 1,
+      "clock": "monotonic_ms_relative_to_model",
+      "capacity": 3,
+      "evictedRequests": 0,
+      "evictedConnections": 0,
+      "requests": [
+        {
+          "id": "safe-id",
+          "operation": "OTHER",
+          "source": "other",
+          "startedMs": 10,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 10,
+          "result": "error",
+          "error": "OTHER",
+          "hostOutcome": "none",
+          "terminalApplied": false
+        }
+      ],
+      "connections": [
+        {
+          "atMs": 22,
+          "phase": "other"
+        }
+      ]
+    }
+  },
+  {
+    "name": "lost accepted mutation and later new read",
+    "capacity": 3,
+    "steps": [
+      {
+        "at": 0,
+        "action": "begin",
+        "id": "play",
+        "operation": "PLAY_ITEM",
+        "source": "apple"
+      },
+      {
+        "at": 2,
+        "action": "reply",
+        "id": "play",
+        "type": "ACCEPTED"
+      },
+      {
+        "at": 7,
+        "action": "abandon",
+        "reason": "connection_lost"
+      },
+      {
+        "at": 8,
+        "action": "phase",
+        "phase": "connecting"
+      },
+      {
+        "at": 9,
+        "action": "reply",
+        "id": "play",
+        "type": "RESULT",
+        "outcome": "dispatched"
+      },
+      {
+        "at": 9,
+        "action": "begin",
+        "id": "read-new",
+        "operation": "GET_STATE",
+        "source": "apple"
+      },
+      {
+        "at": 10,
+        "action": "phase",
+        "phase": "connected"
+      },
+      {
+        "at": 11,
+        "action": "reply",
+        "id": "read-new",
+        "type": "RESULT"
+      }
+    ],
+    "expected": {
+      "formatVersion": 1,
+      "clock": "monotonic_ms_relative_to_model",
+      "capacity": 3,
+      "evictedRequests": 0,
+      "evictedConnections": 0,
+      "requests": [
+        {
+          "id": "play",
+          "operation": "PLAY_ITEM",
+          "source": "apple",
+          "startedMs": 0,
+          "accepted": true,
+          "acceptedAfterMs": 2,
+          "finishedAfterMs": 7,
+          "result": "connection_lost",
+          "error": null,
+          "hostOutcome": "none",
+          "terminalApplied": false
+        },
+        {
+          "id": "read-new",
+          "operation": "GET_STATE",
+          "source": "apple",
+          "startedMs": 9,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 2,
+          "result": "result",
+          "error": null,
+          "hostOutcome": "none",
+          "terminalApplied": false
+        }
+      ],
+      "connections": [
+        {
+          "atMs": 8,
+          "phase": "connecting"
+        },
+        {
+          "atMs": 10,
+          "phase": "connected"
+        }
+      ]
+    }
+  },
+  {
+    "name": "capacity, unknown evicted reply, failure and phase bounds",
+    "capacity": 2,
+    "steps": [
+      {
+        "at": 1,
+        "action": "begin",
+        "id": "a",
+        "operation": "GET_STATE",
+        "source": "mango"
+      },
+      {
+        "at": 2,
+        "action": "begin",
+        "id": "b",
+        "operation": "GET_QUEUE",
+        "source": "mango"
+      },
+      {
+        "at": 3,
+        "action": "begin",
+        "id": "c",
+        "operation": "BROWSE",
+        "source": "apple"
+      },
+      {
+        "at": 4,
+        "action": "reply",
+        "id": "a",
+        "type": "RESULT"
+      },
+      {
+        "at": 5,
+        "action": "finish",
+        "id": "b",
+        "reason": "timeout"
+      },
+      {
+        "at": 6,
+        "action": "finish",
+        "id": "c",
+        "reason": "send_failed"
+      },
+      {
+        "at": 7,
+        "action": "phase",
+        "phase": "connecting"
+      },
+      {
+        "at": 7,
+        "action": "phase",
+        "phase": "connecting"
+      },
+      {
+        "at": 8,
+        "action": "phase",
+        "phase": "connected"
+      },
+      {
+        "at": 9,
+        "action": "phase",
+        "phase": "idle"
+      }
+    ],
+    "expected": {
+      "formatVersion": 1,
+      "clock": "monotonic_ms_relative_to_model",
+      "capacity": 2,
+      "evictedRequests": 1,
+      "evictedConnections": 1,
+      "requests": [
+        {
+          "id": "b",
+          "operation": "GET_QUEUE",
+          "source": "mango",
+          "startedMs": 2,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 3,
+          "result": "timeout",
+          "error": null,
+          "hostOutcome": "none",
+          "terminalApplied": false
+        },
+        {
+          "id": "c",
+          "operation": "BROWSE",
+          "source": "apple",
+          "startedMs": 3,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 3,
+          "result": "send_failed",
+          "error": null,
+          "hostOutcome": "none",
+          "terminalApplied": false
+        }
+      ],
+      "connections": [
+        {
+          "atMs": 8,
+          "phase": "connected"
+        },
+        {
+          "atMs": 9,
+          "phase": "idle"
+        }
+      ]
+    }
+  },
+  {
+    "name": "clock regression never invents negative latency or overwrites first acceptance",
+    "capacity": 2,
+    "steps": [
+      {
+        "at": 10,
+        "action": "begin",
+        "id": "r",
+        "operation": "GET_STATE",
+        "source": "mango"
+      },
+      {
+        "at": 9,
+        "action": "reply",
+        "id": "r",
+        "type": "ACCEPTED"
+      },
+      {
+        "at": 15,
+        "action": "reply",
+        "id": "r",
+        "type": "ACCEPTED"
+      },
+      {
+        "at": 8,
+        "action": "reply",
+        "id": "r",
+        "type": "RESULT"
+      }
+    ],
+    "expected": {
+      "formatVersion": 1,
+      "clock": "monotonic_ms_relative_to_model",
+      "capacity": 2,
+      "evictedRequests": 0,
+      "evictedConnections": 0,
+      "requests": [
+        {
+          "id": "r",
+          "operation": "GET_STATE",
+          "source": "mango",
+          "startedMs": 10,
+          "accepted": true,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": null,
+          "result": "result",
+          "error": null,
+          "hostOutcome": "none",
+          "terminalApplied": false
+        }
+      ],
+      "connections": []
+    }
+  },
+  {
+    "name": "duplicate begin and terminal cannot change original operation",
+    "capacity": 2,
+    "steps": [
+      {
+        "at": 0,
+        "action": "begin",
+        "id": "r",
+        "operation": "GET_STATE",
+        "source": "mango"
+      },
+      {
+        "at": 3,
+        "action": "begin",
+        "id": "r",
+        "operation": "NEXT",
+        "source": "apple"
+      },
+      {
+        "at": 5,
+        "action": "reply",
+        "id": "r",
+        "type": "ERROR",
+        "error": "STALE_SOURCE"
+      },
+      {
+        "at": 8,
+        "action": "finish",
+        "id": "r",
+        "reason": "timeout"
+      }
+    ],
+    "expected": {
+      "formatVersion": 1,
+      "clock": "monotonic_ms_relative_to_model",
+      "capacity": 2,
+      "evictedRequests": 0,
+      "evictedConnections": 0,
+      "requests": [
+        {
+          "id": "r",
+          "operation": "GET_STATE",
+          "source": "mango",
+          "startedMs": 0,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 5,
+          "result": "error",
+          "error": "STALE_SOURCE",
+          "hostOutcome": "none",
+          "terminalApplied": false
+        }
+      ],
+      "connections": []
+    }
+  }
+]

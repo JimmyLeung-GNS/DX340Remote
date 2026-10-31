@@ -37,6 +37,8 @@ class Remote extends ChangeNotifier {
   String? error;
   bool authorized = false;
   bool mutationPending = false;
+  bool exportingDiagnostics = false;
+  String? diagnosticsNotice;
   bool controlRequestAvailable = false;
   bool _dispatchingControl = false;
   Json connectionSetup = {};
@@ -223,6 +225,30 @@ class Remote extends ChangeNotifier {
         notifyListeners();
       }
       return false;
+    }
+  }
+
+  /// Explicit troubleshooting action; never changes playback or connection state.
+  Future<void> exportDiagnostics() async {
+    if (_disposed || exportingDiagnostics) return;
+    exportingDiagnostics = true;
+    diagnosticsNotice = null;
+    notifyListeners();
+    try {
+      final message = await bridge.call('exportDiagnostics');
+      if (message is! String || message.trim().isEmpty) {
+        throw StateError('Missing export result');
+      }
+      if (!_disposed) diagnosticsNotice = message;
+    } catch (issue) {
+      if (!_disposed) {
+        diagnosticsNotice = issue is PlatformException && issue.message != null
+            ? issue.message
+            : 'Could not prepare the connection report. Try again.';
+      }
+    } finally {
+      exportingDiagnostics = false;
+      if (!_disposed) notifyListeners();
     }
   }
 

@@ -182,3 +182,81 @@ public final class Reassembler {
         partials[id] = p; return nil
     }
 }
+
+/// Bounded observations only. Never authorizes, sends or retries a command.
+public final class RequestJournal {
+    private let capacity: Int
+    private let now: () -> Int64
+    private let origin: Int64
+    private struct Entry {
+        let id: String, operation: String, source: String
+        let start: Int64
+        var accepted = false
+        var acceptedAfter: Int64?, finishedAfter: Int64?
+        var result = "pending", outcome = "none"
+        var terminalApplied = false
+        var error: String?
+    }
+    private var entries: [String: Entry] = [:]
+    private var order: [String] = []
+    private var connections: [[String: Any]] = []
+    private var evictedRequests: Int64 = 0, evictedConnections: Int64 = 0
+    private static let clockOrigin = ContinuousClock.now
+    public static func monotonicMilliseconds() -> Int64 {
+        let elapsed = clockOrigin.duration(to: ContinuousClock.now).components
+        return elapsed.seconds * 1_000 + elapsed.attoseconds / 1_000_000_000_000_000
+    }
+    public init(capacity: Int = 256, now: @escaping () -> Int64 = RequestJournal.monotonicMilliseconds) {
+        precondition((1...512).contains(capacity)); self.capacity = capacity; self.now = now; origin = now()
+    }
+    private func elapsed(_ end: Int64, _ start: Int64) -> Int64? { end >= start && start >= 0 ? end - start : nil }
+    public func begin(id: String, operation: String, source: String) {
+        guard !id.isEmpty, id.utf8.count <= 64, id.utf8.allSatisfy({ (48...57).contains($0) || (65...90).contains($0) || (97...122).contains($0) || $0 == 45 || $0 == 95 }), entries[id] == nil else { return }
+        if order.count == capacity { entries.removeValue(forKey: order.removeFirst()); evictedRequests += 1 }
+        order.append(id); entries[id] = Entry(id: id, operation: Self.operations.contains(operation) ? operation : "OTHER", source: Self.sources.contains(source) ? source : "other", start: now())
+    }
+    public func phase(_ value: String) {
+        let phase = Self.phases.contains(value) ? value : "other"
+        guard connections.last?["phase"] as? String != phase else { return }
+        if connections.count == capacity { connections.removeFirst(); evictedConnections += 1 }
+        connections.append(["atMs": elapsed(now(), origin) as Any? ?? NSNull(), "phase": phase])
+    }
+    @discardableResult public func reply(id: String, type: String, outcome: String = "", error: String = "") -> [String: Any]? {
+        guard var entry = entries[id], entry.result == "pending" else { return nil }
+        if type == "ACCEPTED" {
+            guard !entry.accepted else { return nil }
+            entry.accepted = true; entry.acceptedAfter = elapsed(now(), entry.start)
+        } else {
+            entry.finishedAfter = elapsed(now(), entry.start)
+            entry.result = ["HELLO", "RESULT"].contains(type) ? "result" : type == "ERROR" ? "error" : "other_reply"
+            entry.outcome = ["observed", "dispatched"].contains(outcome) ? outcome : "none"
+            entry.error = type == "ERROR" ? (Self.errors.contains(error) ? error : "OTHER") : nil
+        }
+        entries[id] = entry; return snapshot(entry)
+    }
+    public func markTerminalApplied(id: String) {
+        guard var entry = entries[id], ["result", "error", "other_reply"].contains(entry.result) else { return }
+        entry.terminalApplied = true; entries[id] = entry
+    }
+    @discardableResult public func finish(id: String, reason: String) -> [String: Any]? {
+        guard var entry = entries[id], entry.result == "pending" else { return nil }
+        entry.result = Self.endings.contains(reason) ? reason : "other"; entry.finishedAfter = elapsed(now(), entry.start)
+        entries[id] = entry; return snapshot(entry)
+    }
+    @discardableResult public func abandon(reason: String = "connection_lost") -> [[String: Any]] { order.compactMap { finish(id: $0, reason: reason) } }
+    private func snapshot(_ e: Entry) -> [String: Any] {
+        ["id": e.id, "operation": e.operation, "source": e.source, "startedMs": elapsed(e.start, origin) as Any? ?? NSNull(),
+         "accepted": e.accepted, "acceptedAfterMs": e.acceptedAfter as Any? ?? NSNull(), "finishedAfterMs": e.finishedAfter as Any? ?? NSNull(),
+         "result": e.result, "terminalApplied": e.terminalApplied, "hostOutcome": e.outcome, "error": e.error as Any? ?? NSNull()]
+    }
+    public func report() -> [String: Any] {
+        ["formatVersion": 1, "clock": "monotonic_ms_relative_to_model", "capacity": capacity,
+         "evictedRequests": evictedRequests, "evictedConnections": evictedConnections,
+         "requests": order.compactMap { entries[$0].map(snapshot) }, "connections": connections]
+    }
+    private static let operations: Set<String> = ["HELLO", "AUTHORIZE", "REQUEST_CONTROL", "GET_STATE", "GET_QUEUE", "GET_ARTWORK", "GET_CAPABILITIES", "LIST_SOURCES", "SUBSCRIBE_STATE", "SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "SELECT_SOURCE", "PLAY_ITEM", "PLAY_QUEUE_ITEM", "ADJUST_VOLUME", "BROWSE", "SEARCH", "SET_SHUFFLE", "SET_REPEAT"]
+    private static let sources: Set<String> = ["mango", "apple", "none", ""]
+    private static let errors: Set<String> = ["AUTHORIZATION_DENIED", "LOCAL_APPROVAL_REQUIRED", "CONTROLLER_BUSY", "STALE_HOST", "STALE_CONTROL", "CONTROL_REQUEST_USED", "STALE_SOURCE", "SOURCE_UNAVAILABLE", "SOURCE_NOT_READY", "SOURCE_BUSY", "UNSUPPORTED", "STALE_LIBRARY", "EXPIRED_ITEM", "STALE_QUEUE", "STALE_ARTWORK", "INVALID_REQUEST", "BAD_REQUEST", "MALFORMED_REQUEST", "PROTOCOL_MISMATCH", "STALE_VOLUME", "VOLUME_AT_BOUNDARY", "VOLUME_PROFILE_CHANGED", "VOLUME_VERIFICATION_REQUIRED", "VOLUME_SOURCE_NOT_READY", "UI_PERMISSION_REQUIRED", "UI_SCREEN_UNLOCK_REQUIRED", "UI_FOREGROUND_REQUIRED", "UI_SETUP_REQUIRED", "UI_UNEXPECTED_SCREEN", "UI_STORAGE_CONTEXT_REQUIRED", "UI_VERSION_UNVERIFIED", "UI_ACTIVE_PAGE_UNVERIFIED", "UI_TREE_CHANGED", "UI_ACTION_TIMEOUT", "UI_ACTION_INTERRUPTED", "UI_MODE_DISABLED", "UI_BUSY", "RESPONSE_TOO_LARGE"]
+    private static let phases: Set<String> = ["idle", "preparing", "searching", "choosing", "connecting", "approval", "busy", "connected", "permission", "bluetoothOff", "failed"]
+    private static let endings: Set<String> = ["timeout", "send_failed", "connection_lost", "session_reset"]
+}

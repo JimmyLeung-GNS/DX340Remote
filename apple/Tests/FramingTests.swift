@@ -2,6 +2,38 @@ import XCTest
 @testable import DXProtocol
 
 final class FramingTests: XCTestCase {
+    func testSharedRequestJournalFixtures() throws {
+        let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        let cases = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("protocol/fixtures/request-journal.json"))) as! [[String: Any]]
+        for item in cases {
+            var clock: Int64 = 0
+            let journal = RequestJournal(capacity: item["capacity"] as! Int, now: { clock })
+            for step in item["steps"] as! [[String: Any]] {
+                clock = (step["at"] as! NSNumber).int64Value
+                switch step["action"] as! String {
+                case "begin": journal.begin(id: step["id"] as! String, operation: step["operation"] as! String, source: step["source"] as! String)
+                case "reply": journal.reply(id: step["id"] as! String, type: step["type"] as! String, outcome: step["outcome"] as? String ?? "", error: step["error"] as? String ?? "")
+                case "apply": journal.markTerminalApplied(id: step["id"] as! String)
+                case "finish": journal.finish(id: step["id"] as! String, reason: step["reason"] as! String)
+                case "abandon": journal.abandon(reason: step["reason"] as! String)
+                case "phase": journal.phase(step["phase"] as! String)
+                default: XCTFail("Unknown fixture action")
+                }
+            }
+            XCTAssertTrue(NSDictionary(dictionary: journal.report()).isEqual(to: item["expected"] as! [AnyHashable: Any]), item["name"] as! String)
+        }
+    }
+    func testRequestJournalStaysBoundedAndSnapshotsDoNotMutate() throws {
+        var clock: Int64 = 100; let journal = RequestJournal(capacity: 128, now: { clock })
+        journal.begin(id: "first", operation: "NEXT", source: "mango")
+        let before = journal.report()
+        for i in 0..<10000 { clock += 1; journal.begin(id: "read-\(i)", operation: "GET_STATE", source: "mango"); journal.reply(id: "read-\(i)", type: "RESULT") }
+        let report = journal.report()
+        XCTAssertEqual((report["requests"] as! [[String: Any]]).count, 128)
+        XCTAssertEqual(report["evictedRequests"] as! Int64, 9873)
+        XCTAssertNil(journal.reply(id: "first", type: "RESULT"))
+        XCTAssertEqual((before["requests"] as! [[String: Any]])[0]["result"] as? String, "pending")
+    }
     func testChangedHostsCannotHideBehindReplyStatusAndLateUnknownRepliesAreIgnored() throws {
         let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
         let cases = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("protocol/fixtures/host-reply-gate.json"))) as! [[String: Any]]

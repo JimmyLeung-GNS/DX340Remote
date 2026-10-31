@@ -20,6 +20,7 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler {
     private var connectionService: RemoteService? = null
     private var sink: EventChannel.EventSink? = null
     private var bound = false
+    private var exportingDiagnostics = false
     private var permissionReply: MethodChannel.Result? = null
     private val operations = setOf("GET_STATE", "GET_QUEUE", "SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "SELECT_SOURCE", "PLAY_ITEM", "PLAY_QUEUE_ITEM", "ADJUST_VOLUME")
     private val serviceConnection = object : ServiceConnection {
@@ -51,6 +52,23 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler {
                 if (call.method == "captureTab") { result.success(if (applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE != 0) intent.getStringExtra("captureTab") else null); return@setMethodCallHandler }
                 val remote = model ?: error("Bluetooth service is starting. Try again in a moment.")
                 when (call.method) {
+                    "diagnostics" -> { result.success(remote.diagnostics()); return@setMethodCallHandler }
+                    "exportDiagnostics" -> {
+                        if (exportingDiagnostics) { result.error("BUSY", "A connection report is already being prepared.", null); return@setMethodCallHandler }
+                        val report = remote.diagnostics()
+                        val ownApk = applicationInfo.sourceDir
+                        exportingDiagnostics = true
+                        // Snapshot on main; file I/O never delays BLE callbacks or source controls.
+                        Thread {
+                            try {
+                                val location = ConnectionReportExport.save(contentResolver, report, ownApk)
+                                runOnUiThread { exportingDiagnostics = false; result.success("Saved to $location") }
+                            } catch (_: Exception) {
+                                runOnUiThread { exportingDiagnostics = false; result.error("REPORT_SAVE", "Could not save the connection report. Check storage space and try again.", null) }
+                            }
+                        }.start()
+                        return@setMethodCallHandler
+                    }
                     "scan" -> { requireBluetoothPermission(); remote.scan() }
                     "connectPlayer" -> {
                         requireBluetoothPermission()

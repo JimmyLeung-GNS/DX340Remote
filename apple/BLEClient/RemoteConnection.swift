@@ -11,6 +11,8 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     var devices: [CBPeripheral] = []
     var authorized = false
     private var controlProposal = ControlProposal()
+    private let journal = RequestJournal()
+    private let diagnosticSessionId = UUID().uuidString
     var canRequestControl: Bool { !authorized && controlProposal.available && !pending.values.contains("REQUEST_CONTROL") }
     var state: [String: Any] = [:]
     var stateSampleId = ""
@@ -39,7 +41,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     private var reconnectAttempts = 0
     private var connectionTimeout: Task<Void, Never>?
     private var connectionGeneration = 0
-    private var connectionPhase = "idle"
+    private var connectionPhase = "idle" { didSet { journal.phase(connectionPhase) } }
     private var servicesInvalidated = false
     private var pendingQuickConnect = false
     private var discoveryGeneration = 0
@@ -75,6 +77,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
     private var assembler = Reassembler()
     override init() {
         super.init()
+        journal.phase("idle")
         if let bytes = try? Data(contentsOf: snapshotURL()), bytes.count <= 262144, let saved = try? JSONSerialization.jsonObject(with: bytes) as? [String: Any] {
             state = saved["state"] as? [String: Any] ?? [:]; sources = saved["sources"] as? [[String: Any]] ?? []; library = saved["library"] as? [String: Any] ?? [:]
             status = "Cached metadata is stale. Connect to DX340 before controlling playback."
@@ -176,7 +179,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         if let p = peripheral { manager.cancelPeripheralConnection(p) }
         clearConnection(); status = "Disconnected. Cached lists may be stale."
     }
-    private func clearConnection() { stopDiscovery(); cancelApprovalCheck(); servicesInvalidated = false; connectionPhase = "idle"; abandonAssistedPage(); cancelSetupDeadline(); setupExpiryNotice = nil; connectionGeneration += 1; connectionTimeout?.cancel(); connectionTimeout = nil; writeTimeout?.cancel(); writeTimeout = nil; authorized = false; controlProposal.clear(); assistedPageUse.clear(); rx = nil; tx = nil; writing = false; writes = []; pending = [:]; browseLocations = [:]; queueLocations = [:]; activeBrowseId = nil; activeQueueId = nil; hostEpoch = ""; assembler.clear() }
+    private func clearConnection() { journal.abandon(); stopDiscovery(); cancelApprovalCheck(); servicesInvalidated = false; connectionPhase = "idle"; abandonAssistedPage(); cancelSetupDeadline(); setupExpiryNotice = nil; connectionGeneration += 1; connectionTimeout?.cancel(); connectionTimeout = nil; writeTimeout?.cancel(); writeTimeout = nil; authorized = false; controlProposal.clear(); assistedPageUse.clear(); rx = nil; tx = nil; writing = false; writes = []; pending = [:]; browseLocations = [:]; queueLocations = [:]; activeBrowseId = nil; activeQueueId = nil; hostEpoch = ""; assembler.clear() }
     private func cancelSetupDeadline() { setupTimeout?.cancel(); setupTimeout = nil; setupDeadline.clear() }
     private func beginSetupDeadline() {
         guard !setupDeadline.active else { return }
@@ -287,10 +290,11 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         guard !mutations.contains(type) || !mutationPending else { status = "Wait for the current playback action to finish."; return }
         let id = UUID().uuidString
         let request: [String: Any] = ["v": 1, "id": id, "type": type, "hostEpoch": hostEpoch, "source": state["source"] ?? "", "sourceEpoch": state["sourceEpoch"] ?? "", "args": args]
+        journal.begin(id: id, operation: type, source: state["source"] as? String ?? "")
         do {
             let data = try JSONSerialization.data(withJSONObject: request, options: [.sortedKeys])
             let frames = try Wire.frames(data, capacity: min(512, p.maximumWriteValueLength(for: .withResponse)), id: serial)
-            guard writes.count + frames.count <= 12000 else { status = "Too many queued messages."; return }
+            guard writes.count + frames.count <= 12000 else { journal.finish(id: id, reason: "send_failed"); status = "Too many queued messages."; return }
             serial &+= 1; pending[id] = type
             if type == "PLAY_ITEM" {
                 assistedPageUse.begin(id: id, source: state["source"] as? String ?? "", epoch: state["sourceEpoch"] as? String ?? "",
@@ -305,8 +309,8 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
             }
             writes.append(contentsOf: frames); pump()
             let replyBudget = ReplyBudget.milliseconds(type, item: args["item"] as? String)
-            Task { try? await Task.sleep(for: .milliseconds(replyBudget)); if pending.removeValue(forKey: id) != nil { if type == "AUTHORIZE" { cancelApprovalCheck(); connectionPhase = "failed" }; retireAssistedPage(id); browseLocations[id] = nil; queueLocations[id] = nil; if id == activeBrowseId { library = [:] }; status = "Reply timed out; outcome unknown. Refresh before retrying." } }
-        } catch { status = "Cannot encode Bluetooth message." }
+            Task { try? await Task.sleep(for: .milliseconds(replyBudget)); if pending.removeValue(forKey: id) != nil { journal.finish(id: id, reason: "timeout"); if type == "AUTHORIZE" { cancelApprovalCheck(); connectionPhase = "failed" }; retireAssistedPage(id); browseLocations[id] = nil; queueLocations[id] = nil; if id == activeBrowseId { library = [:] }; status = "Reply timed out; outcome unknown. Refresh before retrying." } }
+        } catch { journal.finish(id: id, reason: "send_failed"); status = "Cannot encode Bluetooth message." }
     }
     private func pump() {
         guard !writing, !writes.isEmpty, let p = peripheral, let rx else { return }
@@ -348,6 +352,16 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
             library["invalidated"] = true
         }
     }
+    /// User-initiated export only; excluded from the ordinary observed Flutter snapshot.
+    func diagnostics() throws -> Data {
+        var report = journal.report()
+        report["modelInstanceId"] = diagnosticSessionId
+        report["platform"] = "ios"; report["authorized"] = authorized
+        report["connectionPhase"] = connectionSetup["phase"]
+        report["timingScope"] = "Native send start to matched decoded reply, including encoding, queued writes and reassembly; not a GATT frame ACK or acoustic measurement."
+        report["privacy"] = "Current model instance only. No music metadata, arguments, Bluetooth identities or credentials. Process restart clears this history."
+        return try JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted, .sortedKeys])
+    }
     private func receive(_ value: Data) throws {
         if expireSetupIfNeeded() { return }
         guard let reply = try JSONSerialization.jsonObject(with: value) as? [String: Any], reply["v"] as? Int == 1,
@@ -366,11 +380,12 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
             disconnect(); connectionPhase = "failed"; setupExpiryNotice = HostReplyGate.changedMessage
             status = HostReplyGate.changedMessage; return
         }
+        journal.reply(id: id, type: type, outcome: data["outcome"] as? String ?? "", error: data["code"] as? String ?? "")
         let queueLocation = queueLocations[id]
         if type != "ACCEPTED" { queueLocations[id] = nil }
         if type != "ACCEPTED" { pending[id] = nil }
         if type != "ACCEPTED", reply["hostEpoch"] as? String == hostEpoch { retireAssistedPage(id) }
-        if route == .hello { controlProposal.clear(); hostEpoch = reply["hostEpoch"] as? String ?? ""; authorize(); return }
+        if route == .hello { journal.markTerminalApplied(id: id); controlProposal.clear(); hostEpoch = reply["hostEpoch"] as? String ?? ""; authorize(); return }
         if type == "ERROR", reply["hostEpoch"] as? String == hostEpoch, operation == "AUTHORIZE", !authorized {
             if data["code"] as? String == "CONTROLLER_BUSY" {
                 wantsConnection = false; cancelApprovalCheck(); connectionPhase = "busy"
@@ -381,7 +396,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
                 else { cancelApprovalCheck(); connectionPhase = "failed" }
             }
         }
-        if type == "ERROR" { if reply["hostEpoch"] as? String == hostEpoch, let fresh = data["state"] as? [String: Any] { applyState(fresh, notifyLibraryChange: false) }; browseLocations[id] = nil; if id == activeBrowseId { library = [:] }; if id == activeQueueId { queue = []; queueRevision = ""; queuePage = [:] }; status = errorMessage(data["code"] as? String ?? "Source error"); return }
+        if type == "ERROR" { if reply["hostEpoch"] as? String == hostEpoch, let fresh = data["state"] as? [String: Any] { applyState(fresh, notifyLibraryChange: false) }; browseLocations[id] = nil; if id == activeBrowseId { library = [:] }; if id == activeQueueId { queue = []; queueRevision = ""; queuePage = [:] }; status = errorMessage(data["code"] as? String ?? "Source error"); journal.markTerminalApplied(id: id); return }
         if type == "ACCEPTED" { status = "Waiting for source…"; return }
         guard reply["hostEpoch"] as? String == hostEpoch else { disconnect(); return }
         if ["AUTHORIZE", "REQUEST_CONTROL"].contains(operation ?? ""), data["authorized"] as? Bool == true { controlProposal.clear(); authorized = true; cancelSetupDeadline(); cancelApprovalCheck(); rememberApprovedPlayer(); connectionPhase = "connected"; wantsConnection = true; status = "Connected to player" }
@@ -423,6 +438,7 @@ final class RemoteConnection: NSObject, @preconcurrency CBCentralManagerDelegate
         if data["outcome"] as? String == "dispatched" { status = "Sent to player; waiting for observed playback."; send("GET_STATE") }
         if data["outcome"] as? String == "observed" { status = "Playback state confirmed by source." }
         if let snapshot = try? JSONSerialization.data(withJSONObject: ["state": state, "sources": sources, "library": library]), snapshot.count <= 262144 { try? snapshot.write(to: snapshotURL(), options: .atomic) }
+        journal.markTerminalApplied(id: id)
     }
     private func applyState(_ new: [String: Any], notifyLibraryChange: Bool = true) {
         func context(_ value: [String: Any]) -> BrowseContext {
