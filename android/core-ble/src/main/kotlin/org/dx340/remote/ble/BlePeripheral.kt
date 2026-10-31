@@ -22,7 +22,10 @@ class BlePeripheral(
     private val status: (String) -> Unit,
     private val previouslyApproved: (BluetoothDevice) -> Boolean,
     private val disconnected: (BluetoothDevice) -> Unit,
-    private val message: (BluetoothDevice, ByteArray) -> Unit
+    private val message: (BluetoothDevice, ByteArray) -> Unit,
+    // Production callers leave this false. The host debug variant can exercise
+    // the real deadline after a deliberately ignored successful callback.
+    private val ignoreCompletion: (Any, Boolean) -> Boolean = { _, _ -> false }
 ) {
     private class Link(val device: BluetoothDevice) {
         var subscribed = false
@@ -132,6 +135,10 @@ class BlePeripheral(
         } }
         override fun onNotificationSent(device: BluetoothDevice, code: Int) { main.post {
             val submitted = outgoing.inFlightPeer?.takeIf { it.device == device } ?: return@post
+            if (ignoreCompletion(submitted, code == BluetoothGatt.GATT_SUCCESS)) {
+                status("DIAGNOSTIC_CALLBACK_IGNORED: injected missed indication completion; awaiting existing deadline")
+                return@post
+            }
             outgoing.complete(submitted, if (code == BluetoothGatt.GATT_SUCCESS) null else "INDICATION_FAILED:$code")
         } }
     }
@@ -159,6 +166,10 @@ class BlePeripheral(
         link.expiry = Runnable { if (peers[link.device] === link && !link.controlling) closeLink(link, "BOOTSTRAP_TIMEOUT") }.also { main.postDelayed(it, delay) }
     }
     fun discardQueued(device: BluetoothDevice) { peers[device]?.let(outgoing::discardQueued) }
+    /** Opaque link identity; never grants access or alters the indication queue. */
+    fun idleControllerToken(device: BluetoothDevice): Any? = peers[device]?.takeIf {
+        server != null && it.controlling && it.subscribed && outgoing.pendingCount == 0
+    }
     fun send(device: BluetoothDevice, bytes: ByteArray, lowPriority: Boolean = false) {
         val link = peers[device]?.takeIf { it.subscribed } ?: return
         outgoing.enqueue(link, Wire.frames(bytes, link.capacity, link.serial++ and 65535), lowPriority)

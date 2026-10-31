@@ -28,7 +28,8 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
             if (finished) return
             finished = true
             try {
-                val report = JSONObject().put("kind", "physical-own-accessibility-adapter-debug-probe-no-ble")
+                val report = JSONObject().put("kind", if (intent.getStringExtra("operation") == "ARM_MISSED_INDICATION_CALLBACK")
+                    "debug-injected-missed-indication-callback-arm-only" else "physical-own-accessibility-adapter-debug-probe-no-ble")
                     .put("time", System.currentTimeMillis()).put("operation", intent.getStringExtra("operation") ?: "BROWSE")
                     .put("phase", "FINISHED").put("requestedSource", intent.getStringExtra("source") ?: "com.apple.android.music")
                     .put("elapsedMs", android.os.SystemClock.elapsedRealtime() - startedAt)
@@ -54,12 +55,21 @@ class DebugUiProbeReceiver : BroadcastReceiver() {
         try {
             val sources = HostService.instance?.sources ?: return finish(null, "START_COMPANION_FIRST")
             require(!asynchronous || reportTag != null) { "REPORT_TAG_REQUIRED" }
-            sources.select(intent.getStringExtra("source") ?: "com.apple.android.music")
             fun requirePausedSources() {
                 val states = sources.observedSources()
                 require(states.length() == org.dx340.remote.sources.SourceRegistry.PACKAGES.size &&
                     (0 until states.length()).all { states.getJSONObject(it).optInt("playbackState") in listOf(1, 2) }) { "PAUSE_BOTH_SOURCES_FIRST" }
             }
+            if (operation == "ARM_MISSED_INDICATION_CALLBACK") {
+                require(reportTag != null) { "REPORT_TAG_REQUIRED" }
+                requirePausedSources()
+                require(intent.getStringExtra("source") == sources.selected) { "INVALID_SOURCE" }
+                val host = HostService.instance ?: return finish(null, "START_COMPANION_FIRST")
+                val armed = host.armMissedIndicationCallback(intent.getStringExtra("hostEpoch") ?: "")
+                return finish(JSONObject().put("armed", armed).put("hostEpoch", host.epoch)
+                    .put("expiresAfterMs", 20000).put("playbackDispatched", false), if (armed) null else "DIAGNOSTIC_NOT_IDLE_OR_UNAVAILABLE")
+            }
+            sources.select(intent.getStringExtra("source") ?: "com.apple.android.music")
             fun storageDiagnostic() = sources.storageDiagnostic()
                 .put("appleUi", AppleMusicAccessibilityService.instance?.libraryDiagnostic() ?: JSONObject.NULL)
                 .put("mangoUi", MangoAccessibilityService.instance?.libraryDiagnostic() ?: JSONObject.NULL)

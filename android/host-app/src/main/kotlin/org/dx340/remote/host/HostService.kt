@@ -48,6 +48,7 @@ class HostService : Service() {
     private var started = false
     private val radio = HostRadioRecovery()
     private val transportRecovery = HostTransportRecovery()
+    private val transportFaults = HostTransportFaults(SystemClock::elapsedRealtime)
     private var peripheralGeneration = 0L
     private var transportRecoveryTask: Runnable? = null
     val transportNeedsRestart get() = started && (!ble.isRunning || status.startsWith("BLE_START_FAILED") ||
@@ -87,12 +88,24 @@ class HostService : Service() {
                 if (text.startsWith("BLE_REPLY_TIMEOUT")) recoverClosedTransport(generation)
             }
         }, { approved.contains(it.address) }, { device ->
+            transportFaults.clear()
             authorization.revoke(device.address)
             if (authenticated == device) authenticated = null
             if (pending == device) pending = null
             requestWindows.remove(device.address)
             observer?.invoke()
-        }, ::receive)
+        }, ::receive, transportFaults::ignoreCompletion)
+    }
+
+    internal fun armMissedIndicationCallback(expectedEpoch: String): Boolean {
+        require(expectedEpoch == epoch) { "STALE_HOST" }
+        val device = authenticated ?: return false
+        if (instance !== this || !started || !HostControlStore(this).enabled || !radioOn() ||
+            authorization.current(device.address) == null || !approved.contains(device.address)) return false
+        val token = ble.idleControllerToken(device) ?: return false
+        if (!transportFaults.arm(token)) return false
+        record("DIAGNOSTIC_CALLBACK_ARMED: one successful callback on current idle controller; expires in 20 seconds")
+        return true
     }
 
     private fun radioOn() = HostControlStore.permissionsGranted(this) && runCatching {
@@ -118,6 +131,7 @@ class HostService : Service() {
     }
 
     private fun clearTransportAuthorization() {
+        transportFaults.clear()
         authorization.clear(); authenticated = null; pending = null
         requestWindows.clear(); main.removeCallbacks(pushState)
         // Preserve command ledgers and old control grants: an old mutation ID
