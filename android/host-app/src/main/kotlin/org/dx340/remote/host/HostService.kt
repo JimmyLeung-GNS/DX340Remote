@@ -72,8 +72,8 @@ class HostService : Service() {
         if (Build.VERSION.SDK_INT >= 33) registerReceiver(bonds, events, Context.RECEIVER_EXPORTED) else registerReceiver(bonds, events)
     }
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        if (intent?.action == "STOP") { stopSelf(); return START_NOT_STICKY }
-        if (checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED || checkSelfPermission(Manifest.permission.BLUETOOTH_ADVERTISE) != PackageManager.PERMISSION_GRANTED) { stopSelf(); return START_NOT_STICKY }
+        val start = HostControlStore(this).choice().resolve(intent?.action, HostControlStore.permissionsGranted(this))
+        if (start == HostControlChoice.Start.STOP) { stopSelf(); return START_NOT_STICKY }
         if (!started) {
             val bonded = runCatching {
                 getSystemService(BluetoothManager::class.java).adapter?.takeIf { it.isEnabled }?.bondedDevices?.map { it.address }?.toSet()
@@ -90,7 +90,12 @@ class HostService : Service() {
             sources.start()
             runCatching { ble.start() }.onFailure { record("BLE_START_FAILED:${it.message}") }
         }
-        when (intent?.action) { "PAIR" -> openPairing(); "PROBE" -> { sources.refresh(); sources.probeBrowsers(); export() } }
+        when (start) {
+            HostControlChoice.Start.PAIR -> openPairing()
+            HostControlChoice.Start.PROBE -> { sources.refresh(); sources.probeBrowsers(); export() }
+            else -> Unit
+        }
+        if (intent?.action == "RESTORE") record("PACKAGE_UPDATE_RECOVERED: saved phone control enabled; fresh authorization required")
         if (intent == null) record("SERVICE_RECOVERED: Bluetooth availability restored; fresh authorization required")
         // Recover an enabled remote after process loss without redelivering PAIR,
         // PROBE or a playback action. Explicit Stop and permission loss exit above.

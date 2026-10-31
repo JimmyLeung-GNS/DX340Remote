@@ -88,7 +88,11 @@ class MainActivity : Activity() {
         lateinit var advanced: LinearLayout
         val advancedToggle = button("Show advanced controls") { showAdvanced = !showAdvanced; advanced.visibility = if (showAdvanced) View.VISIBLE else View.GONE; (it as Button).text = if (showAdvanced) "Hide advanced controls" else "Show advanced controls" }
         advanced = group()
-        button("Stop Bluetooth remote", advanced) { stopService(Intent(this, HostService::class.java)); content.postDelayed({ attach(); refresh() }, 500) }
+        button("Stop Bluetooth remote", advanced) {
+            HostControlStore(this).setEnabled(false)
+            stopService(Intent(this, HostService::class.java))
+            content.postDelayed({ attach(); refresh() }, 500)
+        }
         button("Probe source capabilities", advanced) { start("PROBE") }
         button("Show / hide technical diagnostics", advanced) { showDiagnostics = !showDiagnostics; refresh() }
         button("Export diagnostics", advanced) {

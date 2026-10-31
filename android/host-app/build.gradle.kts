@@ -6,5 +6,6 @@ android {
 }
 dependencies { implementation(project(":core-protocol")); implementation(project(":core-ble")); implementation(project(":source-adapters")); implementation(project(":library-cache")) }
 dependencies { androidTestImplementation("androidx.media3:media3-session:1.8.0") }
+dependencies { testImplementation("junit:junit:4.13.2") }
 
 apply(from = rootProject.file("development-signing.gradle"))
