@@ -1,6 +1,18 @@
 # Implementation status
 
-## Current checkpoint —31 October2026,09:00 HKT
+## Current checkpoint —31 October2026,09:17 HKT
+
+Full goal **ACTIVE/incomplete**. Product code remains53229582; latest checkpoint documentation is on the current branch. Preserve newer work and keep the original4df objective snapshot historical.
+
+- **Current physical regressions VERIFIED:** Pixel6b Nearby Devices denial/regrant, background Bluetooth-off/on and controlled Companion process SIGKILL/recovery. The permission case verifies OS termination for revoked access, disabled controls, exact grant/flag restoration and saved-grant recovery. Radio-off clears foreground/started state with Settings actually in front and the same PID; radio-on stays idle until a deliberate Connect. [Report and adjacent JSON](test-results/2026-10-31-current-recovery-regression.md).
+- **Process-loss scope:** own-UID SIGKILL changes Companion PID/host epoch. Reopening Companion and choosing Enable phone control locally was required; the Pixel then automatically rediscovered/reauthorized without another phone Connect/approval, retaining its PID. One bootstrap connection closed before the next approval. Host event timestamps span21.203seconds from advertising to approval; this does not pass15-second range recovery or unattended host restart.
+- **Reads and cleanup:** all three state-request UI checks stayed authorized without observed timeout beyond the12-second reply budget, followed by normal Disconnect foreground/started cleanup. No decoded terminal packet/ACK/p95 timing was captured, no physical mutation was in flight and no playback/volume command was sent.
+- **Preserved and installed:** exact original-signer installed APKs were re-pulled: Pixel6b7e379d…/Companion491dbbff…, full hashes in the reports. All4 host preferences, Pixel/JIMMYAH approvals, exposed bond identities/types, radio/font/theme settings and phone runtime flags match preflight. Browsing modesON and both services bound after process restart; both source sessions still paused37/headset(4), proof disabled. Pixel normally disconnected, host enabled. No observer, emulator or local build running.
+- **Earlier verification retained:** source53229582 Android168 JVM/native-reference/shared builds/lint, Apple17 Swift/67 Flutter/both terminal SUCCESS archives, scoped F1/icon reviews and the56-sample1802.562-second USB/Awake paused background check retain their recorded scopes. No product code changed and unrelated checks were not rerun this turn. Physical iPhone/full T05/radio/audio acceptance is not supplied by those proxies.
+
+Next independent work: correct Android's timeout hint to check Companion/phone control rather than suggesting another pairing window for an approved player. Then continue calls/in-flight/range/full T12, screen-off pause/resume, physical iPhone/Mac signing, complete source/audio/format/SD/output/latency/battery/walking/two-controller/Watch requirements. Keep exact-package evidence and failures separate. A new owner-dependent long observation requires fresh availability; do not reuse the agreement for the completed run. Preserve grants; no new PC revocation test. Follow automatic device-switch handoff when explicitly requested.
+
+## Prior checkpoint —31 October2026,09:00 HKT
 
 Full goal **ACTIVE/incomplete**. Latest code-bearing checkpoint is `53229582b5d4ad04a1c9ad739b38575c2f4aa9ed`; inspect actual HEAD/remote and preserve newer work. The original4df objective snapshot and older dated paragraphs below are historical.
 
