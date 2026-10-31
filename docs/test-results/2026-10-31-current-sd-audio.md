@@ -1,0 +1,17 @@
+# Current phone: offline Apple selection after SD check — 31 October 2026
+
+**VERIFIED owner-audible selection outside the immediately preceding full queue. Full goal ACTIVE/incomplete.** [Versions, decoded receipts and raw evidence hashes](2026-10-31-current-sd-audio.json).
+
+Pixel9a Android16/API36 CP1A.260405.005 runs original-signer Remote0.2.0/code2, APK `ce47b14caa3b78c6e482387a971bc3efc80fdc7539845a7cb01b5c55daa614f2`, source25ed62a. Unchanged DX340 Android13/API33 eng.iBasso.20260812.181952 runs Companion0.1.0/code1, APK `82ad322f6f804c224603dde6668cb2f34c1a7de83b974edbfc4dec5245c721a5`, sourcefa60705; Apple Music6.5.3/code1599 and Mango4.1.37/code240.
+
+Immediately before this stage, the [read-only Apple Downloads chooser](2026-10-31-seek-freshness.md) confirms **SD Card** selected, Device Storage unselected,237GB downloaded/272GB free. No storage option, mount, source data, download file or network configuration is changed. This destination preference does not prove integrity of all237GB.
+
+The actual Pixel reconnects using its retained approval, selects Apple and opens Library → Browse source library → Downloaded/Songs. Before selecting the first song, a read-only host test adapter reads the **entire21-item current queue** and verifies **A・RA・SHI absent**. The actual Pixel then taps that downloaded row once over BLE. The adapter only observes queue/source state; it does not perform the playback action. The source UI identifies Downloaded Song, Apple reports A・RA・SHI/ARASHI PLAYING3, Mango stays paused2 and volume stays37/headset(4).
+
+The DX340 has no active default network, Wi-Fi0/mobile_data0 and no ADB reverse tunnel. Pixel Wi-Fi0/mobile_data1/noSIM is preserved; strict controller-cellular-off acceptance remains open. The owner explicitly confirms **“Yes, the expected song is audible.”** This is one currentce47 Apple hearing result, separate from earlier builds and the previous Kuchibirukara Romantica question, which remains unanswered.
+
+After the listening interval, a second source observation still finds the expected song playing. One deliberate Pixel Pause gives PAUSED2 on both source sessions. Target Mango is restored, the report is saved, and normal Disconnect clears phone foreground/started ownership; help is collapsed. Four own host preference hashes, global settings, own runtime grant/flag sets, exposed bond identities/types and both process IDs match the preceding seek cleanup. Grants and both browsing modes ON remain. No volume command is sent.
+
+The same current native model retains all11 previous seek-case records unchanged and ends with20 requests. Nine new applied results comprise HELLO, AUTHORIZE, two SELECT_SOURCE, two BROWSE, one PLAY_ITEM, its GET_STATE and one SET_PLAYING pause; zero errors/evictions. Exact durations and dispatch outcome are in the JSON. Send-to-decoded-reply timing does not establish GATT ACK, acoustic latency or p95.
+
+This advances one offline Apple selection on the installed phone. It does not complete20 selections across5albums/2playlists, formats/output quality,100 commands, full237GB download integrity, long background/range/calls/battery/walk, ownership/security, physical owner-iPhone/Mac signing or Watch. Older Mango audible cases retain their APK scope; no currentce47 Mango hearing result is inferred. The Apple MEDIA_MOUNTED crash and original no-card/Internal navigation failure remain unresolved. No build, observer, long hold or CI job remains running; shared25ed iPhone simulator evidence is separately verified in the seek report.

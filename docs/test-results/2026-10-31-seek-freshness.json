@@ -1,0 +1,1588 @@
+{
+  "recordedAt": "2026-10-31T22:33:17.933158+08:00",
+  "goalStatus": "ACTIVE/incomplete",
+  "phoneSource": "25ed62a39ee0ce7bd4d33d83a9596b6cb22ffcf0",
+  "phoneApkSha256": "ce47b14caa3b78c6e482387a971bc3efc80fdc7539845a7cb01b5c55daa614f2",
+  "hostSource": "fa60705ac5c798a58ffb26c1d32b43f2ae77ff5f",
+  "hostApkSha256": "82ad322f6f804c224603dde6668cb2f34c1a7de83b974edbfc4dec5245c721a5",
+  "devices": {
+    "host": "DX340 Android13/API33 eng.iBasso.20260812.181952; Companion0.1.0/code1; Mango4.1.37/code240; Apple6.5.3/code1599",
+    "phone": "Pixel9a Android16/API36 CP1A.260405.005; Remote0.2.0/code2"
+  },
+  "checks": {
+    "flutterTests": 80,
+    "analysisReleaseLint": "PASS",
+    "baseline": "Two existing platform widget lifecycle tests fail against old code; pass with fix",
+    "fixtureFailure": "Initial new model test fixture map type rejected null age; explicit dynamic fixture correction, full green retained",
+    "unchangedNativeEvidence": "199 JVM and19 Swift retain previous source scope; no native code changed"
+  },
+  "ci": {
+    "archiveInspected": true,
+    "runId": 41208873642,
+    "headSha": "25ed62a39ee0ce7bd4d33d83a9596b6cb22ffcf0",
+    "status": "VERIFIED/SUCCESS; simulator only",
+    "artifactId": 13046470518,
+    "archiveSha256": "042e6c280d06cd5dda2c10e6bc1633f15f67a174ddd05d3769e78af3430cd09f",
+    "flutterTests": 80,
+    "captureGuards": 12,
+    "nativeUIKitReportSheet": "presented, matching model/export; ordinary build restored and final frame manually inspected",
+    "macOS": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.2\nBuildVersion:\t\t25G83",
+    "xcode": "Xcode 26.6\nBuild version 17F113",
+    "simulator": [
+      "com.apple.CoreSimulator.SimRuntime.iOS-26-5",
+      "iPhone Air"
+    ],
+    "description": "[Shared iPhone job41208873642](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/41208873642) is terminal SUCCESS at exact source25ed62a. Artifact13046470518 ZIP SHA256 `042e6c280d06cd5dda2c10e6bc1633f15f67a174ddd05d3769e78af3430cd09f` is verified and safely extracted. Archive inspection confirms80 Flutter tests/analyze,12 capture guards, ordinary/Setup/browsing/handoff/volume/report-probe simulator builds and final ordinary rebuild/relaunch. The actual native UIKit export-sheet result matches its export model; the restored ordinary frame was inspected and shows Bluetooth unavailable/no track, not a connected fixture. Hosted macOS26.6.2/25G83, Xcode26.6/17F113, iPhone Air/iOS26.5 simulator. This is not owner signing, physical iPhone Bluetooth or audio. The run is closed; no further polling. Prior5f Apple jobs remain closed with their own scopes.",
+    "shortDescription": "shared iPhone41208873642 SUCCESS/archive13046470518 verified (80 Flutter/12 guards/native report sheet/ordinary restoration), simulator only; no polling"
+  },
+  "stages": [
+    {
+      "stage": "old277d",
+      "modelInstanceId": "b3b7698f-a4ce-4eff-840a-94b074ef8f6f",
+      "count": 6,
+      "operations": {
+        "HELLO": 1,
+        "AUTHORIZE": 1,
+        "SELECT_SOURCE": 2,
+        "SEEK": 1,
+        "GET_STATE": 1
+      },
+      "requests": [
+        {
+          "id": "d956c564-f762-47b5-a2f0-84285ec5285d",
+          "operation": "HELLO",
+          "source": "mango",
+          "startedMs": 1938120,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 52,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "0c6adeae-9f5d-4016-bf81-faad7c26fd37",
+          "operation": "AUTHORIZE",
+          "source": "mango",
+          "startedMs": 1938172,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 743,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "bdb3a1ff-0fe4-4b2f-ac12-f53774d4df14",
+          "operation": "SELECT_SOURCE",
+          "source": "mango",
+          "startedMs": 2011895,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 392,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "d130f601-8b8a-4004-a8c7-f06483bc36d1",
+          "operation": "SEEK",
+          "source": "apple",
+          "startedMs": 2055685,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 134,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "dispatched",
+          "error": null
+        },
+        {
+          "id": "7afe2541-37ec-4390-bbbc-a69419b2dd8e",
+          "operation": "GET_STATE",
+          "source": "apple",
+          "startedMs": 2055820,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 392,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "abd1f3c2-0af4-4d5c-a968-b50507f35643",
+          "operation": "SELECT_SOURCE",
+          "source": "apple",
+          "startedMs": 2559749,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 402,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        }
+      ]
+    },
+    {
+      "stage": "newce47",
+      "modelInstanceId": "441c9c0f-6a4d-406c-aced-449e5f450b82",
+      "count": 11,
+      "operations": {
+        "HELLO": 1,
+        "AUTHORIZE": 1,
+        "SELECT_SOURCE": 2,
+        "SEEK": 3,
+        "GET_STATE": 4
+      },
+      "requests": [
+        {
+          "id": "4c1e4cc0-c2a6-46c6-8f21-b7ce7516a75a",
+          "operation": "HELLO",
+          "source": "mango",
+          "startedMs": 43733,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 54,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "5bff1498-e7e3-4c6f-a850-de85e984306b",
+          "operation": "AUTHORIZE",
+          "source": "mango",
+          "startedMs": 43787,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 994,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "a8f0595f-ab20-4ec0-91cb-1dc9dde9cc60",
+          "operation": "SELECT_SOURCE",
+          "source": "mango",
+          "startedMs": 172162,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 395,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "84b09cb6-5ea4-400d-b37f-39482af6d9ce",
+          "operation": "SEEK",
+          "source": "apple",
+          "startedMs": 180018,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 141,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "dispatched",
+          "error": null
+        },
+        {
+          "id": "f5f0939e-b174-4711-8cab-600f481bdc3c",
+          "operation": "GET_STATE",
+          "source": "apple",
+          "startedMs": 180160,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 342,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "c05bf95e-70a0-4a07-bce0-001d9952ff5a",
+          "operation": "GET_STATE",
+          "source": "apple",
+          "startedMs": 324967,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 374,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "020676d4-b8b5-4c41-a124-28d8ba8436be",
+          "operation": "SEEK",
+          "source": "apple",
+          "startedMs": 330840,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 204,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "dispatched",
+          "error": null
+        },
+        {
+          "id": "adc68508-acee-455f-867e-d1b9a4571478",
+          "operation": "GET_STATE",
+          "source": "apple",
+          "startedMs": 331044,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 390,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "bb393cb8-4dd8-44e4-b440-6aaf7f59f83a",
+          "operation": "SEEK",
+          "source": "apple",
+          "startedMs": 598040,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 159,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "dispatched",
+          "error": null
+        },
+        {
+          "id": "fdfe9c90-c7d9-4462-8b03-62d57dcffca6",
+          "operation": "GET_STATE",
+          "source": "apple",
+          "startedMs": 598200,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 390,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "eccc4728-3c44-4d8f-a78f-ecd2bf35a7cc",
+          "operation": "SELECT_SOURCE",
+          "source": "apple",
+          "startedMs": 869564,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 375,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        }
+      ]
+    }
+  ],
+  "oldTwentyRecordsUnchanged": true,
+  "zeroEvictions": true,
+  "noPlaybackOrVolumeCommand": true,
+  "physicalCases": {
+    "oldPhoneAwake": {
+      "before": {
+        "com.ibasso.music": {
+          "state": 2,
+          "positionMs": 78991,
+          "description": "ゴースト, tayori, tayori LIVE TOUR \"magic\"\r"
+        },
+        "com.apple.android.music": {
+          "state": 2,
+          "positionMs": 183568,
+          "description": "Kuchibirukara Romantica, AAA, AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan\r"
+        }
+      },
+      "after": {
+        "com.ibasso.music": {
+          "state": 2,
+          "positionMs": 78991,
+          "description": "ゴースト, tayori, tayori LIVE TOUR \"magic\"\r"
+        },
+        "com.apple.android.music": {
+          "state": 2,
+          "positionMs": 173568,
+          "description": "Kuchibirukara Romantica, AAA, AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan\r"
+        }
+      },
+      "expectedApplePositionMs": 173568,
+      "noAutomaticRetry": true
+    },
+    "newPhoneAwake": {
+      "before": {
+        "com.ibasso.music": {
+          "state": 2,
+          "positionMs": 78991,
+          "description": "ゴースト, tayori, tayori LIVE TOUR \"magic\"\r"
+        },
+        "com.apple.android.music": {
+          "state": 2,
+          "positionMs": 173568,
+          "description": "Kuchibirukara Romantica, AAA, AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan\r"
+        }
+      },
+      "after": {
+        "com.ibasso.music": {
+          "state": 2,
+          "positionMs": 78991,
+          "description": "ゴースト, tayori, tayori LIVE TOUR \"magic\"\r"
+        },
+        "com.apple.android.music": {
+          "state": 2,
+          "positionMs": 163568,
+          "description": "Kuchibirukara Romantica, AAA, AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan\r"
+        }
+      },
+      "expectedApplePositionMs": 163568,
+      "noAutomaticRetry": true
+    },
+    "initialTransition": {
+      "original": {
+        "mWakefulness": "Awake",
+        "mLastWakeTime": "0",
+        "mLastSleepTime": "0"
+      },
+      "phonePidUnchangedAcrossForeground": true,
+      "before": {
+        "com.ibasso.music": {
+          "state": 2,
+          "positionMs": 78991,
+          "description": "ゴースト, tayori, tayori LIVE TOUR \"magic\"\r"
+        },
+        "com.apple.android.music": {
+          "state": 2,
+          "positionMs": 163568,
+          "description": "Kuchibirukara Romantica, AAA, AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan\r"
+        }
+      },
+      "changedScreenState": true,
+      "beforeSeekPower": {
+        "mWakefulness": "Dozing",
+        "mLastWakeTime": "0",
+        "mLastSleepTime": "26786300"
+      },
+      "after": {
+        "com.ibasso.music": {
+          "state": 2,
+          "positionMs": 78991,
+          "description": "ゴースト, tayori, tayori LIVE TOUR \"magic\"\r"
+        },
+        "com.apple.android.music": {
+          "state": 2,
+          "positionMs": 153568,
+          "description": "Kuchibirukara Romantica, AAA, AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan\r"
+        }
+      },
+      "afterSeekPower": {
+        "mWakefulness": "Dozing",
+        "mLastWakeTime": "0",
+        "mLastSleepTime": "26786300"
+      },
+      "screenOffObservationSeconds": 8.531,
+      "status": "VERIFIED native seek between Dozing endpoints; NOT strict display-OFF-at-dispatch proof",
+      "finalPower": {
+        "mWakefulness": "Awake",
+        "mLastWakeTime": "26794872",
+        "mLastSleepTime": "26786300"
+      },
+      "initialDriverAssessment": "VERIFIED one paused seek during a short screen-off interval; not30min T05",
+      "evidenceLimit": "Initial PowerManager sample is transitioning with HAL interactive true. No display service OFF preflight was collected. Separate strict display case follows."
+    },
+    "strictDisplayOff": {
+      "original": {
+        "mWakefulness": "Awake",
+        "mLastWakeTime": "26794872",
+        "mLastSleepTime": "26786300"
+      },
+      "before": {
+        "com.ibasso.music": {
+          "state": 2,
+          "positionMs": 78991,
+          "description": "ゴースト, tayori, tayori LIVE TOUR \"magic\"\r"
+        },
+        "com.apple.android.music": {
+          "state": 2,
+          "positionMs": 153568,
+          "description": "Kuchibirukara Romantica, AAA, AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan\r"
+        }
+      },
+      "scope": "Short paused native seek; not T05/30min or audio evidence",
+      "preflight": {
+        "display": "OFF",
+        "power": {
+          "mWakefulness": "Dozing",
+          "mLastWakeTime": "26794872",
+          "mLastSleepTime": "27052908"
+        }
+      },
+      "after": {
+        "com.ibasso.music": {
+          "state": 2,
+          "positionMs": 78991,
+          "description": "ゴースト, tayori, tayori LIVE TOUR \"magic\"\r"
+        },
+        "com.apple.android.music": {
+          "state": 2,
+          "positionMs": 143568,
+          "description": "Kuchibirukara Romantica, AAA, AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan\r"
+        }
+      },
+      "postflight": {
+        "display": "OFF",
+        "power": {
+          "mWakefulness": "Dozing",
+          "mLastWakeTime": "26794872",
+          "mLastSleepTime": "27052908"
+        }
+      },
+      "samples": [
+        {
+          "elapsedSeconds": 0.938,
+          "display": "OFF",
+          "power": {
+            "mWakefulness": "Dozing",
+            "mLastWakeTime": "26794872",
+            "mLastSleepTime": "27052908"
+          }
+        },
+        {
+          "elapsedSeconds": 1.75,
+          "display": "OFF",
+          "power": {
+            "mWakefulness": "Dozing",
+            "mLastWakeTime": "26794872",
+            "mLastSleepTime": "27052908"
+          }
+        },
+        {
+          "elapsedSeconds": 2.657,
+          "display": "OFF",
+          "power": {
+            "mWakefulness": "Dozing",
+            "mLastWakeTime": "26794872",
+            "mLastSleepTime": "27052908"
+          }
+        },
+        {
+          "elapsedSeconds": 3.438,
+          "display": "OFF",
+          "power": {
+            "mWakefulness": "Dozing",
+            "mLastWakeTime": "26794872",
+            "mLastSleepTime": "27052908"
+          }
+        },
+        {
+          "elapsedSeconds": 4.282,
+          "display": "OFF",
+          "power": {
+            "mWakefulness": "Dozing",
+            "mLastWakeTime": "26794872",
+            "mLastSleepTime": "27052908"
+          }
+        },
+        {
+          "elapsedSeconds": 5.203,
+          "display": "OFF",
+          "power": {
+            "mWakefulness": "Dozing",
+            "mLastWakeTime": "26794872",
+            "mLastSleepTime": "27052908"
+          }
+        },
+        {
+          "elapsedSeconds": 6.016,
+          "display": "OFF",
+          "power": {
+            "mWakefulness": "Dozing",
+            "mLastWakeTime": "26794872",
+            "mLastSleepTime": "27052908"
+          }
+        },
+        {
+          "elapsedSeconds": 6.766,
+          "display": "OFF",
+          "power": {
+            "mWakefulness": "Dozing",
+            "mLastWakeTime": "26794872",
+            "mLastSleepTime": "27052908"
+          }
+        },
+        {
+          "elapsedSeconds": 7.578,
+          "display": "OFF",
+          "power": {
+            "mWakefulness": "Dozing",
+            "mLastWakeTime": "26794872",
+            "mLastSleepTime": "27052908"
+          }
+        },
+        {
+          "elapsedSeconds": 8.422,
+          "display": "OFF",
+          "power": {
+            "mWakefulness": "Dozing",
+            "mLastWakeTime": "26794872",
+            "mLastSleepTime": "27052908"
+          }
+        }
+      ],
+      "samplerErrors": [],
+      "observationSeconds": 9.235,
+      "status": "VERIFIED one paused Apple seek with explicit OFF preflight/all sampled display states/postflight OFF",
+      "final": {
+        "display": "ON",
+        "power": {
+          "mWakefulness": "Awake",
+          "mLastWakeTime": "27062136",
+          "mLastSleepTime": "27052908"
+        },
+        "keyguardNotShowing": true
+      }
+    }
+  },
+  "storage": {
+    "at": "2026-10-31T22:30:04.120068+08:00",
+    "status": "VERIFIED destination preference only",
+    "selected": "SD Card",
+    "deviceStorageSelected": false,
+    "downloadedMusicLabel": "237 GB",
+    "freeLabel": "272 GB",
+    "downloadPinsObserved": "Off, unchanged from preceding checkpoint",
+    "chooserEvidence": "sd-check-chooser.png",
+    "closedVia": "two ordinary Back keys; no storage option chosen",
+    "limit": "No private download integrity, migration or all-tracks playback proof"
+  },
+  "preservation": {
+    "phonePermissionsAndExposedBondsUnchanged": true,
+    "hostPermissionsAndExposedBondsUnchanged": true,
+    "prefsAndSettingsUnchanged": true,
+    "bothPaused": true,
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeProof": false,
+    "hostForegroundBothBindings": true,
+    "phoneNormallyDisconnectedHelpCollapsed": true,
+    "controlTarget": "Mango",
+    "cardMounted": true,
+    "pidsBefore": {
+      "host": "22092",
+      "phone": "23795"
+    },
+    "pidsAfter": {
+      "host": "22092",
+      "phone": "27462"
+    },
+    "appleIntentionalPositionChangeMs": -40000,
+    "mangoPositionUnchanged": true
+  },
+  "limits": [
+    "No audio playback or hearing confirmation in these seek cases",
+    "Physical stale-race window not captured; negative race proven by widget/model regressions",
+    "OFF display/Dozing over9.235s is not deep sleep,30min T05, bag/walk or battery proof",
+    "Four intentional seeks do not complete100-command/source/phone T03 or ACK/p95 T04",
+    "Prior Apple offline hearing response and immediate full-queue proof remain separate",
+    "Original no-card/Internal navigation and Apple MEDIA_MOUNTED crash remain unclosed",
+    "Physical owner-iPhone/Mac signing, full source/playlist/format/output/offline/reliability/security/Watch remain open"
+  ],
+  "rawEvidence": [
+    {
+      "file": "artifacts/paused-seek-20261031/apple-selected.xml",
+      "sha256": "8c60d4759925ff7399f86d2a763244f10099c52759b0d736d6e39b23385ad752"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/before-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/before-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/before-host-accessibility.txt",
+      "sha256": "f0ee84906b3a3502fbefc5d96ecd324412daca8339c4409e9e9023d7cc3f0ed0"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/before-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "6f2df69f88f23b87b439272b2d30c3404855d020686858df850eeef838adf91c"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/before-host-audio.txt",
+      "sha256": "acd7525632f2a90f27d48375b8b15bcab9eed0e5c635192b7e14c4eca7c9104c"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/before-host-bluetooth_manager.txt",
+      "sha256": "ccdfafd3a8f9bbcb0149a4adf8998a90f7bcdcabe3dfb53e55151300f0847a1d"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/before-host-media_session.txt",
+      "sha256": "8715fc285fadb1edbf6d2ac337bb9d3fb25f1d626c117767ebe854364637ea8a"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/before-host-package-org.dx340.remote.host.txt",
+      "sha256": "d5600395acdff16ac46cb1229eba3d71b0471f30fd4b0eff18871807f35867b3"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/before-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/before-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "482b25e20cdd2c6b1d2a323b43e3d7c2862ddd482635b712f98d633abc1bfd51"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/before-phone-bluetooth_manager.txt",
+      "sha256": "8349586672cc1536d5babdad920b05df6fdc35e704dd97f74eb39c2cb21cb325"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/before-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "aa01c5b3cc8263512e9ee460d46a058a9426cdd2be970a0f22f7ca621d726f9c"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/before-restore-mango.xml",
+      "sha256": "2df654531a8023b04cb30690f770809d85f562c45236c345bc8283e196d3b6ac"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/before-short-sleep-policy.txt",
+      "sha256": "719ee5c29b1b44b7c41e9136b1f0446405b963fb750d98e3e12b9764d6e44500"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/before-short-sleep-trust.txt",
+      "sha256": "b0fe15b94fcd9a2e866f35730ee1013a753bba753ffcf45abfdf2cbec90ba345"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/before-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/before.json",
+      "sha256": "c94f842be163954497e1bcc2ec705567776afdf1e940fa06ecdd8e6caa330dd3"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-bootstrap.txt",
+      "sha256": "a4798e0a34a98730348cba0cba8ae10b459b868cfbe8a02478c445165c7cac1f"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-browsing-fixture-launch.txt",
+      "sha256": "aae0066e60179146beb42ac3e97d521b7d770129d0d58f7027ac0c878a18090f"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-capture-matcher-tests.txt",
+      "sha256": "2072ea10acb601303ef8f21be984d3cfc065831ff61278198aa4b2b3955354ce"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-capture-readiness.txt",
+      "sha256": "190aaa33a7efe79e43dbf84c6d4fba137861dbb097e29dcef6997e4736ac131c"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-handoff-fixture-launch.txt",
+      "sha256": "91e76bc2f72b517fd2a4a042555ab4692e22d4544084d6ff3791dab5d86f9c20"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-ios-analyze.txt",
+      "sha256": "3ef4cfd91bae1bac6a426decb683b0d2001b61afc68d542691bcefbbbd0342fe"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-ios-browsing-fixture-build.txt",
+      "sha256": "b260b0ff02a1159add537a25e67d5a297ba82ad951b8bb0042eac39547116f2c"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-ios-build.txt",
+      "sha256": "7e7a16873fdea4f1d62d088489f6845f49aa0d1e24c6d228347b6b2b4ea0fc1a"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-ios-handoff-fixture-build.txt",
+      "sha256": "9d7eed524a990bc123a14a2b19ea6cc629d14751cf5a89ff8da4cf0daf4708bf"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-ios-report-probe-build.txt",
+      "sha256": "40e3837c6901aa2f6837e5caacc914c6eae605bbdb10d7d43c7581b8f954a132"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-ios-restore-build.txt",
+      "sha256": "391008970c5eeddcae882fc0bcda6fee746633d2b61bee4fda266ea15bfa6b38"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-ios-setup-fixture-build.txt",
+      "sha256": "7d8ab4f8662907714536ef64cab62c8547316d95dced5c428dcf754ee74bf093"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-ios-tests.txt",
+      "sha256": "5e93319416ba0dfd738f1fabf7704c97d06f8e89a050a40ed119db802094b4df"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-ios-toolchain.json",
+      "sha256": "4c13dc6534635375ab58ff3b75ae0d02bd5967ee36a84a40b0e48126b7ea84a4"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-ios-volume-fixture-build.txt",
+      "sha256": "bef82893099f0a7c0c36274f173e333e47100c0bf9300489b34794631506537a"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-library-light.png",
+      "sha256": "5991d2e7032baa6b5cce0f8c9bee8fa68f21b0482f85b101d55021120261852e"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-macos-version.txt",
+      "sha256": "cd5d6399b3785b04ceaae75045a9ca9f80f0bbc3526eff9d0c36b170ed1ec348"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-native-report-export.json",
+      "sha256": "11548b0acf73a350c3d5555b67963db5d8c711c8d02b7abd05ab0e2e6a6e8f8c"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-native-report-share-sheet.png",
+      "sha256": "b39f78ae9854e4e47b8d14d85a42300d5746daf2aad37673ed15854c40068692"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-player-dark.png",
+      "sha256": "717b40a50ac2c1a567edb0ee2efff3a78d893800c9c6450b5d34a21e43c3f250"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-player-large-dark.png",
+      "sha256": "95420f1d271de153340eab70d5f8efc37c2df3670681fbe627fb84bed2b5ab87"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-player-light.png",
+      "sha256": "fbddf46fe29aa90b3256ab33ca039ec8bda6edc3acc4fd70e534a761f245e6bf"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-queue-light.png",
+      "sha256": "8ea6cb0264cc70df79e8ad66f419d3a7e1bdfc861f71de6504db7b0c4e78dbf0"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-report-probe-launch.txt",
+      "sha256": "307a7c0623e760fbe3649c48e778badd2c383c221ac9459c127e39f82eea794b"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-report-probe-result.json",
+      "sha256": "3f8f591d08f8114be40a3d451a0ed8238ec8f1522e804e5465ab4b5fd4d00fc6"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-restored-launch.txt",
+      "sha256": "20c53ca5544cae077a16266ee48a829b6433bb717bfc021c0aa686b67eeb5252"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-restored-player-light.png",
+      "sha256": "31d178c9ddd5561197811a4d69e9924e8d4d77664b0eb610e835e70c6bc12bb2"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-setup-fixture-launch.txt",
+      "sha256": "2eba3a128016af55a899480f0f3f5d5b243273de060804cb75b4f1897147e24b"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-setup-light.png",
+      "sha256": "31728a1daf3a73621dfb071268fc16969ef77281cead2372d733647fb46067e3"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-simulator-boot.txt",
+      "sha256": "ad713f609d456fab321ab2bde30cff6b7a9c393698ed496d5debcefd806cd222"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-simulator-launch.txt",
+      "sha256": "0065ffcdabb2e7f5bd424ce67e8b433dca092d7e1b34b5b4b8a33fec3c29e57a"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-simulators.json",
+      "sha256": "594084d646f2586e52c66328c583b79fcde9330e82ceb24cc72373ab3630ff45"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-synthetic-browsing-expired-large-dark.png",
+      "sha256": "36d6916ec5ffb7b251c9241c36f1ad663c537b415deb8916172d78fd8d4a680e"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-synthetic-browsing-expired-light.png",
+      "sha256": "070bcc6e3be8bd4fc46a52ed4f9ca692ce3177fb95c24521784671d4358b55a7"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-synthetic-browsing-large-dark.png",
+      "sha256": "ad9ceec5fba0af1553ed6e556398c7452c5f1e49b27efa5a3e47c8e186a8ec88"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-synthetic-browsing-library-light.png",
+      "sha256": "41011b81b0721dcfd2675133c1eedb8fcee213f420f51ac4d6c4424ca1518668"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-synthetic-browsing-queue-light.png",
+      "sha256": "b5767a5d703b22de7e13c1523ab22d53437ac12c2802cfd10f4de24ba1bc46ea"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-synthetic-handoff-large-dark.png",
+      "sha256": "3b2e5b85b3382e4d9e9d77ce9fcaab9a7a8f0a0f9f3cabe2dc09a5a6a2474b21"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-synthetic-handoff-lost-light.png",
+      "sha256": "75a45fee3a8dbc55c0d0de13bc73cc3ce63ae5e44f79396d3a04eb1a5a30991e"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-synthetic-handoff-pending-light.png",
+      "sha256": "75a45fee3a8dbc55c0d0de13bc73cc3ce63ae5e44f79396d3a04eb1a5a30991e"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-synthetic-handoff-ready-dark.png",
+      "sha256": "b2f8f1023d6fc6b9cd0f40164284c166143552d2510a632ef7396661a74d1f58"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-synthetic-handoff-ready-light.png",
+      "sha256": "cdd996613fe30f05ef2d4260d0b2b68f374c25e72b59b5f30c19241c8deb1edc"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-synthetic-setup-approval-large-dark.png",
+      "sha256": "8cb3a95959a6d93dfafb0a497b4a0b5017e79275bbb7c997c74c76d41ba6e6ae"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-synthetic-setup-approval-light.png",
+      "sha256": "ce0c65d6b6b64fcd639b242a484b103b177b7273c0fbec3fb58c922ac08f29d3"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-synthetic-setup-choosing-light.png",
+      "sha256": "41d384a6bef02a7bc23cbe152d30edf03b84d0601a9327aed8d4fcc9dedac3a9"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-synthetic-setup-connected-light.png",
+      "sha256": "a6d5dc4997f535ab8e3d2b4c8a9142758000b971c6ff3b9baa6aa749e5cbb199"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-synthetic-setup-idle-light.png",
+      "sha256": "eee0c60cc19a7048f263feeee11da12918e8d3189b2f09b4f3cbd02dd2ec170f"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-synthetic-volume-high-light.png",
+      "sha256": "f4057ac14bbe39a7fad47831168b5cd3a8c535460dd010160e58f7e8979f144f"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-synthetic-volume-large-dark.png",
+      "sha256": "4700321f542ed66f5e82e130d31105f5f373fecc860ead33c689462e57212eb4"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-synthetic-volume-low-light.png",
+      "sha256": "fbcb62718702e7192d8e93e2424c532cbef63119202417efc7ee85281b3fcbe6"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-volume-fixture-launch.txt",
+      "sha256": "66152202f0f64c16a173d256feaeb953f4ec424fbb1e85e06c4fb56330a3365d"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642/flutter-xcode-version.txt",
+      "sha256": "18730ed2ae28a2c9cf0c2d5db549033a4f07089331391a7133b7b32187454fa9"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642-artifacts.json",
+      "sha256": "5c6a36304fe726e92f35f23e7b64794d63ae40a3c77e876936e7826c58e2cba5"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642-jobs.json",
+      "sha256": "670ddffd6df8ab84cd66d7a22868f3ed044c68d4175a11a6be375c977313d424"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642-verified.json",
+      "sha256": "05e4b59864ba57fb9f4a7cccbc29c8f03c7e7eed05ac520f83f706ee966ca9ca"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642.json",
+      "sha256": "8303526ef07118fe39fe47945e68dd830c425a3b562509d1fc2debffb499203e"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/ci-41208873642.zip",
+      "sha256": "042e6c280d06cd5dda2c10e6bc1633f15f67a174ddd05d3769e78af3430cd09f"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/apple-selected.xml",
+      "sha256": "2df654531a8023b04cb30690f770809d85f562c45236c345bc8283e196d3b6ac"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/apple-source-find-0.xml",
+      "sha256": "dec98d763de90a6d731eae9afcae6d0202caaa096ba666382603aff5468b9ac3"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/apple-source-find-1.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/display-awake-baseline.txt",
+      "sha256": "79d2c81c376bc53cd22dd9ad7305e404dc37bca5fb7649773c2c7d21b77a85f6"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/final-player-before-restore.xml",
+      "sha256": "4509d2b0a00c3395efbfa3c9f23aefa6058c51843440af1e86fa0cde4aae5af2"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/foreground-return-launch.txt",
+      "sha256": "91a553325276747e622729fb51208f9d930f9a83ff1a5475ea8bc2f36cc83274"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/foreground-return.xml",
+      "sha256": "042655ef68d84dc8e4f0befe35230ef43b7f55155cddb6bc7c70005522478874"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/mango-capability-before.xml",
+      "sha256": "dec98d763de90a6d731eae9afcae6d0202caaa096ba666382603aff5468b9ac3"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/restore-mango-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/restore-mango-before.xml",
+      "sha256": "4509d2b0a00c3395efbfa3c9f23aefa6058c51843440af1e86fa0cde4aae5af2"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/screen-seek-after-media.json",
+      "sha256": "995a665127b016c632c4aa276c32f85548e2ea88ec4ca3e5708352b6991c7d59"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/screen-seek-after-media_session.txt",
+      "sha256": "427d5f64bb5f9cd569c6d5ec67af9e57227eb8eb0237a80d51d73ac164f85e89"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/screen-seek-before-media.json",
+      "sha256": "37710464fb56cb2e099537f4043cea0da2fbc4f5edc28b601669dc3eb4cc3870"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/screen-seek-before-media_session.txt",
+      "sha256": "380a403909783ceb26a3caf934871613f99a989d7463d2319f7b3e626d4f3c1c"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/screen-seek-once-after.xml",
+      "sha256": "8855a3f7abd36e320dd4fa88c761c010d7deb9889afccda19f810493ee8ff89a"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/screen-seek-once-before.xml",
+      "sha256": "042655ef68d84dc8e4f0befe35230ef43b7f55155cddb6bc7c70005522478874"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/screen-seek-result.json",
+      "sha256": "4c2114df30e4424050c1714ad69281ce6c01bf042cfd60af2a50e4c3546f85fd"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/screen-seek-settled.xml",
+      "sha256": "8855a3f7abd36e320dd4fa88c761c010d7deb9889afccda19f810493ee8ff89a"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/seek-after-media.json",
+      "sha256": "37710464fb56cb2e099537f4043cea0da2fbc4f5edc28b601669dc3eb4cc3870"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/seek-after-media_session.txt",
+      "sha256": "380a403909783ceb26a3caf934871613f99a989d7463d2319f7b3e626d4f3c1c"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/seek-before-media.json",
+      "sha256": "95a9403b2ab7aa54ceb639a14ed2f1b0533a7af5f6e79829639de81c810e4605"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/seek-before-media_session.txt",
+      "sha256": "385cdbbdf02fa952a63ff48d9bc28a03b40257abe6609a17843c39f349e5de87"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/seek-once-after.xml",
+      "sha256": "042655ef68d84dc8e4f0befe35230ef43b7f55155cddb6bc7c70005522478874"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/seek-once-before.xml",
+      "sha256": "2df654531a8023b04cb30690f770809d85f562c45236c345bc8283e196d3b6ac"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/seek-result.json",
+      "sha256": "ff6946958882c96b6006bae9ac35905237e19fb10b710f0c962344803b51dab0"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/seek-settled.xml",
+      "sha256": "042655ef68d84dc8e4f0befe35230ef43b7f55155cddb6bc7c70005522478874"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/select-apple-after.xml",
+      "sha256": "2df654531a8023b04cb30690f770809d85f562c45236c345bc8283e196d3b6ac"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/select-apple-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/sleep-after-seek-power.txt",
+      "sha256": "ddbb8d06043fc5ad399a87fa5e266328c776ba08a1779885de8d8834e4baf04b"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/sleep-final-policy.txt",
+      "sha256": "0f6c55e4487a0418bb2bd93c714cc74e63ef971e954810f858ebd0bcc3ba91b5"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/sleep-final-power.txt",
+      "sha256": "b552a0bbfa6062c04b099e384b6ae3f4688723701b45a1aa82d0e26827f62b71"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/sleep-original-power.txt",
+      "sha256": "fcd0b07e5ee0f1caad9b4246eb1ea2acdb8eb6a05adf9ed375f513ed1b4a0f5f"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/sleep-preflight-0-power.txt",
+      "sha256": "2869c11bfe77644a361e05b47da64b50296f18c73450f3001e490f23b19725cb"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/source-scroll-0-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/source-scroll-0-before.xml",
+      "sha256": "dec98d763de90a6d731eae9afcae6d0202caaa096ba666382603aff5468b9ac3"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/after-display.txt",
+      "sha256": "419d79fbade1600d48f8ad06bd3abc44878dee5e46ce7b90a56d104f6df10245"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/after-media.json",
+      "sha256": "8aa159b5eaaf0379523f3a6760f991da244a82f52b9d0b9309c715912e047380"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/after-media_session.txt",
+      "sha256": "1cf034fac716cb1d6210281e9c24faba3904ad3f2d56e70b9a1964b4b9569cfe"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/after-power.txt",
+      "sha256": "9988840a9d34ca8604b1ee0da8b41d0a46d2d408f3209b2a63c43d25b774998e"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/before-display.txt",
+      "sha256": "86db7d81d29f722f4c3c25a5baf361e96dfed9fd9ed86d2a26c43a4b231fca5d"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/before-media.json",
+      "sha256": "995a665127b016c632c4aa276c32f85548e2ea88ec4ca3e5708352b6991c7d59"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/before-media_session.txt",
+      "sha256": "427d5f64bb5f9cd569c6d5ec67af9e57227eb8eb0237a80d51d73ac164f85e89"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/before-power.txt",
+      "sha256": "de8f6620c07418df5d9b900b647c755272fbf93506e67c36bc870e11d77842e6"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/preflight-0-display.txt",
+      "sha256": "9f538b0f72f9e1265070d365fe633e82a52788bcc81c9312695c11ea6bd2b639"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/preflight-0-power.txt",
+      "sha256": "b145f9d8334ac34e2c63fb2dd4db551a6b3d55b7375eff0cc6ceecb9bcf667d8"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/preflight-1-display.txt",
+      "sha256": "106e5a3d42c8eac94fc451f5143be54b31e3e83807d8f5d3479e1dee44a7b6b1"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/preflight-1-power.txt",
+      "sha256": "8b20a31a0e76b593397750d667321c1ba0cb14f0672376d2f8fa6a4c973b4343"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/restored-display.txt",
+      "sha256": "280160e390c5df9c014c0771cc7b4b584af9b3640d4c797209f2f3511f72e154"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/restored-policy-0.txt",
+      "sha256": "67c370bb7fcfef0d10130577aab771c59ab9e0d93ffccede6b0a381f8db2c400"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/restored-policy-1.txt",
+      "sha256": "0f6c55e4487a0418bb2bd93c714cc74e63ef971e954810f858ebd0bcc3ba91b5"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/restored-policy-2.txt",
+      "sha256": "18d68918cbdf20899146d1a57d3573a933210fc02342e22aa73f6a5758527614"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/restored-power.txt",
+      "sha256": "72bd8e6b4055d4e7c226b4f867e3638695bfe9c868b1b10ed61ae2c0838bf59a"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/result.json",
+      "sha256": "0518feb681e588dae44a363d7caf5ac80b02a2fbf768b0d529c5b51ff92758ca"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-0-display.txt",
+      "sha256": "c809f24ccd561d7bfdc59c8f8724361305a60e0a9f7854b51c3ed112a23c4a12"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-0-power.txt",
+      "sha256": "f452c412683d3e1ed5d3c79c9c801a66f01e61801e67494f63f60ff8548fa0ed"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-1-display.txt",
+      "sha256": "42df614c370512c44140f014a9a6ba8d3faaa71fe6af67b42890278d7db7d5c9"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-1-power.txt",
+      "sha256": "fde5230451bd1de33bda987622ae02267fffae5ac832a628cdf9f0196e1e0d00"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-2-display.txt",
+      "sha256": "54ef703530c1f9d0805c4c6982d7bee4efd19d67a3693f0090065b44db7d0033"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-2-power.txt",
+      "sha256": "d232b6461d256c3460cd96796050b80df718dcfe7a66a4a0c4cd8c91b6a66bdd"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-3-display.txt",
+      "sha256": "9eadee9ba8b66bc5964e32dfd78d25b25e373091a9e299534d587b15c0933234"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-3-power.txt",
+      "sha256": "f291b9de23789db9fded8c2fcf5ef6ac0bb6869634792d3d7ffe7788a9e88bb2"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-4-display.txt",
+      "sha256": "59d8596a1322462a1393be7e3fe93b4a7b683a6f6c930e7a6fb44a4281161f23"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-4-power.txt",
+      "sha256": "b235439bbc44cd3c21afab1ca18dfb377d30c4591e2267dd08090a8b39fa62af"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-5-display.txt",
+      "sha256": "e7645b993fa40ed300642739972153bad20fefc4d7f2dbec081c798204b77546"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-5-power.txt",
+      "sha256": "d6dabf5c387ca0e26110e45900ac6fda4ef14aec9b4c83cff8b74d9d56c35ce7"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-6-display.txt",
+      "sha256": "1adb68663a70a7111d6faae59e2286ffc05c2d5b0ee41092b55a6fbc5b529909"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-6-power.txt",
+      "sha256": "2b5bb639e9d9c71960d526c29dfc0d1f8acc66161e74f3d5feba83f3aa19ffa2"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-7-display.txt",
+      "sha256": "9e5643a56bcbfa30e41b777e10eaad8a57942de2e0e98c185e115f7fe46550e0"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-7-power.txt",
+      "sha256": "8d922cfaf112c3076b79f0496988456c9e458b2017dbc1fe7cb99c2aa3a087de"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-8-display.txt",
+      "sha256": "78575a9dd971c5a5916640b5bc105237f4d697e8128b72f084af138153b9af28"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-8-power.txt",
+      "sha256": "3a90916137add55f172aa5e0eba498e6a316f63ad9d23dc7bcf40de098912bea"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-9-display.txt",
+      "sha256": "d5efd315ae15554889cc4d527aab85985c0ca57c589c90f4086cce19ea5c4a0f"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/sample-9-power.txt",
+      "sha256": "77dd67394a407951a6a715e5f062ead6a650c116c7e1a6e7fdebe931633b6cb2"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/seek-once-after.xml",
+      "sha256": "078d346296047496ba25685a6509cfc38d5da63e322858ea507fe31f833e6a06"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/seek-once-before.xml",
+      "sha256": "8855a3f7abd36e320dd4fa88c761c010d7deb9889afccda19f810493ee8ff89a"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/strict-display-off/seek-settled.xml",
+      "sha256": "4509d2b0a00c3395efbfa3c9f23aefa6058c51843440af1e86fa0cde4aae5af2"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/wake-current-policy.txt",
+      "sha256": "18d68918cbdf20899146d1a57d3573a933210fc02342e22aa73f6a5758527614"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/current-phone/wake-current.png",
+      "sha256": "e1c4cf920016e39328d2c9c4198096a57c428e74551799c1dcadc12e6619a27d"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-devices.txt",
+      "sha256": "99221000e3050b063712b3b8bb8b7e8b078c782ac467f889eb1e4f7c66d2336c"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-display.txt",
+      "sha256": "a6c992f172caef9baa1018977c2e230661b1b4599470f0877d010d68bdeef0cd"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-export-console.txt",
+      "sha256": "a2206ebc93ef4959fefc4cea9d3a1a063454ced1092234b869ecd3b438cd7ed5"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-export-final-disconnect-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-export-final-disconnect-before.xml",
+      "sha256": "2f960254f0d45d3bfd91878993bccf0dfcd6fba1961380f5b8805b429864966f"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-export-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-export-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-export-help-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-export-help-collapse-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-export-save-after.xml",
+      "sha256": "2f960254f0d45d3bfd91878993bccf0dfcd6fba1961380f5b8805b429864966f"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-export-save-before.xml",
+      "sha256": "e15fd2e375a748169e7f71f55d0adf7979f458ca03d8630a4449848461d0eaa5"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-export-scroll-after.xml",
+      "sha256": "e15fd2e375a748169e7f71f55d0adf7979f458ca03d8630a4449848461d0eaa5"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-export-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-export-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-export-setup-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-host-accessibility.txt",
+      "sha256": "ddbe96f677e654dc0f60ed7cb42cbdcf8f441ccdc44e3493210294f3fe5979a2"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "f8d5a1adbaff6ff4acc4a972a0413d4e8cc5c0ae51cacc400ea0449c8cda84a0"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-host-audio.txt",
+      "sha256": "15af46e9702ab6d775613d39b706ee90db7c3302f27d4d10e26b22b27c8ba1fe"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-host-bluetooth_manager.txt",
+      "sha256": "d4228ee5abac079bb8f1ea930603c1b48a7e618cc850999f77e0e8e1bf34d1e8"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-host-media_session.txt",
+      "sha256": "1cf034fac716cb1d6210281e9c24faba3904ad3f2d56e70b9a1964b4b9569cfe"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-host-package-org.dx340.remote.host.txt",
+      "sha256": "5b5ded491706d171da3313518a61ae7b753cbad7bf7ebca4bd93875ae95e1515"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "41f465c426c0be9148b5db0f74140bbfa122f97ecd6fd424087aac257198c440"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-phone-bluetooth_manager.txt",
+      "sha256": "f4b280efde2bec3468aa84692a877c946400da3bb11d96fe5966837b8ebe7420"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "282a2e21d21f9479350dbe96021443da4c4601b3b90f099176d077971cc280e3"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-power.txt",
+      "sha256": "790ecdf95952284861f6b4b60bfeb932fccce641dd398cf989dc11d2928bec3a"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-volumes.txt",
+      "sha256": "7f7be54d6ac662c6c253fefac52be59dce97549438b29993566e0dd53c4803a4"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final-window-policy.txt",
+      "sha256": "18d68918cbdf20899146d1a57d3573a933210fc02342e22aa73f6a5758527614"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/final.json",
+      "sha256": "1885abe0614f5f16d475b35d62d070aac2c4913e475a15799aaf92b46ef1e8a7"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/flutter-analyze.txt",
+      "sha256": "e2d39bcbfd7cd168c8a472491fd83a4b8a2965156a682871201d888ba28a0bfd"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/flutter-android-build.txt",
+      "sha256": "baea48f1b15d9747752878ec85e18d19d06dff9d57b30d5cf0d85e4306e34dba"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/flutter-android-lint.txt",
+      "sha256": "70cfed3d3c1c939e32c0b873e2303333e89b527c197be3fccfa2b87fdfd511e0"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/flutter-tests.txt",
+      "sha256": "cad70433acf79b6992c318a4f2cad10927cd5416130adffe832c5c4b01d64f2a"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/install.txt",
+      "sha256": "c4aa470acafcf8576c15b0f0b5ae7e852d1ec5413372d0e6a9272e788e1306d3"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/installed-sha256.txt",
+      "sha256": "e735e8036d1e1cbdedfc5daa6b5ec3c3faed7981112ea78fbd05cd8598f44c9f"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/launch.txt",
+      "sha256": "e88655088a42192e99c1aff45d7e983228b5b59be2766afd79e1a69a5e97dec1"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/mango-capability-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/mango-connected.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/mango-player-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/mango-player-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/new-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/new-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/new-mango-player-after.xml",
+      "sha256": "dec98d763de90a6d731eae9afcae6d0202caaa096ba666382603aff5468b9ac3"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/new-mango-player-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/new-setup-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/new-setup-before.xml",
+      "sha256": "80962d9282db56e46f3aec02503856b1e5dcbd7825ad5165332a542d6cb00990"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/old-export-console.txt",
+      "sha256": "37d0cdc64d5e3f77eeb18380f1cf1fee87f12a2994d16b61293eee0b5ce6a3e2"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/old-export-final-disconnect-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/old-export-final-disconnect-before.xml",
+      "sha256": "d9c8705efa8dcb9d7f0d2b2f7af4f256d125e9bd00bb0923691f3fc7c2266c81"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/old-export-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/old-export-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/old-export-help-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/old-export-help-collapse-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/old-export-save-after.xml",
+      "sha256": "d9c8705efa8dcb9d7f0d2b2f7af4f256d125e9bd00bb0923691f3fc7c2266c81"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/old-export-save-before.xml",
+      "sha256": "3121c9ac3e6c3307d041b4e9283b4d585960ef9d97fb6b6ffe1435f4ef81d3d5"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/old-export-scroll-after.xml",
+      "sha256": "3121c9ac3e6c3307d041b4e9283b4d585960ef9d97fb6b6ffe1435f4ef81d3d5"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/old-export-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/old-export-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/old-export-setup-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/phone-before-update-report.json",
+      "sha256": "3b9678b5d1e2efa1512b71b164254a7e2b5011a3734920ad4f96069d6ba34a6c"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/phone-build.txt",
+      "sha256": "4188889a0dedde4196aba4f56bfb5cab29d5ee21d6c2e43fb7359e52e55d470d"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/phone-final-report.json",
+      "sha256": "f92832931ed89bcb82e54d0245658cec663e935f42af2050af74ab50f5e9f3a5"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/phone-installed.apk",
+      "sha256": "ce47b14caa3b78c6e482387a971bc3efc80fdc7539845a7cb01b5c55daa614f2"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/phone-start.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/restore-mango-old-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/restore-mango-old-before.xml",
+      "sha256": "2df654531a8023b04cb30690f770809d85f562c45236c345bc8283e196d3b6ac"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/sd-check-chooser.png",
+      "sha256": "f8f0b9e59525df132057f5adf276a89869d7e84ee159f8fdf71e93cfec843af8"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/sd-check-exited.png",
+      "sha256": "99145ee053ef5c2416039e8476fb4f1a0798d48ea515d2c8b703e70130158751"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/sd-check-menu.png",
+      "sha256": "7655d1331059a5e1ba5f43ce1beb7dc9c55292065a8c867e610feb381a4ccfb4"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/sd-check-options.png",
+      "sha256": "6f6a58054fef57c06a7a246a8059b141cc07fd0a657053da49a418b40fabe402"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/sd-check-settings-settled.png",
+      "sha256": "872aac90c98a63fc19cf9ea607a1c24e963af4f8c36ff24482ed8e34d2f6f15e"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/sd-check-settings.png",
+      "sha256": "12e1986815facc9dbde504755f720dbd4464ec58300d9d523c5c5cfc88b1879b"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/sd-check-start.png",
+      "sha256": "8b29dd4d22744cfde82562c60ceabf36bf98b0d27dd2b918ac022801816b02f2"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/sd-destination.json",
+      "sha256": "e820733680b449a3edb25f0ea872ee0a7c4bbc24498aeed0bbd69c451d4f5d53"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/seek-after-media.json",
+      "sha256": "95a9403b2ab7aa54ceb639a14ed2f1b0533a7af5f6e79829639de81c810e4605"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/seek-after-media_session.txt",
+      "sha256": "385cdbbdf02fa952a63ff48d9bc28a03b40257abe6609a17843c39f349e5de87"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/seek-before-media.json",
+      "sha256": "3635d274a76e0b03eb0120b2c1ee6e3b01482bb0f105cc351914d4f69958a21d"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/seek-before-media_session.txt",
+      "sha256": "8715fc285fadb1edbf6d2ac337bb9d3fb25f1d626c117767ebe854364637ea8a"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/seek-fixture-type-failure.txt",
+      "sha256": "7086ea7a4aef682b1675ea530299aa0906ed0193e5ae891326897d2c162bb4a0"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/seek-freshness-baseline.txt",
+      "sha256": "fbf64756b0c48d523a99da47f5a2f1e9feeb80fb4a268dd871dc51277e0b5bda"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/seek-freshness-fixed.txt",
+      "sha256": "d2e8f54f47a43264875131157a7c37ecaf4a68a5cc5ac01a76c53db7fa4784da"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/seek-once-after.xml",
+      "sha256": "2df654531a8023b04cb30690f770809d85f562c45236c345bc8283e196d3b6ac"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/seek-once-before.xml",
+      "sha256": "8c60d4759925ff7399f86d2a763244f10099c52759b0d736d6e39b23385ad752"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/seek-result.json",
+      "sha256": "4524fbbc69272facc9c717903e45c78761cb26df6593444b4eecef4727a9b4e5"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/seek-settled.xml",
+      "sha256": "2df654531a8023b04cb30690f770809d85f562c45236c345bc8283e196d3b6ac"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/seek-tests.txt",
+      "sha256": "d9f6b097da01a14698796a0a6793729b7212379e2db2c4df834055ffc0ca2c32"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/select-apple-after.xml",
+      "sha256": "8c60d4759925ff7399f86d2a763244f10099c52759b0d736d6e39b23385ad752"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/select-apple-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/paused-seek-20261031/upgrade-signing.json",
+      "sha256": "3cd00ec15021efe9d7c4420534658060f6fd43a96313a4c86da9e12d712c637a"
+    }
+  ]
+}
