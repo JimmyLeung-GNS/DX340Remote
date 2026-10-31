@@ -330,6 +330,9 @@ class MangoAccessibilityService : AccessibilityService() {
                     } else if (!storageClicked && !menuClicked && MangoUiModel.playlistMenuAction(current.nodes) != null) {
                         val node = MangoUiModel.playlistMenuAction(current.nodes)!!
                         perform(current, Action(node.path, "menu"), stillAuthorized); menuClicked = true; trace("playlist-menu-click")
+                    } else if (!storageClicked && !menuClicked && MangoUiModel.allMusicMenuAction(current.nodes) != null) {
+                        val node = MangoUiModel.allMusicMenuAction(current.nodes)!!
+                        perform(current, Action(node.path, "menu"), stillAuthorized); menuClicked = true; trace("all-music-menu-click")
                     } else if (!storageClicked && MangoUiModel.node(current.nodes, "folder_detail_content") != null) {
                         if (!menuClicked) { val node = MangoUiModel.node(current.nodes, "nav_bar_back_iv") ?: error("UI_UNEXPECTED_SCREEN"); val click = MangoUiModel.clickable(current.nodes, node) ?: error("UI_ACTION_FAILED"); perform(current, Action(click.path, "menu"), stillAuthorized); menuClicked = true }
                     } else if (!storageClicked && !libraryClicked) {

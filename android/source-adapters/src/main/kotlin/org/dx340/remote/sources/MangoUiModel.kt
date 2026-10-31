@@ -25,6 +25,22 @@ object MangoUiModel {
         require(arrow.clickable && arrow.enabled) { "UI_ACTION_FAILED" }
         return arrow
     }
+    /** Observed All Music root: its toolbar opens the library menu, never a song row. */
+    fun allMusicMenuAction(nodes: List<UiNode>): UiNode? {
+        if (menuVisible(nodes)) return null
+        val headers = nodes.filter { it.id == PREFIX + "entry_title_tv" }
+        if (headers.none { it.text == "All Music" }) return null
+        require(nodes.size <= 800 && nodes.map { it.path }.distinct().size == nodes.size) { "UI_TREE_LIMIT" }
+        require(headers.size == 1 && headers.single().enabled && nodes.none { it.className.contains("EditText") }) { "UI_UNEXPECTED_SCREEN" }
+        require(nodes.none { it.id == PREFIX + "playlist_view" || it.id == PREFIX + "folder_detail_content" }) { "UI_ACTIVE_PAGE_UNVERIFIED" }
+        val header = headers.single()
+        val bar = nodes.singleOrNull { it.id == PREFIX + "nav_bar" && it.path == header.parent } ?: error("UI_UNEXPECTED_SCREEN")
+        val list = nodes.singleOrNull { it.id == PREFIX + "music_lib_all_music_list" } ?: error("UI_UNEXPECTED_SCREEN")
+        require(bar.parent != null && list.parent == bar.parent) { "UI_UNEXPECTED_SCREEN" }
+        val arrow = nodes.singleOrNull { it.id == PREFIX + "nav_bar_back_iv" && it.parent == bar.path } ?: error("UI_UNEXPECTED_SCREEN")
+        require(arrow.clickable && arrow.enabled) { "UI_ACTION_FAILED" }
+        return arrow
+    }
     fun storageAction(nodes: List<UiNode>, storage: String): UiNode {
         require(storage in storages && menuVisible(nodes)) { "UI_STORAGE_CONTEXT_REQUIRED" }
         val option = node(nodes, if (storage == "internal") "internalStorgeLayout" else "sdcardLayout")!!
