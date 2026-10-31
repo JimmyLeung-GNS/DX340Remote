@@ -2,7 +2,7 @@
 
 The shared phone app has a deliberate troubleshooting action in **Setup → Connection help**: **Save connection report** on Android or **Share connection report** on iPhone. This does not connect, authorize, retry, change playback or adjust volume. The regular UI snapshot does not include the journal, so collecting it adds no library/queue rebuild notifications.
 
-History belongs to the current native model instance and is cleared by process restart. Each report uses a new random model instance identifier for safe correlation across multiple exports; it is not a device, Bluetooth or controller identity. The default limit is 256 requests and 256 connection transitions. Eviction counters expose missing earlier history.
+History belongs to the current native model instance and is cleared by process restart. Each native model creates a random instance identifier, reused by its exports for safe correlation; it is not a device, Bluetooth or controller identity. The default limit is 256 requests and 256 connection transitions. Eviction counters expose missing earlier history.
 
 Format version 1 contains allowlisted operation/source/error/connection categories, request IDs and relative monotonic milliseconds. Unknown categories become `OTHER`/`other`. Music metadata, command arguments, item IDs, paths, artwork, Bluetooth identities, host epochs and credentials are excluded. App/OS versions and generic device model identify the software environment. Android additionally hashes its own installed base APK, outside the BLE callback thread. No source storage is scanned.
 
@@ -21,3 +21,11 @@ The Kotlin and Swift journals consume the same six fixtures for duplicate/late r
 The iOS CI developer-only `report_export_probe.dart` uses the real native bridge and UIKit with no BLE/source fixture, correlates a unique launch marker and native model instance, checks an empty request history and the strict report keys, then captures the share sheet. The existing EXIT trap rebuilds/reinstalls/relaunches ordinary `main.dart`, including after failure. This probe is never imported by the production entrypoint.
 
 Builds, simulator exports and fixture timings do not pass T04. Physical exports from the actual phones, decoded ACCEPTED versus terminal/applied outcomes, source-state observation and listening remain separate required evidence. Do not relabel old physical results as results for a newly built candidate.
+
+## Summarizing exports
+
+Run `python scripts/summarize-connection-reports.py <first.json> <second.json>` with explicit export paths. The standard-library tool rejects mixed build/platform/OS environments, conflicting request identities/receipts, duplicate JSON keys and oversized/unexpected report fields. Separate model sessions require the explicit `--allow-multiple-sessions` option; request IDs are deduplicated with their model instance, so process restarts do not collide. Repeated eviction counters use the maximum per session rather than being added on every export.
+
+The output groups operations by source and separates accepted-receipt, terminal-reply, applied-result and host-observed applied-result distributions. Timeouts/losses/errors remain outcome counts. Percentiles use nearest rank; missing or invalid-clock samples do not become zeros. Empty reports retain zero samples and null percentiles. Every summary says `physicalT04=NOT_ADJUDICATED`: these reports alone cannot establish controlled local-track availability, GATT acknowledgement timing or audible output. Overlapping exports do not inflate the sample count.
+
+Run the analyser's synthetic checks with `python -m unittest discover -s scripts/tests -p test_connection_reports.py -v`. Keep raw exports and generated summaries under ignored `artifacts/`, with sanitized device/build/test conditions in `docs/test-results/`.
