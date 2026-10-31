@@ -1,6 +1,6 @@
 # Current pair source selection —1 November2026
 
-**VERIFIED: source-state, BLE receipt and sampled row-geometry subsets. Human listening confirmations remain PENDING.** [Structured result](2026-11-01-current-pair-source-selection.json). Full acceptance remains incomplete; older explicit hearing answers retain their original APK scopes.
+**VERIFIED: source-state, BLE receipt and sampled row-geometry subsets. Hearing remains NOT TESTED; the owner waived routine listening prompts on1 November, so these unanswered questions no longer block development.** [Structured result](2026-11-01-current-pair-source-selection.json). Full acceptance remains incomplete; older explicit hearing answers retain their original APK scopes.
 
 DX340 Android13/API33 `eng.iBasso.20260812.181952`, Companion0.1.0/code1 SHA256 `61153223b7a37d5ed3ac293455478d4199cf4fed4b2f4282fb21e5f03915a215`, source9fb503a/PID10544. Pixel9a Android16/API36 `CP1A.260405.005`, shared Remote0.2.0/code2 SHA256 `95d29be69f09e90b978a6907e46d2ec9952b5a0676ccd0a7da0d36fa54d06bca`, sourcee40b822/PID25153. Sources remain Mango4.1.37/code240 and Apple Music6.5.3/code1599. No app rebuild or update occurs within this listening batch; the preceding same-signer host update and injected timeout have [separate evidence](2026-11-01-injected-indication-recovery.md). No fault is armed during these selections.
 

@@ -35,13 +35,16 @@
   ],
   "hearing": {
     "apple": {
-      "status": "PENDING owner listening confirmation; source PLAYING alone is not audible proof"
+      "status": "NOT TESTED; routine listening prompt waived by owner on 2026-11-01; no retrospective hearing confirmation",
+      "originalStatus": "PENDING owner listening confirmation; source PLAYING alone is not audible proof"
     },
     "mango-wav": {
-      "status": "PENDING owner listening confirmation; source PLAYING alone is not audible proof"
+      "status": "NOT TESTED; routine listening prompt waived by owner on 2026-11-01; no retrospective hearing confirmation",
+      "originalStatus": "PENDING owner listening confirmation; source PLAYING alone is not audible proof"
     },
     "mango-flac": {
-      "status": "PENDING owner listening confirmation; source PLAYING alone is not audible proof"
+      "status": "NOT TESTED; routine listening prompt waived by owner on 2026-11-01; no retrospective hearing confirmation",
+      "originalStatus": "PENDING owner listening confirmation; source PLAYING alone is not audible proof"
     }
   },
   "rowGeometry": {
@@ -184,5 +187,6 @@
     "iPhone Bluetooth/audio",
     "30minute sleep or unplugged hold",
     "natural vendor indication failure"
-  ]
+  ],
+  "ownerPlaybackPreferenceUpdate": "Routine direct screen/state/progress checks replace repeated listening prompts. Existing observed playback remains valid for its recorded binary pair; headphone audibility remains unverified. No replay needed to resolve the old questions."
 }

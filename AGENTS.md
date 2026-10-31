@@ -12,6 +12,8 @@ The user selected a shared phone interface on 28 October 2026. Use Flutter/Dart 
 
 Use meaningful tests for framing, duplicate commands, routing, stale IDs, reconnection and capability handling. Run actual build commands where supported. A successful mock, BLE write or compile does not prove source playback, audio quality or physical Bluetooth support.
 
+Owner preference, 1 November 2026: do routine playback tests directly, without asking for a listening confirmation after each selection. Inspect the actual source screen, expected track, playback state and advancing position. Interpret each icon according to its action/state rather than assuming a Play button means playback is active. Record this as observed playback; headphone audibility and audio quality remain unverified unless independently measured or explicitly reported. Do not keep routine development waiting on historical unanswered listening questions.
+
 ## Evidence and continuity
 
 On 30 October 2026 the user explicitly chose to switch development to **another Windows PC**, superseding the 29 October stay-on-this-PC instruction. The exporting checkout is `C:\GitHub\DX340Remote`; verify the portable checkpoint and inventory the next PC's actual workspace/toolchain rather than assuming the same paths. Read `docs/device-switch-handoff.md` for the standing handoff procedure and `docs/device-continuation.md` for this Windows transfer/resume and `docs/windows-continuation.md` for the prior local build workflow. Mac/Xcode remains the separate iPhone build/validation host.

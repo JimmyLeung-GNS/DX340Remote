@@ -1,0 +1,147 @@
+{
+  "date": "2026-11-01",
+  "status": "VERIFIED pending-input fault retirement and bounded host fallback; FAILED short recovery observation; VERIFIED eventual slow automatic recovery; full acceptance incomplete",
+  "hostSource": "5f4f1f24a673f778d7b403203e35f3e48edf4b8a",
+  "phoneSource": "d06a481b4eb533b42d80331203891f8f62a342ab",
+  "installedSha256": {
+    "org.dx340.remote.host": "3a32689ac5805cf58758286f27ee1c1b2abeec16f01b8de70b5ac9cfe8307b2c",
+    "org.dx340.remote.controller": "a65ac6a9660223532a23f0eaf828dc62282759d1e66e04dba66fb10a2704622a"
+  },
+  "devices": {
+    "host": "DX340 Android13/API33 eng.iBasso.20260812.181952 Companion0.1.0/code1",
+    "phone": "Pixel9a Android16/API36 CP1A.260405.005 Remote0.2.0/code2",
+    "mango": "4.1.37/code240",
+    "appleMusic": "6.5.3/code1599"
+  },
+  "sameSigner": true,
+  "hostEpoch": "a74fdb31-5aac-4b91-bffd-5d35e46a4772",
+  "pids": {
+    "host": "16085",
+    "phone": "4427"
+  },
+  "radioCase": {
+    "status": "VERIFIED input write remained unacknowledged before actual local radio interruption",
+    "request": {
+      "id": "6f296c3e-60ce-4061-af93-a4db87645ea6",
+      "operation": "GET_STATE",
+      "source": "mango",
+      "startedMs": 2383283,
+      "firstWriteSubmittedAfterMs": 4,
+      "writeAcknowledgedAfterMs": null,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 767,
+      "result": "connection_lost",
+      "terminalApplied": false,
+      "hostOutcome": "none",
+      "error": null
+    },
+    "heldToHostDisconnectMs": 863,
+    "fallbackFired": false,
+    "radioOffScope": "global flag0 but manager BLE_TURNING_ON; full RF-Off not proven",
+    "restored": "global1 and actual ON",
+    "job": "472f384fe0b54766bffcaaad8694b721",
+    "watcherPid": 9227,
+    "loggerPid": 9238,
+    "bothRecordedProcessesExited": true
+  },
+  "fallbackCase": {
+    "hostFallbackStatus": "VERIFIED",
+    "request": {
+      "id": "874cc889-5148-4414-916b-a39982080c20",
+      "operation": "GET_STATE",
+      "source": "mango",
+      "startedMs": 2735735,
+      "firstWriteSubmittedAfterMs": 4,
+      "writeAcknowledgedAfterMs": null,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 10028,
+      "result": "connection_lost",
+      "terminalApplied": false,
+      "hostOutcome": "none",
+      "error": null
+    },
+    "heldToCloseMs": 5002,
+    "initialObservationStatus": "FAILED to reach Ready within 23-second driver observation",
+    "failedObservationRetained": "fallback-driver-result.json",
+    "eventualSavedAutomaticApproval": "VERIFIED same attempt without manual reconnect or additional fault",
+    "closeToHostConnectedMs": 80587,
+    "closeToHostApprovedMs": 81526,
+    "clientTrace": "10s write deadline; two 30s service-discovery stalls; one status133; later HELLO/AUTHORIZE succeeds",
+    "recoveryLatencyStatus": "UNRESOLVED slow recovery; no fast/full reliability pass"
+  },
+  "journal": {
+    "modelInstanceId": "a6d211e5-d892-4ae6-a416-ebe05ff24768",
+    "counts": [
+      9,
+      10,
+      13,
+      16,
+      17
+    ],
+    "everyPrecedingRowUnchanged": true,
+    "evictions": 0,
+    "newRequests": 8,
+    "interruptedReadsRetired": 2,
+    "noReplay": true,
+    "freshFinalGetState": {
+      "id": "7219ca92-4568-4220-ab57-5cc2485ef30f",
+      "operation": "GET_STATE",
+      "source": "mango",
+      "startedMs": 3296182,
+      "firstWriteSubmittedAfterMs": 4,
+      "writeAcknowledgedAfterMs": 131,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 379,
+      "result": "result",
+      "terminalApplied": true,
+      "hostOutcome": "none",
+      "error": null
+    }
+  },
+  "validation": {
+    "jvmAggregate": 248,
+    "hostReleaseTestsAdditionalScope": 20,
+    "newWriteHoldTests": 6,
+    "priorCallbackTests": 9,
+    "nativeBuildLint": "PASSED",
+    "hostReleaseBuildLint": "PASSED",
+    "releaseDebugReceiverAbsent": true,
+    "flutter": 82,
+    "swift": 22,
+    "analyser": 18,
+    "unchangedPhoneAndAppleResults": "Prior d06 scopes retained; no new phone build or Apple CI triggered"
+  },
+  "final": {
+    "at": "2026-11-01T05:35:43.275208+08:00",
+    "states": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeVerified": false,
+    "prefsSettingsPidsSourcePositionsPreserved": true,
+    "controllerApprovals": "unchanged persisted controllers hash; no revoke/re-pair",
+    "optionalBrowsing": "both ON and Accessibility bound",
+    "storage": "public:179,1 mounted FBB9-E8FE; no mount or Apple destination change",
+    "phone": "ordinary Disconnect, help collapsed, no foreground service",
+    "host": "saved enabled, foreground service, advertising; source app may remain foreground"
+  },
+  "ownerPlaybackPreference": "Routine selection tests use source screen/expected title/PLAYING/progress without asking for listening; older unanswered hearing questions do not block development. Audibility remains NOT TESTED, not inferred.",
+  "limits": [
+    "debug-injected fault, not a spontaneous vendor failure",
+    "older post-ACK missed-window case remains NOT_MET",
+    "read-only fault cases do not prove playback mutation, headphone audio or full T12/T16",
+    "strict cellular-off T01 remains open; Pixel mobile_data1 preserved",
+    "prior failed holds, no-card Internal timeout and Apple MEDIA_MOUNTED crash remain unresolved",
+    "physical owner iPhone/Mac signing and Watch remain unavailable or unfinished"
+  ],
+  "rawEvidence": {
+    "root": "artifacts/held-input-write-20261101",
+    "filesHashed": 337,
+    "manifestSha256": "715025b6ba3aec10c7c98fcea8460e6e3392022e7f6b29ad70ba1a13521750d8"
+  }
+}
