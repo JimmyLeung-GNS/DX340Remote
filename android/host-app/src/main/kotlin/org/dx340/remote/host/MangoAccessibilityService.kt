@@ -290,7 +290,9 @@ class MangoAccessibilityService : AccessibilityService() {
                 // One complete 450ms settling interval for a final folder. Previously the
                 // 300ms navigation wait was followed by a separate 450ms wait on that same
                 // fingerprint. Intermediate menus still settle for 300ms before any action.
-                val finalFolder = parsed?.storage == storage && parsed.root == null || storage == MangoPlaylistUiModel.CONTEXT && playlist?.root == null && playlist != null
+                val finalFolder = parsed?.storage == storage && parsed.root == null &&
+                    reloadReturnStorage == null && (storage != "sd" || storageClicked) ||
+                    storage == MangoPlaylistUiModel.CONTEXT && playlist?.root == null && playlist != null
                 if (stableMs < if (finalFolder) 450 else 300) { main.postDelayed({ openStorage(storage) }, 180); return }
                 // Mango retains an obsolete SD directory list even when its SD menu
                 // entry is selected again. A deliberate root browse leaves that storage
@@ -335,9 +337,12 @@ class MangoAccessibilityService : AccessibilityService() {
                             if (returnStorage != null) {
                                 reloadReturnStorage = null
                                 storageClicked = false; menuClicked = false; libraryClicked = false
-                                resetFingerprint = ""; navigationStability = UiSnapshotStability()
+                                resetFingerprint = ""
+                                // The observed Internal root is already stable. Keep that
+                                // observation for the next guarded menu action; only the final
+                                // requested SD page needs the longer result-settling interval.
                                 trace("sd-reload-return")
-                                main.postDelayed({ openStorage(returnStorage) }, 180); return
+                                main.post { openStorage(returnStorage) }; return
                             }
                             guard(); finish(result(current, storage, 0), null); return
                         } else if (!menuClicked) {
