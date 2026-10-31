@@ -1,5 +1,9 @@
 # Source and BLE capability findings
 
+Current611/95 pair also verifies three source PLAYING selections and stable sampled song rows; all three fresh listening answers remain pending. Final04:11:50 both sources paused37, grants/settings preserved and phone disconnected. [Source selection evidence](test-results/2026-11-01-current-pair-source-selection.md).
+
+Latest1 November2026: One debug-injected missed indication callback now exercises the existing actual host timeout/recreation and automatic Pixel reauthorization without replay. This is a controlled physical subset, separate from natural vendor callback failures and audio acceptance. See [injected timeout evidence](test-results/2026-11-01-injected-indication-recovery.md). Older inventory/results below retain their exact binary scope.
+
 ## Current scope —1 November2026
 
 Use the [reconciled matrix](compatibility-matrix.md), [acceptance ledger](test-results/2026-11-01-acceptance-reconciliation.json) and [latest interrupted-browse report](test-results/2026-11-01-interrupted-library.md). Current installed hostdc53629d/source1e3c551 and Pixel95d29be6/sourcee40b822 verify saved authorization, mounted Mango storage navigation and pending-browse loss/reconnect without replay. Current PC physical oversized/slow-drip framing checks pass in their [stated subset](test-results/2026-11-01-framing-bounds.md). Full source audio/actions and physical iPhone acceptance are incomplete.

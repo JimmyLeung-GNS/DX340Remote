@@ -11,9 +11,10 @@
       "build": "DX340-userdebug 13 TKQ1.221013.002 eng.iBasso.20260812.181952 release-keys",
       "app": {
         "package": "org.dx340.remote.host",
-        "sha256": "dc53629d33cecb25fb381d464fe3e55656b35ca5575c32211da3971fbda7e775",
+        "sha256": "61153223b7a37d5ed3ac293455478d4199cf4fed4b2f4282fb21e5f03915a215",
         "versionName": "0.1.0",
-        "versionCode": 1
+        "versionCode": 1,
+        "sourceCommit": "9fb503a3eac7fc8832a3e4abfd5758962b19aa48"
       }
     },
     "phone": {
@@ -137,21 +138,24 @@
       "status": "PARTIAL_OLDER_AUDIO",
       "finding": "Older source-local20 cases retain24attempts/4rejections/mixed builds; later b805/00e5 audible outside101 queue and ce47/82ad outside21 queue remain separate. No95 audio result.",
       "remainingRequirement": "20 correct offline downloaded selections across5albums/2playlists, outside prior queue included, each phone.",
-      "evidence": "2026-10-31-current-sd-audio.md"
+      "evidence": "2026-10-31-current-sd-audio.md",
+      "currentPairSelectionSupplement": "2026-11-01-current-pair-source-selection.md"
     },
     {
       "id": "T08",
       "status": "PARTIAL_OLDER_AUDIO",
       "finding": "b805/00e5 physical Pixel WAV/FLAC owner hearing (2/20 in that scope) and earlier source-local cases retain caveats.95 mounted storage/fault recovery contains no selected-file playback.",
       "remainingRequirement": "At least20 correct FLAC/WAV selections across albums/folders/exposed playlists through Mango, each phone.",
-      "evidence": "2026-10-31-current-phone-source-audio.md"
+      "evidence": "2026-10-31-current-phone-source-audio.md",
+      "currentPairSelectionSupplement": "2026-11-01-current-pair-source-selection.md"
     },
     {
       "id": "T09",
       "status": "PARTIAL",
       "finding": "Older source-switch/state/audio subsets retain exact hashes; no current95/full both-phone acoustic overlap matrix.",
       "remainingRequirement": "Alternate source control during playback; only selected source changes, no unwanted overlap.",
-      "evidence": "2026-10-31-phone-ui-source-scope.md"
+      "evidence": "2026-10-31-phone-ui-source-scope.md",
+      "currentPairSelectionSupplement": "2026-11-01-current-pair-source-selection.md"
     },
     {
       "id": "T10",
@@ -170,9 +174,10 @@
     {
       "id": "T12",
       "status": "PARTIAL",
-      "finding": "Current95 pending browse loss clears spinner; saved reconnect does not replay. Earlier radio/permission/process recovery scopes retained; new-host indication-timeout auto-recovery, calls/full sleep/two-phone matrix incomplete.",
+      "finding": "Current95 pending browse loss clears spinner; saved reconnect does not replay. Earlier radio/permission/process recovery scopes retained; new host debug-injected timeout auto-recovery verified without replay; natural faults/calls/full sleep/two-phone matrix incomplete. [Evidence](test-results/2026-11-01-interrupted-library.md).",
       "remainingRequirement": "Calls/radio/permission/background/restart produce honest status and bounded recovery with clear required action.",
-      "evidence": "2026-11-01-interrupted-library.md"
+      "evidence": "2026-11-01-interrupted-library.md",
+      "injectedRecoverySupplement": "2026-11-01-injected-indication-recovery.md"
     },
     {
       "id": "T13",
@@ -198,16 +203,18 @@
     {
       "id": "T16",
       "status": "PARTIAL",
-      "finding": "PC65537-byte and60s slow-drip bounds, earlier malformed/quota/idle subset, current95 pending-browse loss/no replay verified. Duplicate playback mutation, physical pending ATT writes and delayed callbacks remain open.",
+      "finding": "PC65537-byte and60s slow-drip bounds, earlier malformed/quota/idle subset, current95 pending-browse loss/no replay verified. One debug-injected successful indication callback omission reaches the real deadline and recovers, with no old read replay. Duplicate playback mutations, input ATT write faults and natural vendor failures remain open. [Evidence](test-results/2026-11-01-framing-bounds.md).",
       "remainingRequirement": "Duplicate/delayed/truncated/oversized/transfer-loss faults cause no crash, duplicate mutation or unbounded allocation.",
-      "evidence": "2026-11-01-framing-bounds.md"
+      "evidence": "2026-11-01-framing-bounds.md",
+      "injectedRecoverySupplement": "2026-11-01-injected-indication-recovery.md"
     },
     {
       "id": "T17",
       "status": "PARTIAL",
-      "finding": "Original-signer hostdc/phone95 verified in place, grants/settings retained. Earlier enabled/stopped package-restoration scopes retained. Final fresh install/production signing/owner-iPhone not tested.",
+      "finding": "Original-signer host611/phone95 verified in place, grants/settings retained. Earlier enabled/stopped package-restoration scopes retained. Final fresh install/production signing/owner-iPhone not tested. [Evidence](test-results/2026-11-01-interrupted-library.md).",
       "remainingRequirement": "Fresh install and upgrades preserve intended pairing/state with valid installation/signing.",
-      "evidence": "2026-11-01-interrupted-library.md"
+      "evidence": "2026-11-01-interrupted-library.md",
+      "injectedRecoverySupplement": "2026-11-01-injected-indication-recovery.md"
     },
     {
       "id": "T18",
@@ -219,7 +226,7 @@
   ],
   "sourceOfTargets": "docs/implementation-plan.md sections12,13,18; numeric targets remain proposed, not proven",
   "resourceGate": "FAILED spawn xcrun ENOENT; no owner Mac available through current tool connection",
-  "ownerMacAvailability": "UNKNOWN; fresh text question pending",
+  "ownerMacAvailability": "Owner confirms only Windows and Android available now; physical Mac/iPhone/signing unavailable for current tests",
   "limits": "This reconciliation is a documentation/evidence audit, not an additional radio/audio/build/physical acceptance test.",
   "rawEvidence": [
     {
@@ -231,5 +238,29 @@
       "sha256": "1be147c02380d16b086f0947f8292d83e244533dbc0b2aaa69462857856eff29"
     }
   ],
-  "lastSupplementedAt": "2026-11-01T03:40:00+08:00"
+  "lastSupplementedAt": "2026-11-01T04:13:57.677194+08:00",
+  "injectedRecoverySupplement": {
+    "evidence": "2026-11-01-injected-indication-recovery.md",
+    "scope": "one debug-injected missed successful indication callback; actual existing timeout/recreation/automatic phone authorization; no playback",
+    "tests": 241,
+    "releaseDiagnosticContract": true,
+    "automaticRecoveryOnlyHelloAuthorize": true,
+    "freshReadExplicit": true,
+    "fullAcceptancePassed": false
+  },
+  "currentPairSelectionSupplement": {
+    "evidence": "2026-11-01-current-pair-source-selection.md",
+    "sourceStatesVerified": 3,
+    "ownerHeardConfirmed": 0,
+    "hearingPending": 3,
+    "journalCounts": [
+      19,
+      48
+    ],
+    "allPreviousRowsUnchanged": true,
+    "zeroEvictions": true,
+    "newAppliedResults": 29,
+    "sampledSongRowsStable": true,
+    "fullAcceptancePassed": false
+  }
 }

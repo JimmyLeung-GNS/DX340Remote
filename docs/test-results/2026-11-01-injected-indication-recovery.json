@@ -1,0 +1,154 @@
+{
+  "date": "2026-11-01",
+  "status": "VERIFIED bounded debug-injected physical timeout recovery subset; full goal incomplete",
+  "sourceCommit": "9fb503a3eac7fc8832a3e4abfd5758962b19aa48",
+  "build": {
+    "sourceCommit": "9fb503a3eac7fc8832a3e4abfd5758962b19aa48",
+    "jvmDebugCounts": {
+      "android\\core-protocol\\build\\test-results\\test": 57,
+      "android\\controller-core\\build\\test-results\\testDebugUnitTest": 3,
+      "android\\library-cache\\build\\test-results\\test": 7,
+      "android\\source-adapters\\build\\test-results\\testDebugUnitTest": 146,
+      "android\\host-app\\build\\test-results\\testDebugUnitTest": 28
+    },
+    "aggregateDebug": 241,
+    "releaseOnlyDiagnosticTests": 1,
+    "releaseSharedPolicyTestsNotAddedToDebugAggregate": true,
+    "releaseDebugReceiverAbsent": true,
+    "candidateAndInstalledSha256": "61153223b7a37d5ed3ac293455478d4199cf4fed4b2f4282fb21e5f03915a215"
+  },
+  "devices": {
+    "DX340": "Android13/API33 eng.iBasso.20260812.181952 Companion0.1.0/code1",
+    "Pixel9a": "Android16/API36 CP1A.260405.005 Remote0.2.0/code2 SHA256 95d29be69f09e90b978a6907e46d2ec9952b5a0676ccd0a7da0d36fa54d06bca; source e40b822"
+  },
+  "injection": "ADB DUMP-protected debug receiver arms one idle authorized link for20s; one successful indication callback ignored; real existing10s queue deadline runs",
+  "timingMsHostLog": {
+    "ignoredToTimeout": 9960,
+    "timeoutToAdvertising": 495,
+    "timeoutToApproved": 2378
+  },
+  "journal": {
+    "modelInstanceId": "0baf310c-e141-4cfb-95f4-c16c8b7d459b",
+    "counts": [
+      15,
+      18,
+      19
+    ],
+    "allPreviousRowsUnchanged": true,
+    "zeroEvictions": true,
+    "newRequests": [
+      {
+        "id": "4340aa8f-98f9-4f3c-8362-e853742bd4a5",
+        "operation": "GET_STATE",
+        "source": "mango",
+        "startedMs": 3353766,
+        "writeAcknowledgedAfterMs": 162,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 10278,
+        "result": "connection_lost",
+        "terminalApplied": false,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "332d3732-3fdd-4bef-a477-dfb8dd9d0540",
+        "operation": "HELLO",
+        "source": "mango",
+        "startedMs": 3365966,
+        "writeAcknowledgedAfterMs": 153,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 252,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "a5780336-a1da-4029-81ab-3ca891d5b9ee",
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "startedMs": 3366219,
+        "writeAcknowledgedAfterMs": 192,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 1706,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "83d6add0-3fe6-4408-804d-c06012288ee7",
+        "operation": "GET_STATE",
+        "source": "mango",
+        "startedMs": 3459489,
+        "writeAcknowledgedAfterMs": 134,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 815,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      }
+    ],
+    "automaticRecoveryOnlyHelloAuthorize": true,
+    "freshReadExplicit": true
+  },
+  "preserved": {
+    "fourPreferenceHashes": {
+      "controllers": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311",
+      "mango-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "apple-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "source-verification": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    "settings": {
+      "host": {
+        "wifi_on": "0",
+        "mobile_data": "0",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      },
+      "phone": {
+        "wifi_on": "0",
+        "mobile_data": "1",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      }
+    },
+    "hostEpochUnchangedWithinFault": true,
+    "pidsAfterUpdateAndFinal": {
+      "host": "10544",
+      "phone": "25153"
+    },
+    "beforeUpdateHostPid": "4334",
+    "bothSourcesPausedPositions": {
+      "com.ibasso.music": 78991,
+      "com.apple.android.music": 99367
+    },
+    "headsetVolume": 37,
+    "output": "headset(4)",
+    "allThreeApprovedControllersRetained": true,
+    "card": "FBB9-E8FE mounted",
+    "phoneCleanup": "normal Disconnect, help collapsed, foreground service cleared"
+  },
+  "evidence": {
+    "root": "artifacts/transport-injection-20261101",
+    "hashManifest": "artifacts/transport-injection-20261101/SHA256SUMS.json",
+    "files": 202
+  },
+  "notProved": [
+    "naturally occurring missed vendor callback",
+    "budget exhaustion and manual Restart UI on hardware",
+    "interruption of an input ATT write",
+    "duplicate playback mutation faults",
+    "physical iPhone",
+    "audio or bit-perfect playback",
+    "full T12 or T16",
+    "30minute sleep/unplugged acceptance"
+  ]
+}

@@ -1,0 +1,188 @@
+{
+  "date": "2026-11-01",
+  "status": "VERIFIED source-state and row-geometry subsets; listening confirmations separately recorded; full acceptance incomplete",
+  "hostSha256": "61153223b7a37d5ed3ac293455478d4199cf4fed4b2f4282fb21e5f03915a215",
+  "hostSource": "9fb503a3eac7fc8832a3e4abfd5758962b19aa48",
+  "phoneSha256": "95d29be69f09e90b978a6907e46d2ec9952b5a0676ccd0a7da0d36fa54d06bca",
+  "phoneSource": "e40b822813573ee93493cf863ea0bde49885a36f",
+  "devices": "DX340 Android13/API33 eng.iBasso.20260812.181952 Companion0.1.0/code1; Pixel9a Android16/API36 CP1A.260405.005 Remote0.2.0/code2; Mango4.1.37/code240; Apple Music6.5.3/code1599",
+  "ownerListeningAvailability": "Fresh explicit Yes, I can listen now before this batch",
+  "selections": [
+    {
+      "label": "apple",
+      "title": "Kuchibirukara Romantica",
+      "artist": "AAA",
+      "path": "Apple Downloaded Albums / AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan",
+      "absentFromCapturedFullPreviousQueue": true,
+      "previousQueueCount": 101,
+      "playingObserved": true
+    },
+    {
+      "label": "mango-wav",
+      "file": "03. 風のたより.wav",
+      "title": "風のたより",
+      "path": "Internal Storage / Music / Tayori / tayori - 1st Live “春を待つ” 追加公演 (2025)",
+      "playingObserved": true
+    },
+    {
+      "label": "mango-flac",
+      "file": "03. ゴースト.flac",
+      "title": "ゴースト",
+      "path": "Internal Storage / Music / Tayori / tayori LIVE TOUR “magic” 2025",
+      "precedingWavPlayingImmediatelyBeforeSelection": true,
+      "playingObserved": true
+    }
+  ],
+  "hearing": {
+    "apple": {
+      "status": "PENDING owner listening confirmation; source PLAYING alone is not audible proof"
+    },
+    "mango-wav": {
+      "status": "PENDING owner listening confirmation; source PLAYING alone is not audible proof"
+    },
+    "mango-flac": {
+      "status": "PENDING owner listening confirmation; source PLAYING alone is not audible proof"
+    }
+  },
+  "rowGeometry": {
+    "mango-wav": {
+      "beforePendingFinalEqual": true,
+      "rows": {
+        "01. Intro.wav": "[53,1462][1028,1654]",
+        "02. 白日夢.wav": "[53,1654][1028,1845]",
+        "03. 風のたより.wav": "[53,1845][1028,1983]"
+      }
+    },
+    "mango-flac": {
+      "beforePendingFinalEqual": true,
+      "rows": {
+        "01. envision.flac": "[53,1383][1028,1575]",
+        "02. 魔法.flac": "[53,1575][1028,1767]",
+        "03. ゴースト.flac": "[53,1767][1028,1958]",
+        "04. 白日夢.flac": "[53,1958][1028,1983]"
+      }
+    }
+  },
+  "journal": {
+    "modelInstanceId": "0baf310c-e141-4cfb-95f4-c16c8b7d459b",
+    "counts": [
+      19,
+      48
+    ],
+    "allPreviousRowsUnchanged": true,
+    "zeroEvictions": true,
+    "newOperationCounts": {
+      "HELLO": 1,
+      "AUTHORIZE": 1,
+      "SELECT_SOURCE": 2,
+      "BROWSE": 17,
+      "PLAY_ITEM": 3,
+      "GET_STATE": 3,
+      "SET_PLAYING": 2
+    },
+    "allNewAppliedResults": true,
+    "singlePlayItemReceipts": [
+      {
+        "id": "3cb541c5-4212-4698-acea-5a4a2cf8468f",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 3670650,
+        "writeAcknowledgedAfterMs": 83,
+        "accepted": true,
+        "acceptedAfterMs": 90,
+        "finishedAfterMs": 1505,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "44ea0522-66e8-4e3c-9fd8-22baaa8e2f88",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 4105064,
+        "writeAcknowledgedAfterMs": 90,
+        "accepted": true,
+        "acceptedAfterMs": 116,
+        "finishedAfterMs": 5351,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "aca7c205-2b72-48f0-ac3d-5c2f6abb39d0",
+        "operation": "PLAY_ITEM",
+        "source": "mango",
+        "startedMs": 4249692,
+        "writeAcknowledgedAfterMs": 79,
+        "accepted": true,
+        "acceptedAfterMs": 85,
+        "finishedAfterMs": 4933,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      }
+    ]
+  },
+  "networkScope": "During Apple playback both endpoints report no active default network; both Wi-Fi flags0 retained; Pixel mobile_data1. No immediate pre-play connectivity capture, continuous network or strict cellular-off T01 claim. No network-setting action.",
+  "driverFindings": [
+    "Existing album helper included one ordinary phone Play tap; no second Apple play was sent",
+    "Music and Tayori searches stopped without input while their rows were offscreen; explicit fresh scrolling exposed both, not a source browse failure"
+  ],
+  "preserved": {
+    "preferenceHashes": {
+      "controllers": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311",
+      "mango-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "apple-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "source-verification": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    "settings": {
+      "host": {
+        "wifi_on": "0",
+        "mobile_data": "0",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      },
+      "phone": {
+        "wifi_on": "0",
+        "mobile_data": "1",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      }
+    },
+    "pids": {
+      "host": "10544",
+      "phone": "25153"
+    },
+    "finalSourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeProof": false,
+    "phone": "normal Disconnect; help collapsed; foreground cleared",
+    "grants": "all three retained, OS bonds intact",
+    "storage": "card FBB9-E8FE mounted; no mount/download-setting/file action"
+  },
+  "evidence": {
+    "root": "artifacts/current-pair-audio-20261101",
+    "files": 223,
+    "hashManifest": "artifacts/current-pair-audio-20261101/SHA256SUMS.json"
+  },
+  "notProved": [
+    "hearing without explicit owner answer",
+    "full20 selections/source/phone",
+    "100 controls/source/phone",
+    "p95 or acoustic latency",
+    "bit-perfect/output quality",
+    "strict cellular-off T01",
+    "iPhone Bluetooth/audio",
+    "30minute sleep or unplugged hold",
+    "natural vendor indication failure"
+  ]
+}

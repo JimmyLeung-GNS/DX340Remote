@@ -1,5 +1,9 @@
 # Device inventory
 
+Current611/95 pair also verifies three source PLAYING selections and stable sampled song rows; all three fresh listening answers remain pending. Final04:11:50 both sources paused37, grants/settings preserved and phone disconnected. [Source selection evidence](test-results/2026-11-01-current-pair-source-selection.md).
+
+Latest1 November2026: Current installed Companion is now61153223/source9fb503a, verified by original-signer comparison and pulled APK byte match. Host PID10544, Pixel95/PID25153 unchanged. Owner confirms only Windows/Android available now; physical owner Mac/iPhone/signing unavailable for current tests. See [injected timeout evidence](test-results/2026-11-01-injected-indication-recovery.md). Older inventory/results below retain their exact binary scope.
+
 ## Current verified inventory —1 November2026
 
 Full goal remains ACTIVE/incomplete. The [acceptance reconciliation](test-results/2026-11-01-acceptance-reconciliation.json) and [current matrix](compatibility-matrix.md) supersede the older checkpoint summaries below. Direct read-only inventory again finds both physical Android devices and confirms their installed APK hashes:
