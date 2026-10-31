@@ -91,7 +91,9 @@
       "status": "PARTIAL",
       "finding": "Both endpoints Wi-Fi0 in BLE cases; Pixel cellular1 keeps strict cellular-off requirement open. Physical iPhone missing.",
       "remainingRequirement": "Both phones connect with Wi-Fi and cellular off.",
-      "evidence": "2026-11-01-interrupted-library.md"
+      "evidence": "2026-11-01-interrupted-library.md",
+      "supplementalEvidence": "2026-11-01-no-active-network-read.md",
+      "supplementalFinding": "Current95 read-only BLE succeeds with both systems reporting no active/default networks in four snapshots each; Settings Wi-Fi off, SIMs Add a network, SIM property ABSENT,NOT_READY. Stored Pixel mobile_data1 remains, so strict cellular-off and physical iPhone are open."
     },
     {
       "id": "T02",
@@ -112,7 +114,9 @@
       "status": "NOT_PASSED",
       "finding": "Earlier4ee read-only ACK/reply p95 Mango160/469ms, Apple168/494ms are scoped. Current95 fresh SD result7777ms misses3s page target; no full control/state/acoustic pass.",
       "remainingRequirement": "ACK p95 below500ms, observed local state below1.5s; cache pages below500ms/uncached below3s measured separately.",
-      "evidence": "2026-11-01-write-ack-timing.md"
+      "evidence": "2026-11-01-write-ack-timing.md",
+      "supplementalEvidence": "2026-11-01-no-active-network-read.md",
+      "supplementalFinding": "Current95 isolated GET_STATE ATT94ms/RESULT322ms is one read, not a p95/control/audio pass."
     },
     {
       "id": "T05",
@@ -226,5 +230,6 @@
       "file": "artifacts/acceptance-reconciliation-20261101/xcode-tool-inventory.json",
       "sha256": "1be147c02380d16b086f0947f8292d83e244533dbc0b2aaa69462857856eff29"
     }
-  ]
+  ],
+  "lastSupplementedAt": "2026-11-01T03:40:00+08:00"
 }

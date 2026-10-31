@@ -1,0 +1,537 @@
+{
+  "recordedAt": "2026-11-01T03:37:35.721941+08:00",
+  "goal": "ACTIVE/incomplete",
+  "status": "VERIFIED_SAMPLED_NO_ACTIVE_NETWORK_READ_ONLY_SUBSET",
+  "strictT01": "NOT_ADJUDICATED_FULL",
+  "host": {
+    "source": "1e3c551de98dba20183c452ea0f0b9f08bed42c9",
+    "sha256": "dc53629d33cecb25fb381d464fe3e55656b35ca5575c32211da3971fbda7e775",
+    "device": "DX340 Android13/API33 eng.iBasso.20260812.181952",
+    "version": "Companion0.1.0/code1",
+    "pid": "4334"
+  },
+  "phone": {
+    "source": "e40b822813573ee93493cf863ea0bde49885a36f",
+    "sha256": "95d29be69f09e90b978a6907e46d2ec9952b5a0676ccd0a7da0d36fa54d06bca",
+    "device": "Pixel9a Android16/API36 CP1A.260405.005",
+    "version": "Remote0.2.0/code2",
+    "pid": "25153",
+    "modelInstanceId": "0baf310c-e141-4cfb-95f4-c16c8b7d459b",
+    "journalCounts": [
+      10,
+      13
+    ],
+    "allPreviousRowsUnchanged": true,
+    "evictions": 0,
+    "newRequests": [
+      {
+        "id": "a2605793-ffd3-463a-a13f-fc368cb9e147",
+        "operation": "HELLO",
+        "source": "mango",
+        "startedMs": 2047506,
+        "writeAcknowledgedAfterMs": 187,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 191,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "60f931f4-807e-4667-b363-4b0616ea2fba",
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "startedMs": 2047698,
+        "writeAcknowledgedAfterMs": 187,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 532,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "a9d8c938-fbc2-4870-b0b4-8fe8748d25ab",
+        "operation": "GET_STATE",
+        "source": "mango",
+        "startedMs": 2154599,
+        "writeAcknowledgedAfterMs": 94,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 322,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      }
+    ]
+  },
+  "network": {
+    "snapshots": [
+      {
+        "device": "host",
+        "sample": "before",
+        "activeDefaultNetwork": "none",
+        "currentNetworks": 0
+      },
+      {
+        "device": "host",
+        "sample": "during",
+        "activeDefaultNetwork": "none",
+        "currentNetworks": 0
+      },
+      {
+        "device": "host",
+        "sample": "after-read",
+        "activeDefaultNetwork": "none",
+        "currentNetworks": 0
+      },
+      {
+        "device": "host",
+        "sample": "after",
+        "activeDefaultNetwork": "none",
+        "currentNetworks": 0
+      },
+      {
+        "device": "phone",
+        "sample": "before",
+        "activeDefaultNetwork": "none",
+        "currentNetworks": 0
+      },
+      {
+        "device": "phone",
+        "sample": "during",
+        "activeDefaultNetwork": "none",
+        "currentNetworks": 0
+      },
+      {
+        "device": "phone",
+        "sample": "after-read",
+        "activeDefaultNetwork": "none",
+        "currentNetworks": 0
+      },
+      {
+        "device": "phone",
+        "sample": "after",
+        "activeDefaultNetwork": "none",
+        "currentNetworks": 0
+      }
+    ],
+    "phoneSimProperty": "ABSENT,NOT_READY",
+    "settingsSimSummary": "Add a network",
+    "settingsWifiSwitchChecked": false,
+    "phoneMobileDataStoredFlag": "1",
+    "networkSettingsChanged": false,
+    "adbReverseTunnels": 0,
+    "installedPhoneRequestsInternetPermission": false
+  },
+  "preserved": {
+    "fourPreferenceHashes": {
+      "controllers": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311",
+      "mango-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "apple-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "source-verification": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    "globalSettings": {
+      "host": {
+        "wifi_on": "0",
+        "mobile_data": "0",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      },
+      "phone": {
+        "wifi_on": "0",
+        "mobile_data": "1",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      }
+    },
+    "pids": {
+      "host": "4334",
+      "phone": "25153"
+    },
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "positions": {
+      "com.ibasso.music": "78991",
+      "com.apple.android.music": "99367"
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "cardMounted": true,
+    "phoneOrdinaryDisconnectHelpCollapsedForegroundCleared": true,
+    "hostForeground": true
+  },
+  "driverNotes": [
+    "Direct NETWORK_OPERATOR_SETTINGS activity returned to Remote; no SIM panel evidence claimed from that route",
+    "Read-only Network and Internet/Internet screens inspected through guarded UI entries; no toggle pressed",
+    "First Refresh player search found no visible action and sent no command; one normal scroll exposed it, then one deliberate refresh"
+  ],
+  "limits": [
+    "Sampled no-network condition, not continuous packet capture, mobile-data-off flag proof or physical iPhone acceptance",
+    "One read-state exchange, not playback/current hearing/100 controls or T04 p95",
+    "Host display/power captured only after the read; no claim that request ran during sleep/no T05 acceptance",
+    "Prior failed hold5024 remains terminal/zero samples; fresh availability and owner Mac/iPhone access unanswered",
+    "All remaining P0\u2013P9/T01\u2013T18/source/audio/reliability/signing/Watch gates remain explicit"
+  ],
+  "primaryReferences": [
+    "https://developer.android.com/reference/android/Manifest.permission#INTERNET",
+    "https://developer.android.com/reference/android/net/ConnectivityManager#getActiveNetwork()"
+  ],
+  "rawEvidence": [
+    {
+      "file": "artifacts/offline-preflight-20261101/before-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/before-controllers.xml",
+      "sha256": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/before-host-accessibility.txt",
+      "sha256": "926896c1740ddc72f86c392f39ef7f812983ba63d250ccc9e3a221d11a9774bf"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/before-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "3bb716b687b4fd0c21f14f76b6d87ed507d132d62b0fb07f8afd2510a0777213"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/before-host-audio.txt",
+      "sha256": "07957f6f06fe4dcedf12b243d98871ec018dd549de80b0772bf90c4e68c0a55a"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/before-host-bluetooth_manager.txt",
+      "sha256": "4e9ed684cd9d57413d018b27c71b056d5184e825c38f42be0730025e5f8fda57"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/before-host-media_session.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/before-host-package-org.dx340.remote.host.txt",
+      "sha256": "cdf834406baa33881bdd37c844024ba5c7d3be87269c4ec0e56ba3c08a41e503"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/before-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/before-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "d0ee537d0354aff2fdc8fe254325f88bd3c8dabab0840b7ea1faac698e2b38cf"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/before-phone-bluetooth_manager.txt",
+      "sha256": "0d601ee091139d82d076e416d871893d06c119dbdd260125b98bf5d8b1f4916f"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/before-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "00d0f8f3a75728ad8c11e6d127143146b0c5d1ccbb002f2ffcf8e8df3152e755"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/before-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/before.json",
+      "sha256": "8bd0980d0d32f1b593dcc09e786367fa72e92458dbc1e0cdf0cedc9c3778e017"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/final-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/final-controllers.xml",
+      "sha256": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/final-host-accessibility.txt",
+      "sha256": "926896c1740ddc72f86c392f39ef7f812983ba63d250ccc9e3a221d11a9774bf"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/final-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "e579e46ba1a94e84a29c70824e213fe039bbab48e669e745875b47e067c80557"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/final-host-audio.txt",
+      "sha256": "97f82695f20e3868f91baea28a068473126f7ae54dfbccb68cd46443531d5522"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/final-host-bluetooth_manager.txt",
+      "sha256": "cc39857fab49960a8e1dbbfba2599bc8f92961a2442d860cf99d10a5bb93747e"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/final-host-media_session.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/final-host-package-org.dx340.remote.host.txt",
+      "sha256": "12cf588c89c7a8fb317bc7abf3ac51b53f6f5a22bfdf3ff85757f670d7da093b"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/final-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/final-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "4f5889b01ee3ce2f286f1021b4c1b30ec9b66a6e4680fd28713643427c1e2fed"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/final-phone-bluetooth_manager.txt",
+      "sha256": "2f49f778821fc8a82a81854f4af2c2643fd8d9483fa723f740f7ffa3df250386"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/final-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "018df3252749cdaa9e3c4468775e186e598b184799e1d66e6fb479582d967466"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/final-setup.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/final-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/final.json",
+      "sha256": "7a58997f79b15db1434d8be09b4da34b07ab2c945e8b4460b63b7518ca21666a"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/host-connectivity-after-read.txt",
+      "sha256": "eecfaef1e617fafa0a6c7c2b5f135099bfeee5a32aee5d0176f191aec46848cc"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/host-connectivity-after.txt",
+      "sha256": "eecfaef1e617fafa0a6c7c2b5f135099bfeee5a32aee5d0176f191aec46848cc"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/host-connectivity-before.txt",
+      "sha256": "eecfaef1e617fafa0a6c7c2b5f135099bfeee5a32aee5d0176f191aec46848cc"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/host-connectivity-during.txt",
+      "sha256": "eecfaef1e617fafa0a6c7c2b5f135099bfeee5a32aee5d0176f191aec46848cc"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/host-display-after-read.txt",
+      "sha256": "136f160d3866af73e9d8af1de2d919aa8757c1be99b000a86d4804dc42673463"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/host-power-after-read.txt",
+      "sha256": "3d622e8f6247dc4bfdeb8238662dcacd516021e86970c0ed8af3f8c95a5fae81"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/internet-before.xml",
+      "sha256": "e5b67151e7f30053e2bb89c182d4b442dda1c6f863ecc6b2fb3ad442cec9b771"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/internet-panel.png",
+      "sha256": "668449b368c3af49217a5c18c2948e4ee8a0f3950a5ae1b8520b263ff9e88bf5"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/internet-panel.xml",
+      "sha256": "d8cc0f2ea7be3be19bcef56871ec0359d8deaa7ce4ebec75acc6970590e25540"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/network-settings.png",
+      "sha256": "fc551013bf164424d8488485639b6756687729ba5471257604261f47be230d5d"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/network-settings.xml",
+      "sha256": "e5b67151e7f30053e2bb89c182d4b442dda1c6f863ecc6b2fb3ad442cec9b771"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-connect-wait-0.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-export-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-export-setup-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-export-setup-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-player-after.xml",
+      "sha256": "dec98d763de90a6d731eae9afcae6d0202caaa096ba666382603aff5468b9ac3"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-player-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-player-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-read-visible-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-read-visible-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-read-visible-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-read-wait-0.xml",
+      "sha256": "dec98d763de90a6d731eae9afcae6d0202caaa096ba666382603aff5468b9ac3"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-read-wait-1.xml",
+      "sha256": "dec98d763de90a6d731eae9afcae6d0202caaa096ba666382603aff5468b9ac3"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-read-wait-2.xml",
+      "sha256": "dec98d763de90a6d731eae9afcae6d0202caaa096ba666382603aff5468b9ac3"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-read-wait-3.xml",
+      "sha256": "dec98d763de90a6d731eae9afcae6d0202caaa096ba666382603aff5468b9ac3"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-read-wait-4.xml",
+      "sha256": "dec98d763de90a6d731eae9afcae6d0202caaa096ba666382603aff5468b9ac3"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-read-wait-5.xml",
+      "sha256": "dec98d763de90a6d731eae9afcae6d0202caaa096ba666382603aff5468b9ac3"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-read-wait-6.xml",
+      "sha256": "dec98d763de90a6d731eae9afcae6d0202caaa096ba666382603aff5468b9ac3"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/no-network-read-wait-7.xml",
+      "sha256": "dec98d763de90a6d731eae9afcae6d0202caaa096ba666382603aff5468b9ac3"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/offline-final-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/offline-final-collapse-before.xml",
+      "sha256": "11752b48a6fbcc216c16bd01a5c7b99b3a2e2df64452c2690b899c68ae75e5c5"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/offline-final-collapse-wait-0.xml",
+      "sha256": "11752b48a6fbcc216c16bd01a5c7b99b3a2e2df64452c2690b899c68ae75e5c5"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/offline-final-disconnect-after.xml",
+      "sha256": "11752b48a6fbcc216c16bd01a5c7b99b3a2e2df64452c2690b899c68ae75e5c5"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/offline-final-disconnect-before.xml",
+      "sha256": "06b617e09eeff7c381367ab50a20f0699a5fcf57ca88112f20c4653948dca7db"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/offline-final-disconnect-wait-0.xml",
+      "sha256": "06b617e09eeff7c381367ab50a20f0699a5fcf57ca88112f20c4653948dca7db"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/offline-final-export-after.xml",
+      "sha256": "06b617e09eeff7c381367ab50a20f0699a5fcf57ca88112f20c4653948dca7db"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/offline-final-export-before.xml",
+      "sha256": "303ea8868cf564991d7a9a925c8e07e212d025549fda59dfafc8418583dbb471"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/offline-final-export-wait-0.xml",
+      "sha256": "303ea8868cf564991d7a9a925c8e07e212d025549fda59dfafc8418583dbb471"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/offline-final-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/offline-final-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/offline-final-help-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/offline-final-phone-report.json",
+      "sha256": "2d09d3de1ea94c874e6128378df963045971e304be92508a9fe493da3849eb47"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/offline-final-scroll-after.xml",
+      "sha256": "303ea8868cf564991d7a9a925c8e07e212d025549fda59dfafc8418583dbb471"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/offline-final-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/offline-final-setup.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/phone-connectivity-after-read.txt",
+      "sha256": "6a00150ea2e77de3bf62ae1edb83858756145d76d2248e748c4fc09892aa737e"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/phone-connectivity-after.txt",
+      "sha256": "af10606c704f55ccce137d9cf70a14ec1fe807afd94fcd15bd5fb8a3f011568f"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/phone-connectivity-before.txt",
+      "sha256": "3de0f134685e603b377e956ebbb842d2b04c62ad780dd28739236e2ae6faa242"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/phone-connectivity-during.txt",
+      "sha256": "4a9f7e8e02b0a594b8d67458533f26d8d59e762bcbba4ac81c3fb310da1e9c89"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/phone-package-before.txt",
+      "sha256": "8d22268935dd4c80da3f39078f715d04a450e60f9309f3687b3c4b77a720d348"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/player-refresh-scroll-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/player-refresh-scroll-before.xml",
+      "sha256": "dec98d763de90a6d731eae9afcae6d0202caaa096ba666382603aff5468b9ac3"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/preflight.json",
+      "sha256": "88c877901da2349db3f15e2fcd671aa48a8361b968a0ea5729ea27ce3445f36d"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/sim-settings.png",
+      "sha256": "b8782b58554b99e20930a8f812d1f9bd77c4efb8524f9ba3b9272760b1abbd78"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/sim-settings.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/offline-preflight-20261101/volumes-final.txt",
+      "sha256": "7f7be54d6ac662c6c253fefac52be59dce97549438b29993566e0dd53c4803a4"
+    }
+  ]
+}
