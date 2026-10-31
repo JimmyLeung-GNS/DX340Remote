@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.*
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothAdapter
 import android.content.ComponentName
 import android.content.Intent
 import android.content.BroadcastReceiver
@@ -45,8 +46,13 @@ class HostService : Service() {
     var status = "Starting"; private set
     var observer: (() -> Unit)? = null
     private var started = false
+    private val radio = HostRadioRecovery()
     private val bonds = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
+            if (intent.action == BluetoothAdapter.ACTION_STATE_CHANGED) {
+                updateRadio(intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR))
+                return
+            }
             if (intent.action == Intent.ACTION_SCREEN_OFF || intent.action == Intent.ACTION_USER_PRESENT) { sources.externalStateChanged(); return }
             if (intent.action != BluetoothDevice.ACTION_BOND_STATE_CHANGED || intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, -1) != BluetoothDevice.BOND_NONE) return
             val device = if (Build.VERSION.SDK_INT >= 33) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE, BluetoothDevice::class.java) else @Suppress("DEPRECATION") intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
@@ -61,15 +67,54 @@ class HostService : Service() {
     override fun onCreate() {
         super.onCreate(); instance = this
         sources = SourceRegistry(this, ComponentName(this, SessionListener::class.java), AppleUiAdapterProvider(this), MangoUiAdapterProvider(this)) { onSourceChanged() }
-        ble = BlePeripheral(this, ::record, { approved.contains(it.address) }, { device ->
+        ble = newPeripheral()
+        val events = IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED).apply {
+            addAction(BluetoothAdapter.ACTION_STATE_CHANGED)
+            addAction(Intent.ACTION_SCREEN_OFF); addAction(Intent.ACTION_USER_PRESENT)
+        }
+        if (Build.VERSION.SDK_INT >= 33) registerReceiver(bonds, events, Context.RECEIVER_EXPORTED) else registerReceiver(bonds, events)
+    }
+    private fun newPeripheral() = BlePeripheral(this, ::record, { approved.contains(it.address) }, { device ->
             authorization.revoke(device.address)
             if (authenticated == device) authenticated = null
             if (pending == device) pending = null
             requestWindows.remove(device.address)
             observer?.invoke()
         }, ::receive)
-        val events = IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED).apply { addAction(Intent.ACTION_SCREEN_OFF); addAction(Intent.ACTION_USER_PRESENT) }
-        if (Build.VERSION.SDK_INT >= 33) registerReceiver(bonds, events, Context.RECEIVER_EXPORTED) else registerReceiver(bonds, events)
+
+    private fun clearTransportAuthorization() {
+        authorization.clear(); authenticated = null; pending = null
+        requestWindows.clear(); main.removeCallbacks(pushState)
+        // Preserve command ledgers and old control grants: an old mutation ID
+        // must remain rejected after fresh authorization in this same host epoch.
+    }
+    private fun updateRadio(adapterState: Int) {
+        if (!HostControlStore.permissionsGranted(this)) {
+            clearTransportAuthorization(); ble.stop(); stopSelf(); return
+        }
+        val state = when (adapterState) {
+            BluetoothAdapter.STATE_OFF -> HostRadioRecovery.State.OFF
+            BluetoothAdapter.STATE_TURNING_OFF -> HostRadioRecovery.State.TURNING_OFF
+            BluetoothAdapter.STATE_TURNING_ON -> HostRadioRecovery.State.TURNING_ON
+            BluetoothAdapter.STATE_ON -> if (getSystemService(BluetoothManager::class.java).adapter?.isEnabled == true)
+                HostRadioRecovery.State.ON else HostRadioRecovery.State.UNKNOWN
+            else -> HostRadioRecovery.State.UNKNOWN
+        }
+        when (radio.update(state, started && HostControlStore(this).enabled)) {
+            HostRadioRecovery.Action.STOP -> {
+                clearTransportAuthorization(); ble.pairingUntil = 0; ble.stop()
+                record("BLUETOOTH_PAUSED: transport closed; turn Bluetooth on to restore saved phone control")
+            }
+            HostRadioRecovery.Action.START -> {
+                clearTransportAuthorization(); ble.stop()
+                // A new callback/queue instance isolates late events from the closed server.
+                ble = newPeripheral()
+                runCatching { ble.start() }.onFailure {
+                    radio.startFailed(); ble.stop(); record("BLE_START_FAILED:${it.message}")
+                }
+            }
+            HostRadioRecovery.Action.NONE -> Unit
+        }
     }
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val start = HostControlStore(this).choice().resolve(intent?.action, HostControlStore.permissionsGranted(this))
@@ -88,8 +133,8 @@ class HostService : Service() {
                 .addAction(Notification.Action.Builder(null, "Stop remote", stop).build()).setOngoing(true).build(), android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE)
             started = true
             sources.start()
-            runCatching { ble.start() }.onFailure { record("BLE_START_FAILED:${it.message}") }
         }
+        updateRadio(getSystemService(BluetoothManager::class.java).adapter?.state ?: BluetoothAdapter.ERROR)
         when (start) {
             HostControlChoice.Start.PAIR -> openPairing()
             HostControlChoice.Start.PROBE -> { sources.refresh(); sources.probeBrowsers(); export() }
@@ -101,7 +146,12 @@ class HostService : Service() {
         // PROBE or a playback action. Explicit Stop and permission loss exit above.
         return START_STICKY
     }
-    fun openPairing() { ble.pairingUntil = SystemClock.elapsedRealtime() + 60000; record("PAIRING_WINDOW:60 seconds; approve OS pairing and controller locally") }
+    fun openPairing() {
+        if (!HostControlStore.permissionsGranted(this) || getSystemService(BluetoothManager::class.java).adapter?.isEnabled != true) {
+            record("BLUETOOTH_OFF: turn Bluetooth on before setting up a new phone"); return
+        }
+        ble.pairingUntil = SystemClock.elapsedRealtime() + 60000; record("PAIRING_WINDOW:60 seconds; approve OS pairing and controller locally")
+    }
     val pairingRemainingMs get() = (ble.pairingUntil - SystemClock.elapsedRealtime()).coerceAtLeast(0)
     val activeControllerAddress get() = authenticated?.address?.takeIf { authorization.current(it) != null }
     fun approve(expectedAddress: String) {
