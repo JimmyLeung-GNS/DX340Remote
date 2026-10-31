@@ -22,6 +22,8 @@ If Queue says **Read-only queue**, choose tracks from **Library**. Some sources 
 
 If browsing asks you to close a dialog, check the music app on the player, handle its prompt locally, then browse again from the phone. The remote leaves source-app prompts for you to decide.
 
+Mango can keep an old SD-folder listing. A fresh SD-root browse may briefly switch the player through Internal Storage and back to reload it. If an old folder was removed, browse again after the error; the remote does not retry that folder action.
+
 **Disconnect** ends phone control and leaves music playing on the player. It keeps the saved approval for next time. **Stop Bluetooth remote** in Companion also stops phone control without pausing the source music app.
 
 ## If connection needs attention

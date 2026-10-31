@@ -1,0 +1,2794 @@
+{
+  "recordedAt": "2026-10-31T19:49:24.284058+08:00",
+  "goalStatus": "ACTIVE/incomplete",
+  "phoneSource": "80d4edc6f2967596be7474a57eb40118558d562f",
+  "hostSource": "230380715b3546f2aed29b42c7a10ddecc7dbd64",
+  "installedApks": {
+    "host": "f0093a110c09661d01669d268d3eef2e2608f28f362e244a21dfcfe54cb88cc9",
+    "phone": "d75540a514bbc484cc1f84462c50b1f9f62b7bd4b15ce4c8ae019c58655acc02"
+  },
+  "stages": [
+    {
+      "name": "baseline644",
+      "priorRecordsUnchanged": 8,
+      "newCount": 18,
+      "operations": {
+        "HELLO": 1,
+        "AUTHORIZE": 1,
+        "BROWSE": 16
+      },
+      "requests": [
+        {
+          "id": "6317232a-7ffd-4acb-af96-e973b186d4e3",
+          "operation": "HELLO",
+          "source": "mango",
+          "startedMs": 799741,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 91,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "6aae2f5f-03f0-4bb0-b885-ed2485ad6455",
+          "operation": "AUTHORIZE",
+          "source": "mango",
+          "startedMs": 799832,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 658,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "0366f020-4521-4e65-bb57-61e64dbf14b2",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 808951,
+          "accepted": true,
+          "acceptedAfterMs": 164,
+          "finishedAfterMs": 756,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "d9dc9043-e547-4598-9478-ec5b82902954",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 814329,
+          "accepted": true,
+          "acceptedAfterMs": 149,
+          "finishedAfterMs": 347,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "d19e3bf0-a847-494b-ae4c-135b4b73af27",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 819382,
+          "accepted": true,
+          "acceptedAfterMs": 168,
+          "finishedAfterMs": 3536,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "5f233824-1ad4-4ccb-a569-fec24579a6f6",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 825173,
+          "accepted": true,
+          "acceptedAfterMs": 133,
+          "finishedAfterMs": 767,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "09749f0b-7927-4763-b706-10e9f0f17408",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 830614,
+          "accepted": true,
+          "acceptedAfterMs": 99,
+          "finishedAfterMs": 297,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "feab368d-01c7-4303-bba1-05bc9b4f7a36",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 835642,
+          "accepted": true,
+          "acceptedAfterMs": 145,
+          "finishedAfterMs": 3605,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "0465fef4-8771-4947-abf6-aaed93b406d7",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 845543,
+          "accepted": true,
+          "acceptedAfterMs": 139,
+          "finishedAfterMs": 8185,
+          "result": "error",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": "UI_ACTION_TIMEOUT"
+        },
+        {
+          "id": "ab6cdb3e-16b3-4434-ba14-b6d617ef7fc9",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 882855,
+          "accepted": true,
+          "acceptedAfterMs": 170,
+          "finishedAfterMs": 806,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "b4271409-b500-4782-aa6d-1ea47a4afa7a",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 888314,
+          "accepted": true,
+          "acceptedAfterMs": 172,
+          "finishedAfterMs": 366,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "88238776-94f3-4791-80c1-844c2829796a",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 893353,
+          "accepted": true,
+          "acceptedAfterMs": 153,
+          "finishedAfterMs": 1032,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "90d1e4cb-16ad-4923-b095-eab4884b97ab",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1007434,
+          "accepted": true,
+          "acceptedAfterMs": 148,
+          "finishedAfterMs": 836,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "e3a043db-750c-4ef6-95d4-5539d99f734e",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1012926,
+          "accepted": true,
+          "acceptedAfterMs": 167,
+          "finishedAfterMs": 365,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "85ffc894-8be6-460e-81d4-cd4c5203b14d",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1018026,
+          "accepted": true,
+          "acceptedAfterMs": 136,
+          "finishedAfterMs": 3502,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "99ac329f-29be-49ee-8c95-19cdfa663ce3",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1023754,
+          "accepted": true,
+          "acceptedAfterMs": 165,
+          "finishedAfterMs": 751,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "0db5c584-072f-4b78-832a-ae96bf687622",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1029199,
+          "accepted": true,
+          "acceptedAfterMs": 129,
+          "finishedAfterMs": 326,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "a642f75d-049f-45a9-b3d8-8e22362db33d",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1034241,
+          "accepted": true,
+          "acceptedAfterMs": 155,
+          "finishedAfterMs": 3519,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        }
+      ],
+      "errors": [
+        {
+          "code": "UI_ACTION_TIMEOUT",
+          "finishedAfterMs": 8185
+        }
+      ],
+      "hostSource": "81b3f6bad5ab68fae8dfd70dce0c64303e3cba3c",
+      "hostApkSha256": "644799cca6da1ceb11775d006512c24a618bf536e94c8e1f831a0624936e0093"
+    },
+    {
+      "name": "firstFix691",
+      "priorRecordsUnchanged": 26,
+      "newCount": 13,
+      "operations": {
+        "HELLO": 1,
+        "AUTHORIZE": 1,
+        "BROWSE": 11
+      },
+      "requests": [
+        {
+          "id": "99dfdad3-2951-4d56-adb7-bf59d279eaec",
+          "operation": "HELLO",
+          "source": "mango",
+          "startedMs": 1248183,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 182,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "80715249-0624-417b-8b43-aa0e6e9f8994",
+          "operation": "AUTHORIZE",
+          "source": "mango",
+          "startedMs": 1248365,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 881,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "a6e9f852-068e-4d2e-acf9-2f18ecbfbac2",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1257266,
+          "accepted": true,
+          "acceptedAfterMs": 166,
+          "finishedAfterMs": 802,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "dd2b5ca4-a96e-4d61-8f04-eadd3e270c52",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1262704,
+          "accepted": true,
+          "acceptedAfterMs": 141,
+          "finishedAfterMs": 336,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "26ec17dc-943c-47f2-9061-2edcfb6c02b2",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1267759,
+          "accepted": true,
+          "acceptedAfterMs": 154,
+          "finishedAfterMs": 8054,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "f0f79b24-3e58-4543-b664-039a17b5ca39",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1281775,
+          "accepted": true,
+          "acceptedAfterMs": 131,
+          "finishedAfterMs": 8277,
+          "result": "error",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": "UI_ACTION_TIMEOUT"
+        },
+        {
+          "id": "f25b94ef-3da7-483a-bf2a-6aa8ada8d444",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1300857,
+          "accepted": true,
+          "acceptedAfterMs": 110,
+          "finishedAfterMs": 700,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "b33bcd27-7a25-42ff-8a45-291bf48f9727",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1306264,
+          "accepted": true,
+          "acceptedAfterMs": 164,
+          "finishedAfterMs": 360,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "7cc51698-dede-466b-9076-6e38abd88b1f",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1311294,
+          "accepted": true,
+          "acceptedAfterMs": 155,
+          "finishedAfterMs": 7662,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "96a607d1-e93d-41f9-90e9-82b0fcb8fb4b",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1357666,
+          "accepted": true,
+          "acceptedAfterMs": 150,
+          "finishedAfterMs": 1661,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "07ab6dc5-359d-406e-831c-eb9222d91b15",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1367592,
+          "accepted": true,
+          "acceptedAfterMs": 164,
+          "finishedAfterMs": 805,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "8952ee80-0b43-4a1c-8172-8098ec6c9baf",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1373105,
+          "accepted": true,
+          "acceptedAfterMs": 164,
+          "finishedAfterMs": 360,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "a9df8d68-04f8-46c1-8753-9b8254a0bef7",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1378111,
+          "accepted": true,
+          "acceptedAfterMs": 130,
+          "finishedAfterMs": 8323,
+          "result": "error",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": "UI_ACTION_TIMEOUT"
+        }
+      ],
+      "errors": [
+        {
+          "code": "UI_ACTION_TIMEOUT",
+          "finishedAfterMs": 8277
+        },
+        {
+          "code": "UI_ACTION_TIMEOUT",
+          "finishedAfterMs": 8323
+        }
+      ],
+      "hostSource": "af516c9d25255c5428115b17b07ce2219f4f97c0",
+      "hostApkSha256": "691d53be9c6274fe477ab7500b750102ae90a45a8e3d703669a9261d842b79d0"
+    },
+    {
+      "name": "refinedCf",
+      "priorRecordsUnchanged": 39,
+      "newCount": 13,
+      "operations": {
+        "HELLO": 1,
+        "AUTHORIZE": 1,
+        "BROWSE": 11
+      },
+      "requests": [
+        {
+          "id": "5d5a0b16-5dcf-47f9-a29d-6e9aa1698d5e",
+          "operation": "HELLO",
+          "source": "mango",
+          "startedMs": 1513989,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 121,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "2532778c-3b08-4aec-bdb1-331d0daf1081",
+          "operation": "AUTHORIZE",
+          "source": "mango",
+          "startedMs": 1514111,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 828,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "0d103628-bf2b-438c-b0c0-bdfea4fabc24",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1522943,
+          "accepted": true,
+          "acceptedAfterMs": 142,
+          "finishedAfterMs": 774,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "d0efdd83-2613-460e-8742-73073df3f4fd",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1528396,
+          "accepted": true,
+          "acceptedAfterMs": 144,
+          "finishedAfterMs": 345,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "95239270-e09c-4cd9-a08a-f0191a9ecf54",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1533428,
+          "accepted": true,
+          "acceptedAfterMs": 132,
+          "finishedAfterMs": 7302,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "e68d888a-e390-4d55-9aa2-84a682d9f113",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1548053,
+          "accepted": true,
+          "acceptedAfterMs": 135,
+          "finishedAfterMs": 8182,
+          "result": "error",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": "UI_ACTION_TIMEOUT"
+        },
+        {
+          "id": "db4325d4-f92c-45ef-8a81-d8fdf421df70",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1576963,
+          "accepted": true,
+          "acceptedAfterMs": 85,
+          "finishedAfterMs": 674,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "5b5f355e-eaf4-462a-8608-6b6fb658701a",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1582314,
+          "accepted": true,
+          "acceptedAfterMs": 145,
+          "finishedAfterMs": 353,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "cbf14995-02fb-4162-b757-c9ab4bc1c473",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1587289,
+          "accepted": true,
+          "acceptedAfterMs": 143,
+          "finishedAfterMs": 6628,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "9e350abc-6b57-4ff7-ad2b-be047b0e198e",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1623302,
+          "accepted": true,
+          "acceptedAfterMs": 156,
+          "finishedAfterMs": 1721,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "22dcf09e-cccb-4a08-9da6-0005aed30d68",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1633100,
+          "accepted": true,
+          "acceptedAfterMs": 158,
+          "finishedAfterMs": 795,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "cd8f35c1-54be-4cfc-9fe9-045e56450113",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1638542,
+          "accepted": true,
+          "acceptedAfterMs": 130,
+          "finishedAfterMs": 321,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "8e2fdc27-0f46-47c1-bfc5-e31d075da295",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1643524,
+          "accepted": true,
+          "acceptedAfterMs": 166,
+          "finishedAfterMs": 8503,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        }
+      ],
+      "errors": [
+        {
+          "code": "UI_ACTION_TIMEOUT",
+          "finishedAfterMs": 8182
+        }
+      ],
+      "hostSource": "8e3131ed57b2e260ee769619dcdcc821bddcfdc8",
+      "hostApkSha256": "cf0205e3e585dff4b9ac3004f33690fa1ae587a4332bf17d7a8d1d911dddcc89"
+    },
+    {
+      "name": "directMenu2e",
+      "priorRecordsUnchanged": 52,
+      "newCount": 13,
+      "operations": {
+        "HELLO": 1,
+        "AUTHORIZE": 1,
+        "BROWSE": 11
+      },
+      "requests": [
+        {
+          "id": "3dacd7a8-cb97-4be3-95d1-0b198932334c",
+          "operation": "HELLO",
+          "source": "mango",
+          "startedMs": 1853675,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 108,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "2d120fd0-8144-4cad-906c-d17c179009ef",
+          "operation": "AUTHORIZE",
+          "source": "mango",
+          "startedMs": 1853784,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 396,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "4bf15cc4-a32a-42a5-b4dd-d42d5d8add7c",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1862227,
+          "accepted": true,
+          "acceptedAfterMs": 109,
+          "finishedAfterMs": 271,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "44180237-0478-4860-a18e-c079f47d9b38",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1867258,
+          "accepted": true,
+          "acceptedAfterMs": 100,
+          "finishedAfterMs": 151,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "742db040-e233-4427-aebb-68b0f04b328b",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1872209,
+          "accepted": true,
+          "acceptedAfterMs": 104,
+          "finishedAfterMs": 6915,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "de3c099f-a89c-4008-8019-3f81419ca470",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1885816,
+          "accepted": true,
+          "acceptedAfterMs": 87,
+          "finishedAfterMs": 8230,
+          "result": "error",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": "UI_ACTION_TIMEOUT"
+        },
+        {
+          "id": "79d9b3f0-b286-49f8-9c8f-8788c3a18d59",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1931105,
+          "accepted": true,
+          "acceptedAfterMs": 80,
+          "finishedAfterMs": 237,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "c9b4f413-83d8-44ab-b188-aa93c25607f2",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1936160,
+          "accepted": true,
+          "acceptedAfterMs": 96,
+          "finishedAfterMs": 146,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "a376788d-cecc-4aaa-a9e5-a78ae80b75db",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1941138,
+          "accepted": true,
+          "acceptedAfterMs": 111,
+          "finishedAfterMs": 6311,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "631abdcf-5180-491f-966f-4de6312cf555",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1988519,
+          "accepted": true,
+          "acceptedAfterMs": 95,
+          "finishedAfterMs": 1849,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "3cca9561-4643-4fa0-9490-26b23a9247c5",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 1998426,
+          "accepted": true,
+          "acceptedAfterMs": 103,
+          "finishedAfterMs": 261,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "207c0594-8c49-403b-a25e-a10dea8ff92e",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 2003414,
+          "accepted": true,
+          "acceptedAfterMs": 81,
+          "finishedAfterMs": 134,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "f7e92a43-10a6-4097-a95d-3f6b087e4010",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 2008445,
+          "accepted": true,
+          "acceptedAfterMs": 113,
+          "finishedAfterMs": 8142,
+          "result": "error",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": "UI_ACTION_TIMEOUT"
+        }
+      ],
+      "errors": [
+        {
+          "code": "UI_ACTION_TIMEOUT",
+          "finishedAfterMs": 8230
+        },
+        {
+          "code": "UI_ACTION_TIMEOUT",
+          "finishedAfterMs": 8142
+        }
+      ],
+      "hostSource": "262f5a3643e0d0cd7665a5b225e996162232c662",
+      "hostApkSha256": "2e130d5101d4a5bc0b243e8c16cbaf8db18d018b207c78fb6b78df5f669cbad9"
+    },
+    {
+      "name": "budgetF009",
+      "priorRecordsUnchanged": 65,
+      "newCount": 13,
+      "operations": {
+        "HELLO": 1,
+        "AUTHORIZE": 1,
+        "BROWSE": 11
+      },
+      "requests": [
+        {
+          "id": "c90e3648-b8d3-42e3-b683-72733cbb0845",
+          "operation": "HELLO",
+          "source": "mango",
+          "startedMs": 2287548,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 155,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "349ddf0c-3873-4a97-9465-5e4c20ed025c",
+          "operation": "AUTHORIZE",
+          "source": "mango",
+          "startedMs": 2287704,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 827,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "b8851a3b-2bd6-4756-a1a3-70f8413448ae",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 2296571,
+          "accepted": true,
+          "acceptedAfterMs": 148,
+          "finishedAfterMs": 786,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "ed0efd83-1371-4938-b049-ba2e36f58d25",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 2302048,
+          "accepted": true,
+          "acceptedAfterMs": 130,
+          "finishedAfterMs": 326,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "eeea41e9-66af-4331-b0c5-1556467a5fe1",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 2307045,
+          "accepted": true,
+          "acceptedAfterMs": 154,
+          "finishedAfterMs": 7760,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "1c07a976-0b30-41ce-8477-378cf6f54d38",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 2321541,
+          "accepted": true,
+          "acceptedAfterMs": 139,
+          "finishedAfterMs": 8333,
+          "result": "error",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": "UI_ACTION_TIMEOUT"
+        },
+        {
+          "id": "c334bce7-97f4-4bca-b189-9d3e272790e1",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 2343430,
+          "accepted": true,
+          "acceptedAfterMs": 139,
+          "finishedAfterMs": 729,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "2ec3cf1c-ad04-40e1-805b-70bfcde50df7",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 2348799,
+          "accepted": true,
+          "acceptedAfterMs": 134,
+          "finishedAfterMs": 328,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "76d6535a-80f3-4995-a18a-6cb4699138b0",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 2353820,
+          "accepted": true,
+          "acceptedAfterMs": 133,
+          "finishedAfterMs": 6471,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "91d04285-f4eb-48e9-88f4-6c238470e77c",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 2401916,
+          "accepted": true,
+          "acceptedAfterMs": 155,
+          "finishedAfterMs": 1771,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "2d80b60e-7252-4370-b501-8b58c78a5364",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 2411744,
+          "accepted": true,
+          "acceptedAfterMs": 125,
+          "finishedAfterMs": 715,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "cc25d31e-2995-4d15-a226-5fc25db8659c",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 2417191,
+          "accepted": true,
+          "acceptedAfterMs": 142,
+          "finishedAfterMs": 338,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "356ed582-31cb-45d9-b942-23e77748760e",
+          "operation": "BROWSE",
+          "source": "mango",
+          "startedMs": 2422216,
+          "accepted": true,
+          "acceptedAfterMs": 137,
+          "finishedAfterMs": 8034,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        }
+      ],
+      "errors": [
+        {
+          "code": "UI_ACTION_TIMEOUT",
+          "finishedAfterMs": 8333
+        }
+      ],
+      "hostSource": "230380715b3546f2aed29b42c7a10ddecc7dbd64",
+      "hostApkSha256": "f0093a110c09661d01669d268d3eef2e2608f28f362e244a21dfcfe54cb88cc9"
+    }
+  ],
+  "totalModelRequests": 78,
+  "modelInstanceId": "60276d32-d73a-4e41-a4c5-be5a895e1228",
+  "zeroEvictions": true,
+  "playbackOrVolumeSent": false,
+  "cases": {
+    "baselineFreshBrowseStillShowsDeletedFolder": true,
+    "allFiveOwnedEmptyFixturesRemoved": true,
+    "originalRootNamesPreserved": true,
+    "latestFreshRootOmitsRemovedFolder": true,
+    "nestedRootRecovered": true,
+    "firstFixNestedFailure": {
+      "error": "UI_ACTION_TIMEOUT",
+      "kind": "finished",
+      "elapsedMs": 8181
+    },
+    "latestNestedTraceFinal": {
+      "error": null,
+      "kind": "finished",
+      "elapsedMs": 7574
+    },
+    "latestRootNavigation": {
+      "reloadDetours": 1,
+      "returns": 1,
+      "storageClicks": 2,
+      "elapsedMs": 6015,
+      "noFolderReplayInRootRefresh": true
+    },
+    "failedDirectMenuTraceFinal": {
+      "error": "UI_ACTION_TIMEOUT",
+      "kind": "finished",
+      "elapsedMs": 8008
+    }
+  },
+  "preservation": {
+    "phonePermissionsUnchanged": true,
+    "phoneExposedBondIdentitiesUnchanged": true,
+    "hostPermissionsUnchanged": true,
+    "hostExposedBondIdentitiesUnchanged": true,
+    "preferencesByteIdentical": true,
+    "settingsUnchanged": true,
+    "phonePidUnchanged": true,
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeProof": false,
+    "phoneDisconnectedForegroundCleared": true,
+    "hostForegroundBothBindings": true,
+    "cardMounted": true,
+    "temporaryFolderAbsent": true
+  },
+  "checks": {
+    "jvm": {
+      "protocol": 55,
+      "controller": 3,
+      "cache": 7,
+      "sources": 118
+    },
+    "newDeadlineTests": 3,
+    "nativeAssemblyLint": "PASS",
+    "ordinarySourceBudgetMs": 8000,
+    "twoStageSdReloadBudgetMs": 10000,
+    "unchangedPhoneReplyBudgetMs": 12000,
+    "unchangedFilePreparationBudgetMs": 20000
+  },
+  "versions": {
+    "pc": "DESKTOP-T9ICUE4 / Windows11 Pro10.0.26300 / PowerShell7.6.5",
+    "phone": "Pixel9a / Android16 API36 / CP1A.260405.005 / shared0.2.0 code2",
+    "host": "DX340 / Android13 API33 / eng.iBasso.20260812.181952 / Companion0.1.0 code1",
+    "mango": "4.1.37 code240",
+    "appleMusic": "6.5.3 code1599"
+  },
+  "signer": {
+    "package": "org.dx340.remote.host",
+    "candidateSha256": "f0093a110c09661d01669d268d3eef2e2608f28f362e244a21dfcfe54cb88cc9",
+    "installedSignerSha256": "24f48aa3566dcf7b65774ee12585191a8a0df9eeff9cc49e9e72c22bacca6e8d",
+    "candidateSignerSha256": "24f48aa3566dcf7b65774ee12585191a8a0df9eeff9cc49e9e72c22bacca6e8d",
+    "sameSigner": true,
+    "note": "Read-only development-key comparison; no install, uninstall, data reset or signing-key migration."
+  },
+  "rawEvidence": [
+    {
+      "file": "artifacts/sd-folder-change-20261031/after-host-enable-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/after-host-enable-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/after-host-enable-host-accessibility.txt",
+      "sha256": "d209ada7d1c85ef62933eed830607c563776358523e1eee7b4bebfe143ff5703"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/after-host-enable-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "6d34912a30e2952a01b19c3dd5f052a7b74af98495b2659dc19c1a3db886b3f5"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/after-host-enable-host-audio.txt",
+      "sha256": "5f82618d9afa408824ee39587e1190213b004fb34d8f34118fcdcfaf53d3ddcc"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/after-host-enable-host-bluetooth_manager.txt",
+      "sha256": "05a8c8dccff823befc1178413d852b8e032192a4d06d2e40b92eba28b690a810"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/after-host-enable-host-media_session.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/after-host-enable-host-package-org.dx340.remote.host.txt",
+      "sha256": "9cfb006fcde174a09ec2e5a41e88493961cc97825a0fb1cf8a7dc74dbb2be514"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/after-host-enable-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/after-host-enable-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "5066083efde393f1b9f6158254e5ef88cee1e22921e3394c0f4976c3893f6cc9"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/after-host-enable-phone-bluetooth_manager.txt",
+      "sha256": "b8e839cafb1177cca7de89e7568870fef9bf0bac4825214206bdfd829c0e0223"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/after-host-enable-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "28c6672ddd68fb03e4efe91320a0e1c9a4171c81c49759e75f75c609ac08c448"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/after-host-enable-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/after-host-enable.json",
+      "sha256": "6ea7946e238debd2f9af0b10073fc452746c0815d2c57dc015f733632227a37e"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/before-host-update-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/before-host-update-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/before-host-update-host-accessibility.txt",
+      "sha256": "e40594e954a7a2c0fba5ea3e89ca9aa800c85d6a4adeb06c79f700c3ddc4b422"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/before-host-update-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "aaddffafb7ebb12a8233238da0acfc014241e589201fa55e0c859714c734a581"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/before-host-update-host-audio.txt",
+      "sha256": "a296a45ae9e60d763679384c6c05a9d87786751f45ebedba1e705669ef3fbc26"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/before-host-update-host-bluetooth_manager.txt",
+      "sha256": "324996cbc131defaf672739b00038143dfa42b2ca0356a66f01ccdf98138b747"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/before-host-update-host-media_session.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/before-host-update-host-package-org.dx340.remote.host.txt",
+      "sha256": "c805b457bb63d62353ac6028d559548a14dd41d070fde5f4a04106f5ee3eed8b"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/before-host-update-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/before-host-update-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "d6365b38fe52993476fe323fc8c6c8c24471e1d851743062a8905fab2825ff78"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/before-host-update-phone-bluetooth_manager.txt",
+      "sha256": "d8b1e840cebd76d624c7cb44861eafeab72841383188d93882033e074cb226ed"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/before-host-update-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "3587bf740746ab3524d92063f9b4a5b7a4ab422ae37962ac276908062ad42dfd"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/before-host-update-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/before-host-update.json",
+      "sha256": "d66e1996597a925086dc50ef0e663bbbd16c2046ef326ed53d7a424b0b41252e"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/bounce-internal-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/bounce-internal-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/bounce-internal-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/bounce-internal-root-before.xml",
+      "sha256": "e309b7a6e4cf2ccec71737fb4b354dfeca6297f143f88a7b9c236f934ac48dc3"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/bounce-internal-stub-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/bounce-internal-stub-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/bounce-sd-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/bounce-sd-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/bounce-sd-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/bounce-sd-root-before.xml",
+      "sha256": "7aedcb01095d65c825d07c93638b4b87028b656280a4a161ff7f300d1443c635"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/bounce-sd-stub-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/bounce-sd-stub-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/bounce-wait-0.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-after-removal-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-after-removal-wait-1.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-after-removal-wait-2.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-fixture-visible.png",
+      "sha256": "9f01a9fe1438ec5c4929975821d83d45d6e55dc37d23b2cbfa21df3fad7f563f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-fixture-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-fixture-wait-1.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-fixture-wait-2.xml",
+      "sha256": "1eca34f228f593e0ea28457d5c7eefe9aae3522b1e5294e139f81f1d64a20abc"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-fixture.json",
+      "sha256": "a2ca9241b9eb087bffc06ac8fa98f6640c1e8085c92ed4aa1cb4ddcf0b16f4cf"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-fresh-folder-recovery.json",
+      "sha256": "316a9fb988610bb6d6f95dba8ae2781421543237d17c8c17600990ad98432773"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-library-after.xml",
+      "sha256": "72fb1bd5a6c4c348c653667fcfc0ac1328062c3cd0d4ca30727ce1715f215ca2"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-library-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-navigation-check.json",
+      "sha256": "dae095a46f658394020a49332867537c47c34978496a804c5ba32ada6e60f97c"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-final-trace-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-final-trace.json",
+      "sha256": "c0d4cd37673df69dbf09f2701f4b80b2b1b4a721adee9d25c8f07e049cae8db0"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-music-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-music-before.xml",
+      "sha256": "775431fa982bee9271eba3f0c6d2326fbb7d33e464462a56a668399e6eea26f0"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-music-find-0.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-music-find-1.xml",
+      "sha256": "775431fa982bee9271eba3f0c6d2326fbb7d33e464462a56a668399e6eea26f0"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-music-scroll-0-after.xml",
+      "sha256": "775431fa982bee9271eba3f0c6d2326fbb7d33e464462a56a668399e6eea26f0"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-music-scroll-0-before.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-music-wait-0.xml",
+      "sha256": "5f4e78bf11bb63e83668817744df419cd3ce7d6b42bd9555a04c8728ca4eb8f9"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-recover-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-recover-root-before.xml",
+      "sha256": "5f4e78bf11bb63e83668817744df419cd3ce7d6b42bd9555a04c8728ca4eb8f9"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-recover-sd-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-recover-sd-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-recover-stub-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-recover-stub-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-root-case.json",
+      "sha256": "2013d274d939f39012a842d6156db246620a4a359c66b64206e9020617f2d1b3"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-root-find-0.xml",
+      "sha256": "5f4e78bf11bb63e83668817744df419cd3ce7d6b42bd9555a04c8728ca4eb8f9"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-root-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-root-wait-1.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-nested-root-wait-2.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-recovery-dx.png",
+      "sha256": "a9ebf83c97c6bbd359dfed819a505eeaceb4c1bfd9c6c7ab17ca6c2f9e0f53e2"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-recovery-phone.png",
+      "sha256": "e9a4e46dd905589cf141b543239cae3bd3dd7ab352f37b2f28b762079978f410"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-recovery-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-recovery-root-before.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-recovery-sd-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-recovery-sd-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-recovery-stub-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-recovery-stub-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-recovery-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-recovery-wait-1.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-recovery-wait-2.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-removed-folder-outcome-labels.json",
+      "sha256": "4c734ec56be05aa37ae571632b363df43dab33121f846f54843e5ca32511aa4e"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-removed-folder-outcome.png",
+      "sha256": "0ef98dfef2a5e5f17c4a73da9dbbd98ff6d1fb809a63e6bf63c5ed6963f81255"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-removed-stale-browse-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-removed-stale-browse-before.xml",
+      "sha256": "1eca34f228f593e0ea28457d5c7eefe9aae3522b1e5294e139f81f1d64a20abc"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-root-sd-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-root-sd-before.xml",
+      "sha256": "72fb1bd5a6c4c348c653667fcfc0ac1328062c3cd0d4ca30727ce1715f215ca2"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-sd-refresh-trace-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-sd-refresh-trace.json",
+      "sha256": "e2dc39f3a5dec882d548cd39942616f5ab3a78801408072f0f99c5e1eec6313f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-sd-root-after-removal.txt",
+      "sha256": "fa166d2f1171690e9f101486779c94742b7017cc588e7b3cae35f89a927a69e7"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-sd-root-before.txt",
+      "sha256": "fa166d2f1171690e9f101486779c94742b7017cc588e7b3cae35f89a927a69e7"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-sd-with-fixture-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-sd-with-fixture-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-setup-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-setup-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-stub-sd-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/budget-stub-sd-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-after-removal-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-after-removal-wait-1.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-after-removal-wait-2.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-fixture-visible.png",
+      "sha256": "27e61b5ea8b1dd43cbba392e093643b9b7f79daa751f355b5084780cf977d48e"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-fixture-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-fixture-wait-1.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-fixture-wait-2.xml",
+      "sha256": "7924aa5d501deb974b183fed974b4228df18f5e57f3cbff7d7b0768680a09301"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-fixture.json",
+      "sha256": "0ff29b915dc13fb0d9503781d865274de6b326dc9acf5d6251639de07a197b6b"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-fresh-folder-recovery.json",
+      "sha256": "316a9fb988610bb6d6f95dba8ae2781421543237d17c8c17600990ad98432773"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-library-after.xml",
+      "sha256": "72fb1bd5a6c4c348c653667fcfc0ac1328062c3cd0d4ca30727ce1715f215ca2"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-library-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-navigation-check.json",
+      "sha256": "6f6de1dc83951660f783d1e6a19175f8a03c1f82a85e06a643e74c52581e78c5"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-failed-dx.png",
+      "sha256": "a9ebf83c97c6bbd359dfed819a505eeaceb4c1bfd9c6c7ab17ca6c2f9e0f53e2"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-failed-trace-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-failed-trace.json",
+      "sha256": "e8218c68d81e035e25d809a0d100ec37d0eebf686ab9b3501b921f9afe6639e8"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-music-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-music-before.xml",
+      "sha256": "aa0ddcc79a72624ebe50c5c91c849ba021769a0542d56a7316aab71d4e478bd8"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-music-find-0.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-music-find-1.xml",
+      "sha256": "aa0ddcc79a72624ebe50c5c91c849ba021769a0542d56a7316aab71d4e478bd8"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-music-scroll-0-after.xml",
+      "sha256": "aa0ddcc79a72624ebe50c5c91c849ba021769a0542d56a7316aab71d4e478bd8"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-music-scroll-0-before.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-music-wait-0.xml",
+      "sha256": "5f4e78bf11bb63e83668817744df419cd3ce7d6b42bd9555a04c8728ca4eb8f9"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-recover-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-recover-root-before.xml",
+      "sha256": "5f4e78bf11bb63e83668817744df419cd3ce7d6b42bd9555a04c8728ca4eb8f9"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-recover-sd-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-recover-sd-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-recover-stub-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-recover-stub-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-root-find-0.xml",
+      "sha256": "5f4e78bf11bb63e83668817744df419cd3ce7d6b42bd9555a04c8728ca4eb8f9"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-root-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-root-wait-1.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-root-wait-2.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-root-wait-3.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-root-wait-4.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-nested-root-wait-5.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-recovery-dx.png",
+      "sha256": "a9ebf83c97c6bbd359dfed819a505eeaceb4c1bfd9c6c7ab17ca6c2f9e0f53e2"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-recovery-phone.png",
+      "sha256": "c496518f6906a9307ee087c6d780dc6554d85047e8dece97c69854ebcf31b5f3"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-recovery-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-recovery-root-before.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-recovery-sd-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-recovery-sd-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-recovery-stub-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-recovery-stub-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-recovery-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-recovery-wait-1.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-recovery-wait-2.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-removed-folder-outcome-labels.json",
+      "sha256": "4c734ec56be05aa37ae571632b363df43dab33121f846f54843e5ca32511aa4e"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-removed-folder-outcome.png",
+      "sha256": "5b5126857b13578533a1e38dc73816b3e39c2dae6ece533f3684351589e15bc3"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-removed-stale-browse-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-removed-stale-browse-before.xml",
+      "sha256": "7924aa5d501deb974b183fed974b4228df18f5e57f3cbff7d7b0768680a09301"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-root-sd-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-root-sd-before.xml",
+      "sha256": "72fb1bd5a6c4c348c653667fcfc0ac1328062c3cd0d4ca30727ce1715f215ca2"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-sd-refresh-trace-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-sd-refresh-trace.json",
+      "sha256": "1521f865be38b155791c9a2f1a892c51db002b1f14c4e04bd9e47637c5a80211"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-sd-root-after-removal.txt",
+      "sha256": "fa166d2f1171690e9f101486779c94742b7017cc588e7b3cae35f89a927a69e7"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-sd-root-before.txt",
+      "sha256": "fa166d2f1171690e9f101486779c94742b7017cc588e7b3cae35f89a927a69e7"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-sd-with-fixture-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-sd-with-fixture-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-setup-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-setup-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-stub-sd-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/direct-stub-sd-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/export-final-disconnect-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/export-final-disconnect-before.xml",
+      "sha256": "91e3e06282f362eeb90e7eeef550eee8fe7498d1bd1aa1957fc249022aa7afb6"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/export-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/export-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/export-help-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/export-help-collapse-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/export-save-after.xml",
+      "sha256": "91e3e06282f362eeb90e7eeef550eee8fe7498d1bd1aa1957fc249022aa7afb6"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/export-save-before.xml",
+      "sha256": "0ecd33819ff9df1b8de082a23ae2cc9ee0dad5c2486af8e2cd46848c44fcd42e"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/export-scroll-after.xml",
+      "sha256": "0ecd33819ff9df1b8de082a23ae2cc9ee0dad5c2486af8e2cd46848c44fcd42e"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/export-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/export-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/export-setup-before.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/final-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/final-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/final-host-accessibility.txt",
+      "sha256": "c5f3290b7ce11fb6d0e4904bf448f80ea4276eb7c3082ce5a80c807f8a111cdf"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/final-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "9db4fefeaf65c21ee3e0daf159b423a76d79315f826c7aa451f71bc989a34ac3"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/final-host-audio.txt",
+      "sha256": "1e0ebc0025cdb04000bbc398a0aae9e63de32d43ecac3d14d2e14adfe92e15ca"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/final-host-bluetooth_manager.txt",
+      "sha256": "2732012bae028aa5afa0678364e3d0bce5c4374b88f41424231df592c9b32896"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/final-host-media_session.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/final-host-package-org.dx340.remote.host.txt",
+      "sha256": "6e7399909cfd3c60faadc394011178bee92926896b28311034bba6b5e0dcb1f3"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/final-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/final-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "e34188490d28886ffff98b83255c0532346dbecab7f047d9c5c56289944ed71a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/final-phone-bluetooth_manager.txt",
+      "sha256": "37898f8125a60dbfd21df8cab4496eafb9c8667475cfceb24202f85369b0307d"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/final-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "218ebea037d72107589fdb2c75217b7a1ceece142a90508dec2964b23a18268c"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/final-sd-root.txt",
+      "sha256": "fa166d2f1171690e9f101486779c94742b7017cc588e7b3cae35f89a927a69e7"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/final-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/final-volumes.txt",
+      "sha256": "7f7be54d6ac662c6c253fefac52be59dce97549438b29993566e0dd53c4803a4"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/final.json",
+      "sha256": "fb608737141b48879f78616529aa348e2c3d7dce1f67ea3a2c804c34ee825ec0"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/first-fix-nested-timeout-trace-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/first-fix-nested-timeout-trace.json",
+      "sha256": "29fccc4fe03bdb2c03c9775355ab2cc76ac95cd20ffca98a04b58fec95dccfff"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-after-removal-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-after-removal-wait-1.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-after-removal-wait-2.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-fixture-visible.png",
+      "sha256": "74cea6c933068d83939ea24f398c5aa870ccd7f4264dd07895ce861590c265a0"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-fixture-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-fixture-wait-1.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-fixture-wait-2.xml",
+      "sha256": "2f34ef0e9433c53c7631f98f0632af9ad38aa1ea5290d032a67bf618de3afeee"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-fixture.json",
+      "sha256": "7ab1e440face73d965327ee19fba0446b1c00b763d442b661aa789f75f837f27"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-fresh-folder-recovery.json",
+      "sha256": "316a9fb988610bb6d6f95dba8ae2781421543237d17c8c17600990ad98432773"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-library-after.xml",
+      "sha256": "72fb1bd5a6c4c348c653667fcfc0ac1328062c3cd0d4ca30727ce1715f215ca2"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-library-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-navigation-check.json",
+      "sha256": "1500bd47880b7bb1d9049e6f52433f0ac7c9d958e6ce60c45cb1a8b513c55b93"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-recovery-dx.png",
+      "sha256": "a9ebf83c97c6bbd359dfed819a505eeaceb4c1bfd9c6c7ab17ca6c2f9e0f53e2"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-recovery-phone.png",
+      "sha256": "6a0a3c2e880ee55e6f5a1c9a95e6b0806a53dd0a7391f930a27a38af4fffa161"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-recovery-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-recovery-root-before.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-recovery-sd-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-recovery-sd-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-recovery-stub-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-recovery-stub-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-recovery-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-recovery-wait-1.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-recovery-wait-2.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-removed-folder-outcome-labels.json",
+      "sha256": "4c734ec56be05aa37ae571632b363df43dab33121f846f54843e5ca32511aa4e"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-removed-folder-outcome.png",
+      "sha256": "9f23215f6a0654f9e34ab0e1f0c09be8edf3b0aaee3c8e997446f130782b7fe5"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-removed-stale-browse-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-removed-stale-browse-before.xml",
+      "sha256": "2f34ef0e9433c53c7631f98f0632af9ad38aa1ea5290d032a67bf618de3afeee"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-root-sd-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-root-sd-before.xml",
+      "sha256": "72fb1bd5a6c4c348c653667fcfc0ac1328062c3cd0d4ca30727ce1715f215ca2"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-sd-refresh-trace-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-sd-refresh-trace.json",
+      "sha256": "cdd2b7ed462ed1d18ffb66e7d1e4a13f48085fefaaa04e1ca89055528a80437c"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-sd-root-after-removal.txt",
+      "sha256": "fa166d2f1171690e9f101486779c94742b7017cc588e7b3cae35f89a927a69e7"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-sd-root-before.txt",
+      "sha256": "fa166d2f1171690e9f101486779c94742b7017cc588e7b3cae35f89a927a69e7"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-sd-with-fixture-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-sd-with-fixture-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-setup-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-setup-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-stub-sd-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixed-stub-sd-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixture-visible.png",
+      "sha256": "b8bc94a4eef383bbb647168da03adf9422204ee832738754bafc54c9a6a9a2eb"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fixture.json",
+      "sha256": "fccad07f67953aaa2d9ca7b7b875c3ca968d9ec8089fb30bb35f17fbe04e2de1"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-after-removal-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-after-removal-wait-1.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-after-removal-wait-2.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-fixture-wait-0.xml",
+      "sha256": "e309b7a6e4cf2ccec71737fb4b354dfeca6297f143f88a7b9c236f934ac48dc3"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-library-after.xml",
+      "sha256": "cab32c3dbb5f75c7b765d9058396c7c2c46d2d2ac66d3c39367e61ff69358a58"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-library-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-menu-tree-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-menu-tree.json",
+      "sha256": "1e50ca1548ac850807b1a11fc221c1b81c9756c8113e40e7901fb6315973e01d"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-recovery-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-recovery-root-before.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-recovery-sd-after.xml",
+      "sha256": "e309b7a6e4cf2ccec71737fb4b354dfeca6297f143f88a7b9c236f934ac48dc3"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-recovery-sd-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-recovery-stub-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-recovery-stub-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-refresh-internal-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-refresh-internal-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-removed-stale-browse-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-removed-stale-browse-before.xml",
+      "sha256": "e309b7a6e4cf2ccec71737fb4b354dfeca6297f143f88a7b9c236f934ac48dc3"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-root-internal-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-root-internal-before.xml",
+      "sha256": "cab32c3dbb5f75c7b765d9058396c7c2c46d2d2ac66d3c39367e61ff69358a58"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-root-sd-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-root-sd-before.xml",
+      "sha256": "7aedcb01095d65c825d07c93638b4b87028b656280a4a161ff7f300d1443c635"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-root-tree-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-root-tree.json",
+      "sha256": "b40a8762140894d9c639c7002f43a763cc541e65efcfc5764c07f8afc669e878"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-sd-with-fixture-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-sd-with-fixture-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-setup-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-setup-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-stub-internal-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-stub-internal-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-stub-sd-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/folder-stub-sd-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/fresh-folder-recovery.json",
+      "sha256": "01419c9285f691a9dc53c2337aeed776d645d7308ad3c8d55654a0413d8343d8"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/host-after-budget-upgrade.png",
+      "sha256": "823d77566e7ef408079ac8682aad5737f4333689e1febc372f675c93e2262094"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/host-after-direct-menu-upgrade.png",
+      "sha256": "8e002faa008082e25f85011d7bc220146656070a3914e6f800a80bd5e597898e"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/host-after-refined-upgrade.png",
+      "sha256": "29e310545f292f92c96f7250ea52154b6417f291dc1133fd391b82fcdac3a2b0"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/host-after-upgrade.png",
+      "sha256": "d1d361f4d0bba030a9a270c2dd4b9ca2663a441487b0f522a56e2afe0657192f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/host-installed-budget.apk",
+      "sha256": "f0093a110c09661d01669d268d3eef2e2608f28f362e244a21dfcfe54cb88cc9"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/host-installed-direct-before-replacement.apk",
+      "sha256": "2e130d5101d4a5bc0b243e8c16cbaf8db18d018b207c78fb6b78df5f669cbad9"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/host-installed-final.apk",
+      "sha256": "cf0205e3e585dff4b9ac3004f33690fa1ae587a4332bf17d7a8d1d911dddcc89"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/host-installed-fixed.apk",
+      "sha256": "691d53be9c6274fe477ab7500b750102ae90a45a8e3d703669a9261d842b79d0"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/installed-budget-match.json",
+      "sha256": "c997bf56793c0f9b547e9914a8f4ca70ea6eaf2ff2d9497eba0f1a961dc9b2e5"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/installed-final-match.json",
+      "sha256": "00193fff56699ef98350a621e3de64600c1c3984bfadfe616109ec398c1b95d0"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/installed-host-match.json",
+      "sha256": "caa89acccb3e05a228b91114a60f5e7a5f6b20edc2ed7f88dda576eddd09ef6b"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/jvm-results-budget.json",
+      "sha256": "6f0bc700560c412fbc4f20e4fe9b59a5fc6dd88bc3bf96fcc3500d7e1f63688d"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/manual-menu-investigation.png",
+      "sha256": "7feafb77cc0170d03d246fefae97afd0854c98964eb3bb9424687f482c13c470"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/manual-sd-reopen.png",
+      "sha256": "180886b7243047111c38250562c5342ef25ba4a790ac349d84c4701a1d26eee3"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/native-build-budget.txt",
+      "sha256": "c7ea07694fd34ff43327cd22a9577c343e76eb91d3539fc5d3393e31a5cfe20e"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/native-build-direct-menu.txt",
+      "sha256": "8a03a35fdbab317bf2e35b094485a75ec82a78b0d6b0b2aa1f19bb87514362bc"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/native-build-refined.txt",
+      "sha256": "71410b31cf9fbb6e7e2085d4aedbe0f75b394aa5e881ddef00caf357c7eecf1f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/native-build.txt",
+      "sha256": "dd1f00e959d819e3fe788d361d92dd2870a2ef348e20654356af246717d18a99"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-music-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-music-before.xml",
+      "sha256": "aa0ddcc79a72624ebe50c5c91c849ba021769a0542d56a7316aab71d4e478bd8"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-music-find-0.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-music-find-1.xml",
+      "sha256": "aa0ddcc79a72624ebe50c5c91c849ba021769a0542d56a7316aab71d4e478bd8"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-music-scroll-0-after.xml",
+      "sha256": "aa0ddcc79a72624ebe50c5c91c849ba021769a0542d56a7316aab71d4e478bd8"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-music-scroll-0-before.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-music-wait-0.xml",
+      "sha256": "5f4e78bf11bb63e83668817744df419cd3ce7d6b42bd9555a04c8728ca4eb8f9"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-recover-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-recover-root-before.xml",
+      "sha256": "5f4e78bf11bb63e83668817744df419cd3ce7d6b42bd9555a04c8728ca4eb8f9"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-recover-sd-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-recover-sd-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-recover-stub-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-recover-stub-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-root-find-0.xml",
+      "sha256": "5f4e78bf11bb63e83668817744df419cd3ce7d6b42bd9555a04c8728ca4eb8f9"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-root-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-root-wait-1.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-root-wait-2.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-root-wait-3.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-root-wait-4.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/nested-root-wait-5.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/phone-after-direct-fix.json",
+      "sha256": "43a8ff012d3e7d6da4ae542d9d32b4cf22e0870706b53ddd9d0ef2bbd6d85838"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/phone-after-first-fix.json",
+      "sha256": "41ccee7e12632998d615fbca35fc8900ff277112b02254ce566266a0d3ee15c2"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/phone-after-refined-fix.json",
+      "sha256": "9404c565e6d908e3604b9353ae72233eec53993c3fb7932dc745a94d2fbc989f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/phone-before-host-update.json",
+      "sha256": "373b0dec2c6984fc4f54292eeb0afc2b7fc01928b26a9ba1c6e6584101b2cec9"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/phone-final-report.json",
+      "sha256": "b706e41080fb3aa1e330ef131fc0d4149b3ff034390bdb359b4cfaaed40611a0"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/phone-installed-budget.apk",
+      "sha256": "d75540a514bbc484cc1f84462c50b1f9f62b7bd4b15ce4c8ae019c58655acc02"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/phone-installed-final.apk",
+      "sha256": "d75540a514bbc484cc1f84462c50b1f9f62b7bd4b15ce4c8ae019c58655acc02"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/preflight-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/preflight-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/preflight-host-accessibility.txt",
+      "sha256": "e40594e954a7a2c0fba5ea3e89ca9aa800c85d6a4adeb06c79f700c3ddc4b422"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/preflight-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "dd42e6f4e5726693733f80c63d26d069f8b416a703819478bcd01f9056e915fe"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/preflight-host-audio.txt",
+      "sha256": "2369a9199593488927b50e99b3576174e6b1ec18d1d8ddce4db4142c56b1c228"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/preflight-host-bluetooth_manager.txt",
+      "sha256": "efd1e521bdfadc4a8be824fb9cfb1a6f0ce80e72a9a5660e971d0b2b13d9069a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/preflight-host-media_session.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/preflight-host-package-org.dx340.remote.host.txt",
+      "sha256": "7ce79aff08e6ca573965d52bc47e98d01c5ed6328caacc4d0b1b6b9ed81ae5fd"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/preflight-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/preflight-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "037866531a4eb4a37d65b519456922d278abec6e008cbb61b563321ec62746bd"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/preflight-phone-bluetooth_manager.txt",
+      "sha256": "50cd22367b9a1cffe827282424ebec5dffc485770fdb132394d71875d3addee5"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/preflight-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "89866441037a3a81c5f45b8afa667ad6b9ffaf2b5926fe5159f0966aa5ef2756"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/preflight-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/preflight.json",
+      "sha256": "4e030749372c1d62d32135309c5838200a146c35d93f878d74519c851a54a31b"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/recovery-dx.png",
+      "sha256": "060aaea86d2cc1ffaab4970fe0d3c9fe82eb996fc453010b13539634e1a67f10"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/recovery-phone.png",
+      "sha256": "218fede8879b4e109729cb8e94a20f9fa85a8550f541a152b82d63cbd761bc0e"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-after-removal-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-after-removal-wait-1.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-after-removal-wait-2.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-final-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-final-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-final-host-accessibility.txt",
+      "sha256": "86aeb7cffcbf069de65c41e1a34c286b5b93cf0be7af5742a9352d19305c9139"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-final-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "a16e7d3edaa919f5d415f1c717220a92a38bbfcf19559d1f4751804ba0b6c104"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-final-host-audio.txt",
+      "sha256": "3d14241927e2ebee6fab21319ca0e8a17ded10260c1edcf0cf77e50ba6b51b81"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-final-host-bluetooth_manager.txt",
+      "sha256": "f0e838778d59b0e94d4b2c7ee6bdd43088105e8f2a67f62e8b0f659b5e92ebc1"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-final-host-media_session.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-final-host-package-org.dx340.remote.host.txt",
+      "sha256": "9983f4e3c623e8c30959b3df07b8f243858d78d7d3edb6a6892607c06be35978"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-final-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-final-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "6a075eec28694d568554fea2f29f6aa674cc420cee8b1e24f7d479873ba3a810"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-final-phone-bluetooth_manager.txt",
+      "sha256": "68499346567317cb8baab7ae7fba6d07a29923f0bd77851ce64b130fd94106bd"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-final-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "c2b020cc3a30c9dafdad3063b58fd55a0a7e1afeaddf98b1253b96dbaa13faf6"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-final-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-final.json",
+      "sha256": "3cf88f0db564238729a469f7472ad62e4ee76eec5d5b22719e97df24a6d6d8f7"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-fixture-visible.png",
+      "sha256": "3e239600006d49e292591d2a3fc535e1538b4f8677ef45a1cf41e020481d5bf1"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-fixture-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-fixture-wait-1.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-fixture-wait-2.xml",
+      "sha256": "f5199bb6c51289bd1a9a48e276aa02d2eb5ec09b63bb011f4dbd4dc0a6031b1c"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-fixture.json",
+      "sha256": "7e70ba0a0775e016d73fedc93640a5813ff559bb76e3ca044abffcbc7936e047"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-fresh-folder-recovery.json",
+      "sha256": "316a9fb988610bb6d6f95dba8ae2781421543237d17c8c17600990ad98432773"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-library-after.xml",
+      "sha256": "72fb1bd5a6c4c348c653667fcfc0ac1328062c3cd0d4ca30727ce1715f215ca2"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-library-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-navigation-check.json",
+      "sha256": "790ac1af6d420153338dab3173b820b6a25000b9e7234aa45c3bc833b521938f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-final-trace-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-final-trace.json",
+      "sha256": "9e966207a7b7213204adf6a47209acfabd799d91f1ef0b74e5e083d7f206955f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-music-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-music-before.xml",
+      "sha256": "775431fa982bee9271eba3f0c6d2326fbb7d33e464462a56a668399e6eea26f0"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-music-find-0.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-music-find-1.xml",
+      "sha256": "775431fa982bee9271eba3f0c6d2326fbb7d33e464462a56a668399e6eea26f0"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-music-scroll-0-after.xml",
+      "sha256": "775431fa982bee9271eba3f0c6d2326fbb7d33e464462a56a668399e6eea26f0"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-music-scroll-0-before.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-music-wait-0.xml",
+      "sha256": "5f4e78bf11bb63e83668817744df419cd3ce7d6b42bd9555a04c8728ca4eb8f9"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-recover-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-recover-root-before.xml",
+      "sha256": "5f4e78bf11bb63e83668817744df419cd3ce7d6b42bd9555a04c8728ca4eb8f9"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-recover-sd-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-recover-sd-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-recover-stub-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-recover-stub-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-root-case.json",
+      "sha256": "2013d274d939f39012a842d6156db246620a4a359c66b64206e9020617f2d1b3"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-root-find-0.xml",
+      "sha256": "5f4e78bf11bb63e83668817744df419cd3ce7d6b42bd9555a04c8728ca4eb8f9"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-root-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-root-wait-1.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-nested-root-wait-2.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-recovery-dx.png",
+      "sha256": "a9ebf83c97c6bbd359dfed819a505eeaceb4c1bfd9c6c7ab17ca6c2f9e0f53e2"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-recovery-phone.png",
+      "sha256": "e0b62815b3321cde6f58af028ae27ce6048b5328abc6005440d60105fe01af49"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-recovery-root-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-recovery-root-before.xml",
+      "sha256": "659119479275526ade33ffe0fe1981c428d78fc536cc1d0b4b5c5efd493d9659"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-recovery-sd-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-recovery-sd-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-recovery-stub-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-recovery-stub-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-recovery-wait-0.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-recovery-wait-1.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-recovery-wait-2.xml",
+      "sha256": "9069aea1952b3a26a8c504b27a25b757b2ee24a406be755283c4ec57070e5060"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-removed-folder-outcome-labels.json",
+      "sha256": "4c734ec56be05aa37ae571632b363df43dab33121f846f54843e5ca32511aa4e"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-removed-folder-outcome.png",
+      "sha256": "c6ab1a5ad40f97b2fdc14963f78980d05c934dd03fc6a0109a7d935deada60ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-removed-stale-browse-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-removed-stale-browse-before.xml",
+      "sha256": "f5199bb6c51289bd1a9a48e276aa02d2eb5ec09b63bb011f4dbd4dc0a6031b1c"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-root-sd-after.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-root-sd-before.xml",
+      "sha256": "72fb1bd5a6c4c348c653667fcfc0ac1328062c3cd0d4ca30727ce1715f215ca2"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-sd-refresh-trace-broadcast.txt",
+      "sha256": "332cc959a95bd8f931ec030f6b78a7956a3748e464dd66a45753d90ef271650d"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-sd-refresh-trace.json",
+      "sha256": "ab618c835047a7d47f511f582481dbac8132f85ef1d807c07df789dbd2638876"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-sd-root-after-removal.txt",
+      "sha256": "fa166d2f1171690e9f101486779c94742b7017cc588e7b3cae35f89a927a69e7"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-sd-root-before.txt",
+      "sha256": "fa166d2f1171690e9f101486779c94742b7017cc588e7b3cae35f89a927a69e7"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-sd-with-fixture-after.xml",
+      "sha256": "ff93ba374474c2aba7edab5cbf03ba1f53f2dffb5f65e5c936c7056e1d0e98ec"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-sd-with-fixture-before.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-setup-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-setup-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-stub-sd-after.xml",
+      "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/refined-stub-sd-before.xml",
+      "sha256": "eb7703ab6bf10de94a20839e40f942f438eed1da8ba7dd6da0f949d35381d36a"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/removed-folder-outcome-labels.json",
+      "sha256": "4c734ec56be05aa37ae571632b363df43dab33121f846f54843e5ca32511aa4e"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/removed-folder-outcome.png",
+      "sha256": "1cdd156cd077a4eae55e672fc768d7b0fc4b53a56083db85155b245860c00192"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/sd-root-after-removal.txt",
+      "sha256": "fa166d2f1171690e9f101486779c94742b7017cc588e7b3cae35f89a927a69e7"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/sd-root-before.txt",
+      "sha256": "fa166d2f1171690e9f101486779c94742b7017cc588e7b3cae35f89a927a69e7"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/signing-manifest-budget.json",
+      "sha256": "2f315bc9e23b66e150c92c98441e45cf2403a199133e4f95dd2250a54051dc3b"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/signing-manifest-direct-menu.json",
+      "sha256": "e31e2ab10290a53ebc397a52bdd981da3c6d0a869118c7d7bf967965a8061514"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/signing-manifest-refined.json",
+      "sha256": "71575d44c0457e3314c8deefa1173fa47b057541430cc072c3477996483ac4a7"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/signing-manifest.json",
+      "sha256": "98620c7110e9eb6c43db7a10e88beb65f9532457eb91d08b726e58c25c5eaee1"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/storage-bounce-case.json",
+      "sha256": "4591c219dccdce573f8b1266414016b8e4494965f408d4e73c8e12d0dfd2b347"
+    },
+    {
+      "file": "artifacts/sd-folder-change-20261031/verified-summary.json",
+      "sha256": "7a93bd4aba323d2f7fc607f86f8b5c9d958e335b1060850107fbccccebfedc1b"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-10-31T19:17:28.245122+08:00",
+  "recordedAt": "2026-10-31T19:28:13.042579+08:00",
   "status": "VERIFIED Android paused subset; full goal ACTIVE/incomplete",
   "versions": {
     "pc": "DESKTOP-T9ICUE4 / Windows11 Pro10.0.26300 / PowerShell7.6.5",
@@ -196,15 +196,253 @@
       "runId": 41195490341,
       "name": "Shared phone interface verification",
       "headSha": "80d4edc6f2967596be7474a57eb40118558d562f",
-      "status": "in_progress",
-      "conclusion": null,
-      "url": "https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/41195490341"
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/41195490341",
+      "archiveInspected": true,
+      "artifactId": 13040693576,
+      "archiveSha256": "2c4b08c2088316516c781880cf4016ba3b1dc0c4fafa593c520d48ffb0a9429e",
+      "flutterTests": 76,
+      "captureGuards": 12,
+      "nativeUIKitReportSheet": "presented, matching model/export; ordinary build restored and final frame manually inspected",
+      "macOS": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.2\nBuildVersion:\t\t25G83",
+      "xcode": "Xcode 26.6\nBuild version 17F113",
+      "simulator": [
+        "com.apple.CoreSimulator.SimRuntime.iOS-26-5",
+        "iPhone Air"
+      ],
+      "description": "[Shared iPhone job41195490341](https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/41195490341) is terminal SUCCESS at exact source80d4edc. Artifact13040693576 ZIP SHA256 `2c4b08c2088316516c781880cf4016ba3b1dc0c4fafa593c520d48ffb0a9429e` is verified and safely extracted. Archive inspection confirms76 Flutter tests/analyze,12 capture guards, ordinary/Setup/browsing/handoff/volume/report-probe simulator builds and final ordinary rebuild/relaunch. The actual native UIKit export-sheet result matches its export model; the restored ordinary frame was inspected and shows Bluetooth unavailable/no track, not a connected fixture. Hosted macOS26.6.2/25G83, Xcode26.6/17F113, iPhone Air/iOS26.5 simulator. This is not owner signing, physical iPhone Bluetooth or audio. The run is closed; no further polling. Prior5f Apple jobs remain closed with their own scopes.",
+      "shortDescription": "shared iPhone41195490341 SUCCESS/archive13040693576 verified (76 Flutter/12 guards/native report sheet/ordinary restoration), simulator only; no polling"
     }
   ],
   "rawEvidence": [
     {
       "file": "artifacts/sd-dialog-guidance-20261031/blocked-guidance-case.json",
       "sha256": "2bd67997a43167bb0ec90cad2bd13b5b36b97078c57c3d83a0c84264de58438f"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-bootstrap.txt",
+      "sha256": "3541e90aa920e757e0a0d7caf7c34b487e385898e7439905f295f0e7301a920a"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-browsing-fixture-launch.txt",
+      "sha256": "4cefc6b18f533c1d7e38887627b4a8df747fc699dbb6ccc891fa8600cc42f9df"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-capture-matcher-tests.txt",
+      "sha256": "2072ea10acb601303ef8f21be984d3cfc065831ff61278198aa4b2b3955354ce"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-capture-readiness.txt",
+      "sha256": "57558746ced84c86ddb57f90b0bdfc7e6424bacf2a90bf4556119ab1ce0880d4"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-handoff-fixture-launch.txt",
+      "sha256": "13327d258a7979184a618e04afa24697d357d5a84d6f7b5e68dcd494d792fd8e"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-ios-analyze.txt",
+      "sha256": "0507e5c5dfae1431b72a0065ce0654e0ed4bbcdb11ad4be6714dc8f27d0531b5"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-ios-browsing-fixture-build.txt",
+      "sha256": "a1103a742a41b273850f95fbf6dc6df7a503a426eb573956d84d11eca3471ca0"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-ios-build.txt",
+      "sha256": "cab6d90db576ff4895b11dabb10ac02ab74ea63c1daf3694b4c95a5ab898a79d"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-ios-handoff-fixture-build.txt",
+      "sha256": "77729a0ab575f7e298c3dfd5903b0fc7b704231fd8ba0f2f94ec910fcf5356a0"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-ios-report-probe-build.txt",
+      "sha256": "035569fa9330e0f7d21f1c3f1932dd32ddffab3a86a373222440315a7947a48a"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-ios-restore-build.txt",
+      "sha256": "94afa87a0e121c0e6b248d24f74efb56601229dab1c5b9ea53cd274102a9fbd9"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-ios-setup-fixture-build.txt",
+      "sha256": "5a587802df9525067daea1740e03fc64b5a8c0fa3c02f779d9cbd4b2faf75fa5"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-ios-tests.txt",
+      "sha256": "5a9259b91adaba0d91ffa8b946c11568ee8462b1c24d77f2f26e0f3c8df594d0"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-ios-toolchain.json",
+      "sha256": "4c13dc6534635375ab58ff3b75ae0d02bd5967ee36a84a40b0e48126b7ea84a4"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-ios-volume-fixture-build.txt",
+      "sha256": "df9019d757fcf018a873a1b68181ce67fba7954aea69ac9d5870a7ee67b4441d"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-library-light.png",
+      "sha256": "37713b98d4452e47abb24e4d6a2f52ccd47cafaeea1c64e162c095d2559da8b8"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-macos-version.txt",
+      "sha256": "cd5d6399b3785b04ceaae75045a9ca9f80f0bbc3526eff9d0c36b170ed1ec348"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-native-report-export.json",
+      "sha256": "5281d8b177d23fd95ac80f8d3b6a22cd48829f56c4db1031bdafdc365901ae1a"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-native-report-share-sheet.png",
+      "sha256": "008392d8aa2a9d4f0e8aa2e4d62e5e9771266788ab38f0f9058a0b02a29e0817"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-player-dark.png",
+      "sha256": "021aae5090648cede0bcac9bb33d09b5cc42eb58a57dae939648b5f1e6c0f8e6"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-player-large-dark.png",
+      "sha256": "1ac5e872fb5124c75b85e3e72adc86d67df3f38a09acd15b1631629d09af1326"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-player-light.png",
+      "sha256": "0259a470957f507722d4726f45a544e438f112b94fb908e8f5ded062b767eff1"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-queue-light.png",
+      "sha256": "7c6f44f4b9c4bb937c520c5a0941eb79d6bb19660aec4c73d3bf06745780a152"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-report-probe-launch.txt",
+      "sha256": "69d460e449ffdf08d571feb3ea3b41616e4a343d1fd225416ce7c9da195fe7c6"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-report-probe-result.json",
+      "sha256": "c23ef4d69612ff3904af2dba259d084f6e71eb14bbf575c48916256c2e48f4bd"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-restored-launch.txt",
+      "sha256": "b5acca1b82b3b6e49e9a5964474a0a5c9d2010807de123b8cdf48eb03f83052b"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-restored-player-light.png",
+      "sha256": "e0acf3e14847fe7b78a47e3ca611ffc4f3b1e94dfab06c1151d2270e8e3e6710"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-setup-fixture-launch.txt",
+      "sha256": "bfc6690afc1996721ccb957786c02d2dca1b93df1cf19e757adbe3c96450d267"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-setup-light.png",
+      "sha256": "e28f1d80f68ba021b1c12969594f76a4a0f6ab4b52a293f1ea7e23719642c089"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-simulator-boot.txt",
+      "sha256": "28c9c9581bdedd043ab3580c48ff038df3c28ddfefee63de109ccce85e2726ae"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-simulator-launch.txt",
+      "sha256": "fa52c10612b36265aa545637aadf91832b1495cedadcd880487ac44908c59371"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-simulators.json",
+      "sha256": "594084d646f2586e52c66328c583b79fcde9330e82ceb24cc72373ab3630ff45"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-synthetic-browsing-expired-large-dark.png",
+      "sha256": "aca5c298a1731f738b6473a25b40a3f7b0bea206145f9db957e7fdc62313fd3d"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-synthetic-browsing-expired-light.png",
+      "sha256": "f7dcf12dc876aa83d63a6842de3e7a2a163a8d555a7d5bd529e576aa03ca115e"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-synthetic-browsing-large-dark.png",
+      "sha256": "b9223d29cb1f621feb737980522c82ff4980f56f35abe16140bdfc2dc3f1d7a6"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-synthetic-browsing-library-light.png",
+      "sha256": "9e4493ff900e656d8462314549691fb3bbf65376becd9d342d2a1afbed0d1bb8"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-synthetic-browsing-queue-light.png",
+      "sha256": "70538c1894e61ff44a5ea517c382e3ce01fa4eadb08bed19834a306723a9f0a7"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-synthetic-handoff-large-dark.png",
+      "sha256": "cdf3bde81ba782fdb4ab74b8b87a41054f0885b7b441d97e8f90f1bb82de3de8"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-synthetic-handoff-lost-light.png",
+      "sha256": "7f2886d6b61e043311ea5f32aaf7bc9628ec3d0a43d5b58adbe0de40f69fb2ea"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-synthetic-handoff-pending-light.png",
+      "sha256": "7f2886d6b61e043311ea5f32aaf7bc9628ec3d0a43d5b58adbe0de40f69fb2ea"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-synthetic-handoff-ready-dark.png",
+      "sha256": "a254d91949c393733da6c016caf543287641a7c50552336780671737635b505e"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-synthetic-handoff-ready-light.png",
+      "sha256": "1b6438cbd8f6ad368ccbaef3f7c4dcbb17a4d8509b3a6c216715e9e50801758c"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-synthetic-setup-approval-large-dark.png",
+      "sha256": "5aba741abafe7bae97b2e8bea4861bb141f25f39a818f49fe27f785d1409edbb"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-synthetic-setup-approval-light.png",
+      "sha256": "cd9b35eb6cc4a5e872f04a7759ac6f0cce4bcba95db0da669473e4e67cb1a7f5"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-synthetic-setup-choosing-light.png",
+      "sha256": "9530e5b393a20b3d9d3c9190ddd96f39a5aead35c3b3e7858b99d01efc205571"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-synthetic-setup-connected-light.png",
+      "sha256": "6a0c243b7ec0f5fea5529c4e9ecd01f6776435336c5bdbc39fb4f8fd8b02a866"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-synthetic-setup-idle-light.png",
+      "sha256": "fe2fa2b05c99f016fbd2dc80a0e36340d0e9580ed3ec2392473db01c4aeeab64"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-synthetic-volume-high-light.png",
+      "sha256": "1746fda9e05d2a47632d760218d2d6cb50882368ff9dcc764b25a1705270d667"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-synthetic-volume-large-dark.png",
+      "sha256": "0205bbbffbcff68f12e8027d9be0032f1af2280206881907fb230145dbe6a4a0"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-synthetic-volume-low-light.png",
+      "sha256": "d9d8a3ed97ed6a68b3a4e7f788684feb1c87bf0ad8b1e3ffcb66cf86dd28d095"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-volume-fixture-launch.txt",
+      "sha256": "4633a61312367c05bcb41079d9542dbeffd7fd770b6fde4e65ea2c102c58730c"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341/flutter-xcode-version.txt",
+      "sha256": "18730ed2ae28a2c9cf0c2d5db549033a4f07089331391a7133b7b32187454fa9"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341-artifacts.json",
+      "sha256": "d4b400d41175755a2ab56d5e484cadf0e511c25e757cb0bc8ae3fde628e061fc"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341-jobs.json",
+      "sha256": "b0cbd62204dadc73434178784ff2be5608e2ed2c25c450afc7c2c2063c4851a5"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341-verified.json",
+      "sha256": "1cd0c47646a45a6dcfe5311e7d764ee3ed9274887fd94b09f5f13139af12fcf0"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490341.zip",
+      "sha256": "2c4b08c2088316516c781880cf4016ba3b1dc0c4fafa593c520d48ffb0a9429e"
     },
     {
       "file": "artifacts/sd-dialog-guidance-20261031/ci-41195490397/apple-build.txt",
@@ -513,6 +751,10 @@
     {
       "file": "artifacts/sd-dialog-guidance-20261031/recovery-fresh-sd-before.xml",
       "sha256": "daf35cfce33eae5066c01c37a7a3612055fee813494cd6deccc0d7a212f1506f"
+    },
+    {
+      "file": "artifacts/sd-dialog-guidance-20261031/remote-checkpoint.json",
+      "sha256": "ba091e810cc47f484cd06284b27be19b0fddc35feb206054d392a51ba2fb857b"
     },
     {
       "file": "artifacts/sd-dialog-guidance-20261031/shared-build.txt",

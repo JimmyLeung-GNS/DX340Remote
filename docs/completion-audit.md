@@ -1,8 +1,12 @@
 # Full-scope completion audit
 
-## Current full-scope audit —31 October2026,19:17 HKT
+## Current full-scope audit —31 October2026,19:49 HKT
 
-**NOT ACHIEVED; goal ACTIVE/incomplete.** [Real OS SD cycle](test-results/2026-10-31-sd-volume-cycle.md) verifies real event-driven stale-context clearing; it is not physical pull, file-change/rescan, token wire replay or SD audio proof. [Source-dialog guidance](test-results/2026-10-31-source-dialog-guidance.md) corrects a reproduced modal error message and verifies local cancellation/fresh phone browse on new d755/644.180 JVM/Android builds and separate exact-source Apple jobs retain their recorded scopes: native Apple41195490397 SUCCESS/archive inspected; shared iPhone41195490341 IN PROGRESS/archive inspection pending. Full T01–T18/current two-phone/source/audio/format/output/reliability/owner-iPhone signing/Watch remain open. No new audio/long hold from silence; no pause/device switch.
+**NOT ACHIEVED; goal ACTIVE/incomplete.** [Real SD empty-directory change](test-results/2026-10-31-sd-folder-refresh.md) reproduces and corrects a fresh-browse cache defect on finalf009/d755, retaining first nested timeout, second near-budget trial, source/terminal times and all78 requests. No playback or volume command. T11 remains partial: no audio-file/rescan/physical-pull/full context gate. Four native builds/lint and183 JVM checks pass; three new bounded-deadline regressions and both closed80d Apple archives retain exact scopes. Full current two-phone/source/audio/format/output/command/latency/sleep/call/range/battery/walk/ownership/owner-iPhone signing/Watch remain required. Fresh listening and30min readiness unanswered; no audio/long hold inferred. No pause/device switch.
+
+## Prior full-scope audit —31 October2026,19:28 HKT
+
+**NOT ACHIEVED; goal ACTIVE/incomplete.** [Real OS SD cycle](test-results/2026-10-31-sd-volume-cycle.md) verifies real event-driven stale-context clearing; it is not physical pull, file-change/rescan, token wire replay or SD audio proof. [Source-dialog guidance](test-results/2026-10-31-source-dialog-guidance.md) corrects a reproduced modal error message and verifies local cancellation/fresh phone browse on new d755/644.180 JVM/Android builds and separate exact-source Apple jobs retain their recorded scopes: native Apple41195490397 SUCCESS/archive inspected; shared iPhone41195490341 SUCCESS/archive inspected. Full T01–T18/current two-phone/source/audio/format/output/reliability/owner-iPhone signing/Watch remain open. No new audio/long hold from silence; no pause/device switch.
 
 ## Prior full-scope audit —31 October2026,18:42 HKT
 
@@ -130,7 +134,7 @@ Current Windows protocol preparation has19 separate software tests and a live un
 
 Current Mango prefetch comparison/build:86 native tests/lint, source-local nested/root recovery and four interruption/token regressions pass. Three retained Playlist reads3.704–3.952seconds were below six baseline samples4.100–4.518seconds, but all still fail the proposed3second target. No general tree-throughput/root-refresh/phone performance or new audio acceptance follows. Companion40114ff8... is installed with real preferences preserved; see test-results/2026-10-29-mango-prefetch.md.
 
-## Current resources and resume
+## Historical resource and resume notes
 
 The original debug key supplied in a ZIP has been extracted outside Git, verified against both installed certificates and used through process-local DX340_DEBUG_KEYSTORE. Both apps upgraded with install -r. Four companion preference files remained byte-identical, default PC key stayed unchanged, both optional Accessibility services rebound and installed package bytes were checked. The key-transfer blocker is resolved; current continuation is blocked by the operator/hardware gates above. Current evidence: test-results/2026-10-29-pending-accessibility.md, test-results/2026-10-29-pending-session-access.md, test-results/2026-10-29-assisted-interruptions.md, test-results/2026-10-29-mango-playlist-recovery.md and test-results/2026-10-29-queue-pagination.md; preceding key/audio evidence: test-results/2026-10-29-original-key-upgrade.md. Full101-entry queue source reads now pass, with phone continuation/stale-selection widget tests; actual BLE remains unverified.
 
