@@ -444,5 +444,203 @@
       ],
       "connections": []
     }
+  },
+  {
+    "name": "actual wire package IDs use fixed source categories without leaking unknown packages",
+    "capacity": 8,
+    "steps": [
+      {
+        "at": 0,
+        "action": "begin",
+        "id": "mango-wire",
+        "operation": "GET_STATE",
+        "source": "com.ibasso.music"
+      },
+      {
+        "at": 4,
+        "action": "reply",
+        "id": "mango-wire",
+        "type": "RESULT"
+      },
+      {
+        "at": 10,
+        "action": "begin",
+        "id": "apple-wire",
+        "operation": "GET_STATE",
+        "source": "com.apple.android.music"
+      },
+      {
+        "at": 14,
+        "action": "reply",
+        "id": "apple-wire",
+        "type": "RESULT"
+      },
+      {
+        "at": 20,
+        "action": "begin",
+        "id": "unknown-wire",
+        "operation": "GET_STATE",
+        "source": "com.private.example.music"
+      },
+      {
+        "at": 24,
+        "action": "reply",
+        "id": "unknown-wire",
+        "type": "RESULT"
+      },
+      {
+        "at": 30,
+        "action": "begin",
+        "id": "lookalike-wire",
+        "operation": "GET_STATE",
+        "source": "com.ibasso.music.private"
+      },
+      {
+        "at": 34,
+        "action": "reply",
+        "id": "lookalike-wire",
+        "type": "RESULT"
+      },
+      {
+        "at": 40,
+        "action": "begin",
+        "id": "upper-wire",
+        "operation": "GET_STATE",
+        "source": "COM.APPLE.ANDROID.MUSIC"
+      },
+      {
+        "at": 44,
+        "action": "reply",
+        "id": "upper-wire",
+        "type": "RESULT"
+      },
+      {
+        "at": 50,
+        "action": "begin",
+        "id": "no-source",
+        "operation": "GET_STATE",
+        "source": "none"
+      },
+      {
+        "at": 54,
+        "action": "reply",
+        "id": "no-source",
+        "type": "RESULT"
+      },
+      {
+        "at": 60,
+        "action": "begin",
+        "id": "empty-source",
+        "operation": "GET_STATE",
+        "source": ""
+      },
+      {
+        "at": 64,
+        "action": "reply",
+        "id": "empty-source",
+        "type": "RESULT"
+      }
+    ],
+    "expected": {
+      "formatVersion": 1,
+      "clock": "monotonic_ms_relative_to_model",
+      "capacity": 8,
+      "evictedRequests": 0,
+      "evictedConnections": 0,
+      "requests": [
+        {
+          "id": "mango-wire",
+          "operation": "GET_STATE",
+          "source": "mango",
+          "startedMs": 0,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 4,
+          "result": "result",
+          "error": null,
+          "hostOutcome": "none",
+          "terminalApplied": false
+        },
+        {
+          "id": "apple-wire",
+          "operation": "GET_STATE",
+          "source": "apple",
+          "startedMs": 10,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 4,
+          "result": "result",
+          "error": null,
+          "hostOutcome": "none",
+          "terminalApplied": false
+        },
+        {
+          "id": "unknown-wire",
+          "operation": "GET_STATE",
+          "source": "other",
+          "startedMs": 20,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 4,
+          "result": "result",
+          "error": null,
+          "hostOutcome": "none",
+          "terminalApplied": false
+        },
+        {
+          "id": "lookalike-wire",
+          "operation": "GET_STATE",
+          "source": "other",
+          "startedMs": 30,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 4,
+          "result": "result",
+          "error": null,
+          "hostOutcome": "none",
+          "terminalApplied": false
+        },
+        {
+          "id": "upper-wire",
+          "operation": "GET_STATE",
+          "source": "other",
+          "startedMs": 40,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 4,
+          "result": "result",
+          "error": null,
+          "hostOutcome": "none",
+          "terminalApplied": false
+        },
+        {
+          "id": "no-source",
+          "operation": "GET_STATE",
+          "source": "none",
+          "startedMs": 50,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 4,
+          "result": "result",
+          "error": null,
+          "hostOutcome": "none",
+          "terminalApplied": false
+        },
+        {
+          "id": "empty-source",
+          "operation": "GET_STATE",
+          "source": "",
+          "startedMs": 60,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 4,
+          "result": "result",
+          "error": null,
+          "hostOutcome": "none",
+          "terminalApplied": false
+        }
+      ],
+      "connections": []
+    }
   }
 ]

@@ -15,7 +15,7 @@ class RequestJournal(private val capacity: Int = 256, private val nowMs: () -> L
     fun begin(id: String, operation: String, source: String) {
         if (!id.matches(Regex("[A-Za-z0-9_-]{1,64}")) || entries.containsKey(id)) return
         if (entries.size == capacity) { entries.remove(entries.keys.first()); evictedRequests++ }
-        entries[id] = Entry(id, operation.takeIf { it in operations } ?: "OTHER", source.takeIf { it in sources } ?: "other", nowMs())
+        entries[id] = Entry(id, operation.takeIf { it in operations } ?: "OTHER", sourceCategory(source), nowMs())
     }
     fun phase(value: String) {
         val phase = value.takeIf { it in phases } ?: "other"
@@ -54,7 +54,13 @@ class RequestJournal(private val capacity: Int = 256, private val nowMs: () -> L
         "requests" to entries.values.map(::snapshot), "connections" to connections.map { it.toMap() })
     companion object {
         private val operations = setOf("HELLO", "AUTHORIZE", "REQUEST_CONTROL", "GET_STATE", "GET_QUEUE", "GET_ARTWORK", "GET_CAPABILITIES", "LIST_SOURCES", "SUBSCRIBE_STATE", "SET_PLAYING", "NEXT", "PREVIOUS", "SEEK", "SELECT_SOURCE", "PLAY_ITEM", "PLAY_QUEUE_ITEM", "ADJUST_VOLUME", "BROWSE", "SEARCH", "SET_SHUFFLE", "SET_REPEAT")
-        private val sources = setOf("mango", "apple", "none", "")
+        // Wire source IDs are package names. Export only these fixed categories.
+        private fun sourceCategory(source: String): String = when (source) {
+            "com.ibasso.music", "mango" -> "mango"
+            "com.apple.android.music", "apple" -> "apple"
+            "none", "" -> source
+            else -> "other"
+        }
         private val errors = setOf("AUTHORIZATION_DENIED", "LOCAL_APPROVAL_REQUIRED", "CONTROLLER_BUSY", "STALE_HOST", "STALE_CONTROL", "CONTROL_REQUEST_USED", "STALE_SOURCE", "SOURCE_UNAVAILABLE", "SOURCE_NOT_READY", "SOURCE_BUSY", "UNSUPPORTED", "STALE_LIBRARY", "EXPIRED_ITEM", "STALE_QUEUE", "STALE_ARTWORK", "INVALID_REQUEST", "BAD_REQUEST", "MALFORMED_REQUEST", "PROTOCOL_MISMATCH", "STALE_VOLUME", "VOLUME_AT_BOUNDARY", "VOLUME_PROFILE_CHANGED", "VOLUME_VERIFICATION_REQUIRED", "VOLUME_SOURCE_NOT_READY", "UI_PERMISSION_REQUIRED", "UI_SCREEN_UNLOCK_REQUIRED", "UI_FOREGROUND_REQUIRED", "UI_SETUP_REQUIRED", "UI_UNEXPECTED_SCREEN", "UI_STORAGE_CONTEXT_REQUIRED", "UI_VERSION_UNVERIFIED", "UI_ACTIVE_PAGE_UNVERIFIED", "UI_TREE_CHANGED", "UI_ACTION_TIMEOUT", "UI_ACTION_INTERRUPTED", "UI_MODE_DISABLED", "UI_BUSY", "RESPONSE_TOO_LARGE")
         private val phases = setOf("idle", "preparing", "searching", "choosing", "connecting", "approval", "busy", "connected", "permission", "bluetoothOff", "failed")
         private val endings = setOf("timeout", "send_failed", "connection_lost", "session_reset")

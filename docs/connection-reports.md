@@ -6,6 +6,8 @@ History belongs to the current native model instance and is cleared by process r
 
 Format version 1 contains allowlisted operation/source/error/connection categories, request IDs and relative monotonic milliseconds. Unknown categories become `OTHER`/`other`. Music metadata, command arguments, item IDs, paths, artwork, Bluetooth identities, host epochs and credentials are excluded. App/OS versions and generic device model identify the software environment. Android additionally hashes its own installed base APK, outside the BLE callback thread. No source storage is scanned.
 
+The native journals map the actual wire source IDs `com.ibasso.music` and `com.apple.android.music` to the fixed report categories `mango` and `apple`. Short category names remain accepted; unknown package names, lookalikes and case variants become `other`. This affects diagnostics only; wire IDs and source routing are unchanged. Earlier builds exported real package IDs as `other`; preserve those reports and do not infer or rewrite their source categories afterward.
+
 Connection entries record native setup-phase assignments; the root `connectionPhase` separately captures current derived permission/radio/authorization readiness. This is not continuous radio observation. Unsolicited state events are not matched request receipts and do not create latency samples. In particular, a dispatched-only action followed by a later state event does not acquire an inferred observed-state duration in this journal.
 
 Each request records `startedMs`, `accepted`, nullable `acceptedAfterMs`, nullable `finishedAfterMs`, `result`, `terminalApplied`, `hostOutcome` and nullable `error`. A duplicate/late reply cannot overwrite its first receipt. Unknown or changed-host replies are rejected before journaling. Clock regression produces null, never a fabricated duration. Timings start at native send registration, before encoding/queued writes, and end at a matched decoded reply after reassembly. They are **not** a GATT frame acknowledgement, UI-tap measurement or acoustic measurement.
@@ -18,7 +20,7 @@ The report is at most 256 KiB. Native export is single-flight; a failure permits
 
 ## Verification and limits
 
-The Kotlin and Swift journals consume the same six fixtures for duplicate/late replies, privacy categories, lost accepted mutations, bounded eviction, clock regression and duplicate registration. Sustained-operation tests cover bounded memory; Android JSON tests check explicit nulls survive serialization. Flutter tests check explicit invocation, single-flight, failure/retry, disposal and the collapsed-help action on both platform styles.
+The Kotlin and Swift journals consume the same seven fixtures for duplicate/late replies, privacy categories, lost accepted mutations, bounded eviction, clock regression, duplicate registration and actual wire source IDs. Sustained-operation tests cover bounded memory; Android JSON tests check explicit nulls survive serialization. Flutter tests check explicit invocation, single-flight, failure/retry, disposal and the collapsed-help action on both platform styles.
 
 The iOS CI developer-only `report_export_probe.dart` uses the real native bridge and UIKit with no BLE/source fixture, correlates a unique launch marker and native model instance, checks an empty request history and the strict report keys, then captures the share sheet. The existing EXIT trap rebuilds/reinstalls/relaunches ordinary `main.dart`, including after failure. This probe is never imported by the production entrypoint.
 
