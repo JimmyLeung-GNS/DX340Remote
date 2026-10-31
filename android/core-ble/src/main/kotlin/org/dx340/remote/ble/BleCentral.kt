@@ -11,6 +11,9 @@ import android.os.ParcelUuid
 import org.dx340.remote.protocol.Reassembler
 import org.dx340.remote.protocol.AcknowledgedWriteQueue
 import org.dx340.remote.protocol.LinkRetirement
+import org.dx340.remote.protocol.GattProcedureGate
+import org.dx340.remote.protocol.GattProcedureGate.Operation
+import org.dx340.remote.protocol.GattProcedureGate.Completion
 import org.dx340.remote.protocol.Wire
 import java.util.UUID
 
@@ -33,6 +36,10 @@ class BleCentral(private val context: Context, private val status: (String) -> U
     private var serial = 0
     private val writes = AcknowledgedWriteQueue<() -> Unit>()
     private var established = false
+    private var linkConnected = false
+    private var mtuKnown = false
+    private var setupGeneration = 0L
+    private val procedures = GattProcedureGate()
     private var desired: BluetoothDevice? = null
     private var retries = 0
     private var reconnect: Runnable? = null
@@ -44,9 +51,15 @@ class BleCentral(private val context: Context, private val status: (String) -> U
     private val cb = object : BluetoothGattCallback() {
         override fun onServiceChanged(g: BluetoothGatt) { main.post {
             if (g != gatt) return@post
-            // Cached handles are invalid. Reconnect and discover/authorize anew;
-            // fail clears pending writes rather than replaying playback commands.
-            fail("Player service changed. Reconnecting without replay.")
+            val wasEstablished = established
+            established = false; rx = null; tx = null; writeGeneration++
+            writes.clear(); assembler.clear()
+            if (wasEstablished) { lost(); armSetupDeadline(g) }
+            phase(CentralPhase.CHECKING); status("Player service changed. Refreshing services without replay.")
+            android.util.Log.i("DX340RemoteClient", "GATT_SERVICE_CHANGED: pending commands cleared; rediscovery serialized")
+            // Drain the old native operation before rediscovery. Closing here
+            // can abandon the very discovery callback that refreshes the cache.
+            if (procedures.changed() && linkConnected) discover(g)
         } }
         override fun onConnectionStateChange(g: BluetoothGatt, code: Int, newState: Int) { main.post {
             if (retirement.contains(g)) {
@@ -55,29 +68,56 @@ class BleCentral(private val context: Context, private val status: (String) -> U
             }
             if (g != gatt) { g.close(); return@post }
             if (code == 0 && newState == BluetoothProfile.STATE_CONNECTED) {
-                phase(CentralPhase.CHECKING); status("Discovering service…"); if (!g.discoverServices()) fail("Service discovery could not start")
+                if (!linkConnected) { linkConnected = true; discover(g) }
             } else { fail("Disconnected ($code). Commands cleared; reconnect to refresh.", newState == BluetoothProfile.STATE_DISCONNECTED) }
         } }
         override fun onServicesDiscovered(g: BluetoothGatt, code: Int) { main.post {
             if (g != gatt) return@post
+            when (procedures.complete(Operation.DISCOVER)) {
+                Completion.IGNORED -> return@post
+                Completion.REDISCOVER -> { discover(g); return@post }
+                Completion.CONTINUE -> Unit
+            }
             val s = g.getService(UUID.fromString(Wire.SERVICE))
             rx = s?.getCharacteristic(UUID.fromString(Wire.RX)); tx = s?.getCharacteristic(UUID.fromString(Wire.TX))
             if (code != 0 || rx == null || tx == null) { fail("DX340 service unavailable"); return@post }
             // Serialize MTU negotiation before the CCC write; never assume 512 bytes.
-            if (!g.requestMtu(247)) subscribe(g)
+            if (mtuKnown) subscribe(g)
+            else {
+                check(procedures.begin(Operation.MTU))
+                if (!g.requestMtu(247)) {
+                    procedures.complete(Operation.MTU); subscribe(g)
+                }
+            }
         } }
         override fun onMtuChanged(g: BluetoothGatt, mtu: Int, code: Int) { main.post {
             if (g != gatt) return@post
-            capacity = if (code == 0) (mtu - 3).coerceIn(20, 512) else 20; subscribe(g)
+            capacity = if (code == 0) (mtu - 3).coerceIn(20, 512) else 20
+            mtuKnown = code == 0
+            when (procedures.complete(Operation.MTU)) {
+                Completion.IGNORED -> Unit
+                Completion.REDISCOVER -> discover(g)
+                Completion.CONTINUE -> subscribe(g)
+            }
         } }
         override fun onDescriptorWrite(g: BluetoothGatt, d: BluetoothGattDescriptor, code: Int) { main.post {
             if (g != gatt) return@post
+            if (d.uuid.toString() != Wire.CCC) return@post
+            when (procedures.complete(Operation.SUBSCRIBE)) {
+                Completion.IGNORED -> return@post
+                Completion.REDISCOVER -> { discover(g); return@post }
+                Completion.CONTINUE -> Unit
+            }
             if (code != 0) { desired = null; fail("Encrypted pairing failed ($code). Open pairing on DX340 and retry."); return@post }
-            established = true; phase(CentralPhase.CHECKING); retries = 0; status("Connected; checking authorization…"); ready()
+            established = true; setupGeneration++; phase(CentralPhase.CHECKING); retries = 0; status("Connected; checking authorization…"); ready()
         } }
         override fun onCharacteristicWrite(g: BluetoothGatt, c: BluetoothGattCharacteristic, code: Int) { main.post {
-            if (g != gatt || c.uuid.toString() != Wire.RX || !writes.busy) return@post
-            if (code != 0) fail("Bluetooth write failed ($code); outcome unknown") else {
+            if (g != gatt || c.uuid.toString() != Wire.RX) return@post
+            val completion = procedures.complete(Operation.WRITE)
+            if (completion == Completion.IGNORED) return@post
+            if (code != 0) fail("Bluetooth write failed ($code); outcome unknown")
+            else if (completion == Completion.REDISCOVER) discover(g)
+            else if (writes.busy) {
                 writes.acknowledge()?.invoke(); pump()
             }
         } }
@@ -85,12 +125,13 @@ class BleCentral(private val context: Context, private val status: (String) -> U
         override fun onCharacteristicChanged(g: BluetoothGatt, c: BluetoothGattCharacteristic) { if (android.os.Build.VERSION.SDK_INT < 33) receive(g, c.value) }
     }
     private fun receive(g: BluetoothGatt, value: ByteArray) { main.post {
-        if (g != gatt) return@post
+        if (g != gatt || !established) return@post
         try { assembler.accept(value)?.let(message) } catch (_: IllegalArgumentException) { fail("Malformed Bluetooth reply; reconnect") }
     } }
     private fun subscribe(g: BluetoothGatt) {
         val characteristic = tx ?: return
         val d = characteristic.getDescriptor(UUID.fromString(Wire.CCC)) ?: return fail("Missing indications descriptor")
+        check(procedures.begin(Operation.SUBSCRIBE))
         if (!g.setCharacteristicNotification(characteristic, true)) return fail("Cannot subscribe")
         val result = if (android.os.Build.VERSION.SDK_INT >= 33) g.writeDescriptor(d, BluetoothGattDescriptor.ENABLE_INDICATION_VALUE)
         else { d.value = BluetoothGattDescriptor.ENABLE_INDICATION_VALUE; if (g.writeDescriptor(d)) 0 else -1 }
@@ -128,8 +169,18 @@ class BleCentral(private val context: Context, private val status: (String) -> U
     private fun openLink(device: BluetoothDevice) {
         phase(CentralPhase.CONNECTING); status("Connecting…")
         gatt = device.connectGatt(context, false, cb, BluetoothDevice.TRANSPORT_LE)
-        val current = gatt
-        main.postDelayed({ if (gatt == current && !established) fail("Connection timed out. Check phone control is enabled in Companion on your player, then tap Connect again.") }, 30000)
+        val current = gatt ?: return fail("Bluetooth connection could not start")
+        armSetupDeadline(current)
+    }
+    private fun armSetupDeadline(current: BluetoothGatt) {
+        val ticket = ++setupGeneration
+        main.postDelayed({ if (gatt == current && ticket == setupGeneration && !established) fail("Connection timed out. Check phone control is enabled in Companion on your player, then tap Connect again.") }, 30000)
+    }
+    private fun discover(g: BluetoothGatt) {
+        if (g != gatt) return
+        check(procedures.begin(Operation.DISCOVER))
+        phase(CentralPhase.CHECKING); status("Discovering service…")
+        if (!g.discoverServices()) fail("Service discovery could not start")
     }
     fun send(bytes: ByteArray, submitted: (() -> Unit)? = null, acknowledged: (() -> Unit)? = null) {
         check(established) { "Not connected" }
@@ -138,7 +189,9 @@ class BleCentral(private val context: Context, private val status: (String) -> U
     }
     private fun pump() {
         val g = gatt ?: return; val c = rx ?: return
+        if (procedures.busy || !established) return
         val frame = writes.next() ?: return
+        check(procedures.begin(Operation.WRITE))
         val generation = ++writeGeneration
         main.postDelayed({ if (writes.busy && g == gatt && generation == writeGeneration) fail("Bluetooth write timed out; outcome unknown. Reconnecting without replay.") }, 10000)
         val result = if (android.os.Build.VERSION.SDK_INT >= 33) g.writeCharacteristic(c, frame, BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT)
@@ -161,8 +214,9 @@ class BleCentral(private val context: Context, private val status: (String) -> U
         desired = null; retries = 0; reconnect?.let { main.removeCallbacks(it) }; reconnect = null; retirement.cancelWaiting(); clearLink(); phase(CentralPhase.IDLE)
     }
     private fun clearLink(alreadyDisconnected: Boolean = false) {
-        val old = gatt; gatt = null; rx = null; tx = null; established = false; capacity = 20; writeGeneration++
-        writes.clear(); assembler.clear()
+        val old = gatt; gatt = null; rx = null; tx = null; established = false; linkConnected = false
+        capacity = 20; mtuKnown = false; setupGeneration++; writeGeneration++
+        writes.clear(); assembler.clear(); procedures.clear()
         if (old != null) {
             if (alreadyDisconnected) runCatching { old.close() }
             else retirement.retire(old, { old.disconnect() }, { reason ->
