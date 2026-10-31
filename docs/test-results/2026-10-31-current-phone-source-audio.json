@@ -1,0 +1,281 @@
+{
+  "recordedAt": "2026-10-31T16:18:17+08:00",
+  "goalStatus": "ACTIVE/incomplete",
+  "appSource": "3f4e8629ee9ce9946539b11947a73994c9bccd87",
+  "hostSource": "7fbdec8ada9faa1573afa7efea9fa598c22b2ef1",
+  "phoneApkSha256": "b805e4ce2b4105721ce0f748fb610f02f31c48667658379611d7bfdde0221386",
+  "hostApkSha256": "00e5e50b19d13f3e626ac0c882386a26174adff283dc9b2c8926413ef258e7cb",
+  "devices": {
+    "pixel": "Pixel9a Android16/API36 CP1A.260405.005, shared0.2.0/code2",
+    "dx340": "Android13 eng.iBasso.20260812.181952, Companion0.1.0/code1, Mango4.1.37/code240, AppleMusic6.5.3/code1599"
+  },
+  "results": [
+    {
+      "status": "VERIFIED/one current-phone subset",
+      "source": "Apple Music",
+      "title": "A・RA・SHI",
+      "artist": "ARASHI",
+      "phonePath": "Downloaded -> Songs -> first row",
+      "outsideCompletePreviousQueue": true,
+      "previousQueueItems": 101,
+      "ownerAudible": true
+    },
+    {
+      "status": "VERIFIED/one current-phone subset",
+      "source": "Mango",
+      "title": "風のたより",
+      "file": "03. 風のたより.wav",
+      "artist": "tayori",
+      "folder": "1st Live 春を待つ additional performance",
+      "ownerAudible": true,
+      "format": {
+        "container": "RIFF/WAVE",
+        "formatTag": 65534,
+        "subFormatGuid": "00000001-0000-0010-8000-00aa00389b71",
+        "channels": 2,
+        "sampleRate": 48000,
+        "byteRate": 288000,
+        "blockAlign": 6,
+        "containerBitsPerSample": 24,
+        "extensionBytes": 22,
+        "validBitsPerSample": 24,
+        "channelMask": 3,
+        "headerBytesRead": 4096,
+        "headerSha256": "a55ed4141e6ab39f1e6a6e0c7ba5cd937f9216a0a1ade6e65386748432f1f9e4",
+        "scope": "bounded header observation; no bit-perfect or acoustic quality claim",
+        "reference": "https://learn.microsoft.com/en-us/windows/win32/api/mmreg/ns-mmreg-waveformatextensible"
+      }
+    },
+    {
+      "status": "VERIFIED/one current-phone subset",
+      "source": "Mango",
+      "title": "ゴースト",
+      "file": "03. ゴースト.flac",
+      "artist": "tayori",
+      "folder": "magic tour",
+      "selectedDuringOtherMangoTrackPlayback": true,
+      "ownerAudible": true,
+      "format": {
+        "container": "FLAC",
+        "sampleRate": 48000,
+        "channels": 2,
+        "bitsPerSample": 24,
+        "totalSamples": 11167200,
+        "headerBytesRead": 42,
+        "headerSha256": "52598af2e9dbd8a275317d57c311583a0afb3e046d2243f0dc95de6cce30c50d",
+        "scope": "STREAMINFO header only; not bit-perfect or acoustic quality proof",
+        "reference": "https://xiph.org/flac/format.html#metadata_block_streaminfo"
+      }
+    }
+  ],
+  "receipts": {
+    "totalRequests": 34,
+    "earlierRequests": 6,
+    "newRequests": 28,
+    "operations": {
+      "HELLO": 1,
+      "AUTHORIZE": 1,
+      "SELECT_SOURCE": 2,
+      "BROWSE": 14,
+      "PLAY_ITEM": 3,
+      "GET_STATE": 3,
+      "GET_ARTWORK": 2,
+      "SET_PLAYING": 2
+    },
+    "plays": [
+      {
+        "source": "apple",
+        "acceptedAfterMs": 135,
+        "finishedAfterMs": 229,
+        "result": "result",
+        "hostOutcome": "dispatched",
+        "terminalApplied": true
+      },
+      {
+        "source": "mango",
+        "acceptedAfterMs": 149,
+        "finishedAfterMs": 3521,
+        "result": "result",
+        "hostOutcome": "dispatched",
+        "terminalApplied": true
+      },
+      {
+        "source": "mango",
+        "acceptedAfterMs": 159,
+        "finishedAfterMs": 3529,
+        "result": "result",
+        "hostOutcome": "dispatched",
+        "terminalApplied": true
+      }
+    ],
+    "pauses": [
+      {
+        "source": "apple",
+        "acceptedAfterMs": 155,
+        "finishedAfterMs": 599,
+        "hostOutcome": "observed",
+        "terminalApplied": true
+      },
+      {
+        "source": "mango",
+        "acceptedAfterMs": 150,
+        "finishedAfterMs": 495,
+        "hostOutcome": "observed",
+        "terminalApplied": true
+      }
+    ],
+    "scope": "new request IDs against earlier same-model b805 export; old rows unchanged; timings not acoustic/GATT ACK",
+    "physicalT04": "NOT_ADJUDICATED"
+  },
+  "finalState": {
+    "at": "2026-10-31T16:18:17+08:00",
+    "states": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "preferences": [
+      {
+        "file": "controllers.xml",
+        "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd",
+        "unchanged": true
+      },
+      {
+        "file": "mango-ui.xml",
+        "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+        "unchanged": true
+      },
+      {
+        "file": "apple-ui.xml",
+        "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+        "unchanged": true
+      },
+      {
+        "file": "source-verification.xml",
+        "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f",
+        "unchanged": true
+      }
+    ],
+    "phoneForegroundCleared": true,
+    "settings": {
+      "dx340": {
+        "wifi_on": "0",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      },
+      "pixel": {
+        "wifi_on": "0",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      }
+    },
+    "volumeProof": false
+  },
+  "limits": [
+    "T07 only1/20 current Android selections; albums/playlists matrix not complete",
+    "T08 only2/20 current Android selections across two folders; no playlist completion",
+    "actual no-default-network/no-SIM offline subset; strict SIM-installed cellular-off case open",
+    "no acoustic/GATT ACK timing or T04 acceptance",
+    "header observations and audible selections do not establish bit-perfect output or audio quality",
+    "sampled row geometry is not continuous no-flicker proof",
+    "physical iPhone/Mac signing, sleep/range/calls/SD/output/battery/walking/ownership/Watch remain open",
+    "waiting-for-observed status can remain after metadata changes; needs truthful reconciliation"
+  ],
+  "evidence": [
+    {
+      "file": "artifacts/b805-source-tests-20261031/apple-full-queue-before.json",
+      "sha256": "b84f58fe64a02b6481ee4753ae2c8e19821c7555d4f53fd72e73c3e6e0115116"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/apple-audible-confirmation.json",
+      "sha256": "fa177901c66ac36608f1bef9ceaaaded3b7bfe2a62d0bd39ea56336bcb7d50a7"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/mango-wav-audible-confirmation.json",
+      "sha256": "31b0b37cded1709ec570afb2ff2f2cabd2553fa78d4ec6154314326542b81883"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/mango-flac-audible-confirmation.json",
+      "sha256": "2057b5596a9396d8cef2473bee9b5116378cd7f38f4fa99c5dbd3e1943954ec8"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/mango-wav-format.json",
+      "sha256": "c26e9be94c96846d1037eceae5f43c5511ea6ebb13236a3d41c4aa9cafa77c64"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/mango-flac-format.json",
+      "sha256": "d9930d952236eb93df4cfcaa35312dbd2167778e31c282aad4d1a732141af5ff"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/mango-wav-row-geometry.json",
+      "sha256": "c0bb6c14c22fba39eead83baca030bd693e0891c74f429339e4fe94a3081099e"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/mango-flac-row-geometry.json",
+      "sha256": "71e018a1732cada9074846157ec7b64d16964dd362af842211adda8824feddcb"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/phone-report-three-selections.json",
+      "sha256": "e04968af89f0541f1805cb0a4ef4601a947374ea110364b787f468b6fdb15bfa"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/receipt-delta.json",
+      "sha256": "5818b050614b13c97e9fca222252b828e3791bdff43ad1b2f1375e5150d73cb5"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/merged-report-summary.json",
+      "sha256": "8e65a3f83585cfe0ff6f13d66aa04a3942231140d31badd9fbb1a0c1e35850c7"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/dx-connectivity-before.txt",
+      "sha256": "620414784eaa3ea0cceadc6db23fa3c1dd355df53552b87b2b1f7e7a3e41a4d6"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/phone-connectivity-before.txt",
+      "sha256": "7f45ff5c70399a6f157db3d4dddfb1029c6526fb3f6846a5d2cf3b1079242db4"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/media-before.txt",
+      "sha256": "a79ed289b9bf0a7082cac330f27fd24d199273c1d449887e724a7acf9dbc21c9"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/media-after-apple-selection.txt",
+      "sha256": "a816e2ec041d84c599d0275159ff3d619bcd5881e1bde25859c7fc0a9170b2cb"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/media-after-wav-selection.txt",
+      "sha256": "a9e3efa4d4baf32752c2a97b42fa912c9238f7026745f214cde04cf4db9b3e5f"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/media-after-flac-selection.txt",
+      "sha256": "be6edb83bcc010fac52774340d1bc558b8ee6053ccf50d5f93bbe099642feb40"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/final-media.txt",
+      "sha256": "daa6506f0207ae0e4b2e61ccf7d328d2db5d0ccae6ba6c598c8fe62542100acb"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/final-audio.txt",
+      "sha256": "cd96b01bac298f9cb00339476f7f1bff4976948f70ec3acd7921cc5ace41c0ee"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/final-services.txt",
+      "sha256": "5d936b760c87eceaf4f48b66ae6812db3537d5e2d81cfe13a28b2d55007c2f3e"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/final-accessibility.txt",
+      "sha256": "17c02ffe710c299d8d009979f7381f27f9536ec708cd31ab061f4beec711f5af"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/final-phone-services.txt",
+      "sha256": "894c76b4b031589a4c93118df0d6f91416b717e3380953ecb30625c42d5b3303"
+    },
+    {
+      "file": "artifacts/b805-source-tests-20261031/final-preservation.json",
+      "sha256": "75b6053338d8bd8a48958c3c0e32826cad68ad30c37e1830f19b89b34cc3acad"
+    }
+  ]
+}

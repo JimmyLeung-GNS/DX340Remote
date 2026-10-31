@@ -1,6 +1,17 @@
 # Implementation status
 
-## Current checkpoint —31 October2026,16:02 HKT
+## Current checkpoint —31 October2026,16:18 HKT
+
+Full goal **ACTIVE/incomplete**. Installed b805e4ce phone/source3f4e862 and00e5e50b Companion/source7fbdec8 are unchanged. [New actual current-phone source/audio evidence](test-results/2026-10-31-current-phone-source-audio.md), [manifest/JSON](test-results/2026-10-31-current-phone-source-audio.json).
+
+- **Owner-audible on current phone:** Apple Downloaded→Songs A・RA・SHI, absent from the full previous101-item queue; Mango03.風のたより.wav; different-folder03.ゴースト.flac selected during WAV playback. One BLE PLAY_ITEM each; actual source metadata/playback and explicit owner hearing, no overlap. Local WAV/FLAC headers both stereo48kHz/24-bit; no bit-perfect/output-quality claim.
+- **Actual receipts:**28 new applied RESULTs relative to prior6 unchanged b805 rows;34 total/zero evictions.14 successful browses,3 dispatched selections,2 observed pauses. Play ACCEPTED135/149/159ms, terminal229/3521/3529ms. No error/timeout/loss or volume command. Not GATT ACK/acoustic/p95 acceptance; T04 remains NOT_ADJUDICATED. WAV/FLAC sampled row bounds unchanged; continuous flicker/rapid-tap behavior not claimed.
+- **Final:** both source sessions paused2 at37/headset(4)/proof false; all4 saved host preferences byte-hash unchanged, grants/browsingON retained, host foreground/both bindings. Phone normal Disconnect clears foreground/started state; Setup help collapsed. Both USB devices present, fonts/radios/timeouts retained. No build, emulator, observer, long-run trial or Apple job running.
+- **Scope:** clean current Android T07=1/20 and T08=2/20. Old66f CALL/OPENING VTR and source-local Intro evidence remain separate. No product patch/package/settings change in this test turn;178 JVM/72 Flutter/19 Swift and both3f4e862 Apple archives retain their scopes. Full two-phone/source/format/playlist/SD/output/command/latency/sleep/range/call/battery/walk/handoff and physical iPhone/Mac signing/Watch gates stay open.
+
+Next: correct the post-dispatch message that can still say waiting after metadata updates, preserving distinction between dispatched command and observed state; then continue full current-build acceptance. Watch remains gated on stable phones. No user pause/device-switch request.
+
+## Prior checkpoint —31 October2026,16:02 HKT
 
 Full goal **ACTIVE/incomplete** after resumed physical progress. New code is `7fbdec8` (Mango navigation) and `3f4e862` (journal categories); preserve newer HEAD. [New physical evidence/JSON](test-results/2026-10-31-mango-navigation-and-phone-recovery.md), [full-scope audit](completion-audit.md).
 

@@ -1,6 +1,10 @@
 # Full-scope completion audit
 
-## Current full-scope audit —31 October2026,16:02 HKT
+## Current full-scope audit —31 October2026,16:18 HKT
+
+**NOT ACHIEVED; goal ACTIVE/incomplete.** [Current-phone evidence](test-results/2026-10-31-current-phone-source-audio.md) now proves one b805 Apple downloaded selection outside the full previous101-item queue and two b805 Mango WAV/FLAC selections across folders, all explicitly owner-audible.28 new decoded applied requests/normal pause-disconnect/preservation verified. This advances P1/P2/P4/P6/P7/P8; it does not complete any full gate. Current Android T07=1/20/T08=2/20; strict SIM-installed offline, albums/playlists/commands/latency/sleep/range/SD/output/battery/walk/ownership and signed owner-iPhone evidence remain open. Native status wording still needs honest dispatch-versus-observation reconciliation; Watch stays gated on stable phones. No new product build or job, no pause/device-switch request. Earlier audits retain their exact scopes.
+
+## Prior full-scope audit —31 October2026,16:02 HKT
 
 **NOT ACHIEVED; goal ACTIVE/incomplete.** Owner resumed and real devices returned. The old three-turn resource block below is historical. [New evidence](test-results/2026-10-31-mango-navigation-and-phone-recovery.md) records a reproduced Mango navigation failure/fix, original-signer host00e5 and physical phone66f→b805 upgrades, two actual66f Pixel/BLE owner-audible Mango selections,22 decoded requests and recovered Pixel USB via the proven data path. Currentb805 has saved approval/read-only Mango category proof, no new audio.178 JVM/native/shared builds pass; new native Apple41181585937 SUCCESS/archive verified, shared41181585936 SUCCESS/archive verified (72Flutter/12guards/native export sheet/ordinary restoration). Currentb805 also verifies actual Apple category, control restored Mango and normal Disconnect/foreground cleanup; no new audio. All prior per-package evidence remains separate.
 
