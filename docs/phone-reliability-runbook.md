@@ -30,6 +30,8 @@ Write-Host "Stop flag: $stopPath"
 
 The fresh stop flag must initially be absent. To stop early, create the exact printed flag path from another terminal; allow the existing observer to write its incomplete/operatorStopped summary. Do not start a replacement run solely because a monitoring poll times out. The observer reads USB service/process, foreground activity, power, source/output and log evidence; it sends no BLE/source/radio commands. It rejects a foreground Remote or an unknown awake top activity. Review every sample and the terminal summary, then foreground the ordinary app and verify a fresh read/normal Disconnect separately.
 
+For a separately agreed DX340 screen-off hold, establish and verify `mWakefulness=Asleep` before starting, then add `-ExpectedDxWakefulness Asleep` to the command. Every sample must match that state; an awake sample fails immediately and the summary records the required state. The default `Any` preserves the earlier awake/background case and cannot be relabeled as a screen-off result. The observer does not change the display, lock, charging or power settings. Keep both sources paused and output unchanged; obtain fresh owner availability for the hold and the later listening check. A live negative preflight on31 October rejected an actually awake DX340 in2.578seconds with one sample, as intended; that is a guard check, not a30-minute trial.
+
 USB awake samples cannot prove continuous screen-off/deep sleep, and process/foreground-service survival alone cannot prove uninterrupted radio/control availability. Even a completed paused observation does not pass full T05/GateA/D, audible resume, unplugged range/walking/battery, or the separate playing variant below. Keep those outcomes distinct.
 
 ## Full physical sequence
