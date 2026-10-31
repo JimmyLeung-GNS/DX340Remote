@@ -297,7 +297,7 @@ class MangoAccessibilityService : AccessibilityService() {
                 // Mango retains an obsolete SD directory list even when its SD menu
                 // entry is selected again. A deliberate root browse leaves that storage
                 // once before returning; it never retries the old folder/file action.
-                if (storage == "sd" && parsed?.storage == "sd" && parsed.root == null &&
+                if (storage == "sd" && parsed?.storage == "sd" &&
                     !storageClicked && !menuClicked && reloadReturnStorage == null) {
                     reloadReturnStorage = storage
                     trace("sd-reload-via-internal")
@@ -324,7 +324,10 @@ class MangoAccessibilityService : AccessibilityService() {
                         }
                     } else if (parsed != null) {
                         val rootPath = parsed.root
-                        if (rootPath != null) {
+                        // A reload is leaving SD anyway. Its toolbar menu is already
+                        // available in nested folders, so avoid a redundant crumb round trip.
+                        val leavingSdForReload = reloadReturnStorage == "sd" && storage == "internal" && parsed.storage == "sd"
+                        if (rootPath != null && !leavingSdForReload) {
                             // Mango may pop only one cached page even for the storage crumb.
                             // Continue only after a newly observed, settled folder snapshot.
                             if (resetFingerprint != parsed.fingerprint) {
