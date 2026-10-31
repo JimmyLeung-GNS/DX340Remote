@@ -1,6 +1,17 @@
 # Implementation status
 
-## Current checkpoint —31 October2026,11:09 HKT
+## Current checkpoint —31 October2026,11:16 HKT
+
+Full goal **BLOCKED/incomplete** after the required three-consecutive-turn resource audit. App code956e5bf, receipt analyserb7a8f56 and battery toole35835e retain their scopes. Latest pre-audit pushed checkpoint8632a53 is preserved; this documentation update follows it. [Resource-gate evidence/JSON](test-results/2026-10-31-final-resource-gate.md), [full-scope audit](completion-audit.md).
+
+- **Fresh resources unavailable:** ADB empty; PC radioON/LE-central available but another3-second filtered scan receives0 advertisements. No GATT/pairing/approval/source/playback operation. Local xcrun/xcodebuild absent; actual XcodeBuildMCP list_sims returns spawn xcrun ENOENT with no configured defaults. Owner reconnect/unlock and listening replies are unanswered. Do not infer cause, radio failure, current playback or consent from these misses/silence.
+- **No running goal work:** persistent Gradle8.14 PID6952 is authoritatively IDLE and left untouched; no observer/emulator/build is active. Native41159819250/shared41159819268 already terminalSUCCESS/archive verified, not waits to restart. This gate persisted through4c24cdb report progress,8632a53 battery progress and this fresh audit; required next progress now needs real devices/observations. Watch remains gated on stable phones.
+- **Verified work retained:**174 JVM/72 Flutter/19 Swift/9 receipt-analyser and12 battery-analyser checks in their recorded scopes; real Android report save and UIKit share-sheet/ordinary restoration; actual candidate APK permissions. Battery planned6/recorded0, no physical T13 result. No new APK or product patch for this resource audit.
+- **Physical preservation:** last byte-verified Pixel0cf86c9c…/host491dbbff… and09:33 paused37/preferences/grants/bonds/browsingON observations remain historical facts, not fresh state. Phone66f stays emulator-only; host6faf/native7f built/not installed. No device configuration, source/audio/output, approval, bond or key changed. All remaining T01–T18/physical iPhone/source/format/SD/output/reliability/handoff/Watch requirements stay incomplete.
+
+Resume when the actual Pixel/DX340 are connected/unlocked: re-inventory, preserve state, original-signer phone66f in-place update (compatible host491 can stay), then actual receipt/source/listening tests with fresh availability. Owner Mac/Xcode/signing/iPhone is separately required for P5. Schedule six unplugged two-hour battery runs and other long/manual cases separately. No user pause or new device-switch request occurred; do not manufacture more proxy passes or regenerate a transfer package merely because this resource gate is blocked.
+
+## Prior checkpoint —31 October2026,11:09 HKT
 
 Full goal **ACTIVE/incomplete**. This turn made concrete progress: T13 recording/analysis preparation plus actual package-permission and resource checks. Tool source `e35835e0721ba32171f369fda5bd0a7d2a17708e`; app code remains956e5bf and receipt analyserb7a8f56. Preserve newer work, exact package scopes and failed attempts.
 

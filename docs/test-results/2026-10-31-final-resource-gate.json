@@ -1,0 +1,101 @@
+{
+  "date": "2026-10-31",
+  "resourceGate": "BLOCKED",
+  "completion": "INCOMPLETE",
+  "sourceCheckpointBeforeAudit": "8632a538701da03ba2a610ecc590889ec84e2815",
+  "host": "DESKTOP-T9ICUE4",
+  "freshChecks": {
+    "adbDevices": [],
+    "pcBle": {
+      "radio": "ON",
+      "lowEnergyCentral": true,
+      "scanSeconds": 3,
+      "matchingAdvertisements": 0,
+      "gattAttempted": false,
+      "noPairingApprovalPlaybackMutation": true
+    },
+    "appleTool": "spawn xcrun ENOENT",
+    "appleDefaultsConfigured": false,
+    "localXcrunOrXcodebuildFound": false,
+    "gradleDaemon": {
+      "pid": 6952,
+      "state": "IDLE",
+      "buildRunning": false,
+      "leftUntouched": true
+    },
+    "scrcpyProcessOrMirrorPresent": false
+  },
+  "consecutiveTurnsWithSameRequiredPhysicalResourceGate": [
+    {
+      "checkpoint": "4c24cdb3a6af3295f245c5286e69ed5e39dd6470",
+      "classification": "PROGRESS",
+      "work": "Bounded request journal/export, real SDK checks, both hosted Apple jobs terminal/archive verified",
+      "requiredHardwareAvailable": false
+    },
+    {
+      "checkpoint": "8632a538701da03ba2a610ecc590889ec84e2815",
+      "classification": "PROGRESS",
+      "work": "Battery format/analyser12 tests, actual APK permissions and negative availability check",
+      "requiredHardwareAvailable": false
+    },
+    {
+      "checkpoint": "this resource audit",
+      "classification": "NO_FURTHER_PRODUCT_PROGRESS",
+      "work": "Fresh ADB/BLE/Apple/process checks confirm unchanged resource gate; no running test waits",
+      "requiredHardwareAvailable": false
+    }
+  ],
+  "pendingUserInputs": [
+    "Reconnect/unlock Pixel and DX340 over USB: question unanswered",
+    "Fresh Apple-listening availability: question unanswered"
+  ],
+  "whyBlocked": "The remaining phone/source/audio/sleep/range/battery/SD/ownership validation needs real devices and operator observations; owner-iPhone deployment needs Mac/Xcode/signing. Watch is gated on stable phones. Independent implementation/checks and exact user-run preparation are recorded; no additional evidence-backed independent patch was identified.",
+  "preserved": {
+    "newAppOrSourceChanges": false,
+    "physicalSettingsChanged": false,
+    "playbackOrVolumeCommandSent": false,
+    "approvalOrBondChanged": false,
+    "signingKeyReadOrExported": false,
+    "oldResultsRelabeled": false,
+    "lastPhysicalPhoneSha256": "0cf86c9cfead4b27b3b2c1dcf2135b98fbe78fb992bc755491a1549d79b2fdc0",
+    "lastPhysicalCompanionSha256": "491dbbffabda8f7a20d64a2f591caa486427e036ba9e3821d831ccf6eff5934a"
+  },
+  "nextActions": [
+    "Reconnect/unlock actual Pixel and DX340 and verify their current state",
+    "Verify original signer, install phone66f candidate in place while retaining compatible host491",
+    "Collect actual native receipts and controlled Mango/Apple selection plus fresh owner audio observations",
+    "Schedule six real unplugged two-hour battery trials separately",
+    "Use owner Mac/Xcode/signing with actual iPhone for P5; keep Watch gated"
+  ],
+  "rawEvidence": [
+    {
+      "path": "artifacts/resource-gate-20261031/adb-devices.txt",
+      "sha256": "bbfcc7239a6f1be3544814ebdc6bcc9b66bf5b1f0b03baa3340808f19265a630",
+      "bytes": 28
+    },
+    {
+      "path": "artifacts/resource-gate-20261031/ble-scan.json",
+      "sha256": "d29b3e747cabf8e3db76b9ba4cee7c4bd727352922c9c9a3069b1716d5ec9f1b",
+      "bytes": 655
+    },
+    {
+      "path": "artifacts/resource-gate-20261031/gradle-status.txt",
+      "sha256": "d89dd6143121cb359423b81ae5bb019340357547aa01f505d14fb6d936a3a2fe",
+      "bytes": 238
+    },
+    {
+      "path": "artifacts/resource-gate-20261031/apple-tool-result.txt",
+      "sha256": "553cdbc540551ff3fb8bc2872f1e170ab3f1dc046174f8c84b5ede6dd20246bd",
+      "bytes": 181
+    },
+    {
+      "path": "artifacts/resource-gate-20261031/adb-final-before-block.txt",
+      "sha256": "bbfcc7239a6f1be3544814ebdc6bcc9b66bf5b1f0b03baa3340808f19265a630",
+      "bytes": 28
+    }
+  ],
+  "additionalResourcesRequired": [
+    "Owner Mac/Xcode/signing and actual iPhone for physical P5",
+    "Actual Watch after the stable-phone gate"
+  ]
+}
