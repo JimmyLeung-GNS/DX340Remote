@@ -1,0 +1,1192 @@
+{
+  "recordedAt": "2026-10-31T23:21:02.042542+08:00",
+  "status": "VERIFIED preparation checks; actual unplugged30min/USB-detachment survival NOT TESTED",
+  "goal": "ACTIVE/incomplete",
+  "changes": [
+    "Bounded device-local read-only shell recorder/launcher/status/collect/verified stop",
+    "Actual unplugged+displayOFF arming requires three consecutive five-second observations,120s arming cap",
+    "Dead/stale marker cannot prove process live; PID/path and logger FD ownership checks",
+    "Phone-only PC observer makes no DX reads/commands"
+  ],
+  "softwareTests": {
+    "recorder": 14,
+    "phoneObserver": 5,
+    "syntax": "Final shell uploaded and sh -n passed on DX340 before both final short/arming-stop runs"
+  },
+  "physicalChecks": [
+    {
+      "name": "short-check",
+      "scriptSha256": "9b69409b1074d20f404c478c372edd46be358c2048588a2192058394759e9862",
+      "summary": {
+        "status": "COMPLETED",
+        "reason": "DURATION_REACHED",
+        "startedUptime": "29390.25",
+        "endedUptime": "29402.87",
+        "samples": "5"
+      },
+      "elapsedSeconds": 12.62,
+      "sampleClockSeconds": [
+        29390.38,
+        29393.29,
+        29396.19,
+        29399.13,
+        29402.04
+      ],
+      "displayStates": [
+        "ON",
+        "ON",
+        "ON",
+        "ON",
+        "ON"
+      ],
+      "powerLogBytes": 0,
+      "actualScreenOffEventCaptured": false,
+      "usbPowerWakeCaptured": false,
+      "ownedParentAndLoggerNoLongerLive": true
+    },
+    {
+      "name": "screen-check",
+      "scriptSha256": "19de97c56f1d998f57fe9b861e9955de4e04de6369f8011fd206e05c89d9a29d",
+      "summary": {
+        "status": "COMPLETED",
+        "reason": "DURATION_REACHED",
+        "startedUptime": "29572.41",
+        "endedUptime": "29583.72",
+        "samples": "4",
+        "deadlineUptime": "29583"
+      },
+      "elapsedSeconds": 11.31,
+      "sampleClockSeconds": [
+        29572.56,
+        29575.59,
+        29578.57,
+        29581.69
+      ],
+      "displayStates": [
+        "ON",
+        "OFF",
+        "OFF",
+        "OFF"
+      ],
+      "powerLogBytes": 0,
+      "actualScreenOffEventCaptured": false,
+      "usbPowerWakeCaptured": false,
+      "ownedParentAndLoggerNoLongerLive": true
+    },
+    {
+      "name": "screen-flushed-check",
+      "scriptSha256": "74c629ea3be196a8d57928c5364ab1aff63f9d79ac05cd07ba88b9f8b34d0c67",
+      "summary": {
+        "status": "COMPLETED",
+        "reason": "DURATION_REACHED",
+        "startedUptime": "29818.75",
+        "endedUptime": "29829.50",
+        "samples": "4",
+        "deadlineUptime": "29829"
+      },
+      "elapsedSeconds": 10.75,
+      "sampleClockSeconds": [
+        29818.91,
+        29821.94,
+        29824.95,
+        29827.73
+      ],
+      "displayStates": [
+        "ON",
+        "OFF",
+        "ON",
+        "ON"
+      ],
+      "powerLogBytes": 893,
+      "actualScreenOffEventCaptured": true,
+      "usbPowerWakeCaptured": true,
+      "ownedParentAndLoggerNoLongerLive": true
+    },
+    {
+      "name": "screen-final-check",
+      "scriptSha256": "107e08b392852358bc90143c39acb94f45fc42ddce279d4730d99c4da5f29f9e",
+      "summary": {
+        "status": "COMPLETED",
+        "reason": "DURATION_REACHED",
+        "startedUptime": "29921.18",
+        "endedUptime": "29932.13",
+        "samples": "4",
+        "deadlineUptime": "29932"
+      },
+      "elapsedSeconds": 10.95,
+      "sampleClockSeconds": [
+        29921.34,
+        29924.43,
+        29927.53,
+        29930.33
+      ],
+      "displayStates": [
+        "ON",
+        "OFF",
+        "OFF",
+        "OFF"
+      ],
+      "powerLogBytes": 395,
+      "actualScreenOffEventCaptured": true,
+      "usbPowerWakeCaptured": false,
+      "ownedParentAndLoggerNoLongerLive": true
+    },
+    {
+      "name": "arming-stop-check",
+      "scriptSha256": "107e08b392852358bc90143c39acb94f45fc42ddce279d4730d99c4da5f29f9e",
+      "summary": {
+        "status": "STOPPED",
+        "reason": "OPERATOR_STOP",
+        "startedUptime": "",
+        "endedUptime": "30011.37",
+        "samples": "0",
+        "deadlineUptime": ""
+      },
+      "elapsedSeconds": null,
+      "sampleClockSeconds": [],
+      "displayStates": [],
+      "powerLogBytes": 0,
+      "actualScreenOffEventCaptured": false,
+      "usbPowerWakeCaptured": false,
+      "ownedParentAndLoggerNoLongerLive": true
+    }
+  ],
+  "phoneNegativePreflight": {
+    "kind": "Phone-only USB-powered background observer; no DAP reads/commands",
+    "requestedSeconds": 1,
+    "elapsedSeconds": 0.625,
+    "samples": 1,
+    "failure": "RuntimeError: Phone background/process/service condition failed; preserve this attempt",
+    "operatorStopped": false,
+    "observationComplete": false,
+    "limits": "Not continuous BLE, DAP display/source state, audio, unplugged phone, battery or full T05 evidence. Collect DAP recorder and test foreground control/hearing separately."
+  },
+  "loggerCorrection": "First two direct-file logger captures have0bytes; retained failed logger evidence despite completed snapshot timers. Bounded flushed stdout captures actual OFF/wake events. Completion remains distinct from acceptance.",
+  "installedAppsUnchanged": {
+    "phoneSource": "25ed62a39ee0ce7bd4d33d83a9596b6cb22ffcf0",
+    "phoneApkSha256": "ce47b14caa3b78c6e482387a971bc3efc80fdc7539845a7cb01b5c55daa614f2",
+    "hostSource": "fa60705ac5c798a58ffb26c1d32b43f2ae77ff5f",
+    "hostApkSha256": "82ad322f6f804c224603dde6668cb2f34c1a7de83b974edbfc4dec5245c721a5"
+  },
+  "devices": {
+    "host": "DX340 Android13/API33 eng.iBasso.20260812.181952; Companion0.1.0/code1; Mango4.1.37/code240; Apple6.5.3/code1599",
+    "phone": "Pixel9a Android16/API36 CP1A.260405.005; Remote0.2.0/code2"
+  },
+  "preservation": {
+    "prefsSettingsPidsUnchanged": true,
+    "bothPaused": true,
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeProof": false,
+    "phoneDisconnected": true,
+    "target": "Mango",
+    "cardMounted": true,
+    "noPlaybackOrVolumeCommand": true,
+    "noAppBuildInstallOrSourceStorageAction": true,
+    "phoneGrantFlagsAndExposedBondsUnchanged": true,
+    "hostGrantFlagsAndExposedBondsUnchanged": true,
+    "hostForegroundBothBindings": true
+  },
+  "remaining": [
+    "Fresh unplugged availability question pending; no long recorder/hold started",
+    "Actual USB removal may still terminate recorder; inspect same manifest afterward, never infer survival from launch",
+    "Sampling may pause in suspend; completed timer and samples do not prove continuous screen-off/BLE/audio/battery/T05",
+    "Prior actual offline Apple hearing remains exactce47/82ad scope; no new audio case",
+    "Full physical owner-iPhone/Mac signing/source/formats/output/offline/latency/reliability/security/Watch acceptance remains open"
+  ],
+  "rawEvidence": [
+    {
+      "file": "artifacts/device-recorder-20261031/arming-stop-check/manifest.json",
+      "sha256": "a54e74175ee60778fa7583c8b2a69f8c0846f426fad46157793ceed55f3aa9c8"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/arming-stop-check/raw/arming-display.txt",
+      "sha256": "fa8aace5b8fc0cdcd3d8b85d9b572943aa3b878be39d182d317ba3305c353083"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/arming-stop-check/raw/arming-power.txt",
+      "sha256": "8911d3e42bff02d3e9c373d25f714c43a9a0e0de7922beab1fb4472b945f4310"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/arming-stop-check/raw/arming.tsv",
+      "sha256": "de16a435910d8f29a82aa14ec1005ce68f150ae388b0904d4ba71ec044f19364"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/arming-stop-check/raw/collection.json",
+      "sha256": "05b21cac887fd20a7c6b7532520ac067b71151556ca7bc40a39c3d36e83b78c7"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/arming-stop-check/raw/error.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/arming-stop-check/raw/launcher.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/arming-stop-check/raw/logger-pid",
+      "sha256": "877d4b49006e48820473d5b5dedf22ec5f6402c0411fc378cca571c4c56c1c68"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/arming-stop-check/raw/logger.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/arming-stop-check/raw/pid",
+      "sha256": "465f4310ffb65c4d5bc3d0c1aa85b4dd48136191efaa05170e6f47390134e504"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/arming-stop-check/raw/power-events.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/arming-stop-check/raw/record.sh",
+      "sha256": "107e08b392852358bc90143c39acb94f45fc42ddce279d4730d99c4da5f29f9e"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/arming-stop-check/raw/state",
+      "sha256": "0ab44c69b2b46f9501536da2604bc5e9a57ccbfe58384e239bc6c71d0f5ea635"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/arming-stop-check/raw/summary.tsv",
+      "sha256": "ea50b4e19aabb860eab53ed02257983d32e0f61cf60965efcccce7c7c0c6dd00"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/arming-stop-check/record.sh",
+      "sha256": "107e08b392852358bc90143c39acb94f45fc42ddce279d4730d99c4da5f29f9e"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/before-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/before-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/before-host-accessibility.txt",
+      "sha256": "914d1b04872f701ab098dea3126b753ba17f2b5677e5afd397a07803b8906c33"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/before-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "4da3ebb3a837bf52ad90e413c3e1d921c511dc208aca06d73fe66a2538666c18"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/before-host-audio.txt",
+      "sha256": "f6c9af4526564e03d1f11dde21b056491dbc5f0f474c93f29dca81b1c714968a"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/before-host-bluetooth_manager.txt",
+      "sha256": "918afc769ca27cee18458b065d79a8140a4c3022da6840ee723a334b585af766"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/before-host-media_session.txt",
+      "sha256": "be7b76154e714062d8b253a5a0c6c2c4190aaf589b3dba4628569e007d92ebab"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/before-host-package-org.dx340.remote.host.txt",
+      "sha256": "6ad1d42f703e7418daa9fa1addd6d1f92188704946360ba8515430b59ddad9a4"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/before-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/before-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "01e5f910899a06f79d0a7a3aa7320bc63c1762b781781733839e0242207a1301"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/before-phone-bluetooth_manager.txt",
+      "sha256": "59cfd584167415db25a1a7c0912289f09ddc37b9fe9701fa1793a8e80336642f"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/before-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "7a150c69092efbd84420cc0f8aa43199a6db753eeea6b968864fca8f8aa3240d"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/before-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/before.json",
+      "sha256": "28b7d6a06a25064b4baaadfc7e408358328a8bbca5fc2c3c112dd84584951247"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/final-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/final-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/final-devices.txt",
+      "sha256": "99221000e3050b063712b3b8bb8b7e8b078c782ac467f889eb1e4f7c66d2336c"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/final-display.txt",
+      "sha256": "29ae62b676017f6abdae488b4705a51748040dca11503e0f00bc15bdac5c5a22"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/final-host-accessibility.txt",
+      "sha256": "c40d649e08139ae8d6aefbd8a941ab46cbfd981d82a00b6c3e654be6ddfd6714"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/final-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "07c1d0884e08195ad5696e077ac7b71677ebbb4ff67d5a311e53e54303ac0e10"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/final-host-audio.txt",
+      "sha256": "7b0b8ceab5bad68dc132edfeb85e1741dff937cb93842ddbcfd554d3d951e8af"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/final-host-bluetooth_manager.txt",
+      "sha256": "54156a365f6419c17249aec2eff78626e47bbdb75b1e088941769f17df5c7a69"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/final-host-media_session.txt",
+      "sha256": "be7b76154e714062d8b253a5a0c6c2c4190aaf589b3dba4628569e007d92ebab"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/final-host-package-org.dx340.remote.host.txt",
+      "sha256": "2192f464a33760702f5945ea96eaaef2354902a632e8a9c728ec72e5546994a8"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/final-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/final-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "78ae2c9131a6bdc2a559793e79470403dee09fc57264e43fc5c31d7be944f3b2"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/final-phone-bluetooth_manager.txt",
+      "sha256": "50c65344f6bb5a035ba9202e67722dd20cd1eff3a79bc1b00cfaef25ad8ba0f5"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/final-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "532e5c13c16f836169758aca5a0d6efe5abbd0416359d70a50d692d5d94aa786"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/final-power.txt",
+      "sha256": "ae3d9f71cc54f5eb949a14d15f232eb20bd12967f788544117459f9e7ac4bf66"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/final-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/final-volumes.txt",
+      "sha256": "7f7be54d6ac662c6c253fefac52be59dce97549438b29993566e0dd53c4803a4"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/final-window-policy.txt",
+      "sha256": "18d68918cbdf20899146d1a57d3573a933210fc02342e22aa73f6a5758527614"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/final.json",
+      "sha256": "7bfa4119cccb296c5c01ed534f4889609e8838e39c13c66fe9acd3000e80f126"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/phone-negative/000-activities.txt",
+      "sha256": "bd81c7d8dbc75393039c638b012c0ddc97e7553d1219f04b080d1ae7fd057a21"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/phone-negative/000-power.txt",
+      "sha256": "5d0f6e5dfc4341751a2cf47e7780813a44499dc2722f2d0e4d315e751d7f12cd"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/phone-negative/000-service.txt",
+      "sha256": "34a82df267d840ba05bd35b0e26a549543efbb5ea08da31072e9db2bbb5c96cf"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/phone-negative/samples.jsonl",
+      "sha256": "3b6eba625de474fe0ddd77a28b0431752b2557d993f10ac208247f0bff2d992a"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/phone-negative/summary.json",
+      "sha256": "865da0eade4a6960a1bb2692b2c2075dc5d25567c292db7eb7b42fe10e33f366"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/phone-negative-console.txt",
+      "sha256": "f8bfe8906a9a9c1930452a5b8a1f5f36be4ab87e2d07e2d396f8da2bfd93c8b7"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/phone-observer-tests.txt",
+      "sha256": "018fc3a9d5b460dca55c252e1c0fc432b361de777542aa5946870c13a5b777c8"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/manifest.json",
+      "sha256": "4302ee37bc4f5a3fc1d34ee88e81112ad4ef2d2d62ff2ff893b513a12841fa1c"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/000-audio.txt",
+      "sha256": "71008c7053397438cc839efdc5eaece63c1839385949a7a4f534865b58cc6cbd"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/000-clock.txt",
+      "sha256": "b338ee2ea2d61e5fbad80f4353d250f8b89fea1711feaf06c43fd12f0113c807"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/000-display.txt",
+      "sha256": "63d194f4dc3f64377724ce54662d903fe071e842c3716f1d743182c66cfce06d"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/000-media.txt",
+      "sha256": "3e815293024e47c4e16632dd95884204c0fe9fd1e4701f8233a074ee5b06cf86"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/000-pid.txt",
+      "sha256": "8846d6bac62cbeb4b08f360c4524c0ccb06cd34cb979c37c29f56d67f86cc6b6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/000-power.txt",
+      "sha256": "356cba575642b247edc66e9eb9b557cf7ab59ee11c283a7336806331cf61103b"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/000-service.txt",
+      "sha256": "9e6a1b3aaec3df51b981da87cfdc169de4e9cc3ace7fa295107fc2f6c85f7054"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/001-audio.txt",
+      "sha256": "875864d08e4d90ffc2cc00716f7aa7e831fb80b8e369f857af8caf2e286803f1"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/001-clock.txt",
+      "sha256": "d87902a4d823430539fac088046d880709c83279c1db059d5ffcb20230a7e79f"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/001-display.txt",
+      "sha256": "44322e2ab6c529c96857afdbb3e763980cdea99431cc43123a652b8bbf7a3723"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/001-media.txt",
+      "sha256": "3e815293024e47c4e16632dd95884204c0fe9fd1e4701f8233a074ee5b06cf86"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/001-pid.txt",
+      "sha256": "8846d6bac62cbeb4b08f360c4524c0ccb06cd34cb979c37c29f56d67f86cc6b6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/001-power.txt",
+      "sha256": "049e84505833db26d441c9502e25119779f5cc9b10a5b6fe8bcf9a16d33c51e1"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/001-service.txt",
+      "sha256": "38f0bee130355dbcc0ac87e5d666103db296726351d27561c5e7972cc2f684dd"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/002-audio.txt",
+      "sha256": "ac6a32c9f550eb029d3a6fbf072f42d61ca3216079a6e333262d62225333c8d7"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/002-clock.txt",
+      "sha256": "2fd881e068943a07e6d1c3ebd99e7be6244c19678b939c295352620d09e0e6e5"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/002-display.txt",
+      "sha256": "e7ad8119828e8767e302126cba00f642d26846d5b0c84392cda4f598288f0583"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/002-media.txt",
+      "sha256": "3e815293024e47c4e16632dd95884204c0fe9fd1e4701f8233a074ee5b06cf86"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/002-pid.txt",
+      "sha256": "8846d6bac62cbeb4b08f360c4524c0ccb06cd34cb979c37c29f56d67f86cc6b6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/002-power.txt",
+      "sha256": "f2569b24a6ca689a30e5f1d3d31e4459662ca5f16d7bec4813d4524dc0b4e91a"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/002-service.txt",
+      "sha256": "382fc6674e644c4bab56b32a5fbad316d766f0940d9b3b223ead587adf73cd09"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/003-audio.txt",
+      "sha256": "3f51c666254d81e44f126d27d1bf4534f94a81757a8d6e3c51e82b0d8820b2e9"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/003-clock.txt",
+      "sha256": "fa254267870124fffc52459015bb562ce16b4c4dad71ee982df0872dc01ba366"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/003-display.txt",
+      "sha256": "75ee2fdbf2c92257a51f4033435eb988a90bda1a6648979e7a85678be78a91e0"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/003-media.txt",
+      "sha256": "3e815293024e47c4e16632dd95884204c0fe9fd1e4701f8233a074ee5b06cf86"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/003-pid.txt",
+      "sha256": "8846d6bac62cbeb4b08f360c4524c0ccb06cd34cb979c37c29f56d67f86cc6b6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/003-power.txt",
+      "sha256": "9aa96b0c9815d7fc1b0dd3d86670d4014f48de857a7b7f7112de1b710ab9b2c1"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/003-service.txt",
+      "sha256": "0f8006e052da17046d4306aa7966fa2df4e45734210c8a17dc9efe9ffedd1a88"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/arming-display.txt",
+      "sha256": "31d3c54479fd21c2d3b5fa23130ffbc0f430f12d97fa263f270febdde27216a9"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/arming-power.txt",
+      "sha256": "bcf21ce1f7eff8fa7480cff9f2318d41782dc498f1c46ac2b490f764e1cf0f03"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/collection.json",
+      "sha256": "521b732e4cc4e089997e30d0a57b8dae67bed99b7bdafa65eb9020c5f9fd1f79"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/error.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/launcher.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/logger-pid",
+      "sha256": "29591d7c879885560abbfaa3d4a02ddeaae3a38ceef988cf7d90e9700a258bfa"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/logger.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/pid",
+      "sha256": "8c2a4cceb0a1465b4d306ea03220cbbc02ec40247c5c5c81ccc86957a72eb632"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/power-events.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/record.sh",
+      "sha256": "19de97c56f1d998f57fe9b861e9955de4e04de6369f8011fd206e05c89d9a29d"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/started-uptime",
+      "sha256": "9d603048027aaf204770ab32b1098ac1b60d0b1c4764bd5f33221ce7185f3081"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/state",
+      "sha256": "adce7ab9847b30ed365adfabae1d6539223ce48fd530f0a0f68df0e0b9f30c97"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/raw/summary.tsv",
+      "sha256": "8758574cb05fb62f6067507d6839e354f313992b85ec032a4cd162576b691413"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-check/record.sh",
+      "sha256": "19de97c56f1d998f57fe9b861e9955de4e04de6369f8011fd206e05c89d9a29d"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/manifest.json",
+      "sha256": "40f3616d6abb419ccde017517ba09b949402ec4ba1fa55ff57ae92b199f6843c"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/000-audio.txt",
+      "sha256": "d0b5b0ac91d1d2bf94248dd4a33990b89dccbd290f96c421874e0559af8f8f7e"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/000-clock.txt",
+      "sha256": "f21019af7b4b0f9bd174eff83312ab21293415f11013bdba4ddc3e14fb2c87c8"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/000-display.txt",
+      "sha256": "cc8c3bb07b05678b5191c80d0f8bf0baf4d714ef31a8ceab279c30805c10d417"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/000-media.txt",
+      "sha256": "3e815293024e47c4e16632dd95884204c0fe9fd1e4701f8233a074ee5b06cf86"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/000-pid.txt",
+      "sha256": "8846d6bac62cbeb4b08f360c4524c0ccb06cd34cb979c37c29f56d67f86cc6b6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/000-power.txt",
+      "sha256": "e4c0626851633473ce54aacf98ac4f13c1b4538ff7adc90f54ad4bd5e3c4e5ca"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/000-service.txt",
+      "sha256": "9084246faf5fed81c55a34d5f2b8e756731c4b888e5b5eebf03c77cfa51625a1"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/001-audio.txt",
+      "sha256": "29f1101e219717cf2b632472444bdecdae74ab8b7018fd28ff2de293598cfca3"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/001-clock.txt",
+      "sha256": "d740846e81535e623296cc1bfe920d7d6470afd1ca86d44cd0beb37e313bc8db"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/001-display.txt",
+      "sha256": "e24d445af046725e99a8cc6f5f790979316e1c5a2811dc8e5ecea4f0b6652222"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/001-media.txt",
+      "sha256": "3e815293024e47c4e16632dd95884204c0fe9fd1e4701f8233a074ee5b06cf86"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/001-pid.txt",
+      "sha256": "8846d6bac62cbeb4b08f360c4524c0ccb06cd34cb979c37c29f56d67f86cc6b6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/001-power.txt",
+      "sha256": "6612f4be612bbacfe52f9248aa628673817f0e627b82b970eb57b611b27e35fb"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/001-service.txt",
+      "sha256": "f40b448828a4087c63575c2233602d17903f33127975dc006f2d2bc009a161b3"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/002-audio.txt",
+      "sha256": "2f83a7fb1884101ea731de7424fafefeecfef18209fdd70733b08f94aa1cdb41"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/002-clock.txt",
+      "sha256": "6499a10c37d9f8bac4aa15518eb21f231ed260bb7deb023dac4692e5828f5214"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/002-display.txt",
+      "sha256": "d606113ac23d6dbbef00c9c480a70da34956dd6a8440ecbb34fc57c62063f2f9"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/002-media.txt",
+      "sha256": "3e815293024e47c4e16632dd95884204c0fe9fd1e4701f8233a074ee5b06cf86"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/002-pid.txt",
+      "sha256": "8846d6bac62cbeb4b08f360c4524c0ccb06cd34cb979c37c29f56d67f86cc6b6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/002-power.txt",
+      "sha256": "e24f7788a20e12eeedcbd1048a9fa22ace12b0041428ddaf5fefad772152c99f"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/002-service.txt",
+      "sha256": "d21843dfda06c31940799f5395934c561b43a9d9a4ac2fa8160a016f026e975f"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/003-audio.txt",
+      "sha256": "534a6cae349afce3938815207435625de0d9416fc6322a3525d993063c922678"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/003-clock.txt",
+      "sha256": "3830df4e621dfc2cedecb4fe6c88c99cc73113f444aee40755fcf2be7dbffad2"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/003-display.txt",
+      "sha256": "409f594ac6a726f19876a5dcdcfde66d4bac6498188b5f6be47054788802f2e5"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/003-media.txt",
+      "sha256": "3e815293024e47c4e16632dd95884204c0fe9fd1e4701f8233a074ee5b06cf86"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/003-pid.txt",
+      "sha256": "8846d6bac62cbeb4b08f360c4524c0ccb06cd34cb979c37c29f56d67f86cc6b6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/003-power.txt",
+      "sha256": "38a044561707c48d6c008d111c3b97abdfbd88b7384561f2a94d2327ba663b6c"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/003-service.txt",
+      "sha256": "c0a939b460b981c92fce126e34160e566d18256bdaa13babb574dd4a99cacda7"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/arming-display.txt",
+      "sha256": "27c3c85999247127b66dec1de5cfefe0676720780434792e4679344c5ead4128"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/arming-power.txt",
+      "sha256": "f00132d0ba21da8d9f4d1469722f88b3bd54527dc33bb9e118c48948cbc83234"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/arming.tsv",
+      "sha256": "079514119b30736b031443ce95ecce1f392d75f6e859b4d5d4d801e2d31077d1"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/collection.json",
+      "sha256": "4d118deec5a2f426fb07dffabf1cb0ae8abe9b7cd6f68e1ce111d5e57e07f755"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/error.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/launcher.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/logger-pid",
+      "sha256": "4d8acd8cdfd7353f3a0b1dc8ff47626550627430dbc1ac1d7afe5eebb35b62dd"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/logger.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/pid",
+      "sha256": "34ff9d94b19c73aa216abb3673f942f0e072926de24c99290b3f9fc91e9e01e4"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/power-events.log",
+      "sha256": "38f50256f73b8a0a367e2a4f0968d70534f8a10dbcae50cafa4bba085f80cf82"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/record.sh",
+      "sha256": "107e08b392852358bc90143c39acb94f45fc42ddce279d4730d99c4da5f29f9e"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/started-uptime",
+      "sha256": "e2fff83c527db13933177602ba0aa733db57359d05460d2521b7cdc298927f22"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/state",
+      "sha256": "adce7ab9847b30ed365adfabae1d6539223ce48fd530f0a0f68df0e0b9f30c97"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/raw/summary.tsv",
+      "sha256": "d40cc42eb896116b45615392d0d6837ef9f733eeb697a24f8b1c93caac658379"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check/record.sh",
+      "sha256": "107e08b392852358bc90143c39acb94f45fc42ddce279d4730d99c4da5f29f9e"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check-restored-power.txt",
+      "sha256": "a417b883faebe38d83d9476d915b66106fac76ead9a77751a4f4bc0fa0783614"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-final-check-sleep-action.json",
+      "sha256": "48778905137c28daa87da53ae928c986bf260b9b73fbefb5df7e3dee9920ca7e"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/manifest.json",
+      "sha256": "5c52170dddc814b99e96c78db75ef352e28879abdf5ea0105822270f712e56f1"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/000-audio.txt",
+      "sha256": "4c312d3a5472c544fb1e8961a9849ba3fe4e5f27b17dbee2a4803f9258461f26"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/000-clock.txt",
+      "sha256": "72965ddc1d793e5a7e0c0145bda34ea790502e6fd0c0292d933b8b657c5a5e93"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/000-display.txt",
+      "sha256": "406613b1adec31a3908217b463c177028136474c8aaad3618d99309c8ac04f11"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/000-media.txt",
+      "sha256": "3e815293024e47c4e16632dd95884204c0fe9fd1e4701f8233a074ee5b06cf86"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/000-pid.txt",
+      "sha256": "8846d6bac62cbeb4b08f360c4524c0ccb06cd34cb979c37c29f56d67f86cc6b6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/000-power.txt",
+      "sha256": "4b2c6cb2e041976c871633591946ad322461fcbf790b684bcdb3a82fb0904663"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/000-service.txt",
+      "sha256": "efa49303ddbf3345a2713459a496b9860ccac7561eac3a521cad1056d6099ac9"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/001-audio.txt",
+      "sha256": "540f7e80e3f75c9216a8fc515983c67d9bf38cad2032b0568a3c4d45d0a30adf"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/001-clock.txt",
+      "sha256": "342dcfb038eafa8e59e9623d1a39776e2854682d1c22399d2d9a6f18cecf6db8"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/001-display.txt",
+      "sha256": "65e3b5f14c7c897cfa5d513f066e3a2fcd8cc88e54848f6ff71f5d21f37dcdc7"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/001-media.txt",
+      "sha256": "3e815293024e47c4e16632dd95884204c0fe9fd1e4701f8233a074ee5b06cf86"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/001-pid.txt",
+      "sha256": "8846d6bac62cbeb4b08f360c4524c0ccb06cd34cb979c37c29f56d67f86cc6b6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/001-power.txt",
+      "sha256": "c8bbc4aa2f0923af767849a8263a5dbc2efaec47bdabf0634357f4cb3a9f64ac"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/001-service.txt",
+      "sha256": "f8c478196be98e04cb1b5872227e906c92f8d7fb0acdb07e25ef79c89e012712"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/002-audio.txt",
+      "sha256": "c996dfdc8e7b29010ea33c1c11671e2e9c659d78aea4308e73f1c5faf451ec87"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/002-clock.txt",
+      "sha256": "bb676a449829e79a03e43af6b089bfc799c0d69a02c1660fd76587266c92f9bf"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/002-display.txt",
+      "sha256": "b929a48a30c2394898fea51e1830cf22d4059a47ce2c0b37208b452b1531d0c6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/002-media.txt",
+      "sha256": "3e815293024e47c4e16632dd95884204c0fe9fd1e4701f8233a074ee5b06cf86"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/002-pid.txt",
+      "sha256": "8846d6bac62cbeb4b08f360c4524c0ccb06cd34cb979c37c29f56d67f86cc6b6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/002-power.txt",
+      "sha256": "6d6675e5c88f667b2cbc165e99650a8ce2149d417d981f54c7d7df8155c60c53"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/002-service.txt",
+      "sha256": "32f9b742b624543ff88fc08f43e177a4c062ed1285fd8f7cd70e3f4e894b4fbf"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/003-audio.txt",
+      "sha256": "084410d8ce12d59f932fa855cae92bf0b6a17e9817b64e9bdd26d68b6aef71fd"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/003-clock.txt",
+      "sha256": "15df66d0a5d998be7c350d809916fc4bb52cb20c947a5324e1bffd442633d1db"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/003-display.txt",
+      "sha256": "c14daa93fc5f225a86d7aa6923771234db918181a296da6a73caa69c088ca2f3"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/003-media.txt",
+      "sha256": "3e815293024e47c4e16632dd95884204c0fe9fd1e4701f8233a074ee5b06cf86"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/003-pid.txt",
+      "sha256": "8846d6bac62cbeb4b08f360c4524c0ccb06cd34cb979c37c29f56d67f86cc6b6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/003-power.txt",
+      "sha256": "8f083a16dc1bc1607ff92d5edcc46fa6d28ad8a5261bd5791f1fd6bf02f450b3"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/003-service.txt",
+      "sha256": "a81218636467036cf2bd954b4636ebd0cdaafee225357fc31e351c226678625b"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/arming-display.txt",
+      "sha256": "8abd1b841a1679f3ae61ac07abb283340404cd115046f80a8d70201c6e4d8e53"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/arming-power.txt",
+      "sha256": "d7841009e2e5bb34f498808e01e873b7e7760edc89fdcc270c1338085af5dc4c"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/arming.tsv",
+      "sha256": "c7d8bf946001d0e02a7a6f753d735e49b4de987920bac3ffe25fd5fc4e627022"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/collection.json",
+      "sha256": "c3d9ce00a1ac1b06f78fe07db75e7ef61e01b9165df4d7dde82b27d6d9af9eec"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/error.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/launcher.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/logger-pid",
+      "sha256": "d5f0f1bcf5a9ea15a6df582febec8499f287aeb55d7b631fc446549d2d25d961"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/logger.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/pid",
+      "sha256": "a04ec9054a8e93dcdd8dae1ebddb154102bd5fdbf01f06d0bc0386a053e9b970"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/power-events.log",
+      "sha256": "fa6694e3a2a60bd2f3ae1e9611b73a01673a520e61b431d35b95cb10a970c0fa"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/record.sh",
+      "sha256": "74c629ea3be196a8d57928c5364ab1aff63f9d79ac05cd07ba88b9f8b34d0c67"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/started-uptime",
+      "sha256": "d3ed5d56a76ec2d158b202a41a049d3b6489a090cfa08c3148634270033b1cd9"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/state",
+      "sha256": "adce7ab9847b30ed365adfabae1d6539223ce48fd530f0a0f68df0e0b9f30c97"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/raw/summary.tsv",
+      "sha256": "49dcbabf4a8b8262a9c856c05b5e11ea19db3b0a7dcef90033414bfe99928f4a"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check/record.sh",
+      "sha256": "74c629ea3be196a8d57928c5364ab1aff63f9d79ac05cd07ba88b9f8b34d0c67"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check-restored-power.txt",
+      "sha256": "11c4757c01c8bf885d6d49e58a9326e3dd85dc6ac78321105e0882b7fc9ad68c"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-flushed-check-sleep-action.json",
+      "sha256": "746ace529c84159a981ccf4a0e861cdea1b5cba0ee6c5175cc1f8bd23a7b896a"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-original-power.txt",
+      "sha256": "02ca778090435ae857ac9de2e81b86291173c877e6064d2493fff50e6d130d97"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-restored-power.txt",
+      "sha256": "3fc38144704affc26715dff93e2c087ff5c4dd6b9f39141cba5c27e53086dc47"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/screen-sleep-action.json",
+      "sha256": "8750c3b8f705484b007a30f9c63c33afc50c41e54260058aac52abcd47481841"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/manifest.json",
+      "sha256": "7e4089af86fd122a500e598ceadd08c178dab793872ed008ce1354fa0785a51e"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/000-audio.txt",
+      "sha256": "d2d7011a98e9e9880a08027cd9911d83a390186570f2ee581c6b9f940bb846c4"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/000-clock.txt",
+      "sha256": "ddb0b961085069b571e75c58d2eaeb4f66a80f26aa4991d5e158b918b365ba53"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/000-display.txt",
+      "sha256": "606d9402a9d3dc976a21ee48e23fd126016b2603299c45ce5f42a8dcef7d3436"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/000-media.txt",
+      "sha256": "3e815293024e47c4e16632dd95884204c0fe9fd1e4701f8233a074ee5b06cf86"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/000-pid.txt",
+      "sha256": "8846d6bac62cbeb4b08f360c4524c0ccb06cd34cb979c37c29f56d67f86cc6b6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/000-power.txt",
+      "sha256": "65c3943479d3039d2b3a982d3fddd6dd5d7931a3fbad21f57959ac0e038acabf"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/000-service.txt",
+      "sha256": "799d19a3a7ab662b715369735c648297eabe909d7bd3190549d51f37b6f0a3db"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/001-audio.txt",
+      "sha256": "bfbff1ae3990a7c85867be50e9f3421b6f4d01eb79d2235d203c27b45bf74cfd"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/001-clock.txt",
+      "sha256": "5334750ad449712ce7a5cb7ede3eb85c1cd45f46afeeab811408f14168399e63"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/001-display.txt",
+      "sha256": "621663e6400730cdb3855482982ff8c0d2971c0092ae46cccfbcd2aaf8646acf"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/001-media.txt",
+      "sha256": "3e815293024e47c4e16632dd95884204c0fe9fd1e4701f8233a074ee5b06cf86"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/001-pid.txt",
+      "sha256": "8846d6bac62cbeb4b08f360c4524c0ccb06cd34cb979c37c29f56d67f86cc6b6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/001-power.txt",
+      "sha256": "3fd076eb2b864a4b9943a442ef9320665dff79dd8c021c1a496332b9ece81910"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/001-service.txt",
+      "sha256": "8780457aa1239deeeb4a40119f45286da689fa5cbe2bfd86e7591c50b7e454d1"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/002-audio.txt",
+      "sha256": "5987f128c5947c88eb0563e30e99778aa7d0a2e530970c71a3a9eb405b8afcf3"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/002-clock.txt",
+      "sha256": "bd14ea8f7f92d6b359f36500b676f083279f2c289f767f6ee0b00fd490aaea38"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/002-display.txt",
+      "sha256": "58c4e4bd311b7c481d0eadc78f3e9e4e839bc195b716fdaaacb525a60be30dda"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/002-media.txt",
+      "sha256": "3e815293024e47c4e16632dd95884204c0fe9fd1e4701f8233a074ee5b06cf86"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/002-pid.txt",
+      "sha256": "8846d6bac62cbeb4b08f360c4524c0ccb06cd34cb979c37c29f56d67f86cc6b6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/002-power.txt",
+      "sha256": "d3f64632c6c7d1b2f7d545ac8d6ea4e153be3a1851eed9a63ec5069758c3a01c"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/002-service.txt",
+      "sha256": "1f2852e698a315c98a0ef4e5e8b034f9bd45da4825b975497f6deb43039df209"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/003-audio.txt",
+      "sha256": "29eec68ed70d27a07ec3c703169ed31fab40e49f6126618e7d29c1b1767e62d4"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/003-clock.txt",
+      "sha256": "bf66da975e2915f20ce9d830372a72bf3a55ba5d6e34a2d796c9dac2c9cd5c6d"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/003-display.txt",
+      "sha256": "cb705d56e4481822582f4e91376c8761c30a30c24aa1c878920224d4295ff09c"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/003-media.txt",
+      "sha256": "3e815293024e47c4e16632dd95884204c0fe9fd1e4701f8233a074ee5b06cf86"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/003-pid.txt",
+      "sha256": "8846d6bac62cbeb4b08f360c4524c0ccb06cd34cb979c37c29f56d67f86cc6b6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/003-power.txt",
+      "sha256": "9d3d0484accfa5bdd83fcb30bebd6fe566eb0387d194143b7b7590d573b4ac6e"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/003-service.txt",
+      "sha256": "9ddf2f4f0f99576d136a7ef1fc113d5a25fa3a5603f6393f60b362a0ebf36461"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/004-audio.txt",
+      "sha256": "705c787118d62e03ef43008f4f7a5c4b7638cbd1f0e322116745995e874f53bb"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/004-clock.txt",
+      "sha256": "e56779d5d556011206be11926327e53b48a0bfc896de45ddf7fed3bcf7d75c39"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/004-display.txt",
+      "sha256": "36db8e06cd0e2ead8058223dce1f8241ba44921f09d7b13af2251b3c7ebd97d3"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/004-media.txt",
+      "sha256": "3e815293024e47c4e16632dd95884204c0fe9fd1e4701f8233a074ee5b06cf86"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/004-pid.txt",
+      "sha256": "8846d6bac62cbeb4b08f360c4524c0ccb06cd34cb979c37c29f56d67f86cc6b6"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/004-power.txt",
+      "sha256": "e6c248bd0668e81e4a9e732879aabfc2201ac74f67ab4c19432cf5cc9519b138"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/004-service.txt",
+      "sha256": "16e6895f554c2c3b9801e09543dadfa8f0e5b45eecec4727f508e2279b4d9110"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/arming-display.txt",
+      "sha256": "535a1625f3e54de333dc6c2783022dca68044e53c6413512ff4e843a147d6e35"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/arming-power.txt",
+      "sha256": "225fb9182e6476570c9a85cc9d718933e50730a33e1e5e3065762e5c637d8fa9"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/collection.json",
+      "sha256": "4feec73304d90f00b6032567911a0fbcb7f62dab1cba2f83eae689563f6e9985"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/error.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/launcher.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/logger-pid",
+      "sha256": "3db1da648ec5d0db72eacef8d7e068ed5b9f385e52f91d05ed08167157ed601b"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/logger.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/pid",
+      "sha256": "93a51a943ea4c983a55847b7d2702715e13e10190448b96742836bb36e463d23"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/power-events.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/record.sh",
+      "sha256": "9b69409b1074d20f404c478c372edd46be358c2048588a2192058394759e9862"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/started-uptime",
+      "sha256": "6bdb36b6b68f3dee216399f3f755593611d8ef97a2d5c11164004fe98394d26b"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/state",
+      "sha256": "adce7ab9847b30ed365adfabae1d6539223ce48fd530f0a0f68df0e0b9f30c97"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/raw/summary.tsv",
+      "sha256": "d0f2dd7ab33584ac76a4904af7ccd5cf382d966655f0c69a7ed90716bb9d1961"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-check/record.sh",
+      "sha256": "9b69409b1074d20f404c478c372edd46be358c2048588a2192058394759e9862"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-collection-console.txt",
+      "sha256": "4feec73304d90f00b6032567911a0fbcb7f62dab1cba2f83eae689563f6e9985"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/short-start.json",
+      "sha256": "52dae52a74c900564495b32ede11e3f5d5e37546e3de95aff8e2559b0cedfa5a"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/system-after-screen.txt",
+      "sha256": "6ce4269baf6032a7bb1abd94f830f7756e32fe5e981516af1a2206608ec5ad00"
+    },
+    {
+      "file": "artifacts/device-recorder-20261031/unit-tests.txt",
+      "sha256": "52999582e7f08fea5c523b8690097f22830b275c6980a1a7f0b6f155d2aa48cf"
+    }
+  ],
+  "toolLfSha256": {
+    "scripts/device-hold-recorder.sh": "107e08b392852358bc90143c39acb94f45fc42ddce279d4730d99c4da5f29f9e",
+    "scripts/device-hold-recorder.py": "a7e54b4f08e00fdd52ee2c6de718d4d4e273aac0d977ed20bcf1f9e8f38d525d",
+    "scripts/observe-android-phone-background.py": "dbfd718ae94628093dd9c7db0494da69f7ae89f10ff67a0d784e1decc53e5e14"
+  }
+}
