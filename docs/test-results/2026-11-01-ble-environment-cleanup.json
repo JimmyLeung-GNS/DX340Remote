@@ -1,0 +1,18 @@
+{
+  "status": "VERIFIED one Pixel switch cycle, original ON restored; manual test-environment cleanup, not automatic-recovery proof",
+  "cleanup": {
+    "phase": "RESTORED_ON",
+    "at": "2026-11-01T06:24:34.636567+08:00",
+    "originalBluetoothFlag": "1",
+    "scope": "One Pixel Bluetooth off/on test-environment cleanup after recorded failed attempts; not automatic-recovery evidence",
+    "offFlag": "0",
+    "restoredFlag": "1",
+    "actualOn": true,
+    "offScope": "global0 with BLE_TURNING_OFF sample; fully RF-off interval not proven"
+  },
+  "rawEvidence": {
+    "root": "artifacts/ble-environment-cleanup-20261101",
+    "filesHashed": 6,
+    "manifestSha256": "7a3148be7c826618e9f0caafec70feec5658907bd7adea72a26651dc4a8f0b0e"
+  }
+}

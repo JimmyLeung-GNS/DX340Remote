@@ -11,10 +11,10 @@
       "build": "DX340-userdebug 13 TKQ1.221013.002 eng.iBasso.20260812.181952 release-keys",
       "app": {
         "package": "org.dx340.remote.host",
-        "sha256": "3a32689ac5805cf58758286f27ee1c1b2abeec16f01b8de70b5ac9cfe8307b2c",
+        "sha256": "e1a024293c70e334de1e45c31176be6c19e4555fe97391e84f56b4515148b1f8",
         "versionName": "0.1.0",
         "versionCode": 1,
-        "sourceCommit": "5f4f1f24a673f778d7b403203e35f3e48edf4b8a"
+        "sourceCommit": "731aa64424fa65c771b7ce0f4a3db7a590ead662"
       }
     },
     "phone": {
@@ -23,10 +23,10 @@
       "build": "CP1A.260405.005",
       "app": {
         "package": "org.dx340.remote.controller",
-        "sha256": "daa9f5e572c27380647b76485ed67c2efd20291082fdb87c2632847688e6349b",
+        "sha256": "dac6016c1223f1f2edcc431d95fd108daaa1b2e8d5139fd2ae72d9393092f84f",
         "versionName": "0.2.0",
         "versionCode": 2,
-        "sourceCommit": "84e56ac883dcfb541627c8becee318870268e0f2"
+        "sourceCommit": "731aa64424fa65c771b7ce0f4a3db7a590ead662"
       }
     }
   },
@@ -178,7 +178,7 @@
     {
       "id": "T12",
       "status": "PARTIAL",
-      "finding": "Current95 pending browse loss clears spinner; saved reconnect does not replay. Earlier radio/permission/process recovery scopes retained; new host debug-injected timeout auto-recovery verified without replay; budget exhaustion/native Restart now verified with an intermediate reconnect loss retained. [Budget evidence](test-results/2026-11-01-recovery-budget.md). Natural faults/calls/full sleep/two-phone matrix incomplete. [Evidence](test-results/2026-11-01-interrupted-library.md).  Currenta65/611 real phone-radio interruption retires a read; un-injected host timeout restores advertising693ms later, saved Connect/fresh read pass. [Current result](test-results/2026-11-01-first-write-submission.md). Separate3a/a65 input-response hold retires a pending write without replay; five-second host fallback verified, but23s recovery observation fails and eventual automatic approval takes81526ms after close. Slow discovery recovery unresolved. Currentdaa callback-ordered close works but two30s discovery stalls persist;23s observation failed, eventual auto-approval81580ms after logical retirement. No speed fix.",
+      "finding": "Current95 pending browse loss clears spinner; saved reconnect does not replay. Earlier radio/permission/process recovery scopes retained; new host debug-injected timeout auto-recovery verified without replay; budget exhaustion/native Restart now verified with an intermediate reconnect loss retained. [Budget evidence](test-results/2026-11-01-recovery-budget.md). Natural faults/calls/full sleep/two-phone matrix incomplete. [Evidence](test-results/2026-11-01-interrupted-library.md).  Currenta65/611 real phone-radio interruption retires a read; un-injected host timeout restores advertising693ms later, saved Connect/fresh read pass. [Current result](test-results/2026-11-01-first-write-submission.md). Separate3a/a65 input-response hold retires a pending write without replay; five-second host fallback verified, but23s recovery observation fails and eventual automatic approval takes81526ms after close. Slow discovery recovery unresolved. Currentdaa callback-ordered close works but two30s discovery stalls persist;23s observation failed, eventual auto-approval81580ms after logical retirement. No speed fix. Current731 real Service Changed sequence drains/discovers on same client and automatically reauthorizes after controlled own-server restart; initial stalls/manual cleanup retained, no full reliability pass.",
       "remainingRequirement": "Calls/radio/permission/background/restart produce honest status and bounded recovery with clear required action.",
       "evidence": "2026-11-01-interrupted-library.md",
       "injectedRecoverySupplement": "2026-11-01-injected-indication-recovery.md",
@@ -209,7 +209,7 @@
     {
       "id": "T16",
       "status": "PARTIAL",
-      "finding": "PC65537-byte and60s slow-drip bounds, earlier malformed/quota/idle subset, current95 pending-browse loss/no replay verified. One debug-injected successful indication callback omission reaches the real deadline and recovers, with no old read replay. Three burst callback omissions also verify bounded exhaustion/native Restart and retired reads without replay. [Budget evidence](test-results/2026-11-01-recovery-budget.md). Duplicate playback mutations, input ATT write faults and natural vendor failures remain open. [Evidence](test-results/2026-11-01-framing-bounds.md).  Currenta65 input-write phase target NOT MET (ACK144ms before loss363ms); do not count this reply-wait cut as pending-write proof. [Phase result](test-results/2026-11-01-first-write-submission.md). Separate3a/a65 held-input case verifies pending ATT/noACK/retirement without dispatch or replay. Duplicate mutations/natural faults remain open; earlier missed phase remains NOT_MET.",
+      "finding": "PC65537-byte and60s slow-drip bounds, earlier malformed/quota/idle subset, current95 pending-browse loss/no replay verified. One debug-injected successful indication callback omission reaches the real deadline and recovers, with no old read replay. Three burst callback omissions also verify bounded exhaustion/native Restart and retired reads without replay. [Budget evidence](test-results/2026-11-01-recovery-budget.md). Duplicate playback mutations, input ATT write faults and natural vendor failures remain open. [Evidence](test-results/2026-11-01-framing-bounds.md).  Currenta65 input-write phase target NOT MET (ACK144ms before loss363ms); do not count this reply-wait cut as pending-write proof. [Phase result](test-results/2026-11-01-first-write-submission.md). Separate3a/a65 held-input case verifies pending ATT/noACK/retirement without dispatch or replay. Duplicate mutations/natural faults remain open; earlier missed phase remains NOT_MET. Current731 real Service Changed sequence drains/discovers on same client and automatically reauthorizes after controlled own-server restart; initial stalls/manual cleanup retained, no full reliability pass.",
       "remainingRequirement": "Duplicate/delayed/truncated/oversized/transfer-loss faults cause no crash, duplicate mutation or unbounded allocation.",
       "evidence": "2026-11-01-framing-bounds.md",
       "injectedRecoverySupplement": "2026-11-01-injected-indication-recovery.md",
@@ -219,9 +219,9 @@
     {
       "id": "T17",
       "status": "PARTIAL",
-      "finding": "Original-signer host3a/phonedaa in-place updates verified, grants/settings retained. Earlier enabled/stopped package-restoration scopes retained; final fresh install/production signing/owner-iPhone not tested.",
+      "finding": "Original-signer hoste1/phonedac in-place updates verified, grants/settings retained. Earlier enabled/stopped package-restoration scopes retained; final fresh install/production signing/owner-iPhone not tested.",
       "remainingRequirement": "Fresh install and upgrades preserve intended pairing/state with valid installation/signing.",
-      "evidence": "2026-11-01-gatt-retirement.md",
+      "evidence": "2026-11-01-service-change-recovery.md",
       "injectedRecoverySupplement": "2026-11-01-injected-indication-recovery.md",
       "firstSubmissionEvidence": "2026-11-01-first-write-submission.md"
     },
@@ -247,7 +247,7 @@
       "sha256": "1be147c02380d16b086f0947f8292d83e244533dbc0b2aaa69462857856eff29"
     }
   ],
-  "lastSupplementedAt": "2026-11-01T05:51:51.694393+08:00",
+  "lastSupplementedAt": "2026-11-01T06:39:15.443118+08:00",
   "injectedRecoverySupplement": {
     "evidence": "2026-11-01-injected-indication-recovery.md",
     "scope": "one debug-injected missed successful indication callback; actual existing timeout/recreation/automatic phone authorization; no playback",
@@ -350,6 +350,46 @@
       6
     ],
     "noReplay": true,
+    "fullAcceptancePassed": false
+  },
+  "topologySupplement": {
+    "evidence": "2026-11-01-gatt-stall-topology.md",
+    "logicalCancelToApprovedMs": 73410,
+    "duringTwoStalls": "Host app connections0, replacement phone app1 plus four OS/Google server connections",
+    "rootCauseProven": false,
+    "fullAcceptancePassed": false
+  },
+  "inputResponseGuardSupplement": {
+    "evidence": "2026-11-01-input-response-guard.md",
+    "jvm": 260,
+    "newGateTests": 7,
+    "hostRelease20": "PASSED exact f1 scope",
+    "falseOrExceptionCannotDispatch": "VERIFIED software",
+    "negativePathHardware": "NOT TESTED",
+    "oldPhoneNormalReconnect": "FAILED six resources181562ms before protocol writes",
+    "fullAcceptancePassed": false
+  },
+  "serviceChangedSupplement": {
+    "evidence": "2026-11-01-service-change-recovery.md",
+    "jvm": 268,
+    "newSequencingTests": 8,
+    "sharedAndroidBuildLint": "PASSED",
+    "realServiceChangedEvents": 2,
+    "successfulDeferredDiscoveryOnSameGatt": true,
+    "manualOwnServiceStopEnablePairs": 2,
+    "manualRadioCleanupCycles": 1,
+    "cleanupNotAutomaticRecoveryPass": true,
+    "earlierStallsUnresolved": true,
+    "autoApprovedAfterControlledEnablePcObservedMs": 1907,
+    "hostAdvertToApprovedMs": 1054,
+    "journalCounts": [
+      0,
+      0,
+      3,
+      6
+    ],
+    "noReplay": true,
+    "freshReadMs": 477,
     "fullAcceptancePassed": false
   }
 }

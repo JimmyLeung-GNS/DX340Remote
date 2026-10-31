@@ -1,0 +1,152 @@
+{
+  "date": "2026-11-01",
+  "status": "VERIFIED GATT application/global topology mismatch during two discovery stalls; root cause and fast recovery unresolved; full acceptance incomplete",
+  "installedSha256": {
+    "org.dx340.remote.host": "3a32689ac5805cf58758286f27ee1c1b2abeec16f01b8de70b5ac9cfe8307b2c",
+    "org.dx340.remote.controller": "daa9f5e572c27380647b76485ed67c2efd20291082fdb87c2632847688e6349b"
+  },
+  "hostSource": "5f4f1f24a673f778d7b403203e35f3e48edf4b8a",
+  "phoneSource": "84e56ac883dcfb541627c8becee318870268e0f2",
+  "deviceScope": "DX340 Android13/API33 eng.iBasso.20260812.181952 Companion0.1.0/code1; Pixel9a Android16/API36 CP1A.260405.005 Remote0.2.0/code2; Mango4.1.37/code240; Apple Music6.5.3/code1599",
+  "hostEpoch": "a74fdb31-5aac-4b91-bffd-5d35e46a4772",
+  "pids": {
+    "host": "16085",
+    "phone": "12008"
+  },
+  "modelInstanceId": "a71a45b6-6fb1-4aa1-8067-b96bb71d8d0e",
+  "uniqueFaultTag": "topology-055604",
+  "samples": [
+    {
+      "stage": "connected-before-arm",
+      "sinceTapMs": null,
+      "hostServerConnections": 1,
+      "phoneControllerRegistrationId": 68,
+      "phoneControllerConnections": 1,
+      "phoneSamePeerServerConnections": 4,
+      "collectionDurationMs": 1078
+    },
+    {
+      "stage": "held",
+      "sinceTapMs": 265,
+      "hostServerConnections": 1,
+      "phoneControllerRegistrationId": 68,
+      "phoneControllerConnections": 1,
+      "phoneSamePeerServerConnections": 4,
+      "collectionDurationMs": 953
+    },
+    {
+      "stage": "cancelled",
+      "sinceTapMs": 5578,
+      "hostServerConnections": 0,
+      "phoneControllerRegistrationId": 68,
+      "phoneControllerConnections": 1,
+      "phoneSamePeerServerConnections": 4,
+      "collectionDurationMs": 922
+    },
+    {
+      "stage": "elapsed-20",
+      "sinceTapMs": 20281,
+      "hostServerConnections": 0,
+      "phoneControllerRegistrationId": 69,
+      "phoneControllerConnections": 1,
+      "phoneSamePeerServerConnections": 4,
+      "collectionDurationMs": 1000
+    },
+    {
+      "stage": "elapsed-45",
+      "sinceTapMs": 45015,
+      "hostServerConnections": 0,
+      "phoneControllerRegistrationId": 70,
+      "phoneControllerConnections": 1,
+      "phoneSamePeerServerConnections": 4,
+      "collectionDurationMs": 985
+    },
+    {
+      "stage": "elapsed-65",
+      "sinceTapMs": 65312,
+      "hostServerConnections": 0,
+      "phoneControllerRegistrationId": 70,
+      "phoneControllerConnections": 1,
+      "phoneSamePeerServerConnections": 4,
+      "collectionDurationMs": 1000
+    },
+    {
+      "stage": "eventual-approved",
+      "sinceTapMs": 79015,
+      "hostServerConnections": 1,
+      "phoneControllerRegistrationId": 71,
+      "phoneControllerConnections": 1,
+      "phoneSamePeerServerConnections": 4,
+      "collectionDurationMs": 938
+    }
+  ],
+  "timing": {
+    "heldToLogicalRetirementMs": 5005,
+    "logicalRetirementToApprovedMs": 73410,
+    "interruptedRequest": {
+      "id": "c561a960-81e1-4257-a306-47c2a02bab9f",
+      "operation": "GET_STATE",
+      "source": "mango",
+      "startedMs": 752560,
+      "firstWriteSubmittedAfterMs": 4,
+      "writeAcknowledgedAfterMs": null,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 10022,
+      "result": "connection_lost",
+      "terminalApplied": false,
+      "hostOutcome": "none",
+      "error": null
+    },
+    "freshRead": {
+      "id": "0e23248a-c635-4984-9850-85325da9a09a",
+      "operation": "GET_STATE",
+      "source": "mango",
+      "startedMs": 919025,
+      "firstWriteSubmittedAfterMs": 3,
+      "writeAcknowledgedAfterMs": 145,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 444,
+      "result": "result",
+      "terminalApplied": true,
+      "hostOutcome": "none",
+      "error": null
+    }
+  },
+  "journal": {
+    "counts": [
+      8,
+      12
+    ],
+    "allPriorRowsUnchanged": true,
+    "evictions": 0,
+    "noReplay": true
+  },
+  "interpretation": {
+    "verified": "Host application server connection count is0 while Pixel has a replacement app client plus four same-peer OS/Google server connections during both stalled discovery attempts. Client registration IDs change; this is not proof of an old Java GATT client leak.",
+    "notProven": "Physical ACL teardown, the identity of a blocking ATT transaction and causation by any particular OS/Google service. The same extra server connections also exist before the fault and after successful recovery.",
+    "changes": "No app update, build, CI, radio/network/OS-service configuration or playback/volume action during this case. Do not repeat the unchanged fault merely to confirm the same delay."
+  },
+  "final": {
+    "at": "2026-11-01T06:00:45.208505+08:00",
+    "states": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeVerified": false,
+    "prefsSettingsPidsPositionsRetained": true,
+    "grantsBondsModesBindings": "retained",
+    "storage": "public:179,1 mounted FBB9-E8FE; no Apple destination change",
+    "phone": "normal Disconnect/help collapsed/foreground cleared",
+    "host": "saved enabled/foreground service/advertising"
+  },
+  "next": "Independent code review found input sendResponse return ignored; fix failure-before-dispatch using public API result, with separate unit and normal-hardware evidence. Then continue Android source/control acceptance. This fault topology is not a fast recovery pass.",
+  "rawEvidence": {
+    "root": "artifacts/gatt-stall-topology-20261101",
+    "filesHashed": 126,
+    "manifestSha256": "5ab3e257e49b24b91b7b933a02d8a4c04d5f675fd875df45371dbfd866089b5d"
+  }
+}

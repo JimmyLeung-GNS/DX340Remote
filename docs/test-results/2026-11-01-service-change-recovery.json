@@ -1,0 +1,120 @@
+{
+  "date": "2026-11-01",
+  "status": "VERIFIED serialized real Service Changed rediscovery and saved automatic reauthorization subset on a cleaned transport; initial stalls and required cleanup retained; full goal incomplete",
+  "source": "731aa64424fa65c771b7ce0f4a3db7a590ead662",
+  "installedSha256": {
+    "org.dx340.remote.host": "e1a024293c70e334de1e45c31176be6c19e4555fe97391e84f56b4515148b1f8",
+    "org.dx340.remote.controller": "dac6016c1223f1f2edcc431d95fd108daaa1b2e8d5139fd2ae72d9393092f84f"
+  },
+  "deviceScope": "DX340 Android13/API33 eng.iBasso.20260812.181952 Companion0.1.0/code1; Pixel9a Android16/API36 CP1A.260405.005 Remote0.2.0/code2; Mango4.1.37/code240; Apple Music6.5.3/code1599",
+  "pids": {
+    "host": "21079",
+    "phone": "15533"
+  },
+  "modelInstanceId": "665863d7-8c97-4990-b2e1-9a71afb2a423",
+  "finalHostEpoch": "2159b3e5-2f0d-408c-badf-379c8548416c",
+  "implementation": {
+    "publicRediscovery": "Service Changed invalidates handles, authorization and pending writes; wait for current discovery/MTU/CCC/write callback before one fresh discovery. No old frame replay.",
+    "knownMtu": "Reuse negotiated capacity on the same link instead of redundant MTU negotiation",
+    "deadlines": "Generation-bound30s native setup deadline; repeated invalidations do not extend it; missing callbacks still fail/reconnect",
+    "scope": "Android native core used by shared/reference phone; no wire, permissions, Dart or iOS changes"
+  },
+  "builds": {
+    "jvmAggregate": 268,
+    "newSequencingTests": 8,
+    "priorNewInputResponseTests": 7,
+    "nativeBuildLint": "PASSED",
+    "sharedAndroidAnalysisReleaseLint": "PASSED",
+    "flutter82": "Prior unchanged Dart tests, not rerun (-WithoutTests)",
+    "swift22Analyser18": "Prior unchanged scopes",
+    "hostRelease20": "Actual f1 guard release build/test/lint retained separately; not rerun for Android-client-only731 change",
+    "signing": "Both original-signer comparisons and installed hash checks pass",
+    "appleCI": "No matching Apple paths/new job/polling"
+  },
+  "failedBeforeCleanup": {
+    "oldDaaAfter14bUpdate": "Preserved separate input-response-guard report:181562ms/six resources, Service Changed closed first discovery, zero protocol requests",
+    "newDacAfterExpiredBootstrap": "30s observation FAILED, native retry canceled explicitly; no Service Changed callback/no native commands",
+    "newDacAfterFirstOwnServiceRestart": "30s observation FAILED, ongoing retry canceled explicitly; no Service Changed callback/no native commands",
+    "causality": "Not resolved by the rediscovery patch or own-server restart alone; do not infer an OS-service cause from shared registrations"
+  },
+  "manualCleanup": {
+    "evidence": "2026-11-01-ble-environment-cleanup.json",
+    "scope": "One Pixel Bluetooth off/on cycle, original ON restored; not an automatic recovery pass",
+    "subsequentNormalConnection": "VERIFIED saved HELLO/AUTH and explicit GET_STATE4/142/489ms; input-response guard happy path exercised"
+  },
+  "controlledLiveServiceChange": {
+    "intervention": "Second visible Companion own-service Stop/Enable while phone authorized; no phone Connect/new approval/global radio change during this phase",
+    "stoppedAt": "2026-11-01T06:29:14.770211+08:00",
+    "enabledAt": "2026-11-01T06:29:42.366538+08:00",
+    "pcObserverAfterEnableMs": 1907,
+    "hostAdvertToApprovedMs": 1054,
+    "intermediateGattResourcesWhileServiceOff": 3,
+    "serviceChangedEvents": 2,
+    "firstEvent": "Established client rediscovers, correctly fails when Wire service absent during intentional outage, then retries",
+    "secondEvent": "During reconnect discovery: event5784.168; old discovery complete5784.241; fresh discover5784.251/complete5784.254; HELLO5784.368, all in same client clock",
+    "noCloseBetweenSecondEventAndFreshAuthorization": true,
+    "freshOnlyHelloAuthorize": true,
+    "freshFinalGetState": {
+      "id": "56ec5959-ddd3-4286-8809-a7156c80202b",
+      "operation": "GET_STATE",
+      "source": "mango",
+      "startedMs": 1036346,
+      "firstWriteSubmittedAfterMs": 4,
+      "writeAcknowledgedAfterMs": 134,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 477,
+      "result": "result",
+      "terminalApplied": true,
+      "hostOutcome": "none",
+      "error": null
+    },
+    "physicalScopeLimits": "No pending playback mutation, live MTU/CCC/write invalidation, RF/range/sleep or full reliability pass"
+  },
+  "journal": {
+    "counts": [
+      0,
+      0,
+      3,
+      6
+    ],
+    "everyOldRowUnchanged": true,
+    "evictions": 0,
+    "allSixAppliedResults": true,
+    "noReplay": true
+  },
+  "final": {
+    "at": "2026-11-01T06:32:53.377841+08:00",
+    "states": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeVerified": false,
+    "prefsSettingsSourcePositionsRetained": true,
+    "savedEnabledRestoredExactly": true,
+    "grantsBondsModesBindings": "retained; three stored approvals",
+    "storage": "public:179,1 mounted FBB9-E8FE; no Apple location/mount action",
+    "phone": "normal Disconnect/help collapsed/foreground cleared",
+    "host": "foreground main/service, Advanced collapsed, saved enabled, advertising",
+    "allBuildsObserversFinished": true
+  },
+  "remaining": [
+    "earlier missing-response/shared-link stall and bootstrapped stale-ready states not resolved",
+    "input sendResponse false/exception hardware branch remains NOT TESTED",
+    "strict cellular-offT01, original no-card Internal timeout and Apple MEDIA_MOUNTED crash",
+    "full current source/format/100controls/20selections/output/sleep/range/calls/battery/walk/physical owner-iPhone/Mac signing/Watch"
+  ],
+  "next": "Continue actual Android source/control acceptance with direct observed playback and no listening prompts. Avoid repeating unchanged withheld-ACK faults; address remaining reliability cases with a new discriminating test only.",
+  "rawEvidence": {
+    "root": "artifacts/service-change-recovery-20261101",
+    "filesHashed": 371,
+    "manifestSha256": "27f625c0d24ef30a485cdd22f2f68ed94183e81792169288bf504bcadf49c940"
+  },
+  "cleanupRawEvidence": {
+    "root": "artifacts/ble-environment-cleanup-20261101",
+    "filesHashed": 6,
+    "manifestSha256": "7a3148be7c826618e9f0caafec70feec5658907bd7adea72a26651dc4a8f0b0e"
+  }
+}

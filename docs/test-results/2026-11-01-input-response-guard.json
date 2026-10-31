@@ -1,0 +1,82 @@
+{
+  "date": "2026-11-01",
+  "status": "VERIFIED software fail-closed input response submission guard; FAILED normal saved reconnect on old phone before any protocol command; physical false-return branch NOT TESTED",
+  "hostSource": "f1fa63b1e9e5b5c3859223558403ef1ed37fab3f",
+  "phoneSource": "84e56ac883dcfb541627c8becee318870268e0f2",
+  "installedSha256": {
+    "org.dx340.remote.host": "14b44f00ec415df2cce360d2a6fa1526ecd24ee789bd7409533ed864e38a9f61",
+    "org.dx340.remote.controller": "daa9f5e572c27380647b76485ed67c2efd20291082fdb87c2632847688e6349b"
+  },
+  "pids": {
+    "host": "19833",
+    "phone": "12008"
+  },
+  "deviceScope": "DX340 Android13/API33 eng.iBasso.20260812.181952 Companion0.1.0/code1; Pixel9a Android16/API36 CP1A.260405.005 Remote0.2.0/code2",
+  "implementation": {
+    "failedBooleanOrException": "Never dispatch the complete input; clear transport/session and request existing bounded own-server recovery",
+    "success": "Submit required response before dispatch; true is not remote ATT receipt proof",
+    "invalidOrPartial": "Respond as appropriate; no invalid/incomplete command dispatch",
+    "writeWithoutResponse": "Unsupported; no dispatch",
+    "newPermissionsWireIosChanges": false
+  },
+  "builds": {
+    "jvmAggregate": 260,
+    "newGateTests": 7,
+    "hostReleaseTestsSeparateVariant": 20,
+    "nativeAndReleaseBuildLint": "PASSED",
+    "releaseDebugReceiverAbsent": true,
+    "phoneBuild": "No new phone build/install for this host guard case",
+    "priorFlutterSwiftAnalyser": [
+      82,
+      22,
+      18
+    ]
+  },
+  "physical": {
+    "originalSignerMatchAndInPlaceUpgrade": true,
+    "guardFailureBranch": "NOT TESTED on hardware; no platform submission failure was forced",
+    "normalSavedReconnect": "FAILED old phone; current trace shows Service Changed during first discovery followed by immediate disconnect, then discovery stalls across total six GATT attempts",
+    "firstAttemptStartEpochMs": 1793484170530,
+    "lastCloseEpochMs": 1793484352092,
+    "attemptSpanMs": 181562,
+    "firstServiceChangedEpochMs": 1793484170723,
+    "firstOldDiscoveryCompletionEpochMs": 1793484170873,
+    "retirementDeadlineEpochMs": 1793484172733,
+    "hostBootstrapTimeoutObserved": true,
+    "journalCounts": [
+      12,
+      12
+    ],
+    "allOldRowsUnchanged": true,
+    "newProtocolCommands": 0,
+    "inputGuardReached": "NO; connection failed before CCC/HELLO/WRITE",
+    "freshReadDriver": "Refused disabled Refresh; no read or mutation was sent",
+    "finalSetup": "Connection needs another try / timeout, no remaining retry job"
+  },
+  "final": {
+    "at": "2026-11-01T06:10:51.370333+08:00",
+    "states": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeVerified": false,
+    "prefsSettingsSourcePositionsRetained": true,
+    "host": "saved enabled/foreground service; server registered, status BOOTSTRAP_TIMEOUT",
+    "phone": "terminal failed, report exported without reconnect/help collapsed/foreground cleared",
+    "grantsBondsModesBindingsStorage": "retained; no Apple destination or mount action"
+  },
+  "next": "Follow Android onServiceChanged guidance: invalidate session and serialize rediscovery after the existing native procedure drains, rather than disconnecting during discovery. Validate as a separate updated-pair case; do not erase this failure.",
+  "apiReference": {
+    "apiSource": "https://android.googlesource.com/platform/packages/modules/Bluetooth/+/refs/heads/main/framework/java/android/bluetooth/BluetoothGattServer.java",
+    "readAt": "2026-11-01T06:10:56.234845+08:00",
+    "downloadSha256": "afd264cc3520a233b463de37075df7bcd2bb112cae00826ab500db36fd8bdae0",
+    "scope": "Reference implementation, not a verification of the vendor device fork. false indicates unavailable service/unregistered server or IPC failure; true after submission is not remote ATT receipt proof."
+  },
+  "rawEvidence": {
+    "root": "artifacts/input-response-guard-20261101",
+    "filesHashed": 147,
+    "manifestSha256": "c558c4b4bde4c559b06a788c075151f50a30a0a16ce4715f7ae692ad8cc30d5d"
+  }
+}
