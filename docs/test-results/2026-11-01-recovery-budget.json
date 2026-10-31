@@ -1,0 +1,280 @@
+{
+  "date": "2026-11-01",
+  "status": "VERIFIED bounded injected hardware budget-exhaustion and native Restart UI subset; full goal incomplete",
+  "checkpointBeforeCase": "250b7c58faac1eeabf62eb91036b4843c8a786a4",
+  "host": {
+    "source": "9fb503a3eac7fc8832a3e4abfd5758962b19aa48",
+    "sha256": "61153223b7a37d5ed3ac293455478d4199cf4fed4b2f4282fb21e5f03915a215",
+    "app": "Companion0.1.0/code1",
+    "device": "DX340 Android13/API33 eng.iBasso.20260812.181952"
+  },
+  "phone": {
+    "source": "e40b822813573ee93493cf863ea0bde49885a36f",
+    "sha256": "95d29be69f09e90b978a6907e46d2ec9952b5a0676ccd0a7da0d36fa54d06bca",
+    "app": "shared Remote0.2.0/code2",
+    "device": "Pixel9a Android16/API36 CP1A.260405.005"
+  },
+  "sourceVersions": {
+    "Mango": "4.1.37/code240",
+    "Apple Music": "6.5.3/code1599"
+  },
+  "burst": {
+    "totalElapsedMs": 48046,
+    "firstToThirdTimeoutMs": 31086,
+    "timings": [
+      {
+        "cycle": 1,
+        "ignoredToTimeoutMs": 10091,
+        "timeoutToAdvertisingMs": 650,
+        "timeoutToApprovedMs": 2023
+      },
+      {
+        "cycle": 2,
+        "ignoredToTimeoutMs": 10067,
+        "timeoutToAdvertisingMs": 719,
+        "timeoutToApprovedMs": 1976
+      },
+      {
+        "cycle": 3,
+        "ignoredToTimeoutMs": 10091,
+        "timeoutToBudgetFailureMs": 97
+      }
+    ],
+    "outcomes": [
+      "AUTOMATIC_APPROVED",
+      "AUTOMATIC_APPROVED",
+      "BUDGET_EXHAUSTED"
+    ]
+  },
+  "manualRestart": {
+    "nativeUiScreenshotInspected": true,
+    "originalScreenshotDimensions": [
+      1080,
+      2160
+    ],
+    "singleTapCoordinate": [
+      540,
+      640
+    ],
+    "target": "Restart phone control",
+    "reconnectedByExistingBoundedPhoneRetries": true,
+    "intermediateConnectionLossesBeforeApproval": 1,
+    "bleStartToApprovedMs": 10255,
+    "newPairingWindowOpened": false,
+    "newApprovalNeeded": false,
+    "budgetResetFurtherFaultNotInjected": true
+  },
+  "journal": {
+    "modelInstanceId": "0baf310c-e141-4cfb-95f4-c16c8b7d459b",
+    "counts": [
+      50,
+      60
+    ],
+    "allPreviousRowsUnchanged": true,
+    "zeroEvictions": true,
+    "newRequests": [
+      {
+        "id": "20414480-30f9-4e00-a6a5-78b433f00aff",
+        "operation": "GET_STATE",
+        "source": "mango",
+        "startedMs": 4846781,
+        "writeAcknowledgedAfterMs": 108,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 10337,
+        "result": "connection_lost",
+        "terminalApplied": false,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "210793cb-4e9b-41cc-93a7-2019ce96ac18",
+        "operation": "HELLO",
+        "source": "mango",
+        "startedMs": 4858725,
+        "writeAcknowledgedAfterMs": 150,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 196,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "c4f79e11-16ab-4afe-8afa-5b66fc37853d",
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "startedMs": 4858922,
+        "writeAcknowledgedAfterMs": 194,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 720,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "5a22a04b-14a0-43f8-88b3-478a6843e01a",
+        "operation": "GET_STATE",
+        "source": "mango",
+        "startedMs": 4862318,
+        "writeAcknowledgedAfterMs": 83,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 10307,
+        "result": "connection_lost",
+        "terminalApplied": false,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "cffcc30c-2028-4ad4-ae00-4f38215f69ba",
+        "operation": "HELLO",
+        "source": "mango",
+        "startedMs": 4874176,
+        "writeAcknowledgedAfterMs": 156,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 194,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "5e2ae299-0340-468f-9993-0ef614e40629",
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "startedMs": 4874372,
+        "writeAcknowledgedAfterMs": 202,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 833,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "1b35367f-3cc4-4789-bf55-165d711bad36",
+        "operation": "GET_STATE",
+        "source": "mango",
+        "startedMs": 4877909,
+        "writeAcknowledgedAfterMs": 69,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 10289,
+        "result": "connection_lost",
+        "terminalApplied": false,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "85804b47-f9d1-4e0f-a27c-4b1634b6eb4d",
+        "operation": "HELLO",
+        "source": "mango",
+        "startedMs": 4913381,
+        "writeAcknowledgedAfterMs": 111,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 114,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "edbeb19e-00f3-4c67-9bd4-2e9dd4318692",
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "startedMs": 4913496,
+        "writeAcknowledgedAfterMs": 142,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 927,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "684b8877-66f6-4a98-8e98-a7f2b367f446",
+        "operation": "GET_STATE",
+        "source": "mango",
+        "startedMs": 4940799,
+        "writeAcknowledgedAfterMs": 140,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 438,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      }
+    ],
+    "interruptedReadCount": 3,
+    "eachInterruptedReadRetiredAndNotApplied": true,
+    "recoveryOnlyHelloAuthorize": true,
+    "explicitFreshReadSucceeded": true
+  },
+  "preserved": {
+    "preferenceHashes": {
+      "controllers": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311",
+      "mango-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "apple-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "source-verification": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    "hostControlHash": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+    "hostControlBytesUnchanged": true,
+    "settings": {
+      "host": {
+        "wifi_on": "0",
+        "mobile_data": "0",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      },
+      "phone": {
+        "wifi_on": "0",
+        "mobile_data": "1",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      }
+    },
+    "pids": {
+      "host": "10544",
+      "phone": "25153"
+    },
+    "hostEpochUnchanged": true,
+    "bothSourcesPausedPositions": {
+      "com.ibasso.music": 69226,
+      "com.apple.android.music": 136548
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeProof": false,
+    "threeControllerGrantsAndBondsRetained": true,
+    "browsingModesAndBindings": "both retained ON",
+    "card": "FBB9-E8FE mounted",
+    "phoneCleanup": "normal Disconnect, help collapsed, foreground cleared",
+    "hostCleanup": "main foreground, host service foreground"
+  },
+  "commands": "ordinary saved Connect; debug arm and one real Pixel Refresh per cycle; one observed native Restart tap; one deliberate distinct fresh Refresh; normal Disconnect; read-only capture/analyser. No source, playback, volume, radio, permission, storage, key or bond action.",
+  "evidence": {
+    "root": "artifacts/transport-recovery-budget-20261101",
+    "files": 202,
+    "hashManifest": "artifacts/transport-recovery-budget-20261101/SHA256SUMS.json"
+  },
+  "limits": [
+    "injected successful-callback omission, not naturally occurring vendor fault",
+    "not input ATT write interruption",
+    "no duplicate playback mutations or audio test",
+    "fourth timeout after explicit reset not injected",
+    "no denied-permission or radio-off recreation race in this case",
+    "not full T12/T16 or physical iPhone",
+    "not a screen-off or unplugged hold"
+  ]
+}

@@ -53,7 +53,8 @@
     {
       "id": "P3",
       "status": "IMPLEMENTED_PARTIAL_VALIDATION",
-      "finding": "Host protocol/routing/authorization/storage guards implemented; physical automatic indication-timeout recovery still unverified."
+      "finding": "Host protocol/routing/authorization/storage implemented; injected physical automatic recovery, budget exhaustion and native Restart verified; natural faults/full matrix incomplete.",
+      "recoveryBudgetEvidence": "2026-11-01-recovery-budget.md"
     },
     {
       "id": "P4",
@@ -174,10 +175,11 @@
     {
       "id": "T12",
       "status": "PARTIAL",
-      "finding": "Current95 pending browse loss clears spinner; saved reconnect does not replay. Earlier radio/permission/process recovery scopes retained; new host debug-injected timeout auto-recovery verified without replay; natural faults/calls/full sleep/two-phone matrix incomplete. [Evidence](test-results/2026-11-01-interrupted-library.md).",
+      "finding": "Current95 pending browse loss clears spinner; saved reconnect does not replay. Earlier radio/permission/process recovery scopes retained; new host debug-injected timeout auto-recovery verified without replay; budget exhaustion/native Restart now verified with an intermediate reconnect loss retained. [Budget evidence](test-results/2026-11-01-recovery-budget.md). Natural faults/calls/full sleep/two-phone matrix incomplete. [Evidence](test-results/2026-11-01-interrupted-library.md).",
       "remainingRequirement": "Calls/radio/permission/background/restart produce honest status and bounded recovery with clear required action.",
       "evidence": "2026-11-01-interrupted-library.md",
-      "injectedRecoverySupplement": "2026-11-01-injected-indication-recovery.md"
+      "injectedRecoverySupplement": "2026-11-01-injected-indication-recovery.md",
+      "recoveryBudgetEvidence": "2026-11-01-recovery-budget.md"
     },
     {
       "id": "T13",
@@ -203,10 +205,11 @@
     {
       "id": "T16",
       "status": "PARTIAL",
-      "finding": "PC65537-byte and60s slow-drip bounds, earlier malformed/quota/idle subset, current95 pending-browse loss/no replay verified. One debug-injected successful indication callback omission reaches the real deadline and recovers, with no old read replay. Duplicate playback mutations, input ATT write faults and natural vendor failures remain open. [Evidence](test-results/2026-11-01-framing-bounds.md).",
+      "finding": "PC65537-byte and60s slow-drip bounds, earlier malformed/quota/idle subset, current95 pending-browse loss/no replay verified. One debug-injected successful indication callback omission reaches the real deadline and recovers, with no old read replay. Three burst callback omissions also verify bounded exhaustion/native Restart and retired reads without replay. [Budget evidence](test-results/2026-11-01-recovery-budget.md). Duplicate playback mutations, input ATT write faults and natural vendor failures remain open. [Evidence](test-results/2026-11-01-framing-bounds.md).",
       "remainingRequirement": "Duplicate/delayed/truncated/oversized/transfer-loss faults cause no crash, duplicate mutation or unbounded allocation.",
       "evidence": "2026-11-01-framing-bounds.md",
-      "injectedRecoverySupplement": "2026-11-01-injected-indication-recovery.md"
+      "injectedRecoverySupplement": "2026-11-01-injected-indication-recovery.md",
+      "recoveryBudgetEvidence": "2026-11-01-recovery-budget.md"
     },
     {
       "id": "T17",
@@ -238,7 +241,7 @@
       "sha256": "1be147c02380d16b086f0947f8292d83e244533dbc0b2aaa69462857856eff29"
     }
   ],
-  "lastSupplementedAt": "2026-11-01T04:13:57.677194+08:00",
+  "lastSupplementedAt": "2026-11-01T04:25:43.981125+08:00",
   "injectedRecoverySupplement": {
     "evidence": "2026-11-01-injected-indication-recovery.md",
     "scope": "one debug-injected missed successful indication callback; actual existing timeout/recreation/automatic phone authorization; no playback",
@@ -261,6 +264,24 @@
     "zeroEvictions": true,
     "newAppliedResults": 29,
     "sampledSongRowsStable": true,
+    "fullAcceptancePassed": false
+  },
+  "recoveryBudgetSupplement": {
+    "evidence": "2026-11-01-recovery-budget.md",
+    "injectedPhysicalCycles": 3,
+    "automaticApproved": 2,
+    "thirdBudgetExhausted": true,
+    "nativeRestartObserved": true,
+    "intermediateManualPathReconnectLosses": 1,
+    "noPairingOrApproval": true,
+    "freshReadSucceeded": true,
+    "journalCounts": [
+      50,
+      60
+    ],
+    "allPreviousRowsUnchanged": true,
+    "interruptedReadsRetired": 3,
+    "noReplay": true,
     "fullAcceptancePassed": false
   }
 }

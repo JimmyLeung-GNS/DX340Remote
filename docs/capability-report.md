@@ -1,5 +1,7 @@
 # Source and BLE capability findings
 
+Latest1 November: actual611/95 debug-injected burst now verifies the two-per-minute recovery limit and native Restart phone control path without new pairing/approval. One intermediate reconnect loss is retained; a distinct fresh read succeeds, all saved grants/settings and paused37 preserved. [Budget/restart evidence](test-results/2026-11-01-recovery-budget.md). This is not natural vendor/input-write/audio/full acceptance proof.
+
 Current611/95 pair also verifies three source PLAYING selections and stable sampled song rows; all three fresh listening answers remain pending. Final04:11:50 both sources paused37, grants/settings preserved and phone disconnected. [Source selection evidence](test-results/2026-11-01-current-pair-source-selection.md).
 
 Latest1 November2026: One debug-injected missed indication callback now exercises the existing actual host timeout/recreation and automatic Pixel reauthorization without replay. This is a controlled physical subset, separate from natural vendor callback failures and audio acceptance. See [injected timeout evidence](test-results/2026-11-01-injected-indication-recovery.md). Older inventory/results below retain their exact binary scope.
