@@ -91,7 +91,10 @@ class HostService : Service() {
             runCatching { ble.start() }.onFailure { record("BLE_START_FAILED:${it.message}") }
         }
         when (intent?.action) { "PAIR" -> openPairing(); "PROBE" -> { sources.refresh(); sources.probeBrowsers(); export() } }
-        return START_NOT_STICKY
+        if (intent == null) record("SERVICE_RECOVERED: Bluetooth availability restored; fresh authorization required")
+        // Recover an enabled remote after process loss without redelivering PAIR,
+        // PROBE or a playback action. Explicit Stop and permission loss exit above.
+        return START_STICKY
     }
     fun openPairing() { ble.pairingUntil = SystemClock.elapsedRealtime() + 60000; record("PAIRING_WINDOW:60 seconds; approve OS pairing and controller locally") }
     val pairingRemainingMs get() = (ble.pairingUntil - SystemClock.elapsedRealtime()).coerceAtLeast(0)
