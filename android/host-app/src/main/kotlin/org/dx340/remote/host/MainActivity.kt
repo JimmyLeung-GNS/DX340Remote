@@ -52,7 +52,7 @@ class MainActivity : Activity() {
         remoteAction = button("Enable phone control") {
             start(if (ControllerApprovalStore(this).identities().isEmpty()) "PAIR" else "START")
         }
-        pairing = button("Set up a new phone") { start("PAIR") }
+        pairing = button("Set up a new phone") { start(if (HostService.instance?.transportNeedsRestart == true) "START" else "PAIR") }
         controllers = ControllerManagementPanel(this, ::refresh)
         content.addView(controllers, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(16) })
 
@@ -145,7 +145,9 @@ class MainActivity : Activity() {
             !bluetoothOn -> "Bluetooth is off. Open Bluetooth settings below to enable it."
             service == null -> "Enable phone control here, then tap Connect on your phone."
             service.activeControllerAddress != null -> "Controller connected. Music stays on DX340."
-            service.status.startsWith("BLE_START_FAILED") || service.status.startsWith("ADVERTISING_FAILED") || service.status.startsWith("GATT_SERVICE_FAILED") || service.status.startsWith("BLE_REPLY_TIMEOUT") -> "Bluetooth setup failed. Stop and start the remote, then reconnect your phone."
+            service.transportNeedsRestart -> if (service.status.startsWith("BLUETOOTH_RECOVERING"))
+                "Restoring Bluetooth control. Pending playback commands will not be repeated."
+                else "Bluetooth control needs a restart. Tap Restart phone control below, then reconnect your phone."
             service.pending != null -> "A phone is requesting access. Review it below."
             remaining > 0 -> "On your phone, tap Connect. Confirm matching system codes on both devices, then approve the phone below."
             else -> "Ready for your phone. Tap Connect in the phone app; approved phones need no new pairing."
@@ -154,8 +156,9 @@ class MainActivity : Activity() {
         remoteAction.text = if (ControllerApprovalStore(this).identities().isEmpty()) "Set up first phone" else "Enable phone control"
         remoteAction.isEnabled = !bluetoothAccess || bluetoothOn
         pairing.visibility = if (service != null) View.VISIBLE else View.GONE
-        pairing.isEnabled = bluetoothAccess && bluetoothOn && remaining <= 0
-        pairing.text = if (remaining > 0) "New phone setup open · ${(remaining + 999) / 1000}s" else "Set up a new phone"
+        pairing.isEnabled = bluetoothAccess && bluetoothOn && (service?.transportNeedsRestart == true || remaining <= 0)
+        pairing.text = if (service?.transportNeedsRestart == true) "Restart phone control"
+            else if (remaining > 0) "New phone setup open · ${(remaining + 999) / 1000}s" else "Set up a new phone"
         setupSummary.text = "Bluetooth: ${if (bluetoothAccess) "allowed" else "access needed"} · Playback access: ${if (playbackAccess) "on" else "needed"}\nService notifications: ${if (notifications) "on" else "off"}"
         setupActions.visibility = if (showSetup) View.VISIBLE else View.GONE
         setupToggle.text = if (showSetup) "Hide permissions and access" else "Review permissions and access"

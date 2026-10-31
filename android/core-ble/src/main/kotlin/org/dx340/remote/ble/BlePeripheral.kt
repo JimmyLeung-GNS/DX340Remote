@@ -35,6 +35,7 @@ class BlePeripheral(
     private val main = Handler(Looper.getMainLooper())
     private val manager = context.getSystemService(BluetoothManager::class.java)
     private var server: BluetoothGattServer? = null
+    val isRunning get() = server != null
     private var advertiser: BluetoothLeAdvertiser? = null
     private val peers = linkedMapOf<BluetoothDevice, Link>()
     private val outgoing = PeerIndicationQueue<Link>(

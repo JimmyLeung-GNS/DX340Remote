@@ -47,6 +47,11 @@ class HostService : Service() {
     var observer: (() -> Unit)? = null
     private var started = false
     private val radio = HostRadioRecovery()
+    private val transportRecovery = HostTransportRecovery()
+    private var peripheralGeneration = 0L
+    private var transportRecoveryTask: Runnable? = null
+    val transportNeedsRestart get() = started && (!ble.isRunning || status.startsWith("BLE_START_FAILED") ||
+        status.startsWith("ADVERTISING_FAILED") || status.startsWith("GATT_SERVICE_FAILED") || status.startsWith("BLE_REPLY_TIMEOUT"))
     private val bonds = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.action == BluetoothAdapter.ACTION_STATE_CHANGED) {
@@ -74,13 +79,43 @@ class HostService : Service() {
         }
         if (Build.VERSION.SDK_INT >= 33) registerReceiver(bonds, events, Context.RECEIVER_EXPORTED) else registerReceiver(bonds, events)
     }
-    private fun newPeripheral() = BlePeripheral(this, ::record, { approved.contains(it.address) }, { device ->
+    private fun newPeripheral(): BlePeripheral {
+        val generation = ++peripheralGeneration
+        return BlePeripheral(this, { text ->
+            if (generation == peripheralGeneration && instance === this) {
+                record(text)
+                if (text.startsWith("BLE_REPLY_TIMEOUT")) recoverClosedTransport(generation)
+            }
+        }, { approved.contains(it.address) }, { device ->
             authorization.revoke(device.address)
             if (authenticated == device) authenticated = null
             if (pending == device) pending = null
             requestWindows.remove(device.address)
             observer?.invoke()
         }, ::receive)
+    }
+
+    private fun radioOn() = HostControlStore.permissionsGranted(this) && runCatching {
+        getSystemService(BluetoothManager::class.java).adapter?.isEnabled == true
+    }.getOrDefault(false)
+
+    private fun recoverClosedTransport(generation: Long) {
+        radio.startFailed()
+        val enabled = started && instance === this && HostControlStore(this).enabled
+        if (!enabled) return
+        if (!transportRecovery.request(SystemClock.elapsedRealtime(), enabled, HostControlStore.permissionsGranted(this), radioOn())) {
+            record("BLE_START_FAILED: automatic transport recovery unavailable; use Restart phone control")
+            return
+        }
+        transportRecoveryTask?.let(main::removeCallbacks)
+        record("BLUETOOTH_RECOVERING: restoring saved phone control; pending commands are not replayed")
+        transportRecoveryTask = Runnable {
+            transportRecoveryTask = null
+            if (instance !== this || !started || !HostControlStore(this).enabled || !radioOn() ||
+                generation != peripheralGeneration || ble.isRunning) return@Runnable
+            updateRadio(BluetoothAdapter.STATE_ON)
+        }.also { main.postDelayed(it, 250) }
+    }
 
     private fun clearTransportAuthorization() {
         authorization.clear(); authenticated = null; pending = null
@@ -119,6 +154,11 @@ class HostService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val start = HostControlStore(this).choice().resolve(intent?.action, HostControlStore.permissionsGranted(this))
         if (start == HostControlChoice.Start.STOP) { stopSelf(); return START_NOT_STICKY }
+        if (intent?.action in listOf("START", "PAIR", "PROBE")) {
+            transportRecoveryTask?.let(main::removeCallbacks); transportRecoveryTask = null
+            transportRecovery.explicitRestart()
+            if (transportNeedsRestart) { clearTransportAuthorization(); ble.stop(); radio.startFailed() }
+        }
         if (!started) {
             val bonded = runCatching {
                 getSystemService(BluetoothManager::class.java).adapter?.takeIf { it.isEnabled }?.bondedDevices?.map { it.address }?.toSet()
