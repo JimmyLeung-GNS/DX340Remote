@@ -10,7 +10,8 @@ object MangoUiModel {
     val storages = linkedMapOf("internal" to "Internal Storage", "sd" to "SD Card")
     fun node(nodes: List<UiNode>, id: String) = nodes.firstOrNull { it.id == PREFIX + id }
     fun clickable(nodes: List<UiNode>, value: UiNode, within: String? = null) = AppleUiModel.clickable(nodes, value, within)
-    fun menuVisible(nodes: List<UiNode>) = node(nodes, "internalStorgeLayout") != null && node(nodes, "sdcardLayout") != null
+    // Mango hides the SD option when no card is available; cached folder rows can remain behind this drawer.
+    fun menuVisible(nodes: List<UiNode>) = node(nodes, "internalStorgeLayout") != null || node(nodes, "sdcardLayout") != null
     /** Recognize the observed Playlist page only to leave it for local-folder navigation. */
     fun playlistMenuAction(nodes: List<UiNode>): UiNode? {
         if (menuVisible(nodes)) return null
@@ -43,10 +44,12 @@ object MangoUiModel {
     }
     fun storageAction(nodes: List<UiNode>, storage: String): UiNode {
         require(storage in storages && menuVisible(nodes)) { "UI_STORAGE_CONTEXT_REQUIRED" }
-        val option = node(nodes, if (storage == "internal") "internalStorgeLayout" else "sdcardLayout")!!
+        val id = PREFIX + if (storage == "internal") "internalStorgeLayout" else "sdcardLayout"
+        val option = nodes.singleOrNull { it.id == id } ?: error("UI_STORAGE_CONTEXT_REQUIRED")
+        require(option.enabled && option.clickable) { "UI_ACTION_FAILED" }
         val expected = storages.getValue(storage)
-        require(nodes.any { it.path.startsWith(option.path + ".") && it.text == expected }) { "UI_UNEXPECTED_SCREEN" }
-        return clickable(nodes, option) ?: error("UI_ACTION_FAILED")
+        require(nodes.count { it.path.startsWith(option.path + ".") && it.text == expected } == 1) { "UI_UNEXPECTED_SCREEN" }
+        return option
     }
     private fun ordered(nodes: List<UiNode>) = nodes.sortedWith { a, b ->
         val aa = a.path.split('.').map(String::toInt); val bb = b.path.split('.').map(String::toInt)
