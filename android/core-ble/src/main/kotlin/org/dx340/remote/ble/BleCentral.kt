@@ -116,7 +116,7 @@ class BleCentral(private val context: Context, private val status: (String) -> U
         phase(CentralPhase.CONNECTING); status("Connecting…")
         gatt = device.connectGatt(context, false, cb, BluetoothDevice.TRANSPORT_LE)
         val current = gatt
-        main.postDelayed({ if (gatt == current && !established) fail("Connection timed out; open pairing on DX340 and retry") }, 30000)
+        main.postDelayed({ if (gatt == current && !established) fail("Connection timed out. Check phone control is enabled in Companion on your player, then tap Connect again.") }, 30000)
     }
     fun send(bytes: ByteArray) {
         check(established) { "Not connected" }
