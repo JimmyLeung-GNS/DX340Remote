@@ -1,6 +1,17 @@
 # Implementation status
 
-## Current checkpoint —31 October2026,16:49 HKT
+## Current checkpoint —31 October2026,17:08 HKT
+
+Full goal **ACTIVE/incomplete**. Installed Pixel4318/source5f2de32 and Companion00e5/source7fbdec8 unchanged. [Current pending-source evidence](test-results/2026-10-31-phone-pending-source.md), [versions/hash manifest](test-results/2026-10-31-phone-pending-source.json).
+
+- **Two accepted phone browse interruptions verified:** Mango Internal Storage accepted142ms, source changed locally to Apple after at least360ms, cancellation1170ms. Apple Songs accepted94ms, source changed locally to Mango after at least344ms, cancellation1512ms. Existing AUTHORIZATION_DENIED means request-scope cancellation here; approval remains valid. This is physical Pixel/BLE with an own Companion debug trigger, not a phone source-button test.
+- **Presentation/recovery:** old item rows clear and Library changed guidance appears; fresh Apple Downloaded/Mango Internal browse returns1592/1305ms.13 exported requests/3 prior rows unchanged/10 new:8 applied results,2 expected cancellation errors, zero evictions. No playback/volume command, no wire replay of an old token; no T04 or full T12/T16 claim.
+- **Final:** both direct sessions paused2 at37/headset(4)/proof false; all4 saved preferences byte-hash unchanged/grants/browsingON retained. Host foreground/both bindings, control targetMango. Normal phone Disconnect clears foreground; help collapsed; both USB present. No build/CI/emulator/observer/audio test started in this turn.178 JVM/72 Flutter/19 Swift and both closed5f Apple archives retain earlier scope; no polling.
+- **Owner-dependent cases:** fresh30-minute readiness and retrospective envision hearing questions remain pending. No long screen-off hold or new audio pass is inferred. Older b805 three audible selections remain separate from current4318 source-state/status proof.
+
+Next: current4318 paused radio/foreground recovery and remaining full phone-UI source interruption, stale-token, T01–T18/source/albums/playlists/formats/SD/output/range/calls/battery/walk/ownership/owner-iPhone/Mac signing cases. Start the long hold only on fresh readiness; Watch follows stable phones. No pause/device-switch request.
+
+## Prior checkpoint —31 October2026,16:49 HKT
 
 Full goal **ACTIVE/incomplete**. App source5f2de32, observer toolingb356f5f. [Status correction and checks](test-results/2026-10-31-dispatched-status.md), [current permission recovery](test-results/2026-10-31-4318-permission-recovery.md).
 

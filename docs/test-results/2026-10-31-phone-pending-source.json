@@ -1,0 +1,186 @@
+{
+  "recordedAt": "2026-10-31T17:10:51+08:00",
+  "goalStatus": "ACTIVE/incomplete",
+  "appSource": "5f2de32ca58952faf401d0d558755972d4e160ba",
+  "hostSource": "7fbdec8ada9faa1573afa7efea9fa598c22b2ef1",
+  "phoneApkSha256": "4318e6ad38ac775f8a635532b628be1cd3a93ab54647d6e6893169aaf88bc440",
+  "hostApkSha256": "00e5e50b19d13f3e626ac0c882386a26174adff283dc9b2c8926413ef258e7cb",
+  "versions": {
+    "pixel": "Pixel9a Android16/API36 CP1A.260405.005/shared0.2.0 code2",
+    "dx340": "Android13 eng.iBasso.20260812.181952/Companion0.1.0 code1",
+    "mango": "4.1.37/code240",
+    "appleMusic": "6.5.3/code1599"
+  },
+  "method": "Real Pixel UI/BLE browse; source change injected through existing own DX340 debug GET_STATE source selector after new queued-BROWSE log, not a Pixel source-button test",
+  "cases": [
+    {
+      "status": "VERIFIED/accepted physical browse interruption subset",
+      "source": "mango",
+      "target": "Internal Storage",
+      "sourceChangedTo": "Apple Music",
+      "acceptedMs": 142,
+      "minimumQueueToInjectionMs": 360,
+      "terminalMs": 1170,
+      "result": "error",
+      "code": "AUTHORIZATION_DENIED",
+      "terminalApplied": true,
+      "postChange": "Library changed. Browse again or refresh Queue.",
+      "oldSourceRowsCleared": true
+    },
+    {
+      "status": "VERIFIED/accepted physical browse interruption subset",
+      "source": "apple",
+      "target": "Songs",
+      "sourceChangedTo": "Mango",
+      "acceptedMs": 94,
+      "minimumQueueToInjectionMs": 344,
+      "terminalMs": 1512,
+      "result": "error",
+      "code": "AUTHORIZATION_DENIED",
+      "terminalApplied": true,
+      "postChange": "Library changed. Browse again or refresh Queue.",
+      "oldSourceRowsCleared": true
+    }
+  ],
+  "journal": {
+    "priorUnchangedRequests": 3,
+    "totalRequests": 13,
+    "newRequests": 10,
+    "newHello": 1,
+    "newAuthorize": 1,
+    "newBrowse": 8,
+    "successfulNewResults": 8,
+    "expectedCanceledErrors": 2,
+    "noEvictions": true,
+    "authorizedAfterBoth": true,
+    "noPlaybackOrVolumeCommands": true
+  },
+  "recovery": {
+    "appleDownloadedRootTerminalMs": 1592,
+    "mangoInternalStorageTerminalMs": 1305,
+    "oldRowsCleared": true,
+    "freshSourceBrowse": true
+  },
+  "final": {
+    "at": "2026-10-31T17:07:51+08:00",
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "volume": 37,
+    "output": "headset(4)",
+    "preferences": [
+      {
+        "file": "controllers.xml",
+        "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd",
+        "unchanged": true
+      },
+      {
+        "file": "mango-ui.xml",
+        "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+        "unchanged": true
+      },
+      {
+        "file": "apple-ui.xml",
+        "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+        "unchanged": true
+      },
+      {
+        "file": "source-verification.xml",
+        "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f",
+        "unchanged": true
+      }
+    ],
+    "phoneForegroundCleared": true,
+    "hostForeground": true,
+    "bothAccessibilityBound": true,
+    "controlTarget": "Mango",
+    "longHold": "NOT STARTED; owner readiness still pending"
+  },
+  "limits": [
+    "mixed physical-phone request and source-local trigger; not full phone-UI source switch acceptance",
+    "existing AUTHORIZATION_DENIED here is request-scope cancellation after selection changes, not controller revocation",
+    "old actionable rows cleared, but no deliberate stale-token wire replay performed",
+    "no playback/audio test or T04 performance pass",
+    "no 30-minute sleep hold started; owner readiness and earlier envision hearing replies pending",
+    "full T01-T18/physical iPhone/Mac signing/source/format/SD/output/range/calls/battery/walk/ownership/Watch remain open"
+  ],
+  "evidence": [
+    {
+      "file": "artifacts/4318-pending-source-20261031/phone-pending-source-report.json",
+      "sha256": "ecd292c99097d678ef3ef8d19dc890555f7b5c5d4e8cc16c51ebb51a41523d83"
+    },
+    {
+      "file": "artifacts/4318-pending-source-20261031/receipt-results.json",
+      "sha256": "455c54db8923eb19b31b4b57bb46eb31e30e4dbba4b9cb6bb6b94b3f441196c7"
+    },
+    {
+      "file": "artifacts/4318-pending-source-20261031/merged-summary.json",
+      "sha256": "836e65901ab3aec7a1a09630d2c890a3818e2082af1508c40c00111560b82d1e"
+    },
+    {
+      "file": "artifacts/4318-pending-source-20261031/mango-injection-event.json",
+      "sha256": "f44be6a24a341475ffb2e5974eec84ce513da47c3e4ae8bd51e630f26ac14b6a"
+    },
+    {
+      "file": "artifacts/4318-pending-source-20261031/apple-injection-event.json",
+      "sha256": "23de9bbacfbe0102a9bf8d3793ce5ac9e2efbc942b898240f9a97ad860f1f0d7"
+    },
+    {
+      "file": "artifacts/4318-pending-source-20261031/mango-pending-source-change.json",
+      "sha256": "7484de11d2951154838200600d2a0f3911375b0e36c8eb82e8b00ef3043de9d9"
+    },
+    {
+      "file": "artifacts/4318-pending-source-20261031/apple-pending-source-change.json",
+      "sha256": "dbaca94bbad0bac6ed3f4c76194c5c69f872d21a516a1e119a79c93fa702601e"
+    },
+    {
+      "file": "artifacts/4318-pending-source-20261031/after-mango-source-change.xml",
+      "sha256": "8036dd938c84f2b14572c16f927fca00442d26e898219e1a895f0515304678fb"
+    },
+    {
+      "file": "artifacts/4318-pending-source-20261031/after-apple-source-change.xml",
+      "sha256": "5b72ce105bfd44578a630c058de1df7a57d24c80fe6cf3fb1d12e4c2d0bdf9a3"
+    },
+    {
+      "file": "artifacts/4318-pending-source-20261031/apple-recovered-root.xml",
+      "sha256": "a8d5f34901acb7a575fc91c48bd5ed29cb8d709506650a0604dfee677d13ba44"
+    },
+    {
+      "file": "artifacts/4318-pending-source-20261031/mango-recovery-final.xml",
+      "sha256": "7aedcb01095d65c825d07c93638b4b87028b656280a4a161ff7f300d1443c635"
+    },
+    {
+      "file": "artifacts/4318-pending-source-20261031/media-before.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/4318-pending-source-20261031/media-after-both-cases.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/4318-pending-source-20261031/media-final.txt",
+      "sha256": "438cffd34129da20df09aefd62509e359063d70f5a29221af622ac240755ca40"
+    },
+    {
+      "file": "artifacts/4318-pending-source-20261031/audio-final.txt",
+      "sha256": "40b855cffcf767b035c4e006a682f3289d147cfdc20832bd03a5baf5a3c385db"
+    },
+    {
+      "file": "artifacts/4318-pending-source-20261031/host-service-final.txt",
+      "sha256": "bf09d6d60f12c89be88a9ab1e0b1eaccfd1713848a1bdf955eb03f59f26291a8"
+    },
+    {
+      "file": "artifacts/4318-pending-source-20261031/accessibility-final.txt",
+      "sha256": "17c02ffe710c299d8d009979f7381f27f9536ec708cd31ab061f4beec711f5af"
+    },
+    {
+      "file": "artifacts/4318-pending-source-20261031/phone-service-final.txt",
+      "sha256": "3e200d34d6562b4b35d94ef0fcdcbdb24806018a86bfbc091da365aff52cea03"
+    },
+    {
+      "file": "artifacts/4318-pending-source-20261031/final-preservation.json",
+      "sha256": "b5dc160f451e612d68771e21f1e2dd0bc4cdf795222b504ea86d7496dc84cf91"
+    }
+  ]
+}

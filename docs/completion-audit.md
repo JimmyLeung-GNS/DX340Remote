@@ -1,6 +1,10 @@
 # Full-scope completion audit
 
-## Current full-scope audit —31 October2026,16:49 HKT
+## Current full-scope audit —31 October2026,17:08 HKT
+
+**NOT ACHIEVED; goal ACTIVE/incomplete.** [Two current phone pending-browse cases](test-results/2026-10-31-phone-pending-source.md) now verify accepted real Pixel/BLE requests canceled by a source-local Companion switch, stale-row clearing and fresh recovery, with approval/pause/output/preferences preserved. This advances P3/P4/P6/P7/P8 context/routing coverage; it does not complete phone-UI switching, token wire replay, all T12/T16 or full two-phone/source/offline/format/SD/output/command/latency/sleep/range/call/battery/walk/ownership requirements. Owner-iPhone/Mac signing and later Watch remain open. Long-hold readiness/hearing replies pending, no observer or audio claim. No new product patch/build/job, no user pause/device switch.
+
+## Prior full-scope audit —31 October2026,16:49 HKT
 
 **NOT ACHIEVED; goal ACTIVE/incomplete.** [Current status fix](test-results/2026-10-31-dispatched-status.md) and [4318 permission recovery](test-results/2026-10-31-4318-permission-recovery.md) add verified current Android presentation, grant-loss cleanup/restore/reconnect and two closed Apple build archives. They do not complete P4/P5/P8 or full T12. One4318 source-state selection has no owner hearing confirmation yet; previous b8053 audible selections retain their exact binary scope. Fresh30-minute availability is pending and no sleep hold started. Full T01–T18/current source/albums/playlists/formats/commands/latency/sleep/range/SD/output/battery/walk/ownership and signed owner-iPhone/Mac evidence remain required; Watch stays gated on stable phones. No user pause/device switch.
 
