@@ -1,0 +1,1932 @@
+{
+  "recordedAt": "2026-11-01T01:54:53.217851+08:00",
+  "status": "VERIFIED scoped software/build/physical read-only timing and normal reconnect; full goal ACTIVE/incomplete",
+  "source": "a5b3fc0ac1e558b0f4eba3daff6dcf3cb94bf532",
+  "physical": {
+    "source": "a5b3fc0ac1e558b0f4eba3daff6dcf3cb94bf532",
+    "phone": {
+      "sha256": "4eea5c15a6c567efedba5329b2bb2256137caa3c964bbd5f818233827222212d",
+      "modelInstanceId": "69f72db0-331f-4f34-ad09-8e1421f93c67",
+      "version": "Remote0.2.0/code2",
+      "device": "Pixel9a Android16/API36 CP1A.260405.005",
+      "pidBefore": "27462",
+      "pidAfter": "17394",
+      "originalSignerRetained": true
+    },
+    "host": {
+      "sha256": "dde825a97b1767c119e4ecc76f638c4c76876cbe7dce86439d277ffb8b2af739",
+      "source": "f3abc266a300030f2a59e4530bbb0dc14aac070f",
+      "pidUnchanged": "31888",
+      "device": "DX340 Android13/API33 eng.iBasso.20260812.181952",
+      "version": "Companion0.1.0/code1",
+      "upgrade": "No host install in this case; newly compiled candidate remains build-only"
+    },
+    "requests": {
+      "counts": [
+        26,
+        29
+      ],
+      "allInitialRowsUnchanged": true,
+      "zeroEvictions": true,
+      "operations": {
+        "HELLO": 2,
+        "AUTHORIZE": 2,
+        "GET_STATE": 21,
+        "BROWSE": 2,
+        "SELECT_SOURCE": 2
+      },
+      "all29HaveWriteReceiptsAndAppliedResults": true,
+      "errors": 0,
+      "reconnectNewRequests": [
+        {
+          "id": "d163579e-3c72-4955-bbc9-c7ee41d4b07f",
+          "operation": "HELLO",
+          "source": "mango",
+          "startedMs": 553880,
+          "writeAcknowledgedAfterMs": 87,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 88,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "e4a87d39-3809-4f2f-96a5-4e845f7c0fea",
+          "operation": "AUTHORIZE",
+          "source": "mango",
+          "startedMs": 553969,
+          "writeAcknowledgedAfterMs": 93,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 879,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        },
+        {
+          "id": "614a5efd-f06c-4feb-9803-fd259ece5782",
+          "operation": "GET_STATE",
+          "source": "mango",
+          "startedMs": 570298,
+          "writeAcknowledgedAfterMs": 95,
+          "accepted": false,
+          "acceptedAfterMs": null,
+          "finishedAfterMs": 393,
+          "result": "result",
+          "terminalApplied": true,
+          "hostOutcome": "none",
+          "error": null
+        }
+      ],
+      "noPlaybackSeekSkipVolume": true
+    },
+    "metricsInitialCohort": [
+      {
+        "operation": "AUTHORIZE",
+        "source": "mango",
+        "requests": 1,
+        "outcomes": {
+          "result": 1
+        },
+        "attWriteAcknowledged": {
+          "samples": 1,
+          "p50Ms": 46,
+          "p95Ms": 46,
+          "maxMs": 46
+        },
+        "acceptedReceipt": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        },
+        "terminalReply": {
+          "samples": 1,
+          "p50Ms": 735,
+          "p95Ms": 735,
+          "maxMs": 735
+        },
+        "appliedResult": {
+          "samples": 1,
+          "p50Ms": 735,
+          "p95Ms": 735,
+          "maxMs": 735
+        },
+        "hostObservedAppliedResult": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        }
+      },
+      {
+        "operation": "BROWSE",
+        "source": "apple",
+        "requests": 1,
+        "outcomes": {
+          "result": 1
+        },
+        "attWriteAcknowledged": {
+          "samples": 1,
+          "p50Ms": 116,
+          "p95Ms": 116,
+          "maxMs": 116
+        },
+        "acceptedReceipt": {
+          "samples": 1,
+          "p50Ms": 118,
+          "p95Ms": 118,
+          "maxMs": 118
+        },
+        "terminalReply": {
+          "samples": 1,
+          "p50Ms": 1439,
+          "p95Ms": 1439,
+          "maxMs": 1439
+        },
+        "appliedResult": {
+          "samples": 1,
+          "p50Ms": 1439,
+          "p95Ms": 1439,
+          "maxMs": 1439
+        },
+        "hostObservedAppliedResult": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        }
+      },
+      {
+        "operation": "BROWSE",
+        "source": "mango",
+        "requests": 1,
+        "outcomes": {
+          "result": 1
+        },
+        "attWriteAcknowledged": {
+          "samples": 1,
+          "p50Ms": 134,
+          "p95Ms": 134,
+          "maxMs": 134
+        },
+        "acceptedReceipt": {
+          "samples": 1,
+          "p50Ms": 135,
+          "p95Ms": 135,
+          "maxMs": 135
+        },
+        "terminalReply": {
+          "samples": 1,
+          "p50Ms": 771,
+          "p95Ms": 771,
+          "maxMs": 771
+        },
+        "appliedResult": {
+          "samples": 1,
+          "p50Ms": 771,
+          "p95Ms": 771,
+          "maxMs": 771
+        },
+        "hostObservedAppliedResult": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        }
+      },
+      {
+        "operation": "GET_STATE",
+        "source": "apple",
+        "requests": 10,
+        "outcomes": {
+          "result": 10
+        },
+        "attWriteAcknowledged": {
+          "samples": 10,
+          "p50Ms": 143,
+          "p95Ms": 168,
+          "maxMs": 168
+        },
+        "acceptedReceipt": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        },
+        "terminalReply": {
+          "samples": 10,
+          "p50Ms": 451,
+          "p95Ms": 494,
+          "maxMs": 494
+        },
+        "appliedResult": {
+          "samples": 10,
+          "p50Ms": 451,
+          "p95Ms": 494,
+          "maxMs": 494
+        },
+        "hostObservedAppliedResult": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        }
+      },
+      {
+        "operation": "GET_STATE",
+        "source": "mango",
+        "requests": 10,
+        "outcomes": {
+          "result": 10
+        },
+        "attWriteAcknowledged": {
+          "samples": 10,
+          "p50Ms": 131,
+          "p95Ms": 160,
+          "maxMs": 160
+        },
+        "acceptedReceipt": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        },
+        "terminalReply": {
+          "samples": 10,
+          "p50Ms": 432,
+          "p95Ms": 469,
+          "maxMs": 469
+        },
+        "appliedResult": {
+          "samples": 10,
+          "p50Ms": 432,
+          "p95Ms": 469,
+          "maxMs": 469
+        },
+        "hostObservedAppliedResult": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        }
+      },
+      {
+        "operation": "HELLO",
+        "source": "mango",
+        "requests": 1,
+        "outcomes": {
+          "result": 1
+        },
+        "attWriteAcknowledged": {
+          "samples": 1,
+          "p50Ms": 54,
+          "p95Ms": 54,
+          "maxMs": 54
+        },
+        "acceptedReceipt": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        },
+        "terminalReply": {
+          "samples": 1,
+          "p50Ms": 74,
+          "p95Ms": 74,
+          "maxMs": 74
+        },
+        "appliedResult": {
+          "samples": 1,
+          "p50Ms": 74,
+          "p95Ms": 74,
+          "maxMs": 74
+        },
+        "hostObservedAppliedResult": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        }
+      },
+      {
+        "operation": "SELECT_SOURCE",
+        "source": "apple",
+        "requests": 1,
+        "outcomes": {
+          "result": 1
+        },
+        "attWriteAcknowledged": {
+          "samples": 1,
+          "p50Ms": 87,
+          "p95Ms": 87,
+          "maxMs": 87
+        },
+        "acceptedReceipt": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        },
+        "terminalReply": {
+          "samples": 1,
+          "p50Ms": 432,
+          "p95Ms": 432,
+          "maxMs": 432
+        },
+        "appliedResult": {
+          "samples": 1,
+          "p50Ms": 432,
+          "p95Ms": 432,
+          "maxMs": 432
+        },
+        "hostObservedAppliedResult": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        }
+      },
+      {
+        "operation": "SELECT_SOURCE",
+        "source": "mango",
+        "requests": 1,
+        "outcomes": {
+          "result": 1
+        },
+        "attWriteAcknowledged": {
+          "samples": 1,
+          "p50Ms": 165,
+          "p95Ms": 165,
+          "maxMs": 165
+        },
+        "acceptedReceipt": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        },
+        "terminalReply": {
+          "samples": 1,
+          "p50Ms": 506,
+          "p95Ms": 506,
+          "maxMs": 506
+        },
+        "appliedResult": {
+          "samples": 1,
+          "p50Ms": 506,
+          "p95Ms": 506,
+          "maxMs": 506
+        },
+        "hostObservedAppliedResult": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        }
+      }
+    ],
+    "legacy159WriteTiming": "UNKNOWN/zero samples; no inference from existing decoded replies",
+    "preserved": {
+      "phonePermissionFlagsAndExposedBondsUnchanged": true,
+      "hostPermissionFlagsAndExposedBondsUnchanged": true,
+      "fourPrefs": {
+        "controllers": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd",
+        "mango-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+        "apple-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+        "source-verification": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+      },
+      "fifthEnabledChoiceUnchanged": true,
+      "globalSettingsUnchanged": {
+        "host": {
+          "wifi_on": "0",
+          "mobile_data": "0",
+          "bluetooth_on": "1",
+          "font_scale": "1.0",
+          "screen_off_timeout": "1800000"
+        },
+        "phone": {
+          "wifi_on": "0",
+          "mobile_data": "1",
+          "bluetooth_on": "1",
+          "font_scale": "1.0",
+          "screen_off_timeout": "1800000"
+        }
+      },
+      "metadataAndPositions": {
+        "com.ibasso.music": {
+          "state": 2,
+          "positionMs": 78991,
+          "description": "ゴースト, tayori, tayori LIVE TOUR \"magic\""
+        },
+        "com.apple.android.music": {
+          "state": 2,
+          "positionMs": 99367,
+          "description": "A・RA・SHI, ARASHI, 5×20 All the BEST!! 1999-2019 (Special Edition)"
+        }
+      },
+      "volume": 37,
+      "output": "headset(4)",
+      "volumeProof": false,
+      "hostForegroundBothBindings": true,
+      "browsingModes": "Both ON",
+      "phoneNormalDisconnectHelpCollapsed": true,
+      "target": "Mango",
+      "cardMounted": true
+    },
+    "physicalT04": "NOT_ADJUDICATED",
+    "limits": [
+      "Ten read-state requests per source and one fresh root browse per source, not100 playback controls or20 source selections",
+      "Write duration includes encoding/queue/callback delay; no raw RF/UI-tap/acoustic measurement",
+      "No playback/listening/current audio or quality proof; older hearing keeps exact scopes",
+      "Normal reconnect only; pending-transfer failure covered by software fixtures, not physical fault injection",
+      "Phone cellular flag1 prevents strict all-radios-off T01 claim",
+      "No new storage/mount/source-data/radio/network/power-policy changes; SD preference retained",
+      "Unplugged31min availability pending/no long observer; prior two USB-power-wake holds remain failed",
+      "Physical owner-iPhone/Mac signing/Watch/full T01–T18 remain open"
+    ]
+  },
+  "software": {
+    "jvmAggregate": 226,
+    "jvmModuleCounts": {
+      "core-protocol": 57,
+      "controller-core": 3,
+      "library-cache": 7,
+      "source-adapters": 146,
+      "host-app": 13
+    },
+    "sharedJournalFixtures": 12,
+    "sharedQueueFixtures": 4,
+    "queueJournalIntegrationTests": "Kotlin and Swift",
+    "nativeAndroidBuildLint": "PASS",
+    "sharedAndroid": "80 Flutter/analyze/release/lint PASS, pinned3.41.4/ff37bef603469fb030f2b72995ab929ccfc227f0",
+    "analyserTests": 13,
+    "nativeSwiftTests": 21,
+    "captureGuardsPerAppleRun": 12,
+    "nativeAppleBuilds": 1,
+    "sharedIphoneBuilds": 7
+  },
+  "apple": [
+    {
+      "run": 41224745105,
+      "artifact": 13051532808,
+      "source": "a5b3fc0ac1e558b0f4eba3daff6dcf3cb94bf532",
+      "status": "SUCCESS",
+      "zipSha256": "73887fe1e278b266aa9c8c92243f5b892422a5a129c1da6f4d690b715e900cd8",
+      "simulator": {
+        "runtime": "com.apple.CoreSimulator.SimRuntime.iOS-26-5",
+        "name": "iPhone Air",
+        "udid": "D8AAABAD-F0D0-4A6C-8B1B-8249EADEEEDE"
+      },
+      "scope": "Simulator/build/software only; no physical iPhone or ATT samples"
+    },
+    {
+      "run": 41224745016,
+      "artifact": 13050949158,
+      "source": "a5b3fc0ac1e558b0f4eba3daff6dcf3cb94bf532",
+      "status": "SUCCESS",
+      "zipSha256": "bef789fcd0b9433ce534592722de34674cb94cb1b0ddba8de269bd6c1503c354",
+      "simulator": {
+        "runtime": "com.apple.CoreSimulator.SimRuntime.iOS-26-5",
+        "name": "iPhone Air",
+        "udid": "1F0A9C4B-2DFC-444E-B162-696E5078A72B"
+      },
+      "scope": "Simulator/build/software only; no physical iPhone or ATT samples"
+    }
+  ],
+  "sharedNativeExport": {
+    "status": "UIKit sheet presented and visually inspected; matching marker/export instance; ordinary main.dart restored and frame inspected",
+    "modelInstanceId": "E728FBC6-4461-4EE8-90ED-47606A7245B2",
+    "emptyRequests": true,
+    "bluetoothSampleScope": "No physical iPhone/CoreBluetooth timing sample"
+  },
+  "appleEnvironment": {
+    "macOS": "26.6.2/25G83",
+    "Xcode": "26.6/17F113",
+    "simulator": "iPhone Air/iOS26.5"
+  },
+  "physicalT04": "NOT_ADJUDICATED",
+  "pending": [
+    "Strict controller cellular-off,100 controls/source/phone,20 source selections, format/output quality and hearing",
+    "Unplugged31min availability/30min sleep/range/calls/battery/walk/ownership/security/fault matrix",
+    "Owner iPhone/Mac signing/physical tests and later Watch; full T01–T18 incomplete",
+    "Prior two USB-power-wake holds failed; old no-card Internal timeout/Apple MEDIA_MOUNTED crash remain open"
+  ],
+  "rawEvidence": [
+    {
+      "file": "artifacts/write-ack-timing-20261101/after-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/after-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/after-host-accessibility.txt",
+      "sha256": "5bf3f8a7e539cf3cf2d6c13a1e72d4cbc62366b044f4998492a79144e361be26"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/after-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "a5253c405a2266985b485adb2663413d97b4615d5963c2528b0915f1def4605b"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/after-host-audio.txt",
+      "sha256": "f529fc3afd6241454426ecdafd4c74ea4e76e7d8c9114122e4b0c4ab63d17316"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/after-host-bluetooth_manager.txt",
+      "sha256": "c1ff4a5394fd2ab96c25f9ce87e3c40d978e0d1a438d035361cd439c981e7aa4"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/after-host-media_session.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/after-host-package-org.dx340.remote.host.txt",
+      "sha256": "2c1260507b81db4d4887d4300009a59cd584a01f5bbd0e0964eb01c017fe9d27"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/after-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/after-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "68af60e336dd26228928bcf67b3f991447d184b0f6de2d4b59cf26d633a7381c"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/after-phone-bluetooth_manager.txt",
+      "sha256": "29ddc4054c8dd8692d6196f47d4abb2e7c080a90689116fa97162d15c661ed01"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/after-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "ae6d3c1cc2fd83ea50fb500af2ba218489cad9a75482608ccb638bcf0ab12c2f"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/after-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/after.json",
+      "sha256": "a503e88d580c8aac67417f441a28d56d221e955d4a1ae8045dea602fb705e809"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/android-build-console.txt",
+      "sha256": "7d78524aa06b523b3f7d16b4f3da055cba37ae09ae8e54e40753322c6ffb0c8c"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/android-build.txt",
+      "sha256": "7d78524aa06b523b3f7d16b4f3da055cba37ae09ae8e54e40753322c6ffb0c8c"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-0-find-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-1-find-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-2-find-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-3-find-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-4-find-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-5-find-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-6-find-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-7-find-0.xml",
+      "sha256": "d8a1b6ca5b6b32739b8069f7b5c2ee99018dc7e534b87db162cc753c562d8cc1"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-8-find-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-9-find-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-after-browse-media.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-after-reads-media.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-browse-after.xml",
+      "sha256": "4a9f8ce00e9d55161fcc425c665d2bf8547a40f55dc50763b48b6b3c381f7e68"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-browse-before.xml",
+      "sha256": "8036dd938c84f2b14572c16f927fca00442d26e898219e1a895f0515304678fb"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-browse-wait-0.xml",
+      "sha256": "8036dd938c84f2b14572c16f927fca00442d26e898219e1a895f0515304678fb"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-find-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-library-actions.xml",
+      "sha256": "8036dd938c84f2b14572c16f927fca00442d26e898219e1a895f0515304678fb"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-library-after.xml",
+      "sha256": "8036dd938c84f2b14572c16f927fca00442d26e898219e1a895f0515304678fb"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-library-before.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-library-wait-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-player-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-player-before.xml",
+      "sha256": "6edadd75b0ce2fc2c2a7fb95b115825d257d37fee6649e4bc863be05a162b438"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-player-wait-0.xml",
+      "sha256": "6edadd75b0ce2fc2c2a7fb95b115825d257d37fee6649e4bc863be05a162b438"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-0-after.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-0-before.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-0-wait-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-1-after.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-1-before.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-1-wait-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-2-after.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-2-before.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-2-wait-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-3-after.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-3-before.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-3-wait-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-4-after.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-4-before.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-4-wait-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-5-after.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-5-before.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-5-wait-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-6-after.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-6-before.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-6-wait-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-7-after.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-7-before.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-7-wait-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-8-after.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-8-before.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-8-wait-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-9-after.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-9-before.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-read-9-wait-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-select-after.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-select-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/apple-select-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/before-apple-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/before-controllers.xml",
+      "sha256": "317509aa84df5bc250006fd0ae2263997a562a6edf0ffb0a800dcd4c8e3b56dd"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/before-host-accessibility.txt",
+      "sha256": "599780da6244434d5a7613266e1cff825f347e77bd497cdad6ee5a5e1da57801"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/before-host-activity-services-org.dx340.remote.host.txt",
+      "sha256": "a9fe2cb1159cc6cf54e3506af91460b28702e9d372201ba756fd5862fd4335ea"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/before-host-audio.txt",
+      "sha256": "1863071be2aa3ab9eeb804e8e9a5cc259313b332952d2736b332756ddc0f4159"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/before-host-bluetooth_manager.txt",
+      "sha256": "4b69596f09e82609d48ad701a057b11fac7c45bc7aec3379ac1a86c11c365958"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/before-host-media_session.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/before-host-package-org.dx340.remote.host.txt",
+      "sha256": "2ab4796256c76de8999b8badb570ce64b2a77d310d7d6c8ccfc95f7c5440d917"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/before-mango-ui.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/before-phone-activity-services-org.dx340.remote.controller.txt",
+      "sha256": "dd7294af15a377f9ccf82d18e78c541f2fd2b39c011b56748353da5009dc1b4f"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/before-phone-bluetooth_manager.txt",
+      "sha256": "26b14efc165385bdefd787015da8421ea399967eac7db176d21e2070eb86861e"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/before-phone-package-org.dx340.remote.controller.txt",
+      "sha256": "b237e85b9c18e02925fb1e2e84c2710885cbc7c3694a68f58cf23ae7f370a0d5"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/before-source-verification.xml",
+      "sha256": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/before.json",
+      "sha256": "a3f44d8f9c6df0abc0fafabb9f4f4eec344c73133e7bc95d52fa7ea8bf9f9655"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/case-actions.json",
+      "sha256": "fdac4a933828e938b8bdbf7c0cc7017520132ca9a5d5f9d035e8a693924afbf4"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/case-after-reads-media.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/case-before-connect-media.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-bootstrap.txt",
+      "sha256": "275251819c8fafc90d7df45a9b9ea91057638657dd42c028b7c7e0fabfae1fad"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-browsing-fixture-launch.txt",
+      "sha256": "8fbff8390854bae85265dbdd74cf96482967094cf0f1710926411175611a7513"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-capture-matcher-tests.txt",
+      "sha256": "2072ea10acb601303ef8f21be984d3cfc065831ff61278198aa4b2b3955354ce"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-capture-readiness.txt",
+      "sha256": "ca1b0f18339c8fc950ed2ec28fbf2f50020192f31b1722d287ad2fbbdbc78dae"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-handoff-fixture-launch.txt",
+      "sha256": "cd6995d76a09b477aff10606ecbc0df079ac017abcc4ce2d2aaa1e70d26d19f9"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-ios-analyze.txt",
+      "sha256": "907ca854abf7b791e60ef8b47c93ff572cf54fd666fea72f1d08ce4efe19ba85"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-ios-browsing-fixture-build.txt",
+      "sha256": "cacf2642ade8f75a0a0e185525bb1ed9eef0423c18e789507e840f2276fc8bbc"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-ios-build.txt",
+      "sha256": "89ceb7ef0f581735505f9791692c219d4aac23238ebabe32b08b98f7bc9e9255"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-ios-handoff-fixture-build.txt",
+      "sha256": "453a02154489efa0a673f993232f71a7429e9049daf255cb2471326d60214578"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-ios-report-probe-build.txt",
+      "sha256": "4754cf65e65237e0db2b6df60d22568bcb09fa535721af7cd8fb02ee208a720d"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-ios-restore-build.txt",
+      "sha256": "6dc3cb350dcd74a8e963ff5d52c44114335434f2019e9fe08df9c064b4b157e6"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-ios-setup-fixture-build.txt",
+      "sha256": "88cd450ec84555c9aacf370d65d60c2cd917f1ca8a1d064f30784bdcd875736c"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-ios-tests.txt",
+      "sha256": "d317dedbef38daea93653c711a7c10f185e6595885a8420cecffcd007233df47"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-ios-toolchain.json",
+      "sha256": "4c13dc6534635375ab58ff3b75ae0d02bd5967ee36a84a40b0e48126b7ea84a4"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-ios-volume-fixture-build.txt",
+      "sha256": "2f90a609f8c9b636bcff5d57af04f02eec4a5dc6fdcc2471b8ad7641f59b7045"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-library-light.png",
+      "sha256": "30ce1a0625bcfe0f9149a67904e3f4abf440810a62adde57ec250d68339872e6"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-macos-version.txt",
+      "sha256": "cd5d6399b3785b04ceaae75045a9ca9f80f0bbc3526eff9d0c36b170ed1ec348"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-native-report-export.json",
+      "sha256": "76e0608f88c893630685ddec1790faa163bc57ac08013750efb3e37d607cdce4"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-native-report-share-sheet.png",
+      "sha256": "5b74a0f071a06b668b055f05ed1d244f8ca10cecab1d848ae7cc04e03680fb2a"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-player-dark.png",
+      "sha256": "6ec63c98a8c25e3ea7959c730badbb8115a69ab6dff0e3fc47423da70d51c003"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-player-large-dark.png",
+      "sha256": "c415f4c99bf1038dbd52b4395e7c96dedd8abcd0475536f81edfee1e58dd4aa7"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-player-light.png",
+      "sha256": "0430b222500c50754fb63bc05bff37c75147fc480890401e5629ddda6d27b80e"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-queue-light.png",
+      "sha256": "28787fc4bd7b0a0f567d0b7481dadda9d5d6e2cbc6fb521ad5cf35cdfba054bd"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-report-probe-launch.txt",
+      "sha256": "e4a0f7df6f0f95047fe65c5ad81ae3db3d17de37a3cad7226854150b48cb683b"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-report-probe-result.json",
+      "sha256": "c06c5f61b32711d0fde36586857101e39deaedea652d56931c06b10ee5ceb263"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-restored-launch.txt",
+      "sha256": "655527069c64d31fb4ea841cbef9e1380ed60cb28a0bea32ddd8b52d10e1b4e7"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-restored-player-light.png",
+      "sha256": "eca1bf2686f2a4bb472c13cda08c26c4724de3e7bc4550829b25ae907a5bc192"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-setup-fixture-launch.txt",
+      "sha256": "2c8eab5376d0a00313ef520bf042eba7270c247914b6787702b9404ee545cde7"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-setup-light.png",
+      "sha256": "8c90b10460750725931ec0b5a73ae4c59f4270f592a87827ce0d00a3ed744897"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-simulator-boot.txt",
+      "sha256": "cca1e5610de19edec739e4c52bed4251e5828f452cda2f66bdb777242f4973cb"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-simulator-launch.txt",
+      "sha256": "d7f47c2d69daa464e0512c6bcf700474573a90329af8f58a03c32726193f9ad0"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-simulators.json",
+      "sha256": "594084d646f2586e52c66328c583b79fcde9330e82ceb24cc72373ab3630ff45"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-synthetic-browsing-expired-large-dark.png",
+      "sha256": "46d4aed33b3708c0735f638fc6e9e4e37ad9f942dce886d33fd22ab109227e75"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-synthetic-browsing-expired-light.png",
+      "sha256": "60d88abe5bb9652e17484f4aba3f537667de9ec891b22cadc80c64717ed17c99"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-synthetic-browsing-large-dark.png",
+      "sha256": "415aeac1307c7f349930ee975bf6041e3da9c13df881a4583706b23e314fd20f"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-synthetic-browsing-library-light.png",
+      "sha256": "fa5b7f8ee178470da3a0049d5ddada70e25872f6c75327d343b9b9f3167478bc"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-synthetic-browsing-queue-light.png",
+      "sha256": "dd43010250813ef2235ee8363df502e00a2ef8442cc8012bb2f8573228bcc620"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-synthetic-handoff-large-dark.png",
+      "sha256": "5ebd8c30dc479711df12d41c093d904a963e0fe0c631b7f5c90131065b359020"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-synthetic-handoff-lost-light.png",
+      "sha256": "47a0f5ca1b2498887269f81d98082f8d099b9b96563a5e6ea97d7c424879c8ac"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-synthetic-handoff-pending-light.png",
+      "sha256": "47a0f5ca1b2498887269f81d98082f8d099b9b96563a5e6ea97d7c424879c8ac"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-synthetic-handoff-ready-dark.png",
+      "sha256": "2a31a89881fdfd65067e82c8362dff733d9b225d748730950f73a702d8a39c6f"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-synthetic-handoff-ready-light.png",
+      "sha256": "f895a9a5e378fa2c5893ebf8b15cfc59b0ca5b380d25258e56ec27e52e216196"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-synthetic-setup-approval-large-dark.png",
+      "sha256": "c804b95e643d3039baf8aa1cb5ea06331e742707689eda83b0758ee394c7be22"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-synthetic-setup-approval-light.png",
+      "sha256": "2a09c96ed93145e3276eb870a8af243591e031690e2d2bfcd46c02ff49e58e70"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-synthetic-setup-choosing-light.png",
+      "sha256": "c5ac177eb5ce4e1e3437378e9c352186e0ebec2c18fbf0c4e47ae6ddc9bc403c"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-synthetic-setup-connected-light.png",
+      "sha256": "78764126d3e6c6bbc3e1493b5ab0cd55fbf50d98d9c24b0d24f85879aa84f2c2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-synthetic-setup-idle-light.png",
+      "sha256": "d60cabfd49caf8c381bf7fd37018abb739efb0afef17acf7dd19d1ce85d27a93"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-synthetic-volume-high-light.png",
+      "sha256": "401ad69b9949bb0ef19767eaf5e7a2a84c81419f81075eabab83541707eddd78"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-synthetic-volume-large-dark.png",
+      "sha256": "7ec8306b538b02cbee090c477d94e99d7cdad4ba08aeaf55e5b3454888f7d5b6"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-synthetic-volume-low-light.png",
+      "sha256": "4ba929266f2c2e2816491afa4f46bd3bf10191fc0ab9f629309e1e0edd0d1130"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-volume-fixture-launch.txt",
+      "sha256": "380ee4343ae510300522feb35e4b008f676c789b60b843a232b0728c3db3e942"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016/flutter-xcode-version.txt",
+      "sha256": "18730ed2ae28a2c9cf0c2d5db549033a4f07089331391a7133b7b32187454fa9"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016-jobs.json",
+      "sha256": "8df063fd1c58ca6a3d438e0719668362db82a51238e1a96a978c356251d88ee7"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016-metadata.json",
+      "sha256": "dd477e3e8b695ed1b72ee914cd268bf04bc39e2b8595afed68b904d0238ae05c"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016-status.json",
+      "sha256": "0057b7f97dd5e9c57aec8879b334ae06f9210a9c4410a2415e74ca31e250e25d"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745016.zip",
+      "sha256": "bef789fcd0b9433ce534592722de34674cb94cb1b0ddba8de269bd6c1503c354"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105/apple-build.txt",
+      "sha256": "d650101a029bdda326d884775f6ff8e743cfb9f7cba6c397fb953354b7b086a5"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105/apple-capture-matcher-tests.txt",
+      "sha256": "2072ea10acb601303ef8f21be984d3cfc065831ff61278198aa4b2b3955354ce"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105/apple-capture-readiness.txt",
+      "sha256": "2d281066dd34cbb93d31c51774640e2c11c79f3159aa05bbf62b1ce5d058f529"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105/apple-library-light.png",
+      "sha256": "cac8abb1f3df9fb3db0187c440dcdeded989703b017176a9cda0137a9943452d"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105/apple-player-dark.png",
+      "sha256": "dc968c8ffca4077c5008461c1e1be230c384eefb8dbeff89c1d06627872fd584"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105/apple-player-large-dark.png",
+      "sha256": "d7d84500d1a54ea40d82a49aa6dae8bef650d692ceb54b9427ac206df9d2a35f"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105/apple-queue-light.png",
+      "sha256": "c226a32b3bd719f7fc0f73432ed7f92d381519f205239052303344d1362c1270"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105/apple-setup-light.png",
+      "sha256": "a8ee3312d0ddf1cb3e137e8ccf0b6d220aa07a39b8a8fbc79686819f3d3184c5"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105/apple-simulator-boot.txt",
+      "sha256": "ffe2b37ebccd403d4ebca6749a48f36edc1c43895531235118be9e8a691b3596"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105/apple-simulator-launch.png",
+      "sha256": "99384180b372828bfb12c5f61d64c55113954420532bc4cdba61f42c49654fb5"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105/apple-simulator-launch.txt",
+      "sha256": "a980625ecd907a313569126e61d7f6ce193ff1953eca1027f495a2a8f548b3d4"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105/apple-simulator-processes.txt",
+      "sha256": "91a2373d6dd7e2d9526a7db2f45f81361e8d42243bdcac05b0a6f691a941fc7b"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105/ci-simulators.json",
+      "sha256": "b8bbdec4294de79fb0519d509e7ed74aac56b4b448f17a7b80afe36e99cb90c7"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105/ci-xcode-version.txt",
+      "sha256": "18730ed2ae28a2c9cf0c2d5db549033a4f07089331391a7133b7b32187454fa9"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105/macos-version.txt",
+      "sha256": "cd5d6399b3785b04ceaae75045a9ca9f80f0bbc3526eff9d0c36b170ed1ec348"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105/swift-tests.txt",
+      "sha256": "ac633ac12b75e8bcf9f2cdafc40a395e430963ce8b002d2551eb4cb23f4dff52"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105/xcode-version.txt",
+      "sha256": "18730ed2ae28a2c9cf0c2d5db549033a4f07089331391a7133b7b32187454fa9"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105-jobs.json",
+      "sha256": "450478c00667094bf52ed5bca096bb1ff6bd963116cd82883b3d6dd3e1c1a2dd"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105-metadata.json",
+      "sha256": "fdab360b439afba93b5e9d93fd571045c9c85c3ab7652e0362890055bb4e6274"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-41224745105.zip",
+      "sha256": "73887fe1e278b266aa9c8c92243f5b892422a5a129c1da6f4d690b715e900cd8"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/ci-runs.json",
+      "sha256": "c1a2bc9740f068de5d29a07d0ec54652aad937a257580c1656f9454566685b1d"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/driver-notes.txt",
+      "sha256": "94f3f0e59a0cad0e6c79abeff4f1739fbf9911888d899ac4b333f75023ba7e4f"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-choice.xml",
+      "sha256": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-client-logcat.txt",
+      "sha256": "b8638389dbfe414a363312dd2f5043e761de015d00334673bb424fdcefd84b60"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-collapse-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-collapse-before.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-collapse-wait-0.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-connectivity.txt",
+      "sha256": "8ab2d2add606c6990edc32450325ea22128cdf02a08dd077ecbefb7bdecb1066"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-devices.txt",
+      "sha256": "99221000e3050b063712b3b8bb8b7e8b078c782ac467f889eb1e4f7c66d2336c"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-disconnect-after.xml",
+      "sha256": "3863d9ce69bf90b05cfafade2b205e084de307cc5ba845532afe428904abd970"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-disconnect-before.xml",
+      "sha256": "ceda00f06c9c326b2e4156f266239fa816a1e9b607cc51c4a8e7534c1dde645c"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-disconnect-wait-0.xml",
+      "sha256": "ceda00f06c9c326b2e4156f266239fa816a1e9b607cc51c4a8e7534c1dde645c"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-export-after.xml",
+      "sha256": "ceda00f06c9c326b2e4156f266239fa816a1e9b607cc51c4a8e7534c1dde645c"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-export-before.xml",
+      "sha256": "e60a73084b20a2ff0cedadca0e5b1f2e8bfdbf6fb11e5e14787b9ca21f91f125"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-export-wait-0.xml",
+      "sha256": "e60a73084b20a2ff0cedadca0e5b1f2e8bfdbf6fb11e5e14787b9ca21f91f125"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-help-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-phone-report.json",
+      "sha256": "5081f4dc82881c55c20bbad11134f6f235200c1d3c893567f9a91fe6cfe339ff"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-scroll-after.xml",
+      "sha256": "e60a73084b20a2ff0cedadca0e5b1f2e8bfdbf6fb11e5e14787b9ca21f91f125"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-setup-before.xml",
+      "sha256": "95f85331bda472ba496961eef62d82f7fe2eb7079041317ba2bb315dcbdf9085"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-setup-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-setup.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/final-volumes.txt",
+      "sha256": "7f7be54d6ac662c6c253fefac52be59dce97549438b29993566e0dd53c4803a4"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/flutter-analyze.txt",
+      "sha256": "3473f1ad67cf42f2c1c4070bccdf67ee00ece020375ef5c209152eba14c7363b"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/flutter-android-build.txt",
+      "sha256": "41735234dc290636ce74c283159b84bb95e68f3cab635fc6f093f84a0659040f"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/flutter-android-lint.txt",
+      "sha256": "e015789bc9f339b860a1a24c6b6a67152c1edfea3ae4d98fae49d29fea27c18a"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/flutter-tests.txt",
+      "sha256": "268b1361edc00a608804fa75f77cc3c02fc699568d2bc7b4e40c3779e1dec1ed"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/flutter-windows-toolchain.txt",
+      "sha256": "43e3da12ea6ed49ffe7b7d113e736b2f4af7ca43b50a82886af83b14c6b33099"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/initial-collapse-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/initial-collapse-before.xml",
+      "sha256": "18a8728abf8791b393efae0c10d6961500517b4272b06e2a241e3c13a77d53c1"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/initial-collapse-wait-0.xml",
+      "sha256": "18a8728abf8791b393efae0c10d6961500517b4272b06e2a241e3c13a77d53c1"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/initial-export-after.xml",
+      "sha256": "18a8728abf8791b393efae0c10d6961500517b4272b06e2a241e3c13a77d53c1"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/initial-export-before.xml",
+      "sha256": "e15fd2e375a748169e7f71f55d0adf7979f458ca03d8630a4449848461d0eaa5"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/initial-export-wait-0.xml",
+      "sha256": "e15fd2e375a748169e7f71f55d0adf7979f458ca03d8630a4449848461d0eaa5"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/initial-help-after.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/initial-help-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/initial-help-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/initial-phone-report.json",
+      "sha256": "c3f74606a5963a36d1ab67ac86c70c50ac5df5f128b9390d41437ac54cc81e4c"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/initial-scroll-after.xml",
+      "sha256": "e15fd2e375a748169e7f71f55d0adf7979f458ca03d8630a4449848461d0eaa5"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/initial-scroll-before.xml",
+      "sha256": "e05bc4f06ac63773d70717f7e56a77216fe1f92022f69c6b5a600285ad934a37"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/initial-setup.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/initial-summary.json",
+      "sha256": "606847ac9290d55129d1e6093f3a6dd07fe550a7b12d2511d480e067585a98e9"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/installed-sha256.txt",
+      "sha256": "1dd7821e6a0391b98e1f08906ad0711677d956c3323b9df8d65bdd259f6afcaa"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/controller-core-TEST-org.dx340.remote.controller.JournalReportJsonTest.xml",
+      "sha256": "315908aba0710c915ce2ab7261635ff5e7e33a1f73fb81bda8931ec96d86bbe2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.AcknowledgedWriteQueueTest.xml",
+      "sha256": "b1b00980a4c727f368c12f362fc5d5cbeddad7aa4052d61ea4e3616fa3d9d021"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.AssistedPageUseTest.xml",
+      "sha256": "bc117b077d89e25dbdba5d12f1bceff452925ecdb28ef574e8aeed8ce26c0d45"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.AuthorizationSessionTest.xml",
+      "sha256": "df1b90685b4ab84155b826d302bcf1c3eeece40b786ba460a959da5c6c5eec43"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.BrowseContextTransitionTest.xml",
+      "sha256": "785d204feb3d00db11ebcdb2db741e51cc7ec7a8946c0cc86157b615ab57873c"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.ConnectionAssistTest.xml",
+      "sha256": "a24463b427df5e3c4a1532df48fc0a0242c80f8f3af132936f99f048116bc8dd"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.ConnectionSetupDeadlineTest.xml",
+      "sha256": "69a058dffcc9d5aefcab337f8291eb214c55b9f395041fbae5ae04460f1531de"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.ControlHandoffTest.xml",
+      "sha256": "33af22e927e77991e3c391c0d0ffbd0a0b93604d5964ca3dca9985b575437943"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.HostReplyGateTest.xml",
+      "sha256": "037990cb0c733d5c77bf61a53c7587da6809fe1106d0654af0b7db5f31c05583"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.IndicationQueueTest.xml",
+      "sha256": "2cdddee5cb0f3313f4c7b92b6d390376acdbbb5756c5ee10db650f8e0c3c0998"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.PeerIndicationQueueTest.xml",
+      "sha256": "fd7e23cc9f2c83a56a37b816406864b9a76941dff65b17ce1e8ce12d8ad78bec"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.PeerWriteCapacityTest.xml",
+      "sha256": "877fdf248cfa5c22e5566a7428a622ee0226b12bc15e1040483b6e5ca561bb89"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.ProtocolTest.xml",
+      "sha256": "1c3c586293876357064c414825b6e15d6b04cb30699ce924d32b063ed40f51ab"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.ReplyAccessTest.xml",
+      "sha256": "4afda7d0113d560c76c818413e3c12201fb3ef7a5354b52ffdeb70ae179b6ce6"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.ReplyBudgetTest.xml",
+      "sha256": "37b3918a933d7e16d77f4f001e713065fc80c9c01a114b5cbfe84110579cbf77"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/core-protocol-TEST-org.dx340.remote.protocol.RequestJournalTest.xml",
+      "sha256": "b99af5c6321c806c01fbdbb152eb8aff7c3de4d26305ba6c903674b22528a0da"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/host-app-TEST-org.dx340.remote.host.HostControlChoiceTest.xml",
+      "sha256": "ea2952b23af33881ab5cc24cca5f157914f09c82812c31010fae22996fab5a6e"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/host-app-TEST-org.dx340.remote.host.HostRadioRecoveryTest.xml",
+      "sha256": "792278f3b54641cf8b30ebe74d4670783f4eb1899fd9b4818f41bf62bb77addf"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/library-cache-TEST-org.dx340.remote.library.LibraryIndexTest.xml",
+      "sha256": "f83199d8eeeccc6689b4684785716d914eac8a30363594ea88038668e9e07c41"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/library-cache-TEST-org.dx340.remote.library.MetadataFixtureTest.xml",
+      "sha256": "52b55dbb5b8f50371c768ec2e94271d6e4a7c331e35f0c762ceeb1d411eda7c2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.ApplePostDispatchTest.xml",
+      "sha256": "1a3d7b96122f48108ed7b71d7600f52fb6e18a10704f93212b970164fb977369"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.AppleRootNavigationTest.xml",
+      "sha256": "c84b427418da30c6bed4fcaf9a9e2866c5e2eac1d309a22cf79eb9029aa7171b"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.AppleUiModelTest.xml",
+      "sha256": "e258e87d24c1dc4a3b2739482dda1e88a819efee90e3c36b84cf9ed62585e02b"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.ControllerHandoffCancellationTest.xml",
+      "sha256": "5e3e3951ea2b631594f6803d664a0f290629ce04f73282694c1f43af2e19175a"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.MangoAllMusicNavigationTest.xml",
+      "sha256": "ef65f4bff350fab28e032c9a8af29453bbfd1d539e4e85825186ffed8e04d100"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.MangoBrowseBudgetTest.xml",
+      "sha256": "333dcdf1324046caf5f1ab25b8eb0c80d8d17636c0ebeef5022106946566c1ba"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.MangoNativePlaybackIdTest.xml",
+      "sha256": "71bee8b18eb29650e30622625fae6b3d156e9efca8c3222cef39c7ee40c6b2f1"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.MangoPlaylistUiModelTest.xml",
+      "sha256": "94f8dc469a18e2eaeb891af3f5b1c52ca7a225dbf1091e9b5fd9221742828138"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.MangoStorageAvailabilityTest.xml",
+      "sha256": "de4a65dc53b6a5726f79328f62a763b567e673695899c64640a567d2331eaeda"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.MangoStorageMenuTest.xml",
+      "sha256": "1784c08cbbcbf939d756369a23247ea1938541fb1575674a1c476893268636a9"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.MangoUiModelTest.xml",
+      "sha256": "06b353d69565d12d0abf5366c7ed991ab5da2d8c3719d3eb8f809924a27b0c99"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.NativeBrowsePageCacheTest.xml",
+      "sha256": "936cf27a8b47e467cfa6a1c2a2fba2b944f5956580798eb71f50cdc1ef1c6cca"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.NativeItemFingerprintTest.xml",
+      "sha256": "b3a2801a63667c689c0e3f81f08fb3806dba6cfce831b1855610956a309910b4"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.OutputVolumeTest.xml",
+      "sha256": "5ed0b263609f5edb1e820b867438e1f25b47bcfdbac433f5eaec99db97c49ebd"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.PlaybackHandoffTest.xml",
+      "sha256": "ceda43ea01cfe1deb7ce6ff69a8fb701d760370c12b7da31cc6234d655d2c4bd"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.PlaybackPositionTest.xml",
+      "sha256": "975908a88d8b60f270dda8b80198d7f452a61b9ffac1d10caeda29635bd1f898"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.QueuePagesTest.xml",
+      "sha256": "6ca2c51f81f243a1adff4fbd34667545f6f477bd6cd0d92cf434dd22fc7f1a5f"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.SourceCallbackGuardTest.xml",
+      "sha256": "a5c1eed768be5eff54f6109ac18bf2d341eb1baff4b70d618c61d269856e2428"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.SourceRequestTest.xml",
+      "sha256": "81d27dd4e9556ead5a684970fdc18e99e9ddbf1015ac0c350d77b3ca3db92884"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.SourceSessionAccessTest.xml",
+      "sha256": "d552fc38edd42ddbcbf00f3a2e554ac54a7ec13b6b6610995d3e9624eb6d4f6a"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.StorageVolumeChangesTest.xml",
+      "sha256": "56f2a9866ff7696b851b0969429f4a72ed57424b35b740462be1f32561acda77"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.UiForegroundStartupTest.xml",
+      "sha256": "42813e7b7c81417194d70f67d7f0cae4f0678b33f16a984060f3eccf7f6095ad"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.UiSnapshotStabilityTest.xml",
+      "sha256": "0bc8d85da37c1e7f4c0232d6b13ab24f55ab0f72cb61d32f86fb07dc984b3f7e"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/source-adapters-TEST-org.dx340.remote.sources.UiWindowGuardTest.xml",
+      "sha256": "df7f57d25579a7f38bada999b5dfe81ca3daba9aec0c81dfe4129db99150363d"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/jvm/summary.json",
+      "sha256": "f6e2d2025c0c9c1712185b9ee1221f50233b2ba0d25046642977da252de05691"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/legacy-summary.json",
+      "sha256": "e653c2dde97b97d927c869e7f9f0154831ade167f47fe7433c4caa0cce4a28ac"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-0-find-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-1-find-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-2-find-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-3-find-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-4-find-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-5-find-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-6-find-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-7-find-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-8-find-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-9-find-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-after-browse-media.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-after-reads-media.txt",
+      "sha256": "a68263c4a07baf0ace38d56da616d178d68a694fafc7fd97a0e1f1aa5bf68a0f"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-browse-after.xml",
+      "sha256": "6edadd75b0ce2fc2c2a7fb95b115825d257d37fee6649e4bc863be05a162b438"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-browse-before.xml",
+      "sha256": "00f059c207354f26d2a679ce2bf9e3b2162d4a1e4986dae04abc61cb5ebeb9ff"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-browse-wait-0.xml",
+      "sha256": "00f059c207354f26d2a679ce2bf9e3b2162d4a1e4986dae04abc61cb5ebeb9ff"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-find-0.xml",
+      "sha256": "dec98d763de90a6d731eae9afcae6d0202caaa096ba666382603aff5468b9ac3"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-find-1.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-library-actions.xml",
+      "sha256": "00f059c207354f26d2a679ce2bf9e3b2162d4a1e4986dae04abc61cb5ebeb9ff"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-library-after.xml",
+      "sha256": "00f059c207354f26d2a679ce2bf9e3b2162d4a1e4986dae04abc61cb5ebeb9ff"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-library-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-library-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-player-after.xml",
+      "sha256": "dec98d763de90a6d731eae9afcae6d0202caaa096ba666382603aff5468b9ac3"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-player-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-player-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-0-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-0-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-0-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-1-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-1-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-1-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-2-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-2-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-2-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-3-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-3-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-3-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-4-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-4-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-4-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-5-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-5-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-5-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-6-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-6-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-6-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-7-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-7-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-7-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-8-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-8-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-8-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-9-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-9-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-read-9-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-scroll-0-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/mango-scroll-0-before.xml",
+      "sha256": "dec98d763de90a6d731eae9afcae6d0202caaa096ba666382603aff5468b9ac3"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/merged-summary.json",
+      "sha256": "b478cc8b84b44ef4cd73fa048bb126c738f307d17091dce7c36a91669b166fac"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/new-phone-setup-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/new-phone-setup-before.xml",
+      "sha256": "80962d9282db56e46f3aec02503856b1e5dcbd7825ad5165332a542d6cb00990"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/phone-before.apk",
+      "sha256": "ce47b14caa3b78c6e482387a971bc3efc80fdc7539845a7cb01b5c55daa614f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/phone-build-console.txt",
+      "sha256": "22372b21a2e390147b792f7a6410cf68242dc95ea371f35b083955eb3f0c67f3"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/phone-candidate.apk",
+      "sha256": "4eea5c15a6c567efedba5329b2bb2256137caa3c964bbd5f818233827222212d"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/phone-install.txt",
+      "sha256": "c4aa470acafcf8576c15b0f0b5ae7e852d1ec5413372d0e6a9272e788e1306d3"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/phone-installed.apk",
+      "sha256": "4eea5c15a6c567efedba5329b2bb2256137caa3c964bbd5f818233827222212d"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/phone-launch-corrected.txt",
+      "sha256": "6bbee07f0b059331e9b4f246f2e268d5b2bf84c79e69449c6b3175b3d4a3c952"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/phone-launch.txt",
+      "sha256": "335087225b80744a1b320609854b87d0b91333d01be6c04e44973d1d04436b35"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/phone-signing.json",
+      "sha256": "31d4a5337d4eebd4a6e16d7b8ddc270102401f33645c247b498c61032d02545f"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/phone-toolchain-preflight-failed.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/physical-checks.json",
+      "sha256": "588affe70e8c39ffc2a832ca4f878c9fe6de9683c7b8551596a29d6dc589ae6c"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/reconnect-connect-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/reconnect-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/reconnect-connect-wait-0.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/reconnect-disconnect-after.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/reconnect-disconnect-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/reconnect-disconnect-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/reconnect-player-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/reconnect-player-before.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/reconnect-player-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/reconnect-setup-after.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/reconnect-setup-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/reconnect-setup-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/reconnect-state-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/reconnect-state-before.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/reconnect-state-wait-0.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/report-tests.txt",
+      "sha256": "a28e7a2ba098b8b0941a2abe2a6e6a0bd6a7f829885fed67ee4c31ee129f8cb4"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/restore-mango-find-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/restore-mango-player-after.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/restore-mango-player-before.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/restore-mango-player-wait-0.xml",
+      "sha256": "a092fc06adc6b398ac088167a50f3d02c55878bdd9ced007b6012ebce11da8df"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/restore-mango-select-after.xml",
+      "sha256": "37d69e30f3c1e354fd907d21514e38674e27afc4e076be7531504a3d6fef5900"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/restore-mango-select-before.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/restore-mango-select-wait-0.xml",
+      "sha256": "e66d84e0de35f8dc1b4d0a9861ba62000c91c4a3f0b5d5891a0aefe0d00624f2"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/saved-connect-after.xml",
+      "sha256": "558fa869073039c4fd0cb8899a7ea236d367b7ebe65c416353c0d3ca147e3565"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/saved-connect-before.xml",
+      "sha256": "c971e2f0dd57bc1e1d794681b892b219e0f948ebb18d620bf96f7ccc86727061"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/saved-connect-wait-0.xml",
+      "sha256": "537c2f882ca48b0dece56f5d301b15f33ae355445bc3cf295f0234508f266b44"
+    },
+    {
+      "file": "artifacts/write-ack-timing-20261101/unchanged-host-sha256.txt",
+      "sha256": "fa32a24b9b7804d3e15ca42e2da8aeef57c5a8062c27932f879325b85495b4eb"
+    }
+  ]
+}
