@@ -91,6 +91,17 @@ class ReportsTest(unittest.TestCase):
         self.assertEqual(value['evictedRequestsAtLeast'], 120)
         self.assertEqual(value['evictedConnectionsAtLeast'], 5)
 
+    def test_ios_reused_version_numbers_cannot_combine_distinct_model_sessions(self):
+        a, b = report([row()]), report([row()], 'session-B')
+        for value in (a, b):
+            value['platform'] = 'ios'
+            del value['app']['baseApkSha256']
+            value['app']['versionCode'] = '1'
+            del value['os']['api']
+        self.assertEqual(reports.summarize([a, a])['uniqueRequests'], 1)
+        with self.assertRaises(reports.ReportError):
+            reports.summarize([a, b], allow_multiple_sessions=True)
+
     def test_nearest_rank_and_clock_regression_do_not_manufacture_samples(self):
         values = [row(str(i), result='result', terminalApplied=True, finishedAfterMs=i) for i in range(1, 21)]
         values.append(row('bad-clock', startedMs=None, result='result', terminalApplied=True, finishedAfterMs=0))

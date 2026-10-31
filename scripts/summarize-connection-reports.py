@@ -118,6 +118,9 @@ def summarize(reports, allow_multiple_sessions=False):
             rows[key] = merge(rows[key], row) if key in rows else dict(row)
     require(len(environments) == 1, 'Mixed builds/platforms/OS environments require separate summaries')
     require(allow_multiple_sessions or len(sessions) == 1, 'Multiple model sessions require --allow-multiple-sessions')
+    environment = json.loads(next(iter(environments)))
+    require(environment['platform'] != 'ios' or len(sessions) == 1,
+            'iOS reports have no binary digest: summarize each model session separately and retain external build provenance')
     groups = {}
     for row in rows.values():
         groups.setdefault((row['operation'], row['source']), []).append(row)
@@ -134,7 +137,7 @@ def summarize(reports, allow_multiple_sessions=False):
                        'appliedResult': times(applied, 'finishedAfterMs'),
                        'hostObservedAppliedResult': times([r for r in applied if r['hostOutcome'] == 'observed'], 'finishedAfterMs')})
     return {'formatVersion': 1, 'inputReports': len(reports), 'modelSessions': len(sessions),
-            'environment': json.loads(next(iter(environments))), 'uniqueRequests': len(rows),
+            'environment': environment, 'uniqueRequests': len(rows),
             'evictedRequestsAtLeast': sum(v[0] for v in evictions.values()),
             'evictedConnectionsAtLeast': sum(v[1] for v in evictions.values()),
             'percentiles': 'nearest_rank', 'groups': output,
@@ -158,7 +161,7 @@ def read_report(path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('reports', nargs='+', help='Explicit paths to phone JSON exports')
-    parser.add_argument('--allow-multiple-sessions', action='store_true', help='Combine separate native model instances in the same build/OS environment')
+    parser.add_argument('--allow-multiple-sessions', action='store_true', help='Combine Android model instances with the same APK digest/OS environment; iOS stays one session per summary')
     args = parser.parse_args()
     try:
         result = summarize([read_report(p) for p in args.reports], args.allow_multiple_sessions)
