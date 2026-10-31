@@ -366,6 +366,15 @@ class _PhoneShellState extends State<PhoneShell>
     ];
   }
 
+  Widget libraryBrowseAction() => action(
+    'Browse source library',
+    perform(
+      remote.can('canBrowse') && !remote.libraryLoading && !remote.busy,
+      remote.root,
+    ),
+    icon: Icons.library_music,
+  );
+
   List<Widget> library() => [
     if (!remote.authorized) recovery('browse music on DX340'),
     if (remote.authorized && remote.assisted)
@@ -380,14 +389,6 @@ class _PhoneShellState extends State<PhoneShell>
             ? remote.browseExplanation
             : 'Browsing is unavailable. Open the selected music app on DX340, then refresh the player.',
       ),
-    action(
-      'Browse source library',
-      perform(
-        remote.can('canBrowse') && !remote.libraryLoading && !remote.busy,
-        remote.root,
-      ),
-      icon: Icons.library_music,
-    ),
     if (remote.libraryLoading)
       const Padding(
         padding: EdgeInsets.all(16),
@@ -750,7 +751,7 @@ class _PhoneShellState extends State<PhoneShell>
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (_tab.value == 1 && remote.libraryInvalidated)
+        if (_tab.value == 1 && remote.authorized && remote.libraryInvalidated)
           Padding(
             padding: const EdgeInsets.only(bottom: 12),
             child: Text(remote.libraryRecovery),
@@ -794,6 +795,15 @@ class _PhoneShellState extends State<PhoneShell>
               .toDouble();
       return Column(
         children: [
+          if (_tab.value == 1)
+            Padding(
+              key: const ValueKey('library-browse-toolbar'),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+              child: SizedBox(
+                width: double.infinity,
+                child: libraryBrowseAction(),
+              ),
+            ),
           SizedBox(
             height: height,
             child: SingleChildScrollView(
