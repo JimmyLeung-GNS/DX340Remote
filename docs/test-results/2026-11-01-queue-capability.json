@@ -1,0 +1,280 @@
+{
+  "date": "2026-11-01",
+  "status": "VERIFIED current Companion update/profile and both-source queue-read subset; full acceptance incomplete",
+  "source": "84da612f220135dd770a2f11f20b6185dc6835a5",
+  "installed": {
+    "host": {
+      "installedApkSha256": "92b9972d83b3c9e67f1a24189b7ed1a06ee6a5c57c2061d9c134607eec3e1482"
+    },
+    "phone": {
+      "installedApkSha256": "9f085bc22e8665b25dc886ee22cb6f2a977c002baa57c6f057c59fc2a243116e"
+    }
+  },
+  "phoneSource": "07c2029503ebb929f03c0a3cc9b421c29ef2455d",
+  "environment": "DX340 Android13/API33 eng.iBasso.20260812.181952 Companion0.1.0/code1; Pixel9a Android16/API36 CP1A.260405.005 Remote0.2.0/code2; Mango4.1.37/code240; Apple6.5.3/code1599",
+  "hostEpoch": "71344a90-05c0-4e3f-947f-fe7896aa13dd",
+  "software": "Own queue availability fact follows current media-session lease/queue callback and explicit Refresh. Queue contents/revisions/playback validation still query fresh public source data. No phone/wire/signing/permission change.",
+  "checks": {
+    "aggregateDebugCoreTests": 272,
+    "sourceTests": 150,
+    "newLifecycleTests": 4,
+    "nativeBuildLint": "PASS;32 tasks executed/266 up-to-date in final28s build",
+    "priorHostReleaseTests": "20 unchanged/not rerun",
+    "sharedFlutterSwiftAnalyser": "90/22/18 unchanged prior scopes; no matching Apple CI"
+  },
+  "physicalProfile": {
+    "flow": "Three Pixel Next,Pause,three paused Refresh; automatic state read after each Next. Setup Play outside trace.",
+    "nativeRows": [
+      {
+        "id": "3bda005e-d689-4499-8ec6-c39df5d6c5a9",
+        "operation": "NEXT",
+        "source": "apple",
+        "startedMs": 5112431,
+        "firstWriteSubmittedAfterMs": 3,
+        "writeAcknowledgedAfterMs": 122,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 124,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "467020a2-df45-4946-9593-ab80c0f31b26",
+        "operation": "GET_STATE",
+        "source": "apple",
+        "startedMs": 5112558,
+        "firstWriteSubmittedAfterMs": 10,
+        "writeAcknowledgedAfterMs": 92,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 1125,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "40adaa0e-6855-46e0-8edf-6ff721b957f1",
+        "operation": "NEXT",
+        "source": "apple",
+        "startedMs": 5117308,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 120,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 172,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "e11b7d5e-187f-4525-8b73-d94652d3ee87",
+        "operation": "GET_STATE",
+        "source": "apple",
+        "startedMs": 5117482,
+        "firstWriteSubmittedAfterMs": 12,
+        "writeAcknowledgedAfterMs": 189,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 1120,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "cb9b6aad-029c-4442-bc34-059e97616382",
+        "operation": "NEXT",
+        "source": "apple",
+        "startedMs": 5121293,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 132,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 134,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "6876df36-980a-4d3d-9cb2-72ef6d95064a",
+        "operation": "GET_STATE",
+        "source": "apple",
+        "startedMs": 5121428,
+        "firstWriteSubmittedAfterMs": 7,
+        "writeAcknowledgedAfterMs": 198,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 1124,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "a946d327-fbce-4814-a407-53b6cff93f65",
+        "operation": "SET_PLAYING",
+        "source": "apple",
+        "startedMs": 5125245,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 128,
+        "accepted": true,
+        "acceptedAfterMs": 133,
+        "finishedAfterMs": 569,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "observed",
+        "error": null
+      },
+      {
+        "id": "4736a751-2e77-4955-a3f5-6c6c12356a52",
+        "operation": "GET_STATE",
+        "source": "apple",
+        "startedMs": 5128184,
+        "firstWriteSubmittedAfterMs": 3,
+        "writeAcknowledgedAfterMs": 116,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 463,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "223ac5cf-23e6-4064-8c1d-f0c34d833b4a",
+        "operation": "GET_STATE",
+        "source": "apple",
+        "startedMs": 5134148,
+        "firstWriteSubmittedAfterMs": 3,
+        "writeAcknowledgedAfterMs": 99,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 395,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      },
+      {
+        "id": "9c235774-0ae7-45c1-9b39-648156e3829a",
+        "operation": "GET_STATE",
+        "source": "apple",
+        "startedMs": 5140199,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 141,
+        "accepted": false,
+        "acceptedAfterMs": null,
+        "finishedAfterMs": 436,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "none",
+        "error": null
+      }
+    ],
+    "simpleperfDurationSeconds": 59.9805,
+    "simpleperfSamples": 1375,
+    "samplesLost": 0,
+    "sampledCpuSeconds": 3.4375,
+    "getQueueInclusiveSamplePercent": 2.25,
+    "baselineGetQueuePercent": 26.34,
+    "baselineSampledCpuSeconds": 4.0725,
+    "perfettoRetainedSeconds": 60.079824,
+    "perfettoBufferMb": 128,
+    "retainedHostMainCpuMs": 2492.544,
+    "limits": "One before/after diagnostic capture per build; concurrent profilers/ADB observation add overhead, source tracks differ and candidate process/JIT is fresh. Baseline Perfetto retained only48.471s, so its main CPU total is not comparable with this full60s trace. CPU sample percentages overlap; do not add them or infer acoustic/complete latency acceptance."
+  },
+  "queueReads": [
+    {
+      "source": "com.apple.android.music",
+      "observedHeader": "Queue items 1–50 of 101",
+      "firstTitle": "\"Q\" - AAA DOME TOUR 15th ANNIVERSARY - thanx AAA lot (Live)"
+    },
+    {
+      "source": "com.ibasso.music",
+      "observedHeader": "Queue items 1–28 of 28",
+      "firstTitle": "envision"
+    }
+  ],
+  "queueIdentity": "Apple final three-title prefix matches exactly3 advances, disambiguating the adjacent duplicate Q titles despite reused ID0. Current exposed total101 is observed, not assumed fixed.",
+  "timingVerdict": "Automatic replies after Next1125/1120/1124ms versus baseline1472/1403/1292; paused refresh463/395/436ms versus235/252/243. Small instrumented samples with mixed ACK/reply results, not proof that prior775ms busy-read ACK is fixed. FullT04 remains open.",
+  "journal": {
+    "model": "47719f25-1cfd-4c64-a9b3-c4aada9d5e00",
+    "cumulativeRowsRetained": 454,
+    "finalEvictions": 198,
+    "overlapUnchanged": true,
+    "allCumulativeRowsAcrossThreeArchives": true
+  },
+  "upgrade": "Original certificate matched before install-r. Initial immediate diagnostic read was stale persisted old epoch; fresh PID, live native GET_STATE and new running diagnostic verified automatic saved foreground-service restore and both optional bindings. No host Activity launch, re-pairing, data reset, source/volume action needed for restore.",
+  "final": {
+    "at": "2026-11-01T09:24:45.733439+08:00",
+    "prefs": {
+      "controllers": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311",
+      "mango-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "apple-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "source-verification": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    "settings": {
+      "host": {
+        "wifi_on": "0",
+        "mobile_data": "0",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      },
+      "phone": {
+        "wifi_on": "0",
+        "mobile_data": "1",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      }
+    },
+    "pids": {
+      "host": "28758",
+      "phone": "1355"
+    },
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "sourceStateScope": "Record each observed state; NONE or an absent session is not paused-playback proof",
+    "phone": "connected Ready/help collapsed/targetMango; no live profiler/export worker",
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeVerified": false,
+    "grantsBondsBindings": "retained",
+    "storage": "SD mountedFBB9-E8FE; original Apple SD destination scope retained/no storage action"
+  },
+  "audibility": "NOT TESTED; routine listening prompts waived",
+  "next": "Uninstrumented current-build busy source-selection workload and remaining lifecycle/security/output tests; fresh unplugged30minute availability requested, no recorder/observer started without completion reply. Physical iPhone/signing/Watch unavailable.",
+  "rawEvidence": {
+    "root": "artifacts/queue-capability-20261101",
+    "filesHashed": 194,
+    "manifestSha256": "608b7a19cea6e6525f57b72395ee553dd5830304e730e43daf31953a023df0d2"
+  },
+  "goal": "ACTIVE/incomplete",
+  "testEvidence": {
+    "root": "artifacts/queue-capability-test-reports-20261101",
+    "filesHashed": 51,
+    "manifestSha256": "d069c712f160dfca9d0f209eddef20081cf1d679a876beaab25405e391188330",
+    "results": {
+      "source": "84da612f220135dd770a2f11f20b6185dc6835a5",
+      "tests": 272,
+      "reports": 50,
+      "failures": 0,
+      "groups": {
+        "controller-core:testDebugUnitTest": 3,
+        "core-protocol:test": 78,
+        "host-app:testDebugUnitTest": 34,
+        "library-cache:test": 7,
+        "source-adapters:testDebugUnitTest": 150
+      },
+      "scope": "Final native debug/core tasks. Earlier20 host release tests excluded; unchanged tasks can be up-to-date."
+    }
+  }
+}

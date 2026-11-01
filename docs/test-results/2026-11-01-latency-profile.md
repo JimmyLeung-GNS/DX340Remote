@@ -1,5 +1,7 @@
 # DX340 latency profile and queue availability candidate
 
+Subsequent update: the candidate is now installed and its focused physical profile/queue checks are recorded [separately](2026-11-01-queue-capability.md). The candidate paragraph below preserves the earlier built-before-install checkpoint.
+
 **VERIFIED baseline:** a focused physical Pixel→DX340 flow captured three correct Apple Music Next actions, Pause and three paused Refresh inputs. The original-signer Companion e1a02429/source731aa64 and Pixel9f085bc2/source07c2029 were unchanged during profiling. Exact devices/OS/source versions and ten native receipts are in [structured evidence](2026-11-01-latency-profile.json). Both sources finished paused at37; preferences/settings/PIDs stayed unchanged and Pixel used ordinary Disconnect.
 
 The Android performance skill guided a60-second device Simpleperf CPU capture and Perfetto scheduling/Binder capture. Simpleperf ran59.9873seconds at400Hz, recording1,629 samples with zero sample loss, representing4.0725seconds sampled CPU across process threads. Inclusive sampled percentages overlap:
