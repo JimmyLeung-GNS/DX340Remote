@@ -1,0 +1,537 @@
+{
+  "date": "2026-11-01",
+  "status": "VERIFIED current92/9f Android20 offline Apple selections and20 automatic-read ACK subset; full goal incomplete",
+  "hostSource": "84da612f220135dd770a2f11f20b6185dc6835a5",
+  "phoneSource": "07c2029503ebb929f03c0a3cc9b421c29ef2455d",
+  "installedSha256": {
+    "org.dx340.remote.host": "92b9972d83b3c9e67f1a24189b7ed1a06ee6a5c57c2061d9c134607eec3e1482",
+    "org.dx340.remote.controller": "9f085bc22e8665b25dc886ee22cb6f2a977c002baa57c6f057c59fc2a243116e"
+  },
+  "environment": "DX340 Android13/API33 eng.iBasso.20260812.181952 Companion0.1.0/code1; Pixel9a Android16/API36 CP1A.260405.005 Remote0.2.0/code2; Apple6.5.3/code1599; Mango4.1.37/code240",
+  "selections": [
+    {
+      "case": {
+        "label": "apple-01",
+        "category": "Albums",
+        "collection": "AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan",
+        "title": "Kuchibirukara Romantica",
+        "artist": "AAA",
+        "requireOutsideQueue": true,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan",
+      "estimatedProgressMs": 1770,
+      "previousQueueCount": 101,
+      "outsideFullPriorQueue": true
+    },
+    {
+      "case": {
+        "label": "apple-02",
+        "category": "Albums",
+        "collection": "AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan",
+        "title": "Paradise Paradise",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan",
+      "estimatedProgressMs": 1760,
+      "previousQueueCount": 21,
+      "outsideFullPriorQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-03",
+        "category": "Albums",
+        "collection": "AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan",
+        "title": "Virgin F",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan",
+      "estimatedProgressMs": 1780,
+      "previousQueueCount": 20,
+      "outsideFullPriorQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-04",
+        "category": "Albums",
+        "collection": "AAA 3rd Anniversary Live 080922-080923 Nihonbudoukan",
+        "title": "Zero",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 3rd Anniversary Live 080922-080923 Nihonbudoukan",
+      "estimatedProgressMs": 1750,
+      "previousQueueCount": 19,
+      "outsideFullPriorQueue": true
+    },
+    {
+      "case": {
+        "label": "apple-05",
+        "category": "Albums",
+        "collection": "AAA 3rd Anniversary Live 080922-080923 Nihonbudoukan",
+        "title": "One Night Animal",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 3rd Anniversary Live 080922-080923 Nihonbudoukan",
+      "estimatedProgressMs": 1770,
+      "previousQueueCount": 21,
+      "outsideFullPriorQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-06",
+        "category": "Albums",
+        "collection": "AAA 3rd Anniversary Live 080922-080923 Nihonbudoukan",
+        "title": "SHE no Jijitsu",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 3rd Anniversary Live 080922-080923 Nihonbudoukan",
+      "estimatedProgressMs": 1760,
+      "previousQueueCount": 19,
+      "outsideFullPriorQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-07",
+        "category": "Albums",
+        "collection": "AAA 10th Anniversary Best",
+        "title": "Blood on Fire",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 10th Anniversary Best",
+      "estimatedProgressMs": 1740,
+      "previousQueueCount": 18,
+      "outsideFullPriorQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-08",
+        "category": "Albums",
+        "collection": "AAA 10th Anniversary Best",
+        "title": "Harikeenriri, Bosutonmari",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 10th Anniversary Best",
+      "estimatedProgressMs": 1780,
+      "previousQueueCount": 27,
+      "outsideFullPriorQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-09",
+        "category": "Albums",
+        "collection": "AAA 10th Anniversary Best",
+        "title": "Winter Lander!!",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 10th Anniversary Best",
+      "estimatedProgressMs": 1780,
+      "previousQueueCount": 26,
+      "outsideFullPriorQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-10",
+        "category": "Albums",
+        "collection": "AAA 15th Anniversary All Time Best -thanx AAA lot-",
+        "title": "BLOOD on FIRE (15thbest)",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 15th Anniversary All Time Best -thanx AAA lot-",
+      "estimatedProgressMs": 1760,
+      "previousQueueCount": 25,
+      "outsideFullPriorQueue": true
+    },
+    {
+      "case": {
+        "label": "apple-11",
+        "category": "Albums",
+        "collection": "AAA 15th Anniversary All Time Best -thanx AAA lot-",
+        "title": "Friday Party (15thbest)",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 15th Anniversary All Time Best -thanx AAA lot-",
+      "estimatedProgressMs": 1750,
+      "previousQueueCount": 73,
+      "outsideFullPriorQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-12",
+        "category": "Albums",
+        "collection": "AAA 15th Anniversary All Time Best -thanx AAA lot-",
+        "title": "Kireinasora (15thbest)",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 15th Anniversary All Time Best -thanx AAA lot-",
+      "estimatedProgressMs": 1760,
+      "previousQueueCount": 72,
+      "outsideFullPriorQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-13",
+        "category": "Albums",
+        "collection": "AAA a-nation2018 SET LIST",
+        "title": "DEJAVU",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA a-nation2018 SET LIST",
+      "estimatedProgressMs": 1740,
+      "previousQueueCount": 71,
+      "outsideFullPriorQueue": true
+    },
+    {
+      "case": {
+        "label": "apple-14",
+        "category": "Albums",
+        "collection": "AAA a-nation2018 SET LIST",
+        "title": "No Way Back",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA a-nation2018 SET LIST",
+      "estimatedProgressMs": 1800,
+      "previousQueueCount": 9,
+      "outsideFullPriorQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-15",
+        "category": "Albums",
+        "collection": "AAA a-nation2018 SET LIST",
+        "title": "NEW",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA a-nation2018 SET LIST",
+      "estimatedProgressMs": 1780,
+      "previousQueueCount": 8,
+      "outsideFullPriorQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-16",
+        "category": "Playlists",
+        "collection": "Favourite Songs",
+        "title": "Koe",
+        "artist": null,
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "Hitsujibungaku",
+      "observedAlbum": "Don't Laugh It Off (Truly Deluxe)",
+      "estimatedProgressMs": 1780,
+      "previousQueueCount": 7,
+      "outsideFullPriorQueue": true
+    },
+    {
+      "case": {
+        "label": "apple-17",
+        "category": "Playlists",
+        "collection": "Favourite Songs",
+        "title": "Fleeting Girl",
+        "artist": null,
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "Misekai",
+      "observedAlbum": "Fleeting Girl - Single",
+      "estimatedProgressMs": 1690,
+      "previousQueueCount": 5,
+      "outsideFullPriorQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-18",
+        "category": "Playlists",
+        "collection": "Favourite Songs",
+        "title": "谁 (Live)",
+        "artist": null,
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "Liao JunTao",
+      "observedAlbum": "这个人创作LIVE现场辑 - EP",
+      "estimatedProgressMs": 1730,
+      "previousQueueCount": 4,
+      "outsideFullPriorQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-19",
+        "category": "Playlists",
+        "collection": "AAA",
+        "title": "One Night Animal - AAA DOME TOUR 15th ANNIVERSARY - thanx AAA lot (Live)",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA DOME TOUR 15th ANNIVERSARY -thanx AAA lot- LIVE ALBUM (Live at TOKYO DOME 20211212)",
+      "estimatedProgressMs": 1720,
+      "previousQueueCount": 2,
+      "outsideFullPriorQueue": true
+    },
+    {
+      "case": {
+        "label": "apple-20",
+        "category": "Playlists",
+        "collection": "AAA",
+        "title": "MAGIC - AAA DOME TOUR 15th ANNIVERSARY - thanx AAA lot (Live)",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "reportedPlaybackVerified": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA DOME TOUR 15th ANNIVERSARY -thanx AAA lot- LIVE ALBUM (Live at TOKYO DOME 20211212)",
+      "estimatedProgressMs": 1700,
+      "previousQueueCount": 101,
+      "outsideFullPriorQueue": false
+    }
+  ],
+  "method": {
+    "quietSecondsAfterSingleTap": 6,
+    "profilers": "none",
+    "sourceUiSnapshotBroadcastsDuringTiming": "none",
+    "observation": "After six quiet seconds, public system MediaSession/uptime plus existing app diagnostic file and screenshots. No fresh source UI-tree probe during command/ACK budget. ADB observation can still add overhead.",
+    "comparisonLimits": "Same20 navigation candidates, changed Companion and warm retained phone artwork cache. Earlier source-SNAPSHOT method differs; not an isolated causal A/B."
+  },
+  "minimumQuietSeconds": 6.10899999999674,
+  "geometry": {
+    "selectedRowTopsUnchanged": 20,
+    "rectanglesUnchanged": 19,
+    "toolbarsUnchanged": 20,
+    "scope": "Before and final only; six-second quiet window deliberately has no pending-state capture. Earlier pending-state evidence retains its original binary/method scope."
+  },
+  "native": {
+    "modelInstanceId": "47719f25-1cfd-4c64-a9b3-c4aada9d5e00",
+    "baselineCumulativeRows": 455,
+    "newRequests": 119,
+    "operations": {
+      "BROWSE": 76,
+      "PLAY_ITEM": 20,
+      "GET_STATE": 20,
+      "SET_PLAYING": 2,
+      "SELECT_SOURCE": 1
+    },
+    "metrics": {
+      "BROWSE": {
+        "firstWriteSubmittedAfterMs": {
+          "samples": 76,
+          "p50Ms": 6,
+          "p95Ms": 7,
+          "maxMs": 8
+        },
+        "writeAcknowledgedAfterMs": {
+          "samples": 76,
+          "p50Ms": 141,
+          "p95Ms": 169,
+          "maxMs": 170
+        },
+        "acceptedAfterMs": {
+          "samples": 76,
+          "p50Ms": 152,
+          "p95Ms": 172,
+          "maxMs": 188
+        },
+        "finishedAfterMs": {
+          "samples": 76,
+          "p50Ms": 1790,
+          "p95Ms": 3686,
+          "maxMs": 3979
+        }
+      },
+      "PLAY_ITEM": {
+        "firstWriteSubmittedAfterMs": {
+          "samples": 20,
+          "p50Ms": 4,
+          "p95Ms": 5,
+          "maxMs": 5
+        },
+        "writeAcknowledgedAfterMs": {
+          "samples": 20,
+          "p50Ms": 132,
+          "p95Ms": 156,
+          "maxMs": 159
+        },
+        "acceptedAfterMs": {
+          "samples": 20,
+          "p50Ms": 144,
+          "p95Ms": 158,
+          "maxMs": 160
+        },
+        "finishedAfterMs": {
+          "samples": 20,
+          "p50Ms": 1767,
+          "p95Ms": 2295,
+          "maxMs": 2393
+        }
+      },
+      "GET_STATE": {
+        "firstWriteSubmittedAfterMs": {
+          "samples": 20,
+          "p50Ms": 12,
+          "p95Ms": 13,
+          "maxMs": 14
+        },
+        "writeAcknowledgedAfterMs": {
+          "samples": 20,
+          "p50Ms": 86,
+          "p95Ms": 137,
+          "maxMs": 138
+        },
+        "acceptedAfterMs": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        },
+        "finishedAfterMs": {
+          "samples": 20,
+          "p50Ms": 336,
+          "p95Ms": 434,
+          "maxMs": 435
+        }
+      }
+    },
+    "finalCumulativeRows": 574,
+    "finalEvictions": 318,
+    "allHistoricalRowsRetainedAcrossArchives": true,
+    "overlapUnchanged": true,
+    "unexpectedConnectionTransition": false
+  },
+  "navigationDriverFailure": {
+    "phase": "BEFORE apple-12 playback tap",
+    "reason": "First find XML has Waiting for source and disabled Browse; fresh scroll snapshot is already loaded with enabled Show more but no scrollable list",
+    "selectionReceiptExisted": false,
+    "completedSelectionsPreserved": 11,
+    "playbackInputsReplayed": 0,
+    "preflightFilesCopied": 10,
+    "recovery": "Wait for Waiting for source/Loading library to settle and use fresh Show more. Preserved10 files, paused Friday Party once, resumed at12; first11 selections not replayed. No app change."
+  },
+  "timingVerdict": "Current20 automatic GET_STATE ACKp95137ms meets500ms target in this cohort; prior e1 cohort775ms remains preserved and was not reproduced here. Changed host, warm phone artwork cache (zero GET_ARTWORK) and removal/delay of source UI probes confound causality. PLAY_ITEM result is dispatched, not observed state; first source observation is delayed6seconds, so fullT04 observed-state/UI/acoustic and both-phone acceptance remain open.",
+  "final": {
+    "at": "2026-11-01T10:00:00.075669+08:00",
+    "prefs": {
+      "controllers": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311",
+      "mango-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "apple-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "source-verification": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    "settings": {
+      "host": {
+        "wifi_on": "0",
+        "mobile_data": "0",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      },
+      "phone": {
+        "wifi_on": "0",
+        "mobile_data": "1",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      }
+    },
+    "pids": {
+      "host": "28758",
+      "phone": "1355"
+    },
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "sourceStateScope": "Record each observed state; NONE or an absent session is not paused-playback proof",
+    "phone": "ordinary Disconnect/help collapsed/targetMango",
+    "volume": 37,
+    "volumeVerified": false,
+    "output": "headset(4)",
+    "mangoCursorMetadata": "unchanged through all20 selections",
+    "grantsBondsBindings": "retained",
+    "storage": "SD mounted FBB9-E8FE/no storage setting/mount/reset/private-download action; prior Apple own-UI SD destination scope retained/whole-library integrity unproven"
+  },
+  "remaining": [
+    "Current92 full Mango browsing/100controls per source",
+    "Source state/UI latency and interrupted-link stalls",
+    "Strict cellular-offT01",
+    "Unplugged30minute availability pending; no recorder/observer started",
+    "No-card Internal timeout/Apple MEDIA_MOUNTED crash",
+    "Range/calls/security/output/battery/walk/audio quality/owner-iPhone/signing/Watch"
+  ],
+  "audibility": "NOT TESTED; routine listening prompts waived",
+  "fullAcceptancePassed": false,
+  "rawEvidence": {
+    "root": "artifacts/queue-capability-apple-matrix-20261101",
+    "filesHashed": 875,
+    "manifestSha256": "fb75bcccf69ca5ac5ad4452a7ab743f029850d5d982ec82c5091f730feb84187"
+  },
+  "goal": "ACTIVE/incomplete",
+  "all20DifferentFromPreTapReportedTrack": true,
+  "postMatrixStorageCheck": {
+    "command": "adb -s d shell sm list-volumes all",
+    "observed": "public:179,1 mounted FBB9-E8FE",
+    "scope": "Read-only post-matrix live verification; no mount/settings action. Whole-library integrity unproven."
+  }
+}
