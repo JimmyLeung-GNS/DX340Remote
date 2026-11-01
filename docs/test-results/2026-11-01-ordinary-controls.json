@@ -1,0 +1,384 @@
+{
+  "date": "2026-11-01",
+  "status": "VERIFIED current Android basic-control subset:100 commands per source; full goal ACTIVE/incomplete",
+  "hostSource": "731aa64424fa65c771b7ce0f4a3db7a590ead662",
+  "phoneSource": "07c2029503ebb929f03c0a3cc9b421c29ef2455d",
+  "installedSha256": {
+    "host": "e1a024293c70e334de1e45c31176be6c19e4555fe97391e84f56b4515148b1f8",
+    "phone": "9f085bc22e8665b25dc886ee22cb6f2a977c002baa57c6f057c59fc2a243116e"
+  },
+  "devices": "DX340 Android13/API33 eng.iBasso.20260812.181952 Companion0.1.0/code1; Pixel9a Android16/API36 CP1A.260405.005 Remote0.2.0/code2; Mango4.1.37/code240; Apple Music6.5.3/code1599",
+  "cohorts": {
+    "mango": {
+      "confirmedCommands": 100,
+      "deliberateActions": {
+        "Next": 20,
+        "Pause": 40,
+        "Play": 40
+      },
+      "setupCleanupOutsideCount": 2,
+      "queueRange": {
+        "first": "4",
+        "last": "23"
+      },
+      "newNativeRows": 123,
+      "newNativeOperations": {
+        "SELECT_SOURCE": 1,
+        "SET_PLAYING": 82,
+        "NEXT": 20,
+        "GET_STATE": 20
+      },
+      "nativePlaybackMetrics": {
+        "firstWriteSubmittedAfterMs": {
+          "samples": 100,
+          "p50Ms": 3,
+          "p95Ms": 5,
+          "maxMs": 7
+        },
+        "writeAcknowledgedAfterMs": {
+          "samples": 100,
+          "p50Ms": 104,
+          "p95Ms": 143,
+          "maxMs": 169
+        },
+        "acceptedAfterMs": {
+          "samples": 80,
+          "p50Ms": 118,
+          "p95Ms": 163,
+          "maxMs": 172
+        },
+        "finishedAfterMs": {
+          "samples": 100,
+          "p50Ms": 498,
+          "p95Ms": 566,
+          "maxMs": 605
+        }
+      },
+      "nativeAutomaticReadMetrics": {
+        "firstWriteSubmittedAfterMs": {
+          "samples": 20,
+          "p50Ms": 8,
+          "p95Ms": 10,
+          "maxMs": 11
+        },
+        "writeAcknowledgedAfterMs": {
+          "samples": 20,
+          "p50Ms": 93,
+          "p95Ms": 96,
+          "maxMs": 99
+        },
+        "acceptedAfterMs": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        },
+        "finishedAfterMs": {
+          "samples": 20,
+          "p50Ms": 343,
+          "p95Ms": 393,
+          "maxMs": 443
+        }
+      },
+      "postTapPcObservationUpperBoundsMs": {
+        "samples": 100,
+        "p50Ms": 500,
+        "p95Ms": 531,
+        "maxMs": 532
+      },
+      "observationScope": "PC monotonic time immediately before ADB input to first matching public source queue/title/state dump; includes command delivery and polling overhead, not native event/acoustic latency",
+      "otherSourcePausedAndCursorUnchangedForEveryAction": true,
+      "duplicateSkipObserved": false,
+      "wrongSourceObserved": false
+    },
+    "apple": {
+      "confirmedCommands": 100,
+      "deliberateActions": {
+        "Next": 20,
+        "Pause": 40,
+        "Play": 40
+      },
+      "setupCleanupOutsideCount": 2,
+      "queueRange": {
+        "first": "0",
+        "last": "0"
+      },
+      "newNativeRows": 122,
+      "newNativeOperations": {
+        "SET_PLAYING": 82,
+        "NEXT": 20,
+        "GET_STATE": 20
+      },
+      "nativePlaybackMetrics": {
+        "firstWriteSubmittedAfterMs": {
+          "samples": 100,
+          "p50Ms": 4,
+          "p95Ms": 5,
+          "maxMs": 7
+        },
+        "writeAcknowledgedAfterMs": {
+          "samples": 100,
+          "p50Ms": 101,
+          "p95Ms": 136,
+          "maxMs": 168
+        },
+        "acceptedAfterMs": {
+          "samples": 80,
+          "p50Ms": 127,
+          "p95Ms": 167,
+          "maxMs": 171
+        },
+        "finishedAfterMs": {
+          "samples": 100,
+          "p50Ms": 541,
+          "p95Ms": 638,
+          "maxMs": 698
+        }
+      },
+      "nativeAutomaticReadMetrics": {
+        "firstWriteSubmittedAfterMs": {
+          "samples": 20,
+          "p50Ms": 10,
+          "p95Ms": 14,
+          "maxMs": 14
+        },
+        "writeAcknowledgedAfterMs": {
+          "samples": 20,
+          "p50Ms": 287,
+          "p95Ms": 434,
+          "maxMs": 482
+        },
+        "acceptedAfterMs": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        },
+        "finishedAfterMs": {
+          "samples": 20,
+          "p50Ms": 1221,
+          "p95Ms": 1366,
+          "maxMs": 1368
+        }
+      },
+      "postTapPcObservationUpperBoundsMs": {
+        "samples": 100,
+        "p50Ms": 485,
+        "p95Ms": 532,
+        "maxMs": 1078
+      },
+      "observationScope": "PC monotonic time immediately before ADB input to first matching public source queue/title/state dump; includes command delivery and polling overhead, not native event/acoustic latency",
+      "otherSourcePausedAndCursorUnchangedForEveryAction": true,
+      "duplicateSkipObserved": false,
+      "wrongSourceObserved": false
+    }
+  },
+  "isolatedPausedReads": {
+    "mango": {
+      "requests": 20,
+      "metrics": {
+        "firstWriteSubmittedAfterMs": {
+          "samples": 20,
+          "p50Ms": 4,
+          "p95Ms": 5,
+          "maxMs": 5
+        },
+        "writeAcknowledgedAfterMs": {
+          "samples": 20,
+          "p50Ms": 116,
+          "p95Ms": 159,
+          "maxMs": 163
+        },
+        "acceptedAfterMs": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        },
+        "finishedAfterMs": {
+          "samples": 20,
+          "p50Ms": 399,
+          "p95Ms": 459,
+          "maxMs": 461
+        }
+      },
+      "pausedSourceCursorMetadataUnchanged": true
+    },
+    "apple": {
+      "requests": 20,
+      "metrics": {
+        "firstWriteSubmittedAfterMs": {
+          "samples": 20,
+          "p50Ms": 4,
+          "p95Ms": 5,
+          "maxMs": 5
+        },
+        "writeAcknowledgedAfterMs": {
+          "samples": 20,
+          "p50Ms": 118,
+          "p95Ms": 156,
+          "maxMs": 165
+        },
+        "acceptedAfterMs": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        },
+        "finishedAfterMs": {
+          "samples": 20,
+          "p50Ms": 409,
+          "p95Ms": 479,
+          "maxMs": 492
+        }
+      },
+      "pausedSourceCursorMetadataUnchanged": true
+    }
+  },
+  "mangoNaturalEndExclusion": {
+    "publicFlacHeaders": 28,
+    "bytesPerHeader": 42,
+    "shortestDurationMs": 24984,
+    "everyCycleTapIntervalPlusFirstBasePositionBelowDuration": true
+  },
+  "appleNaturalEndExclusion": {
+    "durationSource": "Expected title and public reported duration in actual phone UI before final Play of each cycle",
+    "everyCycleTapIntervalPlusFirstBasePositionBelowReportedDuration": true,
+    "queueFinalPrefixMatches20Advances": true,
+    "queueTotalBefore": 101,
+    "queueTotalAfter": 100
+  },
+  "nativeHistory": {
+    "modelInstanceId": "47719f25-1cfd-4c64-a9b3-c4aada9d5e00",
+    "exports": [
+      {
+        "label": "connected-baseline",
+        "rows": 131,
+        "evictedRequests": 0
+      },
+      {
+        "label": "paused-reads",
+        "rows": 151,
+        "evictedRequests": 0
+      },
+      {
+        "label": "mango-controls",
+        "rows": 256,
+        "evictedRequests": 18
+      },
+      {
+        "label": "apple-controls-before",
+        "rows": 256,
+        "evictedRequests": 19
+      },
+      {
+        "label": "apple-adjusted-before",
+        "rows": 256,
+        "evictedRequests": 23
+      },
+      {
+        "label": "apple-controls",
+        "rows": 256,
+        "evictedRequests": 145
+      },
+      {
+        "label": "apple-paused-reads",
+        "rows": 256,
+        "evictedRequests": 165
+      },
+      {
+        "label": "final",
+        "rows": 256,
+        "evictedRequests": 166
+      }
+    ],
+    "mergedUniqueRows": 422,
+    "allCumulativeRowsRetainedAcrossExports": true,
+    "overlapRowsUnchanged": true
+  },
+  "appleQueueIdentity": {
+    "originalDriverFailureRetained": "apple-control-001-receipt.json",
+    "adjudication": {
+      "status": "Original driver FAILED_EXPECTED_INCREMENTING_ID; expected next track and shifted queue VERIFIED separately",
+      "expectedTitle": "BAD LOVE - AAA DOME TOUR 15th ANNIVERSARY - thanx AAA lot (Live)",
+      "expectedNumericId": "1",
+      "observedActiveNumericId": "0",
+      "beforeQueueFirst": "MAGIC - AAA DOME TOUR 15th ANNIVERSARY - thanx AAA lot (Live)",
+      "afterQueueFirst": {
+        "id": "0",
+        "title": "BAD LOVE - AAA DOME TOUR 15th ANNIVERSARY - thanx AAA lot (Live)"
+      },
+      "afterQueueSecond": {
+        "id": "1",
+        "title": "Heart and Soul - AAA DOME TOUR 15th ANNIVERSARY - thanx AAA lot (Live)"
+      },
+      "total": 101,
+      "originalReceiptRetained": true,
+      "playbackInputReplayed": false
+    },
+    "current100Policy": "Installed Apple Music shifts the queue window and reuses activeQueueId0. Match20 distinct exact versioned titles in order; final queue prefix independently checked. Do not infer persistent track identity from0."
+  },
+  "driverFindings": [
+    "Before any playback input, viewport helper required an enabled Pause on already-paused Apple; bounded navigation stopped. Corrected helper to require currently enabled Play/Next; no playback attempt replayed.",
+    "Own debug GET_QUEUE also selects its requested host target. Apple queue preflight therefore changed only the control target after paused reads; actual Pixel SELECT_SOURCE restored Mango before commands. This is not a BLE playback command or source failure.",
+    "Public FLAC STREAMINFO transport check initially returned43bytes through adb shell for a42byte request. Raw exec-out returned exact42; final durations use that path. No private Apple content read.",
+    "First Apple Next reached expected BAD LOVE but retained ID0. Driver stopped because it expected1. Public before/after queues demonstrate shifted101-entry window. Original failure preserved; no replay. New100 starts at BAD LOVE, advancing first to Heart and Soul. Extra diagnostic setup/Next/Pause remain outside100.",
+    "Cleanup requested an assisted Mango UI snapshot while Mango was not foreground and received UI_FOREGROUND_REQUIRED. Preserved this expected limitation; used native GET_STATE for paused state/volume, without opening the source or replaying playback."
+  ],
+  "timingVerdict": "Scoped native controls/paused-read metrics only. Earlier automatic Apple GET_STATE ACKp95775ms remains failed against500ms; fullT04 not passed. Do not infer a cause from different workloads.",
+  "audibility": "NOT TESTED; routine listening prompts waived. Icons are interpreted by action/state and combined with expected metadata/progress; not acoustic proof.",
+  "final": {
+    "at": "2026-11-01T08:58:20.381306+08:00",
+    "prefs": {
+      "controllers": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311",
+      "mango-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "apple-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "source-verification": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    "settings": {
+      "host": {
+        "wifi_on": "0",
+        "mobile_data": "0",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      },
+      "phone": {
+        "wifi_on": "0",
+        "mobile_data": "1",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      }
+    },
+    "pids": {
+      "host": "21079",
+      "phone": "1355"
+    },
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "sourceStateScope": "Record each observed state; NONE or an absent session is not paused-playback proof",
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeVerified": false,
+    "phone": "ordinary Disconnect/help collapsed/targetMango",
+    "grantsBondsBindings": "retained; four preference hashes and exposed OS bond lists/optional bound-service block match preflight",
+    "storage": "SD mounted FBB9-E8FE; no storage setting/mount/reset/private-download action; prior Apple own-UI SD destination scope retained"
+  },
+  "remaining": [
+    "Physical owner-iPhone/signing/Bluetooth/100controls per source",
+    "FullT04 and earlier interrupted-link stalls",
+    "Strict cellular-offT01",
+    "No-card Internal timeout/Apple MEDIA_MOUNTED crash",
+    "Sleep/range/calls/battery/walk/output/audio quality/security/Watch"
+  ],
+  "rawEvidence": {
+    "root": "artifacts/ordinary-controls-20261101",
+    "filesHashed": 1502,
+    "manifestSha256": "4ec6cb8b5b7f8196ea5b9c4f692d5f9cd6ae1363af2fdd94c434182b9d470267"
+  },
+  "fullAcceptancePassed": false,
+  "reportValidationFinding": "Before freezing, expecting final Apple queue total101 failed on actual100. Kept actual totals and exact three-title prefix/revision checks, removed constant-length assumption; no playback input repeated."
+}
