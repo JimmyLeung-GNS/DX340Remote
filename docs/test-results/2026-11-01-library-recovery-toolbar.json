@@ -1,6 +1,6 @@
 {
   "date": "2026-11-01",
-  "status": "VERIFIED Android Library recovery toolbar and four observed source selections; iPhone simulator evidence pending until collected",
+  "status": "VERIFIED Android toolbar/physical subset and iPhone simulator layout/build; normal iOS contrast finding retained for07c follow-up; full acceptance incomplete",
   "goal": "ACTIVE/incomplete",
   "hostSource": "731aa64424fa65c771b7ce0f4a3db7a590ead662",
   "phoneSource": "3571db290084aa1ee9180cb43e62123a4a9cd377",
@@ -251,11 +251,48 @@
     "scope": "All current non-CI files; frozen. CI-prefixed evidence is independently collected from the existing run and excluded from this manifest."
   },
   "sharedIphoneCI": {
-    "id": 41252477906,
-    "head_sha": "3571db290084aa1ee9180cb43e62123a4a9cd377",
-    "status": "in_progress",
-    "conclusion": null,
-    "html_url": "https://github.com/JimmyLeung-GNS/DX340Remote/actions/runs/41252477906",
-    "artifactInspection": "PENDING existing run terminal completion"
+    "run": 41252477906,
+    "source": "3571db290084aa1ee9180cb43e62123a4a9cd377",
+    "status": "SUCCESS; collected and CLOSED",
+    "artifactId": 13062022454,
+    "archiveSha256": "883a6de3a814912e9918b28c2e67b031e51a421fe13ea63fbe799eaa8b2179ea",
+    "platform": "macOS26.6.2/Xcode26.6, iPhone Air iOS26.5 simulator",
+    "flutterTests": 86,
+    "readinessTests": 12,
+    "simulatorBuildLogs": [
+      "flutter-ios-browsing-fixture-build.txt",
+      "flutter-ios-build.txt",
+      "flutter-ios-handoff-fixture-build.txt",
+      "flutter-ios-report-probe-build.txt",
+      "flutter-ios-restore-build.txt",
+      "flutter-ios-setup-fixture-build.txt",
+      "flutter-ios-volume-fixture-build.txt"
+    ],
+    "nativeReportExport": "Real UIKit sheet inspected; format1/zero requests/model match",
+    "restoration": "Ordinary restored app inspected; simulator correctly reports Bluetooth unavailable",
+    "layoutReview": "Default light and largest-text dark Library/expired-page captures inspected; toolbar reachable, content scrollable",
+    "finding": {
+      "kind": "normal iOS Library action contrast",
+      "foregroundRGB": [
+        0,
+        122,
+        255
+      ],
+      "backgroundRGB": [
+        255,
+        255,
+        255
+      ],
+      "contrast": 4.016975780478911,
+      "requiredNormalText": 4.5,
+      "disposition": "Follow-up source07c2029 uses scoped contrast-safe system blue; this build success is not a contrast pass"
+    },
+    "physicalIphone": "NOT TESTED; simulator-only",
+    "doNotPollAgain": true
+  },
+  "rawCIEvidence": {
+    "manifest": "ci-3571-sha256-manifest.json",
+    "filesHashed": 56,
+    "manifestSha256": "1e7434e89374ef2a20b33620dd6619c47c4976c1e37bc9e95d43287c5aa552e1"
   }
 }

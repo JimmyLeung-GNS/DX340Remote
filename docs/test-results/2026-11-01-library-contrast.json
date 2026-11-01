@@ -1,0 +1,73 @@
+{
+  "date": "2026-11-01",
+  "status": "VERIFIED scoped iPhone Library action contrast correction; simulator/Android build and current Pixel observed-playback evidence, full project incomplete",
+  "source": "07c2029503ebb929f03c0a3cc9b421c29ef2455d",
+  "implementation": "Existing contrast-safe Cupertino system blue shared with Setup, scoped only to Library Browse action. Neighboring Library rows/destinations keep their tint. Android appearance, native/wire/adapters unchanged.",
+  "negativeBaseline": {
+    "normalLightContrast": 4.016975780478911,
+    "normalTextTarget": 4.5,
+    "test": "One of four new contrast cases fails old tint; three other theme/contrast variants already pass",
+    "initialCompileFailure": "Static-const initializer attempted property access on dynamic colours; caught before build/install and corrected to static-final"
+  },
+  "software": {
+    "targetedTests": 19,
+    "fullFlutterTests": 90,
+    "androidAnalysisReleaseLint": "PASSED",
+    "native268Swift22Analyser18": "Prior unchanged scopes; not rerun"
+  },
+  "measurement": {
+    "foregroundRGB": [
+      0,
+      64,
+      221
+    ],
+    "backgroundRGB": [
+      255,
+      255,
+      255
+    ],
+    "contrastAgainstWhite": 7.560892352027087,
+    "source": "07c2029503ebb929f03c0a3cc9b421c29ef2455d",
+    "kind": "Measured dominant full-colour text pixels from actual iPhone simulator capture; antialiased edge pixels excluded"
+  },
+  "signing": {
+    "package": "org.dx340.remote.controller",
+    "candidateSha256": "9f085bc22e8665b25dc886ee22cb6f2a977c002baa57c6f057c59fc2a243116e",
+    "installedSignerSha256": "24f48aa3566dcf7b65774ee12585191a8a0df9eeff9cc49e9e72c22bacca6e8d",
+    "candidateSignerSha256": "24f48aa3566dcf7b65774ee12585191a8a0df9eeff9cc49e9e72c22bacca6e8d",
+    "sameSigner": true,
+    "note": "Read-only development-key comparison; no install, uninstall, data reset or signing-key migration."
+  },
+  "sharedIphoneCI": {
+    "run": 41254110437,
+    "source": "07c2029503ebb929f03c0a3cc9b421c29ef2455d",
+    "status": "SUCCESS; archive verified and CLOSED",
+    "artifactId": 13062064644,
+    "archiveSha256": "7193a97a42e4d46a37cb269b69679df15fe61cc0f2e6fdc752db4cac20a75af1",
+    "platform": "macOS26.6.2/Xcode26.6, iPhone Air iOS26.5 simulator",
+    "flutterTests": 90,
+    "captureReadinessTests": 12,
+    "buildLogs": [
+      "flutter-ios-browsing-fixture-build.txt",
+      "flutter-ios-build.txt",
+      "flutter-ios-handoff-fixture-build.txt",
+      "flutter-ios-report-probe-build.txt",
+      "flutter-ios-restore-build.txt",
+      "flutter-ios-setup-fixture-build.txt",
+      "flutter-ios-volume-fixture-build.txt"
+    ],
+    "nativeExport": "Format1/zero requests/model match/real UIKit presentation; ordinary restoration checks pass",
+    "visualConfirmation": "Expired default-light and largest-text dark captures inspected; normal text contrast rises4.01698→7.56089, layout unchanged. Bounded confirmation complete; no further polish loop.",
+    "physicalIphone": "NOT TESTED",
+    "doNotPollAgain": true
+  },
+  "androidInstalledSha256": "9f085bc22e8665b25dc886ee22cb6f2a977c002baa57c6f057c59fc2a243116e",
+  "currentPhysicalEvidence": "docs/test-results/2026-11-01-apple-selection-matrix.md/.json:20 actual current9f/e1 offline Apple selections; not audible-quality proof",
+  "priorToolbarEvidence": "docs/test-results/2026-11-01-library-recovery-toolbar.md/.json retains exact5d/3571 physical scope and old contrast finding",
+  "fullAcceptancePassed": false,
+  "rawEvidence": {
+    "root": "artifacts/library-contrast-20261101",
+    "filesHashed": 67,
+    "manifestSha256": "ac21e330b26c3badd6715e14d75d6bd0abd26d126c4c3a836758d6880897fbd7"
+  }
+}

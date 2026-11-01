@@ -1,0 +1,1026 @@
+{
+  "date": "2026-11-01",
+  "status": "VERIFIED current Android20 offline Apple selections across5albums/2playlists; full both-phone/audio/lifecycle acceptance incomplete",
+  "goal": "ACTIVE/incomplete",
+  "hostSource": "731aa64424fa65c771b7ce0f4a3db7a590ead662",
+  "phoneSource": "07c2029503ebb929f03c0a3cc9b421c29ef2455d",
+  "installedSha256": {
+    "org.dx340.remote.host": "e1a024293c70e334de1e45c31176be6c19e4555fe97391e84f56b4515148b1f8",
+    "org.dx340.remote.controller": "9f085bc22e8665b25dc886ee22cb6f2a977c002baa57c6f057c59fc2a243116e"
+  },
+  "deviceScope": "DX340 Android13/API33 eng.iBasso.20260812.181952 Companion0.1.0/code1; Pixel9a Android16/API36 CP1A.260405.005 Remote0.2.0/code2; Apple Music6.5.3/code1599; Mango4.1.37/code240",
+  "selections": [
+    {
+      "case": {
+        "label": "apple-01",
+        "category": "Albums",
+        "collection": "AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan",
+        "title": "Kuchibirukara Romantica",
+        "artist": "AAA",
+        "requireOutsideQueue": true,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan",
+      "reportedPositionAdvanceMs": 1819,
+      "previousQueueCount": 101,
+      "absentFromFullPreviousQueue": true
+    },
+    {
+      "case": {
+        "label": "apple-02",
+        "category": "Albums",
+        "collection": "AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan",
+        "title": "Paradise Paradise",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan",
+      "reportedPositionAdvanceMs": 2202,
+      "previousQueueCount": 21,
+      "absentFromFullPreviousQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-03",
+        "category": "Albums",
+        "collection": "AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan",
+        "title": "Virgin F",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan",
+      "reportedPositionAdvanceMs": 2109,
+      "previousQueueCount": 20,
+      "absentFromFullPreviousQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-04",
+        "category": "Albums",
+        "collection": "AAA 3rd Anniversary Live 080922-080923 Nihonbudoukan",
+        "title": "Zero",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 3rd Anniversary Live 080922-080923 Nihonbudoukan",
+      "reportedPositionAdvanceMs": 2103,
+      "previousQueueCount": 19,
+      "absentFromFullPreviousQueue": true
+    },
+    {
+      "case": {
+        "label": "apple-05",
+        "category": "Albums",
+        "collection": "AAA 3rd Anniversary Live 080922-080923 Nihonbudoukan",
+        "title": "One Night Animal",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 3rd Anniversary Live 080922-080923 Nihonbudoukan",
+      "reportedPositionAdvanceMs": 2194,
+      "previousQueueCount": 21,
+      "absentFromFullPreviousQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-06",
+        "category": "Albums",
+        "collection": "AAA 3rd Anniversary Live 080922-080923 Nihonbudoukan",
+        "title": "SHE no Jijitsu",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 3rd Anniversary Live 080922-080923 Nihonbudoukan",
+      "reportedPositionAdvanceMs": 2453,
+      "previousQueueCount": 19,
+      "absentFromFullPreviousQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-07",
+        "category": "Albums",
+        "collection": "AAA 10th Anniversary Best",
+        "title": "Blood on Fire",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 10th Anniversary Best",
+      "reportedPositionAdvanceMs": 2035,
+      "previousQueueCount": 18,
+      "absentFromFullPreviousQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-08",
+        "category": "Albums",
+        "collection": "AAA 10th Anniversary Best",
+        "title": "Harikeenriri, Bosutonmari",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 10th Anniversary Best",
+      "reportedPositionAdvanceMs": 2487,
+      "previousQueueCount": 27,
+      "absentFromFullPreviousQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-09",
+        "category": "Albums",
+        "collection": "AAA 10th Anniversary Best",
+        "title": "Winter Lander!!",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 10th Anniversary Best",
+      "reportedPositionAdvanceMs": 2124,
+      "previousQueueCount": 26,
+      "absentFromFullPreviousQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-10",
+        "category": "Albums",
+        "collection": "AAA 15th Anniversary All Time Best -thanx AAA lot-",
+        "title": "BLOOD on FIRE (15thbest)",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 15th Anniversary All Time Best -thanx AAA lot-",
+      "reportedPositionAdvanceMs": 2118,
+      "previousQueueCount": 25,
+      "absentFromFullPreviousQueue": true
+    },
+    {
+      "case": {
+        "label": "apple-11",
+        "category": "Albums",
+        "collection": "AAA 15th Anniversary All Time Best -thanx AAA lot-",
+        "title": "Friday Party (15thbest)",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 15th Anniversary All Time Best -thanx AAA lot-",
+      "reportedPositionAdvanceMs": 2425,
+      "previousQueueCount": 73,
+      "absentFromFullPreviousQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-12",
+        "category": "Albums",
+        "collection": "AAA 15th Anniversary All Time Best -thanx AAA lot-",
+        "title": "Kireinasora (15thbest)",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA 15th Anniversary All Time Best -thanx AAA lot-",
+      "reportedPositionAdvanceMs": 2082,
+      "previousQueueCount": 72,
+      "absentFromFullPreviousQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-13",
+        "category": "Albums",
+        "collection": "AAA a-nation2018 SET LIST",
+        "title": "DEJAVU",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA a-nation2018 SET LIST",
+      "reportedPositionAdvanceMs": 1980,
+      "previousQueueCount": 71,
+      "absentFromFullPreviousQueue": true
+    },
+    {
+      "case": {
+        "label": "apple-14",
+        "category": "Albums",
+        "collection": "AAA a-nation2018 SET LIST",
+        "title": "No Way Back",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA a-nation2018 SET LIST",
+      "reportedPositionAdvanceMs": 2103,
+      "previousQueueCount": 9,
+      "absentFromFullPreviousQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-15",
+        "category": "Albums",
+        "collection": "AAA a-nation2018 SET LIST",
+        "title": "NEW",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA a-nation2018 SET LIST",
+      "reportedPositionAdvanceMs": 2155,
+      "previousQueueCount": 8,
+      "absentFromFullPreviousQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-16",
+        "category": "Playlists",
+        "collection": "Favourite Songs",
+        "title": "Koe",
+        "artist": null,
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "Hitsujibungaku",
+      "observedAlbum": "Don't Laugh It Off (Truly Deluxe)",
+      "reportedPositionAdvanceMs": 2053,
+      "previousQueueCount": 7,
+      "absentFromFullPreviousQueue": true
+    },
+    {
+      "case": {
+        "label": "apple-17",
+        "category": "Playlists",
+        "collection": "Favourite Songs",
+        "title": "Fleeting Girl",
+        "artist": null,
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "Misekai",
+      "observedAlbum": "Fleeting Girl - Single",
+      "reportedPositionAdvanceMs": 2064,
+      "previousQueueCount": 5,
+      "absentFromFullPreviousQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-18",
+        "category": "Playlists",
+        "collection": "Favourite Songs",
+        "title": "谁 (Live)",
+        "artist": null,
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "Liao JunTao",
+      "observedAlbum": "这个人创作LIVE现场辑 - EP",
+      "reportedPositionAdvanceMs": 2309,
+      "previousQueueCount": 4,
+      "absentFromFullPreviousQueue": false
+    },
+    {
+      "case": {
+        "label": "apple-19",
+        "category": "Playlists",
+        "collection": "AAA",
+        "title": "One Night Animal - AAA DOME TOUR 15th ANNIVERSARY - thanx AAA lot (Live)",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA DOME TOUR 15th ANNIVERSARY -thanx AAA lot- LIVE ALBUM (Live at TOKYO DOME 20211212)",
+      "reportedPositionAdvanceMs": 2249,
+      "previousQueueCount": 2,
+      "absentFromFullPreviousQueue": true
+    },
+    {
+      "case": {
+        "label": "apple-20",
+        "category": "Playlists",
+        "collection": "AAA",
+        "title": "MAGIC - AAA DOME TOUR 15th ANNIVERSARY - thanx AAA lot (Live)",
+        "artist": "AAA",
+        "requireOutsideQueue": false,
+        "scope": "Old inventory used only as navigation candidates; current enabled Pixel row/heading and actual playback must be observed anew"
+      },
+      "playingObserved": true,
+      "observedArtist": "AAA",
+      "observedAlbum": "AAA DOME TOUR 15th ANNIVERSARY -thanx AAA lot- LIVE ALBUM (Live at TOKYO DOME 20211212)",
+      "reportedPositionAdvanceMs": 2134,
+      "previousQueueCount": 101,
+      "absentFromFullPreviousQueue": false
+    }
+  ],
+  "collections": {
+    "albums": [
+      "AAA 10th Anniversary Best",
+      "AAA 15th Anniversary All Time Best -thanx AAA lot-",
+      "AAA 2nd Anniversary Live - 5th Attack 070922 - Nippon Budokan",
+      "AAA 3rd Anniversary Live 080922-080923 Nihonbudoukan",
+      "AAA a-nation2018 SET LIST"
+    ],
+    "playlists": [
+      "AAA",
+      "Favourite Songs"
+    ]
+  },
+  "observedOffline": "Every selection: no active default network and no ADB reverse on both endpoints immediately before/after; Wi-Fi0 remains. Pixel stored mobile_data1 unchanged, so strict cellular-offT01 remains incomplete.",
+  "trackMatching": "Current collection header/enabled row observed before tap; NFKC/casefold/whitespace title equality, album equality for all15 album cases, independent AAA artist expectation for17 cases. Favourite Songs artists are observed, not independently predicted. Version suffixes and punctuation retained.",
+  "audibility": "NOT TESTED; routine hearing prompts waived. Public PlaybackState-derived advancing position is estimated, not acoustic/decoded-frame proof.",
+  "geometry": [
+    {
+      "case": "apple-01",
+      "selectedRowBounds": [
+        "[53,1341][1028,1491]",
+        "[53,1341][1028,1491]",
+        "[53,1341][1028,1491]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": true,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "apple-02",
+      "selectedRowBounds": [
+        "[53,1491][1028,1641]",
+        "[53,1491][1028,1641]",
+        "[53,1491][1028,1641]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": true,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "apple-03",
+      "selectedRowBounds": [
+        "[53,1341][1028,1491]",
+        "[53,1341][1028,1491]",
+        "[53,1341][1028,1491]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": true,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "apple-04",
+      "selectedRowBounds": [
+        "[53,1341][1028,1491]",
+        "[53,1341][1028,1491]",
+        "[53,1341][1028,1491]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": true,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "apple-05",
+      "selectedRowBounds": [
+        "[53,1341][1028,1491]",
+        "[53,1341][1028,1491]",
+        "[53,1341][1028,1491]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": true,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "apple-06",
+      "selectedRowBounds": [
+        "[53,1491][1028,1641]",
+        "[53,1491][1028,1641]",
+        "[53,1491][1028,1641]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": true,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "apple-07",
+      "selectedRowBounds": [
+        "[53,1268][1028,1417]",
+        "[53,1268][1028,1417]",
+        "[53,1268][1028,1417]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": true,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "apple-08",
+      "selectedRowBounds": [
+        "[53,1417][1028,1567]",
+        "[53,1417][1028,1567]",
+        "[53,1417][1028,1567]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": true,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "apple-09",
+      "selectedRowBounds": [
+        "[53,1567][1028,1717]",
+        "[53,1567][1028,1717]",
+        "[53,1567][1028,1717]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": true,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "apple-10",
+      "selectedRowBounds": [
+        "[53,1341][1028,1491]",
+        "[53,1341][1028,1491]",
+        "[53,1341][1028,1491]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": true,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "apple-11",
+      "selectedRowBounds": [
+        "[53,1491][1028,1641]",
+        "[53,1491][1028,1641]",
+        "[53,1491][1028,1641]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": true,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "apple-12",
+      "selectedRowBounds": [
+        "[53,1341][1028,1491]",
+        "[53,1341][1028,1491]",
+        "[53,1341][1028,1491]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": true,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "apple-13",
+      "selectedRowBounds": [
+        "[53,1268][1028,1417]",
+        "[53,1268][1028,1417]",
+        "[53,1268][1028,1417]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": true,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "apple-14",
+      "selectedRowBounds": [
+        "[53,1417][1028,1567]",
+        "[53,1417][1028,1567]",
+        "[53,1417][1028,1567]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": true,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "apple-15",
+      "selectedRowBounds": [
+        "[53,1567][1028,1717]",
+        "[53,1567][1028,1717]",
+        "[53,1567][1028,1717]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": true,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "apple-16",
+      "selectedRowBounds": [
+        "[53,1268][1028,1459]",
+        "[53,1268][1028,1459]",
+        "[53,1268][1028,1459]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": true,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "apple-17",
+      "selectedRowBounds": [
+        "[53,1459][1028,1651]",
+        "[53,1459][1028,1651]",
+        "[53,1459][1028,1651]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": true,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "apple-18",
+      "selectedRowBounds": [
+        "[53,1843][1028,1983]",
+        "[53,1843][1028,1983]",
+        "[53,1843][1028,1980]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": false,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "apple-19",
+      "selectedRowBounds": [
+        "[53,1268][1028,1512]",
+        "[53,1268][1028,1512]",
+        "[53,1268][1028,1512]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": true,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    },
+    {
+      "case": "apple-20",
+      "selectedRowBounds": [
+        "[53,1512][1028,1756]",
+        "[53,1512][1028,1756]",
+        "[53,1512][1028,1756]"
+      ],
+      "selectedRowTopStable": true,
+      "selectedRowFullBoundsStable": true,
+      "toolbarBounds": "[53,320][1028,446]",
+      "toolbarBoundsStable": true
+    }
+  ],
+  "journal": {
+    "modelInstanceId": "47719f25-1cfd-4c64-a9b3-c4aada9d5e00",
+    "counts": [
+      0,
+      2,
+      129
+    ],
+    "allPriorRowsUnchanged": true,
+    "zeroEvictions": true,
+    "newOperationCounts": {
+      "BROWSE": 78,
+      "PLAY_ITEM": 20,
+      "GET_STATE": 20,
+      "GET_ARTWORK": 7,
+      "SET_PLAYING": 1,
+      "SELECT_SOURCE": 1
+    },
+    "allNewAppliedResults": true,
+    "exactPlayItemReceipts": [
+      {
+        "id": "606213ae-0658-4263-8033-16f344250148",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 154983,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 148,
+        "accepted": true,
+        "acceptedAfterMs": 148,
+        "finishedAfterMs": 1959,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "a99c059e-cd56-40ff-87cc-7eeb5b8423ed",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 200118,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 154,
+        "accepted": true,
+        "acceptedAfterMs": 156,
+        "finishedAfterMs": 2308,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "77333fb7-e772-4715-a0cf-0ab4e052e0f1",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 245987,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 164,
+        "accepted": true,
+        "acceptedAfterMs": 165,
+        "finishedAfterMs": 1777,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "d6809cc4-610a-46e6-abe8-f5c8ab456496",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 283485,
+        "firstWriteSubmittedAfterMs": 3,
+        "writeAcknowledgedAfterMs": 105,
+        "accepted": true,
+        "acceptedAfterMs": 157,
+        "finishedAfterMs": 2012,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "f7246f76-287c-4c2f-b337-feef7d1b9593",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 328603,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 130,
+        "accepted": true,
+        "acceptedAfterMs": 132,
+        "finishedAfterMs": 1550,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "db3fee58-b06e-4e20-b499-fbca1384b1f5",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 375447,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 137,
+        "accepted": true,
+        "acceptedAfterMs": 140,
+        "finishedAfterMs": 1851,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "ee8e123b-beec-496c-8d2e-bc7dc77703a4",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 420640,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 136,
+        "accepted": true,
+        "acceptedAfterMs": 141,
+        "finishedAfterMs": 2287,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "5a61c164-9c99-4d31-a33f-d033cb410bab",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 465522,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 153,
+        "accepted": true,
+        "acceptedAfterMs": 158,
+        "finishedAfterMs": 1818,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "0398548d-3930-4f83-b253-3a33373b042f",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 511586,
+        "firstWriteSubmittedAfterMs": 3,
+        "writeAcknowledgedAfterMs": 109,
+        "accepted": true,
+        "acceptedAfterMs": 162,
+        "finishedAfterMs": 2312,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "ffb8ca0d-069a-4ad6-be80-4dd4b2d1e2f8",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 745330,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 130,
+        "accepted": true,
+        "acceptedAfterMs": 130,
+        "finishedAfterMs": 1452,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "2bbb7de2-28ae-4367-8851-f913ba144f79",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 790202,
+        "firstWriteSubmittedAfterMs": 3,
+        "writeAcknowledgedAfterMs": 108,
+        "accepted": true,
+        "acceptedAfterMs": 110,
+        "finishedAfterMs": 1869,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "7e3f0726-f6e2-40da-9059-bd95bfe01f2a",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 842843,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 167,
+        "accepted": true,
+        "acceptedAfterMs": 170,
+        "finishedAfterMs": 2517,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "764a21ba-2d00-4845-9163-60a796368226",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 887552,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 167,
+        "accepted": true,
+        "acceptedAfterMs": 169,
+        "finishedAfterMs": 2073,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "1c1238db-da99-470d-abe3-e3c50bee0a58",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 929743,
+        "firstWriteSubmittedAfterMs": 3,
+        "writeAcknowledgedAfterMs": 142,
+        "accepted": true,
+        "acceptedAfterMs": 145,
+        "finishedAfterMs": 1710,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "276ad4e4-b1c9-42ac-bf54-6ed881a4044e",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 974885,
+        "firstWriteSubmittedAfterMs": 3,
+        "writeAcknowledgedAfterMs": 144,
+        "accepted": true,
+        "acceptedAfterMs": 151,
+        "finishedAfterMs": 1811,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "63582952-d0ce-489d-abbe-8a67fcd090ea",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 1012514,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 152,
+        "accepted": true,
+        "acceptedAfterMs": 153,
+        "finishedAfterMs": 1867,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "d4ccb76d-5d39-4157-bf58-df4022f3abf0",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 1050241,
+        "firstWriteSubmittedAfterMs": 3,
+        "writeAcknowledgedAfterMs": 160,
+        "accepted": true,
+        "acceptedAfterMs": 161,
+        "finishedAfterMs": 2165,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "e46b81d0-811b-4a86-aa82-5b3bde8762ef",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 1095194,
+        "firstWriteSubmittedAfterMs": 3,
+        "writeAcknowledgedAfterMs": 106,
+        "accepted": true,
+        "acceptedAfterMs": 107,
+        "finishedAfterMs": 1673,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "1035bbe8-cc2d-4bc5-ae03-ebfcfc4fcd16",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 1132725,
+        "firstWriteSubmittedAfterMs": 4,
+        "writeAcknowledgedAfterMs": 162,
+        "accepted": true,
+        "acceptedAfterMs": 163,
+        "finishedAfterMs": 2707,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      },
+      {
+        "id": "0c2e54ba-41ca-4364-a643-ce42ba2c2ff0",
+        "operation": "PLAY_ITEM",
+        "source": "apple",
+        "startedMs": 1171021,
+        "firstWriteSubmittedAfterMs": 3,
+        "writeAcknowledgedAfterMs": 135,
+        "accepted": true,
+        "acceptedAfterMs": 137,
+        "finishedAfterMs": 2679,
+        "result": "result",
+        "terminalApplied": true,
+        "hostOutcome": "dispatched",
+        "error": null
+      }
+    ],
+    "playItemNativeTimingMs": {
+      "firstWriteSubmittedAfterMs": {
+        "count": 20,
+        "min": 3,
+        "max": 4,
+        "p95NearestRank": 4
+      },
+      "writeAcknowledgedAfterMs": {
+        "count": 20,
+        "min": 105,
+        "max": 167,
+        "p95NearestRank": 167
+      },
+      "acceptedAfterMs": {
+        "count": 20,
+        "min": 107,
+        "max": 170,
+        "p95NearestRank": 169
+      },
+      "finishedAfterMs": {
+        "count": 20,
+        "min": 1452,
+        "max": 2707,
+        "p95NearestRank": 2679
+      }
+    },
+    "getStateNativeTimingMs": {
+      "firstWriteSubmittedAfterMs": {
+        "count": 20,
+        "min": 7,
+        "max": 15,
+        "p95NearestRank": 15
+      },
+      "writeAcknowledgedAfterMs": {
+        "count": 20,
+        "min": 85,
+        "max": 1122,
+        "p95NearestRank": 775
+      },
+      "acceptedAfterMs": {
+        "count": 0,
+        "min": null,
+        "max": null,
+        "p95NearestRank": null
+      },
+      "finishedAfterMs": {
+        "count": 20,
+        "min": 333,
+        "max": 1507,
+        "p95NearestRank": 1166
+      }
+    }
+  },
+  "driverFailure": {
+    "phase": "BEFORE apple-10 playback tap",
+    "failure": "Unquoted parentheses in read-only Android intent candidate argument; prior9 completed selections were not repeated",
+    "preservation": "14 read-only preflight files copied to driver-quote-failure-before-apple-10 before resuming; source/card/volume unchanged",
+    "fix": "POSIX-quote each remote shell argument as data; no app change",
+    "queueProof": "All20 outside-queue checks independently compare full captured queue titles; historical611/95 full101-title absence revalidated read-only in historical-queue-recheck.json, without modifying frozen evidence"
+  },
+  "final": {
+    "at": "2026-11-01T08:14:41.684168+08:00",
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "pids": {
+      "host": "21079",
+      "phone": "1355"
+    },
+    "hostEpoch": "2159b3e5-2f0d-408c-badf-379c8548416c",
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeVerified": false,
+    "mangoCursorMetadataUnchanged": true,
+    "prefsSettingsGrantsBondsBindings": "retained",
+    "storage": "SD mountedFBB9-E8FE; no storage setting/mount/reset/private-download action; Apple SD destination retains earlier own-UI verification scope",
+    "phone": "ordinary Disconnect/help collapsed/targetMango",
+    "host": "enabled foreground service/advertising",
+    "localWorkers": "all matrix/export/build jobs terminal"
+  },
+  "remaining": [
+    "Physical owner-iPhone source matrix/signing",
+    "Strict cellular-offT01",
+    "100 deliberate playback controls/source/phone and full T01-T18",
+    "Earlier interrupted-link stalls/no-card Internal timeout/Apple MEDIA_MOUNTED crash",
+    "Sleep/range/calls/battery/walk/output/audio-quality/Watch"
+  ],
+  "fullAcceptancePassed": false,
+  "rawEvidence": {
+    "root": "artifacts/apple-selection-matrix-20261101",
+    "filesHashed": 832,
+    "manifestSha256": "33e5464b5c65a430232899f6976c7a7a1c60dfec872c14fb5c4f82375fb0e000"
+  }
+}

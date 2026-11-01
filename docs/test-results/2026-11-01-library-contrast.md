@@ -1,0 +1,13 @@
+# Scoped iPhone Library contrast correction
+
+**VERIFIED:** the fixed Browse source library action uses the same contrast-safe Cupertino system blue already used by Setup. Its normal-light text contrast rises **4.01698:1→7.56089:1**. Neighboring Library rows and destinations retain their tint; Android appearance, native Bluetooth, protocol and source adapters are unchanged. Full UX and project acceptance remain incomplete.
+
+Source `07c2029503ebb929f03c0a3cc9b421c29ef2455d`; original-signer Pixel APK `9f085bc22e8665b25dc886ee22cb6f2a977c002baa57c6f057c59fc2a243116e` is installed in place. Four new theme/contrast cases include one intended red normal-light baseline. All19 targeted tests,90 full Flutter tests, analysis, Android release build and release lint pass. A static-const dynamic-colour getter compile attempt was caught before build/install and corrected to static-final. Native268/Swift22/analyser18 retain unchanged prior scopes and were not rerun.
+
+Shared iPhone run **41254110437 is SUCCESS, collected and CLOSED**. Artifact13062064644 archive SHA256 `7193a97a42e4d46a37cb269b69679df15fe61cc0f2e6fdc752db4cac20a75af1` is verified. macOS26.6.2/Xcode26.6, iPhone Air iOS26.5 simulator:90 Flutter tests,12 readiness guards and seven actual simulator builds pass. Native format1 report has zero requests and matches the UIKit probe model; real report presentation and ordinary restoration checks pass. This is not an owner-iPhone signing, Bluetooth or playback pass.
+
+The bounded confirmation pass inspected expired-page normal-light and largest-text dark captures. In the actual normal-light PNG, full-colour foreground pixels are RGB(0,64,221) against white, measured7.56089:1. The previous3571 source capture was RGB(0,122,255),4.01698:1; that failed visual criterion remains preserved in the [earlier report](2026-11-01-library-recovery-toolbar.md). Text wraps and the toolbar remains reachable at large type. No additional polish cycle is pending.
+
+The new phone's [20 actual Apple selections](2026-11-01-apple-selection-matrix.md) provide the distinct current Android observed-playback scope. Headphone audibility/quality remain untested, with routine prompts waived. The original icon family was already implemented31 October and was not recreated.
+
+[Structured evidence](2026-11-01-library-contrast.json). Raw `artifacts/library-contrast-20261101/`: **67 frozen files**, manifest SHA256 `ac21e330b26c3badd6715e14d75d6bd0abd26d126c4c3a836758d6880897fbd7`. Do not poll/restart either completed3571 or07c shared iPhone job. No native Apple job matched these Dart-only changes. Physical owner-iPhone/signing and full T01–T18/Watch remain incomplete.

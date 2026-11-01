@@ -23,10 +23,10 @@
       "build": "CP1A.260405.005",
       "app": {
         "package": "org.dx340.remote.controller",
-        "sha256": "5d7082344b7d9c8fe8d5ab46510be9545e1055f448c982d113ec1daea19934fd",
+        "sha256": "9f085bc22e8665b25dc886ee22cb6f2a977c002baa57c6f057c59fc2a243116e",
         "versionName": "0.2.0",
         "versionCode": 2,
-        "sourceCommit": "3571db290084aa1ee9180cb43e62123a4a9cd377"
+        "sourceCommit": "07c2029503ebb929f03c0a3cc9b421c29ef2455d"
       }
     }
   },
@@ -61,7 +61,7 @@
     {
       "id": "P4",
       "status": "IMPLEMENTED_PARTIAL_VALIDATION",
-      "finding": "Shared Pixela65 installed; submission/ACK diagnostics, reply-loss retirement and saved recovery verified. Older95 browse/audio evidence retains exact scope; full source/reliability remains open. Current3571 shared Library toolbar verified on Pixel5d;86Flutter/build/lint. Existing native transport scope unchanged."
+      "finding": "Shared Pixela65 installed; submission/ACK diagnostics, reply-loss retirement and saved recovery verified. Older95 browse/audio evidence retains exact scope; full source/reliability remains open. Current3571 shared Library toolbar verified on Pixel5d;86Flutter/build/lint. Existing native transport scope unchanged. Current9f/source07c installed;90Flutter and current20 Apple observed selections, original signer preserved."
     },
     {
       "id": "P5",
@@ -76,7 +76,7 @@
     {
       "id": "P7",
       "status": "IMPLEMENTED_PARTIAL_VALIDATION",
-      "finding": "Optional awake/unlocked Apple Downloaded UI adapter; older offline outside-queue hearing is scoped, current20/both-phone matrix incomplete. Current5d/e1 Downloaded Songs A・RA・SHI outside full21 queue reaches expected reported playback with no active network on both endpoints;1/20 current selections, hearing untested."
+      "finding": "Optional awake/unlocked Apple Downloaded UI adapter; older offline outside-queue hearing is scoped, current20/both-phone matrix incomplete. Current5d/e1 Downloaded Songs A・RA・SHI outside full21 queue reaches expected reported playback with no active network on both endpoints;1/20 current selections, hearing untested. Current9f/e1 Android20 offline selections across5albums/2playlists verified, outside full101 queue included. Physical iPhone and independent output/quality remain incomplete."
     },
     {
       "id": "P8",
@@ -93,7 +93,7 @@
     {
       "id": "T01",
       "status": "PARTIAL",
-      "finding": "Both endpoints Wi-Fi0 in BLE cases; Pixel cellular1 keeps strict cellular-off requirement open. Physical iPhone missing.",
+      "finding": "Both endpoints Wi-Fi0 in BLE cases; Pixel cellular1 keeps strict cellular-off requirement open. Physical iPhone missing. Current9f20 selections verify before/after no default network/reverse on both endpoints, Wi-Fi0; stored Pixel flag1 retained, strict cellular-off/iPhone remain open.",
       "remainingRequirement": "Both phones connect with Wi-Fi and cellular off.",
       "evidence": "2026-11-01-interrupted-library.md",
       "supplementalEvidence": "2026-11-01-no-active-network-read.md",
@@ -116,7 +116,7 @@
     {
       "id": "T04",
       "status": "NOT_PASSED",
-      "finding": "Earlier4ee read-only ACK/reply p95 Mango160/469ms, Apple168/494ms are scoped. Current95 fresh SD result7777ms misses3s page target; no full control/state/acoustic pass. [Evidence](test-results/2026-11-01-write-ack-timing.md).  Current95 isolated GET_STATE ATT94ms/RESULT322ms is one read, not a p95/control/audio pass. [Current read](test-results/2026-11-01-no-active-network-read.md).  Currenta65 first-submission timing is separate from ACK; no p95/control/audio pass. [Submission report](test-results/2026-11-01-first-write-submission.md). Current73120 Mango PLAY_ITEM p95 submission4/ATT105/ACCEPTED121/dispatchedRESULT3789ms; not fullT04/UI-tap/acoustic proof.",
+      "finding": "Earlier4ee read-only ACK/reply p95 Mango160/469ms, Apple168/494ms are scoped. Current95 fresh SD result7777ms misses3s page target; no full control/state/acoustic pass. [Evidence](test-results/2026-11-01-write-ack-timing.md).  Current95 isolated GET_STATE ATT94ms/RESULT322ms is one read, not a p95/control/audio pass. [Current read](test-results/2026-11-01-no-active-network-read.md).  Currenta65 first-submission timing is separate from ACK; no p95/control/audio pass. [Submission report](test-results/2026-11-01-first-write-submission.md). Current73120 Mango PLAY_ITEM p95 submission4/ATT105/ACCEPTED121/dispatchedRESULT3789ms; not fullT04/UI-tap/acoustic proof. Current9f Apple20 selection workload: PLAY_ITEM p95 submission4/ATT167/ACCEPTED169/dispatchedRESULT2679ms; automatic GET_STATE ACK775/reply1166ms. GET ACK exceeds500ms; fullT04 remains not passed, cause unproved.",
       "remainingRequirement": "ACK p95 below500ms, observed local state below1.5s; cache pages below500ms/uncached below3s measured separately.",
       "evidence": "2026-11-01-write-ack-timing.md",
       "supplementalEvidence": "2026-11-01-no-active-network-read.md",
@@ -139,11 +139,12 @@
     },
     {
       "id": "T07",
-      "status": "PARTIAL_CURRENT_ANDROID_OBSERVED",
-      "finding": "Older source-local20 cases retain24attempts/4rejections/mixed builds; later b805/00e5 audible outside101 queue and ce47/82ad outside21 queue remain separate. Earlier611/95 downloaded-album selection outside captured101 queue reaches expected PLAYING3; hearing untested; routine prompts waived, no a65 audio pass. [Prior pair](test-results/2026-11-01-current-pair-source-selection.md). [Evidence](test-results/2026-10-31-current-sd-audio.md). Current5d/e1 one actual Pixel A・RA・SHI offline selection outside full21 queue reaches expected PLAYING/progress; current20/5albums/2playlists remains incomplete.",
+      "status": "PARTIAL_BOTH_PHONE_ANDROID20_OBSERVED",
+      "finding": "Older source-local20 cases retain24attempts/4rejections/mixed builds; later b805/00e5 audible outside101 queue and ce47/82ad outside21 queue remain separate. Earlier611/95 downloaded-album selection outside captured101 queue reaches expected PLAYING3; hearing untested; routine prompts waived, no a65 audio pass. [Prior pair](test-results/2026-11-01-current-pair-source-selection.md). [Evidence](test-results/2026-10-31-current-sd-audio.md). Current5d/e1 one actual Pixel A・RA・SHI offline selection outside full21 queue reaches expected PLAYING/progress; current20/5albums/2playlists remains incomplete. Current9f/e1 actual Pixel20/5albums/2playlists complete; expected track/album reported PLAYING/progress offline, first outside full101 queue, exactly20 native PLAY_ITEM. Hearing prompts waived; output/quality not independently tested.",
       "remainingRequirement": "20 correct offline downloaded selections across5albums/2playlists, outside prior queue included, each phone.",
       "evidence": "2026-10-31-current-sd-audio.md",
-      "currentPairSelectionSupplement": "2026-11-01-current-pair-source-selection.md"
+      "currentPairSelectionSupplement": "2026-11-01-current-pair-source-selection.md",
+      "currentTwentySupplement": "2026-11-01-apple-selection-matrix.md"
     },
     {
       "id": "T08",
@@ -429,8 +430,35 @@
     ],
     "allNewAppliedResults": true,
     "sharedIphoneRun": 41252477906,
-    "sharedIphoneStatus": "IN_PROGRESS; terminal/artifact review pending",
+    "sharedIphoneStatus": "SUCCESS; archive/captures verified/CLOSED, normal-light4.01698 contrast finding retained for07c correction",
     "icons": "Already implemented/verified31Oct; broadUX partial",
+    "fullAcceptancePassed": false
+  },
+  "libraryContrastSupplement": {
+    "evidence": "2026-11-01-library-contrast.md",
+    "phoneSource": "07c2029503ebb929f03c0a3cc9b421c29ef2455d",
+    "flutterTests": 90,
+    "normalTextContrast": 7.560892352027087,
+    "sharedIphoneRun": 41254110437,
+    "sharedIphoneStatus": "SUCCESS; archive/capture verified/CLOSED",
+    "fullAcceptancePassed": false
+  },
+  "currentAndroidAppleTwentySupplement": {
+    "evidence": "2026-11-01-apple-selection-matrix.md",
+    "selections": 20,
+    "albums": 5,
+    "playlists": 2,
+    "previousFullQueueCountFirst": 101,
+    "firstOutsideQueue": true,
+    "journalCounts": [
+      0,
+      2,
+      129
+    ],
+    "exactPlayItemCount": 20,
+    "allNewAppliedResults": true,
+    "zeroEvictions": true,
+    "hearing": "NOT TESTED; routine prompts waived",
     "fullAcceptancePassed": false
   }
 }
