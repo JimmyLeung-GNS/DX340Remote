@@ -1,6 +1,16 @@
 # Implementation status
 
-## Current checkpoint —1 November2026,10:00 HKT
+## Current checkpoint — 1 November 2026, 10:50 HKT
+
+Current 1 November 2026, 10:50 HKT: full goal ACTIVE/incomplete. Read docs/test-results/2026-11-01-queue-capability-mango-matrix.md/.json. Unchanged installed Companion92/source84da612 and Pixel9f/source07c now verify 20 distinct actual Mango Library selections across four folders, 17 FLAC/three WAV public headers, expected titles/artists/PLAYING and advancing public position. Each requested title differs from its immediate pre-tap track. Apple Music stays paused with unchanged metadata/cursor. Selected-row tops 20/20, full rectangles 20/20 and fixed toolbar 20/20 match before/final; no pending capture in six-second quiet windows. Current playlist page returned no items; no fixtures created. No listening prompts; audibility/quality untested.
+
+Native cohort 576→739, 163 new applied results including exactly20 PLAY_ITEM/20 automatic GET_STATE/one final Pause. No unexpected connection transition; final deliberate idle. GET_STATE ACK/reply p95 125/399ms; PLAY_ITEM ACK/dispatched reply 155/3818ms. Delayed source observation/mixed browse pages do not prove full T04 state/UI/cached-page targets or isolate causality. Prior Apple775ms failure and all older scopes retained. 976 raw files frozen, manifest e9d2bcba35c3d17f62901b61069d17c33d08edbe15067d4f0ed59693954381ef; never rerun helpers against frozen roots. Initialization encoding error preserved before any playback input, original preflight retained; no replay. No code/build/install/CI change; prior272 native/core/90Flutter/22Swift/18analyser retain scopes, Apple jobs closed.
+
+Final both PAUSED2/37/headset(4)/proof false; PIDs28758/1355/hostepoch71344a90, four prefs/settings/exposed bonds/both optional bindings retained. Phone ordinary Disconnect/help collapsed/targetMango, host enabled/advertising. Both endpoints no active default network/reverse before/after every selection; Pixel mobile_data1 keeps strictT01 open. SD FBB9-E8FE mounted, no storage setting/mount/reset/private extraction; prior Apple own-UI SD destination scope retained, whole237GB integrity unproven. All matrix/export workers terminal, no hold recorder/phone observer started; fresh unplugged availability still pending. NEXT: current92/9f100 controls/source and advertised actions/state timing, remaining interrupted-link/sleep/range/calls/security/output/battery/walk. Preserve original no-card Internal timeout/Apple MEDIA_MOUNTED crash. Physical iPhone/signing/Watch remain unavailable/unverified. No pause/device switch.
+
+Earlier entries retain historical scope.
+
+## Earlier checkpoint —1 November2026,10:00 HKT
 
 Current1 November2026,10:00 HKT: full goal ACTIVE/incomplete. Read docs/test-results/2026-11-01-queue-capability-apple-matrix.md/.json. Unchanged installed Companion92/source84da612 and Pixel9f/source07c verified20 distinct actual Library Apple selections offline across5 downloaded albums/2playlists. All expected titles/public PLAYING/progress,15 album names and17 independent AAA artist expectations match;3Favourite artists observed, not predicted. All20 requested titles differ from immediate pre-tap track; firstKuchibirukara Romantica absent from full101 prior queue. Mango stays paused with same metadata/cursor, unmuted37/headset(4)/proof false; both endpoints no active default network/reverse before/after each case. No app/source/build/install/CI change;272 native/core/90Flutter/22Swift/18analyser keep prior scopes, Apple jobs remain closed.
 
