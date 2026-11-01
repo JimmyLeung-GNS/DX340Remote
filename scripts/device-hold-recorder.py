@@ -78,7 +78,15 @@ def start(serial, out, duration, interval, unplugged):
     # A launch PID is not evidence of successful arming. Inspect this exact job.
     for _ in range(15):
         try:
-            pid = int(adb(serial, 'shell', 'cat', root + '/pid').decode().strip())
+            pid_text = adb(serial, 'shell', 'cat', root + '/pid').decode().strip()
+            # The shell opens/truncates its PID file before printf writes it.
+            # Re-read this same launch within the existing bounded wait.
+            if not pid_text:
+                time.sleep(.2)
+                continue
+            if not re.fullmatch(r'\d+', pid_text):
+                raise RuntimeError('Malformed recorder PID; inspect existing job')
+            pid = int(pid_text)
             if pid != value['pid']:
                 raise RuntimeError('Unexpected recorder PID; inspect existing job')
             current = state(value)

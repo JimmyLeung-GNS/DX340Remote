@@ -1,0 +1,151 @@
+{
+  "date": "2026-11-01",
+  "status": "PAUSED by explicit owner stop/device-switch request; full goal incomplete",
+  "repo": "https://github.com/JimmyLeung-GNS/DX340Remote",
+  "branch": "codex/source-recovery-checkpoint",
+  "exportingCheckout": "C:/GitHub/DX340Remote",
+  "destination": "Unspecified device; re-inventory Windows/Mac/iPhone/Android actual execution environment",
+  "installed": {
+    "org.dx340.remote.host": "92b9972d83b3c9e67f1a24189b7ed1a06ee6a5c57c2061d9c134607eec3e1482",
+    "org.dx340.remote.controller": "9f085bc22e8665b25dc886ee22cb6f2a977c002baa57c6f057c59fc2a243116e"
+  },
+  "hostSource": "84da612f220135dd770a2f11f20b6185dc6835a5",
+  "phoneSource": "07c2029503ebb929f03c0a3cc9b421c29ef2455d",
+  "versions": "DX340 Android13/API33 eng.iBasso.20260812.181952 Companion0.1.0/code1; Pixel9a Android16/API36 CP1A.260405.005 Remote0.2.0/code2; Apple6.5.3/code1599; Mango4.1.37/code240",
+  "newActions": {
+    "applePlayingSeek": {
+      "estimatedRewindMs": 10595,
+      "toleranceMs": 1500,
+      "status": "VERIFIED public projected progress, not frame/acoustic proof"
+    },
+    "applePausedSeeks": [
+      {
+        "expected": 22877,
+        "observed": 22877
+      },
+      {
+        "expected": 12877,
+        "observed": 12877
+      },
+      {
+        "expected": 2877,
+        "observed": 2877
+      },
+      {
+        "expected": 0,
+        "observed": 0
+      }
+    ],
+    "applePrevious": "VERIFIED prior exact versioned title, remains paused",
+    "mangoPrevious": "FAILED preceding-track expectation: from paused track23/8927ms, same track23 restarts at0 and begins playing. Single Native PREVIOUS ACK86/reply136ms; subsequent GET_STATE and separate Pause. No automatic replay. Investigate source-native semantics; do not silently normalize into two commands.",
+    "nativeRows": 23,
+    "nativeOperations": {
+      "SET_PLAYING": 3,
+      "GET_STATE": 12,
+      "SEEK": 5,
+      "PREVIOUS": 2,
+      "SELECT_SOURCE": 1
+    }
+  },
+  "hold": {
+    "status": "FAILED_ARMING_TIMEOUT",
+    "samples": 0,
+    "pid": 29335,
+    "remoteRoot": "/data/local/tmp/dx340-hold-30aab3e2a5e447109c18c649623e495c",
+    "phoneObserverStarted": false,
+    "oldUnplugPrompt": "Canceled; do not act on late replies until explicit development resume"
+  },
+  "tooling": {
+    "change": "Only PC Python startup PID confirmation now tolerates an empty file within existing15 polls, malformed PID fails closed; never relaunches",
+    "command": "python -m unittest discover -s scripts/tests -p test_device_hold_recorder.py -v",
+    "verifiedBeforeStop": true,
+    "tests": 17,
+    "failures": 0,
+    "exitCode": 0,
+    "newRegressionTests": [
+      "Empty PID then correct PID verifies same launch",
+      "Persistent empty PID keeps manifest and bounded wait/no relaunch",
+      "Malformed PID fails closed/no relaunch"
+    ],
+    "scriptSha256": "ba7982bfc96c1591cb4d5a2a2616a88c3652bc56e76c4de6dc889bcf61ba94ae",
+    "testSha256": "32c7a9942c2518cb622835d02d4192f80cf225589e3f5fc9797b6adf3208af09",
+    "shellScriptUnchanged": true,
+    "androidAppsUnchanged": true
+  },
+  "previousVerified": [
+    "Current20 Apple selections/5albums/2playlists/outside101 queue",
+    "Current20 Mango files/4folders/17FLAC3WAV/stable before-final bounds",
+    "Current100 basic controls/source with native ACK p95159/166ms and public-state upper-bound p95547ms each"
+  ],
+  "final": {
+    "at": "2026-11-01T11:40:54.424994+08:00",
+    "prefs": {
+      "controllers": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311",
+      "mango-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "apple-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "source-verification": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    "settings": {
+      "host": {
+        "wifi_on": "0",
+        "mobile_data": "0",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      },
+      "phone": {
+        "wifi_on": "0",
+        "mobile_data": "1",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      }
+    },
+    "pids": {
+      "host": "28758",
+      "phone": "1355"
+    },
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "sourceStateScope": "Record each observed state; NONE or an absent session is not paused-playback proof",
+    "phone": "Normal Disconnect/help collapsed/targetMango, then Home/Sleep; no active foreground controller ownership",
+    "host": "Enabled/advertising",
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeVerified": false,
+    "sd": "FBB9-E8FE mounted; no storage action/private extraction; earlier own-UI SD Card destination verification retains scope",
+    "battery": "Pixel7percent/AC powered true/status4 not charging; charge reliably before physical tests"
+  },
+  "nativeModel": "47719f25-1cfd-4c64-a9b3-c4aada9d5e00",
+  "nativeCumulativeRows": 1023,
+  "cleanupRead": "One automatic GET_STATE on foregrounding for normal Disconnect, outside action cohort",
+  "workers": "All action/export/recorder jobs terminal; no phone observer started",
+  "remaining": [
+    "Investigate Mango Previous source semantics; Apple subset does not certify all sources/lifecycles",
+    "Fresh unplugged30minute hold after owner ready; no expired job restart",
+    "Pixel charging; strict cellular-off flag1, source/UI/cache timing",
+    "Interrupted-link stalls, no-card Internal timeout/Apple MEDIA_MOUNTED crash",
+    "Source switching/lifecycle/range/calls/security/output/battery/walk, physical owner-iPhone/Mac signing/Watch"
+  ],
+  "signing": "Original debug key C:/Users/user/.android/dx340-original-debug.keystore, public certificate SHA25624f48aa3566dcf7b65774ee12585191a8a0df9eeff9cc49e9e72c22bacca6e8d; private separate transfer, never Git",
+  "rawEvidence": [
+    {
+      "root": "artifacts/current-action-checks-20261101",
+      "filesHashed": 204,
+      "manifestSha256": "9abf3dc724948220669f70e7b950eade06f2e1ab42dbd8671605ea4732320280"
+    },
+    {
+      "root": "artifacts/unplugged-hold-20261101-current92",
+      "filesHashed": 38,
+      "manifestSha256": "c3b5cb608a70a1bafc8cf06bafee61d759820867859e5eb75cc0264f5d2be82f"
+    },
+    {
+      "root": "artifacts/device-switch-20261101-final",
+      "filesHashed": 41,
+      "manifestSha256": "f877c1b58ce562c734bcaa58a8c3c3bce8b9f28ecc4229b847fb90eb61f873bc"
+    }
+  ],
+  "fullAcceptancePassed": false
+}

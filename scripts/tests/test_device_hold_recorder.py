@@ -83,5 +83,40 @@ class RecorderTests(unittest.TestCase):
             with self.assertRaises(FileExistsError): m.start('d', Path(tmp), 10, 2, False)
             adb.assert_not_called()
 
+    def test_empty_pid_read_recovers_same_launch(self):
+        command = b'\0'.join(x.encode() for x in ['sh', self.manifest['remoteRoot'] + '/record.sh', self.manifest['remoteRoot'], '10', '2', '0'])
+        fixed = type('FixedUUID', (), {'hex': 'a' * 32})()
+        replies = [b'', b'', b'', b'123\n', b'', b'123\n', b'ARMING', b'ARMING', command]
+        with tempfile.TemporaryDirectory() as tmp, patch.object(m.uuid, 'uuid4', return_value=fixed), patch.object(m, 'adb', side_effect=replies) as adb, patch.object(m.time, 'sleep') as sleep:
+            out = Path(tmp) / 'case'
+            result = m.start('d', out, 10, 2, False)
+            self.assertEqual(result['state'], 'ARMING')
+            self.assertTrue(result['ownedProcessLive'])
+            self.assertEqual(json.loads((out / 'manifest.json').read_text())['pid'], 123)
+            self.assertEqual(sum('nohup sh ' in str(call.args) for call in adb.call_args_list), 1)
+            self.assertEqual(sum(call.args == ('d', 'shell', 'cat', self.manifest['remoteRoot'] + '/pid') for call in adb.call_args_list), 2)
+            sleep.assert_called_once_with(.2)
+
+    def test_persistent_empty_pid_preserves_manifest_without_relaunch(self):
+        fixed = type('FixedUUID', (), {'hex': 'a' * 32})()
+        def reply(*args):
+            return b'123\n' if 'nohup sh ' in str(args) else b''
+        with tempfile.TemporaryDirectory() as tmp, patch.object(m.uuid, 'uuid4', return_value=fixed), patch.object(m, 'adb', side_effect=reply) as adb, patch.object(m.time, 'sleep') as sleep:
+            out = Path(tmp) / 'case'
+            with self.assertRaisesRegex(RuntimeError, 'Existing launch not confirmed'):
+                m.start('d', out, 10, 2, False)
+            self.assertEqual(json.loads((out / 'manifest.json').read_text())['pid'], 123)
+            self.assertEqual(sum('nohup sh ' in str(call.args) for call in adb.call_args_list), 1)
+            self.assertEqual(sleep.call_count, 15)
+
+    def test_malformed_pid_fails_closed_without_relaunch(self):
+        replies = [b'', b'', b'', b'123\n', b'not-a-pid']
+        with tempfile.TemporaryDirectory() as tmp, patch.object(m, 'adb', side_effect=replies) as adb:
+            out = Path(tmp) / 'case'
+            with self.assertRaisesRegex(RuntimeError, 'Malformed recorder PID'):
+                m.start('d', out, 10, 2, False)
+            self.assertEqual(json.loads((out / 'manifest.json').read_text())['pid'], 123)
+            self.assertEqual(sum('nohup sh ' in str(call.args) for call in adb.call_args_list), 1)
+
 
 if __name__ == '__main__': unittest.main()
