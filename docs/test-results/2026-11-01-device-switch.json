@@ -147,5 +147,11 @@
       "manifestSha256": "f877c1b58ce562c734bcaa58a8c3c3bce8b9f28ecc4229b847fb90eb61f873bc"
     }
   ],
-  "fullAcceptancePassed": false
+  "fullAcceptancePassed": false,
+  "lastUsbInventory": {
+    "at": "2026-11-01T11:47:36+08:00",
+    "command": "adb devices -l",
+    "devices": [],
+    "scope": "Both devices disappeared after normal cleanup; final verified source state is11:40, no later device validation. PortableAPK bytes are existing build outputs with exact matching installed hashes before loss, not fresh pulls."
+  }
 }

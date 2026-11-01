@@ -1,5 +1,7 @@
 # Implementation status
 
+Latest USB inventory11:47 HKT is empty after cleanup. Last verified both paused/disconnected state is11:40. Recovery APKs are exact matched existing92/9f bytes, not fresh pulls; re-inventory next host.
+
 ## Current checkpoint — STOP/device switch,1 November2026
 
 Current device-switch checkpoint — 1 November2026,11:40 HKT: owner explicitly requested STOP to switch devices. Full goal PAUSED/incomplete; do not restart tests from late pending replies. Read docs/test-results/2026-11-01-device-switch.md/.json. Unchanged Companion92/source84da612 and Pixel9f/source07c retain current20 Apple/20 Mango/100controls per source scopes. New Apple playing rewind10595ms within1500 tolerance, four paused seeks exact22877→12877→2877→0 and Previous-to-prior-track pass. Mango Previous from paused item23/8927ms instead restarts same item and resumes playback; original failed expectation/nativeACK86/reply136/25samples preserved, separate Pause, no replay. Investigate semantics; never auto-double-send. Action cohort23 applied results/no protocol errors. New recorder29335 same manifest recovered from empty-PID launch read, then terminal FAILED/ARMING_TIMEOUT/zero samples; poweredtrue/displayON throughout, no completion reply or phone observer. Old unplug prompt canceled. Python startup empty-PID bounded wait/no-relaunch correction and17unit tests passed before stop; shell/APKs unchanged. All workers terminal.
