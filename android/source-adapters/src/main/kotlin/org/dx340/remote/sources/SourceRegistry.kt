@@ -86,8 +86,14 @@ class SourceRegistry(private val context: Context, private val listener: Compone
     fun storageDiagnostic(): JSONObject = storage.diagnostic().put("libraryInvalidations", storageInvalidations)
     private fun attach(pkg: String, controller: MediaController) {
         if (closed || accessError != null) return
-        if (tokens[pkg] == controller.sessionToken) return
-        val lease = callbackGuard.replace(pkg)
+        if (tokens[pkg] == controller.sessionToken) {
+            callbackGuard.refreshQueue(pkg) { controller.queue != null }
+            return
+        }
+        // Query at attach/explicit refresh and observe availability through the
+        // owned callback. Routine capability/state notifications must not repeatedly
+        // transfer an entire source queue (including its parcelled descriptions).
+        val lease = callbackGuard.replace(pkg, controller.queue != null)
         callbacks[pkg]?.let { controllers[pkg]?.unregisterCallback(it) }
         epochs[pkg] = UUID.randomUUID().toString(); tokens[pkg] = controller.sessionToken
         items.remove(pkg); proofs.remove(pkg); nativePages.invalidate(pkg)
@@ -95,7 +101,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         val cb = object : MediaController.Callback() {
             override fun onPlaybackStateChanged(state: PlaybackState?) = callbackGuard.dispatch(lease, changed)
             override fun onMetadataChanged(metadata: android.media.MediaMetadata?) = callbackGuard.dispatch(lease, changed)
-            override fun onQueueChanged(queue: MutableList<android.media.session.MediaSession.QueueItem>?) = callbackGuard.dispatch(lease, changed)
+            override fun onQueueChanged(queue: MutableList<android.media.session.MediaSession.QueueItem>?) = callbackGuard.queueChanged(lease, queue != null, changed)
             override fun onAudioInfoChanged(info: MediaController.PlaybackInfo) = callbackGuard.dispatch(lease, changed)
             override fun onSessionDestroyed() {
                 if (!callbackGuard.retire(lease)) return
@@ -180,7 +186,7 @@ class SourceRegistry(private val context: Context, private val listener: Compone
         put("canPlay", supports(pkg, PlaybackState.ACTION_PLAY) || (pkg == PACKAGES[0] && verification.getString("mangoObservedPlayVersion", null) == version(pkg)))
         put("canPause", supports(pkg, PlaybackState.ACTION_PAUSE) || (pkg == PACKAGES[0] && verification.getString("mangoPauseVersion", null) == version(pkg)))
         put("canNext", supports(pkg, PlaybackState.ACTION_SKIP_TO_NEXT)); put("canPrevious", supports(pkg, PlaybackState.ACTION_SKIP_TO_PREVIOUS))
-        put("canSeek", supports(pkg, PlaybackState.ACTION_SEEK_TO)); put("canReadQueue", controllers[pkg]?.queue != null)
+        put("canSeek", supports(pkg, PlaybackState.ACTION_SEEK_TO)); put("canReadQueue", callbackGuard.canReadQueue(pkg))
         put("canPlayQueueItem", supports(pkg, PlaybackState.ACTION_SKIP_TO_QUEUE_ITEM))
         put("canBrowse", browsers[pkg]?.isConnected == true || (usingUi(pkg) && uiLibrary?.ready == true))
         put("canPlayNativeItem", nativeSelectionSupported(pkg))

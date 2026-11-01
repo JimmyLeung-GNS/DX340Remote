@@ -4,6 +4,66 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class SourceCallbackGuardTest {
+    @Test fun delayedQueueCallbackCannotChangeReplacementSessionAvailability() {
+        val guard = SourceCallbackGuard()
+        val old = guard.replace("apple", queueAvailable = true)
+        val current = guard.replace("apple")
+        var updates = 0
+        assertFalse(guard.canReadQueue("apple"))
+        guard.queueChanged(old, true) { updates++ }
+        assertFalse(guard.canReadQueue("apple"))
+        guard.queueChanged(current, true) { updates++ }
+        guard.queueChanged(old, false) { updates++ }
+        assertTrue(guard.canReadQueue("apple"))
+        assertEquals(1, updates)
+        assertTrue(guard.retire(current))
+        assertFalse(guard.canReadQueue("apple"))
+        guard.queueChanged(current, true) { updates++ }
+        assertFalse(guard.canReadQueue("apple"))
+        assertEquals(1, updates)
+    }
+    @Test fun queuePresenceChangesIndependentlyAndPermissionLossClearsAllFacts() {
+        val guard = SourceCallbackGuard()
+        val mango = guard.replace("mango", queueAvailable = true)
+        val apple = guard.replace("apple", queueAvailable = true)
+        guard.queueChanged(apple, false) {}
+        assertFalse(guard.canReadQueue("apple"))
+        assertTrue(guard.canReadQueue("mango"))
+        // A non-null empty queue is readable; null means no exposed queue.
+        guard.queueChanged(apple, true) {}
+        assertTrue(guard.canReadQueue("apple"))
+        guard.invalidateAll()
+        guard.queueChanged(mango, true) {}; guard.queueChanged(apple, true) {}
+        assertFalse(guard.canReadQueue("mango")); assertFalse(guard.canReadQueue("apple"))
+        guard.replace("mango")
+        assertFalse(guard.canReadQueue("mango"))
+    }
+    @Test fun closedRegistryCannotRestoreQueueCapabilityFromQueuedCallbacks() {
+        val guard = SourceCallbackGuard()
+        val lease = guard.replace("mango", queueAvailable = true)
+        var updates = 0
+        guard.close()
+        guard.queueChanged(lease, true) { updates++ }
+        assertFalse(guard.canReadQueue("mango"))
+        assertFalse(guard.canReadQueue("missing"))
+        assertEquals(0, updates)
+    }
+    @Test fun capabilityReadsDoNotPollSourceButExplicitRefreshRecoversMissedCallback() {
+        val guard = SourceCallbackGuard()
+        guard.replace("apple")
+        var reads = 0
+        val freshQueue = { reads++; true }
+        repeat(100) { assertFalse(guard.canReadQueue("apple")) }
+        assertEquals(0, reads)
+        guard.refreshQueue("apple", freshQueue)
+        repeat(100) { assertTrue(guard.canReadQueue("apple")) }
+        assertEquals(1, reads)
+        guard.refreshQueue("missing", freshQueue)
+        guard.invalidateAll()
+        guard.refreshQueue("apple", freshQueue)
+        assertFalse(guard.canReadQueue("apple"))
+        assertEquals(1, reads)
+    }
     @Test fun delayedCallbacksAndDestructionCannotRetireReplacementSession() {
         val guard = SourceCallbackGuard()
         val old = guard.replace("mango")

@@ -1,0 +1,299 @@
+{
+  "date": "2026-11-01",
+  "status": "VERIFIED diagnostic profile baseline; not latency acceptance or a demonstrated fix",
+  "hostSource": "731aa64424fa65c771b7ce0f4a3db7a590ead662",
+  "phoneSource": "07c2029503ebb929f03c0a3cc9b421c29ef2455d",
+  "hostApkSha256": "e1a024293c70e334de1e45c31176be6c19e4555fe97391e84f56b4515148b1f8",
+  "phoneApkSha256": "9f085bc22e8665b25dc886ee22cb6f2a977c002baa57c6f057c59fc2a243116e",
+  "scope": "DX340 Android13/API33 eng.iBasso.20260812.181952 debug Companion0.1.0/code1 PID21079; Pixel9a Android16/API36 CP1A.260405.005 shared Remote0.2.0/code2 PID1355; Apple6.5.3/code1599; Mango4.1.37/code240",
+  "flow": "Saved Connect/select Apple/setup Play outside trace; three actual Pixel Next actions, Pause, three deliberate paused Refresh inputs; automatic GET_STATE follows each dispatched Next. Other source paused/cursor retained. Volume37/proof false unchanged.",
+  "traceCompletion": {
+    "processes": [
+      {
+        "tool": "perfetto",
+        "pcPid": 49312,
+        "remote": "/data/misc/perfetto-traces/dx340-latency-20261101.pftrace",
+        "local": "host.pftrace",
+        "arguments": [
+          "perfetto",
+          "-o",
+          "/data/misc/perfetto-traces/dx340-latency-20261101.pftrace",
+          "-t",
+          "60s",
+          "-b",
+          "64mb",
+          "--app",
+          "org.dx340.remote.host",
+          "sched",
+          "freq",
+          "idle",
+          "am",
+          "wm",
+          "gfx",
+          "view",
+          "binder_driver",
+          "hal",
+          "dalvik"
+        ],
+        "exitCode": 0,
+        "pullExitCode": 0,
+        "bytes": 66927042
+      },
+      {
+        "tool": "simpleperf",
+        "pcPid": 60576,
+        "remote": "/data/local/tmp/dx340-latency-20261101.data",
+        "local": "host-perf.data",
+        "arguments": [
+          "simpleperf",
+          "record",
+          "--app",
+          "org.dx340.remote.host",
+          "-o",
+          "/data/local/tmp/dx340-latency-20261101.data",
+          "-e",
+          "cpu-clock",
+          "-f",
+          "400",
+          "-g",
+          "--duration",
+          "60"
+        ],
+        "exitCode": 0,
+        "pullExitCode": 0,
+        "bytes": 1329845
+      }
+    ]
+  },
+  "simpleperf": {
+    "version": "device Android13 system Simpleperf",
+    "durationSeconds": 59.9873,
+    "event": "cpu-clock",
+    "frequencyHz": 400,
+    "samples": 1629,
+    "samplesLost": 0,
+    "sampledCpuSeconds": 4.0725,
+    "inclusiveSamplePercent": {
+      "HostService.export": 59.73,
+      "SourceRegistry.diagnostic": 56.84,
+      "SourceRegistry.capabilities": 45.3,
+      "SourceRegistry.state": 41.56,
+      "MediaController.getQueue": 26.34,
+      "ArtworkRepository.remember": 14.36
+    },
+    "limits": "Inclusive percentages overlap and must not be added. Sampled CPU is not wall-clock wait or proof of the earlier775ms ACK cause. Kernel addresses remain restricted; no root/security-setting change."
+  },
+  "perfetto": {
+    "deviceVersion": "v25.0",
+    "processorVersion": "v59.1-1e9c61e98",
+    "requestedSeconds": 60,
+    "bufferMb": 64,
+    "retainedTraceBoundsSeconds": 48.471162,
+    "coverage": "PARTIAL; ring-buffer capture does not retain the full requested60seconds. Do not attribute every command or infer complete main-thread wait totals.",
+    "retainedMainThreadCpuMs": 1321.89,
+    "longestRetainedMainBinderMs": 12.372,
+    "nonzeroErrorOrDataLossStats": 0
+  },
+  "nativeRows": [
+    {
+      "id": "21ae399f-baaf-470d-a6c9-11d6ef71c05c",
+      "operation": "NEXT",
+      "source": "apple",
+      "startedMs": 4425514,
+      "firstWriteSubmittedAfterMs": 3,
+      "writeAcknowledgedAfterMs": 81,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 135,
+      "result": "result",
+      "terminalApplied": true,
+      "hostOutcome": "dispatched",
+      "error": null
+    },
+    {
+      "id": "130fe1ec-7b92-4d2d-9aa4-31a74e00bc79",
+      "operation": "GET_STATE",
+      "source": "apple",
+      "startedMs": 4425651,
+      "firstWriteSubmittedAfterMs": 9,
+      "writeAcknowledgedAfterMs": 50,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 1472,
+      "result": "result",
+      "terminalApplied": true,
+      "hostOutcome": "none",
+      "error": null
+    },
+    {
+      "id": "ae0e7b10-6f4f-4e59-9337-53d338b15153",
+      "operation": "NEXT",
+      "source": "apple",
+      "startedMs": 4430493,
+      "firstWriteSubmittedAfterMs": 3,
+      "writeAcknowledgedAfterMs": 66,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 125,
+      "result": "result",
+      "terminalApplied": true,
+      "hostOutcome": "dispatched",
+      "error": null
+    },
+    {
+      "id": "67e7b474-0e15-4c50-9177-d4cc24e92a58",
+      "operation": "GET_STATE",
+      "source": "apple",
+      "startedMs": 4430619,
+      "firstWriteSubmittedAfterMs": 8,
+      "writeAcknowledgedAfterMs": 42,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 1403,
+      "result": "result",
+      "terminalApplied": true,
+      "hostOutcome": "none",
+      "error": null
+    },
+    {
+      "id": "35e7ba66-0706-46c1-9485-d1303024dc7e",
+      "operation": "NEXT",
+      "source": "apple",
+      "startedMs": 4434440,
+      "firstWriteSubmittedAfterMs": 3,
+      "writeAcknowledgedAfterMs": 73,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 115,
+      "result": "result",
+      "terminalApplied": true,
+      "hostOutcome": "dispatched",
+      "error": null
+    },
+    {
+      "id": "81384f4e-99c5-43bd-a8f6-b25fdf8ae86e",
+      "operation": "GET_STATE",
+      "source": "apple",
+      "startedMs": 4434556,
+      "firstWriteSubmittedAfterMs": 7,
+      "writeAcknowledgedAfterMs": 44,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 1292,
+      "result": "result",
+      "terminalApplied": true,
+      "hostOutcome": "none",
+      "error": null
+    },
+    {
+      "id": "8e6e56ba-232e-48ac-922e-37d21f84aee9",
+      "operation": "SET_PLAYING",
+      "source": "apple",
+      "startedMs": 4439306,
+      "firstWriteSubmittedAfterMs": 5,
+      "writeAcknowledgedAfterMs": 72,
+      "accepted": true,
+      "acceptedAfterMs": 91,
+      "finishedAfterMs": 399,
+      "result": "result",
+      "terminalApplied": true,
+      "hostOutcome": "observed",
+      "error": null
+    },
+    {
+      "id": "8a43f33a-06b5-4680-9dac-093bda20383a",
+      "operation": "GET_STATE",
+      "source": "apple",
+      "startedMs": 4442208,
+      "firstWriteSubmittedAfterMs": 4,
+      "writeAcknowledgedAfterMs": 91,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 235,
+      "result": "result",
+      "terminalApplied": true,
+      "hostOutcome": "none",
+      "error": null
+    },
+    {
+      "id": "b13a39e3-9a63-44b5-b766-1cfaeea9a85e",
+      "operation": "GET_STATE",
+      "source": "apple",
+      "startedMs": 4448238,
+      "firstWriteSubmittedAfterMs": 4,
+      "writeAcknowledgedAfterMs": 83,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 252,
+      "result": "result",
+      "terminalApplied": true,
+      "hostOutcome": "none",
+      "error": null
+    },
+    {
+      "id": "f2835055-e7b2-408c-94f0-92ade26cf38b",
+      "operation": "GET_STATE",
+      "source": "apple",
+      "startedMs": 4454163,
+      "firstWriteSubmittedAfterMs": 3,
+      "writeAcknowledgedAfterMs": 67,
+      "accepted": false,
+      "acceptedAfterMs": null,
+      "finishedAfterMs": 243,
+      "result": "result",
+      "terminalApplied": true,
+      "hostOutcome": "none",
+      "error": null
+    }
+  ],
+  "final": {
+    "at": "2026-11-01T09:08:44.339127+08:00",
+    "prefs": {
+      "controllers": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311",
+      "mango-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "apple-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "source-verification": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    "settings": {
+      "host": {
+        "wifi_on": "0",
+        "mobile_data": "0",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      },
+      "phone": {
+        "wifi_on": "0",
+        "mobile_data": "1",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      }
+    },
+    "pids": {
+      "host": "21079",
+      "phone": "1355"
+    },
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "sourceStateScope": "Record each observed state; NONE or an absent session is not paused-playback proof"
+  },
+  "findings": [
+    "Diagnostic export and capability computation account for substantial sampled host-main CPU. getQueue repeatedly transfers source queue descriptions for canReadQueue checks.",
+    "Proposed change: observe queue availability on owned media-session callbacks; initialize and explicitly refresh it with public getQueue. Explicit queue contents/revisions and playback validation still query fresh data.",
+    "No claim that this alone fixes earlier slow ACK, source-selection dispatch timing, interrupted-link stalls or fullT04."
+  ],
+  "references": [
+    "https://perfetto.dev/docs/analysis/trace-processor",
+    "https://developer.android.com/reference/android/media/session/MediaController",
+    "https://developer.android.com/reference/android/media/session/MediaController.Callback"
+  ],
+  "rawEvidence": {
+    "root": "artifacts/latency-profile-20261101",
+    "filesHashed": 140,
+    "manifestSha256": "e67f905160211caa555284fa4a6d4ce125ecbdbbac160f6a6a8783d898591de3"
+  },
+  "goal": "ACTIVE/incomplete"
+}
