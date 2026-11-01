@@ -1,5 +1,7 @@
 # Phone connection acceptance
 
+Current92/9f100 controls/source are verified: [report](test-results/2026-11-01-queue-capability-controls.md). Both paused37/ordinaryDisconnect. Pixel9%/external power present/status4 not charging, separate Home/Sleep→Dozing cleanup; verify charging before long foreground/background trials. No recorder/observer started, unplugged availability pending. Next Previous both/Apple Seek; Mango seeking unavailable.
+
 Current92/9f Mango20/four-folder/17FLAC+3WAV evidence is frozen: [report](test-results/2026-11-01-queue-capability-mango-matrix.md). Both paused37, normal Disconnect; no recorder/observer started. Keep all older failures/binary scopes. Next current100 controls/source and owner-ready unplugged hold remain open.
 
 Latest1 November2026,10:00: unchanged92/9f now20 actual offline Apple Library selections/5albums/2playlists verified, first outside full101 queue. Current automatic GET_STATE ACKp95137ms/max138/reply434ms; method leaves6quiet seconds/no source UI probes, warm art cache/noGET_ARTWORK; earlier775ms failure retained/causality and full state/UI T04 open. Before-case12 navigation driver race preserved/recovered without replaying11 selections.574 total native rows retained/318evictions;875 raw hashes frozen. Final bothpaused37/ordinaryDisconnect/targetMango/prefs/bonds/bindings/SD retained; no worker/hold/profiler live, fresh unplugged availability pending. [Current evidence](test-results/2026-11-01-queue-capability-apple-matrix.md).

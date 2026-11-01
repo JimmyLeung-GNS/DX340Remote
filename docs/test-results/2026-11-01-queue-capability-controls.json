@@ -1,0 +1,289 @@
+{
+  "date": "2026-11-01",
+  "status": "VERIFIED current92/9f Android100 basic controls/source; full goal incomplete",
+  "hostSource": "84da612f220135dd770a2f11f20b6185dc6835a5",
+  "phoneSource": "07c2029503ebb929f03c0a3cc9b421c29ef2455d",
+  "installedSha256": {
+    "org.dx340.remote.host": "92b9972d83b3c9e67f1a24189b7ed1a06ee6a5c57c2061d9c134607eec3e1482",
+    "org.dx340.remote.controller": "9f085bc22e8665b25dc886ee22cb6f2a977c002baa57c6f057c59fc2a243116e"
+  },
+  "devices": "DX340 Android13/API33 eng.iBasso.20260812.181952 Companion0.1.0/code1; Pixel9a Android16/API36 CP1A.260405.005 Remote0.2.0/code2; Mango4.1.37/code240; Apple6.5.3/code1599",
+  "cohorts": {
+    "mango": {
+      "confirmedCommands": 100,
+      "actions": {
+        "Next": 20,
+        "Pause": 40,
+        "Play": 40
+      },
+      "setupCleanupOutsideCount": 2,
+      "nativeRows": 122,
+      "nativeOperations": {
+        "SET_PLAYING": 82,
+        "NEXT": 20,
+        "GET_STATE": 20
+      },
+      "nativePlaybackMetrics": {
+        "firstWriteSubmittedAfterMs": {
+          "samples": 100,
+          "p50Ms": 4,
+          "p95Ms": 4,
+          "maxMs": 6
+        },
+        "writeAcknowledgedAfterMs": {
+          "samples": 100,
+          "p50Ms": 100,
+          "p95Ms": 159,
+          "maxMs": 172
+        },
+        "acceptedAfterMs": {
+          "samples": 80,
+          "p50Ms": 129,
+          "p95Ms": 168,
+          "maxMs": 175
+        },
+        "finishedAfterMs": {
+          "samples": 100,
+          "p50Ms": 498,
+          "p95Ms": 598,
+          "maxMs": 609
+        }
+      },
+      "automaticReadMetrics": {
+        "firstWriteSubmittedAfterMs": {
+          "samples": 20,
+          "p50Ms": 9,
+          "p95Ms": 12,
+          "maxMs": 13
+        },
+        "writeAcknowledgedAfterMs": {
+          "samples": 20,
+          "p50Ms": 93,
+          "p95Ms": 95,
+          "maxMs": 97
+        },
+        "acceptedAfterMs": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        },
+        "finishedAfterMs": {
+          "samples": 20,
+          "p50Ms": 341,
+          "p95Ms": 438,
+          "maxMs": 485
+        }
+      },
+      "publicStateObservationUpperBoundsMs": {
+        "samples": 100,
+        "p50Ms": 515,
+        "p95Ms": 547,
+        "maxMs": 562
+      },
+      "otherSourcePausedMetadataCursorUnchanged": true,
+      "duplicateSkipObserved": false,
+      "wrongSourceObserved": false,
+      "naturalEndExcludedAll20Cycles": true
+    },
+    "apple": {
+      "confirmedCommands": 100,
+      "actions": {
+        "Next": 20,
+        "Pause": 40,
+        "Play": 40
+      },
+      "setupCleanupOutsideCount": 2,
+      "nativeRows": 122,
+      "nativeOperations": {
+        "SET_PLAYING": 82,
+        "NEXT": 20,
+        "GET_STATE": 20
+      },
+      "nativePlaybackMetrics": {
+        "firstWriteSubmittedAfterMs": {
+          "samples": 100,
+          "p50Ms": 4,
+          "p95Ms": 5,
+          "maxMs": 5
+        },
+        "writeAcknowledgedAfterMs": {
+          "samples": 100,
+          "p50Ms": 105,
+          "p95Ms": 166,
+          "maxMs": 174
+        },
+        "acceptedAfterMs": {
+          "samples": 80,
+          "p50Ms": 130,
+          "p95Ms": 169,
+          "maxMs": 175
+        },
+        "finishedAfterMs": {
+          "samples": 100,
+          "p50Ms": 488,
+          "p95Ms": 563,
+          "maxMs": 601
+        }
+      },
+      "automaticReadMetrics": {
+        "firstWriteSubmittedAfterMs": {
+          "samples": 20,
+          "p50Ms": 10,
+          "p95Ms": 12,
+          "maxMs": 13
+        },
+        "writeAcknowledgedAfterMs": {
+          "samples": 20,
+          "p50Ms": 141,
+          "p95Ms": 192,
+          "maxMs": 194
+        },
+        "acceptedAfterMs": {
+          "samples": 0,
+          "p50Ms": null,
+          "p95Ms": null,
+          "maxMs": null
+        },
+        "finishedAfterMs": {
+          "samples": 20,
+          "p50Ms": 633,
+          "p95Ms": 779,
+          "maxMs": 1023
+        }
+      },
+      "publicStateObservationUpperBoundsMs": {
+        "samples": 100,
+        "p50Ms": 515,
+        "p95Ms": 547,
+        "maxMs": 1047
+      },
+      "otherSourcePausedMetadataCursorUnchanged": true,
+      "duplicateSkipObserved": false,
+      "wrongSourceObserved": false,
+      "naturalEndExcludedAll20Cycles": true
+    }
+  },
+  "advertisedActionsAtSetup": {
+    "mango": {
+      "canPrevious": true,
+      "canSeek": false,
+      "canShuffle": false,
+      "canRepeat": false,
+      "canAdjustVolume": false
+    },
+    "apple": {
+      "canPrevious": true,
+      "canSeek": true,
+      "canShuffle": false,
+      "canRepeat": false,
+      "canAdjustVolume": false
+    }
+  },
+  "phoneChargingCleanup": null,
+  "observationMethod": "PC monotonic immediately before single ADB phone tap to first matching public DX340 MediaSession state/queue/title dump. Upper bound includes delivery/polling overhead, not acoustic or rendered phone UI latency. No fresh source UI-tree SNAPSHOT broadcasts during cohort.",
+  "appleQueuePolicy": {
+    "input": "Current paused Apple queue, first50 public entries",
+    "firstNextAlreadySent": false,
+    "policy": "Next follows exact20 distinct versioned successor titles; numeric active ID0 is reused. Setup/cleanup outside100.",
+    "finalPrefixMatches20Advances": true
+  },
+  "headerDriverFailure": {
+    "stage": "Mango setup duration metadata after successful one selection and Pause, before100 controls",
+    "error": "42-byte header assertion; shell read of02.魔法.flac returned43 bytes",
+    "verifiedCause": "adb shell translated embedded0a to0d0a; exec-out preserved42 bytes; exact hex comparison retained",
+    "recovery": "Read all28 headers with exec-out only, retained initial setup; no playback input replayed"
+  },
+  "nativeHistory": {
+    "modelInstanceId": "47719f25-1cfd-4c64-a9b3-c4aada9d5e00",
+    "exports": [
+      {
+        "label": "mango-before",
+        "retained": 256,
+        "evictions": 494
+      },
+      {
+        "label": "mango-after",
+        "retained": 256,
+        "evictions": 616
+      },
+      {
+        "label": "apple-before",
+        "retained": 256,
+        "evictions": 617
+      },
+      {
+        "label": "apple-after",
+        "retained": 256,
+        "evictions": 739
+      },
+      {
+        "label": "final",
+        "retained": 256,
+        "evictions": 740
+      }
+    ],
+    "mergedRows": 996,
+    "allCumulativeRowsConserved": true,
+    "overlapUnchanged": true
+  },
+  "final": {
+    "at": "2026-11-01T11:12:25.449654+08:00",
+    "prefs": {
+      "controllers": "5f50554138e89881180333202a81eefbe92746995fb0434aa938be74edf0b311",
+      "mango-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "apple-ui": "eb246d714de818f8778f15c4ded6003b401a4b129aeaf7d7e54c5a15214e8cb6",
+      "source-verification": "25d889929ca99468601dacd26604d0a65c3164d64679af6891381c4729a6b37f"
+    },
+    "settings": {
+      "host": {
+        "wifi_on": "0",
+        "mobile_data": "0",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      },
+      "phone": {
+        "wifi_on": "0",
+        "mobile_data": "1",
+        "bluetooth_on": "1",
+        "font_scale": "1.0",
+        "screen_off_timeout": "1800000"
+      }
+    },
+    "pids": {
+      "host": "28758",
+      "phone": "1355"
+    },
+    "sourceStates": {
+      "com.ibasso.music": 2,
+      "com.apple.android.music": 2
+    },
+    "sourceStateScope": "Record each observed state; NONE or an absent session is not paused-playback proof",
+    "phone": "ordinary Disconnect/help collapsed/targetMango",
+    "volume": 37,
+    "output": "headset(4)",
+    "volumeVerified": false
+  },
+  "hearing": "NOT TESTED; routine prompts waived",
+  "remaining": [
+    "Previous on both/Apple Seek and full lifecycle/source-switch matrix; Mango Seek/Shuffle/Repeat not advertised",
+    "Full T04 rendered-UI/cache timing and both phones",
+    "Fresh owner-ready unplugged hold, strict cellular-off, interrupted-link stalls",
+    "No-card Internal timeout/Apple MEDIA_MOUNTED crash",
+    "Physical owner-iPhone/signing/range/calls/security/output/battery/walk/Watch"
+  ],
+  "fullAcceptancePassed": false,
+  "rawEvidence": {
+    "root": "artifacts/queue-capability-controls-20261101",
+    "filesHashed": 1289,
+    "manifestSha256": "2d26f9eeefd71f7d4d9e770fbec7d8f009d368438dbe0fb9c0a2b6066fa21e6f"
+  },
+  "goal": "ACTIVE/incomplete",
+  "postControlsCleanup": {
+    "root": "artifacts/control-charge-idle-20261101",
+    "filesHashed": 8,
+    "manifestSha256": "c72a4d95a81c246663cb5452141c045084bb33ee37ca2def28360cddc1845813"
+  },
+  "postControlsCleanupNote": "Separate frozen post-cleanup: Home/Sleep at9percent; Android AC powered true but battery status4 not charging. Reduce display load; charging effectiveness unverified. Original1289-file control case unchanged."
+}
